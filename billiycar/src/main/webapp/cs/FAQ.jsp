@@ -14,7 +14,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
 	<!-- CSS -->
-	<link rel = "stylesheet" href = "css/FAQ.css">
+	<link rel = "stylesheet" href = "${pageContext.request.contextPath}/resources/css/FAQ.css">
 	
 	<!-- 글꼴 -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">

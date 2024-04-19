@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <title>탑</title>
-<link rel = "stylesheet" href = "resources/css/top.css">
+<link rel = "stylesheet" href = "${pageContext.request.contextPath}/resources/css/top.css">
 <link rel = "stylesheet" href = "../css/font.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

@@ -12,7 +12,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 	
 	<!-- css -->
-	<link rel ="stylesheet" href = "css/sidebar.css">
+	<link rel ="stylesheet" href = "${pageContext.request.contextPath}/resources/css/sidebar.css">
 	
 	<!-- 글꼴 -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">

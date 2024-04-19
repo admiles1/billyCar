@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="../resources/css/join_agree.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/join_agree.css">
 <meta charset="UTF-8">
 <title>약관동의</title>
 </head>
