@@ -1,0 +1,117 @@
+@charset "EUC-KR";
+/*여백 지정*/
+.faq_arti {
+	margin-left : 200px;
+	margin-right: 200px;
+/* 	background-color : pink; */
+}
+
+/* 타이틀 */
+
+.faq_title {
+	text-align : center;
+	margin : 100px;
+}
+
+.faq_title_1 {
+	font-weight : bold;
+	font-size : 40px;
+	margin-left: -100px;
+}
+
+.faq_sub_title {
+	margin-left: -100px;
+	color : #00AAFF;
+}
+
+/* 카테고리 */
+.white {
+        --background: #fff;
+        --text: #275efe;
+        --shadow: 0 2px 8px -1px #{rgba(#121621, .04)};
+        --shadow-hover: 0 4px 20px -2px #{rgba(#121621, .12)};
+}
+
+.white_btn {
+    --background: #275efe;
+    --text: #fff;
+    --font-size: 16px;
+    --duration: .44s;
+    --move-hover: -4px;
+    --shadow: 0 2px 8px -1px #{rgba(#275efe, .32)};
+    --shadow-hover: 0 4px 20px -2px #{rgba(#275efe, .5)};
+    --font-shadow: var(--font-size);
+    padding: 16px 32px;
+    font-family: 'Roboto';
+    font-weight: 500;
+    line-height: var(--font-size);
+    border-radius: 24px;
+    display: block;
+    outline: none;
+    appearance: none;
+    border: none;
+    text-decoration: none;
+    font-size: var(--font-size);
+    letter-spacing: .5px;
+    background: var(--background);
+    color: var(--text);
+    box-shadow: var(--shadow);
+    transform: translateY(var(--y)) translateZ(0);
+    transition: transform var(--duration) ease, box-shadow var(--duration) ease;
+    div {
+        display: flex;
+        overflow: hidden;
+        text-shadow: 0 var(--font-shadow) 0 var(--text);
+        span {
+            display: block;
+            backface-visibility: hidden;
+            font-style: normal;
+            transition: transform var(--duration) ease;
+            transform: translateY(var(--m)) translateZ(0);
+            @while $i < 12 {
+                &:nth-child(#{$i}) {
+                    transition-delay: $i / 20 + s;
+                }
+                $i: $i + 1;
+            }
+        }
+    }
+    &:hover {
+        --y: var(--move-hover);
+        --shadow: var(--shadow-hover);
+        span {
+            --m: calc(var(--font-size) * -1);
+        }
+    }
+}    
+  
+.dribbble {
+    position: fixed;
+    display: block;
+    right: 20px;
+    bottom: 20px;
+    img {
+        display: block;
+        height: 28px;
+    }
+}
+
+#btn_tag {
+	margin-left : 350px;
+	margin-top : -50px;
+}
+
+.white_btn {
+	display : inline-block;
+}
+
+#tag1 #tag2 #tag3 #tag4 #tag5 {
+	margin : 50px;
+	padding : 50px;
+}
+
+/*자주 묻는 질문 */
+.container-fluid .panel-group {
+	margin-top : 70px !important;
+}
+

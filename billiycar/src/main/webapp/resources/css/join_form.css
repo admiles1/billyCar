@@ -1,0 +1,132 @@
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+body {
+	background: White; 
+}
+
+
+form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: 'Montserrat', sans-serif;
+  height: 100vh;
+  margin: -20px 0 50px;
+  overflow: hidden;
+}
+
+#id_1{
+	margin-left : 105px;
+}
+/* #check_tel{ */
+/* 	margin-left : 105px; */
+/* } */
+
+b{
+	font-size: 55px;
+	margin: auto;
+}
+.title{
+	padding:25px;
+}
+.check_gender{
+	width:280;
+}
+.gender {
+ 	width: 50px;
+	margin: 20px;
+	padding: 25px;
+}
+.woman{
+	margin-left: 0;
+}
+.man {
+	margin-left: 30px;
+}
+ .telephone_num{
+ 	width:225px;
+ }
+.telecom {
+	width: 70px;
+	border-radius: 20px;
+	height:39px;
+	background-color: #eee;
+ 	border: none;
+}
+.tel{
+	margin-left: 108px;
+}
+/* button { */
+/*   border-radius: 20px; */
+/*   border: 1px solid rgb(166, 197, 255); */
+/*   background-color: rgb(166, 197, 255); */
+/*   color: #FFFFFF; */
+/*   font-size: 12px; */
+/*   font-weight: bold; */
+/*   padding: 7px 9px; */
+/*   letter-spacing: 1px; */
+/*   text-transform: uppercase; */
+/*   transition: transform 80ms ease-in; */
+/*   margin:10px; */
+/* } */
+
+.id_check ,.check_tel{
+  border-radius: 20px;
+  border: 1px solid #00AAFF;
+  background-color: #00AAFF;
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 7px 9px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
+  margin:10px;
+  position: relative;
+  width: 80px;
+}
+
+input {
+  background-color: #eee;
+  border: none;
+  padding: 12px 15px;
+  margin: 8px 0;
+  width: 300px;
+  border-radius: 20px ;
+}
+
+
+.btn {
+/*   flex: 1 1 auto; */
+	margin: 10px;
+	text-align: center;
+	transition: 0.5s;
+	background-size: 200% ;
+	color: white;
+	text-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+	box-shadow: 0 0 20px #eee;
+	border-radius: 20px;
+	font-size: 18px;
+	font-weight: bold;
+	letter-spacing: 1px;
+	border: 1px solid white;
+/*   margin-left: 45px; */
+	margin: 25px;
+/*   text-align: center; */
+ }
+
+
+.btn:hover {
+  background-position: right center;
+}
+
+
+
+.btn-4 {
+	background-image: linear-gradient(to right, #00AAFF 0%, #c2e9fb 51%, #87CEFA 100%);
+	display: block;
+	padding: 15px 60px;
+}
+
+

@@ -1,0 +1,156 @@
+@charset "EUC-KR";
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
+/* 제목 부분 */
+
+#tapTitle {
+	margin : 50px;
+}
+
+/* 공통 사항 */
+
+
+ul {
+	list-style : none;
+}
+
+li a {
+	display : block;
+	text-decoration : none;
+}
+/* 검색 옵션 선택*/
+
+
+
+.option_title {
+	position : absolute;
+	left : 50px;
+}
+.carTypeList {
+	display : block;
+}
+
+h3 { 	
+	text-align : left;
+	display : block;
+}
+
+#searchForm {
+	border : 1px solid lightgray;
+	border-radius : 10px;
+}
+
+input[name="reserveWhere"] {
+	width : 40%;
+	height: 50px;
+	margin-bottom: 10px;
+	background-color : #00AAFF;
+	border : 0px;
+	border-radius : 10px;
+	color : white;
+	font-size : 15px;
+	font-weight: bold;
+}
+
+.car_option_sel {
+	width : 80%;
+	position : relative;
+	margin : 10px auto;
+}
+#selectArea {
+	text-align : center;
+	width : 81%;	
+	border-radius : 10px;
+	margin-bottom : 5px;	
+}
+
+.carList1, .carList2, .fuelList1, .fuelList2 {
+	display : inline-block;
+	position : relative;
+	width : 45%;
+}
+
+label {
+	position : relative;
+	float : left;
+}
+
+#searchCar {
+	width : 100%;
+	border : 0px;
+	border-radius : 0 0 10px 10px;
+	font-size : 20px;
+	margin : 0px;
+	background-color : #A6C5FF;
+}	
+
+/* 검색 결과 */
+
+.fadeIn {
+	animation: fadein 2s;
+	border-radius : 10px;
+	display : block;
+}
+
+@keyframes fadein {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+.carList {
+	border : 1px solid lightgray;
+	border-radius : 10px;
+	box-sizing: border-box;
+	margin-bottom : 20px;
+}
+
+.carImg {
+	display : block;
+	position : relative;
+	width : 40%;
+	height: 250px;
+	left : 30px;
+}
+.carInfo {
+	display : block;
+	position : relative;
+	width : 60%;
+	height: 200px;
+}
+	
+.carImg img {
+	display : inline-block;
+	position : relative;
+	width : 100%;
+	height: 100%;
+}
+.carInfo span {
+	display : block;
+}
+.carInfo span:nth-child(1) {
+	height: 50%;
+	text-align : left;
+	font-size : 1.35em;
+	padding: 50px 0px 0px 30px;
+	color : black;
+}
+.carInfo span:nth-child(2) {
+	height: 25%;
+	text-align : left;
+	font-size : 1.35em;
+	padding-left : 30px;
+	color : black;
+}
+.carInfo span:nth-child(3) {
+	height: 25%;
+	text-align : left;
+	font-size : 1.35em;
+	padding-left : 30px;
+	color : black;
+}
+
+
