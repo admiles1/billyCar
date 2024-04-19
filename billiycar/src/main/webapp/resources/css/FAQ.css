@@ -1,7 +1,7 @@
 @charset "EUC-KR";
 /*여백 지정*/
 .faq_arti {
-	margin-left : 200px;
+	margin-left : 220px;
 	margin-right: 200px;
 /* 	background-color : pink; */
 }
@@ -110,8 +110,157 @@
 	padding : 50px;
 }
 
+/* 검색창 */
+.faq_se {
+	margin-top : 30px;
+	margin-left : 400px;
+	margin-bottom : -50px;
+}
+
+.group {
+ display: flex;
+ line-height: 28px;
+ align-items: center;
+ position: relative;
+ max-width: 600px;
+}
+
+.input {
+ width: 600px;
+ height: 40px;
+ line-height: 28px;
+ padding: 0 1rem;
+ padding-left: 2.5rem;
+ border: 2px solid transparent;
+ border-radius: 8px;
+ outline: none;
+ background-color: #f3f3f4;
+ color: #0d0c22;
+ transition: .3s ease;
+}
+
+.input::placeholder {
+ color: #9e9ea7;
+}
+
+.input:focus, input:hover {
+ outline: none;
+ border-color: #00AAFF;
+ background-color: #fff;
+ box-shadow: 0 0 0 4px rgb(234 76 137 / 10%);
+}
+
+.icon {
+ position: absolute;
+ left: 1rem;
+ fill: #9e9ea7;
+ width: 1rem;
+ height: 1rem;
+}
+
 /*자주 묻는 질문 */
 .container-fluid .panel-group {
 	margin-top : 70px !important;
 }
 
+/* 페이징 */
+.paging{
+	margin-left: 600px;
+}
+
+/* 상담원 문의 */
+.faq_cs {
+	margin : 0 auto; 
+	font-size : 19px;
+}
+
+.faq_cs > em {
+	margin-left : 20px;
+	font-weight : bold;
+}
+
+.faq_cs_account {
+	margin-top : 10px;
+	background-color : #EAEAEA;
+	padding : 20px;
+}
+
+.faq_cs_account1 {
+	color :#00AAFF;
+	margin-left : 50px;
+	margin-right : 50px;
+}
+
+.faq_cs_account2 {
+	margin-left : 50px;
+}
+
+hr.hr-2 {
+  border: 0;
+  border-bottom: 2px dashed #eee;
+  background: #999;
+}
+
+.faq_tell {
+	margin-left : 50px;
+}
+
+/*상담원 문의 - 버튼*/
+/* 인라인 */
+.faq_cs_1 {
+	width : 400px;
+}
+
+.faq_cs_account .faq_cs1_1 {
+	display : inline-block;
+}
+
+.faq_cs1_1 {
+	margin-top : -70px;
+	margin-right: 100px;
+	float : right;
+}
+
+.cs_btn {
+ align-items: center;
+ background-color: #FFFFFF;
+ border: 1px solid rgba(0, 0, 0, 0.1);
+ border-radius: .25rem;
+ box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+ box-sizing: border-box;
+ color: rgba(0, 0, 0, 0.85);
+ cursor: pointer;
+ display: inline-flex;
+ font-size: 18px;
+ font-weight: 600;
+ justify-content: center;
+ line-height: 1.25;
+ min-height: 3rem;
+ padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+ text-decoration: none;
+ transition: all 250ms;
+ user-select: none;
+ -webkit-user-select: none;
+ touch-action: manipulation;
+ vertical-align: baseline;
+ width: auto;
+}
+
+.cs_btn:hover,
+.cs_btn:focus {
+ border-color: rgba(0, 0, 0, 0.15);
+ box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+ color: rgba(0, 0, 0, 0.65);
+}
+
+.cs_btn:hover {
+ transform: translateY(-1px);
+}
+
+.cs_btn:active {
+ background-color: #F0F0F1;
+ border-color: rgba(0, 0, 0, 0.15);
+ box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+ color: rgba(0, 0, 0, 0.65);
+ transform: translateY(0);
+}
