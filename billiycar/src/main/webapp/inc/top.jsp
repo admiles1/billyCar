@@ -11,7 +11,7 @@
 <body class = "body">
 
 <div id = "logo">
-	<img src="resources/images/billycar_logo.png">
+	<img src="${pageContext.request.contextPath}/resources/images/billycar_logo.png">
 </div>
 
 <div class = "right_menu">
@@ -55,28 +55,21 @@
 	        </li>
 	        <li>
 	          <a class = "top_menu"  href="#">이용 안내</a>
-	          <ul>
+	          <ul class = "top_ul">
 	            <li><a class = "top_sub_menu"  href="#">회사 안내</a></li>
 	            <li><a class = "top_sub_menu"  href="#">대여 안내</a></li>
-	            <li><a class = "top_sub_menu"  href="#">보유 차량 안내</a></li>
 	            <li><a class = "top_sub_menu"  href="#">취소 및 환불 규정</a></li>
 	          </ul>
 	        </li>
 	        <li>
-	          <a class = "top_menu"  href="#">이용 후기</a>
-	          <ul>
-	            <li><a class = "top_sub_menu"  href="#">차량 이용 후기</a></li>
-	            <li><a class = "top_sub_menu"  href="#">후기 작성</a></li>
+	          <a class = "top_menu"  href="#">차량 안내</a>
+	          <ul class = "top_ul">
+	            <li><a class = "top_sub_menu"  href="#">보유 차량 안내</a></li>
+	            <li><a class = "top_sub_menu"  href="#">보험 안내</a></li>
 	          </ul>
 	        </li>
 	        <li>
 	          <a class = "top_menu" href="#">이벤트</a>
-	          <ul>
-	            <li><a class = "top_sub_menu"  href="#">이벤트 머할지</a></li>
-	            <li><a class = "top_sub_menu"  href="#">정해야 함</a></li>
-	            <li><a class = "top_sub_menu"  href="#">ui랑 요구사항정의서</a></li>
-	            <li><a class = "top_sub_menu"  href="#">다 안 됐어요</a></li>
-	          </ul>
 	        </li>
 	        <li>
 	          <a class = "top_menu"  href="#">고객센터</a>

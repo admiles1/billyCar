@@ -1,0 +1,80 @@
+@charset "EUC-KR";
+
+/*여백 지정*/
+.notice_de_main {
+	margin-left : 220px;
+	margin-right: 200px;
+}
+
+/* 타이틀 */
+
+.notice_d_t_div {
+	text-align : center;
+	margin : 100px;
+}
+
+.notice_d_title {
+	font-weight : bold;
+	font-size : 40px;
+	margin-left: -100px;
+}
+
+/*----------------------------------*/
+
+.detail_view {
+	text-align : center;
+	padding : 30px;
+}
+
+.detail_view .view_tit {
+	margin-top : 30px;
+	margin-bottom : 30px;
+}
+
+.detail_view .view_info {
+	border-top : 1px solid #999;
+	border-bottom : 1px solid #999;
+	margin : auto;
+	width : 400px;
+	padding-top : 10px;
+	padding-bottom : 10px;
+}
+
+.datail_view .view_info dl {
+	display : inline-block;
+}
+
+.datail_view .view_info dl dt, dd {
+	display : inline-block;
+	font-size : small;
+}
+
+.datail_view .view_info dl dt {
+	margin-left : 5px;
+	color : #999;
+}
+
+.datail_view .view_info dl dd {
+	margin-right : 10px;
+	margin-left : 5px;
+}
+
+.view_cont {
+	margin-top : 30px;
+	padding-bottom : 30px;
+}
+
+.btn-view {
+	position : absolute;
+	right : 0;
+	bottom : 0;
+	padding : 10px;
+	margin : 10px 10px 20px 10px;
+}
+
+.btn-view a {
+	padding : 10px;
+	border-radius : 10px;
+	background-color : #00aaff;
+	color : white;
+}
