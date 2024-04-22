@@ -18,6 +18,15 @@ input {
     margin: 50px auto;
 }
 
+.check_btn{
+	 background-color: #00AAFF;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+	
+}
 
 .button a {
     text-decoration: none;
@@ -68,28 +77,6 @@ label {
     font-size: 16px;
 }
 
-input[type="button"] {
-    background-color: #00AAFF;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 16px;
-    width:80px;
-    height:33px;
-    text-align: center;
-    margin: 20px auto;
-}
-
-input[type="button"]:hover {
-    background-color: #0056b3;
-}
-
-.next {
-    margin-top: 20px;
-    text-align: center; /* 버튼을 가운데 정렬 */
-}
-
 .next input[type="button"] {
     background-color: #00AAFF;
     color: white;
@@ -97,8 +84,20 @@ input[type="button"]:hover {
     border-radius: 20px;
     cursor: pointer;
     font-size: 16px;
-    width: 100px; /* 버튼의 너비를 조절 */
+    width: 120px; /* 버튼의 너비를 조절 */
     height: 33px;
     margin: 0 auto; /* 가운데 정렬을 위해 좌우 마진을 자동으로 설정 */
     display: block; /* 버튼을 블록 요소로 설정하여 줄 바꿈을 추가 */
 }
+
+input[type="button"]:hover {
+    background-color: #0056b3;
+}
+
+
+.next {
+    margin-top: 20px;
+    text-align: center; /* 버튼을 가운데 정렬 */
+}
+
+

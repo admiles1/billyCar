@@ -1,0 +1,88 @@
+body {
+       font-family: Arial, sans-serif;
+       margin: 0 auto;
+       padding: 0;
+   }
+     
+input {
+	font-size: 15px;
+}
+
+
+.container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 600px;
+    margin: 50px auto;
+}
+
+
+
+
+.button a {
+    text-decoration: none;
+    color: #00AAFF;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+fieldset {
+	width:450px;
+	height:100px;
+	margin: 20px auto;
+}
+
+
+.id_list {
+	margin:20px;
+}
+
+/* .next { */
+/*     display: flex; */
+/*     justify-content: space-between; 각 버튼을 좌우로 최대한 띄우기 */
+/*     margin-top: 20px; 필요에 따라 상단 여백 조절 */
+/* } */
+
+.next {
+    margin-top: 20px;
+    text-align: center; /* 버튼을 가운데 정렬 */
+}
+
+.next input[type="button"] {
+    background-color: #00AAFF;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 120px; /* 버튼의 너비를 조절 */
+    height: 33px;
+    margin: 0 10px; /* 좌우 여백을 조절 */
+}
+
+
+
+input[type="button"] {
+    background-color: #00AAFF;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    width:80px;
+    height:33px;
+    text-align: center;
+}
+
+input[type="button"]:hover {
+    background-color: #0056b3;
+}
