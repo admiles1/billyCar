@@ -6,7 +6,6 @@
 <meta charset="UTF-8">
 <title>바텀</title>
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/resources/css/bottom.css">
-<link rel = "stylesheet" href = "../css/font.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
@@ -22,9 +21,7 @@
 		<hr id="top_hr">
 		<div class="finfo">
 			<h3 id = "center_tel">고객센터 3333-3333</h3>
-			<div class="cs_info">
-				<em class = "cs_weekend"><p>월 ~ 일 9: 00 ~ 17:00 (공휴일 제외)</p></em>
-			</div>
+			<p class = "cs_weekend">월 ~ 일 9: 00 ~ 17:00 (공휴일 제외)</p>
 			<div class="bank_info">
 				<em class="tit">입금계좌 안내</em><br>
 				<em>부산 114-511-806000</em>

@@ -34,7 +34,7 @@
 
 /* 고객센터 및 계좌 크기 및 배치 */
 #footer_account {
-	margin-top : 60px;
+	margin-top : 80px;
 	margin-left : 70px;
 	text-align: center;
 }
@@ -42,13 +42,22 @@
 /* 고객센터 글씨 색상 및 크기 */
 #f_size .finfo #center_tel {
 	font-weight : bold;
-	color :  #A6C5FF;
+	color :  #00AAFF;
 	font-size: 25px;
 }
 
 /* 여백 조정 */
-.cs_info{
-	margin-top: -20px;
+.cs_info {
+	margin-top: 20px !important;
+}
+
+.cs_weekend {
+    margin-top: 10px; /* 원하는 여백 값으로 조정 */
+    margin-bottom: 10px; /* 원하는 여백 값으로 조정 */
+}
+
+#center_tel {
+	margin-bottom : -10px;
 }
 
 /* 고객센터 및 계좌 글씨 정령 */
