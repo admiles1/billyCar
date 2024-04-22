@@ -15,7 +15,7 @@
 </head>
 <body>
      <div id="wrapper">
-        <div class="topbar" style="position: absolute; top:0;">
+        <div class="topbar">
               <!-- 왼쪽 메뉴 -->
             <div class="left side-menu">
                 <div class="sidebar-inner">
@@ -41,8 +41,7 @@
                     <ul class="big_menu">
                         <li>나의 예약관리 <i class="arrow fas fa-angle-right"></i>
                             <ul class="small_menu">
-                                <li><a href="#">현재 예약내역</a></li>
-                                <li><a href="#">과거 예약내역</a></li>
+                                <li><a href="#">예약내역</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -88,12 +87,6 @@
                 // 드롭다운 메뉴가 열려있는 상태에서 항목을 클릭해도 메뉴를 닫지 않음
                 return false;
             });
-            
-           
-
-            // 왼쪽 서브 메뉴를 나타내도록 fadeIn
-            $(".left_sub_menu").hide();
-            $(".left_sub_menu").fadeIn(300);
         });
     </script>
 
