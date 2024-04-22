@@ -1,0 +1,162 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+	
+	.topbar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+    }
+	
+	
+	.side-menu {
+/*             position: fixed; */
+            width: 45px;
+            z-index: 10;
+            background: #006AFF;
+            border-right: 1px solid rgba(0, 0, 0, 0.07);
+            box-shadow: 0 0px 24px 0 rgb(0 0 0 / 6%), 0 1px 0px 0 rgb(0 0 0 / 2%);
+/*      		transition: height 0.3s; */
+        }
+	
+	   .sidebar-inner {
+            height: 100%;
+            padding-top: 30px;
+        }
+        
+	
+	 #sidebar-menus
+         {
+            border: 1px;
+            font-weight: normal;
+            line-height: 1;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            text-decoration: none;
+        }
+	
+	
+    .left_sub_menu {
+            width: 200px;
+            z-index: 10;
+            background: white;
+            border-right: 1px solid rgba(0, 0, 0, 0.07);
+            overflow-y: auto;
+            padding-bottom: 50px;
+            box-shadow: 0 0px 24px 0 rgb(0 0 0 / 6%), 0 1px 0px 0 rgb(0 0 0 / 2%);
+            color: black;
+/*             transition: height 0.3s; */
+        }
+        
+         .side-menu.clicked,
+    .left_sub_menu.clicked {
+        height: calc(100vh - 50px); /* 상단 바의 높이를 제외한 부분으로 높이를 맞춤 */
+    }
+        
+        
+
+        .sub_menu {
+            margin-top: 50px;
+        }
+        
+        .big_meun .no-drop {
+        	color: black;
+        }
+        
+        .left_sub_menu .big_menu li:first-child {
+    		color: black;
+		}
+		
+		left_sub_menu>.sub_menu li:hover {
+            color: cyan;
+            background-color: #e1e1e1;
+        }
+		
+		.left_sub_menu>.sub_menu li {
+            color: #333;
+            font-size: 17px;
+            font-weight: 600;
+            padding: 20px 0px 8px 14px;
+            border-bottom: 1px solid #e1e1e1;
+        }
+		
+		
+		
+        .sub_menu>h2 {
+            padding-bottom: 4px;
+            border-bottom: 3px solid #797979;
+            margin-top: 30px;
+            font-size: 21px;
+            font-weight: 600;
+            color: #333;
+            margin-left: 10px;
+            margin-right: 10px;
+            font-family: 'NotoKrB';
+            line-height: 35px;
+        }
+
+        .sub_menu .fas {
+            color: #006AFF;
+            font-size: 20px;
+            line-height: 20px;
+            float: right;
+            margin-right: 20px;
+        }
+
+      
+        
+           .sub_menu>.big_menu>.small_menu li {
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+            border-bottom: 0px solid #e1e1e1;
+            margin-left: 14px;
+            padding-top: 8px;
+        }
+        
+        ul {
+        	padding-inline-start: 0px;
+        }
+        
+        
+       	a {
+           color: #797979;
+           text-decoration: none;
+           background-color: transparent;
+        }
+        
+        ul {
+        	list-style: none;	
+        }
+        
+
+        .small_menu {
+            margin-left: 10px; /* 드롭다운 메뉴 왼쪽 여백 추가 */
+        }
+
+        .small_menu li {
+            padding: 8px 0; /* 드롭다운 메뉴 아이템 간격 조정 */
+            color: black; /* 기본 텍스트 색상 */
+        }
+        
+
+        .small_menu li.clicked {
+            color: #00ffff!important; /* 클릭 시 텍스트 색상 변경 */
+        }
+
+        .small_menu li:hover {
+            cursor: pointer;
+        }
+
+        .small_menu li a {
+            text-decoration: none; /* 하이퍼링크 표시 없애기 */
+        }
+		
+	   
+        ol, ul {
+        	margin-top: 0;
+            margin-bottom: 10px;
+        }
