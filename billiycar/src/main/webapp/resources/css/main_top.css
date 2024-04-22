@@ -1,0 +1,139 @@
+@charset "EUC-KR";
+
+/*==================================로고 크기 및 위치=================================*/
+
+* {
+  font-family: "Noto Sans KR", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.top_logo{
+	margin-left : 50px;
+}
+
+.left_menu{
+	margin-top:20px;
+	width: 1920px;
+}
+
+.right_menu {
+	float:right;
+	margin-top : -30px;
+	margin-right : 30px;
+}
+
+/*구분선*/
+#top-line {
+	border: 0px;
+ 	height: 0.5px;
+	background-color : #e4e4e4;
+}
+
+/*======================================왼쪽 메뉴=====================================*/
+/* 메인 메뉴 스타일 */
+.top_bar {
+    display: flex; /* 가로 정렬을 위해 flexbox 사용 */
+    justify-content: center; /* 가운데 정렬 */
+}
+
+.top_ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex; /* 가로로 정렬하기 위해 flexbox 사용 */
+}
+
+.top_ul > li {
+	left : 30px;
+    position: relative;
+    margin: 0 10px; /* 메뉴 간의 간격 조정 */
+    margin-top : 8px;
+    margin-bottom : 8px;
+}
+
+/* 메뉴 링크 스타일 */
+.top_menu {
+	font-size : 17px;
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #00AAFF !important;
+    font-weight: bold;
+}
+
+.top_menu:hover {
+    color: #353535 !important; /* hover 시 글자색 변경 */
+}
+
+/* 드롭다운 메뉴 스타일 */
+.top_ul ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: -100px;
+    text-align : center;
+    background-color: #EBEEF2;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    white-space: nowrap; /* 서브메뉴가 한 줄로 늘어나도록 설정 */
+    display: flex; /* 가로 정렬을 위해 flexbox 사용 */
+    flex-direction: row; /* 가로로 정렬 */
+    width : 700px !important;
+}
+
+.top_ul li {
+    display: block;
+    flex-grow: 1; /* 항목들이 동일한 너비를 가지도록 설정 */
+    left : 0px !important;
+}
+
+.top_ul .top_sub_menu {
+	left : -100px !important;
+}
+
+
+.top_ul li a {
+    display: block;
+    padding: 10px 25px; /* 서브메뉴 링크의 패딩 조정 */
+    text-decoration: none;
+    color: #000;
+   
+}
+
+/* hover 효과 */
+.top_ul > li:hover > ul {
+    display: flex; /* hover시 서브메뉴 보이도록 설정 */
+}
+
+/* 클릭시에도 드롭다운 메뉴 유지 */
+.top_ul > li:active > ul {
+    display: flex; /* 클릭 시 서브메뉴 보이도록 설정 */
+}
+
+/* hover 안 했을 때 서브메뉴 숨기기 */
+.top_ul ul {
+    display: none;
+}
+
+/* hover 했을 때 서브메뉴 보이도록 설정 */
+.top_ul > li:hover > ul {
+    display: flex;
+}
+
+.top_sub_menu:hover {
+	background-color : #00AAFf;
+    color : white !important;
+}
+/*=====================================오른쪽 메뉴=======================================*/
+#right_menu{
+	text-align:right;
+	width: 200px;
+}
+
+.top_right_menu {
+	text-decoration: none;
+	color : #00AAFF;
+	font-size : 19px;
+}
+
+

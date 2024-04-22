@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>바텀</title>
-<link rel = "stylesheet" href = "resources/css/bottom.css">
+<link rel = "stylesheet" href = "${pageContext.request.contextPath}/resources/css/bottom.css">
 <link rel = "stylesheet" href = "../css/font.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

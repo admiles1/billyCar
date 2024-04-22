@@ -14,7 +14,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
 	<!-- CSS -->
-	<link rel = "stylesheet" href = "css/FAQ.css">
+	<link rel = "stylesheet" href = "${pageContext.request.contextPath}/resources/css/FAQ.css">
 	
 	<!-- 글꼴 -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,6 +33,7 @@
   			<em class = "faq_title_1">FAQ</em><br>
   			<em class = "faq_sub_title">빌리카에서 궁금한 내용들을 모두 알려 드립니다.</em>
   		</div>
+  		
   		
   		<!-- 카테고리 -->
   		<div id = "btn_tag">
@@ -55,6 +56,18 @@
   		
   		<!-- dribbble -->
 		<a class="dribbble" href="https://dribbble.com/shots/7441241-Button-Hover-Effects" target="_blank"><img src="https://cdn.dribbble.com/assets/dribbble-ball-mark-2bd45f09c2fb58dbbfb44766d5d1d07c5a12972d602ef8b32204d28fa3dda554.svg" alt=""></a>
+		
+		<!-- 검색창 -->
+		<div class = "searc">
+		  	<form action="">
+			  	<div class = "faq_se">
+				  	<div class="group">
+			  			<svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><g><path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"></path></g></svg>
+			  			<input placeholder="Search" type="search" class="input" name = "notice_search">
+					</div>
+			  	</div>
+			 </form> 
+		 </div>	
 		
 		
 		<!-- 자주묻는질문들 -->
@@ -88,15 +101,69 @@
             </div>
           </div>
         </div>
+
+        <!-- 세번째 질문 -->
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab">
+            <a role="button" data-toggle="collapse" data-parent="#accParent" data-target="#accEx2" aria-constrols="addEx2">
+              두번째 질문
+            </a>
+          </div>
+          <div id="accEx2" class="panel-collapse collapse" role="tabpanel">
+            <div class="panel-body">
+              답변 ~
+            </div>
+          </div>
+        </div>
         
       </div> <!-- id=accParent -->
     </div>
 
+	<nav aria-label="Page navigation example">
+		<div class = "paging">
+	  		<ul class="pagination">
+	    		<li class="page-item">
+	      			<a class="page-link" href="#" aria-label="Previous">
+	        			<span aria-hidden="true">&laquo;</span>
+	     			 </a>
+	   			 </li>
+			    <li class="page-item"><a class="page-link" href="#">1</a></li>
+			    <li class="page-item"><a class="page-link" href="#">2</a></li>
+			    <li class="page-item"><a class="page-link" href="#">3</a></li>
+			    <li class="page-item">
+			     	 <a class="page-link" href="#" aria-label="Next">
+			        	<span aria-hidden="true">&raquo;</span>
+			     	 </a>
+	    		</li>
+	  		</ul>
+  		</div>
+	</nav>
 
+
+	<div class = "faq_cs">
+		<em> 상담원 1:1 문의 </em>
+		<div class = "faq_cs_account">
+			<span class = "faq_cs_1">
+				<p class = "faq_cs_account1"> 빌리카 상담 운영시간 </p>
+				<p class = "faq_cs_account2">9:00 ~ 17:00 (주말 및 공휴일 휴무)<br> *사고 및 긴급 출동 : 24시간 가능</em>
+			</span>
+			
+		<div class = "faq_cs1_1">
+			<input type = "button" class = "cs_btn" value = "1:1 상담 신청 바로가기">
+		</div>
+		<hr class="hr-2">
+		<em class = "faq_tell"> 전화상담 : 1577-7777</em>
+		</div>
+	</div>
+	
 </div>
 		
 	<!-- 부트 스트랩-->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	
+	<footer>
+		<jsp:include page="../inc/bottom.jsp"/>
+	</footer>
 </body>
 </html>

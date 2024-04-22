@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="${pageContext.request.contextPath}/css/join_complete.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/join_complete.css" rel="stylesheet">
 <meta charset="UTF-8">
 <title>회원가입 완료</title>
 </head>

@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>빌리카 로그인</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/login_form.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/login_form.css">
 </head>
 <body>
  	<div class="sign-in-container">
