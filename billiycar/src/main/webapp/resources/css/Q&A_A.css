@@ -1,0 +1,79 @@
+@charset "EUC-KR";
+
+.cs_act {
+	margin-left : 220px;
+	margin-right: 200px;
+}
+
+/* 제목 */
+.cs_title {
+	text-align : center;
+	margin : 100px 100px 60px 100px;
+}
+
+.cs_title_1 {
+	font-weight : bold;
+	font-size : 40px;
+	margin-left: -100px;
+}
+
+.cs_sub_title {
+	margin-left: -100px;
+	color : #00AAFF;
+}
+
+.cs_write {
+	padding : 20px;
+	margin-top : -30px;
+}
+
+/* 글 적는 곳*/
+.cs_write input, textarea, select {
+	margin-left : 10px;
+	padding : 10px;
+	border: 1px solid #999;
+	border-radius : 10px;
+	box-shadow : 3px 3px 10px #e6e6e6;
+}
+
+.cs_write .title_wr input[type = "text"]{
+	margin-top : 20px;
+	margin-bottom : 20px;
+	width : 85.5%;
+}
+
+.cus_info input[type = "text"] {
+	margin-right : 20px;
+}
+
+.cs_write .content_wr textarea {
+	min-width : 85.5%;
+	max-width : 85.5%;
+	min-height: 200px;
+	box-shadow : inset 3px 3px 10px #e6e6e6;
+	vertical-align : top;
+}
+
+.cs_write input[type = "file"] {
+	border : none;
+	box-shadow : none;
+	padding : 10px;
+	margin-left : 40px;
+}
+
+.btn_wr {
+	position : absolute;
+	padding : 10px;
+	margin-left : 640px;
+}
+
+.btn_wr a {
+	background-color : #00aaFf;
+	padding : 10px;
+	color : #fff;
+	border-radius : 10px;
+}
+
+.material-symbols-outlined {
+	color : #00aaFf;
+}
