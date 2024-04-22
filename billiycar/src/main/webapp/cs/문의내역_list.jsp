@@ -34,6 +34,9 @@
   		<em class = "cs_sub_title">빌리카에서 다양한 소식을 안내해 드립니다.</em>
   	</div>
   	
+  	 <div class ="btn_qna">
+			 	<input type = "button" value = "문의하기">
+	 </div>
   	
   	<!-- 검색창 -->
   	<div class = "searc">

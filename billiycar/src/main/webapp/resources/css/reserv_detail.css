@@ -1,0 +1,77 @@
+@charset "EUC-KR";
+
+
+#selectResult {
+	padding : 30px;
+}
+.car-price {
+	font-size : 50px;
+	
+}
+.car-name, .car-price  {
+	text-align : left;
+	
+}
+
+.car-size {
+	border : 1px solid #006AFF;
+	border-radius : 20px;
+	font-size : 15px;
+	padding : 5px 3px;
+	color : #006AFF;
+}
+
+.car-carousel {
+	border : 1px solid lightgray;
+	border-style : none solid none none;
+}
+.rental-criteria {
+	font-size : 25px;
+	text-align : left;
+}
+
+.qua {
+	font-weight : 800;
+	color : #006AFF;
+}
+.rental-criteria-list {
+	list-style : none;
+	text-align : left;
+	padding-left : 0px;
+}
+
+.make-rv {
+	display : block;
+	float : left;
+	width : 50%;
+	height : 50px;
+	background-image : url(../images/make-reserv.jpg);
+	background-repeat : no-repeat;
+}
+
+.contact-cs {
+	display : block;
+	float : right;
+	width : 50%;
+	height : 50px;
+	background-image : url(../images/contact-cs.jpg);
+	background-repeat : no-repeat;
+}
+
+.check-img {
+	width : 30px;
+	height: 30px;
+}
+
+.car-info, .car-option, .car-insurance {
+	height : 30px;
+	margin-bottom : 15px;
+	text-align : left;
+	background-color : lightgray;
+	border-radius : 10px;
+} 
+
+.car-info h5, .car-option h5, .car-insurance h5 {
+	font-weight : 600;
+	padding : 3px 0px 0px 15px;
+}

@@ -16,7 +16,7 @@
 .notice_d_title {
 	font-weight : bold;
 	font-size : 40px;
-	margin-left: -100px;
+	margin-left: 50px;
 }
 
 /*----------------------------------*/
@@ -31,6 +31,10 @@
 	margin-bottom : 30px;
 }
 
+.view_tit h3 {
+	font-size: 25px;
+}
+
 .detail_view .view_info {
 	border-top : 1px solid #999;
 	border-bottom : 1px solid #999;
@@ -40,23 +44,16 @@
 	padding-bottom : 10px;
 }
 
-.datail_view .view_info dl {
-	display : inline-block;
+.detail_view {
+	margin-top : -50px;
+	margin-left : 430px;
+	border-radius : 15px;
+	background-color : #F3F3F3;
+	width : 600px;
 }
 
-.datail_view .view_info dl dt, dd {
-	display : inline-block;
-	font-size : small;
-}
-
-.datail_view .view_info dl dt {
-	margin-left : 5px;
-	color : #999;
-}
-
-.datail_view .view_info dl dd {
-	margin-right : 10px;
-	margin-left : 5px;
+em {
+	padding : 5px;	
 }
 
 .view_cont {
@@ -64,17 +61,20 @@
 	padding-bottom : 30px;
 }
 
+.view_cont p {
+	font-size : 18px;
+}
+
 .btn-view {
-	position : absolute;
-	right : 0;
-	bottom : 0;
+	margin-left : 660px;
+	margin-top : 15px;
 	padding : 10px;
-	margin : 10px 10px 20px 10px;
 }
 
 .btn-view a {
 	padding : 10px;
 	border-radius : 10px;
-	background-color : #00aaff;
+	background-color : #275efe;
 	color : white;
+	text-decoration: none;
 }
