@@ -72,7 +72,7 @@ $(document).ready(function(){
 <body class ="body">
 <!-- top 부분 -->
 <div id = "logo">
-	<img src="resources/images/logo_1.png" class = "top_logo">
+	<img src="${pageContext.request.contextPath}/resources/images/billycar_logo.png" class = "top_logo">
 </div>
 
 <div class = "right_menu">
