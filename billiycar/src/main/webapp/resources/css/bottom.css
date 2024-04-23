@@ -23,7 +23,7 @@
 /* 상세정보 정렬 및 배치 */
 .finfo {
 	margin-top:0;
-	margin-right:200px;
+	margin-right:500px;
 	float:right;
 }
 
@@ -35,7 +35,7 @@
 /* 고객센터 및 계좌 크기 및 배치 */
 #footer_account {
 	margin-top : 80px;
-	margin-left : 70px;
+	margin-left : 50px;
 	text-align: center;
 }
 

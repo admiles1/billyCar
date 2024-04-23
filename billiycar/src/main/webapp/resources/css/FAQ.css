@@ -1,10 +1,10 @@
 @charset "EUC-KR";
 /*여백 지정*/
-.faq_arti {
-	margin-left : 220px;
-	margin-right: 200px;
-/* 	background-color : pink; */
-}
+/* .faq_arti { */
+/* 	margin-left : 220px; */
+/* 	margin-right: 200px; */
+/* /* 	background-color : pink; */ 
+/* } */
 
 /* 타이틀 */
 
@@ -16,11 +16,11 @@
 .faq_title_1 {
 	font-weight : bold;
 	font-size : 40px;
-	margin-left: -100px;
+	margin-left: -20px;
 }
 
 .faq_sub_title {
-	margin-left: -100px;
+	margin-left: -20px;
 	color : #00AAFF;
 }
 
@@ -97,7 +97,7 @@
 }
 
 #btn_tag {
-	margin-left : 350px;
+	margin-left : 200px;
 	margin-top : -50px;
 }
 
@@ -113,7 +113,7 @@
 /* 검색창 */
 .faq_se {
 	margin-top : 30px;
-	margin-left : 400px;
+	margin-left : 250px;
 	margin-bottom : -50px;
 }
 
@@ -165,7 +165,7 @@
 
 /* 페이징 */
 .paging{
-	margin-left: 600px;
+	margin-left: 470px;
 }
 
 /* 상담원 문의 */

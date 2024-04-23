@@ -12,31 +12,6 @@
 	display : inline-block;
 }
 
-body {
-  margin: 50px;
-}
-
-/* ------------- 사이드바 설정 --------------*/
-
-.sidebar {
-	width : 250px;
-	float: left;
-	margin-top : 100px;
-}
-
-.sidebar .list-group-item {
-	color : black;
-	text-align : center;
-}
-
-.sidebar .list-group-item a {
-	color : black;
-}
-
-.sidebar .list-group-item:hover, .sidebar .list-group-item:focus {
-	background-color :#EBEEF2;
-}
-
 /* 공지사항 타이틀 */
 
 .notice_title {
@@ -47,11 +22,11 @@ body {
 .cs_title_1 {
 	font-weight : bold;
 	font-size : 40px;
-	margin-left: -100px;
+	margin-left: 10px !important;
 }
 
 .cs_sub_title {
-	margin-left: -100px;
+	margin-left: 10px !important;
 	color : #00AAFF;
 }
 
@@ -206,7 +181,7 @@ td.text-left {
 
 .board {
 	margin-top : 110px;
-	margin-left : 400px;
+	margin-left : 350px;
 }
 
 /* .arti { */
@@ -219,7 +194,7 @@ a{
 	text-decoration : none;
 }
 
-.paging{
+.paging {
 	margin-left: 480px;
 }
 

@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     
 	<!-- css -->
-	<link rel ="stylesheet" href = "${pageContext.request.contextPath}/resources/css/문의내역_list.css">
+	<link rel ="stylesheet" href = "${pageContext.request.contextPath}/resources/css/Q&A_list.css">
 	<link rel ="stylesheet" href = "css/font.css">
 	
 	<!-- 글꼴 -->

@@ -12,7 +12,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 	
 	<!-- css -->
-	<link rel ="stylesheet" href = "${pageContext.request.contextPath}/resources/css/notice.css">
+	<link rel ="stylesheet" href = "${pageContext.request.contextPath}/resources/css/공지사항.css">
 	
 	<!-- 글꼴 -->
 </head>
