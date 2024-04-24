@@ -25,6 +25,8 @@
   		<jsp:include page="../inc/top.jsp"/>
   	</header>
 	
+	<main class="container">
+	
 	<div class = "cs_act">
 	
 		<!-- 타이틀 -->
@@ -35,9 +37,9 @@
  
  		<div class = "cs_write">
  			<div class = "cus_info">
- 				이름 <input type = "text" placeholder="이름을 입력하세요" >
+ 				이메일 <input type = "text" placeholder="이메일을 입력하세요" >
  				문의 주제 
- 				<select id="" name="">
+ 				<select id="" name="" style = "margin-left : 15px" >
  					<option value = ""> 문의 주제 </option>
  					<option value = ""> 예약 변경 및 취소 </option>
  					<option value = ""> 운전자 </option>
@@ -45,7 +47,7 @@
  			</div>
  			
  			<div class = "title_wr">
- 				제목 <input type = "text" placeholder="제목을 입력하세요">
+ 				제목 <input type = "text" placeholder="제목을 입력하세요" style = "margin-left : 15px">
  			</div>
  			
  			<div class = "content_wr">
@@ -56,7 +58,7 @@
  		<div class = "btn_wr"><a href = "#"> 문의 제출 </a></div>
  	 		
 	</div>
-	
+	</main>
 	
 	<footer>
 		<jsp:include page="../inc/bottom.jsp"/>

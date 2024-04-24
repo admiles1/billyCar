@@ -1,0 +1,139 @@
+@charset "EUC-KR";
+
+
+
+/*타이틀*/
+.re_title_div {
+	text-align : center;
+	margin : 100px;
+}
+
+.rental_title {
+	font-weight : bold;
+	font-size : 40px;
+	margin-left: 50px;
+}
+
+li {
+    list-style: none;
+}
+
+.guide{
+	background-color : #E4E4E4;	
+	padding : 10px;
+	border-radius: 10px;
+	border : none;
+	margin-left : 120px;
+}
+
+.for_table {
+	margin-top : 40px;
+	margin-bottom  : 40px;
+}
+
+.for_table, th, td, tr, .cont {
+	border : 1px solid #ddd;
+	border-collapse: collapse;
+	text-align: center;
+}
+
+
+th, td {
+	padding : 5px;
+}
+
+th {
+	background-color : #f2f2f2;
+	font-weight : bold;
+}
+
+td {
+	background-color : #fff;
+}
+
+.sub_t {
+	font-family: "Noto Sans KR", sans-serif !important;
+	font-size : 18px;
+	color : #00AAFF;
+	margin-left : 50px;
+}
+
+.sub {
+	width : 200px;
+	float : left;
+	margin-left : 90px;
+}
+
+/*div 그림자 및 크기*/
+.tabless {
+	width : 800px;
+	margin-left : 300px;
+}
+
+.hr-2 {
+  border: 0;
+  border-bottom: 2px dashed #eee;
+  margin-left : 100px;
+  background: #999;
+  margin-top : 50px;
+}
+
+
+/* 절차 */
+#step {
+	margin-left : 300px;
+	padding : 10px;
+	vertical-align: middle;
+}
+
+#step1, #step2, #step3 {
+	display : inline-block;
+	padding : 30px;
+	text-align : center;
+	width : 250px;
+	height : 170px;
+	border : 0.5px solid #ddd;
+	border-radius: 10px;
+	vertical-align: middle;
+}
+
+#step4, #step5 {
+	margin-top : 30px;
+	display : inline-block;
+	padding : 30px;
+	text-align : center;
+	width : 250px;
+	height : 190px;
+	border : 0.5px solid #ddd;
+	border-radius: 10px;
+	vertical-align: middle;
+}
+
+#return_step {
+	margin-left : 300px;
+	padding : 10px;
+	vertical-align: middle;
+}
+
+#rstep1, #rstep2 {
+	margin-top : 30px;
+	display : inline-block;
+	padding : 30px;
+	text-align : center;
+	width : 250px;
+	height : 220px;
+	border : 0.5px solid #ddd;
+	border-radius: 10px;
+	vertical-align: middle;
+}
+
+/*주의사항*/
+
+.caution{
+	background-color : #E4E4E4;	
+	padding : 10px;
+	border-radius: 10px;
+	border : none;
+	margin-left : 300px;
+	width : 850px;
+}
