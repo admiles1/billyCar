@@ -1,0 +1,47 @@
+@charset "EUC-KR";
+
+/*여백 지정*/
+com_intro {
+	margin-left : 220px;
+	margin-right: 200px;
+}
+
+/*타이틀*/
+.title_div {
+	text-align : center;
+	margin : 100px;
+}
+
+.intro_title {
+	font-weight : bold;
+	font-size : 40px;
+	margin-left: 50px;
+}
+
+/* 본문 */
+.com_intro_center {
+	width : 700px;
+	margin-left : 600px;
+}
+
+.com_good {
+	width : 700px;
+	margin-top : 130px;
+	margin-left : 600px;
+	margin-bottom : 30px;
+}
+
+.img_intro {
+	margin-top : 30px;
+	margin-left : 500px;
+}
+
+.img_intro img {
+	width : 300px;
+	height : 200px;
+}
+
+.img_span {
+	margin-left : 100px;
+	padding : 18px;
+}
