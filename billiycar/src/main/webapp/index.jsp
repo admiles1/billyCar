@@ -39,6 +39,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+
+<!-- 아이콘 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <style type="text/css">
 	
 	#optionSelect{
@@ -181,12 +184,12 @@ $(document).ready(function(){
             <form>
                 <div class="input-daterange">
                     <div class="mb-2 row">
-                        <label for="pickupDate" class="col-sm-2 col-form-label" style="text-align: center;">대여일</label>
+                        <label for="pickupDate" class="col-sm-2 col-form-label" style="text-align: center;"><i class="fa-regular fa-calendar-days"></i> 대여일</label>
                         <div class="col-sm-4">
                             <input type="text" class="form-control form-control-sm" id="pickupDate" placeholder="대여 날짜 선택" readonly>
                         </div>
 
-                        <label for="returnDate" class="col-sm-2 col-form-label" style="text-align: center;">반납일</label>
+                        <label for="pickupDate" class="col-sm-2 col-form-label" style="text-align: center;"><i class="fa-regular fa-calendar-days"></i> 반납일</label>
                         <div class="col-sm-4">
                             <input type="text" class="form-control form-control-sm" id="returnDate" placeholder="반납 날짜 선택" readonly>
                         </div>
@@ -194,17 +197,17 @@ $(document).ready(function(){
                 </div>
 
                 <div class="mb-2 row">
-                    <label for="pickupTime" class="col-sm-2 col-form-label" style="text-align: center;">대여 시간</label>
+                    <label for="pickupTime" class="col-sm-2 col-form-label" style="text-align: center;"><i class="fa-regular fa-clock"></i> 대여시간</label>
                     <div class="col-sm-4">
                         <input type="time" class="form-control form-control-sm" id="pickupTime">
                     </div>
-                    <label for="pickupTime" class="col-sm-2 col-form-label" style="text-align: center;">반납 시간</label>
+                    <label for="pickupTime" class="col-sm-2 col-form-label" style="text-align: center;"><i class="fa-regular fa-clock"></i> 반납시간</label>
                     <div class="col-sm-4">
                         <input type="time" class="form-control form-control-sm" id="pickupTime">
                     </div>
                 </div>
                 <div class="mb-2 row">
-                	<label for="carType" class="col-sm-2 col-form-label" style="text-align: center;">차종</label>
+                	<label for="carType" class="col-sm-2 col-form-label" style="text-align: center;"><i class="fa-solid fa-car-side"></i> 차종</label>
                     <div class="col-sm-4">
                         <select class="form-select form-select-sm" id="carType">
                             <option selected>차종 선택</option>
@@ -213,7 +216,7 @@ $(document).ready(function(){
                             <option value="hatchback">Hatchback</option>
                         </select>
                     </div>
-                    <label for="carType" class="col-sm-2 col-form-label" style="text-align: center;">연료</label>
+                    <label for="carType" class="col-sm-2 col-form-label" style="text-align: center;"><i class="fa-solid fa-gas-pump"></i> 연료</label>
                     <div class="col-sm-4">
                         <select class="form-select form-select-sm" id="carType">
                             <option selected>연료 선택</option>
@@ -224,7 +227,7 @@ $(document).ready(function(){
                     </div>
                 </div>
                 <div style="margin-top: 8px;">
-                    <button type="submit" class="btn btn-sm date_btn-black">차량 검색</button>
+                    <button type="submit" class="btn btn-sm date_btn-black"><i class="fa-solid fa-magnifying-glass"></i> 차량 검색</button>
                 </div>
             </form>
         </div>
