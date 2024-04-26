@@ -33,9 +33,9 @@
   		</div>
   		
 		<div class = "img_intro">
-			<img src = "../images/billycar_intro3.png">
-			<img src = "../images/billycar_intro1.png">
-			<img src = "../images/billycar_intro2.png">
+			<img src = "${pageContext.request.contextPath}/resources/images/billycar_intro3.png">
+			<img src = "${pageContext.request.contextPath}/resources/images/billycar_intro1.png">
+			<img src = "${pageContext.request.contextPath}/resources/images/billycar_intro2.png">
 			<br>
 			<span class = "img_span">실제 유저들의 리뷰</span>
 			<span class = "img_span">우리 집 앞까지 배달 가능</span>
