@@ -194,11 +194,17 @@ $(document).ready(function(){
                 </div>
 
                 <div class="mb-2 row">
-                    <label for="pickupTime" class="col-sm-2 col-form-label" style="text-align: center;">픽업 시간</label>
+                    <label for="pickupTime" class="col-sm-2 col-form-label" style="text-align: center;">대여 시간</label>
                     <div class="col-sm-4">
                         <input type="time" class="form-control form-control-sm" id="pickupTime">
                     </div>
-                    <label for="carType" class="col-sm-2 col-form-label" style="text-align: center;">차종</label>
+                    <label for="pickupTime" class="col-sm-2 col-form-label" style="text-align: center;">반납 시간</label>
+                    <div class="col-sm-4">
+                        <input type="time" class="form-control form-control-sm" id="pickupTime">
+                    </div>
+                </div>
+                <div class="mb-2 row">
+                	<label for="carType" class="col-sm-2 col-form-label" style="text-align: center;">차종</label>
                     <div class="col-sm-4">
                         <select class="form-select form-select-sm" id="carType">
                             <option selected>차종 선택</option>
@@ -207,9 +213,18 @@ $(document).ready(function(){
                             <option value="hatchback">Hatchback</option>
                         </select>
                     </div>
+                    <label for="carType" class="col-sm-2 col-form-label" style="text-align: center;">연료</label>
+                    <div class="col-sm-4">
+                        <select class="form-select form-select-sm" id="carType">
+                            <option selected>연료 선택</option>
+                            <option value="">휘발유</option>
+                            <option value="">경유</option>
+                            <option value="">LPG</option>
+                        </select>
+                    </div>
                 </div>
                 <div style="margin-top: 8px;">
-                    <button type="submit" class="btn btn-sm date_btn-black">최저가 검색</button>
+                    <button type="submit" class="btn btn-sm date_btn-black">차량 검색</button>
                 </div>
             </form>
         </div>
