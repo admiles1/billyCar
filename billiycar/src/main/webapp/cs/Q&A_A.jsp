@@ -28,6 +28,7 @@
   		<jsp:include page="../inc/top.jsp"/>
   	</header>
 	
+	<main class="container">
 	<div class = "cs_act">
 	
 		<!-- 타이틀 -->
@@ -38,7 +39,7 @@
  
  		<div class = "cs_write">
  			<div class = "cus_info">
- 				이름 <input type = "text" placeholder="이름을 입력하세요" >
+ 				이메일 <input type = "text" >
  				문의 주제 
  				<select id="" name="">
  					<option value = ""> 문의 주제 </option>
@@ -63,7 +64,7 @@
  		</div>
  	 		<div class = "btn_wr"><a href = "#" > 돌아가기 </a></div>
 	</div>
-	
+	 </main>
 	<footer>
 		<jsp:include page="../inc/bottom.jsp"/>
 	</footer>

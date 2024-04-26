@@ -1,9 +1,5 @@
 @charset "EUC-KR";
 
-.cs_act {
-	margin-left : 220px;
-	margin-right: 200px;
-}
 
 /* Á¦¸ñ */
 .cs_title {
@@ -52,14 +48,7 @@
 	min-height: 200px;
 	box-shadow : inset 3px 3px 10px #e6e6e6;
 	vertical-align : top;
-}
-
-.cs_write .content_A textarea{
-	min-width : 85.5%;
-	max-width : 85.5%;
-	min-height: 200px;
-	box-shadow : inset 3px 3px 10px #e6e6e6;
-	vertical-align : top;
+	margin-left : 15px;
 }
 
 .cs_write input[type = "file"] {
@@ -72,7 +61,7 @@
 .btn_wr {
 	position : absolute;
 	padding : 10px;
-	margin-left : 640px;
+	margin-left : 470px;
 }
 
 .btn_wr a {

@@ -5,13 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>관리자 페이지</title>
+<title>블랙 리스트 관리</title>
 <!-- 부트스트랩 CSS 링크 -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <!-- Font Awesome 아이콘 CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-<!-- Chart.js CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js">
 <!-- 관리자 페이지 스타일 -->
 <style>
   /* 추가적인 스타일링 */
@@ -24,9 +22,7 @@
   }
   .card-text {
     white-space: nowrap;
-  	
   }
-  
 </style>
 </head>
 <body>
@@ -55,11 +51,11 @@
                 <ul class="nav flex-column pl-3">
                   <!-- 회원 목록 조회 -->
                   <li class="nav-item">
-                    <a class="nav-link" href="admin_member.jsp"><i class="fas fa-list"></i> 회원 목록 조회</a>
+                    <a class="nav-link" href="#"><i class="fas fa-list"></i> 회원 목록 조회</a>
                   </li>
                   <!-- 블랙리스트 관리 -->
                   <li class="nav-item">
-                    <a class="nav-link" href="admin_blackList.jsp"><i class="fas fa-user-lock"></i> 블랙리스트 관리</a>
+                    <a class="nav-link" href="#"><i class="fas fa-user-lock"></i> 블랙리스트 관리</a>
                   </li>
                 </ul>
               </div>
@@ -71,7 +67,7 @@
                 <ul class="nav flex-column pl-3">
                   <!-- 차량 목록 조회 -->
                   <li class="nav-item">
-                    <a class="nav-link" href="admin_car.jsp"><i class="fas fa-list"></i> 차량 목록 조회</a>
+                    <a class="nav-link" href="#"><i class="fas fa-list"></i> 차량 목록 조회</a>
                   </li>
                   <!-- 신규 차량 등록 -->
                   <li class="nav-item">
@@ -109,105 +105,62 @@
       </nav>
 
       <!-- 메인 컨텐츠 영역 -->
-      <main role="main" class="col-md-10 col-lg-10 ml-sm-auto px-4">
+      <main role="main" class="col-md-10 ml-sm-auto px-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <h1 class="h2">관리자 메인</h1>
+          <h1 class="h2">블랙 리스트 관리</h1>
         </div>
 
-        <!-- 메인 페이지의 내용 추가 -->
-        <div class="row">
-          <div class="col-md-12 px-0">
-            <div class="card">
-              <div class="card-body">
-                <canvas id="myChart"></canvas>
-              </div>
-            </div>
+        <!-- 회원 목록 검색 기능 -->
+        <form class="form-inline mb-3">
+          <div class="form-group mr-2">
+            <input type="text" class="form-control" placeholder="검색어 입력">
           </div>
-          
+          <div class="form-group mr-2">
+            <select class="form-control">
+              <option value="">전체</option>
+              <option value="active">활성 회원</option>
+              <option value="inactive">비활성 회원</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">검색</button>
+        </form>
+
+        <!-- 회원 목록 테이블 -->
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>이름</th>
+                <th>이메일</th>
+                <th>가입일</th>
+                <th>상태</th>
+                <th>조작</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>홍길동</td>
+                <td>hong@example.com</td>
+                <td>2024-04-17</td>
+                <td>활성</td>
+                <td>
+                  <a href="#" class="btn btn-sm btn-primary">기간 수정</a>
+                  <button class="btn btn-sm btn-danger">삭제</button>
+                </td>
+              </tr>
+              <!-- 다른 회원들의 정보도 동일한 형식으로 추가 -->
+            </tbody>
+          </table>
         </div>
-        <div class="row">
-            <div class="card col-md-3">
-              <div class="card-body">
-                <h5 class="card-title">회원 정보</h5>
-                <p class="card-text">총 회원 수: 100</p>
-                <p class="card-text">당일 가입 회원 수: 10</p>
-                <p class="card-text">미답변 문의 수: 5</p>
-              </div>
-            </div>
-            <div class="card col-md-3">
-              <div class="card-body">
-                <h5 class="card-title">차량 정보</h5>
-                <p class="card-text">출고된 차량 수: 50</p>
-                <p class="card-text">출고 가능한 차량 수: 20</p>
-              </div>
-            </div>
-            <div class="card col-md-3">
-              <div class="card-body">
-                <h5 class="card-title">어떤 정보</h5>
-                <p class="card-text">출고된 차량 수: 50</p>
-                <p class="card-text">출고 가능한 차량 수: 20</p>
-              </div>
-            </div>
-            <div class="card col-md-3">
-              <div class="card-body">
-                <h5 class="card-title">저런 정보</h5>
-                <p class="card-text">출고된 차량 수: 50</p>
-                <p class="card-text">출고 가능한 차량 수: 20</p>
-              </div>
-            </div>
-        </div>
-        
-        
-        
       </main>
     </div>
   </div>
 </main>
-  <!-- jQuery, Popper.js, 부트스트랩 JS -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <!-- Chart.js JS -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script>
-    // 차트 데이터 생성
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['1월', '2월', '3월', '4월', '5월', '6월'],
-            datasets: [{
-                label: '매출 현황',
-                data: [100, 200, 300, 400, 500, 600],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
-        }
-    });
-  </script>
+<!-- jQuery, Popper.js, 부트스트랩 JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
