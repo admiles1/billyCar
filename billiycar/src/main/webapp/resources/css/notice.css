@@ -1,4 +1,4 @@
-@charset "EUC-KR";
+@charset "UTF-8";
 
 * {
   font-family: "Noto Sans KR", sans-serif;
@@ -7,12 +7,12 @@
 }
 
 
-/* ÀÎ¶óÀÎ */
+/* ì¸ë¼ì¸ */
 .notice_title .sideber .notice_se {
 	display : inline-block;
 }
 
-/* °øÁö»çÇ× Å¸ÀÌÆ² */
+/* ê³µì§€ì‚¬í•­ íƒ€ì´í‹€ */
 
 .notice_title {
 	text-align : center;
@@ -30,7 +30,7 @@
 	color : #00AAFF;
 }
 
-/* °Ë»öÃ¢ */
+/* ê²€ìƒ‰ì°½ */
 .notice_se {
 	float : right;
 	margin-right : 500px;
@@ -78,7 +78,7 @@
  height: 1rem;
 }
 
-/*Å×ÀÌºí*/
+/*í…Œì´ë¸”*/
 .table-fill {
   background: white;
   border-radius:3px;

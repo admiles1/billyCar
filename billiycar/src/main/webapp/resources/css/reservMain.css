@@ -1,13 +1,13 @@
-@charset "EUC-KR";
+@charset "UTF-8";
 @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
 
-/* Á¦¸ñ ºÎºĞ */
+/* ì œëª© ë¶€ë¶„ */
 
 #tapTitle {
 	margin : 50px;
 }
 
-/* °øÅë »çÇ× */
+/* ê³µí†µ ì‚¬í•­ */
 
 
 ul {
@@ -18,7 +18,7 @@ li a {
 	display : block;
 	text-decoration : none;
 }
-/* °Ë»ö ¿É¼Ç ¼±ÅÃ*/
+/* ê²€ìƒ‰ ì˜µì…˜ ì„ íƒ*/
 
 
 
@@ -84,7 +84,7 @@ label {
 	background-color : #A6C5FF;
 }	
 
-/* °Ë»ö °á°ú */
+/* ê²€ìƒ‰ ê²°ê³¼ */
 
 .fadeIn {
 	animation: fadein 2s;

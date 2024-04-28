@@ -1,8 +1,8 @@
-@charset "EUC-KR";
+@charset "UTF-8";
 
 
 
-/* Á¦¸ñ */
+/* ì œëª© */
 .cs_title {
 	text-align : center;
 	margin : 100px 0px 60px 100px;
@@ -25,7 +25,7 @@
 	margin-left : 50px;
 }
 
-/* ±Û Àû´Â °÷*/
+/* ê¸€ ì ëŠ” ê³³*/
 .cs_write input, textarea, select {
 	margin-left : 10px;
 	padding : 10px;

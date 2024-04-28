@@ -1,12 +1,12 @@
-@charset "EUC-KR";
+@charset "UTF-8";
 
-/*¿©¹é ÁöÁ¤*/
+/*ì—¬ë°± ì§€ì •*/
 com_intro {
 	margin-left : 220px;
 	margin-right: 200px;
 }
 
-/*Å¸ÀÌÆ²*/
+/*íƒ€ì´í‹€*/
 .title_div {
 	text-align : center;
 	margin : 100px;
@@ -18,7 +18,7 @@ com_intro {
 	margin-left: 50px;
 }
 
-/* º»¹® */
+/* ë³¸ë¬¸ */
 .com_intro_center {
 	width : 700px;
 	margin-left : 600px;
