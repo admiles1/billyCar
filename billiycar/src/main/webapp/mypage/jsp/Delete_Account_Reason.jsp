@@ -8,31 +8,46 @@
 <title>회원탈퇴 사유</title>
 </head>
 <style>
-   section {
-        padding: 20px;
-        border: 2px solid #797979;
-        border-radius: 10px;
-        height: auto;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
+  	#delete-reason {
+  		background:#fff;
+		border:1px solid #ccc;
+		border-radius: 8px;
+	    padding: 30px;
+		width: 100%;	
+		height: 100%;
+	    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  	}
+  	
     h2 {
         font-size: 32px;
         margin-bottom: 20px;
     }
+    
     p {
         margin-bottom: 20px;
     }
-    .reason-checkbox {
+    
+  	.reason-form {
         display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .reason-checkbox {
+    	display: flex; /* 수정: 내부 요소들을 가로로 정렬하기 위해 flexbox 사용 */
         align-items: center;
         margin-bottom: 10px;
     }
+    
     input[type="checkbox"] {
         margin-right: 10px;
     }
+    
+     label {
+        display: flex;
+        align-items: center;
+    }
+    
     textarea {
         width: 50%;
         padding: 10px;
@@ -41,56 +56,56 @@
         border-radius: 5px;
         resize: none;
     }
-    button {
-        padding: 10px 20px;
-        font-size: 18px;
-        background-color: #333;
-        color: #fff;
+    
+    #delete-reason button {
         border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-top: 10px;
+		border-radius: 20px;
+		font-size: 16px;
+		letter-spacing: 1px;
+		padding: 7px 0;
+		width: 120px;
+		background-color: #00AAFF; /* 배경색 지정 */
+	    color: white; /* 글자색 지정 */
+	    margin-top: 20px;
     }
-    button:hover {
+    
+    #delete-reason button:hover {
         background-color: #555;
     }
 </style>
 </head>
 <body>
 
-<section>
+<form id="delete-reason">
     <h2>회원 탈퇴</h2>
+    <hr>
     <p>회원 탈퇴를 진행하기 전에 탈퇴 사유를 선택해주세요.</p>
-    
-    <div class="reason-checkbox">
-        <input type="checkbox" id="reason1" value="사유1">
-        <label for="reason1">사유 1</label>
+    <div class="reason-form">
+	    <div class="reason-checkbox">
+	        <input type="checkbox" id="reason1" value="사유1">
+	        <label for="reason1">아이디 및 비밀번호 분실</label>
+	    </div>
+	    
+	    <div class="reason-checkbox">
+	        <input type="checkbox" id="reason2" value="사유2">
+	        <label for="reason2">개인정보 유출 우려</label>
+	    </div>
+	    
+	    <div class="reason-checkbox">
+	        <input type="checkbox" id="reason3" value="사유3">
+	        <label for="reason3">서비스 이용 불편</label>
+	    </div>
+	    
+	    <div class="reason-checkbox">
+	        <input type="checkbox" id="otherReason">
+	        <label for="otherReason">기타</label>
+	    </div>
+	    
+	    <textarea id="otherReasonText" placeholder="기타 사유를 입력해주세요" rows="4"></textarea>
+	    
+	    <button onclick="goToNextPage()">다음</button>
     </div>
-    
-    <div class="reason-checkbox">
-        <input type="checkbox" id="reason2" value="사유2">
-        <label for="reason2">사유 2</label>
-    </div>
-    
-    <div class="reason-checkbox">
-        <input type="checkbox" id="reason3" value="사유3">
-        <label for="reason3">사유 3</label>
-    </div>
-    
-    <div class="reason-checkbox">
-        <input type="checkbox" id="reason4" value="사유4">
-        <label for="reason4">사유 4</label>
-    </div>
-    
-    <div class="reason-checkbox">
-        <input type="checkbox" id="otherReason">
-        <label for="otherReason">기타</label>
-    </div>
-    
-    <textarea id="otherReasonText" placeholder="기타 사유를 입력해주세요" rows="4"></textarea>
-    
-    <button onclick="goToNextPage()">다음</button>
-</section>
+</form>
 
 <script>
     function goToNextPage() {

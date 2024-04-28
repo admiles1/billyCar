@@ -5,23 +5,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>현재 예약 내역</title>
+<title>회원탈퇴</title>
 </head>
 <style>
-       section {
-        padding: 20px;
-        border: 2px solid #797979;
-        border-radius: 10px;
-        height: 750px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
+    #delete-acc {
+    	background:#fff;
+		border:1px solid #ccc;
+		border-radius: 8px;
+	    padding: 30px;
+		width: 100%;	
+		height: 100%;
+	    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	}
+       
     h2 {
         font-size: 32px;
         margin-bottom: 20px;
     }
+    
+   
     input[type="password"] {
         width: 50%;
         padding: 10px;
@@ -30,29 +32,41 @@
         border-radius: 5px;
         box-sizing: border-box;
     }
-    button {
-        padding: 10px 20px;
-        font-size: 18px;
-        background-color: #FF0000;
-        color: #fff;
+    
+    #delete-acc button {
         border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-top: 10px;
+		border-radius: 20px;
+		font-size: 16px;
+		letter-spacing: 1px;
+		padding: 7px 0;
+		width: 120px;
+		background-color: red; /* 배경색 지정 */
+	    color: white; 
     }
-    button:hover {
-        background-color: #CC0000;
+    
+    #delete-acc button:hover {
+        background-color: #555;
+    }
+    
+    .delete-check {
+    	margin-top: 200px;
+        display: flex; /* 내부 요소를 가로로 나란히 정렬하기 위해 flexbox 사용 */
+       	flex-direction: column; /* 가운데 정렬 */
+        align-items: center; /* 세로 가운데 정렬 */
     }
 </style>
 </head>
 <body>
 
-<section>
+<form id="delete-acc">
     <h2>회원탈퇴</h2>
+    <hr>
     <p>회원탈퇴를 진행하시려면 비밀번호를 입력해주세요.</p>
+    <div class="delete-check">
     <input type="password" id="password" placeholder="비밀번호를 입력하세요">
     <button onclick="withdraw()">회원탈퇴</button>
-</section>
+	</div>
+</form>
 
 <script>
     function withdraw() {

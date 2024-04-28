@@ -9,15 +9,6 @@
 </head>
 <title>Main Area</title>
 <style>
-* {
-	margin: 0;
-	padding: 0;
-}
-
-/* body { */
-/* 	background: #ccc; */
-/* 	padding: 20px;	 */
-/* } */
 
 #signup {
 	background:#fff;
@@ -25,25 +16,14 @@
 	border-radius: 8px;
     padding: 30px;
 	width: 100%;	
-	height: 90%;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	margin-top: 85px;
-/* 	margin:30px auto; */
-}
-		
-#signup fieldset {
-	border: 1px solid #ccc;
 	height: 100%;
-	margin-bottom: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 	
-}
-		
-#signup legend {
-	font-size: 16px;
-	font-weight: bold;
-	padding-left:5px;
-	padding-bottom: 10px;	
-}
+h2 {
+	font-size: 32px;
+    margin-bottom: 20px;
+}	
 
 #singup ul {
 	list-style: none;
@@ -65,7 +45,6 @@
     margin-right: 80px; /* 입력창과 버튼 사이의 간격 조정 */
 	width: 350px;
 }
-
 			
 #signup button {	
 	border: none;
@@ -78,23 +57,54 @@
     color: white; /* 글자색 지정 */
 }
 
+#signup button:hover {
+	 background-color: #555;
+}
+
 #signup label {
 /* 	float: left;  /* 왼쪽으로 배치 */ */
 	font-size: 13px;  /* 글자 크기 - 13px */
 	width: 110px;  /* 너비 - 110px */
 }
 
+.modify-notice {
+	border: 1px solid #ccc;
+	border-radius: 12px;
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	line-height: 15px;
+	padding: 15px;
+}
+
+#signup em {
+	font-size: 13px; /* 원하는 크기로 조절하세요 */
+	color: red; /* 빨간색으로 변경 */
+	letter-spacing: -1px;
+}   
     
 </style>
 </head>
 <body>
 	<form id="signup">
 		<fieldset>
-		      <legend></legend>
+			<h2>회원정보 수정</h2>
+			<hr>
+			<div class="modify-notice">
+			<p>회원정보 수정을 위해 다음의 양식을 준수하여 주십시오.</p>
+			<p class="contxt-list"> 
+				<em>이름은 5자 미만</em>
+			</p>
+			<p class="contxt-list">
+				<em>이메일은 반드시 @를 포함</em>
+				하여 입력해주세요. 
+			</p>
+		</div>
 		      <ul>
 		        <li>
 		          <label for="fullname">이름</label>
 		          <input id="fullname" name="fullname" type="text" placeholder="5자미만 공백없이" required>
+		           <button onclick="changeName()">이름 변경</button> 	 	
 		        </li>
 		        <li>
 		          <label for="email">메일 주소</label>

@@ -8,43 +8,26 @@
 <title>비밀번호입력</title>
 </head>
 <style>
-    body {
-        font-family: "Noto Sans KR", sans-serif;
-        margin: 0;
-        padding: 0;
-    }
-    header {
-        color: #006AFF;
-        padding: 20px;
-        text-align: left;
-        border-bottom: 3px solid #797979;
-        margin-bottom: 20px; 
-        padding-bottom: 4px;
-        margin-top: 30px;
-        margin-left: 10px;
-        margin-right: 10px;
-        font-size: 21px;
-        font-weight: 600;
-         font-family: 'NotoKrB';
-    }
-    section {
-        padding: 20px;
-        border: 2px solid #797979;
-        border-radius: 10px;
-        height: 750px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-    h1 {
+	#passwd-insert {
+		background:#fff;
+		border:1px solid #ccc;
+		border-radius: 8px;
+	    padding: 30px;
+		width: 100%;	
+		height: 100%;
+	    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	}
+
+    h2 {
         font-size: 32px;
         margin-bottom: 20px;
     }
+    
     p {
         font-size: 18px;
         line-height: 1.6;
     }
+    
     input[type="password"] {
         width: 50%;
         padding: 10px;
@@ -53,32 +36,42 @@
         border-radius: 5px;
         box-sizing: border-box;
     }
-    button {
-        padding: 10px 20px;
-        font-size: 18px;
-        background-color: #333;
-        color: #fff;
+    
+    #passwd-insert button {
         border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-top: 10px; /* 버튼과 입력란 사이의 간격 조정 */
+		border-radius: 20px;
+		font-size: 16px;
+		letter-spacing: 1px;
+		padding: 7px 0;
+		width: 90px;
+		background-color: #00AAFF; /* 배경색 지정 */
+	    color: white; /* 글자색 지정 */
     }
-    button:hover {
+   
+    #passwd-insert button:hover {
         background-color: #555;
     }
+    
+    .passwd-check {
+    	margin-top: 200px;
+        display: flex; /* 내부 요소를 가로로 나란히 정렬하기 위해 flexbox 사용 */
+       	flex-direction: column; /* 가운데 정렬 */
+        align-items: center; /* 세로 가운데 정렬 */
+    }
+    
 </style>
 </head>
 <body>
 
-<header>
-    <h4>회원정보 수정</h4>
-</header>
-
-<section>
-    <h2>회원정보 수정을 위해 비밀번호를 입력해주세요</h2>
-    <input type="password" id="password" placeholder="비밀번호를 입력하세요">
-    <button onclick="checkPassword()">다음</button>
-</section>
+<form id="passwd-insert">
+	<h2>회원정보 수정</h2>
+	<hr>
+    <p>회원정보 수정을 위해 비밀번호를 입력해주세요<p>
+    <div class="passwd-check">
+    	<input type="password" id="password" placeholder="비밀번호를 입력하세요">
+    	<button onclick="checkPassword()">다음</button>
+	</div>
+</form>
 
 <script>
     function checkPassword() {

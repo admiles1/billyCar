@@ -14,7 +14,7 @@
     <div class="container">
         <div class="row g-5">
             <div class="col-md-7 col-lg-8 order-md-last">
-			    <jsp:include page="../jsp/Current_Reservation.jsp"></jsp:include>   
+			    <jsp:include page="../jsp/Reservation.jsp"></jsp:include>   
 			</div>
             <div class="col-md-5 col-lg-4">
                 <jsp:include page="../jsp/sidebar.jsp"></jsp:include>
