@@ -11,9 +11,7 @@
 	<header>
   		<jsp:include page="../inc/top.jsp"/>
   	</header>
-  	
   	<div class = "com_intro">
-  		
 		<!-- 타이틀 -->
 		<div class = "title_div">
   			<em class = "intro_title">빌리카 소개</em><br>

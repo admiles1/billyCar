@@ -12,6 +12,15 @@
 	display : inline-block;
 }
 
+/**/
+.write_btn {
+	float : right;
+	margin : 20px;
+	margin-top : -30px;
+	margin-left : 20px;
+	margin-right : 100px;
+}
+
 /* 공지사항 타이틀 */
 
 .notice_title {

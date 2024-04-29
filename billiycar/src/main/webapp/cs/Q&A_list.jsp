@@ -35,7 +35,7 @@
   	</div>
   	
   	 <div class ="btn_qna">
-	 	<input type = "button" value = "문의하기">
+	 	<input type = "button" value = "문의하기" onclick = "location.href = '#'">
 	 </div>
   	
   	<!-- 검색창 -->
