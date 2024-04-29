@@ -32,16 +32,16 @@
                     <ul class="big_menu">
                         <li>나의 정보관리 <i class="arrow fas fa-angle-right"></i>
                             <ul class="small_menu">
-                                <li><a href="#">회원정보 수정</a></li>
-                                <li><a href="#">비밀번호 변경</a></li>
-                                <li><a href="#">면허등록 및 갱신</a></li>
+                                <li><a href="modifyInfo">회원정보 수정</a></li>
+                                <li><a href="modifyPasswd">비밀번호 변경</a></li>
+                                <li><a href="license">면허등록 및 갱신</a></li>
                             </ul>
                         </li>
                     </ul>
                     <ul class="big_menu">
                         <li>나의 예약관리 <i class="arrow fas fa-angle-right"></i>
                             <ul class="small_menu">
-                                <li><a href="#">예약내역 확인</a></li>
+                                <li><a href="reservation">예약내역 확인</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -64,7 +64,7 @@
                         <li class="no-drop"><a href="#">로그아웃<i class="fas fa-right-from-bracket"></i></a></li>
                     </ul>
                     <ul class="big_menu">
-                        <li class="no-drop"><a href="#">회원탈퇴<i class="fas fa-user-slash"></i></a></li>
+                        <li class="no-drop"><a href="resign">회원탈퇴<i class="fas fa-user-slash"></i></a></li>
                     </ul>
                 </div>
             </div>

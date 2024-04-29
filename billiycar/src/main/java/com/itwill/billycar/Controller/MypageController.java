@@ -11,4 +11,9 @@ public class MypageController {
 		return "mypage/page/Mypage_Insert_Password";
 	}
 	
+	@GetMapping("modifyInfo")
+	public String modifyInfo() {
+		return "mypage/page/Mypage_Modify_Info";
+	}
+	
 }
