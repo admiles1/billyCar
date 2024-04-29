@@ -11,6 +11,7 @@
 <script src="https://kit.fontawesome.com/ef42a902c7.js" crossorigin="anonymous"></script>
 </head>
 <body>
+	<header><jsp:include page="/inc/top.jsp"></jsp:include></header>
     <div class="container">
         <div class="row g-5">
             <div class="col-md-7 col-lg-8 order-md-last">
@@ -21,5 +22,6 @@
             </div>
         </div>
     </div>
+    <footer><jsp:include page="/inc/bottom.jsp"></jsp:include></footer>
 </body>
 </html>
