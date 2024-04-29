@@ -16,4 +16,9 @@ public class ReservController {
 		return "reservation/reserv_detail";
 	}
 	
+	@GetMapping("review")
+	public String review() {
+		return "reservation/review";
+	}
+	
 }

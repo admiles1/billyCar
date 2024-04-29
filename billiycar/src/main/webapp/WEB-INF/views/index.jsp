@@ -78,7 +78,7 @@ $(document).ready(function(){
 	</header>
 
  <!-- 메인 부분 -->
-<main class="container" style="position: relative; z-index: 1">
+<main class="container" style="position: relative; z-index: 1; margin-top: 37px;">
 
 	<div id="carouselExample" class="carousel slide">
   <div class="carousel-inner">
@@ -200,7 +200,7 @@ $(document).ready(function(){
 				<h1 class="fw-light">고객 리뷰</h1>
 				<p class="lead text-body-secondary">위드 렌트카는 이미 많은 고객분들로부터 사랑받고 있습니다.</p>
 				<p>
-					<a href="#" class="btn btn-primary my-2">리뷰 더보기</a>
+					<a href="review" class="btn btn-primary my-2">리뷰 더보기</a>
 				</p>
 			</div>
 		</div>
@@ -375,7 +375,7 @@ $(document).ready(function(){
     </div>
     </div>
 </main>
-
+<footer><jsp:include page="/inc/bottom.jsp"></jsp:include></footer>
 
 
   
