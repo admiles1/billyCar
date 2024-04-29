@@ -30,4 +30,29 @@ public class LoginController {
 		return "index";
 	}
 	
+	@GetMapping("forgot_id")
+	public String forgot_id() {
+		return "login/forgot_id";
+	}
+	
+	@GetMapping("go_join")
+	public String go_join() {
+		return "join/join_form";
+	}
+	
+	@GetMapping("show_id")
+	public String show_id() {
+		return "login/show_id";
+	}
+	
+	@GetMapping("forgot_pw")
+	public String forgot_pw() {
+		return "login/forgot_pw1";
+	}
+	
+	@GetMapping("forgot_pw2")
+	public String forgot_pw2() {
+		return "login/forgot_pw2";
+	}
+	
 }

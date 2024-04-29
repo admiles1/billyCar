@@ -8,6 +8,27 @@ input {
 	font-size: 15px;
 }
 
+.forgot_id {
+	display : inline-block;
+	text-decoration: none;
+	background-color: #00AAFF;
+	width : 100px;
+	height : 30px;	
+	color: white;
+	font-weight: bold;
+    margin-right: 10px;
+    text-align: center;
+    padding-top : 5px;
+	
+}
+
+.forgot_pw{
+    text-decoration: none;
+    color: #00AAFF;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
 
 .container {
     background-color: white;
@@ -18,13 +39,6 @@ input {
     margin: 50px auto;
 }
 
-
-.button a {
-    text-decoration: none;
-    color: #00AAFF;
-    font-weight: bold;
-    margin-right: 10px;
-}
 
 hr {
     border: none;
@@ -98,7 +112,7 @@ input[type="button"]:hover {
     cursor: pointer;
     font-size: 16px;
     width: 100px; /* 버튼의 너비를 조절 */
-    height: 33px;
+    height: 35px;
     margin: 0 auto; /* 가운데 정렬을 위해 좌우 마진을 자동으로 설정 */
     display: block; /* 버튼을 블록 요소로 설정하여 줄 바꿈을 추가 */
 }

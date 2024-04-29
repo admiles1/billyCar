@@ -8,11 +8,12 @@
 <title>아이디 비밀번호 찾기</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/forgot_id.css">
 </head>
+<header><jsp:include page="../inc/top.jsp"></jsp:include></header>
 <body>
     <div class="container">
         <div class="button">
-            <a href="#">아이디 찾기</a> |
-            <a href="#">비밀번호 찾기</a>
+            <a href="forgot_id" class="forgot_id">아이디 찾기</a> |
+            <a href="forgot_pw" class="forgot_pw">비밀번호 찾기</a>
         </div>
         <hr>
         <br>
@@ -49,7 +50,7 @@
             <br>
         </div>
         <div class="next">
-        <input type="button" value="다음">
+        <input type="button" value="다음" onclick="location.href='show_id'">
         </div>
     </div>
 </body>

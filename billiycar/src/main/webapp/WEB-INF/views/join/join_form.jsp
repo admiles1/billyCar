@@ -61,7 +61,8 @@
 				<input type="text" placeholder="추천인 아이디"/>
 			</div>
 			<div>
-				<button class="btn btn-4">회원가입</button>
+				<input type="submit" value="회원가입" class="btn btn-4">
+<!-- 				<button class="btn btn-4">회원가입</button> -->
 			</div>
 		</form>
 	</article>
