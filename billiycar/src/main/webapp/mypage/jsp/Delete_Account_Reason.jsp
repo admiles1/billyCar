@@ -29,23 +29,36 @@
     
   	.reason-form {
         display: flex;
+        line-height: 30px;
         flex-direction: column;
         align-items: center;
+        margin-top: 40px;
     }
     
     .reason-checkbox {
     	display: flex; /* 수정: 내부 요소들을 가로로 정렬하기 위해 flexbox 사용 */
         align-items: center;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
     }
     
     input[type="checkbox"] {
         margin-right: 10px;
+        transform: scale(1.5);
     }
     
      label {
-        display: flex;
-        align-items: center;
+       	display: block; /* 수정: label을 블록 요소로 변경 */
+       	align-items: center;
+       	height: 100%;
+    	width: 200px;    
+     	flex-shrink: 0;  수정: flex item으로 축소되지 않도록 설정 */
+    	line-height: 1.5em; 
+    }
+    
+    label::before {
+    	content: "";
+   	 	display: inline-block;
+   		width: 1em; /* 예시로 조정할 수 있는 값 */
     }
     
     textarea {
@@ -108,6 +121,10 @@
 </form>
 
 <script>
+	document.getElementById('otherReasonText').addEventListener('click', function() {
+	    document.getElementById('otherReason').checked = true;
+	});
+
     function goToNextPage() {
         // 다음 페이지로 이동하는 로직 추가 필요
         alert("다음 페이지로 이동합니다.");
