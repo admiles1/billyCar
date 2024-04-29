@@ -56,7 +56,7 @@
 	          <ul class = "top_ul">
 	            <li><a class = "top_sub_menu"  href="guideCompany">회사 안내</a></li>
 	            <li><a class = "top_sub_menu"  href="guideRental">대여 안내</a></li>
-	            <li><a class = "top_sub_menu"  href="#">취소 및 환불 규정</a></li>
+	            <li><a class = "top_sub_menu"  href="guideRefund">취소 및 환불 규정</a></li>
 	          </ul>
 	        </li>
 	        <li>

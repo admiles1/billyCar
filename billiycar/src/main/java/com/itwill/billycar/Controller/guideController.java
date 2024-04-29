@@ -15,5 +15,10 @@ public class guideController {
 	public String guideReantal() {
 		return "guidance/rental";
 	}
-
+	
+	@GetMapping("guideRefund")
+	public String guideRefund() {
+		return "guidance/refund";
+	}
+	
 }
