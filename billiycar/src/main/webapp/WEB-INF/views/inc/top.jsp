@@ -68,13 +68,13 @@
 	          </ul>
 	        </li>
 	        <li>
-	          <a class = "top_menu" href="#">이벤트</a>
+	          <a class = "top_menu" href="event">이벤트</a>
 	        </li>
 	        <li>
 	          <a class = "top_menu"  href="#">고객센터</a>
 	          <ul class = "top_ul">
-	            <li><a class = "top_sub_menu" href="#">공지사항</a></li>
-	            <li><a class = "top_sub_menu"  href="#">FAQ</a></li>
+	            <li><a class = "top_sub_menu" href="notice">공지사항</a></li>
+	            <li><a class = "top_sub_menu"  href="faq">FAQ</a></li>
 	            <li><a class = "top_sub_menu" href="#">문의 내역</a></li>
 	          </ul>
 	        </li>
