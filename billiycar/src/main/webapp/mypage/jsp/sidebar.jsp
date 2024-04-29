@@ -49,7 +49,6 @@
                         <li>나의 문의내역 <i class="arrow fas fa-angle-right"></i>
                         	<ul class="small_menu"> 
                                 <li><a href="#">1:1 문의내역</a></li>
-                                <li><a href="#">FAQ</a></li>
                         	</ul>
                         </li>
                     </ul>
