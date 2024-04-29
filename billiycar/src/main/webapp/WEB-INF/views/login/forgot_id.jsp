@@ -16,8 +16,8 @@
             <a href="forgot_pw" class="forgot_pw">비밀번호 찾기</a>
         </div>
         <hr>
+        <label>본인 명의 휴대전화로 인증</label>
         <br>
-        <input type="checkbox"><label>본인 명의 휴대전화로 인증</label>
         <br>
         <div class="tel">
             <input type="text" placeholder="이름" class="name">
@@ -40,7 +40,7 @@
             </div>
         </div>
         <hr>
-        <input type="checkbox"><label>본인확인 이메일로 인증</label>
+        <label>본인확인 이메일로 인증</label>
         <div class="email">
             <br>
             <input type="text" placeholder="이름" class="name"/>
