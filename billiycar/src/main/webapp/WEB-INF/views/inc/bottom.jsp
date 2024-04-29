@@ -7,7 +7,7 @@
 <title>바텀</title>
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/resources/css/bottom.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" >
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
 </head>
 <body>

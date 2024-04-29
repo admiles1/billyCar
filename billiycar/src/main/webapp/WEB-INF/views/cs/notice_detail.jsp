@@ -61,9 +61,9 @@
   		</div>
   		
   		<div class = "btn-view">
-  			<a href = "#">수정</a>
-  			<a href = "#">삭제</a>
-  			<a href = "#">목록</a>
+  			<a href = "noticeModify">수정</a>
+  			<a href = "noticeDelete">삭제</a>
+  			<a href = "history.back()">목록</a>
   		</div>
   		
   	</div>

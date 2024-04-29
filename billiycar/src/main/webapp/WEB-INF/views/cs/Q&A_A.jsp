@@ -62,7 +62,7 @@
 				</span> 답변 <textarea placeholder="내용을 입력하세요" style = "resize : none"></textarea>
 			</div>
  		</div>
- 	 		<div class = "btn_wr"><a href = "#" > 돌아가기 </a></div>
+ 	 		<div class = "btn_wr"><a href = "qna" > 돌아가기 </a></div>
 	</div>
 	 </main>
 	<footer>

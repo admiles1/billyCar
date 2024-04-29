@@ -8,11 +8,12 @@
 <title>아이디 찾음</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/show_id.css">
 </head>
+<header><jsp:include page="../inc/top.jsp"></jsp:include></header>
 <body>
     <div class="container">
         <div class="button">
-            <a href="#">아이디 찾기</a> |
-            <a href="#">비밀번호 찾기</a>
+            <a href="#">아이디 찾기</a>
+<!--             <a href="#">비밀번호 찾기</a> -->
         </div>
         <hr>
         
@@ -22,8 +23,8 @@
     	</div>
     	</fieldset>
         <div class="next">
-        <input type="button" value="로그인하기">
-        <input type="button" value="비밀번호찾기">
+        <input type="button" value="로그인하기" onclick="location.href='login'">
+        <input type="button" value="비밀번호찾기" onclick="location.href='forgot_pw'">
         </div>
     </div>
 </body>

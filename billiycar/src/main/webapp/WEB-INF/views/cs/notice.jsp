@@ -48,6 +48,10 @@
 <!-- 		 </form>  -->
 <!-- 	 </div>	 -->
 	 
+	  <div class = "write_btn">
+	 	<a href = "noticeWriteForm"> 글쓰기 </a>
+	 </div>
+	 
 	 <!-- 게시글 -->
 	<div class = "board">
   	<table class="table-fill">
@@ -63,7 +67,7 @@
 		<tbody class="table-hover">
 			<tr>
 				<td class="text-left">1</td>
-				<td class="text-left"><a href = "#">제목1</a></td>
+				<td class="text-left"><a href = "noticeDetail">제목1</a></td>
 				<td class="text-left">홍길동</td>
 				<td class="text-left">24-12-23</td>
 				<td class="text-left">24-12-23</td>

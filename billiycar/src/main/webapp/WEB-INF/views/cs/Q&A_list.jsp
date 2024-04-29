@@ -35,7 +35,7 @@
   	</div>
   	
   	 <div class ="btn_qna">
-	 	<input type = "button" value = "문의하기">
+	 	<input type = "button" value = "문의하기" onclick = "location.href ='qna_q'">
 	 </div>
   	
   	<!-- 검색창 -->
@@ -55,7 +55,7 @@
 		<tbody class="table-hover">
 			<tr>
 				<td class="text-left">1</td>
-				<td class="text-left"><a href = "#">제목1</a></td>
+				<td class="text-left"><a href = "qnaAnswerDetail">제목1</a></td>
 				<td class="text-left">홍길동</td>
 				<td class="text-left">24-12-23</td>
 				<td class="text-left">답변 완료</td>

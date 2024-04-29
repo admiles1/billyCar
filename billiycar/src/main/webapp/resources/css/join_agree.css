@@ -60,7 +60,7 @@
         width: 50%;
         height: 60px;
     }
-    .footBtwrap>li>button {
+    .footBtwrap>li>button,.fpmgBt1 {
         display: block;
         width: 100%;
         height: 100%;
