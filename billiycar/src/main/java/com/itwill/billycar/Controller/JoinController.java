@@ -8,7 +8,7 @@ public class JoinController {
 	
 	@GetMapping("join")
 	public String join() {
-		return "join/join_form";
+		return "join/join_agree";
 	}
 	
 }

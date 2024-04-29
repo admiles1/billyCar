@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class CsController {
 	
 	@GetMapping("cs")
-	public String event() {
+	public String cs() {
 		return "event/eventPage";
 	}
 	
