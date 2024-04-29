@@ -10,7 +10,7 @@
 <body>
  	<div class="sign-in-container">
     	<form action="#">
-     		 <a href="https://withrent.com/" class="logo">Billycar</a>
+     		 <a href="http://localhost:8081/billycar" class="logo">Billycar</a>
       		 <input type="text" placeholder="아이디" />
      		 <input type="password" placeholder="비밀번호" />
       		 <div class="forgot">
@@ -18,11 +18,11 @@
 	      		 <a href="#"><b>비밀번호찾기</b></a> | 
 	      		 <a href="#"><b>회원가입</b></a>
       		 </div>
-			 <a href="#" class="btn btn-4">로그인</a> 
+			 <a href="loginPro" class="btn btn-4">로그인</a> 
       		 <div class="social-container">
-	      		 <a href="https://www.kakaocorp.com/page/"><img src="../images/kakao.png"></a> 
-	      		 <a href="https://www.google.com"><img src="../images/google.png"></a> 
-	      		 <a href="https://www.naver.com"><img src="../images/naver.png"></a> 
+	      		 <a href="https://www.kakaocorp.com/page/"><img src="${pageContext.request.contextPath}/resources/images/kakao.png"></a> 
+	      		 <a href="https://www.google.com"><img src="${pageContext.request.contextPath}/resources/images/google.png"></a> 
+	      		 <a href="https://www.naver.com"><img src="${pageContext.request.contextPath}/resources/images/naver.png"></a> 
       		</div>
    		</form>
  	 </div>

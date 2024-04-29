@@ -3,18 +3,28 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script>
+	function checkAll() {
+		for(let chk of document.form.chk){
+			chk.checked =  document.querySelector("#chkAll").checked;
+		}
+	};
+
+
+
+</script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/join_agree.css">
 <meta charset="UTF-8">
 <title>약관동의</title>
 </head>
 <body>
-	<form action="" id="joinForm">
+	<form action="" id="joinForm" name="form">
 	    <ul class="join_box">
 	        <li class="checkBox check01">
 	            <ul class="clearfix">
-	                <li>이용약관, 개인정보 수집 및 이용, 위치정보 이용약관(선택), 프로모션 안내 메일 수신(선택)에 모두 동의합니다.</li>
+	                <li>이용약관, 개인정보 수집 및 이용, 위치정보 이용약관(필수), 프로모션 안내 메일 수신(선택)에 모두 동의합니다.</li>
 	                <li class="checkAllBtn">
-	                    <input type="checkbox" name="chkAll" id="chk" class="chkAll">
+	                    <input type="checkbox" name="chkAll" id="chkAll" class="chkAll" onclick="checkAll()">
 	                </li>
 	            </ul>
 	        </li>

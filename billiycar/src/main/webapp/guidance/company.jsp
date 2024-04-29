@@ -11,9 +11,7 @@
 	<header>
   		<jsp:include page="../inc/top.jsp"/>
   	</header>
-  	
   	<div class = "com_intro">
-  		
 		<!-- 타이틀 -->
 		<div class = "title_div">
   			<em class = "intro_title">빌리카 소개</em><br>
@@ -33,9 +31,9 @@
   		</div>
   		
 		<div class = "img_intro">
-			<img src = "../images/billycar_intro3.png">
-			<img src = "../images/billycar_intro1.png">
-			<img src = "../images/billycar_intro2.png">
+			<img src = "${pageContext.request.contextPath}/resources/images/billycar_intro3.png">
+			<img src = "${pageContext.request.contextPath}/resources/images/billycar_intro1.png">
+			<img src = "${pageContext.request.contextPath}/resources/images/billycar_intro2.png">
 			<br>
 			<span class = "img_span">실제 유저들의 리뷰</span>
 			<span class = "img_span">우리 집 앞까지 배달 가능</span>

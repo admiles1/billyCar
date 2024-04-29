@@ -1,18 +1,10 @@
-@charset "EUC-KR";
+@charset "UTF-8";
 
 
-#selectResult {
-	padding : 30px;
-}
-.car-price {
-	font-size : 50px;
-	
-}
-.car-name, .car-price  {
-	text-align : left;
-	
-}
-
+/* 자동차 정보 */
+#selectResult {padding : 30px;}
+.car-price {font-size : 50px;}
+.car-name, .car-price  {text-align : left;}
 .car-size {
 	border : 1px solid #006AFF;
 	border-radius : 20px;
@@ -34,6 +26,7 @@
 	font-weight : 800;
 	color : #006AFF;
 }
+
 .rental-criteria-list {
 	list-style : none;
 	text-align : left;
@@ -63,15 +56,80 @@
 	height: 30px;
 }
 
-.car-info, .car-option, .car-insurance {
+/* 정보영역 */
+
+.div-tap {
 	height : 30px;
 	margin-bottom : 15px;
 	text-align : left;
-	background-color : lightgray;
+	background-color : #00AAFF;
 	border-radius : 10px;
-} 
-
-.car-info h5, .car-option h5, .car-insurance h5 {
+	color : white;
 	font-weight : 600;
 	padding : 3px 0px 0px 15px;
+} 
+
+.car-info-list, .car-option-list, .review-list{
+	list-style-type : none;
+	display : flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.car-info-list li {
+	width : 25%;
+	text-align : left;
+}
+
+
+.car-option-list li {width : 20%;}
+
+.review-list-link {
+	text-decoration-line : none;
+	color : black;
+}
+
+.review-list li{width : 33%;}
+
+.review-list li span {display : block;}
+
+.reviewer-name {
+	text-align : left;
+	font-size : 17px;
+}
+
+.review-content {
+	overflow : hidden;
+	resize : none;
+	border : none;
+}
+
+.review-content:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.car-insurance {
+/* 	background-color : lightgray; */
+	width : 100%;
+	border-radius : 10px;
+}
+
+#insurance-warning {
+	color : red;
+	font-weight: bold;
+}
+.car-insurance-table {margin : 20px;}
+
+.car-insurance-table tr, .car-insurance-table tr td {border : 1px solid black;}
+.car-insurance-table tr th {padding : 10px;}
+.check-list li {
+	text-align : left;
+}
+
+#check {
+	text-align : left;
+	font-size : 20px;
+	font-weight: 600;
+	margin-bottom : 0px;
 }

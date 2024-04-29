@@ -45,9 +45,9 @@
             color: black;
         }
         
-    .side-menu.clicked,
+         .side-menu.clicked,
     .left_sub_menu.clicked {
-		height: calc(100vh - 50px); /* 상단 바의 높이를 제외한 부분으로 높이를 맞춤 */
+        height: calc(100vh - 50px); /* 상단 바의 높이를 제외한 부분으로 높이를 맞춤 */
     }
         
         
@@ -85,7 +85,7 @@
             margin-top: 30px;
             font-size: 21px;
             font-weight: 600;
-            color: #333;
+            color: #333 ;
             margin-left: 10px;
             margin-right: 10px;
             font-family: 'NotoKrB';

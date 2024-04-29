@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -9,13 +8,14 @@
 <title>마이페이지</title>
  
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/sidebar.css">
+<link href="${pageContext.request.contextPath }/resources/css/sidebar.css" rel="stylesheet" type="text/css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://kit.fontawesome.com/ef42a902c7.js" crossorigin="anonymous"></script>
 </head>
 <body>
      <div id="wrapper">
-        <div class="topbar">
+<!--         <div class="topbar" style="position: absolute; top:0; left: 280px" > -->
+        <div class="topbar"  >
               <!-- 왼쪽 메뉴 -->
             <div class="left side-menu">
                 <div class="sidebar-inner">
@@ -41,7 +41,7 @@
                     <ul class="big_menu">
                         <li>나의 예약관리 <i class="arrow fas fa-angle-right"></i>
                             <ul class="small_menu">
-                                <li><a href="#">예약내역</a></li>
+                                <li><a href="#">예약내역 확인</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -50,6 +50,13 @@
                         	<ul class="small_menu"> 
                                 <li><a href="#">1:1 문의내역</a></li>
                                 <li><a href="#">FAQ</a></li>
+                        	</ul>
+                        </li>
+                    </ul>
+                    <ul class="big_menu">
+                        <li>나의 쿠폰함 <i class="arrow fas fa-angle-right"></i>
+                        	<ul class="small_menu"> 
+                                <li><a href="#">나의 쿠폰 확인</a></li>
                         	</ul>
                         </li>
                     </ul>
@@ -87,6 +94,12 @@
                 // 드롭다운 메뉴가 열려있는 상태에서 항목을 클릭해도 메뉴를 닫지 않음
                 return false;
             });
+            
+           
+
+            // 왼쪽 서브 메뉴를 나타내도록 fadeIn
+            $(".left_sub_menu").hide();
+            $(".left_sub_menu").fadeIn(300);
         });
     </script>
 

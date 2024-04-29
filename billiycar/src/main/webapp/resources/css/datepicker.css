@@ -1,4 +1,4 @@
-@charset "EUC-KR";
+@charset "UTF-8";
 
 ::placeholder {
     color: #BDBDBD;
@@ -12,7 +12,7 @@
 ::-ms-input-placeholder {
     color: #BDBDBD;
 }
-/*ÀÏ´Ü ³öµÎ±â*/
+/*ì¼ë‹¨ ë†”ë‘ê¸°*/
 .date_btn-black:focus {
     -moz-box-shadow: none !important;
     -webkit-box-shadow: none !important;
@@ -82,23 +82,23 @@ thead tr:nth-child(3) th {
   background-color: inherit !important;
   opacity: 1;
 }
-/*¼öÁ¤*/
+/*ìˆ˜ì •*/
 .date_btn-black {
   background-color: #37474F !important;
   color: #fff !important;
   width: 100%;
 }
 
-/*¼öÁ¤*/
+/*ìˆ˜ì •*/
 .date_btn-black:hover {
   color: #fff !important;
   background-color: #000 !important;
 }
 	
-/*date_input¿¡ border ¾ø¾Ö±â*/	
+/*date_inputì— border ì—†ì• ê¸°*/	
 .date_input {
     width: calc(50% - 15px);
     margin-right: 15px;
-    border: none; /* border Á¦°Å */
-    outline: none; /* Æ÷Ä¿½º ½Ã Å×µÎ¸® Á¦°Å */
+    border: none; /* border ì œê±° */
+    outline: none; /* í¬ì»¤ìŠ¤ ì‹œ í…Œë‘ë¦¬ ì œê±° */
 }

@@ -48,6 +48,10 @@
 <!-- 		 </form>  -->
 <!-- 	 </div>	 -->
 	 
+	 <div class = "write_btn">
+	 	<a href = "#"> 글쓰기 </a>
+	 </div>
+	 
 	 <!-- 게시글 -->
 	<div class = "board">
   	<table class="table-fill">

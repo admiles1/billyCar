@@ -1,8 +1,8 @@
-@charset "EUC-KR";
+@charset "UTF-8";
 
 
 
-/*Å¸ÀÌÆ²*/
+/*íƒ€ì´í‹€*/
 .re_title_div {
 	text-align : center;
 	margin : 100px;
@@ -64,7 +64,7 @@ td {
 	margin-left : 90px;
 }
 
-/*div ±×¸²ÀÚ ¹× Å©±â*/
+/*div ê·¸ë¦¼ì ë° í¬ê¸°*/
 .tabless {
 	width : 800px;
 	margin-left : 300px;
@@ -79,7 +79,7 @@ td {
 }
 
 
-/* ÀıÂ÷ */
+/* ì ˆì°¨ */
 #step {
 	margin-left : 300px;
 	padding : 10px;
@@ -127,7 +127,7 @@ td {
 	vertical-align: middle;
 }
 
-/*ÁÖÀÇ»çÇ×*/
+/*ì£¼ì˜ì‚¬í•­*/
 
 .caution{
 	background-color : #E4E4E4;	
