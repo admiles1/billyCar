@@ -57,41 +57,41 @@ input[type="password"], input[type="text"] {
 	margin-top: 50px;
 }
    
-	 #passwd-modify button:hover {
-	    background-color: #555;
-	}
+#passwd-modify button:hover {
+    background-color: #555;
+}
    
-   #passwd-modify em {
+#passwd-modify em {
    	font-size: 13px; /* 원하는 크기로 조절하세요 */
    	color: red; /* 빨간색으로 변경 */
    	letter-spacing: -1px;
 }
 
-   .passwd-info {
+.passwd-info {
    	text-align: center;
    	margin-top: 50px;
-   }
+}
  	
-   #passwordMatchMsg {
-       color: blue;
-       font-size: 12px;
-   }
+#passwordMatchMsg {
+    color: blue;
+    font-size: 12px;
+}
 
-   #passwordMismatchMsg {
-       color: red;
-       font-size: 12px;
-   }
+#passwordMismatchMsg {
+    color: red;
+    font-size: 12px;
+}
 
-   .g-recaptcha-container {
-       display: flex;
-       justify-content: center; /* 가로 중앙 정렬 */
-       align-items: center; /* 세로 중앙 정렬 */
-       margin-top: 20px; /* 상단 여백 조정 */
-   }
+.g-recaptcha-container {
+   	display: flex;
+   	justify-content: center; /* 가로 중앙 정렬 */
+  	align-items: center; /* 세로 중앙 정렬 */
+   	margin-top: 20px; /* 상단 여백 조정 */
+}
 
-   .g-recaptcha {
-       display: inline-block; /* 가운데 정렬을 위해 인라인 블록으로 설정 */
-   }
+.g-recaptcha {
+    display: inline-block; /* 가운데 정렬을 위해 인라인 블록으로 설정 */
+}
         
 </style>
 </head>

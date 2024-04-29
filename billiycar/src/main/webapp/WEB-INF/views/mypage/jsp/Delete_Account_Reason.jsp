@@ -29,23 +29,36 @@
     
   	.reason-form {
         display: flex;
+        line-height: 30px;
         flex-direction: column;
         align-items: center;
+        margin-top: 40px;
     }
     
     .reason-checkbox {
     	display: flex; /* 수정: 내부 요소들을 가로로 정렬하기 위해 flexbox 사용 */
         align-items: center;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
     }
     
     input[type="checkbox"] {
         margin-right: 10px;
+        transform: scale(1.5);
     }
     
      label {
-        display: flex;
-        align-items: center;
+       	display: block; /* 수정: label을 블록 요소로 변경 */
+       	align-items: center;
+       	height: 100%;
+    	width: 200px;    
+     	flex-shrink: 0;  수정: flex item으로 축소되지 않도록 설정 */
+    	line-height: 1.5em; 
+    }
+    
+    label::before {
+    	content: "";
+   	 	display: inline-block;
+   		width: 1em; /* 예시로 조정할 수 있는 값 */
     }
     
     textarea {
@@ -76,7 +89,7 @@
 </head>
 <body>
 
-<form id="delete-reason">
+<form id="delete-reason" action="resignPasswd">
     <h2>회원 탈퇴</h2>
     <hr>
     <p>회원 탈퇴를 진행하기 전에 탈퇴 사유를 선택해주세요.</p>
@@ -103,15 +116,15 @@
 	    
 	    <textarea id="otherReasonText" placeholder="기타 사유를 입력해주세요" rows="4"></textarea>
 	    
-	    <button onclick="goToNextPage()">다음</button>
+	    <button>다음</button>
     </div>
 </form>
 
 <script>
-    function goToNextPage() {
-        // 다음 페이지로 이동하는 로직 추가 필요
-        alert("다음 페이지로 이동합니다.");
-    }
+	document.getElementById('otherReasonText').addEventListener('click', function() {
+	    document.getElementById('otherReason').checked = true;
+	});
+
 </script>
 
 </body>

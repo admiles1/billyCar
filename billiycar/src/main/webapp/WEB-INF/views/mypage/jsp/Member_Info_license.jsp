@@ -156,7 +156,7 @@
 <div class="license-notice"> 
 	<div class="detail-info">
 		<p class="notice-text">
-			<img src="../../resources/mypage_images/caution.png">운전면허정보 저장을 위해 약관 동의를 진행해주세요
+			<img src="./resources/mypage_images/caution.png">운전면허정보 저장을 위해 약관 동의를 진행해주세요
 		</p>
 	</div>
 </div>
@@ -164,7 +164,7 @@
     <h2>면허 등록 및 갱신</h2>
     <hr>
     <div class="license-example">
-    	<img id="license-image" src="../../resources/mypage_images/license.png">
+    	<img id="license-image" src="./resources/mypage_images/license.png">
     </div>
     
     <div class="license-info">

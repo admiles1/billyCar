@@ -41,30 +41,29 @@
                     <ul class="big_menu">
                         <li>나의 예약관리 <i class="arrow fas fa-angle-right"></i>
                             <ul class="small_menu">
-                                <li><a href="reservation">예약내역 확인</a></li>
+                                <li><a href="resvConfirm">예약내역 확인</a></li>
                             </ul>
                         </li>
                     </ul>
                     <ul class="big_menu">
                         <li>나의 문의내역 <i class="arrow fas fa-angle-right"></i>
                         	<ul class="small_menu"> 
-                                <li><a href="#">1:1 문의내역</a></li>
-                                <li><a href="#">FAQ</a></li>
+                                <li><a href="MyInquiry">1:1 문의내역</a></li>
                         	</ul>
                         </li>
                     </ul>
                     <ul class="big_menu">
                         <li>나의 쿠폰함 <i class="arrow fas fa-angle-right"></i>
                         	<ul class="small_menu"> 
-                                <li><a href="#">나의 쿠폰 확인</a></li>
+                                <li><a href="MyCoupon">나의 쿠폰 확인</a></li>
                         	</ul>
                         </li>
                     </ul>
                     <ul class="big_menu">
-                        <li class="no-drop"><a href="#">로그아웃<i class="fas fa-right-from-bracket"></i></a></li>
+                        <li class="no-drop"><a href="logout">로그아웃<i class="fas fa-right-from-bracket"></i></a></li>
                     </ul>
                     <ul class="big_menu">
-                        <li class="no-drop"><a href="resign">회원탈퇴<i class="fas fa-user-slash"></i></a></li>
+                        <li class="no-drop"><a href="resignReason">회원탈퇴<i class="fas fa-user-slash"></i></a></li>
                     </ul>
                 </div>
             </div>
@@ -87,19 +86,18 @@
             });
 
             // small menu의 각 항목 클릭 시 글자색 변경
-            $(".small_menu li").click(function() {
-                $(this).siblings().removeClass("clicked");
-                $(this).addClass("clicked");
+//             $(".small_menu li").click(function() {
+//                 $(this).siblings().removeClass("clicked");
+//                 $(this).addClass("clicked");
 
-                // 드롭다운 메뉴가 열려있는 상태에서 항목을 클릭해도 메뉴를 닫지 않음
-                return false;
-            });
+//                 // 드롭다운 메뉴가 열려있는 상태에서 항목을 클릭해도 메뉴를 닫지 않음
+//                 return false;
+//             });
             
-           
-
-            // 왼쪽 서브 메뉴를 나타내도록 fadeIn
-            $(".left_sub_menu").hide();
-            $(".left_sub_menu").fadeIn(300);
+            
+//             // 왼쪽 서브 메뉴를 나타내도록 fadeIn
+//             $(".left_sub_menu").hide();
+//             $(".left_sub_menu").fadeIn(300);
         });
     </script>
 

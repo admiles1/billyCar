@@ -58,7 +58,7 @@
 </head>
 <body>
 
-<form id="delete-acc">
+<form id="delete-acc" action="logout">
     <h2>회원탈퇴</h2>
     <hr>
     <p>회원탈퇴를 진행하시려면 비밀번호를 입력해주세요.</p>

@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Insert title here</title>
 </head>
 <title>Main Area</title>
 <style>
@@ -33,7 +32,6 @@ h2 {
 #signup ul li {
 	display: flex;
 	line-height: 30px; 
-/* 	list-style: none; */
 	padding: 10px 50px; 
 	align-items: center;
 	margin-bottom: 10px;
@@ -62,7 +60,6 @@ h2 {
 }
 
 #signup label {
-/* 	float: left;  /* 왼쪽으로 배치 */ */
 	font-size: 13px;  /* 글자 크기 - 13px */
 	width: 110px;  /* 너비 - 110px */
 }
