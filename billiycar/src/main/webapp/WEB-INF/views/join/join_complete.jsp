@@ -16,13 +16,13 @@
 	<div class="button">
 	    <p class="btnText" >로그인하기</p>
 	    <div class="btnTwo">
-	      <p class="btnText2" onclick="location.href='https://www.naver.com';">GO!</p>
+	      <p class="btnText2" onclick="location.href='login'">GO!</p>
 	    </div>
 	 </div>
 	<div class="button">
 	    <p class="btnText">메인페이지로</p>
 	    <div class="btnTwo">
-	      <p class="btnText2"onclick="location.href='${pageContext.request.contextPath}/main.jsp';">GO!</p>
+	      <p class="btnText2"onclick="location.href='http://localhost:8081/billycar/'">GO!</p>
 	    </div>
 	 </div>
 </div>

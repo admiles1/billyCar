@@ -40,7 +40,7 @@
         </div>
 
         <div class="next">
-        <input type="button" value="다음" class="next">
+        <input type="button" value="다음" class="next" onclick="location.href='forgot_pw3'">
         </div>
     </div>
 </body>

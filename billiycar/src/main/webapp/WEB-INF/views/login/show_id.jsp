@@ -12,7 +12,7 @@
 <body>
     <div class="container">
         <div class="button">
-            <a href="#">아이디 찾기</a>
+            <a>아이디 찾기</a>
 <!--             <a href="#">비밀번호 찾기</a> -->
         </div>
         <hr>

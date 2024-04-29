@@ -55,4 +55,8 @@ public class LoginController {
 		return "login/forgot_pw2";
 	}
 	
+	@GetMapping("forgot_pw3")
+	public String forgot_pw3() {
+		return "login/forgot_pw3";
+	}
 }

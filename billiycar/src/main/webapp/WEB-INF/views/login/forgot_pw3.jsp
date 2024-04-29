@@ -11,8 +11,8 @@
 <body>
     <div class="container">
         <div class="button">
-            <a href="#">아이디 찾기</a> |
-            <a href="#">비밀번호 찾기</a>
+            <a href="forgot_id" class="forgot_id">아이디 찾기</a> |
+            <a class="forgot_pw">비밀번호 찾기</a>
         </div>
 		<hr>
    
@@ -24,7 +24,7 @@
 		</div>
 
         <div class="next">
-        <input type="button" value="완료">
+        <input type="submit" value="완료" onclick="location.href='login'">
         </div>
     </div>
 </body>
