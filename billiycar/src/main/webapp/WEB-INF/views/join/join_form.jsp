@@ -13,7 +13,7 @@
 	<header><jsp:include page="../inc/top.jsp"></jsp:include></header>
 	<!--  메인 시작 -->
 	<article class="sign-up-container">
-		<form action="#" class="box2_form">
+		<form action="join_complete" class="box2_form">
 			<div class="title">
 				<b style="color: #00AAFF">Billycar</b>
 			</div>
