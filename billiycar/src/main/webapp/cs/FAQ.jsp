@@ -106,11 +106,11 @@
         <!-- 세번째 질문 -->
         <div class="panel panel-default">
           <div class="panel-heading" role="tab">
-            <a role="button" data-toggle="collapse" data-parent="#accParent" data-target="#accEx2" aria-constrols="addEx2">
-              두번째 질문
+            <a role="button" data-toggle="collapse" data-parent="#accParent" data-target="#accEx3" aria-constrols="addEx3">
+              세번째 질문
             </a>
           </div>
-          <div id="accEx2" class="panel-collapse collapse" role="tabpanel">
+          <div id="accEx3" class="panel-collapse collapse" role="tabpanel">
             <div class="panel-body">
               답변 ~
             </div>
