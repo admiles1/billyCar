@@ -13,7 +13,26 @@ input {
   border-radius: 20px ;
   font-size: 15px;
 }
+.forgot_pw {
+	display : inline-block;
+	text-decoration: none;
+	background-color: #00AAFF;
+	width : 105px;
+	height : 30px;	
+	color: white;
+	font-weight: bold;
+    margin-right: 10px;
+    text-align: center;
+    padding-top : 5px;
+	
+}
 
+.forgot_id{
+    text-decoration: none;
+    color: #00AAFF;
+    font-weight: bold;
+    margin-right: 10px;
+}
 
 
 .container {
@@ -27,12 +46,14 @@ input {
 
 
 
-.button a {
+.button {
     text-decoration: none;
     color: #00AAFF;
     font-weight: bold;
     margin-right: 10px;
 }
+
+
 
 hr {
     border: none;
@@ -43,7 +64,7 @@ hr {
 
 
 
-.next input[type="button"] {
+.next input[type="submit"] {
     background-color: #00AAFF;
     color: white;
     border: none;
@@ -57,7 +78,7 @@ hr {
     text-align: center;
 }
 
-input[type="button"]:hover {
+input[type="submit"]:hover {
     background-color: #0056b3;
     text-align : center;
 }
