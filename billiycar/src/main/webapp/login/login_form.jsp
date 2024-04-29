@@ -10,7 +10,7 @@
 <body>
  	<div class="sign-in-container">
     	<form action="#">
-     		 <a href="http://localhost:8081/billycar" class="logo">Billycar</a>
+     		 <a href="./" class="logo">Billycar</a>
       		 <input type="text" placeholder="아이디" />
      		 <input type="password" placeholder="비밀번호" />
       		 <div class="forgot">
