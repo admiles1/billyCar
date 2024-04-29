@@ -47,8 +47,7 @@
 	        <li>
 	          <a class = "top_menu" href="reservation">차량 예약</a>
 	          <ul class = "top_ul">
-	            <li><a class = "top_sub_menu"  href="#1"> 실시간 차량 예약 </a> </li>
-	            <li><a class = "top_sub_menu"  href="#1"> 차량 예약 확인 </a> </li>
+	            <li><a class = "top_sub_menu"  href="reservation"> 실시간 차량 예약 </a> </li>
 	            <li><a class = "top_sub_menu"  href="#1"> 차량 후기 </a> </li>
 	          </ul>
 	        </li>
