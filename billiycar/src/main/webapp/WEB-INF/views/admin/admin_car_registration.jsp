@@ -50,62 +50,9 @@ button[type="submit"] {
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<a class="navbar-brand" href="#">관리자 페이지</a>
 		</nav>
-		<div class="container-fluid">
-			<div class="row">
-				<nav class="col-md-2 d-md-block bg-light sidebar">
-					<div class="sidebar-sticky">
-						<ul class="nav flex-column">
-							<li class="nav-item">
-							<a class="nav-link active" href="admin_main.jsp"><i class="fas fa-tachometer-alt"></i>관리자 메인</a>
-							</li>
-							<li class="nav-item"><a class="nav-link" href="#"
-								data-toggle="collapse" data-target="#memberMenu"
-								aria-expanded="false" aria-controls="memberMenu"><i
-									class="fas fa-users"></i> 회원 관리</a>
-								<div id="memberMenu" class="collapse">
-									<ul class="nav flex-column pl-3">
-										<li class="nav-item"><a class="nav-link" href="#"><i
-												class="fas fa-list"></i> 회원 목록 조회</a></li>
-										<li class="nav-item"><a class="nav-link" href="#"><i
-												class="fas fa-user-lock"></i> 블랙리스트 관리</a></li>
-									</ul>
-								</div>
-							</li>
-							<li class="nav-item"><a class="nav-link" href="#"
-								data-toggle="collapse" data-target="#carMenu"
-								aria-expanded="false" aria-controls="carMenu"><i
-									class="fas fa-car"></i> 차량 관리</a>
-								<div id="carMenu" class="collapse">
-									<ul class="nav flex-column pl-3">
-										<li class="nav-item"><a class="nav-link"
-											href="admin_car.jsp"><i class="fas fa-list"></i> 차량 목록 조회</a></li>
-										<li class="nav-item"><a class="nav-link" href="#"><i
-												class="fas fa-car"></i> 신규 차량 등록</a></li>
-										<li class="nav-item"><a class="nav-link" href="#"><i
-												class="fas fa-edit"></i> 차량 수정 및 삭제</a></li>
-										<li class="nav-item"><a class="nav-link" href="#"><i
-												class="fas fa-calendar-alt"></i> 예약 차량 관리</a></li>
-									</ul>
-								</div>
-							</li>
-							<li class="nav-item"><a class="nav-link" href="#"
-								data-toggle="collapse" data-target="#customerMenu"
-								aria-expanded="false" aria-controls="customerMenu"><i
-									class="fas fa-user"></i> 고객 관리</a>
-								<div id="customerMenu" class="collapse">
-									<ul class="nav flex-column pl-3">
-										<li class="nav-item"><a class="nav-link" href="#"><i
-												class="fas fa-comments"></i> 1:1 문의 상담 내역</a></li>
-										<li class="nav-item"><a class="nav-link" href="#"><i
-												class="fas fa-reply"></i> 답변 내역</a></li>
-										<li class="nav-item"><a class="nav-link" href="#"><i
-												class="fas fa-star"></i> 리뷰 관리</a></li>
-									</ul>
-								</div>
-							</li>
-						</ul>
-					</div>
-				</nav>
+		 <div class="container-fluid">
+    <div class="row">
+      <jsp:include page="sidebar.jsp" />
 				<main role="main" class="col-md-10 ml-sm-auto px-4">
 					<div
 						class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
