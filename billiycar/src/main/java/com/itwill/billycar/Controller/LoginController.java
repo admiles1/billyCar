@@ -12,10 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class LoginController {
 	
 	@GetMapping("login")
-	public String login(HttpSession session) {
-		Map<String, String> temp = new HashMap<String, String>();
-		temp.put("id", "admin");
-		session.setAttribute("id", temp);
+	public String login() {
 		return "login/login_form";
 	}
 	

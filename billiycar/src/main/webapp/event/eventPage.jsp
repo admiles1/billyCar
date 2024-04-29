@@ -36,7 +36,7 @@
 					<img src="../resources/event_images/envent_page_event2-1.webp" class="card-img-top" alt="이벤트 이미지 2" width="300" height="300">
 					<div class="card-body">
 						<h5 class="card-title">현대차 렌트 할인 이벤트!</h5>
-						<p class="card-text">현대차 렌트 시 20% 할인 이벤트!</p>
+						<p class="card-text">현대차 렌트 시 20% 할인 이벤트!</p><br>
 						<a href="#" class="btn btn-primary">자세히 보기</a>
 					</div>
 				</div>
@@ -46,7 +46,7 @@
 					<img src="../resources/event_images/envent_page_event3-1.webp" class="card-img-top" alt="이벤트 이미지 1" width="300" height="300">
 					<div class="card-body">
 						<h5 class="card-title">첫 고객 할인 이벤트!</h5>
-						<p class="card-text">빌리카가 쏜다! 첫 고객 할인 이벤트!</p>
+						<p class="card-text">빌리카가 쏜다! 첫 고객 할인 이벤트!</p><br>
 						<a href="#" class="btn btn-primary">자세히 보기</a>
 					</div>
 				</div>

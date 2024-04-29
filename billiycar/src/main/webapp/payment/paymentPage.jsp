@@ -24,6 +24,9 @@
             overflow-y: auto; /* 내용이 넘치는 경우 스크롤 표시 */
     }
     
+    td, th{
+    	border: 1px solid black;
+    }
     
  </style>
 </head>
@@ -267,19 +270,19 @@
 		<h4 class="subject">추가옵션</h4>
 			<div class="row row-cols-2">
 				<div class="opt_chk">
-					<input type="checkbox" name="opt_chk" id="opt_chk8" value="8|0">카시트(영유아용)1개
+					<input type="checkbox" name="opt_chk" id="opt_chk8" value="8|0">&emsp;카시트(영유아용)1개
 					<br>무료대여
 				</div>
 				<div class="opt_chk">
-					<input type="checkbox" name="opt_chk" id="opt_chk8" value="8|0">카시트(주니어)1개
+					<input type="checkbox" name="opt_chk" id="opt_chk8" value="8|0">&emsp;카시트(주니어)1개
 					<br>무료대여
 				</div>
 				<div class="opt_chk">
-					<input type="checkbox" name="opt_chk" id="opt_chk8" value="8|0">카시트(영유아용)2개
+					<input type="checkbox" name="opt_chk" id="opt_chk8" value="8|0">&emsp;카시트(영유아용)2개
 					<br>5000원
 				</div>
 				<div class="opt_chk">
-					<input type="checkbox" name="opt_chk" id="opt_chk8" value="8|0">카시트(주니어)2개
+					<input type="checkbox" name="opt_chk" id="opt_chk8" value="8|0">&emsp;카시트(주니어)2개
 					<br>5000원
 				</div>
 			</div>
@@ -288,22 +291,22 @@
 		<h4 class="subject">결제수단 선택</h4>
 			<div class="row">
 				<div class="col pay_radio">
-					<input type="radio" name="payment">신용/체크카드
+					<input type="radio" name="payment">&emsp;신용/체크카드
 				</div>
 				<div class="col pay_radio">
-					<input type="radio" name="payment">가상계좌이체
+					<input type="radio" name="payment">&emsp;가상계좌이체
 				</div>
 				 <div class="col pay_radio">
-					<input type="radio" name="payment">무통장입금
+					<input type="radio" name="payment">&emsp;무통장입금
 				</div>
 			</div>
 			<hr>
 		<h4 class="subject">할인정보(중복할인불가)</h4>
 			<div class="row g-3">
-				<div class="col-sm-9">
-	            	<label>쿠폰사용<input type="text"></label>
+				<div class="col-sm-3">
+	            	<label>쿠폰사용&emsp;<input type="text"></label>
 	            </div>
-	            <div class="col-sm-3">
+	            <div class="col-sm-9">
 	            	<input type="button" value="적용">
 	            </div>
 			</div>

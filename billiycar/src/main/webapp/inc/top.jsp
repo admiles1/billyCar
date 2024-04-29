@@ -31,7 +31,7 @@
 				</svg>
 					마이페이지 
 				</a>
-				<a class = "top_right_menu" href="">로그아웃</a>
+				<a class = "top_right_menu" href="logout">로그아웃</a>
 				<c:if test="${sessionScope.id eq 'admin'}">
 					| <a class = "top_right_menu" href =""> 관리자페이지</a>
 				</c:if>
