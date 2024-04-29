@@ -7,12 +7,14 @@
    <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>FAQ</title>
-<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<!-- 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> -->
 	
 	 <!-- 부트스트랩 -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-
+<!-- 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> -->
+<!-- 	 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
+	
 	<!-- CSS -->
 	<link rel = "stylesheet" href = "${pageContext.request.contextPath}/resources/css/FAQ.css">
 	
@@ -25,7 +27,8 @@
 	<header>
   		<jsp:include page="../inc/top.jsp"/>
   	</header>
-<main class="container">
+<!-- <main class="container"> -->
+<div class="container">
 	<div class = "faq_arti">
 	
 		<!-- 타이틀 -->
@@ -105,11 +108,11 @@
         <!-- 세번째 질문 -->
         <div class="panel panel-default">
           <div class="panel-heading" role="tab">
-            <a role="button" data-toggle="collapse" data-parent="#accParent" data-target="#accEx2" aria-constrols="addEx2">
-              두번째 질문
+            <a role="button" data-toggle="collapse" data-parent="#accParent" data-target="#accEx3" aria-constrols="addEx3">
+              세번째 질문
             </a>
           </div>
-          <div id="accEx2" class="panel-collapse collapse" role="tabpanel">
+          <div id="accEx3" class="panel-collapse collapse" role="tabpanel">
             <div class="panel-body">
               답변 ~
             </div>
@@ -157,11 +160,14 @@
 	</div>
 	
 </div>
-		</main>
+<!-- 		</main> -->
+		</div>
 	<!-- 부트 스트랩-->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-	
+<!-- 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> -->
+<!-- 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> -->
+<!-- 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script> -->
+<!-- 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script> -->
 	<footer>
 		<jsp:include page="../inc/bottom.jsp"/>
 	</footer>
