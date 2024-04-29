@@ -150,7 +150,7 @@
 			</span>
 			
 		<div class = "faq_cs1_1">
-			<input type = "button" class = "cs_btn" value = "1:1 상담 신청 바로가기">
+			<input type = "button" class = "cs_btn" value = "1:1 상담 신청 바로가기" onclick = "location.href = 'qna_q'">
 		</div>
 		<hr class="hr-2">
 		<em class = "faq_tell"> 전화상담 : 1577-7777</em>

@@ -34,7 +34,8 @@
   			<em class = "cs_title_1">1:1 문의</em><br>
   			<em class = "cs_sub_title">궁금한 점을 해결해 드립니다 :)</em>
   		</div>
- 
+ 		
+ 		<form action = "qnaQuestionPro" method = "post">
  		<div class = "cs_write">
  			<div class = "cus_info">
  				이메일 <input type = "text" placeholder="이메일을 입력하세요" >
@@ -55,7 +56,9 @@
  				<input type = "file" name = "" id = ""> 
  			</div>
  		</div>
- 		<div class = "btn_wr"><a href = "#"> 문의 제출 </a></div>
+ 		<div class = "btn_wr">
+ 			<input type = "submit" value = "문의 제출" id = "qnaGo"></div>
+ 		</form>
  	 		
 	</div>
 	</main>

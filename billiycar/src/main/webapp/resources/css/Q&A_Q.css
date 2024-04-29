@@ -64,7 +64,8 @@
 	margin-left : 470px;
 }
 
-.btn_wr a {
+.btn_wr #qnaGo {
+	border : none;
 	background-color : #00aaFf;
 	padding : 10px;
 	color : #fff;

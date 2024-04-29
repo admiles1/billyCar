@@ -12,7 +12,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
 <!-- css -->
-<link rel = "stylesheet" href = "${pageContext.request.contextPath}/resources/css/notice_write.css">
+<link rel = "stylesheet" href = "${pageContext.request.contextPath}/resources/css/notice_modify.css">
 </head>
 <body>
 	<header>
@@ -24,10 +24,10 @@
 	
 		<!-- 타이틀 -->
 		<div class = "notice_d_t_div">
-  			<em class = "notice_d_title">공지사항 작성</em><br>
+  			<em class = "notice_d_title">공지사항 수정</em><br>
   		</div>
   		
-  		<form action="noticeWritePro" method= "post">
+  		<form action="noticeModifyPro" method= "post">
   		<div class = "detail_view">
   			<div class ="view_tit">
   				<h3> <input type = "text" placeholder="제목을 입력하시오" name = "" style = "width : 400px"> </h3>
@@ -46,7 +46,7 @@
   		</div>
   		
   		<div class = "btn-view">
-  			<input type = "submit" value = "작성" id = "writeGo">
+  			<input type = "submit" value = "수정하기" id = "writeGo">
   			<a href = "notice">목록</a>
   		</div>
 		</form>
