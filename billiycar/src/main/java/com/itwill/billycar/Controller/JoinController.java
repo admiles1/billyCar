@@ -2,6 +2,8 @@ package com.itwill.billycar.Controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import com.itwill.billycar.vo.MemberVO;
 
 @Controller
 public class JoinController {
@@ -16,13 +18,11 @@ public class JoinController {
 		return "join/join_form";
 	}
 	
-	
-	@GetMapping("join_complete")
-	public String join_complete() {
+	@PostMapping("joinPro")
+	public String joinPro(MemberVO member) {
+		
+		
 		return "join/join_complete";
 	}
-	
-	
-	
 	
 }

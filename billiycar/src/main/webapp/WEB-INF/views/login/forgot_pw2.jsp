@@ -8,6 +8,8 @@
 <title>비밀번호 찾기</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/forgot_pw2.css">
 </head>
+<header><jsp:include page="../inc/top.jsp"></jsp:include></header>
+
 <body>
     <div class="container">
         <div class="button">
@@ -43,5 +45,7 @@
         <input type="button" value="다음" class="next" onclick="location.href='forgot_pw3'">
         </div>
     </div>
+        <footer><jsp:include page="../inc/bottom.jsp"></jsp:include></footer>
+    
 </body>
 </html>

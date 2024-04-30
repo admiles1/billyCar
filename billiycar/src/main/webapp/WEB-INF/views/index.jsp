@@ -260,7 +260,7 @@ $(document).ready(function(){
 				<h1 class="fw-light">자주 묻는 질문</h1>
 				<p class="lead text-body-secondary">고객님들의 편의를 위한 FAQ</p>
 				<p>
-					<a href="#" class="btn btn-primary my-2">질문 더보기</a>
+					<a href="faq" class="btn btn-primary my-2">질문 더보기</a>
 				</p>
 			</div>
 		</div>
@@ -375,7 +375,7 @@ $(document).ready(function(){
     </div>
     </div>
 </main>
-<footer><jsp:include page="/inc/bottom.jsp"></jsp:include></footer>
+<footer><jsp:include page="inc/bottom.jsp"></jsp:include></footer>
 
 
   

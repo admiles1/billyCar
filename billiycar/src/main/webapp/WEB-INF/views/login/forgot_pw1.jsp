@@ -24,5 +24,7 @@
         <input type="button" value="다음" onclick="location.href='forgot_pw2'">
         </div>
     </div>
+        <footer><jsp:include page="../inc/bottom.jsp"></jsp:include></footer>
+    
 </body>
 </html>

@@ -8,6 +8,7 @@
 
 .top_logo{
 	margin-left : 300px;
+	cursor: pointer;
 }
 
 .left_menu{
@@ -130,7 +131,7 @@
 
 .top_right_menu {
 	text-decoration: none;
-	color : #00AAFF;
+	color : #00AAFF !important;
 	font-size : 19px;
 }
 
