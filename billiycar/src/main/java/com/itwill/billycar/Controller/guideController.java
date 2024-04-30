@@ -21,4 +21,9 @@ public class guideController {
 		return "guidance/refund";
 	}
 	
+	@GetMapping("guideCar")
+	public String guideCar() {
+		return "guidance/car_introduction";
+	}
+	
 }

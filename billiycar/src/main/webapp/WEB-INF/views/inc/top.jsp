@@ -60,7 +60,7 @@
 	          </ul>
 	        </li>
 	        <li>
-	          <a class = "top_menu"  href="#">차량 안내</a>
+	          <a class = "top_menu"  href="guideCar">차량 안내</a>
 	        </li>
 	        <li>
 	          <a class = "top_menu" href="event">이벤트</a>
