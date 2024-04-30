@@ -344,7 +344,7 @@ $(document).ready(function(){
 	<section class="py-2 text-center container noto-sans-kr" style="margin-top: 100px;">
 		<div class="row py-lg-5">
 			<div class="col-lg-6 col-md-8 mx-auto">
-				<h1 class="fw-light">테마별 맟춤 차량 추천</h1>
+				<h1 class="fw-light">고객 이벤트</h1>
 				<p class="lead text-body-secondary">위드렌트카's PICK</p>
 			</div>
 		</div>
@@ -353,26 +353,38 @@ $(document).ready(function(){
 
 	  <div class="container marketing noto-sans-kr" style="text-align: center;">
 
-    <div class="row" style="text-align: center;">
-      <div class="col-lg-4">
-     	 <img alt="" src="resources/main_images/re1.jpg" width="100%">
-        <h2 class="fw-normal" style="margin-top: 10px;">추천관광지</h2>
-        <p>Some representative placeholder content for the three columns of text below the carousel. This is the first column.</p>
-        <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-      </div>
-      <div class="col-lg-4">
-		<img alt="" src="resources/main_images/re2.jpg" width="100%">      
-        <h2 class="fw-normal" style="margin-top: 10px;">드라이브코스</h2>
-        <p>Another exciting bit of representative placeholder content. This time, we've moved on to the second column.</p>
-        <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-      </div>
-      <div class="col-lg-4">
-      	<img alt="" src="resources/main_images/re3.jpg" width="100%">
-        <h2 class="fw-normal" style="margin-top: 10px;">올레길코스</h2>
-        <p>And lastly this, the third column of representative placeholder content.</p>
-        <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-      </div>
-    </div>
+    <div class="row">
+        	<div class="col-md-4">
+        		<div class="card">
+                	<img src="resources/event_images/envent_page_event1-1.webp" class="card-img-top" alt="이벤트 이미지 1" width="300" height="300">
+                    <div class="card-body">
+                    	<h5 class="card-title">유아용 카시트 무료 이벤트!</h5>
+                    	<p class="card-text">다자녀 고객 당신은 애국자! 애국자한테 드리는 유아용 카시트 무료 이벤트!(자녀3이상일 경우)</p>
+                    	<a href="event1" class="btn btn-primary">자세히 보기</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card">
+					<img src="resources/event_images/envent_page_event2-1.webp" class="card-img-top" alt="이벤트 이미지 2" width="300" height="300">
+					<div class="card-body">
+						<h5 class="card-title">현대차 렌트 할인 이벤트!</h5>
+						<p class="card-text">현대차 렌트 시 5000원 할인 이벤트!</p><br>
+						<a href="event2" class="btn btn-primary">자세히 보기</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card">
+					<img src="resources/event_images/envent_page_event3-1.webp" class="card-img-top" alt="이벤트 이미지 1" width="300" height="300">
+					<div class="card-body">
+						<h5 class="card-title">첫 고객 할인 이벤트!</h5>
+						<p class="card-text">빌리카가 쏜다! 첫 고객 할인 이벤트!</p><br>
+						<a href="event3" class="btn btn-primary">자세히 보기</a>
+					</div>
+				</div>
+			</div>
+		</div>
     </div>
 </main>
 <footer><jsp:include page="inc/bottom.jsp"></jsp:include></footer>
