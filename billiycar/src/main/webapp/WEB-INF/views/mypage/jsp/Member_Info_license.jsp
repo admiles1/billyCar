@@ -150,6 +150,159 @@
 		margin-left: 456px;
 	}
 	
+}
+.modal_btn {
+    display: block;
+    margin: 40px auto;
+    padding: 10px 20px;
+    background-color: royalblue;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+}
+
+
+/*모달 팝업 영역 스타일링*/
+.modal {
+    display: none; 
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: rgba(0,0,0,0.5);
+}
+
+.modal.on {
+    display: block;
+}
+
+.modal .modal_popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+	width: 550px; 
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 20px;
+}
+
+.modal .modal_popup .close_btn {
+    display: block;
+    padding: 10px 20px;
+    margin: 0 auto;
+    margin-top: 50px;
+    background-color: #00AAFF;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+}
+
+.modal_content table {
+	margin-top: 30px;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.modal_content th, .modal_content td {
+    border: 1px solid #fff;
+    padding: 8px;
+    text-align: center;
+}
+
+.modal_content th {
+    background-color: #f2f2f2;
+    font-size: 14px;
+}
+
+.modal_content td {
+    font-size: 12px;
+}
+
+.modal_content th:nth-child(2), .modal_content td:nth-child(1) {
+    width: 25%; 
+}
+
+.modal .modal_popup p {
+    margin-top: 60px;
+    font-size: 14px;
+}
+
+h3 {
+	text-align: center;
+}
+
+.modal2 {
+	z-index: 15;
+    display: none; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal2 .modal_popup {
+    position: relative;
+    margin: 10% auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 550px;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.modal2 .modal_popup .close_btn2 {
+    display: block;
+    margin: 20px auto 0;
+    padding: 10px 20px;
+    background-color: #00AAFF;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+}
+
+.modal2 .modal_content table {
+    margin-top: 30px;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.modal2 .modal_content th, .modal2 .modal_content td {
+    border: 1px solid #fff;
+    padding: 8px;
+    text-align: center;
+}
+
+.modal2 .modal_content th {
+    background-color: #f2f2f2;
+    font-size: 14px;
+}
+
+.modal2 .modal_content td {
+    font-size: 12px;
+}
+
+.modal2 .modal_content th:nth-child(2), .modal2 .modal_content td:nth-child(1) {
+    width: 25%; 
+}
+
+.modal2 .modal_popup p {
+    margin-top: 60px;
+    font-size: 14px;
+}
+
+
 </style>
 </head>
 <body>
@@ -201,7 +354,7 @@
 					</label>				
 				</span>
 				<span class="view1">
-					<a>보기</a>
+					<a type="button" class="modal_btn">보기</a>
 				</span>
 			</li>
 			<li>
@@ -212,21 +365,111 @@
 					</label>
 				</span>
 				<span class="view2">
-					<a>보기</a>
+					<a type="button" class="modal_btn2">보기</a>
 				</span>
 			</li>
 		</ul>
 	</div>
 </form>
-
+<div class="modal">
+    <div class="modal_popup">
+        <h3>개인정보 수집 및 이용 동의(선택)</h3>
+       	<hr>
+       	<div class="modal_content">
+       		<table>
+                <thead>
+                    <tr>
+                        <th>수집항목</th>
+                        <th>수집·이용 목적</th>
+                        <th>보유기간</th>
+                    </tr>
+                </thead>
+               	<tbody>
+	               	<tr>
+		               	<td>
+			               	면허종류, 
+			               	<br>
+			               	면허발급일, 
+			               	<br>
+			               	면허만료일
+		               	</td>
+	               		<td>차량대여자격확인</td>
+	               		<td class="point">회원탈퇴 후 즉시 또는 계약에 따른 거래관계의 종료 후 5년까지</td>
+	            	</tr>
+               	</tbody>
+            </table>
+       	</div>
+       	<p class="ft_14 mt16">
+       		고객님께서는 동의를 거부할 권리가 있으며, 동의하지 않아도 SK렌탈닷컴 회원서비스 
+       		이용이 가능하지만 미리 입력하시면 차량 예약 시 자동으로 입력되어 더욱 간편하게 이용하실 수 있습니다.
+       	</p>
+        <button type="button" class="close_btn">확인</button>
+    </div>
+</div>
+<div class="modal2">
+    <div class="modal_popup">
+        <h3>고유식별정보 수집 및 이용 동의(선택)</h3>
+        <hr>
+        <div class="modal_content">
+            <table>
+                <thead>
+                    <tr>
+                        <th>수집항목</th>
+                        <th>수집·이용 목적</th>
+                        <th>보유기간</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>운전면허번호</td>
+                        <td>차량대여자격확인</td>
+                        <td class="point">회원탈퇴 후 즉시 또는 계약에 따른 거래관계의 종료 후 5년까지</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="ft_14 mt16">
+            고객님께서는 동의를 거부할 권리가 있으며, 동의하지 않아도 SK렌탈닷컴 회원서비스 
+            이용이 가능하지만 미리 입력하시면 차량 예약 시 자동으로 입력되어 더욱 간편하게 이용하실 수 있습니다.
+        </p>
+        <button type="button" class="close_btn2">확인</button>
+    </div>
+</div>
 <script>
     function registerOrUpdateLicense() {
         var licenseNumber = document.getElementById("licenseNumber").value;
         var expirationDate = document.getElementById("expirationDate").value;
         var licenseType = document.getElementById("licenseType").value;
-        
-      
     }
+    
+    const modal = document.querySelector('.modal');
+    const modalOpen = document.querySelector('.modal_btn');
+    const modalClose = document.querySelector('.close_btn');
+	
+    //열기 버튼을 눌렀을 때 모달팝업이 열림
+    modalOpen.addEventListener('click',function(){
+        modal.style.display = 'block';
+    });
+    
+    
+    //확인 버튼을 눌렀을 때 모달팝업이 닫힘
+    modalClose.addEventListener('click',function(){
+        modal.style.display = 'none';
+    });
+    const modal2 = document.querySelector('.modal2');
+    const modalOpen2 = document.querySelector('.modal_btn2');
+    const modalClose2 = document.querySelector('.close_btn2');
+
+    // 보기 버튼을 클릭했을 때 새로운 모달 창이 열림
+    modalOpen2.addEventListener('click', function() {
+        modal2.style.display = 'block';
+    });
+
+    // 확인 버튼을 클릭했을 때 새로운 모달 창이 닫힘
+    modalClose2.addEventListener('click', function() {
+        modal2.style.display = 'none';
+    });
+   
 </script>
 
 </body>
