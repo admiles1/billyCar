@@ -48,7 +48,7 @@
 	          <a class = "top_menu" href="reservation">차량 예약</a>
 	          <ul class = "top_ul">
 	            <li><a class = "top_sub_menu"  href="reservation"> 실시간 차량 예약 </a> </li>
-	            <li><a class = "top_sub_menu"  href="#1"> 차량 후기 </a> </li>
+	            <li><a class = "top_sub_menu"  href="review"> 차량 후기 </a> </li>
 	          </ul>
 	        </li>
 	        <li>
@@ -61,9 +61,6 @@
 	        </li>
 	        <li>
 	          <a class = "top_menu"  href="#">차량 안내</a>
-	          <ul class = "top_ul">
-	            <li><a class = "top_sub_menu"  href="#">보유 차량 안내</a></li>
-	          </ul>
 	        </li>
 	        <li>
 	          <a class = "top_menu" href="event">이벤트</a>
