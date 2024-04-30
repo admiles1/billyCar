@@ -27,5 +27,6 @@
         <input type="button" value="비밀번호찾기" onclick="location.href='forgot_pw'">
         </div>
     </div>
+    <footer><jsp:include page="../inc/bottom.jsp"></jsp:include></footer>
 </body>
 </html>
