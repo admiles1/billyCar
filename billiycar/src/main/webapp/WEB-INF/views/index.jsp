@@ -59,23 +59,23 @@
 }
 
  /* 버튼을 숨기는 CSS */
-#adminButton {
-   display: none;
-   background-color: #f0f0f0; 
-   color: #333; 
-   border: 1px solid #ccc; 
-   padding: 10px 20px; 
-   cursor: pointer; 
-}
+/* #adminButton { */
+/*    display: none; */
+/*    background-color: #f0f0f0;  */
+/*    color: #333;  */
+/*    border: 1px solid #ccc;  */
+/*    padding: 10px 20px;  */
+/*    cursor: pointer;  */
+/* } */
 
 /* 전체 페이지를 덮는 빈 여백 스타일 */
-#overlay {
-   position: fixed;
-   top: 0;
-   left: 0;
-   width: 100%;
-   height: 100%;
-}
+/* #overlay { */
+/*    position: fixed; */
+/*    top: 0; */
+/*    left: 0; */
+/*    width: 100%; */
+/*    height: 100%; */
+/* } */
 }
 
 
@@ -426,8 +426,8 @@ function redirectToAdminPage() {
 			</div>
 		</div>
     </div>
-    <div id="overlay" onclick="countClicks()"></div>
-    <button id="adminButton" onclick="redirectToAdminPage()">관리자페이지 이동</button>
+<!--     <div id="overlay" onclick="countClicks()"></div> -->
+<!--     <button id="adminButton" onclick="redirectToAdminPage()">관리자페이지 이동</button> -->
 </main>
 <footer><jsp:include page="inc/bottom.jsp"></jsp:include></footer>
 
