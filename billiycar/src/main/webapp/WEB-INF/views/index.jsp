@@ -375,7 +375,7 @@ $(document).ready(function(){
     </div>
     </div>
 </main>
-<footer><jsp:include page="/inc/bottom.jsp"></jsp:include></footer>
+<footer><jsp:include page="inc/bottom.jsp"></jsp:include></footer>
 
 
   
