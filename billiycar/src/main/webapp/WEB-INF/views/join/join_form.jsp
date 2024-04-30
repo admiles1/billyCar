@@ -4,7 +4,6 @@
 <html>
 <head>
 <link href="${pageContext.request.contextPath}/resources/css/join_form.css" rel="stylesheet">
-
 <meta charset="UTF-8">
 <title>빌리카 회원가입</title>
 <link rel="stylesheet" href="css/join_form.css">
@@ -20,6 +19,7 @@
 			<div id = "id_1">
 				<input type="text" placeholder="아이디" class="id_box"/>
 				<input type="button" class="id_check" value="중복확인"><br>
+				<div></div>
 			</div>
 			<div>
 				<input type="password" placeholder="비밀번호" /><br>
@@ -61,7 +61,7 @@
 				<input type="text" placeholder="추천인 아이디"/>
 			</div>
 			<div>
-				<input type="submit" value="회원가입" class="btn btn-4">
+				<input type="submit" value="회원가입" class="btn btn-4" onsubmit="submit()">
 <!-- 				<button class="btn btn-4">회원가입</button> -->
 			</div>
 		</form>
