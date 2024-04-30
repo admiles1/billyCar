@@ -30,7 +30,7 @@
   		<form action="noticeWritePro" method= "post">
   		<div class = "detail_view">
   			<div class ="view_tit">
-  				<h3> <input type = "text" placeholder="제목을 입력하시오" name = "" style = "width : 400px"> </h3>
+  				<h3> <input type = "text" placeholder="제목을 입력하시오" name = "notice_title" style = "width : 400px"> </h3>
   			</div>
   			
   			<div class = "view_info">
@@ -40,7 +40,7 @@
   			
   			<div class = "view_cont">
   				<p>
-  				<textarea rows="20" cols="150" style = "resize : none"></textarea>
+  				<textarea rows="20" cols="150" style = "resize : none" name = "notice_content"></textarea>
 				</p>
   			</div>
   		</div>

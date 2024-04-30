@@ -9,9 +9,6 @@
 			chk.checked =  document.querySelector("#chkAll").checked;
 		}
 	};
-
-
-
 </script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/join_agree.css">
 <meta charset="UTF-8">
@@ -66,7 +63,7 @@
 	    </ul>
 	    <ul class="footBtwrap clearfix">
 	        <li><input type="button" class="fpmgBt1" onclick="history.back()" value="비동의"></li>
-	        <li><button class="fpmgBt2" onclick="location.href='join_form'">동의</button></li>
+	        <li><input type="submit" class="fpmgBt2" value="동의"></li>
 	    </ul>
 	</form>
 
