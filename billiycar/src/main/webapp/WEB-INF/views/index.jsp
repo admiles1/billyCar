@@ -58,6 +58,26 @@
   font-style: normal;
 }
 
+ /* 버튼을 숨기는 CSS */
+#adminButton {
+   display: none;
+   background-color: #f0f0f0; 
+   color: #333; 
+   border: 1px solid #ccc; 
+   padding: 10px 20px; 
+   cursor: pointer; 
+}
+
+/* 전체 페이지를 덮는 빈 여백 스타일 */
+#overlay {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+}
+}
+
 
 
 </style>
@@ -70,6 +90,20 @@ $(document).ready(function(){
         orientation: "bottom"
     });
 });
+
+var clickCount = 0;
+function countClicks() {
+    clickCount++; // 클릭 횟수 증가
+    if (clickCount >= 3) { // 예: 클릭 횟수가 3 이상일 때
+        document.getElementById('adminButton').style.display = 'block'; // 버튼을 표시
+    }
+}
+
+//관리자 페이지로 이동하는 함수
+function redirectToAdminPage() {
+    window.location.href = "review"; // 관리자 페이지의 URL로 리디렉션
+}
+
 </script>
 </head>
 <body class ="body">
@@ -119,17 +153,23 @@ $(document).ready(function(){
                         </div>
                     </div>
                 </div>
+                <!--  연습 -->
+   
+                <!-- 연습 -->
+                
 
                 <div class="mb-2 row">
                     <label for="pickupTime" class="col-sm-2 col-form-label" style="text-align: center;"><i class="fa-regular fa-clock"></i> 대여시간</label>
                     <div class="col-sm-4">
-                        <input type="time" class="form-control form-control-sm" id="pickupTime">
+                        <input type="time" class="form-control form-control-sm" id="pickupTime" value="09:00">
                     </div>
                     <label for="pickupTime" class="col-sm-2 col-form-label" style="text-align: center;"><i class="fa-regular fa-clock"></i> 반납시간</label>
                     <div class="col-sm-4">
-                        <input type="time" class="form-control form-control-sm" id="pickupTime">
+                        <input type="time" class="form-control form-control-sm" id="pickupTime" value="21:00">
                     </div>
                 </div>
+                
+                
                 <div class="mb-2 row">
                 	<label for="carType" class="col-sm-2 col-form-label" style="text-align: center;"><i class="fa-solid fa-car-side"></i> 차종</label>
                     <div class="col-sm-4">
@@ -386,6 +426,8 @@ $(document).ready(function(){
 			</div>
 		</div>
     </div>
+    <div id="overlay" onclick="countClicks()"></div>
+    <button id="adminButton" onclick="redirectToAdminPage()">관리자페이지 이동</button>
 </main>
 <footer><jsp:include page="inc/bottom.jsp"></jsp:include></footer>
 
@@ -396,7 +438,7 @@ $(document).ready(function(){
 
 <!-- 부트스트랩 JS 및 추가적인 JS 파일 -->
 <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script> -->
+<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
 </body>
 </html>
