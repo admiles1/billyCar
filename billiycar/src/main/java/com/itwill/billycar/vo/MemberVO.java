@@ -8,11 +8,12 @@ public class MemberVO {
 	private String member_name;
 	private String member_passwd;
 	private String member_email;
-	private Date member_birth;
+	private String member_birth;
 	private String member_phone;
 	private LocalDateTime reg_date;
 	private int member_license;
 	private String inviter;
+	
 	public String getMember_id() {
 		return member_id;
 	}
@@ -37,10 +38,10 @@ public class MemberVO {
 	public void setMember_email(String member_email) {
 		this.member_email = member_email;
 	}
-	public Date getMember_birth() {
+	public String getMember_birth() {
 		return member_birth;
 	}
-	public void setMember_birth(Date member_birth) {
+	public void setMember_birth(String member_birth) {
 		this.member_birth = member_birth;
 	}
 	public String getMember_phone() {
@@ -68,6 +69,10 @@ public class MemberVO {
 		this.inviter = inviter;
 	}
 	
-	
-
+	@Override
+	public String toString() {
+		return "MemberVO [member_id=" + member_id + ", member_name=" + member_name + ", member_passwd=" + member_passwd
+				+ ", member_email=" + member_email + ", member_birth=" + member_birth + ", member_phone=" + member_phone
+				+ ", reg_date=" + reg_date + ", member_license=" + member_license + ", inviter=" + inviter + "]";
+	}
 }

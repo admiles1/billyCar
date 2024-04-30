@@ -9,6 +9,7 @@ import com.itwill.billycar.vo.MemberVO;
 public class Joinservice {
 	
 	public boolean registMember(MemberVO bean) {
+		System.out.println("조인서비스");
 		boolean isJoinSuccess = false;
 		Connection con = JdbcUtil.getConnection(); 
 		

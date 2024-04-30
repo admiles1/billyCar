@@ -20,6 +20,7 @@ public class LoginController {
 	public String loginPro(HttpSession session) {
 		Map<String, String> temp = new HashMap<String, String>();
 		temp.put("id", "admin");
+		
 		session.setAttribute("id", temp);
 		return "index";
 	}
