@@ -164,16 +164,36 @@
 					</thead>
 					<tbody>
 						<tr class="eventChk" bordercolor="black">
-							<td colspan="3" class="c" bordercolor="black">
+							<td colspan="1" class="c" bordercolor="black">
 								<input name="event" class="chk event_data" id="event0" type="radio" value="0|선택안함" checked="checked"> 
-								<label for="event0" bordercolor="black">선택안함</label>
+								<label for="event0" >선택안함</label>
 							</td>
+							<td colspan="1" class="c">없음</td>
+							<td colspan="1" class="c">없음</td>
 						</tr>
 						<tr class="eventChk" bordercolor="black">
-							<td colspan="3" class="c" bordercolor="black">
+							<td colspan="1" class="c" bordercolor="black">
 								<input name="event" class="chk event_data" id="event1" type="radio" value="0|선택안함" > 
-								<label for="event0" bordercolor="black">이벤트1</label>
+								<label for="event1" >유아용 카시트 무료 이벤트</label>
 							</td>
+							<td colspan="1" class="c">카시트 무료 제공</td>
+							<td colspan="1" class="c">무제한</td>							
+						</tr>
+						<tr class="eventChk" bordercolor="black">
+							<td colspan="1" class="c" bordercolor="black">
+								<input name="event" class="chk event_data" id="event2" type="radio" value="0|선택안함" > 
+								<label for="event1" >현대차 렌트 할인 이벤트</label>
+							</td>
+							<td colspan="1" class="c">5000원 쿠폰 제공</td>
+							<td colspan="1" class="c">100명 소진 시 종료</td>							
+						</tr>
+						<tr class="eventChk" bordercolor="black">
+							<td colspan="1" class="c" bordercolor="black">
+								<input name="event" class="chk event_data" id="event3" type="radio" value="0|선택안함" > 
+								<label for="event1" >첫 고객 할인 이벤트</label>
+							</td>
+							<td colspan="1" class="c">5000원 쿠폰 제공</td>
+							<td colspan="1" class="c">제한 없음</td>							
 						</tr>
 				</table>
 			</div>
