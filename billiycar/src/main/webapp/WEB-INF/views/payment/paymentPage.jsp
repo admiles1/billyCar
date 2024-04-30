@@ -14,16 +14,26 @@
 	font: bold;
 /* 	height : 30px; */
 	margin-bottom : 15px;
+	padding : 5px;
 	text-align : left;
 	background-color : lightgray;
 	border-radius : 10px;
+	height: 45px;
+	
 	}
 
 	.accordion-body {
             max-height: 200px; /* 최대 높이 설정 */
             overflow-y: auto; /* 내용이 넘치는 경우 스크롤 표시 */
     }
-    
+    .list-table-v02{
+		border-top: 2px solid black;
+		
+	}
+    .c{
+    	border-top: 0.5px solid gray;
+    	border-bottom: 0.5px solid gray;
+    }
     
  </style>
 </head>
@@ -154,13 +164,13 @@
 					</thead>
 					<tbody>
 						<tr class="eventChk" bordercolor="black">
-							<td colspan="3" class="last-child" bordercolor="black">
+							<td colspan="3" class="c" bordercolor="black">
 								<input name="event" class="chk event_data" id="event0" type="radio" value="0|선택안함" checked="checked"> 
 								<label for="event0" bordercolor="black">선택안함</label>
 							</td>
 						</tr>
 						<tr class="eventChk" bordercolor="black">
-							<td colspan="3" class="last-child" bordercolor="black">
+							<td colspan="3" class="c" bordercolor="black">
 								<input name="event" class="chk event_data" id="event1" type="radio" value="0|선택안함" > 
 								<label for="event0" bordercolor="black">이벤트1</label>
 							</td>
@@ -188,33 +198,33 @@
 					</thead>
 					<tbody>
 						<tr class="insuranceChk" >
-							<td colspan="1" class="chk" >
+							<td colspan="1" class="c" >
 								<input name="insurance0" class="chk insurance_data" id="insuranceCar0" type="radio" value="0" checked="checked"> 
 								<label>선택안함</label>
 							</td>
 							<td colspan="1" class="c" >없음</td>
 							<td colspan="1" class="c" >없음</td>
-							<td colspan="1" class="last-child" >전액부담</td>
+							<td colspan="1" class="c" >전액부담</td>
 						</tr>
 						
 						<tr class="insuranceChk" >
-							<td colspan="1" class="chk" >
+							<td colspan="1" class="c" >
 								<input name="insurance0" class="chk insurance_data" id="insuranceCar1" type="radio" value="10000" > 
 								<label>일반자차</label>
 							</td>
 							<td colspan="1" class="c">1만원</td>
 							<td colspan="1" class="c">200만원</td>
-							<td colspan="1" class="last-child">50만원</td>
+							<td colspan="1" class="c">50만원</td>
 						</tr>
 						
 						<tr class="insuranceChk" >
-							<td colspan="1" class="chk" >
+							<td colspan="1" class="c" >
 								<input name="insurance0" class="chk insurance_data" id="insuranceCar12" type="radio" value="26000" > 
 								<label>완전자차</label>
 							</td>
 							<td colspan="1" class="c">2만6천원</td>
 							<td colspan="1" class="c">200만원</td>
-							<td colspan="1" class="last-child">0만원</td>
+							<td colspan="1" class="c">0만원</td>
 						</tr>
 					</tbody>
 				</table>
@@ -238,25 +248,25 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td colspan="1" class="chk" >대인 |</td>
+							<td colspan="1" class="c" >대인 |</td>
 							<td colspan="1" class="c" >없음</td>
 							<td colspan="1" class="c" >없음</td>
 						</tr>
 						
 						<tr>
-							<td colspan="1" class="chk" >대인 ||</td>
+							<td colspan="1" class="c" >대인 ||</td>
 							<td colspan="1" class="c">무한</td>
 							<td colspan="1" class="c">50만원</td>
 						</tr>
 						
 						<tr>
-							<td colspan="1" class="chk" >대물</td>
+							<td colspan="1" class="c" >대물</td>
 							<td colspan="1" class="c">2000만원</td>
 							<td colspan="1" class="c">30만원</td>
 						</tr>
 						
 						<tr>
-							<td colspan="1" class="chk" >자손</td>
+							<td colspan="1" class="c" >자손</td>
 							<td colspan="1" class="c">1500만원</td>
 							<td colspan="1" class="c">30만원</td>
 						</tr>
@@ -267,19 +277,19 @@
 		<h4 class="subject">추가옵션</h4>
 			<div class="row row-cols-2">
 				<div class="opt_chk">
-					<input type="checkbox" name="opt_chk" id="opt_chk8" value="8|0">카시트(영유아용)1개
+					<input type="checkbox" name="opt_chk" id="opt_chk8" value="8|0">&emsp;카시트(영유아용)1개
 					<br>무료대여
 				</div>
 				<div class="opt_chk">
-					<input type="checkbox" name="opt_chk" id="opt_chk8" value="8|0">카시트(주니어)1개
+					<input type="checkbox" name="opt_chk" id="opt_chk8" value="8|0">&emsp;카시트(주니어)1개
 					<br>무료대여
 				</div>
 				<div class="opt_chk">
-					<input type="checkbox" name="opt_chk" id="opt_chk8" value="8|0">카시트(영유아용)2개
+					<input type="checkbox" name="opt_chk" id="opt_chk8" value="8|0">&emsp;카시트(영유아용)2개
 					<br>5000원
 				</div>
 				<div class="opt_chk">
-					<input type="checkbox" name="opt_chk" id="opt_chk8" value="8|0">카시트(주니어)2개
+					<input type="checkbox" name="opt_chk" id="opt_chk8" value="8|0">&emsp;카시트(주니어)2개
 					<br>5000원
 				</div>
 			</div>
@@ -288,22 +298,22 @@
 		<h4 class="subject">결제수단 선택</h4>
 			<div class="row">
 				<div class="col pay_radio">
-					<input type="radio" name="payment">신용/체크카드
+					<input type="radio" name="payment">&emsp;신용/체크카드
 				</div>
 				<div class="col pay_radio">
-					<input type="radio" name="payment">가상계좌이체
+					<input type="radio" name="payment">&emsp;가상계좌이체
 				</div>
 				 <div class="col pay_radio">
-					<input type="radio" name="payment">무통장입금
+					<input type="radio" name="payment">&emsp;무통장입금
 				</div>
 			</div>
 			<hr>
 		<h4 class="subject">할인정보(중복할인불가)</h4>
 			<div class="row g-3">
-				<div class="col-sm-9">
-	            	<label>쿠폰사용<input type="text"></label>
+				<div class="col-sm-3">
+	            	<label>쿠폰사용&emsp;<input type="text"></label>
 	            </div>
-	            <div class="col-sm-3">
+	            <div class="col-sm-9">
 	            	<input type="button" value="적용">
 	            </div>
 			</div>

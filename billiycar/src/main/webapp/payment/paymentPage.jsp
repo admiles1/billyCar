@@ -24,10 +24,21 @@
             overflow-y: auto; /* 내용이 넘치는 경우 스크롤 표시 */
     }
     
-    td, th{
-    	border: 1px solid black;
+/*     td, th{ */
+/*     	border: 1px solid black; */
+/*     } */
+	.list-table-v02{
+		border-top: 2px solid black;
+		
+	}
+    .c{
+    	border-top: 0.5px solid gray;
+    	border-bottom: 0.5px solid gray;
     }
-    
+/*  	.insuranceChk{  */
+/*  		border-left: 1px solid white;  */
+/*  		border-rightt: 1px solid white;  */
+/*  	}  */
  </style>
 </head>
 <body>
@@ -157,13 +168,13 @@
 					</thead>
 					<tbody>
 						<tr class="eventChk" bordercolor="black">
-							<td colspan="3" class="last-child" bordercolor="black">
+							<td colspan="3" class="c" bordercolor="black">
 								<input name="event" class="chk event_data" id="event0" type="radio" value="0|선택안함" checked="checked"> 
 								<label for="event0" bordercolor="black">선택안함</label>
 							</td>
 						</tr>
 						<tr class="eventChk" bordercolor="black">
-							<td colspan="3" class="last-child" bordercolor="black">
+							<td colspan="3" class="c" bordercolor="black">
 								<input name="event" class="chk event_data" id="event1" type="radio" value="0|선택안함" > 
 								<label for="event0" bordercolor="black">이벤트1</label>
 							</td>
@@ -191,33 +202,33 @@
 					</thead>
 					<tbody>
 						<tr class="insuranceChk" >
-							<td colspan="1" class="chk" >
+							<td colspan="1" class="c" >
 								<input name="insurance0" class="chk insurance_data" id="insuranceCar0" type="radio" value="0" checked="checked"> 
 								<label>선택안함</label>
 							</td>
 							<td colspan="1" class="c" >없음</td>
 							<td colspan="1" class="c" >없음</td>
-							<td colspan="1" class="last-child" >전액부담</td>
+							<td colspan="1" class="c" >전액부담</td>
 						</tr>
 						
 						<tr class="insuranceChk" >
-							<td colspan="1" class="chk" >
+							<td colspan="1" class="c" >
 								<input name="insurance0" class="chk insurance_data" id="insuranceCar1" type="radio" value="10000" > 
 								<label>일반자차</label>
 							</td>
 							<td colspan="1" class="c">1만원</td>
 							<td colspan="1" class="c">200만원</td>
-							<td colspan="1" class="last-child">50만원</td>
+							<td colspan="1" class="c">50만원</td>
 						</tr>
 						
 						<tr class="insuranceChk" >
-							<td colspan="1" class="chk" >
+							<td colspan="1" class="c" >
 								<input name="insurance0" class="chk insurance_data" id="insuranceCar12" type="radio" value="26000" > 
 								<label>완전자차</label>
 							</td>
 							<td colspan="1" class="c">2만6천원</td>
 							<td colspan="1" class="c">200만원</td>
-							<td colspan="1" class="last-child">0만원</td>
+							<td colspan="1" class="c">0만원</td>
 						</tr>
 					</tbody>
 				</table>
@@ -241,25 +252,25 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td colspan="1" class="chk" >대인 |</td>
+							<td colspan="1" class="c" >대인 |</td>
 							<td colspan="1" class="c" >없음</td>
 							<td colspan="1" class="c" >없음</td>
 						</tr>
 						
 						<tr>
-							<td colspan="1" class="chk" >대인 ||</td>
+							<td colspan="1" class="c" >대인 ||</td>
 							<td colspan="1" class="c">무한</td>
 							<td colspan="1" class="c">50만원</td>
 						</tr>
 						
 						<tr>
-							<td colspan="1" class="chk" >대물</td>
+							<td colspan="1" class="c" >대물</td>
 							<td colspan="1" class="c">2000만원</td>
 							<td colspan="1" class="c">30만원</td>
 						</tr>
 						
 						<tr>
-							<td colspan="1" class="chk" >자손</td>
+							<td colspan="1" class="c" >자손</td>
 							<td colspan="1" class="c">1500만원</td>
 							<td colspan="1" class="c">30만원</td>
 						</tr>
