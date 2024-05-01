@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.time.LocalDateTime;
 
 public class MemberVO {
+	private int member_idx;
 	private String member_id;
 	private String member_name;
 	private String member_passwd;
@@ -14,6 +15,14 @@ public class MemberVO {
 	private int member_license;
 	private String inviter;
 	
+	
+	
+	public int getMember_idx() {
+		return member_idx;
+	}
+	public void setMember_idx(int member_idx) {
+		this.member_idx = member_idx;
+	}
 	public String getMember_id() {
 		return member_id;
 	}

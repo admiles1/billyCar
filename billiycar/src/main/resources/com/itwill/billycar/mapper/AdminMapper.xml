@@ -13,8 +13,12 @@
    (일치하는 id 없을 경우 BindingException 발생)
 -->      
 <mapper namespace="com.itwill.billycar.mapper.AdminMapper">
-	<select id="selectMember">
+	<select id="selectMember" resultType="com.itwill.billycar.vo.AdminVO">
 		select * from admin where admin_id = #{admin_id} AND admin_passwd = #{admin_passwd};
+	</select>
+	
+	<select id="selectMemberList" resultType="com.itwill.billycar.vo.MemberVO">
+		select * from member;
 	</select>
 </mapper>
 

@@ -1,5 +1,7 @@
 package com.itwill.billycar.Controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.itwill.billycar.service.AdminService;
 import com.itwill.billycar.vo.AdminVO;
+import com.itwill.billycar.vo.MemberVO;
 
 @Controller
 public class adminController {
@@ -46,7 +49,11 @@ public class adminController {
 	}
 	
 	@GetMapping("admin_member")
-	public String admin_member() {
+	public String admin_member(Model model) {
+		
+		List<MemberVO> member = service.adminMemberList();
+		model.addAttribute("member", member);
+		System.out.println(member);
 		
 		return "admin/admin_member";
 	}
