@@ -1,5 +1,6 @@
 package com.itwill.billycar.Controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,9 @@ import com.itwill.billycar.vo.MemberVO;
 
 @Controller
 public class JoinController {
+	@Autowired
+	private Joinservice service;
+	
 	
 	@GetMapping("join")
 	public String join() {
@@ -23,20 +27,13 @@ public class JoinController {
 	}
 	
 	@PostMapping("joinPro")
-	public ModelAndView joinPro(MemberVO member, Model model) {
-		System.out.println("조인프로");
-		System.out.println(member);
-		ModelAndView mav = null;
-		Joinservice service = new Joinservice();
-		
-		if(service.registMember(member)) {
-			model.addAttribute(member);
-			mav = new ModelAndView("join/join_complete", "member", model ); // 이동할 경로, 객체이름, 실제 객채
+	public String joinPro(MemberVO member, Model model) {
+		if(service.registMember(member) > 0) {
+			return "join/join_complete";
 		} else {
-			mav = new ModelAndView("err/fail", "msg", "로그인 실패");
+			model.addAttribute("msg", "회원가입 실패!");
+			return "err/fail";
 		}
 		
-		return mav;
 	}
-	
 }

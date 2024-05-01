@@ -13,8 +13,21 @@
    (일치하는 id 없을 경우 BindingException 발생)
 -->      
 <mapper namespace="com.itwillbs.billycar.mapper.MemberMapper">
-	
-
+	<insert id="insertMemever">
+		INSERT INTO member
+		VALUES (
+			null
+			, #{member_id}
+			, #{member_name}
+			, #{member_passwd}
+			, #{member_email}
+			, #{member_birth}
+			, #{member_phone}
+			, now()
+			, DEFAULT
+			, #{inviter}
+		)
+	</insert>
 </mapper>
 
 

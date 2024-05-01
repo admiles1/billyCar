@@ -1,30 +1,17 @@
 package com.itwill.billycar.service;
 
-import java.sql.Connection;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import com.itwill.billycar.dao.MemberDAO;
-import com.itwill.billycar.db.JdbcUtil;
 import com.itwill.billycar.vo.MemberVO;
+import com.itwillbs.billycar.mapper.MemberMapper;
 
+@Service
 public class Joinservice {
+	@Autowired
+	private MemberMapper mapper;
 	
-	public boolean registMember(MemberVO bean) {
-		System.out.println("조인서비스");
-		boolean isJoinSuccess = false;
-		Connection con = JdbcUtil.getConnection(); 
-		
-		MemberDAO dao = MemberDAO.getinstance();
-		dao.setConnection(con);
-		int insertCount = dao.insertMember(bean);
-		
-		if (insertCount > 0) {
-			JdbcUtil.commit(con);
-			isJoinSuccess = true;
-		} else {
-			JdbcUtil.rollback(con);
-		}
-		
-		JdbcUtil.close(con);
-		return isJoinSuccess;
-	} 
+	public int registMember(MemberVO bean) {
+		return mapper.insertMemever(bean);
+	}
 }

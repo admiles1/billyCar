@@ -19,7 +19,7 @@
     		<div class="col-4">
 			    <form action="" id="searchForm" method="post">
 			    	<div class="car_select_option">
-			    		<div> 데이트 피커 어떻게하지</div>
+	                </div>
 			    		<div class="howBtn">
 					    	<input type="button" name="reserveWhere" value="지점 선택하기">
 					    	<input type="button" name="reserveWhere" value="내 주위로 부르기">
@@ -62,7 +62,6 @@
 							</span>
 				    	</div>
 				    	<input type="submit" value="차	량	검	색" id="searchCar">
-			    	</div>
 			    </form>
     		</div>
    		 	<div class="col-8" id="selectResult">
