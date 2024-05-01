@@ -12,6 +12,6 @@ public class Joinservice {
 	private MemberMapper mapper;
 	
 	public int registMember(MemberVO bean) {
-		return mapper.insertMemever(bean);
+		return mapper.insertMember(bean);
 	}
 }
