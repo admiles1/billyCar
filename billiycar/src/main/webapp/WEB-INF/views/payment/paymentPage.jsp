@@ -30,11 +30,21 @@
 		border-top: 2px solid black;
 		
 	}
-    .c{
-    	border-top: 0.5px solid gray;
-    	border-bottom: 0.5px solid gray;
+    .c , th{
+    	border: 1px solid gray;
+    	
+/*     	border-top: 0.5px solid gray; */
+/*     	border-bottom: 0.5px solid gray; */
     }
     
+    th:first-child, td:first-child {
+		border-left:0;
+	}
+	th:last-child, td:last-child {
+		border-right: 0;	
+	}
+	
+     
  </style>
 </head>
 <body>
@@ -169,7 +179,7 @@
 								<label for="event0" >선택안함</label>
 							</td>
 							<td colspan="1" class="c">없음</td>
-							<td colspan="1" class="c">없음</td>
+							<td colspan="1" class="c	">없음</td>
 						</tr>
 						<tr class="eventChk" bordercolor="black">
 							<td colspan="1" class="c" bordercolor="black">
