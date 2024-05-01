@@ -47,7 +47,7 @@
 			<tr>
 				<th class="text-left" width = "10px">글 번호</th>
 				<th class="text-left" width = "200px">제목</th>
-				<th class="text-left" width = "70px">작성자</th>
+				<th class="text-left" width = "70px">질문 유형</th>
 				<th class="text-left" width = "50px">작성일</th>
 				<th class="text-left" width = "30px">답변 상태</th>
 			</tr>
