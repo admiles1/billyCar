@@ -58,6 +58,20 @@
         .btn-wrap a:hover {
             opacity: 0.9;
         }
+        
+        .car-option-list {
+			list-style-type : none;
+			display : flex;
+		    flex-wrap: wrap;
+		    width: 100%;
+		}
+		
+		.car-info-list li {
+			width : 25%;
+			text-align : left;
+		}
+		
+		.car-option-list li {width : 20%;}
     </style>
 </head>
 <body>
@@ -126,22 +140,67 @@
                             <div class="search-car-result-cont-right">
                                 <h3 class="title-01 f14">옵션정보</h3>
                                 <div class="text-box">
-                                    <div class="list-option cr">
-                                        <span>국제운전면허증가능</span>
-                                        <span>긴급출동무료</span>
-                                        <span>충전기제공</span>
-                                        <span>AUX선 제공</span>
-                                        <span>카시트무료(수량한정)</span>
-                                        <span>금연</span>
-                                        <span>열선시트</span>
-                                        <span>스마트키</span>
-                                        <span>제2운전자등록가능</span>
-                                        <span>네비게이션</span>
-                                        <span>후방카메라</span>
-                                        <span>블랙박스</span>
-                                        <span>블루투스</span>
-                                        <span>USB</span>
-                                    </div>
+                                    <div class="car-option">
+    					<h5 class="div-tap"> 옵션</h5>
+    					<ul class="car-option-list">
+    						<li>
+    							<img src="../resources/images/option_2ndlinsece.png"><p>
+    							<small>국제운전면허증 가능</small>
+    						</li>
+    						<li>
+    							<img src="../resources/images/option_2ndlinsece.png"><p>
+    							<small> 긴급출동무료</small>
+    						</li>
+    						<li>
+    							<img src="../resources/images/option_2ndlinsece.png"><p>
+    							<small> 충전기제공 </small>
+    						</li>
+    						<li>
+    							<img src="../resources/images/option_2ndlinsece.png"><p>
+    							<small> 연료적립 </small>
+    						</li>
+    						<li>
+    							<img src="../resources/images/option_2ndlinsece.png"><p>
+    							<small> 카시트 무료 </small>
+    						</li>
+    						<li>
+    							<img src="../resources/images/option_2ndlinsece.png"><p>
+    							<small> 금연 </small>
+    						</li>
+    						<li>
+    							<img src="../resources/images/option_2ndlinsece.png"><p>
+    							<small> 열선시트 </small>
+    						</li>
+    						<li>
+    							<img src="../resources/images/option_2ndlinsece.png"><p>
+    							<small> 스마트키 </small>
+    						</li>
+    						<li>
+    							<img src="../resources/images/option_2ndlinsece.png"><p>
+    							<small> 제2운전자 등록가능 </small>
+    						</li>
+    						<li>
+    							<img src="../resources/images/option_2ndlinsece.png"><p>
+    							<small> 네비게이션 </small>
+    						</li>
+    						<li>
+    							<img src="../resources/images/option_2ndlinsece.png"><p>
+    							<small> 후방카메라 </small>
+    						</li>
+    						<li>
+    							<img src="../resources/images/option_2ndlinsece.png"><p>
+    							<small> 블랙박스 </small>
+    						</li>
+    						<li>
+    							<img src="../resources/images/option_2ndlinsece.png"><p>
+    							<small> 하이패스 </small>
+    						</li>
+    						<li>
+    							<img src="../resources/images/option_2ndlinsece.png"><p>
+    							<small> 블루투스 </small>
+    						</li>
+    					</ul>
+    				</div>
                                 </div>
                             </div>
                         </div>

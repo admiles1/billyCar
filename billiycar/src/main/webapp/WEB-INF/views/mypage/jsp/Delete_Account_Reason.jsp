@@ -9,6 +9,7 @@
 </head>
 <style>
   	#delete-reason {
+  		margin-top: 30px;
   		background:#fff;
 		border:1px solid #ccc;
 		border-radius: 8px;
