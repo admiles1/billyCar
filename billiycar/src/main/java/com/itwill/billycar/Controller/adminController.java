@@ -1,11 +1,43 @@
 package com.itwill.billycar.Controller;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.itwill.billycar.service.AdminService;
+import com.itwill.billycar.vo.AdminVO;
 
 @Controller
 public class adminController {
-
+	@Autowired
+	private AdminService service;
+	
+	
+	@GetMapping("adminForm")
+	public String adminForm() {
+		System.out.println("adminForm");
+		
+		return "admin/admin_form";
+	}
+	
+	@PostMapping("adminPro")
+	public String adminPro(AdminVO admin,HttpSession session,Model model) {
+		System.out.println("adminPro");
+		AdminVO returnAdmin = service.adminlogin(admin);
+		
+		if(returnAdmin == null) {
+			model.addAttribute("msg","등록 실패");
+			return "error/fail";
+		}
+		
+		session.setAttribute("id", returnAdmin.getAdmin_id());
+		return "index";
+	}
+	
 	@GetMapping("admin")
 	public String admin() {
 		System.out.println("admin");
