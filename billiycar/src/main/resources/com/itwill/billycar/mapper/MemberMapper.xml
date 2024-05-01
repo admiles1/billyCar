@@ -12,8 +12,8 @@
 => 주의! 각 태그 내의 id 속성에 지정될 이름은 Mapper 인터페이스 내의 메서드명과 일치해야한다!
    (일치하는 id 없을 경우 BindingException 발생)
 -->      
-<mapper namespace="com.itwillbs.billycar.mapper.MemberMapper">
-	<insert id="insertMemever">
+<mapper namespace="com.itwill.billycar.mapper.MemberMapper">
+	<insert id="insertMember">
 		INSERT INTO member
 		VALUES (
 			null
