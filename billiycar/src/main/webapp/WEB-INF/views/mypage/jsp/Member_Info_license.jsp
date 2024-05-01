@@ -9,159 +9,143 @@
 <script src="https://kit.fontawesome.com/ef42a902c7.js" crossorigin="anonymous"></script>
 </head>
 <style>
-  #license-register {
+
+#license-register {
 	background:#fff;
 	border:1px solid #ccc;
 	border-radius: 8px;
-    padding: 30px;
+	padding: 30px;
 	width: 100%;	
-	height: 80%;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	}
-	
-    h2 {
-        font-size: 32px;
-        margin-bottom: 20px;
-    }
-    
-    input[type="password"] {
-        width: 50%;
-        padding: 10px;
-        margin-bottom: 20px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        box-sizing: border-box;
-    }
-    
-    #license-register button {
- 		display: block; /* 블록 요소로 지정하여 다른 요소와 가로로 정렬되도록 합니다. */
-	    margin: 0 auto; /* 좌우 마진을 자동으로 설정하여 가운데 정렬합니다. */
-	    border: none;
-	    border-radius: 20px;
-	    font-size: 16px;
-	    letter-spacing: 1px;
-	    padding: 7px 0;
-	    width: 160px;
-	    background-color: #00AAFF; /* 배경색 지정 */
-	    color: white; /* 글자색 지정 */
-    }
-   
-    #license-register button:hover {
-        background-color: #555;
-    }
-    
-    .license-info {
-    	margin: 0 auto;
-        margin-top: 30px;
-        text-align: left;
-        width: 100%;
-    }
-    
-    
-    .license-info label {
-        font-size: 15px;
-        display: block;
-        margin-bottom: 10px;
-    }
-    .license-info input[type="text"] {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 20px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        box-sizing: border-box;
-    }
-    .license-info select {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 20px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        box-sizing: border-box;
-    }
-    
-    .license-example {
-		padding: 25px;
-	    background: #f7f7f9;
-	    border-radius: 8px;
-	    overflow: hidden;
-	    text-align: center;
-	    margin-bottom: 48px;
-	}
-    
-    #license-image {
-    	display: block; /* 이미지를 블록 요소로 설정하여 가운데 정렬을 쉽게 합니다. */
-   		margin: 0 auto; /* 좌우 마진을 자동으로 설정하여 가운데 정렬합니다. */
-	}
-	
-	.license-notice {
-		background: #50555C;
-		color: #FFF;
-	    border-radius: 12px;
-	    margin-bottom: 20px;
-	}
-	
-	.detail-info {
-		display: flex; /* Flexbox를 사용하여 요소를 수직 가운데로 정렬합니다. */
-	}
-	
-	.notice-text {
-		margin: 0 auto;
-		padding: 16px;
-		display: block;
-		font-size: 14px;
-		line-height: 24px;
-	}
-	
-	.notice-text img {
-	    display: inline-block; /* 이미지를 텍스트와 인라인 요소로 배치합니다. */
-	    vertical-align: middle; /* 이미지를 텍스트의 가운데에 위치시킵니다. */
-	    margin-right: 8px; /* 이미지와 텍스트 사이의 간격을 조절합니다. */
-	    width: 35px; /* 이미지의 너비를 조절합니다. */
-	}
-	
-	#terms {
-		margin-top: 20px;
-		background:#fff;
-		border:1px solid #ccc;
-		border-radius: 8px;
-	    padding: 30px;
-		width: 100%;
-	    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	}
-	
-	.view1 a {
-		display: inline-block;
-		font-size: 14px;
-		line-height: 20px;
-		color : #50555C;
-		text-decoration: underline;
-		cursor: pointer;
-		margin-left: 485px;
-	}
-	
-	.view2 a {
-		display: inline-block;
-		font-size: 14px;
-		line-height: 20px;
-		color : #50555C;
-		text-decoration: underline;
-		cursor: pointer;
-		margin-left: 456px;
-	}
-	
+	height: 75%;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-.modal_btn {
-    display: block;
-    margin: 40px auto;
-    padding: 10px 20px;
-    background-color: royalblue;
-    border: none;
+	
+h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+    
+input[type="password"] {
+    width: 50%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    color: #fff;
-    cursor: pointer;
+    box-sizing: border-box;
+}
+    
+#license-register button {
+	display: block; /* 블록 요소로 지정하여 다른 요소와 가로로 정렬되도록 합니다. */
+	margin: 0 auto; /* 좌우 마진을 자동으로 설정하여 가운데 정렬합니다. */
+  	border: none;
+  	border-radius: 20px;
+  	font-size: 16px;
+  	letter-spacing: 1px;
+  	padding: 7px 0;
+  	width: 160px;
+  	background-color: #00AAFF; /* 배경색 지정 */
+  	color: white; /* 글자색 지정 */
+ }
+   
+#license-register button:hover {
+    background-color: #555;
+}
+    
+.license-info {
+	margin: 0 auto;
+    margin-top: 30px;
+    text-align: left;
+    width: 100%;
+}
+    
+.license-info label {
+    font-size: 15px;
+    display: block;
+    margin-bottom: 10px;
+}
+    
+.license-info input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+    
+.license-info select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+    
+.license-example {
+	padding: 25px;
+    background: #f7f7f9;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    margin-bottom: 48px;
+}
+    
+#license-image {
+   	display: block; /* 이미지를 블록 요소로 설정하여 가운데 정렬을 쉽게 합니다. */
+	margin: 0 auto; /* 좌우 마진을 자동으로 설정하여 가운데 정렬합니다. */
+}
+	
+.license-notice {
+	margin-top: 30px;
+	background: #50555C;
+	color: #FFF;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+	
+.detail-info {
+	display: flex; 
+}
+	
+.notice-text {
+	margin: 0 auto;
+	padding: 16px;
+	display: block;
+	font-size: 14px;
+	line-height: 24px;
+}
+	
+.notice-text img {
+    display: inline-block; 
+    vertical-align: middle; 
+    margin-right: 8px; 
+    width: 35px; 
+}
+	
+#terms {
+	margin-top: 10px;
+	background:#fff;
+	border:1px solid #ccc;
+	border-radius: 8px;
+    padding: 20px;
+	width: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+	
+.view1 a, .view2 a {
+	display: inline-block;
+	font-size: 14px;
+	line-height: 20px;
+	color : #50555C;
+	text-decoration: underline;
+	cursor: pointer;
+	float: right;
 }
 
+.chk-box input[type="checkbox"] {
+    margin-right: 5px; /* 체크박스 오른쪽에 5px의 여백 추가 */
+}
 
 /*모달 팝업 영역 스타일링*/
 .modal {
@@ -323,15 +307,20 @@ h3 {
     <div class="license-info">
         <label for="licenseType">면허 종류 *</label>
         <select id="licenseType">
-            <option value="1종 보통">1종 보통</option>
+            <option value="면허 종류">면허 종류를 선택해주세요</option>
             <option value="2종 보통">2종 보통</option>
+            <option value="1종 보통">1종 대형</option>
+            <option value="1종 보통">1종 특수-대형견인차(트레일러)</option>
+            <option value="1종 보통">1종 특수-구난차(레커)</option>
+            <option value="1종 보통">1종 특수-소형견인차</option>
+            <option value="국제 면허">국제 면허</option>
         </select>
         <label for="licenseNumber">면허 번호 *</label>
-        <input type="text" id="licenseNumber" placeholder="면허 번호를 입력하세요">
+        <input type="text" id="licenseNumber" placeholder="면허 번호를 입력하세요" maxlength="12">
         <label for="issueDate">발급일 *</label>
-        <input type="text" id="issueDate" placeholder= "발급일을 입력하세요 (예: YYYY-MM-DD)">
+        <input type="text" id="issueDate" placeholder= "발급일을 입력하세요 (예: YYYY-MM-DD)" maxlength="8">
         <label for="expirationDate">만료일 *</label>
-        <input type="text" id="expirationDate" placeholder="만료일을 입력하세요 (예: YYYY-MM-DD)">
+        <input type="text" id="expirationDate" placeholder="만료일을 입력하세요 (예: YYYY-MM-DD)" maxlength="8">
         <button onclick="registerOrUpdateLicense()">면허 등록 및 갱신</button>
     </div>
 </form>
@@ -478,19 +467,19 @@ h3 {
         });
     }
     
-    // Function to handle 전체동의 checkbox state change
+    // 전체동의 
     document.getElementById('totalChk').addEventListener('change', function() {
         toggleCheckboxes(this.checked);
     });
     
-    // Function to handle 개인정보 동의 checkbox state change
+    // 개인정보 동의 
     document.getElementById('agree01').addEventListener('change', function() {
         if (!this.checked) {
             document.getElementById('totalChk').checked = false;
         }
     });
 
-    // Function to handle 고유식별정보 동의 checkbox state change
+    // 고유식별정보 동의 
     document.getElementById('agree02').addEventListener('change', function() {
         if (!this.checked) {
             document.getElementById('totalChk').checked = false;
@@ -506,7 +495,27 @@ h3 {
         modal2.style.display = 'none';
         document.getElementById('agree02').checked = true; // 고유식별정보 동의 체크
     });
+    
+    function OnlyNumbers(input) {
+        input.addEventListener('input', function() {
+            // 문자 제거
+            this.value = this.value.replace(/[^\d]/g, '');
+        });
+    }
+
+    // 텍스트 상자에 대한 입력 이벤트 처리
+    window.addEventListener('DOMContentLoaded', function() {
+        var licenseNumberInput = document.getElementById('licenseNumber');
+        var issueDateInput = document.getElementById('issueDate');
+        var expirationDateInput = document.getElementById('expirationDate');
+
+        OnlyNumbers(licenseNumberInput);
+        OnlyNumbers(issueDateInput);
+        OnlyNumbers(expirationDateInput);
+    });
    
+    
+    
 </script>
 
 </body>
