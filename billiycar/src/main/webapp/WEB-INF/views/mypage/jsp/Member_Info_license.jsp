@@ -469,6 +469,43 @@ h3 {
     modalClose2.addEventListener('click', function() {
         modal2.style.display = 'none';
     });
+    
+    function toggleCheckboxes(checked) {
+        // Select all checkboxes except the "전체동의" checkbox
+        var checkboxes = document.querySelectorAll('.agree-list input[type="checkbox"]:not(#totalChk)');
+        checkboxes.forEach(function(checkbox) {
+            checkbox.checked = checked;
+        });
+    }
+    
+    // Function to handle 전체동의 checkbox state change
+    document.getElementById('totalChk').addEventListener('change', function() {
+        toggleCheckboxes(this.checked);
+    });
+    
+    // Function to handle 개인정보 동의 checkbox state change
+    document.getElementById('agree01').addEventListener('change', function() {
+        if (!this.checked) {
+            document.getElementById('totalChk').checked = false;
+        }
+    });
+
+    // Function to handle 고유식별정보 동의 checkbox state change
+    document.getElementById('agree02').addEventListener('change', function() {
+        if (!this.checked) {
+            document.getElementById('totalChk').checked = false;
+        }
+    });
+    
+    modalClose.addEventListener('click',function(){
+        modal.style.display = 'none';
+        document.getElementById('agree01').checked = true; // 개인정보 동의 체크
+    });
+
+    modalClose2.addEventListener('click', function() {
+        modal2.style.display = 'none';
+        document.getElementById('agree02').checked = true; // 고유식별정보 동의 체크
+    });
    
 </script>
 
