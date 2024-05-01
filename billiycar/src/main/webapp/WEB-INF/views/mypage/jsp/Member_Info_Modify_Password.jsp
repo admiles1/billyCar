@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>비밀번호 변경</title>
-</head>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <style>
 #passwd-modify {
 	margin-top: 30px;
@@ -98,7 +98,7 @@ input[type="password"], input[type="text"] {
 </head>
 <body>
 
-<form id="passwd-modify">
+<form id="passwd-modify" method="post" action="processPasswordChange" >
     <h2>비밀번호 변경</h2>
     <hr>
     <div class="passwd-notice">
@@ -118,9 +118,9 @@ input[type="password"], input[type="text"] {
 	   	<span id="passwordMatchMsg"></span>
         <span id="passwordMismatchMsg"></span>
        	<div class="g-recaptcha-container">
-        	<div class="g-recaptcha" data-sitekey="YOUR_SITE_KEY"></div>
+        	<div class="g-recaptcha" data-sitekey="6LfQ8swpAAAAAMfwmMU-_UGqKZL_96D04eJGk2CA"></div>
 	    </div>
-	    <button onclick="changePassword()">비밀번호 변경</button>
+	    <button type="submit">비밀번호 변경</button>
 	</div>
 </form>
 
@@ -155,11 +155,6 @@ input[type="password"], input[type="text"] {
 	    }
 	}
 	
-	function changePassword() {
-	    // reCAPTCHA 유효성 확인 및 기타 작업을 수행하는 코드 추가
-	}
-
 </script>
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </body>
 </html>
