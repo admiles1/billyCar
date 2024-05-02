@@ -12,7 +12,7 @@
 <body>	
 	<header><jsp:include page="../inc/top.jsp"></jsp:include></header>
 	<div id="tapTitle"> 
-		<h1 align="center"> 실시간 예약 </h1>
+		<h1 align="center"> 실시간 예약(테스트)</h1>
 	</div> 
 	<main class="container text-center">
  		<div class="row">	

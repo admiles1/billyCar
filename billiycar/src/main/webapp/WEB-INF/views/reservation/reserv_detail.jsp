@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reserv_detail.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>:: 상세 예약페이지 ::</title>
 </head>
 <body>
 <header><jsp:include page="../inc/top.jsp"></jsp:include></header>
