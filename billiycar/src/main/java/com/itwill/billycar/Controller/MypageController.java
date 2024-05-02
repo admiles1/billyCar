@@ -1,5 +1,8 @@
 package com.itwill.billycar.Controller;
 
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -7,7 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MypageController {
 	
 	@GetMapping("mypage")
-	public String mypage() {
+	public String mypage(HttpSession session) {
+		session.getAttribute("memberid");
 		return "mypage/page/Mypage_Insert_Password";
 	}
 	
