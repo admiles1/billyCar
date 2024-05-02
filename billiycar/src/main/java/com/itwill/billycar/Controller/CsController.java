@@ -1,11 +1,19 @@
 package com.itwill.billycar.Controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.itwill.billycar.service.CsService;
+import com.itwill.billycar.vo.NoticeVO;
+
 @Controller
 public class CsController {
+	
+	@Autowired
+	private CsService service;
 	
 	@GetMapping("cs")
 	public String cs() {
@@ -19,15 +27,25 @@ public class CsController {
 	}
 	
 	// 글 작성
-	@GetMapping("noticeWriteForm")
+	@GetMapping("noticeWrite")
 	public String notice_write() {
 		return "cs/notice_write";
 	}
 	
 	// 글 작성 처리
-	@PostMapping("noticeWritePro")
-	public String noticePro() {
-		return "";
+	@PostMapping("noticeWrite")
+	public String noticePro(NoticeVO notice, Model model) {
+		
+		int insertCnt = service.writeNotice(notice);
+		
+		if(insertCnt > 0) {
+			
+			return "";
+		} else {
+			model.addAttribute("msg","글쓰기 실패하셨습니다. \\n 다시 시도해 주세요");
+			return "err/fail";
+		}
+		
 	}
 	
 	// 제목 누르면 게시물 보기
@@ -43,13 +61,13 @@ public class CsController {
 	}
 	
 	// 수정 처리
-	@PostMapping("noticeModifyPro")
+	@PostMapping("noticeModify")
 	public String noticeModifyPro() {
 		return "";
 	}
 	
 	// 삭제
-	@GetMapping("noticeDeletePro")
+	@GetMapping("noticeDelete")
 	public String noticeDelete() {
 		return "";
 	}
@@ -77,7 +95,7 @@ public class CsController {
 	}
 	
 	// 질문 처리
-	@PostMapping("qnaQuestionPro")
+	@PostMapping("qnaQuestion")
 	public String questionPro() {
 		System.out.println("질문하는곳");
 		return "";

@@ -27,7 +27,7 @@
   			<em class = "notice_d_title">공지사항 수정</em><br>
   		</div>
   		
-  		<form action="noticeModifyPro" method= "post">
+  		<form action="noticeModify" method= "post">
   		<div class = "detail_view">
   			<div class ="view_tit">
   				<h3> <input type = "text" placeholder="제목을 입력하시오" name = "" style = "width : 400px"> </h3>

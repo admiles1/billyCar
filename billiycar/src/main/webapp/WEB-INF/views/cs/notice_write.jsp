@@ -27,7 +27,7 @@
   			<em class = "notice_d_title">공지사항 작성</em><br>
   		</div>
   		
-  		<form action="noticeWritePro" method= "post">
+  		<form action="noticeWrite" method= "post">
   		<div class = "detail_view">
   			<div class ="view_tit">
   				<h3> <input type = "text" placeholder="제목을 입력하시오" name = "board_subject" style = "width : 400px"> </h3>
@@ -40,7 +40,7 @@
   			
   			<div class = "view_cont">
   				<p>
-  				<textarea rows="20" cols="150" style = "resize : none" name = "board_content"></textarea>
+  				<textarea rows="20" cols="150" style = "resize : none" name = "board_content" placeholder="내용을 입력하세요"></textarea>
 				</p>
   			</div>
   		</div>

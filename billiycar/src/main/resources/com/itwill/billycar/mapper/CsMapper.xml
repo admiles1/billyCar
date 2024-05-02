@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.itwill.billycar.mapper.CsMapper">
+
+	<insert id="insertNotice">
+		<selectKey keyProperty="board_idx" resultType="int" order="BEFORE">
+			SELECT IFNULL(MAX(board_idx), 0)
+			FROM notice
+		</selectKey>
+		INSERT
+		INTO notice
+		VALUES (
+			#{board_idx} + 1
+			, #{board_subject}
+			, #{board_content}
+			, #{board_writer}
+			, #{board_readcount}
+			, #{board_date}
+		)
+	</insert>
+</mapper>

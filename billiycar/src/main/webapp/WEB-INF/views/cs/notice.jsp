@@ -49,7 +49,7 @@
 <!-- 	 </div>	 -->
 	 
 	  <div class = "write_btn">
-	 	<a href = "noticeWriteForm"> 글쓰기 </a>
+	 	<a href = "noticeWrite"> 글쓰기 </a>
 	 </div>
 	 
 	 <!-- 게시글 -->
@@ -102,25 +102,25 @@
 			</tr>
 		</tbody>
 	</table>
-<!-- 	<nav aria-label="Page navigation example"> -->
-<!-- 		<div class = "paging"> -->
-<!-- 	  		<ul class="pagination"> -->
-<!-- 	    		<li class="page-item"> -->
-<!-- 	      			<a class="page-link" href="#" aria-label="Previous"> -->
-<!-- 	        			<span aria-hidden="true">&laquo;</span> -->
-<!-- 	     			 </a> -->
-<!-- 	   			 </li> -->
-<!-- 			    <li class="page-item"><a class="page-link" href="#">1</a></li> -->
-<!-- 			    <li class="page-item"><a class="page-link" href="#">2</a></li> -->
-<!-- 			    <li class="page-item"><a class="page-link" href="#">3</a></li> -->
-<!-- 			    <li class="page-item"> -->
-<!-- 			     	 <a class="page-link" href="#" aria-label="Next"> -->
-<!-- 			        	<span aria-hidden="true">&raquo;</span> -->
-<!-- 			     	 </a> -->
-<!-- 	    		</li> -->
-<!-- 	  		</ul> -->
-<!--   		</div> -->
-<!-- 	</nav> -->
+	<nav aria-label="Page navigation example">
+		<div class = "paging">
+	  		<ul class="pagination">
+	    		<li class="page-item">
+	      			<a class="page-link" href="#" aria-label="Previous">
+	        			<span aria-hidden="true">&laquo;</span>
+	     			 </a>
+	   			 </li>
+			    <li class="page-item"><a class="page-link" href="#">1</a></li>
+			    <li class="page-item"><a class="page-link" href="#">2</a></li>
+			    <li class="page-item"><a class="page-link" href="#">3</a></li>
+			    <li class="page-item">
+			     	 <a class="page-link" href="#" aria-label="Next">
+			        	<span aria-hidden="true">&raquo;</span>
+			     	 </a>
+	    		</li>
+	  		</ul>
+  		</div>
+	</nav>
 </div>
 </div> <!-- arti -->
 
