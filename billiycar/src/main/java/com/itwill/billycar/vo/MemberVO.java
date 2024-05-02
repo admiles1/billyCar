@@ -18,6 +18,7 @@ public class MemberVO {
 	private LocalDateTime member_reg_date;
 	private int member_license;
 	private String inviter;
+	private int member_status;
 	
 	
 	
