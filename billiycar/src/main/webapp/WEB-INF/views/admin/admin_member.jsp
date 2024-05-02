@@ -82,7 +82,16 @@
                 <td>${member.member_name }</td>
                 <td>${member.member_email }</td>
                 <td>${member.member_reg_date }</td>
-                <td>활성</td>
+               
+                <c:choose>
+                	<c:when test="${member.member_status eq 3}">
+                		<td>블랙리스트</td>
+                	</c:when>
+                	<c:when test="${member.member_status eq 1}">
+                		<td>회원</td>
+                	</c:when>
+                </c:choose>
+                
                 <td>
                   <a href="#" class="btn btn-sm btn-primary">상세보기</a>
                   <button class="btn btn-sm btn-danger">삭제</button>

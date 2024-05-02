@@ -17,9 +17,13 @@
 		select * from admin where admin_id = #{admin_id} AND admin_passwd = #{admin_passwd};
 	</select>
 	
-	<select id="selectMemberList" resultType="com.itwill.billycar.vo.MemberVO">
+	<select id="adminMemberList" resultType="com.itwill.billycar.vo.MemberVO">
 		select * from member;
 	</select>
+	
+<!-- 	<select id="adminBlackList" resultType="com.itwill.billycar.vo.MemberVO"> -->
+<!-- 		select * from member where member_status = 3; -->
+<!-- 	</select> -->
 </mapper>
 
 

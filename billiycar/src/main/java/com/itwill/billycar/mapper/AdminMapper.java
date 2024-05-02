@@ -12,5 +12,5 @@ public interface AdminMapper {
 	AdminVO selectMember(AdminVO admin);
 	
 	//회원 목록 조회
-	List<MemberVO> selectMemberList();
+	List<MemberVO> adminMemberList();
 }

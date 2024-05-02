@@ -140,7 +140,7 @@ function redirectToAdminPage() {
 <!-- 달력 -->
     <div class="card noto-sans-kr" style="margin-top: 20px;">
         <div class="card-body">	
-            <form>
+            <form action="reservation" method="post">
                 <div class="input-daterange">
                     <div class="mb-2 row">
                         <label for="pickupDate" class="col-sm-2 col-form-label" style="text-align: center;"><i class="fa-regular fa-calendar-days"></i> 대여일</label>

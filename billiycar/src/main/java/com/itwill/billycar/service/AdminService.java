@@ -21,7 +21,7 @@ public class AdminService {
 
 	public List<MemberVO> adminMemberList() {
 		
-		return mapper.selectMemberList();
+		return mapper.adminMemberList();
 	}
 
 }
