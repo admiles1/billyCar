@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ReservController {
 	
 	@GetMapping("reservation")
-	public String reservation() {
+	public String reservation(int idx) {
+		
+		
 		return "reservation/reservation";
 	}
 	
