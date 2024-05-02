@@ -66,11 +66,11 @@
 		</thead>
 		<tbody class="table-hover">
 			<tr>
-				<td class="text-left">1</td>
-				<td class="text-left"><a href = "noticeDetail">제목1</a></td>
-				<td class="text-left">홍길동</td>
-				<td class="text-left">24-12-23</td>
-				<td class="text-left">24-12-23</td>
+				<td class="text-left">${notice.board_idx}</td>
+				<td class="text-left"><a href = "noticeDetail">${notice.board_subject}</a></td>
+				<td class="text-left">${board_writer}</td>
+				<td class="text-left">${board_date}</td>
+				<td class="text-left">${board_readcount}</td>
 			</tr>
 			<tr>
 				<td class="text-left">February</td>

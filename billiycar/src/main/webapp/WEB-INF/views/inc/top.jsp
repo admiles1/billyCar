@@ -30,11 +30,12 @@
 						 <a class = "top_right_menu" href ="admin"> 관리자페이지 </a> |
 					</c:when>
 					<c:otherwise>
+						${sessionScope.memberid } 님
 						<a class = "top_right_menu" href="mypage"> 마이페이지 </a> |
 						<%-- 세션에 넣는 거 구현하면 마이페이지 여기로 넣기 --%>
 					</c:otherwise>
-				</c:choose>
-				<a class = "top_right_menu" href="logout">${sessionScope.memberid }로그아웃</a>
+				</c:choose> 
+				<a class = "top_right_menu" href="logout">로그아웃</a>
 			</c:otherwise>			
 	</c:choose>
 </div>

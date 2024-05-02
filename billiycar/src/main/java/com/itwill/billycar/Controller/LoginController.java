@@ -24,7 +24,7 @@ public class LoginController {
 	
 	@GetMapping("loginPro")
 	public String loginPro(MemberVO member,  HttpSession session , Model model) {
-		
+		System.out.println(member);
 		boolean isCorrectUser = service.isCorrectUser(member);
 		
 		if(isCorrectUser) {
