@@ -29,6 +29,8 @@ public class JoinController {
 	@PostMapping("joinPro")
 	public String joinPro(MemberVO member, Model model) {
 		if(service.registMember(member) > 0) {
+			model.addAttribute("member_id", member.getMember_id());
+			System.out.println(member.getMember_id());
 			return "join/join_complete";
 		} else {
 			model.addAttribute("msg", "회원가입 실패!");
