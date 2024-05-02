@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data
 public class NoticeVO {
+	private int board_idx;
 	private String board_subject;
 	private String board_content;
 	private int board_writer;
