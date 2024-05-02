@@ -52,8 +52,8 @@ public class adminController {
 	public String admin_member(Model model) {
 		
 		List<MemberVO> member = service.adminMemberList();
-		model.addAttribute("member", member);
 		System.out.println(member);
+		model.addAttribute("memberList", member);
 		
 		return "admin/admin_member";
 	}

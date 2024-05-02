@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -72,20 +74,24 @@
                 <th>조작</th>
               </tr>
             </thead>
+            
+            <c:forEach var="member" items="${memberList }">
             <tbody>
-              <tr>
-                <td>1</td>
-                <td>홍길동</td>
-                <td>hong@example.com</td>
-                <td>2024-04-17</td>
+            	 <tr>
+                <td>${member.member_id }</td>
+                <td>${member.member_name }</td>
+                <td>${member.member_email }</td>
+                <td>${member.member_reg_date }</td>
                 <td>활성</td>
                 <td>
                   <a href="#" class="btn btn-sm btn-primary">상세보기</a>
                   <button class="btn btn-sm btn-danger">삭제</button>
                 </td>
               </tr>
-              <!-- 다른 회원들의 정보도 동일한 형식으로 추가 -->
             </tbody>
+            </c:forEach>
+             
+            
           </table>
         </div>
       </main>
