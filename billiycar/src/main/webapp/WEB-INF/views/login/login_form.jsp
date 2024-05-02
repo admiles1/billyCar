@@ -11,8 +11,8 @@
  	<div class="sign-in-container">
     	<form action="loginPro">
      		 <a href="./" class="logo">Billycar</a>
-      		 <input type="text" placeholder="아이디" name="member_id"/>
-     		 <input type="password" placeholder="비밀번호" name="member_passwd" />
+      		 <input type="text" placeholder="아이디" name="member_id" class="member_id"/>
+     		 <input type="password" placeholder="비밀번호" name="member_passwd" class="member_passwd"/>
       		 <div class="forgot">
 	      		 <a href="forgot_id"><b>아이디찾기</b></a> | 
 	      		 <a href="forgot_pw"><b>비밀번호찾기</b></a> | 
