@@ -26,6 +26,7 @@
 			, now()
 			, DEFAULT
 			, #{inviter}
+			, DEFAULT
 		)
 	</insert>
 </mapper>
