@@ -18,7 +18,12 @@
 			, #{board_content}
 			, #{board_writer}
 			, #{board_readcount}
-			, #{board_date}
+			, now()
 		)
 	</insert>
+	
+	<select id="selectNoticeList">
+		SELECT *
+		FROM notice
+	</select>
 </mapper>

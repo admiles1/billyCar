@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <!doctype html>
 <html lang="ko">
 <meta charset="UTF-8">
@@ -14,7 +16,6 @@
 	<!-- css -->
 	<link rel ="stylesheet" href = "${pageContext.request.contextPath}/resources/css/notice.css">
 	
-	<!-- 글꼴 -->
 </head>
   <body>
   
@@ -65,41 +66,15 @@
 			</tr>
 		</thead>
 		<tbody class="table-hover">
-			<tr>
-				<td class="text-left">${notice.board_idx}</td>
-				<td class="text-left"><a href = "noticeDetail">${notice.board_subject}</a></td>
-				<td class="text-left">${board_writer}</td>
-				<td class="text-left">${board_date}</td>
-				<td class="text-left">${board_readcount}</td>
-			</tr>
-			<tr>
-				<td class="text-left">February</td>
-				<td class="text-left">February</td>
-				<td class="text-left">February</td>
-				<td class="text-left">24-12-23</td>
-				<td class="text-left">24-12-23</td>
-			</tr>
-			<tr>
-				<td class="text-left">March</td>
-				<td class="text-left">March</td>
-				<td class="text-left">March</td>
-				<td class="text-left">24-12-23</td>
-				<td class="text-left">24-12-23</td>
-			</tr>
-			<tr>
-				<td class="text-left">April</td>
-				<td class="text-left">April</td>
-				<td class="text-left">April</td>
-				<td class="text-left">$ 56,000.00</td>
-				<td class="text-left">$ 56,000.00</td>
-			</tr>
-			<tr>
-				<td class="text-left">May</td>
-				<td class="text-left">May</td>
-				<td class="text-left">May</td>
-				<td class="text-left">$ 98,000.00</td>
-				<td class="text-left">$ 98,000.00</td>
-			</tr>
+			<c:forEach var="notice" items="${noticeList}">
+				<tr>
+					<td class="text-left">${notice.board_idx}</td>
+					<td class="text-left"><a href = "noticeDetail">${notice.board_subject}</a></td>
+					<td class="text-left">${notice.board_writer}</td>
+					<td class="text-left"><fmt:formatDate value="${notice.board_date}" pattern = "yy-MM-dd HH:mm"/></td>
+					<td class="text-left">${notice.board_readcount}</td>
+				</tr>
+			</c:forEach>
 		</tbody>
 	</table>
 	<nav aria-label="Page navigation example">
