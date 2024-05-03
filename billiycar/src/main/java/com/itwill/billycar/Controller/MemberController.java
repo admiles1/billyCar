@@ -30,6 +30,11 @@ public class MemberController {
 		return "join/join_form";
 	}
 	
+	@GetMapping("check_id")
+	public String check_id() {
+		return "join/check_id";
+	}
+	
 	@PostMapping("joinPro")
 	public String joinPro(MemberVO member, Model model) {
 		if(service.registMember(member) > 0) {

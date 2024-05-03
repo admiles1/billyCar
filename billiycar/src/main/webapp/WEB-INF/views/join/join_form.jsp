@@ -12,7 +12,7 @@
 	$(function() {
 // 		debugger;
 		document.querySelector("#btnCheckId").onclick = function() {
-			window.open("check_id.jsp", "check_id", "width=500, height=400");
+			window.open("check_id", "check_id", "width=500, height=200, top=300, left=700");
 		};
 
 		document.fr.member_id.onblur = function() {
@@ -24,6 +24,12 @@
 				 checkIdResult = true;
 	    	} 
 		}
+		
+		
+		
+		
+		
+		
 		
 		document.fr.onsubmit = function() {
 			if(document.fr.member_name.value == "") {
@@ -87,7 +93,6 @@
 				<input type="text" placeholder="아이디" class="id_box" name="member_id" id="member_id"/>
 				<input type="button" class="id_check" value="중복확인" id="btnCheckId"><br>
 				<div id="checkIdResult"></div>
-				<div id="checkIdResult2"></div>
 			</div>
 			<div>
 				<input type="password" placeholder="비밀번호" name="member_passwd" id="member_passwd"/><br>
