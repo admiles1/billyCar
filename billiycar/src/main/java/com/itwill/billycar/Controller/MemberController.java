@@ -44,30 +44,17 @@ public class MemberController {
 	public String check_id_pro(String member_id, Model model, HttpServletResponse response) {
 		boolean isEmptyId = service.isEmptyId(member_id);
 		if(!isEmptyId) {
-			System.out.println(isEmptyId);
 			
-			try {
-				response.setContentType("text/html; charset=UTF-8");
-				PrintWriter out = response.getWriter();
-				out.print("<script>");
-				out.print("alert('사용가능한 아이디 입니다.');");
-				out.print("self.operer=self; window.close();");
-				out.print("</script>");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		
 			model.addAttribute("member_id", member_id);
-			System.out.println(member_id);
-			
-			
-			return "join/join_form";
+			model.addAttribute("isValid", true);
 			
 		} else {
-			model.addAttribute("msg", "이미 사용중인 아이디입니다.");
-			return "err/fail";
+			
+			model.addAttribute("member_id", member_id);
+			model.addAttribute("isValid", false);
 		}
+		
+		return "redirect:/check_id";
 		
 	}
 	
