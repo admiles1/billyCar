@@ -19,4 +19,10 @@ public class Memberservice {
 	public boolean isCorrectUser(MemberVO member) { //로그인 service
 		return mapper.selectCorrectUser(member);
 	}
+
+
+	public boolean isEmptyId(String member_id) {
+		System.out.println(member_id);
+		return mapper.selectCheckID(member_id);
+	}
 }

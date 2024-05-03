@@ -1,5 +1,9 @@
 package com.itwill.billycar.Controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.itwill.billycar.service.Memberservice;
 import com.itwill.billycar.vo.MemberVO;
@@ -30,9 +33,42 @@ public class MemberController {
 		return "join/join_form";
 	}
 	
+	// get매핑 join_form에서 중복확인을 위한 window.open 하기위한 매핑
 	@GetMapping("check_id")
 	public String check_id() {
 		return "join/check_id";
+	}
+	
+	// 실제 유효성검사를 마친후 중복확인을 위해 DB작업을 하기 위한 매핑주소
+	@PostMapping("check_id")
+	public String check_id_pro(String member_id, Model model, HttpServletResponse response) {
+		boolean isEmptyId = service.isEmptyId(member_id);
+		if(!isEmptyId) {
+			System.out.println(isEmptyId);
+			
+			try {
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.print("<script>");
+				out.print("alert('사용가능한 아이디 입니다.');");
+				out.print("self.operer=self; window.close();");
+				out.print("</script>");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+			model.addAttribute("member_id", member_id);
+			System.out.println(member_id);
+			
+			
+			return "join/join_form";
+			
+		} else {
+			model.addAttribute("msg", "이미 사용중인 아이디입니다.");
+			return "err/fail";
+		}
+		
 	}
 	
 	@PostMapping("joinPro")
@@ -57,7 +93,7 @@ public class MemberController {
 	
 	@GetMapping("loginPro")
 	public String loginPro(MemberVO member,  HttpSession session , Model model) {
-		System.out.println(member);
+
 		boolean isCorrectUser = service.isCorrectUser(member);
 		
 		if(isCorrectUser) {
