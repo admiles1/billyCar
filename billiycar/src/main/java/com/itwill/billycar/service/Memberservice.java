@@ -7,11 +7,16 @@ import com.itwill.billycar.mapper.MemberMapper;
 import com.itwill.billycar.vo.MemberVO;
 
 @Service
-public class Joinservice {
+public class Memberservice {
 	@Autowired
 	private MemberMapper mapper;
 	
-	public int registMember(MemberVO bean) {
+	public int registMember(MemberVO bean) { //회원가입 service
 		return mapper.insertMember(bean);
+	}
+	
+	
+	public boolean isCorrectUser(MemberVO member) { //로그인 service
+		return mapper.selectCorrectUser(member);
 	}
 }
