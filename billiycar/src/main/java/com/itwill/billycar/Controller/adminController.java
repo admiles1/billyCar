@@ -37,8 +37,8 @@ public class adminController {
 			return "err/fail";
 		}
 		
-		session.setAttribute("id", returnAdmin.getAdmin_id());
-		System.out.println("관리자 아이디 : " + session.getAttribute("id"));
+		session.setAttribute("memberid", returnAdmin.getAdmin_id());
+		System.out.println("관리자 아이디 : " + session.getAttribute("memberid"));
 		return "index";
 	}
 	

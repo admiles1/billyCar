@@ -26,7 +26,7 @@
 			<c:otherwise>
 				<c:choose> <%-- 관리자 아이디면 관리자페이지 / 로그아웃만 보여주기 --%>
 					
-					<c:when test="${sessionScope.id eq 'admin'}">
+					<c:when test="${sessionScope.memberid eq 'admin'}">
 						 <a class = "top_right_menu" href ="admin"> 관리자페이지 </a> |
 					</c:when>
 					<c:otherwise>
