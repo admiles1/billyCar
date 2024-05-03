@@ -22,6 +22,7 @@
   	<header>
   		<jsp:include page="../inc/top.jsp"/>
   	</header>
+  	
   	<main class="container">
   	<!-- 제목 -->
   	<div class = "arti">
@@ -55,6 +56,12 @@
 	 
 	 <!-- 게시글 -->
 	<div class = "board">
+	
+		<c:set var = "pageNum" value = "1"/>
+			<c:if test="${not empty param.pageNum}">
+				<c:set var = "pageNum" value = "${param.pageNum}"/>
+			</c:if>
+	
   	<table class="table-fill">
 		<thead>
 			<tr>
@@ -69,7 +76,7 @@
 			<c:forEach var="notice" items="${noticeList}">
 				<tr>
 					<td class="text-left">${notice.board_idx}</td>
-					<td class="text-left"><a href = "noticeDetail">${notice.board_subject}</a></td>
+					<td class="text-left"><a href = "noticeDetail?notice_idx=${notice.board_idx}&pageNum=${pageNum}">${notice.board_subject}</a></td>
 					<td class="text-left">${notice.board_writer}</td>
 					<td class="text-left"><fmt:formatDate value="${notice.board_date}" pattern = "yy-MM-dd HH:mm"/></td>
 					<td class="text-left">${notice.board_readcount}</td>
@@ -81,6 +88,7 @@
 		<div class = "paging">
 	  		<ul class="pagination">
 	    		<li class="page-item">
+	    		
 	      			<a class="page-link" href="#" aria-label="Previous">
 	        			<span aria-hidden="true">&laquo;</span>
 	     			 </a>
@@ -92,6 +100,7 @@
 			     	 <a class="page-link" href="#" aria-label="Next">
 			        	<span aria-hidden="true">&raquo;</span>
 			     	 </a>
+			     	 
 	    		</li>
 	  		</ul>
   		</div>

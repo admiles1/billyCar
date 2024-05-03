@@ -27,8 +27,14 @@ public class CsController {
 	// 공지사항 ----------------------------
 	@GetMapping("notice")
 	public String notice(Model model) {
+		// 페이징 
+		
+		// 조회수
+		
+		// 글 목록
 		List<NoticeVO> noticeList = service.getNoticeList();
 		model.addAttribute("noticeList", noticeList);
+		
 		return "cs/notice";
 	}
 	
