@@ -56,8 +56,13 @@ em {
 	padding : 5px;	
 }
 
+.note-editing-area {
+	background-color : white;
+}
+
 .view_cont {
 	margin-top : 10px;
+	background-color : white;
 /* 	padding-bottom : 30px; */
 }
 
