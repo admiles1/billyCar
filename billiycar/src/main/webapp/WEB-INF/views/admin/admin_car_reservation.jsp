@@ -24,6 +24,13 @@
         .nav-link {
             white-space: nowrap;
         }
+        .input-group {
+		    width: 40%;  /* 검색 영역 너비 조정 */
+		}
+		
+		.form-select {
+		    margin-right: 2px;  /* 셀렉트 박스와 입력 필드 사이의 간격 조정 */
+		}
     </style>
 </head>
 <body>
@@ -42,12 +49,16 @@
                         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">예약 차량 관리</h1>
                 </div>
-                <div class="form-inline mb-3">
-                    <div class="form-group mr-2">
-                        <input type="text" class="form-control" id="searchInput"
-                               placeholder="차량 검색">
+                 <!-- 검색 및 필터링 영역 -->
+                <div class="d-flex justify-content-end mb-3">
+                    <div class="input-group">
+                        <select class="form-select" id="searchCategory">
+                            <option value="member">회원</option>
+                            <option value="car">차량</option>
+                        </select>
+                        <input type="text" class="form-control" id="searchInput" placeholder="검색어 입력">
+                        <button type="button" class="btn btn-primary" id="searchBtn">검색</button>
                     </div>
-                    <button type="button" class="btn btn-primary" id="searchBtn">검색</button>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-striped table-sm">

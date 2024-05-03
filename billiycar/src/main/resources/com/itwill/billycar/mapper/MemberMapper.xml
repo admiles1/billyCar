@@ -26,8 +26,15 @@
 			, now()
 			, DEFAULT
 			, #{inviter}
+			, DEFAULT
 		)
 	</insert>
+	
+	<select id="selectCorrectUser" resultType="boolean">
+		SELECT IF(COUNT(*) = 1, 1, 0) FROM member WHERE member_id = #{member_id} AND member_passwd = #{member_passwd}
+	
+	
+	</select>
 </mapper>
 
 

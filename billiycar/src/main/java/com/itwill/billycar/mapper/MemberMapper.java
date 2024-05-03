@@ -6,5 +6,7 @@ import com.itwill.billycar.vo.MemberVO;
 
 @Mapper
 public interface MemberMapper {
-	int insertMember(MemberVO member);
+	int insertMember(MemberVO member); //회원가입 mapper
+	
+	boolean selectCorrectUser(MemberVO member); // 로그인 mapper
 }

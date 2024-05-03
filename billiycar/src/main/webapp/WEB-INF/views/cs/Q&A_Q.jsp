@@ -35,7 +35,7 @@
   			<em class = "cs_sub_title">궁금한 점을 해결해 드립니다 :)</em>
   		</div>
  		
- 		<form action = "qnaQuestionPro" method = "post">
+ 		<form action = "qnaQuestion" method = "post">
  		<div class = "cs_write">
  			<div class = "cus_info">
  				이메일 <input type = "text" placeholder="이메일을 입력하세요">

@@ -71,7 +71,7 @@ form {
   margin:auto;
 }
 
-input {
+.member_id, .member_passwd {
   background-color: #eee;
   border: none;
   padding: 12px 15px;
@@ -113,19 +113,24 @@ img {
 
 .btn {
 /*   flex: 1 1 auto; */
-  margin: 10px;
-  text-align: center;
-  transition: 0.5s;
-  background-size: 200% ;
-  color: white;
- /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
-  box-shadow: 0 0 20px #eee;
-  border-radius: 20px;
-  font-size: 18px;
-  font-weight: bold;
-  letter-spacing: 1px;
+	margin: 10px;
+	text-align: center;
+	transition: 0.5s;
+	background-size: 200% ;
+	color: white;
+	text-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+	box-shadow: 0 0 20px #eee;
+	border-radius: 20px;
+	font-size: 18px;
+	font-weight: bold;
+	letter-spacing: 1px;
+	border: 1px solid white;
+/*   margin-left: 45px; */
+	margin: 25px;
+/*   text-align: center; */
+    width: 200px;
+    cursor: pointer;
  }
-
 
 .btn:hover {
   background-position: right center;
@@ -156,12 +161,12 @@ img {
     margin-bottom: 10px; /* 입력 상자들 간의 간격 조절 */
 }
 
-.sign-up-container button {
+.sign-up-container input[type="submit"] {
     align-self: flex-end; /* 버튼을 오른쪽으로 정렬합니다. */
     margin-left: 10px; /* 버튼과 입력 상자 사이의 간격 조절 */
 }
 
-.sign-up-container button + br {
+.sign-up-container input[type="submit"] + br {
     display: none; /* <br> 태그 숨기기 */
 }
 

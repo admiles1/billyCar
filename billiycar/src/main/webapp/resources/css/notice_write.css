@@ -16,13 +16,18 @@
 
 /*----------------------------------*/
 
+#title {
+	border-radius: 10px;
+	border : none;
+}
+
 .detail_view {
 	text-align : center;
 	padding : 30px;
 }
 
 .detail_view .view_tit {
-	margin-top : 30px;
+	margin-top : 20px;
 	margin-bottom : 30px;
 }
 
@@ -41,23 +46,24 @@
 
 .detail_view {
 	margin-top : -50px;
-	margin-left : -190px;
+	margin-left : 50px;
 	border-radius : 15px;
 	background-color : #F3F3F3;
-	width : 1500px;
+	width : 1000px;
 }
 
 em {
 	padding : 5px;	
 }
 
-.view_cont {
-	margin-top : 30px;
-	padding-bottom : 30px;
+.note-editing-area {
+	background-color : white;
 }
 
-.view_cont p {
-	font-size : 18px;
+.view_cont {
+	margin-top : 10px;
+	background-color : white;
+/* 	padding-bottom : 30px; */
 }
 
 .btn-view {

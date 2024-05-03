@@ -84,7 +84,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
     $('.input-daterange').datepicker({
-        format: 'dd-mm-yyyy',
+        format: 'yyyy-mm-dd',
         todayHighlight: true,
         startDate: '0d',
         orientation: "bottom"
@@ -162,7 +162,7 @@ function redirectToAdminPage() {
                 <div class="mb-2 row">
                     <label for="pickupTime" class="col-sm-2 col-form-label" style="text-align: center;"><i class="fa-regular fa-clock"></i> 대여시간</label>
                     <div class="col-sm-4">
-                        <input type="time" class="form-control form-control-sm" id="pickupTime" value="09:00">
+                        <input type="time" class="form-control form-control-sm" id="pickupTime" value="09:00" step="1800">
                     </div>
                     <label for="pickupTime" class="col-sm-2 col-form-label" style="text-align: center;"><i class="fa-regular fa-clock"></i> 반납시간</label>
                     <div class="col-sm-4">

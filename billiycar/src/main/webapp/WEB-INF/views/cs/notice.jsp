@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <!doctype html>
 <html lang="ko">
 <meta charset="UTF-8">
@@ -14,13 +16,13 @@
 	<!-- css -->
 	<link rel ="stylesheet" href = "${pageContext.request.contextPath}/resources/css/notice.css">
 	
-	<!-- 글꼴 -->
 </head>
   <body>
   
   	<header>
   		<jsp:include page="../inc/top.jsp"/>
   	</header>
+  	
   	<main class="container">
   	<!-- 제목 -->
   	<div class = "arti">
@@ -49,11 +51,17 @@
 <!-- 	 </div>	 -->
 	 
 	  <div class = "write_btn">
-	 	<a href = "noticeWriteForm"> 글쓰기 </a>
+	 	<a href = "noticeWrite"> 글쓰기 </a>
 	 </div>
 	 
 	 <!-- 게시글 -->
 	<div class = "board">
+	
+		<c:set var = "pageNum" value = "1"/>
+			<c:if test="${not empty param.pageNum}">
+				<c:set var = "pageNum" value = "${param.pageNum}"/>
+			</c:if>
+	
   	<table class="table-fill">
 		<thead>
 			<tr>
@@ -65,62 +73,38 @@
 			</tr>
 		</thead>
 		<tbody class="table-hover">
-			<tr>
-				<td class="text-left">1</td>
-				<td class="text-left"><a href = "noticeDetail">제목1</a></td>
-				<td class="text-left">홍길동</td>
-				<td class="text-left">24-12-23</td>
-				<td class="text-left">24-12-23</td>
-			</tr>
-			<tr>
-				<td class="text-left">February</td>
-				<td class="text-left">February</td>
-				<td class="text-left">February</td>
-				<td class="text-left">24-12-23</td>
-				<td class="text-left">24-12-23</td>
-			</tr>
-			<tr>
-				<td class="text-left">March</td>
-				<td class="text-left">March</td>
-				<td class="text-left">March</td>
-				<td class="text-left">24-12-23</td>
-				<td class="text-left">24-12-23</td>
-			</tr>
-			<tr>
-				<td class="text-left">April</td>
-				<td class="text-left">April</td>
-				<td class="text-left">April</td>
-				<td class="text-left">$ 56,000.00</td>
-				<td class="text-left">$ 56,000.00</td>
-			</tr>
-			<tr>
-				<td class="text-left">May</td>
-				<td class="text-left">May</td>
-				<td class="text-left">May</td>
-				<td class="text-left">$ 98,000.00</td>
-				<td class="text-left">$ 98,000.00</td>
-			</tr>
+			<c:forEach var="notice" items="${noticeList}">
+				<tr>
+					<td class="text-left">${notice.board_idx}</td>
+					<td class="text-left"><a href = "noticeDetail?notice_idx=${notice.board_idx}&pageNum=${pageNum}">${notice.board_subject}</a></td>
+					<td class="text-left">${notice.board_writer}</td>
+					<td class="text-left"><fmt:formatDate value="${notice.board_date}" pattern = "yy-MM-dd HH:mm"/></td>
+					<td class="text-left">${notice.board_readcount}</td>
+				</tr>
+			</c:forEach>
 		</tbody>
 	</table>
-<!-- 	<nav aria-label="Page navigation example"> -->
-<!-- 		<div class = "paging"> -->
-<!-- 	  		<ul class="pagination"> -->
-<!-- 	    		<li class="page-item"> -->
-<!-- 	      			<a class="page-link" href="#" aria-label="Previous"> -->
-<!-- 	        			<span aria-hidden="true">&laquo;</span> -->
-<!-- 	     			 </a> -->
-<!-- 	   			 </li> -->
-<!-- 			    <li class="page-item"><a class="page-link" href="#">1</a></li> -->
-<!-- 			    <li class="page-item"><a class="page-link" href="#">2</a></li> -->
-<!-- 			    <li class="page-item"><a class="page-link" href="#">3</a></li> -->
-<!-- 			    <li class="page-item"> -->
-<!-- 			     	 <a class="page-link" href="#" aria-label="Next"> -->
-<!-- 			        	<span aria-hidden="true">&raquo;</span> -->
-<!-- 			     	 </a> -->
-<!-- 	    		</li> -->
-<!-- 	  		</ul> -->
-<!--   		</div> -->
-<!-- 	</nav> -->
+	<nav aria-label="Page navigation example">
+		<div class = "paging">
+	  		<ul class="pagination">
+	    		<li class="page-item">
+	    		
+	      			<a class="page-link" href="#" aria-label="Previous">
+	        			<span aria-hidden="true">&laquo;</span>
+	     			 </a>
+	   			 </li>
+			    <li class="page-item"><a class="page-link" href="#">1</a></li>
+			    <li class="page-item"><a class="page-link" href="#">2</a></li>
+			    <li class="page-item"><a class="page-link" href="#">3</a></li>
+			    <li class="page-item">
+			     	 <a class="page-link" href="#" aria-label="Next">
+			        	<span aria-hidden="true">&raquo;</span>
+			     	 </a>
+			     	 
+	    		</li>
+	  		</ul>
+  		</div>
+	</nav>
 </div>
 </div> <!-- arti -->
 

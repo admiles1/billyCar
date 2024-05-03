@@ -6,8 +6,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title> :: 빌리카-예약페이지 :: </title>
+<script src="${pageContext.request.contextPath}/resources/util/jquery-3.7.1.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reservMain.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
 <body>	
 	<header><jsp:include page="../inc/top.jsp"></jsp:include></header>
@@ -18,6 +20,11 @@
  		<div class="row">	
     		<div class="col-4">
 			    <form action="" id="searchForm" method="post">
+			    	<div class="date-search">
+				    	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+						<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+						
+					</div>
 			    	<div class="car_select_option">
 	                </div>
 			    		<div class="howBtn">

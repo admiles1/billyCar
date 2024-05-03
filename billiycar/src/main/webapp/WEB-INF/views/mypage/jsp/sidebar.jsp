@@ -28,7 +28,7 @@
             <div class="left_sub_menu">
                 <div class="sub_menu">
                     
-                    <h2>마이페이지</h2>
+                    <h2>${sessionScope.memberid}님의 페이지</h2>
                     <ul class="big_menu">
                         <li>나의 정보관리 <i class="arrow fas fa-angle-right"></i>
                             <ul class="small_menu">
@@ -84,22 +84,8 @@
                     $smallMenu.removeClass("clicked");
                 }
             });
-
-            // small menu의 각 항목 클릭 시 글자색 변경
-//             $(".small_menu li").click(function() {
-//                 $(this).siblings().removeClass("clicked");
-//                 $(this).addClass("clicked");
-
-//                 // 드롭다운 메뉴가 열려있는 상태에서 항목을 클릭해도 메뉴를 닫지 않음
-//                 return false;
-//             });
-            
-            
-//             // 왼쪽 서브 메뉴를 나타내도록 fadeIn
-//             $(".left_sub_menu").hide();
-//             $(".left_sub_menu").fadeIn(300);
+			
         });
-        
         
     </script>
 

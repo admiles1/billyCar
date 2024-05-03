@@ -11,6 +11,11 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
+<!-- 썸머노트 -->
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
 <!-- css -->
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/resources/css/notice_write.css">
 </head>
@@ -27,22 +32,41 @@
   			<em class = "notice_d_title">공지사항 작성</em><br>
   		</div>
   		
-  		<form action="noticeWritePro" method= "post">
+  		<form action="noticeWrite" method= "post">
   		<div class = "detail_view">
   			<div class ="view_tit">
-  				<h3> <input type = "text" placeholder="제목을 입력하시오" name = "board_subject" style = "width : 400px"> </h3>
+  				<h3><input type = "text" id="title" placeholder="제목을 입력하시오" name = "board_subject" style = "width : 400px"> </h3>
   			</div>
   			
   			<div class = "view_info">
 				<em><b>작성자</b></em>
-				<em>빌리카</em>
+				<em>${sessionScope.memberid}</em>
   			</div>
   			
-  			<div class = "view_cont">
-  				<p>
-  				<textarea rows="20" cols="150" style = "resize : none" name = "board_content"></textarea>
-				</p>
-  			</div>
+<!--   			<div class = "view_cont"> -->
+<!--   				<p> -->
+<!--   				<textarea rows="20" cols="150" style = "resize : none" name = "board_content" placeholder="내용을 입력하세요"></textarea> -->
+<!-- 				</p> -->
+<!--   			</div> -->
+			
+			<div class ="view_cont"></div>
+				<textarea id="summernote" style = "background-color:white" name = "board_content"></textarea>
+		    <script>
+		    $('#summernote').summernote({
+		        placeholder: '내용을 입력하시오',
+		        tabsize: 2,
+		        height: 400,
+		        toolbar: [
+		          ['style', ['style']],
+		          ['font', ['bold', 'underline', 'clear']],
+		          ['color', ['color']],
+		          ['para', ['ul', 'ol', 'paragraph']],
+		          ['table', ['table']],
+		          ['insert', ['link', 'picture', 'video']],
+		          ['view', ['fullscreen', 'codeview', 'help']]
+		        ]
+		      });
+		    </script>
   		</div>
   		
   		<div class = "btn-view">
