@@ -34,10 +34,11 @@ public class adminController {
 		
 		if(returnAdmin == null) {
 			model.addAttribute("msg","등록 실패");
-			return "error/fail";
+			return "err/fail";
 		}
 		
 		session.setAttribute("id", returnAdmin.getAdmin_id());
+		System.out.println("관리자 아이디 : " + session.getAttribute("id"));
 		return "index";
 	}
 	
