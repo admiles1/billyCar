@@ -25,12 +25,6 @@
 	    	} 
 		}
 		
-		
-		
-		
-		
-		
-		
 		document.fr.onsubmit = function() {
 			if(document.fr.member_name.value == "") {
 				alert("이름 입력 필수!");

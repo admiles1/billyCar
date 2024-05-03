@@ -153,4 +153,18 @@ label {
 	color : black;
 }
 
+<!-- ddddddddddddd -->
 
+.date-search {width:100%}
+.date-search button {background-color: #0b81ff !important;border: none;display: inline-block;*display: inline;zoom: 1;box-sizing: border-box;border-radius: 0;text-align: center;word-break: break-all;cursor: pointer;vertical-align: middle;overflow: hidden;position: relative;width: 100%;text-align: left;outline-style: none;padding: 30px; color:#fff;border-top-left-radius: 5px; border-top-right-radius: 5px;}
+.date-search button:before {content: '';background-repeat: no-repeat;background-image: url(/_core/_img/bg/btn_search_arrow.png);background-position: 0px 0px;background-size: contain;position: absolute;top: 50%;left: 50%;width: 20px;height: 20px;margin: -10px 0px 0px -4px;z-index: 10;}
+.date-search button > dl {float: right;}
+.date-search button > dl:first-child {float: left;}
+.date-search button > dl dt {font-weight: 300;border: 1px solid #fff;text-align: center;border-radius: 20px;color: #fff;font-size: 12px;line-height: 25px;width: 65px;}
+.date-search button > dl dd {margin-top: 5px;}
+.date-search button:after {position: absolute;top: 50%;left: 50%;margin: -20px 0 0 -20px;content: '';display: block;width: 40px;height: 40px;border-radius: 50%;background-color: #fff;opacity: 0.3;}
+
+.date-search button > dl dd .clickTimeDate {display:flex; justify-content:center; align-items:baseline;margin-top: 5px; margin-bottom: 5px;}
+.date-search button > dl dd h3 {font-size: 24px;line-height: 1;color:#fff;}
+.date-search button > dl dd span {margin-left: 5px;font-size: 14px;font-weight: 400;}
+.date-search button > dl dd small {font-weight: 400;font-size: 12px;}
