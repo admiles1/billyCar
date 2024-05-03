@@ -39,19 +39,19 @@
   		<!-- 카테고리 -->
   		<div id = "btn_tag">
   			<span id = "tag1" style="padding:1px 2px 3px 4px;">
-				<button class="white_btn">예약 변경 및 취소</button>
+				<button class="white_btn">전체</button>
   			</span>
   			<span id = "tag2" style="padding:1px 2px 3px 4px;">
 				<button class="white_btn">고장 및 사고</button>
 			</span>	
 			<span id = "tag3" style="padding:1px 2px 3px 4px;">
-				<button class="white_btn">보험</button>
+				<button class="white_btn">요금 및 결제</button>
 			</span>	
 			<span id = "tag4" style="padding:1px 2px 3px 4px;">
-				<button class="white_btn">유류비</button>
+				<button class="white_btn">예약 변경 및 취소</button>
 			</span>	
 			<span id = "tag5" style="padding:1px 2px 3px 4px;">
-				<button class="white_btn">운전자</button>
+				<button class="white_btn">기타</button>
 			</span>	
   		</div>
   		

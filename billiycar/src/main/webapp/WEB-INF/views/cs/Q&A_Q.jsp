@@ -38,22 +38,24 @@
  		<form action = "qnaQuestion" method = "post">
  		<div class = "cs_write">
  			<div class = "cus_info">
- 				이메일 <input type = "text" placeholder="이메일을 입력하세요">
+ 				작성자 <input type = "text" value="${qna_writer}" readonly="readonly">
  				문의 주제 
- 				<select id="" name="" style = "margin-left : 15px">
- 					<option value = ""> 문의 주제 </option>
- 					<option value = ""> 예약 변경 및 취소 </option>
- 					<option value = ""> 운전자 </option>
+ 				<select name="qna_category" style = "margin-left : 15px">
+ 					<option value =""> 문의 주제 </option>
+ 					<option value ="reservation"> 예약 </option>
+ 					<option value ="fee"> 대여요금 </option>
+ 					<option value ="early"> 조기반납 </option>
+ 					<option value ="etc"> 기타 </option>
  				</select>
  			</div>
  			
  			<div class = "title_wr">
- 				제목 <input type = "text" placeholder="제목을 입력하세요" style = "margin-left : 15px" name = "qna_title">
+ 				제목 <input type = "text" placeholder="제목을 입력하세요" style = "margin-left : 15px" name = "qna_subject">
  			</div>
  			
  			<div class = "content_wr">
- 				내용 <textarea placeholder="내용을 입력하세요" style = "resize : none" name = "qna_content"></textarea>
- 				<input type = "file" name = "" id = ""> 
+ 				내용 <textarea placeholder="내용을 입력하세요" style = "resize : none" name="qna_content"></textarea>
+ 				<input type = "file" name="qna_file"> 
  			</div>
  		</div>
  		<div class = "btn_wr">

@@ -13,6 +13,12 @@
 
 <!-- css -->
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/resources/css/notice_modify.css">
+
+<!-- 썸머노트 -->
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
 </head>
 <body>
 	<header>
@@ -30,18 +36,32 @@
   		<form action="noticeModify" method= "post">
   		<div class = "detail_view">
   			<div class ="view_tit">
-  				<h3> <input type = "text" placeholder="제목을 입력하시오" name = "" style = "width : 400px"> </h3>
+  				<h3> <input type = "text" placeholder="${notice.board_subject}" name ="board_subject" style = "width : 400px"> </h3>
   			</div>
   			
   			<div class = "view_info">
 				<em><b>작성자</b></em>
-				<em>빌리카</em>
+				<em>${notice.board_writer}</em>
   			</div>
   			
   			<div class = "view_cont">
-  				<p>
-  				<textarea rows="20" cols="150" style = "resize : none"></textarea>
-				</p>
+				<textarea rows="20" cols="150" id="summernote" name = "board_content" >${notice.board_content}</textarea>
+			    <script>
+			    $('#summernote').summernote({
+			        placeholder: '내용을 입력하시오',
+			        tabsize: 2,
+			        height: 400,
+			        toolbar: [
+			          ['style', ['style']],
+			          ['font', ['bold', 'underline', 'clear']],
+			          ['color', ['color']],
+			          ['para', ['ul', 'ol', 'paragraph']],
+			          ['table', ['table']],
+			          ['insert', ['link', 'picture', 'video']],
+			          ['view', ['fullscreen', 'codeview', 'help']]
+			        ]
+			      });
+		    </script>
   			</div>
   		</div>
   		

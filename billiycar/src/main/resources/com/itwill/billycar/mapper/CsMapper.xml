@@ -22,8 +22,28 @@
 		)
 	</insert>
 	
-	<select id="selectNoticeList">
+	<select id="selectNoticeList" resultType="com.itwill.billycar.vo.NoticeVO">
 		SELECT *
 		FROM notice
+		ORDER BY board_idx DESC
+		LIMIT #{startRow}, #{listLimit}
 	</select>
+	
+	<select id="selectNoticeDetail" resultType="com.itwill.billycar.vo.NoticeVO">
+		SELECT *
+		FROM notice
+		WHERE board_idx=#{notice_idx}
+	</select>
+	
+	<select id="selectModifyInfo" resultType="com.itwill.billycar.vo.NoticeVO">
+		SELECT *
+		FROM notice
+		WHERE board_idx = #{notice_idx}
+	</select>
+	
+	<update id="updateNotice">
+		UPDATE notice
+		SET board_subject=#{board_subject}, board_content=#{board_content} 
+		WHERE board_idx=#{board_idx}
+	</update>
 </mapper>

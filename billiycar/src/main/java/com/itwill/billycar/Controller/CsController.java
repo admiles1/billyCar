@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.billycar.service.CsService;
 import com.itwill.billycar.vo.NoticeVO;
@@ -26,13 +27,16 @@ public class CsController {
 	
 	// 공지사항 ----------------------------
 	@GetMapping("notice")
-	public String notice(Model model) {
+	public String notice(Model model, @RequestParam(defaultValue = "1") int pageNum) {
 		// 페이징 
+		int listLimit = 5;
+		int startRow = (pageNum-1)*listLimit;
+		
 		
 		// 조회수
 		
 		// 글 목록
-		List<NoticeVO> noticeList = service.getNoticeList();
+		List<NoticeVO> noticeList = service.getNoticeList(startRow, listLimit);
 		model.addAttribute("noticeList", noticeList);
 		
 		return "cs/notice";
@@ -75,19 +79,33 @@ public class CsController {
 	
 	// 제목 누르면 게시물 보기
 	@GetMapping("noticeDetail") 
-	public String noticeDetail() {
+	public String noticeDetail(int notice_idx, Model model) {
+		
+		// 디테일 가져오기
+		NoticeVO notice = service.getNoticeDetail(notice_idx);
+		
+		// 보내기
+		model.addAttribute("notice", notice);
+		
 		return "cs/notice_detail";
 	}
 	
 	// 수정
 	@GetMapping("noticeModify")
-	public String noticeModify() {
+	public String noticeModify(Model model, NoticeVO notice, int notice_idx) {
+		System.out.println(notice_idx);
+		notice = service.modifyInfo(notice_idx);
+		model.addAttribute("notice", notice);
+		
 		return "cs/notice_modify";
 	}
 	
 	// 수정 처리
 	@PostMapping("noticeModify")
-	public String noticeModifyPro() {
+	public String noticeModifyPro(Model model, NoticeVO notice) {
+		
+		int insertCount = service.modifyNotice(notice);
+		
 		return "";
 	}
 	
