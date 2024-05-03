@@ -99,20 +99,30 @@ h2 {
 			</p>
 		</div>
 		      <ul>
-		        <li>
-		          <label for="fullname">이름</label>
-		          <input id="fullname" name="fullname" type="text" placeholder="5자미만 공백없이" required>
-		           <button onclick="changeName()">이름 변경</button> 	 	
+		      	<li>
+		          <label for="memberName">이름</label>
+		          <input id="memberName" name="name" type="text" value="${memberInfo.member_name}" readonly>
+		        </li>
+		      	<li>
+		          <label for="memberId">아이디</label>
+		          <input id="memberId" name="id" type="text" value="${memberInfo.member_id}" readonly>
 		        </li>
 		        <li>
 		          <label for="email">메일 주소</label>
-		          <input id="email" name="email" type="email" placeholder="abcd@domain.com" required autocomplete="off">
-		          <button onclick="changeEmail()">이메일 변경</button> 	
+		          <input id="email" name="email" type="email" value="${memberInfo.member_email}" autocomplete="off">
+		        </li>
+		         <li>
+		          <label for="memberBirth">생년 월일</label>
+		          <input id="memberBirth" name="birth" type="text" value="${memberInfo.member_birth}" readonly>
 		        </li>
 		        <li>
+		          <label for="memberReDdate">가입일</label>
+		          <input id="memberRegDate" name="RegDate" type="text" value="${memberInfo.member_reg_date}" readonly>
+		        </li>
+		        
+		        <li>
 		          <label for="tel">연락처</label>
-		          <input id="tel" name="tel" type="tel" autocomplete="off">
-		          <button onclick="changePhoneNumber()">전화번호 변경</button>
+		          <input id="tel" name="tel" type="tel" value="${memberInfo.member_phone}" autocomplete="off">
 		        </li>  
 		      </ul>
 		</fieldset>

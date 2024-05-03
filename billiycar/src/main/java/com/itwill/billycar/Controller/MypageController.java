@@ -3,23 +3,62 @@ package com.itwill.billycar.Controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.itwill.billycar.service.MypageService;
+import com.itwill.billycar.vo.MemberVO;
 
 @Controller
 public class MypageController {
 	
+	@Autowired
+	private MypageService service;
+	
+//	@GetMapping("mypage")
+//	public String mypage(HttpSession session, MemberVO member) {
+//		session.getAttribute("memberid");
+//		return "mypage/page/Mypage_Insert_Password";
+//	}
 	@GetMapping("mypage")
-	public String mypage(HttpSession session) {
-		session.getAttribute("memberid");
-		return "mypage/page/Mypage_Insert_Password";
+	public String mypage(HttpSession session, Model model) {
+	    // 세션에서 회원 아이디 가져오기
+	    String memberId = (String) session.getAttribute("memberid");
+	    // 가져온 회원 아이디를 모델에 추가
+	    model.addAttribute("memberId", memberId);
+	    // 이후 원하는 페이지로 이동
+	    return "mypage/page/Mypage_Insert_Password";
 	}
 	
+	
+//	@GetMapping("modifyInfo")
+//	public String modifyInfo(HttpSession session, MemberVO member, Model model) {
+////		System.out.println("회원정보 수정");
+//		MemberVO memberInfo = service.getMemberInfo(member);
+//		model.addAttribute("memberInfo", memberInfo);
+//		return "mypage/page/Mypage_Modify_Info";
+//	}
+	
 	@GetMapping("modifyInfo")
-	public String modifyInfo() {
-		System.out.println("회원정보 수정");
-		return "mypage/page/Mypage_Modify_Info";
+	public String modifyInfo(HttpSession session, Model model) {
+	    // 세션에서 회원 아이디 가져오기
+	    String memberId = (String) session.getAttribute("memberid");
+	    // 해당 회원 아이디로 회원 정보 가져오기
+	    MemberVO memberInfo = service.getMemberInfo(memberId);
+	    // 회원 정보를 모델에 추가
+	    model.addAttribute("memberInfo", memberInfo);
+	    // 이후 원하는 페이지로 이동
+	    return "mypage/page/Mypage_Modify_Info";
 	}
+	
+	
+	
+	
+	
 	
 	@GetMapping("modifyPasswd")
     public String modifyPasswd() {
