@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class guideController {
+public class GuideController {
 	
 	@GetMapping("guideCompany")
 	public String guideCompany() {
