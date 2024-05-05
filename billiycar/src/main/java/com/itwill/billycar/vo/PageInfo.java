@@ -9,4 +9,15 @@ public class PageInfo {
 	private int maxPage; 
 	private int startPage;
 	private int endPage;
+	
+	public PageInfo(int listCount, int pageListLimit, int maxPage, int startPage, int endPage) {
+		super();
+		this.listCount = listCount;
+		this.pageListLimit = pageListLimit;
+		this.maxPage = maxPage;
+		this.startPage = startPage;
+		this.endPage = endPage;
+	}
+	
+	
 }

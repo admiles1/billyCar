@@ -40,7 +40,7 @@
                 <div id="memberMenu" class="collapse">
                     <ul class="nav flex-column pl-3">
                         <li class="nav-item">
-                            <a class="nav-link" href="admin_member"><i class="fas fa-address-book"></i> 회원 목록 조회</a>
+                            <a class="nav-link" href="adminMember"><i class="fas fa-address-book"></i> 회원 목록 조회</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="admin_blackList"><i class="fas fa-user-lock"></i> 블랙리스트 관리</a>

@@ -9,10 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.billycar.service.AdminService;
 import com.itwill.billycar.vo.AdminVO;
 import com.itwill.billycar.vo.MemberVO;
+import com.itwill.billycar.vo.PageInfo;
 
 @Controller
 public class adminController {
@@ -49,15 +51,58 @@ public class adminController {
 		return "admin/admin_main";
 	}
 	
-	@GetMapping("admin_member")
-	public String admin_member(Model model) {
+	
+	@GetMapping("adminMember")
+	public String adminMember(@RequestParam(defaultValue = "") String searchType,
+			@RequestParam(defaultValue = "") String searchKeyword,
+			int pageNum,
+			Model model) {
 		
-		List<MemberVO> member = service.adminMemberList();
+		System.out.println(searchType);
+		System.out.println(searchKeyword);
+		System.out.println(pageNum);
+		
+		int listLimit = 3;
+		int startRow = (pageNum - 1) * listLimit;
+		
+		int listCount = service.getMemberListCount();
+		System.out.println("listCount(controller) : " + listCount);
+		//페이지 번호 갯수를 3개로 지정
+		int pageListLimit = 3;
+		
+		//----------------------------------------------------------------
+		int maxPage = listCount/listLimit + (listCount%listLimit > 0 ? 1 : 0);
+		System.out.println(maxPage);
+		//----------------------------------------------------------------
+		//시작페이지 설정
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		System.out.println("시작 페이지 번호 : " + startPage);
+		//끝페이지 설정
+		int endPage = startPage + pageListLimit - 1;
+				
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		
+		System.out.println("끝 페이지 번호 : " + endPage);
+		
+		
+		List<MemberVO> member = service.adminMemberList(searchKeyword,searchType,startRow,listLimit);
 		System.out.println(member);
 		model.addAttribute("memberList", member);
+		model.addAttribute("pageInfo", new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage));
 		
 		return "admin/admin_member";
 	}
+	
+	@GetMapping("memberSearch")
+	public String memberSearch() {
+		
+		
+		return "admin/admin_main";
+	}
+	
 	
 	@GetMapping("admin_blackList")
 	public String admin_blackList() {

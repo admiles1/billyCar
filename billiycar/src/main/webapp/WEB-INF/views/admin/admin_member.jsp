@@ -29,7 +29,7 @@
 </head>
 <body>
 <main class="container">
-
+	<c:set var="pageNum" value="${empty param.pageNum ? 1 : param.pageNum }"/>
 
     <!-- 네비게이션 바 -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -47,18 +47,18 @@
         </div>
 
         <!-- 회원 목록 검색 기능 -->
-        <form class="form-inline mb-3">
+        <form class="form-inline mb-3" action="adminMember" method="post">
           <div class="form-group mr-2">
-            <input type="text" class="form-control" placeholder="검색어 입력">
+            <input type="text" name="searchKeyword" class="form-control" placeholder="검색어 입력">
           </div>
           <div class="form-group mr-2">
-            <select class="form-control">
-              <option value="">전체</option>
-              <option value="active">활성 회원</option>
-              <option value="inactive">비활성 회원</option>
+            <select class="form-control" name="searchType">
+              <option value="all">전체</option>
+              <option value="member">회원</option>
+              <option value="black">블랙리스트</option>
             </select>
+            <input type="submit" class="btn btn-primary" value="검색">
           </div>
-          <button type="submit" class="btn btn-primary">검색</button>
         </form>
 
         <!-- 회원 목록 테이블 -->
@@ -74,35 +74,64 @@
                 <th>조작</th>
               </tr>
             </thead>
-            
-            <c:forEach var="member" items="${memberList }">
-            <tbody>
-            	 <tr>
-                <td>${member.member_id }</td>
-                <td>${member.member_name }</td>
-                <td>${member.member_email }</td>
-                <td>${member.member_reg_date }</td>
-               
-                <c:choose>
-                	<c:when test="${member.member_status eq 3}">
-                		<td>블랙리스트</td>
-                	</c:when>
-                	<c:when test="${member.member_status eq 1}">
-                		<td>회원</td>
-                	</c:when>
-                </c:choose>
-                
-                <td>
-                  <a href="#" class="btn btn-sm btn-primary">상세보기</a>
-                  <button class="btn btn-sm btn-danger">삭제</button>
-                </td>
-              </tr>
-            </tbody>
-            </c:forEach>
-             
+            <c:choose>
+            	<c:when test="${empty memberList }">
+            		<td colspan="6" align="center">게시물 목록이 없습니다.</td>
+            	</c:when>
+            	<c:otherwise>
+		            <c:forEach var="member" items="${memberList }">
+		            <tbody>
+		            	 <tr>
+		                <td>${member.member_id }</td>
+		                <td>${member.member_name }</td>
+		                <td>${member.member_email }</td>
+		                <td>${member.member_reg_date }</td>
+		               
+		                <c:choose>
+		                	<c:when test="${member.member_status eq 3}">
+		                		<td>블랙리스트</td>
+		                	</c:when>
+		                	<c:when test="${member.member_status eq 1}">
+		                		<td>회원</td>
+		                	</c:when>
+		                </c:choose>
+		                
+		                <td>
+		                  <a href="#" class="btn btn-sm btn-primary">상세보기</a>
+		                  <button class="btn btn-sm btn-danger">삭제</button>
+		                </td>
+		              </tr>
+		            </tbody>
+		            </c:forEach>
+	            </c:otherwise>
+            </c:choose> 
             
           </table>
         </div>
+        <!-- 목록 테이블 끝 -->
+        <section id = "pageList">
+			
+			<input type="button" value="이전" onclick="location.href='adminMember?pageNum=${pageNum -1}'" 
+				<c:if test="${pageNum eq 1 }">disabled</c:if>
+			>
+			
+			<c:forEach  var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }" step="1">
+				<c:choose>
+					<c:when test="${i eq pageNum }">
+						${i}
+					</c:when>
+					<c:otherwise>
+						<a href="adminMember?pageNum=${i}">${i}</a>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>		
+		<input type="button" value="다음" onclick="location.href='adminMember?pageNum=${pageNum +1}'"
+			<c:if test="${pageNum eq pageInfo.maxPage }">disabled</c:if>
+		>
+		</section>
+		
+		
+		
       </main>
     </div>
   </div>

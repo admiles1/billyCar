@@ -18,12 +18,16 @@
 	</select>
 	
 	<select id="adminMemberList" resultType="com.itwill.billycar.vo.MemberVO">
-		select * from member;
+		select * from member LIMIT #{startRow},#{listLimit}
 	</select>
 	
 <!-- 	<select id="adminBlackList" resultType="com.itwill.billycar.vo.MemberVO"> -->
 <!-- 		select * from member where member_status = 3; -->
 <!-- 	</select> -->
+
+	<select id="getMemberCount" resultType="int">
+		select count(*) from member LIMIT 1; 
+	</select>
 </mapper>
 
 

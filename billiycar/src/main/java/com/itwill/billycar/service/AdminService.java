@@ -19,9 +19,21 @@ public class AdminService {
 		return mapper.selectMember(admin);
 	}
 
-	public List<MemberVO> adminMemberList() {
+	public List<MemberVO> adminMemberList(String searchType, String searchKeyword, int startRow, int listLimit) {
+		System.out.println(searchType);
+		System.out.println(searchKeyword);
+		System.out.println(startRow);
+		System.out.println(listLimit);
+		return mapper.adminMemberList(searchType,searchKeyword,startRow,listLimit);
+	}
+
+	public int getMemberListCount() {
 		
-		return mapper.adminMemberList();
+		int listCount = 0;
+		
+		listCount = mapper.getMemberCount();
+		System.out.println("listCount : " + listCount);
+		return listCount;
 	}
 
 }
