@@ -22,8 +22,8 @@ public class ReservController {
 	// 메인페이지, 예약페이지에서 조건을 입력하였을 시 (조건에 맞는 차량 검색 및 받아온 값 표시)
 	@PostMapping("reservation")
 	public String reservationpost(@RequestParam(defaultValue = "") Map<String, String> map, 
-								  @RequestParam List<String> carType, 
-								  @RequestParam List<String> fuelType, 
+								  @RequestParam(defaultValue = "") List<String> carType, 
+								  @RequestParam(defaultValue = "") List<String> fuelType, 
 								  Model model) {
 		// 1. 차종류, 연료 각 값으로 빼서 가지고감
 		// 2. select *

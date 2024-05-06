@@ -22,6 +22,7 @@ li a {
 /* 검색 옵션 선택*/
 
 
+
 .option_title {
 	position : absolute;
 	left : 50px;
@@ -82,7 +83,10 @@ label {
 	border-radius : 0 0 10px 10px;
 	font-size : 20px;
 	margin : 0px;
-	background-color : #A6C5FF;
+	background-color : #00AAFF;
+	color : #fff;
+	font-size : 30px;
+	font-weight: bold;
 }	
 
 /* 검색 결과 */
