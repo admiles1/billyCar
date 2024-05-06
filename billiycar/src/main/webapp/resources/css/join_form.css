@@ -4,12 +4,10 @@ body {
 	background: White; 
 }
 
-#checkIdResult{
+#checkIdResult, #checkPwResult , #checkPwResult2{
 	
-	font-size: 15px;
 	margin-left: 15px;
 }
-
 
 form {
   display: flex;

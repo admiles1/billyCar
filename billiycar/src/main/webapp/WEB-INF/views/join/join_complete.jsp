@@ -22,7 +22,7 @@
 	<div class="button">
 	    <p class="btnText">메인페이지로</p>
 	    <div class="btnTwo">
-	      <p class="btnText2"onclick="location.href='index'">GO!</p>
+	      <p class="btnText2"onclick="location.href='./'">GO!</p>
 	    </div>
 	 </div>
 </div>
