@@ -165,7 +165,7 @@
 <!-- 				<div id="checkIdResult"></div> -->
 <!-- 			</div> -->
 			<div>
-				<input type="password" placeholder="비밀번호" name="member_passwd" id="member_passwd"/><br>
+				<input type="password" placeholder="비밀번호(8-12자리 특수문자 포함)" name="member_passwd" id="member_passwd"/><br>
 				<div id="checkPwResult"></div>
 			</div>
 			<div>

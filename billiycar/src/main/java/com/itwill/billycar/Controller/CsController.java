@@ -47,7 +47,7 @@ public class CsController {
 	public String notice_write(HttpSession session, Model model) {
 		
 		// 작성자가 admin이 아닐 경우 튕구기
-		String id = (String)session.getAttribute("memberid");
+		String id = (String)session.getAttribute("member_id");
 		
 		if(id==null || !id.equals("admin")) {
 			model.addAttribute("msg","잘못된 접근입니다");
@@ -62,7 +62,7 @@ public class CsController {
 	@PostMapping("noticeWrite")
 	public String noticePro(NoticeVO notice, Model model, HttpSession session) {
 		// 작성자id에 admin 추가
-		String admin = (String)session.getAttribute("memberid");
+		String admin = (String)session.getAttribute("member_id");
 		notice.setBoard_writer(admin);
 		
 		// DB에 추가

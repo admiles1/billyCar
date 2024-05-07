@@ -27,7 +27,7 @@ public class MypageController {
 	@GetMapping("mypage")
 	public String mypage(HttpSession session, Model model) {
 	    // 세션에서 회원 아이디 가져오기
-	    String memberId = (String) session.getAttribute("memberid");
+	    String memberId = (String) session.getAttribute("member_id");
 	    // 가져온 회원 아이디를 모델에 추가
 	    model.addAttribute("memberId", memberId);
 	    // 이후 원하는 페이지로 이동
@@ -46,7 +46,7 @@ public class MypageController {
 	@GetMapping("modifyInfo")
 	public String modifyInfo(HttpSession session, Model model) {
 	    // 세션에서 회원 아이디 가져오기
-	    String memberId = (String) session.getAttribute("memberid");
+	    String memberId = (String) session.getAttribute("member_id");
 	    // 해당 회원 아이디로 회원 정보 가져오기
 	    MemberVO memberInfo = service.getMemberInfo(memberId);
 	    // 회원 정보를 모델에 추가

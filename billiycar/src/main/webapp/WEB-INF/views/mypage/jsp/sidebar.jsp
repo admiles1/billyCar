@@ -28,7 +28,7 @@
             <div class="left_sub_menu">
                 <div class="sub_menu">
                     
-                    <h2>${sessionScope.memberid}님의 페이지</h2>
+                    <h2>${sessionScope.member_id}님의 페이지</h2>
                     <ul class="big_menu">
                         <li>나의 정보관리 <i class="arrow fas fa-angle-right"></i>
                             <ul class="small_menu">
