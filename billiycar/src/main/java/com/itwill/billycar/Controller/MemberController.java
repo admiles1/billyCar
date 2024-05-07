@@ -84,7 +84,7 @@ public class MemberController {
 		boolean isCorrectUser = service.isCorrectUser(member);
 		
 		if(isCorrectUser) {
-			session.setAttribute("memberid",  member.getMember_id());
+			session.setAttribute("member_id",  member.getMember_id());
 			return "redirect:/./";
 		} else {
 			return "redirect:/error";

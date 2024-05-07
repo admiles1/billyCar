@@ -40,7 +40,7 @@
   			
   			<div class = "view_info">
 				<em><b>작성자</b></em>
-				<em>${sessionScope.memberid}</em>
+				<em>${sessionScope.member_id}</em>
   			</div>
   			
 <!--   			<div class = "view_cont"> -->
