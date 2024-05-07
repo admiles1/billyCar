@@ -24,12 +24,13 @@
 <body>	
 	<header><jsp:include page="../inc/top.jsp"></jsp:include></header>
 	<div id="tapTitle"> 
-		<h1 align="center"> 실시간 예약(테스트)</h1>
+		<h1 align="center"> 실시간 예약</h1>
 	</div> 
 	<main class="container text-center">
  		<div class="row">	
     		<div class="col-4">
 			    <form action="reservation" id="searchForm" method="post">
+			    	<div class="car_option_sel"> <h3> 예약 일정 </h3></div>
 			    	<div>
 		    			<div class="flex-sm-row flex-column d-flex">
 					    	<div class="col-sm-9 col-12 px-0 mb-2">
@@ -46,15 +47,14 @@
 				    	<input type="button" name="reserveWhere" value="지점 선택하기">
 				    	<input type="button" name="reserveWhere" value="내 주위로 부르기">
 		    		</div>
-			    	<select id="selectArea">
-			    		<option selected> :: 대여지점 :: </option>
-			    		<option> 아이티윌본점 </option>
-			    	</select>
-			    	<select id="selectArea">
+		    		<input type="text" class="selectArea" name="pickupLocation"  value=":: 대여지점 ::" readonly style="padding-right: 17px;">
+			    	<select  class="selectArea" name="returnLocation">
 			    		<option selected> :: 반납지점 :: </option>
-			    		<option> 아이티윌본점 </option>
+			    		<option value="direct"> 지점에 직접 반납하기 </option>
+			    		<option value="direct"> 픽업장소에 반납하기 </option>
 			    	</select>
 			    	<div class="car_option_sel">
+			    		<hr>
 			    		<h3> 차종 </h3>
 			    		<span class="carList1">
 			    			<label><input type="checkbox" value="경형" name="carType"> 경형 </label><br>
@@ -71,6 +71,7 @@
 						</span>
 			    	</div>
 			    	<div class="car_option_sel">
+			    		<hr>
 			    		<h3> 연료 </h3>
 			    		<span class="fuelList1">
 			    			<label><input type="checkbox" value="가솔린" name="fuelType"> 가솔린 </label><br>
@@ -116,6 +117,8 @@
 		});
 		
 	});
+	
+	
 </script>
 </body>
 </html>

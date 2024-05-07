@@ -59,11 +59,12 @@ input[name="reserveWhere"] {
 	margin : 10px auto;
 }
 
-#selectArea {
+.selectArea {
+	border : 1px solid gray;
 	text-align : center;
-	width : 81%;	
+	width : 80%;	
 	border-radius : 10px;
-	margin-bottom : 5px;	
+	margin-bottom : 5px;
 }
 
 .carList1, .carList2, .fuelList1, .fuelList2 {

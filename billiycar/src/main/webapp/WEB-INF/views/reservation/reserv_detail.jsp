@@ -1,15 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap-responsive.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reserv_detail.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <meta charset="UTF-8">
@@ -64,9 +58,9 @@
 		    		<br>
 		    		<strong class="rental-criteria"> 대여 기준 </strong>
 		    		<ul class="rental-criteria-list">
-		    			<li><img src="../resources/images/check-img.png" class="check-img">나이 : <span class="qua">만 23세 이상</span></li>
-		    			<li><img src="../resources/images/check-img.png" class="check-img">운전경력 : <span class="qua">1년 이상</span></li>
-		    			<li><img src="../resources/images/check-img.png" class="check-img">면허종류 : <span class="qua">2종 보통면허 이상</span></li>
+		    			<li><img src="${pageContext.request.contextPath}/resources/images/check-img.png" class="check-img">나이 : <span class="qua">만 23세 이상</span></li>
+		    			<li><img src="${pageContext.request.contextPath}/resources/images/check-img.png" class="check-img">운전경력 : <span class="qua">1년 이상</span></li>
+		    			<li><img src="${pageContext.request.contextPath}/resources/images/check-img.png" class="check-img">면허종류 : <span class="qua">2종 보통면허 이상</span></li>
 		    		</ul>
 		    		<a href="payment"><span class="make-rv"></span></a>
 		    		<a href="http://naver.com"><span class="contact-cs"></span></a>
@@ -142,59 +136,59 @@
     					<h5 class="div-tap"> 옵션</h5>
     					<ul class="car-option-list">
     						<li>
-    							<img src="../resources/images/option_2ndlinsece.png"><p>
+    							<img src="${pageContext.request.contextPath}/resources/images/option/option_linsece.png"><p>
     							<small>국제운전면허증 가능</small>
     						</li>
     						<li>
-    							<img src="../resources/images/option_2ndlinsece.png"><p>
+    							<img src="${pageContext.request.contextPath}/resources/images/option/option_sos.png"><p>
     							<small> 긴급출동무료</small>
     						</li>
     						<li>
-    							<img src="../resources/images/option_2ndlinsece.png"><p>
+    							<img src="${pageContext.request.contextPath}/resources/images/option/option_usb.png"><p>
     							<small> 충전기제공 </small>
     						</li>
     						<li>
-    							<img src="../resources/images/option_2ndlinsece.png"><p>
+    							<img src="${pageContext.request.contextPath}/resources/images/option/option_charger.png"><p>
     							<small> 연료적립 </small>
     						</li>
     						<li>
-    							<img src="../resources/images/option_2ndlinsece.png"><p>
+    							<img src="${pageContext.request.contextPath}/resources/images/option/option_seat.png"><p>
     							<small> 카시트 무료 </small>
     						</li>
     						<li>
-    							<img src="../resources/images/option_2ndlinsece.png"><p>
+    							<img src="${pageContext.request.contextPath}/resources/images/option/option_nosmoking.png"><p>
     							<small> 금연 </small>
     						</li>
     						<li>
-    							<img src="../resources/images/option_2ndlinsece.png"><p>
+    							<img src="${pageContext.request.contextPath}/resources/images/option/option_heatseat.png"><p>
     							<small> 열선시트 </small>
     						</li>
     						<li>
-    							<img src="../resources/images/option_2ndlinsece.png"><p>
+    							<img src="${pageContext.request.contextPath}/resources/images/option/option_smartkey.png"><p>
     							<small> 스마트키 </small>
     						</li>
     						<li>
-    							<img src="../resources/images/option_2ndlinsece.png"><p>
+    							<img src="${pageContext.request.contextPath}/resources/images/option/option_2ndlinsece.png"><p>
     							<small> 제2운전자 등록가능 </small>
     						</li>
     						<li>
-    							<img src="../resources/images/option_2ndlinsece.png"><p>
+    							<img src="${pageContext.request.contextPath}/resources/images/option/option_navigation.png"><p>
     							<small> 네비게이션 </small>
     						</li>
     						<li>
-    							<img src="../resources/images/option_2ndlinsece.png"><p>
+    							<img src="${pageContext.request.contextPath}/resources/images/option/option_backcamera.png"><p>
     							<small> 후방카메라 </small>
     						</li>
     						<li>
-    							<img src="../resources/images/option_2ndlinsece.png"><p>
+    							<img src="${pageContext.request.contextPath}/resources/images/option/option_blackbox.png"><p>
     							<small> 블랙박스 </small>
     						</li>
     						<li>
-    							<img src="../resources/images/option_2ndlinsece.png"><p>
+    							<img src="${pageContext.request.contextPath}/resources/images/option/option_highpass.png"><p>
     							<small> 하이패스 </small>
     						</li>
     						<li>
-    							<img src="../resources/images/option_2ndlinsece.png"><p>
+    							<img src="${pageContext.request.contextPath}/resources/images/option/option_bluetooth.png"><p>
     							<small> 블루투스 </small>
     						</li>
     					</ul>
@@ -213,7 +207,7 @@
 								</td>
 							</tr>
 						</table>
-						<p id="check"><img src="../resources/images/check-img.png" class="check-img">Check
+						<p id="check"><img src="${pageContext.request.contextPath}/resources/images/check-img.png" class="check-img">Check
 						<ul class="check-list">
 							<li>모든 자차보험은 사고 1건에 대해서만 적용됩니다.</li>
 							<li>대형,수입 등 특이차종의 경우 일반면책만 가입가능</li>
