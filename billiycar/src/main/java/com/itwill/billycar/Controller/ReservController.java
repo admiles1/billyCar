@@ -34,9 +34,12 @@ public class ReservController {
 		// 페이징처리
 		// 받아온 조건들을 Map으로 관리 후 Model로 다시 넘겨주기
 		
-		// 1. 예약 날짜와 반납 날짜
+		// 1. 예약 일정
 		model.addAttribute("pickupDate", map.get("pickupDate"));
 		model.addAttribute("returnDate", map.get("returnDate"));
+		model.addAttribute("pickupTime", map.get("pickupDate"));
+		model.addAttribute("returnTime", map.get("returnDate"));
+		
 		// 2. 예약 지점과 반납 지점
 	    // 3. 예약 자동차의 타입 (List객체로 받아옴(임시)
 		System.out.println(carType);

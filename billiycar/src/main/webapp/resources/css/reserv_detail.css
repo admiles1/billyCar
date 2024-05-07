@@ -22,10 +22,7 @@
 	text-align : left;
 }
 
-.qua {
-	font-weight : 800;
-	color : #006AFF;
-}
+.qua {font-weight : 800; color : #006AFF;}
 
 .rental-criteria-list {
 	list-style : none;
@@ -77,7 +74,8 @@
 }
 
 .car-info-list li {
-	width : 25%;
+	width : 20%;
+	height : 150px;
 	text-align : left;
 }
 
@@ -120,12 +118,9 @@
 	font-weight: bold;
 }
 .car-insurance-table {margin : 20px;}
-
 .car-insurance-table tr, .car-insurance-table tr td {border : 1px solid black;}
 .car-insurance-table tr th {padding : 10px;}
-.check-list li {
-	text-align : left;
-}
+.check-list li {text-align : left;}
 
 #check {
 	text-align : left;
