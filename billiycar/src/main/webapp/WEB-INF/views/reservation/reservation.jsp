@@ -39,6 +39,40 @@
 					    				<c:if test="${not empty pickupDate}"> value="${pickupDate}"</c:if>>
 					    			<input type="text" class="form-control datetext" placeholder="반납 날짜 선택" readonly name="returnDate"
 					    				<c:if test="${not empty returnDate}"> value="${returnDate}"</c:if>>
+					    				<select name="pickupTime">
+											<option value="06">오전 06:00</option>
+											<option value="07">오전 07:00</option>
+											<option value="08">오전 08:00</option>
+										    <option value="09">오전 09:00</option>
+										    <option value="10">오전 10:00</option>
+										    <option value="11">오전 11:00</option>
+										    <option value="12">오후 12:00</option>
+										    <option value="13">오후 13:00</option>
+										    <option value="14">오후 14:00</option>
+										    <option value="15">오후 15:00</option>
+										    <option value="16">오후 16:00</option>
+										    <option value="17">오후 17:00</option>
+										    <option value="18">오후 18:00</option>
+										    <option value="19">오후 19:00</option>
+										    <option value="20">오후 20:00</option>
+										</select>
+					    				<select name="returnTime">
+											<option value="06">오전 06:00</option>
+											<option value="07">오전 07:00</option>
+											<option value="08">오전 08:00</option>
+										    <option value="09">오전 09:00</option>
+										    <option value="10">오전 10:00</option>
+										    <option value="11">오전 11:00</option>
+										    <option value="12">오후 12:00</option>
+										    <option value="13">오후 13:00</option>
+										    <option value="14">오후 14:00</option>
+										    <option value="15">오후 15:00</option>
+										    <option value="16">오후 16:00</option>
+										    <option value="17">오후 17:00</option>
+										    <option value="18">오후 18:00</option>
+										    <option value="19">오후 19:00</option>
+										    <option value="20">오후 20:00</option>
+										</select>
 					    		</div>
 					    	</div>
 					    </div>
