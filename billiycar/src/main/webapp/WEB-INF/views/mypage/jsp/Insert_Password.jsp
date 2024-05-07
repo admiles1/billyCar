@@ -69,15 +69,13 @@
 	<hr>
     <p>회원정보 수정을 위해 비밀번호를 입력해주세요<p>
     <div class="passwd-check">
-    	<input type="password" id="password" placeholder="비밀번호를 입력하세요">
-    	<button onclick="checkPassword()">다음</button>	
+    	<input type="password" id="password" placeholder="비밀번호를 입력해주세요">
+    	<button type="submit">다음</button>	
 	</div>
 </form>
 
 <script>
-    function checkPassword() {
-        // 비밀번호 확인 로직 추가 필요
-    }
+
 </script>
 
 </body>

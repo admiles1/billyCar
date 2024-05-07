@@ -14,8 +14,17 @@ public class MypageService {
 	
 	public MemberVO getMemberInfo(String memberId) {
         // 회원 아이디를 이용하여 회원 정보를 가져오는 로직
-        return mapper.selectMemberByMemberId(memberId);
+        return mapper.selectMemberInfo(memberId);
     }
+
+	public MemberVO getMemberPasswd(String memberId) {
+		return mapper.selectMemberPasswd(memberId);
+	}
+
+
+	
+
+	
 
 	
 	

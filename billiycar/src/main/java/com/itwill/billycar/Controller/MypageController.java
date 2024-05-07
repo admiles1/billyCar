@@ -27,11 +27,20 @@ public class MypageController {
 	@GetMapping("mypage")
 	public String mypage(HttpSession session, Model model) {
 	    // 세션에서 회원 아이디 가져오기
-	    String memberId = (String) session.getAttribute("member_id");
+		String memberId = (String) session.getAttribute("member_id");
 	    // 가져온 회원 아이디를 모델에 추가
-	    model.addAttribute("memberId", memberId);
+	    MemberVO memberPasswd = service.getMemberPasswd(memberId);
+	    if(memberPasswd == null) {
+	    	model.addAttribute("msg", "비밀번호를 다시 확인해주세요");
+	    	return "err/fail";
+	    } else {
+	    	model.addAttribute("memberPasswd", memberPasswd);
+	    	return "mypage/page/Mypage_Insert_Password";
+	    }
+//	    System.out.println(memberPasswd);
+	    
+	    
 	    // 이후 원하는 페이지로 이동
-	    return "mypage/page/Mypage_Insert_Password";
 	}
 	
 	

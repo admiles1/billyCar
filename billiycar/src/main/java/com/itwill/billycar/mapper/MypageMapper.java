@@ -4,9 +4,15 @@ import com.itwill.billycar.vo.MemberVO;
 
 public interface MypageMapper {
 
-//	MemberVO selectMember(MemberVO member);
+	
+	
+	MemberVO selectMemberInfo(String memberId);
 
-	MemberVO selectMemberByMemberId(String memberId);
+	MemberVO selectMemberPasswd(String memberId);
+
+
+	
+
 
 	
 }

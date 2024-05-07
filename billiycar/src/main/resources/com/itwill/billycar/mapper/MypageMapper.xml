@@ -12,11 +12,18 @@
 <!-- </mapper> -->
 
 <mapper namespace="com.itwill.billycar.mapper.MypageMapper">
-    <select id="selectMemberByMemberId" parameterType="String" resultType="com.itwill.billycar.vo.MemberVO">
+    
+    
+    <select id="selectMemberInfo" parameterType="String" resultType="com.itwill.billycar.vo.MemberVO">
         SELECT *
         FROM member
         WHERE member_id = #{memberId}
     </select>
     
+    <select id="selectMemberPasswd" parameterType="String" resultType="com.itwill.billycar.vo.MemberVO">
+        SELECT member_passwd
+        FROM member
+        WHERE member_id = #{memberId}
+    </select>
     
 </mapper>
