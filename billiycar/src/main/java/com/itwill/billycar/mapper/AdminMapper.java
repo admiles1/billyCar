@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.itwill.billycar.vo.AdminVO;
+import com.itwill.billycar.vo.CarVO;
 import com.itwill.billycar.vo.MemberVO;
 
 @Mapper
@@ -19,5 +20,7 @@ public interface AdminMapper {
 			@Param("listLimit") int listLimit);
 
 	int getMemberCount();
+
+	int insertCar(CarVO car);
 
 }

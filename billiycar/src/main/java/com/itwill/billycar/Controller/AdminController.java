@@ -13,11 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.billycar.service.AdminService;
 import com.itwill.billycar.vo.AdminVO;
+import com.itwill.billycar.vo.CarVO;
 import com.itwill.billycar.vo.MemberVO;
 import com.itwill.billycar.vo.PageInfo;
 
 @Controller
-public class adminController {
+public class AdminController {
 	@Autowired
 	private AdminService service;
 	
@@ -121,6 +122,16 @@ public class adminController {
 		
 		return "admin/admin_car_registration";
 	}
+	
+	// 차량 등록
+	@PostMapping("carUpload")
+	public String carUpload(CarVO car) {
+//		System.out.println(car); // 차량정보
+		int insertCount = service.carUpload(car);
+		
+		return "";
+	}
+	
 	
 	@GetMapping("admin_car_reservation")
 	public String admin_car_reservation() {

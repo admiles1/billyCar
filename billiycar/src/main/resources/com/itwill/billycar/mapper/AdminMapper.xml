@@ -28,6 +28,28 @@
 	<select id="getMemberCount" resultType="int">
 		select count(*) from member LIMIT 1; 
 	</select>
+	
+	<insert id="insertCar">
+		INSERT INTO car
+		VALUES (
+			null
+			, #{car_number}
+			, #{car_model}
+			, #{car_maker}
+			, #{car_fuel}
+			, #{car_them}
+			, #{car_img}
+			, #{car_year}
+			, #{car_img}
+			, #{car_img}
+			, now()
+			, DEFAULT
+			, #{inviter}
+			, DEFAULT
+		)
+		
+	
+	</insert>
 </mapper>
 
 

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.itwill.billycar.mapper.AdminMapper;
 import com.itwill.billycar.vo.AdminVO;
+import com.itwill.billycar.vo.CarVO;
 import com.itwill.billycar.vo.MemberVO;
 
 @Service
@@ -34,6 +35,11 @@ public class AdminService {
 		listCount = mapper.getMemberCount();
 		System.out.println("listCount : " + listCount);
 		return listCount;
+	}
+
+	public int carUpload(CarVO car) {
+		
+		return mapper.insertCar(car);
 	}
 
 }
