@@ -1,14 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>결제페이지</title>
 <!-- <link rel="stylesheet" href="css/paymentPage.css"> -->
  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> -->
+ <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+ <script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
  <style type="text/css">
  	.subject{
 	font: bold;
@@ -44,6 +47,11 @@
 		border-right: 0;	
 	}
 	
+	.testBtn {
+		width: 150px;
+		height: 80px;
+		 
+	}
      
  </style>
 </head>
@@ -651,11 +659,60 @@
 				<br>
 			</div>			
 			<div align="center">
-				<button class="sub_btn w-50 btn btn-primary btn-lg" type="submit" >결제하기</button>
-			</div>
+<!-- 				<button class="sub_btn w-50 btn btn-primary btn-lg" type="submit" >결제하기</button> -->
+				<input class="sub_btn w-50 btn btn-primary btn-lg" type="submit" >결제하기
+<!-- 				<button  class="testBtn" >테스트용 버튼</button> -->
+<!-- 				 <button id="pay-button">결제하기</button> -->
+				 <button type="button" onclick="startPayment();">결제하기</button>
+
+    <!-- 아임포트 스크립트 -->
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
+    <script>
+        const IMP = window.IMP; // 아임포트 라이브러리 추출
+        IMP.init('imp47235683'); // 가맹점 식별 코드
+
+        function startPayment() {
+            IMP.request_pay({
+                pg: 'html5_inicis', // 결제 과정에 사용될 결제사
+                pay_method: 'card', // 결제 수단
+                merchant_uid: 'merchant_' + new Date().getTime(), // 주문번호
+                name: '렌트카 예약', // 주문 명
+                amount: 100, // 금액
+                buyer_email: 'customer@example.com', // 구매자 이메일
+                buyer_name: '홍길동', // 구매자 이름
+                buyer_tel: '010-1234-5678', // 구매자 전화번호
+                buyer_addr: '서울특별시 강남구 삼성동', // 구매자 주소
+                buyer_postcode: '123-456', // 구매자 우편번호
+                m_redirect_url: 'https://www.yoursite.com/payments/complete' // 모바일 결제시 리다이렉션될 URL
+            }, function(rsp) {
+                if (rsp.success) {
+                    alert('결제 성공');
+                } else {
+                    alert('결제 실패');
+                }
+            });
+        }
+    </script>
+				
+				
+				
+			    <!-- 아임포트 스크립트 추가 -->
+			    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
+			
+			    <!-- 결제 스크립트 -->
+			    <script src="payment.js"></script>
+				<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+				<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<!-- 				<script src="https://cdn.iamport.kr/vl/iamport.js"></script> -->
+<!-- 				<script src="./paymentButton.jsp"></script> -->
+<!-- 			</div> -->
 		</div>
 	</div>
-	
+	<!-- 결제버튼 관련 js -->
+<!-- 	<script src="https://cdn.iamport.kr/vl/iamport.js"></script> -->
+<!-- 	<script src="./paymentButton.js"></script> -->
+<!-- 	<script src="payment/paymentButton.js"></script> -->
+	<!-- 부트스트랩 -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <!-- 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
 <!-- 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script> -->
