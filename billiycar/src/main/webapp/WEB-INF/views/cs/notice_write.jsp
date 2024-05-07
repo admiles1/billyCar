@@ -40,7 +40,7 @@
   			
   			<div class = "view_info">
 				<em><b>작성자</b></em>
-				<em>${sessionScope.member_id}</em>
+				<em>${sessionScope.memberid}</em>
   			</div>
   			
 <!--   			<div class = "view_cont"> -->
@@ -62,7 +62,7 @@
 		          ['color', ['color']],
 		          ['para', ['ul', 'ol', 'paragraph']],
 		          ['table', ['table']],
-		          ['insert', ['link', 'picture', 'video']],
+// 		          ['insert', ['link', 'picture', 'video']],
 		          ['view', ['fullscreen', 'codeview', 'help']]
 		        ]
 		      });

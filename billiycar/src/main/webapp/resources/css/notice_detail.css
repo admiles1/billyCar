@@ -78,3 +78,12 @@
 	color : white;
 	text-decoration: none;
 }
+
+.btn-view input {
+	padding : 12px;
+	border-radius : 10px;
+	background-color : #275efe;
+	border : none;
+	color : white;
+	text-decoration: none;
+}

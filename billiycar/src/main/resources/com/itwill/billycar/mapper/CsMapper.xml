@@ -46,4 +46,46 @@
 		SET board_subject=#{board_subject}, board_content=#{board_content} 
 		WHERE board_idx=#{board_idx}
 	</update>
+	
+	<select id="selectAdminPasswd" resultType="String">
+		SELECT admin_passwd
+		FROM admin
+	</select>
+	
+	<delete id="deleteNotice">
+		DELETE FROM notice 
+		WHERE board_idx = #{notice_idx}
+	</delete>
+	
+	<!-- ==================================================================  -->
+	<!-- ** [큐엔에이] ** -->
+	<select id="selectQnaList" resultType="com.itwill.billycar.vo.QnaVO">
+		SELECT *
+		FROM qna
+		WHERE qna_writer = #{id}
+		ORDER BY qna_idx DESC
+		LIMIT #{startRow}, #{listLimit}
+	</select>
+	
+	<insert id="insertQna">
+		<selectKey keyProperty="qna_idx" resultType="int" order="BEFORE">
+			SELECT IFNULL(MAX(qna_idx), 0)  
+			FROM qna
+		</selectKey>
+	
+		INSERT INTO qna
+		VALUES (
+		   #{qna_idx} + 1
+		  ,#{qna_writer}
+		  ,#{qna_subject}
+		  ,#{qna_content}
+		  ,#{qna_file}
+		  ,now()
+		  ,'admin'
+		  , null
+		  , 0 -- 미답변
+		  , #{qna_category}
+		)
+		
+	</insert>
 </mapper>

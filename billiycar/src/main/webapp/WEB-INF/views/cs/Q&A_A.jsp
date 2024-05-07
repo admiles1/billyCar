@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>     
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,27 +42,50 @@
  
  		<div class = "cs_write">
  			<div class = "cus_info">
- 				이메일 <input type = "text" >
+ 				작성자 <input type = "text" value="${qna.qna_writer}" name="qna_writer" readonly="readonly">
  				문의 주제 
- 				<select id="" name="">
- 					<option value = ""> 문의 주제 </option>
- 					<option value = ""> 예약 변경 및 취소 </option>
- 					<option value = ""> 운전자 </option>
+ 				<select name="qna_category" id="qna_category" style = "margin-left : 15px">
+ 					<option value =""> 문의 주제 </option>
+ 					<option value ="reservation"> 예약 </option>
+ 					<option value ="function"> 부름 </option>
+ 					<option value ="fee"> 가격 </option>
+ 					<option value ="return"> 반납 </option>
+ 					<option value ="etc"> 기타 </option>
  				</select>
  			</div>
  			
  			<div class = "title_wr">
- 				제목 <input type = "text" placeholder="제목을 입력하세요">
+ 				제목 <input type = "text" value="${qna.qna_subject}" style = "margin-left : 15px" name ="qna_subject" readonly="readonly">
  			</div>
  			
  			<div class = "content_wr">
- 				질문 <textarea placeholder="내용을 입력하세요" style = "resize : none"></textarea>
- 				<input type = "file" name = "" id = ""> 
+ 				질문 <textarea style = "resize : none" readonly="readonly">${qna.qna_content}</textarea>
+ 				
+ 				<div style="margin-left:50px;">
+	 				파일
+	 				<c:if test="${not empty qna.qna_file}">
+						<div>
+							<c:set var="original_fileName" value="${fn:substringAfter(qna.qna_file, '_')}"/>
+							${original_fileName}
+							<%-- 다운로드 --%>
+							<%-- 다운로드 속성값에 파일명 지정 시 그 이름으로 다운됨 --%>
+							<a href="${pageContext.request.contextPath}/resources/upload/${qna.qna_file}" download="${original_fileName}">
+								<input type="button" value="다운로드">
+							</a>
+						</div>
+					</c:if>
+				</div>
  			</div>
- 			<div class = "content_wr">
+ 			
+ 			
+ 			<div class = "content_wr" style="margin-top:30px;">
  				<span class="material-symbols-outlined">
 					subdirectory_arrow_right
+					
+					
+				<%-- 답변 --%>
 				</span> 답변 <textarea placeholder="내용을 입력하세요" style = "resize : none"></textarea>
+				
 			</div>
  		</div>
  	 		<div class = "btn_wr"><a href = "qna" > 돌아가기 </a></div>

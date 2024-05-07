@@ -35,8 +35,13 @@
   		
   		<form action="noticeModify" method= "post">
   		<div class = "detail_view">
+  		
+  			<!-- 파라미터 전달 -->
+  			<input type="hidden" name="notice_idx" value="${param.notice_idx}">
+  			<input type="hidden" name="pageNum" value="${param.pageNum}">
+  			
   			<div class ="view_tit">
-  				<h3> <input type = "text" placeholder="${notice.board_subject}" name ="board_subject" style = "width : 400px"> </h3>
+  				<h3> <input type = "text" value="${notice.board_subject}" name ="board_subject" style = "width : 400px"> </h3>
   			</div>
   			
   			<div class = "view_info">
@@ -57,7 +62,7 @@
 			          ['color', ['color']],
 			          ['para', ['ul', 'ol', 'paragraph']],
 			          ['table', ['table']],
-			          ['insert', ['link', 'picture', 'video']],
+// 			          ['insert', ['link', 'picture', 'video']],
 			          ['view', ['fullscreen', 'codeview', 'help']]
 			        ]
 			      });

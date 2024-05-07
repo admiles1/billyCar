@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>     
 <!doctype html>
 <html lang="ko">
 <meta charset="UTF-8">
@@ -38,7 +40,11 @@
 	 	<input type = "button" value = "문의하기" onclick = "location.href ='qna_q'">
 	 </div>
   	
-  	<!-- 검색창 -->
+  	<!-- pageNum 변수 선언 -->
+	<c:set var = "pageNum" value = "1"/>
+			<c:if test="${not empty param.pageNum}">
+				<c:set var = "pageNum" value = "${param.pageNum}"/>
+			</c:if>
 	 
 	 <!-- 게시글 -->
 	<div class = "board">
@@ -53,64 +59,55 @@
 			</tr>
 		</thead>
 		<tbody class="table-hover">
-			<tr>
-				<td class="text-left">1</td>
-				<td class="text-left"><a href = "qnaAnswerDetail">제목1</a></td>
-				<td class="text-left">홍길동</td>
-				<td class="text-left">24-12-23</td>
-				<td class="text-left">답변 완료</td>
-			</tr>
-			<tr>
-				<td class="text-left">February</td>
-				<td class="text-left">February</td>
-				<td class="text-left">February</td>
-				<td class="text-left">24-12-23</td>
-				<td class="text-left">24-12-23</td>
-			</tr>
-			<tr>
-				<td class="text-left">March</td>
-				<td class="text-left">March</td>
-				<td class="text-left">March</td>
-				<td class="text-left">24-12-23</td>
-				<td class="text-left">24-12-23</td>
-			</tr>
-			<tr>
-				<td class="text-left">April</td>
-				<td class="text-left">April</td>
-				<td class="text-left">April</td>
-				<td class="text-left">$ 56,000.00</td>
-				<td class="text-left">$ 56,000.00</td>
-			</tr>
-			<tr>
-				<td class="text-left">May</td>
-				<td class="text-left">May</td>
-				<td class="text-left">May</td>
-				<td class="text-left">$ 98,000.00</td>
-				<td class="text-left">$ 98,000.00</td>
-			</tr>
+		
+		<c:choose>
+			<%-- 문의 내역이 존재하지 않을 경우 --%>
+			<c:when test="${empty qnaList}">
+				<tr>
+					<td colspan = "5"> 문의내역이 존재하지 않습니다 </td>
+				</tr>
+			</c:when>
+			
+			
+			<%-- 문의 내역이 존재할 경우 --%>
+			<c:otherwise>
+				<c:forEach var="qna" items="${qnaList}">
+					<tr>
+						<td class="text-left">${qna.qna_idx}</td>
+						<td class="text-left"><a href = "qnaAnswerDetail?qna_idx=${qna.qna_idx}&pageNum=${pageNum}">${qna.qna_subject}</a></td>
+						<td class="text-left">${qna.qna_category}</td>
+						<td class="text-left"><fmt:formatDate value="${qna.qna_date}" pattern = "yy-MM-dd HH:mm"/></td>
+						<td class="text-left">${qna.qna_status}</td>
+					</tr>
+				</c:forEach>
+				
+				
+			</c:otherwise>
+		</c:choose>
+		
 		</tbody>
 	</table>
 	
-	<!-- 페이징 -->
-	<nav aria-label="Page navigation example">
-		<div class = "paging">
-	  		<ul class="pagination">
-	    		<li class="page-item">
-	      			<a class="page-link" href="#" aria-label="Previous">
-	        			<span aria-hidden="true">&laquo;</span>
-	     			 </a>
-	   			 </li>
-			    <li class="page-item"><a class="page-link" href="#">1</a></li>
-			    <li class="page-item"><a class="page-link" href="#">2</a></li>
-			    <li class="page-item"><a class="page-link" href="#">3</a></li>
-			    <li class="page-item">
-			     	 <a class="page-link" href="#" aria-label="Next">
-			        	<span aria-hidden="true">&raquo;</span>
-			     	 </a>
-	    		</li>
-	  		</ul>
-  		</div>
-	</nav>
+				<!-- 페이징 -->
+				<nav aria-label="Page navigation example">
+					<div class = "paging">
+				  		<ul class="pagination">
+				    		<li class="page-item">
+				      			<a class="page-link" href="#" aria-label="Previous">
+				        			<span aria-hidden="true">&laquo;</span>
+				     			 </a>
+				   			 </li>
+						    <li class="page-item"><a class="page-link" href="#">1</a></li>
+						    <li class="page-item"><a class="page-link" href="#">2</a></li>
+						    <li class="page-item"><a class="page-link" href="#">3</a></li>
+						    <li class="page-item">
+						     	 <a class="page-link" href="#" aria-label="Next">
+						        	<span aria-hidden="true">&raquo;</span>
+						     	 </a>
+				    		</li>
+				  		</ul>
+			  		</div>
+				</nav>
 	</div>
 	
 </div> <!-- arti -->

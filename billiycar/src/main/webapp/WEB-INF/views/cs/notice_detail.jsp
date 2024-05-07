@@ -45,12 +45,21 @@
   		</div>
   		
   		<div class = "btn-view">
-  			<a href = "noticeModify?notice_idx=${notice.board_idx}&pageNum=${pageNum}">수정</a>
-  			<a href = "noticeDelete">삭제</a>
+  			<a href = "noticeModify?notice_idx=${notice.board_idx}&pageNum=${param.pageNum}">수정</a>
+  			<input type = "button" value="삭제" onclick="confirmDelete()" />
   			<a href = "notice">목록</a>
   		</div>
   		
   	</div>
+  	
+  	<script type="text/javascript">
+		function confirmDelete() {
+			if(confirm("게시물을 삭제하시겠습니까?")) {
+				location.href = "noticeDelete?notice_idx=${notice.board_idx}&pageNum=${param.pageNum}";
+			}
+		}
+	</script>
+  	
   	
   	<footer>
 		<jsp:include page="../inc/bottom.jsp"/>

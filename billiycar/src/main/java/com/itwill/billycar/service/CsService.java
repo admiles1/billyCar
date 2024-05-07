@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.itwill.billycar.mapper.CsMapper;
 import com.itwill.billycar.vo.NoticeVO;
+import com.itwill.billycar.vo.QnaVO;
 
 @Service
 public class CsService {
@@ -38,4 +40,27 @@ public class CsService {
 	public NoticeVO modifyInfo(int notice_idx) {
 		return mapper.selectModifyInfo(notice_idx);
 	}
+	
+	// 공지사항 삭제를 위한 관리자 비밀번호 확인
+	public String isAdmin() {
+		return mapper.selectAdminPasswd();
+	}
+
+	// 공지사항 삭제하기
+	public int deleteNotice(int notice_idx) {
+		return mapper.deleteNotice(notice_idx);
+	}
+	
+	// ------------------------------------------------------------------------------------------------
+	// ** [QnA] **
+	// 큐엔에이 목록 불러오기
+	public List<QnaVO> getQnaList(int startRow, int listLimit, String id) {
+		return mapper.selectQnaList(startRow, listLimit, id);
+	}
+
+	// 큐엔에이 글작성
+	public int writeQna(QnaVO qna) {
+		return mapper.insertQna(qna);
+	}
+
 }
