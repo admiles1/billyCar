@@ -24,6 +24,7 @@
 	
 	<!-- 화살표 이미지 -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+	
 </head>
 <body>
 	
@@ -44,12 +45,12 @@
  			<div class = "cus_info">
  				작성자 <input type = "text" value="${qna.qna_writer}" name="qna_writer" readonly="readonly">
  				문의 주제 
- 				<select name="qna_category" id="qna_category" style = "margin-left : 15px">
+ 				<select name="qna_category" id="qna_category" style = "margin-left : 15px" disabled="disabled">
  					<option value =""> 문의 주제 </option>
- 					<option value ="reservation"> 예약 </option>
- 					<option value ="function"> 부름 </option>
- 					<option value ="fee"> 가격 </option>
- 					<option value ="return"> 반납 </option>
+ 					<option value ="reservation" <c:if test="${qna.qna_category eq 'reservation'}">selected</c:if>> 예약 </option>
+ 					<option value ="function" <c:if test="${qna.qna_category eq 'function'}">selected</c:if>> 부름 </option>
+ 					<option value ="price" <c:if test="${qna.qna_category eq 'price'}">selected</c:if>> 가격 </option>
+ 					<option value ="return" <c:if test="${qna.qna_category eq 'return'}">selected</c:if>> 반납 </option>
  					<option value ="etc"> 기타 </option>
  				</select>
  			</div>
@@ -83,7 +84,7 @@
 				
 				
 				
-				<%-- 답변 상태에 따라 --%>
+				<%-- 답변 상태에 따라 답변 보여주기 --%>
 				<c:choose>
 					<c:when test="${qna.qna_status eq 1}"> <%-- 답변 완료 --%>
 						 답변 <textarea readonly="readonly" style = "resize : none">${qna.admin_content}</textarea>

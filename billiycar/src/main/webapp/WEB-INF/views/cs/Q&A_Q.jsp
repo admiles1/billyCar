@@ -122,7 +122,7 @@
 		 					<option value =""> 문의 주제 </option>
 		 					<option value ="reservation"> 예약 </option>
 		 					<option value ="function"> 부름 </option>
-		 					<option value ="fee"> 가격 </option>
+		 					<option value ="price"> 가격 </option>
 		 					<option value ="return"> 반납 </option>
 		 					<option value ="etc"> 기타 </option>
 		 				</select>

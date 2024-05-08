@@ -51,10 +51,10 @@
   	<table class="table-fill">
 		<thead>
 			<tr>
-				<th class="text-left" width = "10px">글 번호</th>
+<!-- 				<th class="text-left" width = "10px">글 번호</th> -->
 				<th class="text-left" width = "200px">제목</th>
-				<th class="text-left" width = "70px">질문 유형</th>
-				<th class="text-left" width = "50px">작성일</th>
+				<th class="text-left" width = "40px">질문 유형</th>
+				<th class="text-left" width = "70px">작성일</th>
 				<th class="text-left" width = "30px">답변 상태</th>
 			</tr>
 		</thead>
@@ -73,11 +73,37 @@
 			<c:otherwise>
 				<c:forEach var="qna" items="${qnaList}">
 					<tr>
-						<td class="text-left">${qna.qna_idx}</td>
+						<%-- 답변 번호 --%>
+<%-- 						<td class="text-left">${qna.qna_idx}</td> --%>
+
+						<%-- 제목 --%>
 						<td class="text-left"><a href = "qnaAnswerDetail?qna_idx=${qna.qna_idx}&pageNum=${pageNum}">${qna.qna_subject}</a></td>
-						<td class="text-left">${qna.qna_category}</td>
-						<td class="text-left"><fmt:formatDate value="${qna.qna_date}" pattern = "yy-MM-dd HH:mm"/></td>
-						<td class="text-left">${qna.qna_status}</td>
+						
+						<%-- 카테고리 --%>
+						<td class="text-left">
+							<c:choose>
+								<c:when test="${qna.qna_category eq 'reservation'}"> 예약 문의 </c:when>
+								<c:when test="${qna.qna_category eq 'function'}">부름 문의</c:when>
+								<c:when test="${qna.qna_category eq 'price'}">가격 문의</c:when>
+								<c:when test="${qna.qna_category eq 'return'}">반납 문의</c:when>
+								<c:otherwise>기타</c:otherwise>
+							</c:choose>	
+						</td>
+
+						<%-- 시간 --%>
+						<td class="text-left"><fmt:formatDate value="${qna.qna_date}" pattern = "yy-MM-dd HH시 mm분"/></td>
+						
+						<td class="text-left"> 
+							<%-- 답변상태 --%>
+							<c:choose>
+								<c:when test="${qna.qna_status eq 0}">
+									답변 대기
+								</c:when>
+								<c:otherwise>
+									답변 완료
+								</c:otherwise>
+							</c:choose>
+						</td>
 					</tr>
 				</c:forEach>
 				

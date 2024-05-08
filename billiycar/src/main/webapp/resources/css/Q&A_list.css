@@ -100,7 +100,10 @@ th {
   border-right: 1px solid white;
   font-size:18px;
   font-weight:300;
-  padding:24px;
+  padding:20px;
+  
+  
+  
   text-align:center;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
   vertical-align:middle;
