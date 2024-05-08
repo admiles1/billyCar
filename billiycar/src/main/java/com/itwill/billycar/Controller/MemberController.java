@@ -143,7 +143,7 @@ public class MemberController {
 		model.addAttribute("msg", "아이디 또는 비밀번호를 잘못 입력했습니다.\\n입력하신 내용을 다시 확인해주세요.");
 		return "err/fail";
 	}
-	
+
 	@GetMapping("logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
@@ -155,9 +155,22 @@ public class MemberController {
 		return "login/forgot_id";
 	}
 	
-	@GetMapping("go_join")
-	public String go_join() {
-		return "join/join_form";
+	@PostMapping("forgot_id")
+	public String forgot_idPro(MemberVO member, Model model) {
+		
+		member = service.forgotId(member);
+		
+		if(member != null) {
+			
+			String id = member.getMember_id().substring(0,4) + "****";
+			
+			model.addAttribute("member_id",  id);
+			return "login/show_id";
+		} else {
+			model.addAttribute("msg", "이름 또는 E-Mail 주소를 잘못 입력했습니다.");
+			return "err/fail";
+		}
+		
 	}
 	
 	@GetMapping("show_id")
@@ -185,4 +198,8 @@ public class MemberController {
 		return "redirect:/./";
 	}
 	
+	@GetMapping("go_join")
+	public String go_join() {
+		return "join/join_form";
+	}
 }

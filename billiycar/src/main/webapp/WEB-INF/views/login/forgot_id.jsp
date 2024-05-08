@@ -10,6 +10,7 @@
 </head>
 <header><jsp:include page="../inc/top.jsp"></jsp:include></header>
 <body>
+<form action="forgot_id" method="post">
     <div class="container">
         <div class="button">
             <a href="forgot_id" class="forgot_id">아이디 찾기</a> |
@@ -20,7 +21,7 @@
         <br>
         <br>
         <div class="tel">
-            <input type="text" placeholder="이름" class="name">
+            <input type="text" placeholder="이름" class="name" id="member_name">
             <br>
             <select class="telecom">
                 <option>통신사</option>
@@ -40,19 +41,20 @@
             </div>
         </div>
         <hr>
-        <label>본인확인 이메일로 인증</label>
+        <label>본인확인 이메일로 인증 (아이디 일부분만 확인가능)</label>
         <div class="email">
             <br>
-            <input type="text" placeholder="이름" class="name"/>
+            <input type="text" placeholder="이름" class="name" id="member_name" name="member_name"/>
             <br>
-            <input type="email" placeholder="Email" class="email_ad"/>
-             <input type="button" class="check_btn" value="인증하기" >
+            <input type="email" placeholder="Email" class="email_ad" id="member_email" name="member_email"/>
+<!--              <input type="button" class="check_btn" value="인증하기" > -->
             <br>
         </div>
         <div class="next">
-        <input type="button" value="다음" onclick="location.href='show_id'">
+        <input type="submit" value="다음" >
         </div>
     </div>
+</form>
     <footer><jsp:include page="../inc/bottom.jsp"></jsp:include></footer>
 </body>
 </html>

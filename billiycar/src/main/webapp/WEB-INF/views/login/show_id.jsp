@@ -13,13 +13,12 @@
     <div class="container">
         <div class="button">
             <a>아이디 찾기</a>
-<!--             <a href="#">비밀번호 찾기</a> -->
         </div>
         <hr>
         
     	<fieldset>
         <div class="id_list">
-    	<h4>아이디</h4>
+    	<h4>${member_id}</h4>
     	</div>
     	</fieldset>
         <div class="next">

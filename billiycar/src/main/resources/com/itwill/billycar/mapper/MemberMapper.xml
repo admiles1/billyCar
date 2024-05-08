@@ -30,9 +30,9 @@
 		)
 	</insert>
 	
-	<select id="selectCorrectUser" resultType="boolean">
-		SELECT IF(COUNT(*) = 1, 1, 0) FROM member WHERE member_id = #{member_id} AND member_passwd = #{member_passwd}
-	</select>
+<!-- 	<select id="selectCorrectUser" resultType="boolean"> -->
+<!-- 		SELECT IF(COUNT(*) = 1, 1, 0) FROM member WHERE member_id = #{member_id} AND member_passwd = #{member_passwd} -->
+<!-- 	</select> -->
 	
 	<select id="selectMember" resultType="com.itwill.billycar.vo.MemberVO">
 			SELECT * FROM member WHERE member_id = #{member_id}
@@ -41,6 +41,11 @@
 	<select id="selectCheckID" resultType="boolean">
 		SELECT IF(COUNT(*) = 1, 1, 0) FROM member WHERE member_id = #{member_id}
 	</select>
+	
+	<select id="selectForgotId" resultType="com.itwill.billycar.vo.MemberVO">
+		SELECT * FROM member WHERE member_name = #{member_name} AND member_email = #{member_email}
+	</select>
+	
 </mapper>
 
 
