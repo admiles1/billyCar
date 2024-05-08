@@ -84,7 +84,7 @@
   background: white;
   border-radius:3px;
   border-collapse: collapse;
-  height: 320px;
+/*   height: 320px; */
   margin: 50px;
   max-width: 1000px;
   padding:5px;
@@ -155,7 +155,7 @@ tr:last-child td:last-child {
  
 td {
   background:#FFFFFF;
-  padding:15px;
+  padding:12px;
   text-align:center;
   vertical-align:middle;
   font-weight:300;

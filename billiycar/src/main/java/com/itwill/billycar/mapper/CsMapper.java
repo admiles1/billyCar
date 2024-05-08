@@ -24,5 +24,6 @@ public interface CsMapper {
 	// **  [QnA] **
 	List<QnaVO> selectQnaList(@Param(value = "startRow")int startRow, @Param(value = "listLimit") int listLimit, @Param(value = "id") String id); // 문의 내역 가져오기
 	int insertQna(QnaVO qna); // 큐엔에이 작성하기
+	QnaVO selectQnaDetail(QnaVO qna); // 작성한 큐엔에이 가져오기
 
 }
