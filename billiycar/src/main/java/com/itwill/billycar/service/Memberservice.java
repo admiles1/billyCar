@@ -25,4 +25,10 @@ public class Memberservice {
 		System.out.println(member_id);
 		return mapper.selectCheckID(member_id);
 	}
+
+
+	public MemberVO getMember(MemberVO member) {
+		
+		return mapper.selectMember(member);
+	}
 }

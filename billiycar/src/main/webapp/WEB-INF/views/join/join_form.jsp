@@ -155,7 +155,7 @@
 	<header><jsp:include page="../inc/top.jsp"></jsp:include></header>
 	<!--  메인 시작 -->
 	<article class="sign-up-container">
-		<form action="joinPro" class="box2_form" method="post" name="fr">
+		<form action="join" class="box2_form" method="post" name="fr">
 			<div class="title">
 				<b style="color: #00AAFF">Billycar</b>
 			</div>
