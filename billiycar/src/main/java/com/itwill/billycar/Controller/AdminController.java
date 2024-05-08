@@ -72,27 +72,20 @@ public class AdminController {
 		return "admin/admin_member";
 	}
 	
+	//회원 검색
 	@GetMapping("adminMemberSearch")
 	public String adminMemberSearch(@RequestParam(defaultValue = "") String searchType,
-			@RequestParam(defaultValue = "") String searchKeyword,
-			@RequestParam(defaultValue = "1") int pageNum,
-			Model model) {
+									@RequestParam(defaultValue = "") String searchKeyword,
+									@RequestParam(defaultValue = "1") int pageNum,
+									Model model) {
 		
-		System.out.println("controller(searchType) : " + searchType);
-		System.out.println("controller(searchkeyword) : " + searchKeyword);
-		System.out.println("pageNum : " + pageNum);
 		
 		int listLimit = 3;
 		int startRow = (pageNum - 1) * listLimit;
 		
-		
-		
 		List<MemberVO> member = service.adminMemberList(searchType,searchKeyword,startRow,listLimit);
-		System.out.println(member);
 		
 		int listCount = service.getMemberListCount(searchType,searchKeyword,startRow,listLimit);
-		System.out.println("listCount(controller) : " + listCount);
-		//페이지 번호 갯수를 3개로 지정
 		int pageListLimit = 3;
 		
 		//----------------------------------------------------------------
@@ -101,7 +94,6 @@ public class AdminController {
 		//----------------------------------------------------------------
 		//시작페이지 설정
 		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
-		System.out.println("시작 페이지 번호 : " + startPage);
 		//끝페이지 설정
 		int endPage = startPage + pageListLimit - 1;
 				
