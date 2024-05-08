@@ -8,6 +8,9 @@
 </head>
 <title>Main Area</title>
 <style>
+#signup form {
+    text-align: center; /* 폼 안의 요소들을 가운데 정렬 */
+}
 
 #signup {
 	margin-top: 30px;
@@ -18,6 +21,7 @@
 	width: 100%;	
 	height: 100%;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    align-items: center;
 }
 	
 h2 {
@@ -32,34 +36,20 @@ h2 {
 
 #signup ul li {
 	display: flex;
+	justify-content: center;
 	line-height: 30px; 
 	padding: 10px 50px; 
 	align-items: center;
-	margin-bottom: 10px;
+	margin-bottom: 15px;
 }
 
 #signup input[type="text"],
 #signup input[type="email"],
 #signup input[type="tel"] {
-    margin-right: 80px; /* 입력창과 버튼 사이의 간격 조정 */
+    margin-right: 60px; /* 입력창과 버튼 사이의 간격 조정 */
 	width: 350px;
 }
 			
-#signup button {	
-	border: none;
-	border-radius: 20px;
-	font-size: 16px;
-	letter-spacing: 1px;
-	padding: 7px 0;
-	width: 120px;
-	background-color: #00AAFF; /* 배경색 지정 */
-    color: white; /* 글자색 지정 */
-}
-
-#signup button:hover {
-	 background-color: #555;
-}
-
 #signup label {
 	font-size: 13px;  /* 글자 크기 - 13px */
 	width: 110px;  /* 너비 - 110px */
@@ -75,16 +65,33 @@ h2 {
 	padding: 15px;
 }
 
+#signup input[type="submit"] {
+    display: block; 
+    margin: 0 auto;
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    letter-spacing: 1px;
+    padding: 7px 20px;
+    background-color: #00AAFF;
+    color: white;
+}
+
+#signup input[type="submit"]:hover {
+	 background-color: #555;
+}
+
 #signup em {
 	font-size: 13px; /* 원하는 크기로 조절하세요 */
 	color: red; /* 빨간색으로 변경 */
 	letter-spacing: -1px;
 }   
-    
+
+
 </style>
 </head>
 <body>
-	<form id="signup">
+	<form id="signup" action="checkPasswd">
 		<fieldset>
 			<h2>회원정보 수정</h2>
 			<hr>
@@ -101,42 +108,44 @@ h2 {
 		      <ul>
 		      	<li>
 		          <label for="memberName">이름</label>
-		          <input id="memberName" name="name" type="text" value="${memberInfo.member_name}" readonly>
+		          <input id="memberName" name="name" type="text" value="${info.member_name}" readonly>
 		        </li>
 		      	<li>
 		          <label for="memberId">아이디</label>
-		          <input id="memberId" name="id" type="text" value="${memberInfo.member_id}" readonly>
+		          <input id="memberId" name="id" type="text" value="${info.member_id}" readonly>
 		        </li>
 		        <li>
 		          <label for="email">메일 주소</label>
-		          <input id="email" name="email" type="email" value="${memberInfo.member_email}" autocomplete="off">
+		          <input id="email" name="email" type="email" value="${info.member_email}" autocomplete="off">
 		        </li>
 		         <li>
 		          <label for="memberBirth">생년 월일</label>
-		          <input id="memberBirth" name="birth" type="text" value="${memberInfo.member_birth}" readonly>
+		          <input id="memberBirth" name="birth" type="text" value="${info.member_birth}" readonly>
 		        </li>
 		        <li>
 		          <label for="memberReDdate">가입일</label>
-		          <input id="memberRegDate" name="RegDate" type="text" value="${memberInfo.member_reg_date}" readonly>
+		          <input id="memberRegDate" name="RegDate" type="text" value="${info.member_reg_date}" readonly>
 		        </li>
 		        
 		        <li>
 		          <label for="tel">연락처</label>
-		          <input id="tel" name="tel" type="tel" value="${memberInfo.member_phone}" autocomplete="off">
+		          <input id="tel" name="tel" type="tel" value="${info.member_phone}" autocomplete="off">
 		        </li>  
 		      </ul>
+		      <input type="submit" value="회원정보 변경">
 		</fieldset>
 	</form>
-
-<script>
-    function changeEmail() {
-        // 이메일 변경 로직을 추가하세요
+<script type="text/javascript">	
+	
+  window.onload = function() {
+        // 회원 가입일 가져와서 자르기
+        let memberRegDate = "${info.member_reg_date}";
+        let slicedDate = memberRegDate.slice(0, 10); // 10글자까지 자름
+        
+        // 자른 날짜 설정
+        document.getElementById("memberRegDate").value = slicedDate;
     }
-    
-    function changePhoneNumber() {
-        // 전화번호 변경 로직을 추가하세요
-    }
-</script>
 
+  </script>
 </body>
 </html>
