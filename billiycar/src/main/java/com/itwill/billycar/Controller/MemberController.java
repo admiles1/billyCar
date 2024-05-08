@@ -34,13 +34,13 @@ public class MemberController {
 		return "join/join_form";
 	}
 	
-	// get매핑 join_form에서 중복확인을 위한 window.open 하기위한 매핑
+	// join_form에서 중복확인용 window.open을 하기위한 매핑
 	@GetMapping("check_id")
 	public String check_id() {
 		return "join/check_id";
 	}
 	
-	// 실제 유효성검사를 마친후 중복확인을 위해 DB작업을 하기 위한 매핑주소
+	// 실제 유효성검사를 마친후 중복확인 DB작업을 하기 위한 매핑주소
 	@PostMapping("check_id")
 	public String check_id_pro(String member_id, Model model, HttpServletResponse response) {
 		boolean isEmptyId = service.isEmptyId(member_id);
@@ -58,6 +58,32 @@ public class MemberController {
 		return "redirect:/check_id";
 		
 	}
+	
+	// join_form에서 추천인 확인용 window.open을 하기위한 매핑
+		@GetMapping("check_inviter")
+		public String check_inviter() {
+			return "join/check_inviter";
+		}
+	
+	// 추천인 아이디 검색
+	@PostMapping("check_inviter")
+	public String check_inviter(String member_inviter, Model model, HttpServletResponse response) {
+		boolean isEmptyId = service.isEmptyId(member_inviter);
+		if(isEmptyId) {
+			
+			model.addAttribute("member_inviter", member_inviter);
+			model.addAttribute("isValid", true);
+			
+		} else {
+			
+			model.addAttribute("member_inviter", member_inviter);
+			model.addAttribute("isValid", false);
+		}
+		
+		return "redirect:/check_inviter";
+		
+	}
+	
 	
 	@PostMapping("join")
 	public String joinPro(MemberVO member, Model model, BCryptPasswordEncoder passwordEncoder) {
