@@ -11,6 +11,7 @@
    #resv-confirm {
    		margin-top: 30px;
    	 	background:#fff;
+   	 	margin-right:30px;
 		border:1px solid #ccc;
 		border-radius: 8px;
 	    padding: 30px;
@@ -44,6 +45,13 @@
         text-align: center;
     }
 </style>
+<script type="text/javascript">
+	function showReview(){
+		let review_id = document.querySelector("#reviewShow");
+		review_id.style.display = 'table-cell';
+	}
+
+</script>
 </head>
 <body>
 
@@ -58,6 +66,7 @@
             <th>반납지역</th>
             <th>차량정보</th>
             <th>결제상세내역</th>
+            <th>리뷰</th>
         </tr>
         <tr>
             <td>2024-04-21</td>
@@ -66,6 +75,13 @@
             <td>부산 남구</td>
             <td>소형차, 자동 기어</td>
             <td>총 결제 금액: 200,000원</td>
+            <td><a onclick="showReview()" class="btn btn-sm btn-danger">리뷰쓰기</a></td>
+        </tr>
+        <tr>
+        	<td colspan="8" style="display: none;" id="reviewShow">
+        		리뷰란<br>
+        		<a onclick="showReview()" class="btn btn-sm btn-primary">작성완료</a>
+        	</td>
         </tr>
           <tr>
             <td>2024-05-01</td>
