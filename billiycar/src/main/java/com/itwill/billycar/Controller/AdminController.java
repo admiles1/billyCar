@@ -1,7 +1,16 @@
 package com.itwill.billycar.Controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.itwill.billycar.service.AdminService;
 import com.itwill.billycar.vo.AdminVO;
@@ -21,6 +31,9 @@ import com.itwill.billycar.vo.PageInfo;
 public class AdminController {
 	@Autowired
 	private AdminService service;
+	
+	@Autowired
+	private HttpSession session;
 	
 	
 	@GetMapping("adminForm")
@@ -125,11 +138,19 @@ public class AdminController {
 	
 	// 차량 등록
 	@PostMapping("carUpload")
-	public String carUpload(CarVO car) {
-//		System.out.println(car); // 차량정보
+	public String carUpload(CarVO car, HttpServletRequest request, Model model) {
+		System.out.println(car); // 차량정보
+
 		int insertCount = service.carUpload(car);
 		
-		return "";
+		if(insertCount > 0) {
+			
+			return "redirect:/admin_car_registration";
+		} else { // 실패 시
+			model.addAttribute("msg", "차량등록실패!");
+			return "error/fail";
+		}
+		
 	}
 	
 	

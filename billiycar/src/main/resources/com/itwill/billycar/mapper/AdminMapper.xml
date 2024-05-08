@@ -40,12 +40,10 @@
 			, #{car_them}
 			, #{car_img}
 			, #{car_year}
-			, #{car_img}
-			, #{car_img}
+			, #{car_price}
+			, 0
+			, 0
 			, now()
-			, DEFAULT
-			, #{inviter}
-			, DEFAULT
 		)
 		
 	
