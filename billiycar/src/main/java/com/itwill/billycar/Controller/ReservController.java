@@ -3,19 +3,28 @@ package com.itwill.billycar.Controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.itwill.billycar.service.ReservService;
+import com.itwill.billycar.vo.CarVO;
+
 @Controller
 public class ReservController {
+	@Autowired  ReservService service;
+	
 	
 	// 조건검색하지않고 예약페이지 진입시 (모든 차량검색, 페이징처리)
 	@GetMapping("reservation")
-	public String reservationget() {
-		
+	public String reservationget(Model model) {
+		List<CarVO> cars = service.selectCarList();
+		model.addAttribute("cars", cars);
 		return "reservation/reservation";
 	}
 	
@@ -42,16 +51,14 @@ public class ReservController {
 		
 		// 2. 예약 지점과 반납 지점
 	    // 3. 예약 자동차의 타입 (List객체로 받아옴(임시)
-		System.out.println(carType);
 		// 4. 예약 자동차의 연료종류 (List객체로 받아옴(임시)
 		return "reservation/reservation";
 	}
 	
 	@GetMapping("reservationdetail")
-	public String reservationdetail() {
+	public String reservationdetail(@RequestParam(defaultValue = "") Map<String, String> map, HttpSession session) {
 		//TODO
-		//조건에 상관없이 모든 차량을 조회 차량번호순?
-		// 페이징처리
+		System.out.println(session.getAttribute("member_id") + "!!!");
 		return "reservation/reserv_detail";
 	}
 	

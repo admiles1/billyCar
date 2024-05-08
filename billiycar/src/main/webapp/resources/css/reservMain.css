@@ -118,7 +118,7 @@ label {
 	display : block;
 	position : relative;
 	width : 40%;
-	height: 250px;
+	height: 200px;
 	left : 30px;
 }
 .carInfo {
@@ -166,6 +166,13 @@ label {
 	font-size : 20px;
 }
 
+input[type=checkbox]:active{
+	color : #00AAFF;
+}
+
+.carList:hover {
+	border-color : #00AAFF;
+}
 <!-- 데이트피커 -->
 
 <!-- 날자 텍스트 박스 -->
@@ -180,6 +187,7 @@ label {
     font-size: 14px;
     letter-spacing: 1px;
     position: relative;
+    width : 150px !imtortant;
 }
 
 .datetext:focus {
