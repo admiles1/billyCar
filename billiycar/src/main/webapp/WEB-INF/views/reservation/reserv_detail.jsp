@@ -38,10 +38,10 @@
 						</div>
 	   				</div>	
 	   		 	<div class="col-6" id="selectResult" style="">
-	   		 		<h2 class="car-name"> 람보르기니 
-	   		 			<span class="car-size"> 스포츠카 </span>
+	   		 		<h2 class="car-name"> ${car.car_model}
+	   		 			<span class="car-size"> ${car.car_type} </span>
    		 			</h2>
-	   		 		<h2 class="car-price"> 50,000,000원 </h2>
+	   		 		<h2 class="car-price"> ${car.car_price} </h2>
 	   		 		<hr>
 	   		 		<div>
 	   		 			데이트피커
@@ -104,31 +104,36 @@
     					<ul class="car-info-list">
     						<li>
     							<small> 차량번호 </small> <br>
-    							<strong> DB값 </strong>
+    							<strong> ${car.car_number} </strong>
     						</li>
     						<li>
     							<small> 제조사 </small> <br>
-    							<strong> DB값 </strong>
+    							<strong> ${car.car_maker} </strong>
     						</li>
     						<li>
     							<small> 모델 </small> <br>
-    							<strong> DB값 </strong>
+    							<strong> ${car.car_model} </strong>
     						</li>
     						<li>
     							<small> 연식 </small> <br>
-    							<strong> DB값 </strong>
+    							<strong> ${car.car_year} </strong>
     						</li>
     						<li>
     							<small> 변속타입 </small> <br>
-    							<strong> DB값 </strong>
+    							<strong>
+    								<c:choose>
+    									<c:when test="${car.gear_type eq 1}"> 수동 </c:when>
+    									<c:otherwise> 자동 </c:otherwise>
+    								</c:choose> 
+ 								</strong>
     						</li>
     						<li>
     							<small> 연료 </small> <br>
-    							<strong> DB값 </strong>
+    							<strong> ${car.car_fuel} </strong>
     						</li>
     						<li>
     							<small> 정원 </small> <br>
-    							<strong> DB값 </strong>
+    							<strong> ${car.car_capacity} </strong>
     						</li>
     					</ul>
     				</div>

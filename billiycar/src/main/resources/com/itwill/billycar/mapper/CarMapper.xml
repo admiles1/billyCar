@@ -8,6 +8,12 @@
 		SELECT *
 		  FROM car
 	</select>
+	
+	<select id="selectCar" resultType="com.itwill.billycar.vo.CarVO">
+		SELECT *
+		  FROM car
+		 WHERE car_idx = #{idx}
+	</select>
 </mapper>
 
 

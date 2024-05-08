@@ -10,6 +10,7 @@ import lombok.Data;
 
 @Data
 public class CarVO {
+	private int car_idx;
 	private String car_number;
 	private String car_model;
 	private String car_maker;
@@ -20,7 +21,7 @@ public class CarVO {
 	private String car_img;
 	private MultipartFile mfc_img;
 	private Year car_year;
-	private BigDecimal car_price;
+	private int car_price;
 	private int car_canReserve;
 	private LocalDateTime car_reg_date;
 	
