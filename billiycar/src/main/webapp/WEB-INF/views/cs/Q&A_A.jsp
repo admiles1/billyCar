@@ -25,6 +25,12 @@
 	<!-- 화살표 이미지 -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 	
+	<style type="text/css">
+		 textarea::placeholder {
+		 	color : #00aaff;
+		 }
+	</style>
+	
 </head>
 <body>
 	
@@ -90,7 +96,7 @@
 						 답변 <textarea readonly="readonly" style = "resize : none">${qna.admin_content}</textarea>
 					</c:when>
 					<c:otherwise> <%-- 미답변 --%>
-						 답변 <textarea placeholder="답변 대기 중입니다. 조금만 기다려 주세요." readonly="readonly" style = "resize : none"></textarea>
+						 답변 <textarea placeholder="답변 대기 중입니다. 조금만 기다려 주세요." readonly="readonly" style = "resize : none;"></textarea>
 					</c:otherwise>
 				</c:choose>
 				

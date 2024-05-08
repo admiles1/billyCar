@@ -51,10 +51,10 @@
   	<table class="table-fill">
 		<thead>
 			<tr>
-<!-- 				<th class="text-left" width = "10px">글 번호</th> -->
-				<th class="text-left" width = "200px">제목</th>
+				<th class="text-left" width = "10px">글 번호</th>
+				<th class="text-left" width = "190px">제목</th>
 				<th class="text-left" width = "40px">질문 유형</th>
-				<th class="text-left" width = "70px">작성일</th>
+				<th class="text-left" width = "80px">작성일</th>
 				<th class="text-left" width = "30px">답변 상태</th>
 			</tr>
 		</thead>
@@ -72,9 +72,10 @@
 			<%-- 문의 내역이 존재할 경우 --%>
 			<c:otherwise>
 				<c:forEach var="qna" items="${qnaList}">
+					<c:set var="i" value="${i+1}"></c:set>
 					<tr>
 						<%-- 답변 번호 --%>
-<%-- 						<td class="text-left">${qna.qna_idx}</td> --%>
+						<td class="text-left">${i}</td>
 
 						<%-- 제목 --%>
 						<td class="text-left"><a href = "qnaAnswerDetail?qna_idx=${qna.qna_idx}&pageNum=${pageNum}">${qna.qna_subject}</a></td>

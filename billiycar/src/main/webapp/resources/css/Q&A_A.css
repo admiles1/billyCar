@@ -25,6 +25,11 @@
 	margin-left : 50px;
 }
 
+/**/
+/* .cs_act { */
+/* 	border : 1px solid #fff;	 */
+/* } */
+
 /* 글 적는 곳*/
 .cs_write input, textarea, select {
 	margin-left : 10px;
@@ -81,5 +86,5 @@
 }
 
 .material-symbols-outlined {
-	color : #00aaFf;
+	color : #00aaff;
 }
