@@ -47,21 +47,22 @@
         </div>
 
         <!-- 회원 목록 검색 기능 -->
-        <form class="form-inline mb-3" action="adminMember" method="post">
-          <div class="form-group mr-2">
+        <form class="form-inline mb-3" action="adminMemberSearch" method="get">
+          <div class="form-group mr-2" style="text-align: center;">
             <input type="text" name="searchKeyword" class="form-control" placeholder="검색어 입력">
           </div>
-          <div class="form-group mr-2">
+          <div class="form-group mr-2" style="text-align: center;">
             <select class="form-control" name="searchType">
               <option value="all">전체</option>
-              <option value="member">회원</option>
-              <option value="black">블랙리스트</option>
+              <option value="id">ID</option>
+              <option value="name">이름</option>
+              <option value="status">상태</option>
             </select>
-            <input type="submit" class="btn btn-primary" value="검색">
+            <input type="submit" class="btn btn-primary" value="검색" style="margin-top: 30px;">
           </div>
         </form>
-
-        <!-- 회원 목록 테이블 -->
+		
+		<!-- 회원 목록 테이블 -->
         <div class="table-responsive">
           <table class="table table-striped">
             <thead>
@@ -98,7 +99,7 @@
 		                
 		                <td>
 		                  <a href="#" class="btn btn-sm btn-primary">상세보기</a>
-		                  <button class="btn btn-sm btn-danger">삭제</button>
+		                  <a href="memberDelete" class="btn btn-sm btn-danger">삭제</a>
 		                </td>
 		              </tr>
 		            </tbody>
@@ -109,9 +110,10 @@
           </table>
         </div>
         <!-- 목록 테이블 끝 -->
-        <section id = "pageList">
+        ${pageInfo }
+        <section id = "pageList" style="text-align: center;">
 			
-			<input type="button" value="이전" onclick="location.href='adminMember?pageNum=${pageNum -1}'" 
+			<input type="button" value="이전" onclick="location.href='adminMemberSearch?pageNum=${pageNum -1}&searchType=${searchType }&searchKeyword=${searchKeyword }&searchType=${searchType }&searchKeyword=${searchKeyword }'" 
 				<c:if test="${pageNum eq 1 }">disabled</c:if>
 			>
 			
@@ -121,15 +123,14 @@
 						${i}
 					</c:when>
 					<c:otherwise>
-						<a href="adminMember?pageNum=${i}">${i}</a>
+						<a href="adminMemberSearch?pageNum=${i}&searchType=${searchType }&searchKeyword=${searchKeyword }">${i}</a>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>		
-		<input type="button" value="다음" onclick="location.href='adminMember?pageNum=${pageNum +1}'"
+		<input type="button" value="다음" onclick="location.href='adminMemberSearch?pageNum=${pageNum +1}&searchType=${searchType }&searchKeyword=${searchKeyword }'"
 			<c:if test="${pageNum eq pageInfo.maxPage }">disabled</c:if>
 		>
 		</section>
-		
 		
 		
       </main>

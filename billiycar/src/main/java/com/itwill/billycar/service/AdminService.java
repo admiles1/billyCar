@@ -21,19 +21,14 @@ public class AdminService {
 	}
 
 	public List<MemberVO> adminMemberList(String searchType, String searchKeyword, int startRow, int listLimit) {
-		System.out.println(searchType);
-		System.out.println(searchKeyword);
-		System.out.println(startRow);
-		System.out.println(listLimit);
 		return mapper.adminMemberList(searchType,searchKeyword,startRow,listLimit);
 	}
 
-	public int getMemberListCount() {
+	public int getMemberListCount(String searchType, String searchKeyword, int startRow, int listLimit) {
 		
 		int listCount = 0;
 		
-		listCount = mapper.getMemberCount();
-		System.out.println("listCount : " + listCount);
+		listCount = mapper.getMemberCount(searchType,searchKeyword,startRow,listLimit);
 		return listCount;
 	}
 

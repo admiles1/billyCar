@@ -18,16 +18,44 @@
 	</select>
 	
 	<select id="adminMemberList" resultType="com.itwill.billycar.vo.MemberVO">
-		select * from member LIMIT #{startRow},#{listLimit}
+		select * from member where 1=1
+		
+		<if test="searchType.equals('name')">
+			AND member_name LIKE CONCAT('%', #{searchKeyword}, '%')
+		</if>
+		
+		<if test="searchType.equals('id')">
+			AND member_id LIKE CONCAT('%', #{searchKeyword}, '%')
+		</if>
+		
+		<if test="searchType.equals('status')">
+			AND member_status LIKE CONCAT('%', #{searchKeyword}, '%')
+		</if>
+		
+		LIMIT #{startRow},#{listLimit}
+	</select>
+	
+	<select id="getMemberCount">
+		select count(*) from member where 1=1
+		
+		<if test="searchType.equals('name')">
+			AND member_name LIKE CONCAT('%', #{searchKeyword}, '%')
+		</if>
+		
+		<if test="searchType.equals('id')">
+			AND member_id LIKE CONCAT('%', #{searchKeyword}, '%')
+		</if>
+		
+		<if test="searchType.equals('status')">
+			AND member_status LIKE CONCAT('%', #{searchKeyword}, '%')
+		</if>
 	</select>
 	
 <!-- 	<select id="adminBlackList" resultType="com.itwill.billycar.vo.MemberVO"> -->
 <!-- 		select * from member where member_status = 3; -->
 <!-- 	</select> -->
 
-	<select id="getMemberCount" resultType="int">
-		select count(*) from member LIMIT 1; 
-	</select>
+	
 	
 	<insert id="insertCar">
 		INSERT INTO car

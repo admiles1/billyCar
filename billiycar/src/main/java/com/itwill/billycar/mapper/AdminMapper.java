@@ -19,7 +19,10 @@ public interface AdminMapper {
 			@Param("startRow") int startRow,
 			@Param("listLimit") int listLimit);
 
-	int getMemberCount();
+	int getMemberCount(@Param("searchType") String searchType,
+			@Param("searchKeyword") String searchKeyword,
+			@Param("startRow") int startRow,
+			@Param("listLimit") int listLimit);
 
 	int insertCar(CarVO car);
 

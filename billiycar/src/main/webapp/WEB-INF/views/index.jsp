@@ -145,12 +145,12 @@ function redirectToAdminPage() {
                     <div class="mb-2 row">
                         <label for="pickupDate" class="col-sm-2 col-form-label" style="text-align: center;"><i class="fa-regular fa-calendar-days"></i> 대여일</label>
                         <div class="col-sm-4">
-                            <input type="text" class="form-control form-control-sm" id="pickupDate" placeholder="대여 날짜 선택" readonly>
+                            <input type="text" class="form-control form-control-sm" id="pickupDate" name="pickupDate" placeholder="대여 날짜 선택" readonly>
                         </div>
 
                         <label for="pickupDate" class="col-sm-2 col-form-label" style="text-align: center;"><i class="fa-regular fa-calendar-days"></i> 반납일</label>
                         <div class="col-sm-4">
-                            <input type="text" class="form-control form-control-sm" id="returnDate" placeholder="반납 날짜 선택" readonly>
+                            <input type="text" class="form-control form-control-sm" id="returnDate" name="returnDate" placeholder="반납 날짜 선택" readonly>
                         </div>
                     </div>
                 </div>
@@ -160,7 +160,7 @@ function redirectToAdminPage() {
 					<i class="fa-regular fa-clock"></i> 대여시간
 				</label>
    				<div class="col-sm-4">
-				<select class="form-select form-select-sm" id="carType">
+				<select class="form-select form-select-sm" id="carType" name="pickupTime">
 					<option value="06">오전 06:00</option>
 					<option value="07">오전 07:00</option>
 					<option value="08">오전 08:00</option>
@@ -182,7 +182,7 @@ function redirectToAdminPage() {
 					<i class="fa-regular fa-clock"></i> 반납시간
 				</label>
    				<div class="col-sm-4">
-				<select class="form-select form-select-sm" id="carType">
+				<select class="form-select form-select-sm" id="carType" name="returnTime">
 					<option value="06">오전 06:00</option>
 					<option value="07">오전 07:00</option>
 					<option value="08">오전 08:00</option>

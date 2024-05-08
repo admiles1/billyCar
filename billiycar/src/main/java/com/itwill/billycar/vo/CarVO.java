@@ -14,7 +14,9 @@ public class CarVO {
 	private String car_model;
 	private String car_maker;
 	private String car_fuel;
-	private String car_them;
+	private String car_type;
+	private String gear_type;
+	private String car_capacity;
 	private String car_img;
 	private MultipartFile mfc_img;
 	private Year car_year;

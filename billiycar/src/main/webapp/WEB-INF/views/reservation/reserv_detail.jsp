@@ -6,7 +6,7 @@
 <head>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reserv_detail.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<meta charset="UTF-8">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <title>:: 상세 예약페이지 ::</title>
 </head>
 <body>
@@ -18,13 +18,13 @@
 	    			<div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
 	 					<div class="carousel-inner">
 	    					<div class="carousel-item active">
-	      						<img src="..." class="d-block w-100" alt="...">
+	      						<img src="" class="d-block w-100" alt="...">
 	   						</div>
 	    					<div class="carousel-item">
-	      						<img src="..." class="d-block w-100" alt="...">
+	      						<img src="" class="d-block w-100" alt="...">
 	   						</div>
 	    					<div class="carousel-item">
-	      						<img src="..." class="d-block w-100" alt="...">
+	      						<img src="" class="d-block w-100" alt="...">
 	    					</div>
 						</div>
 	  						<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
@@ -221,8 +221,6 @@
 	<footer>
 		<jsp:include page="../inc/bottom.jsp"></jsp:include>
 	</footer>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>	
+
 </body>
 </html>
