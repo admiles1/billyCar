@@ -28,11 +28,11 @@ public class AdminService {
 		return mapper.adminMemberList(searchType,searchKeyword,startRow,listLimit);
 	}
 
-	public int getMemberListCount() {
+	public int getMemberListCount(String searchType, String searchKeyword, int startRow, int listLimit) {
 		
 		int listCount = 0;
 		
-		listCount = mapper.getMemberCount();
+		listCount = mapper.getMemberCount(searchType,searchKeyword,startRow,listLimit);
 		System.out.println("listCount : " + listCount);
 		return listCount;
 	}

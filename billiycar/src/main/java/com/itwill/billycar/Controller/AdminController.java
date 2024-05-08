@@ -67,19 +67,30 @@ public class AdminController {
 	
 	
 	@GetMapping("adminMember")
-	public String adminMember(@RequestParam(defaultValue = "") String searchType,
+	public String adminMember() {
+		
+		return "admin/admin_member";
+	}
+	
+	@GetMapping("adminMemberSearch")
+	public String adminMemberSearch(@RequestParam(defaultValue = "") String searchType,
 			@RequestParam(defaultValue = "") String searchKeyword,
-			int pageNum,
+			@RequestParam(defaultValue = "1") int pageNum,
 			Model model) {
 		
-		System.out.println(searchType);
-		System.out.println(searchKeyword);
-		System.out.println(pageNum);
+		System.out.println("controller(searchType) : " + searchType);
+		System.out.println("controller(searchkeyword) : " + searchKeyword);
+		System.out.println("pageNum : " + pageNum);
 		
 		int listLimit = 3;
 		int startRow = (pageNum - 1) * listLimit;
 		
-		int listCount = service.getMemberListCount();
+		
+		
+		List<MemberVO> member = service.adminMemberList(searchType,searchKeyword,startRow,listLimit);
+		System.out.println(member);
+		
+		int listCount = service.getMemberListCount(searchType,searchKeyword,startRow,listLimit);
 		System.out.println("listCount(controller) : " + listCount);
 		//페이지 번호 갯수를 3개로 지정
 		int pageListLimit = 3;
@@ -98,24 +109,14 @@ public class AdminController {
 			endPage = maxPage;
 		}
 		
-		
-		System.out.println("끝 페이지 번호 : " + endPage);
-		
-		
-		List<MemberVO> member = service.adminMemberList(searchKeyword,searchType,startRow,listLimit);
-		System.out.println(member);
 		model.addAttribute("memberList", member);
+		model.addAttribute("searchType", searchType);
+		model.addAttribute("searchKeyword", searchKeyword);
 		model.addAttribute("pageInfo", new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage));
 		
 		return "admin/admin_member";
 	}
-	
-	@GetMapping("memberSearch")
-	public String memberSearch() {
-		
-		
-		return "admin/admin_main";
-	}
+
 	
 	
 	@GetMapping("admin_blackList")
