@@ -75,8 +75,24 @@
 			, 0
 			, now()
 		)
-	
 	</insert>
+	<update id="updateMember" parameterType="int">
+		UPDATE member SET member_id = #{member_id}
+		
+		<if test="member_status == 1">
+			,member_status = 1
+		</if>
+		<if test="member_status == 2">
+			,member_status = 2
+		</if>
+		<if test="member_status == 3">
+			,member_status = 3
+		</if>
+		<if test="member_status == 4">
+			,member_status = 4
+		</if>
+		where member_id = #{member_id}
+	</update>
 </mapper>
 
 

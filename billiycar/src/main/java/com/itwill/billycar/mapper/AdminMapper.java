@@ -26,4 +26,6 @@ public interface AdminMapper {
 
 	int insertCar(CarVO car);
 
+	int updateMember(MemberVO member);
+
 }

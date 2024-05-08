@@ -3,8 +3,6 @@ package com.itwill.billycar.Controller;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,10 +54,26 @@ public class ReservController {
 	}
 	
 	@GetMapping("reservationdetail")
-	public String reservationdetail(@RequestParam(defaultValue = "") Map<String, String> map, HttpSession session) {
-		//TODO
-		System.out.println(session.getAttribute("member_id") + "!!!");
-		return "reservation/reserv_detail";
+	public String reservationdetail(CarVO car, int idx, Model model) {
+		// idx없이 강제로 상세예약페이지 진입시
+		if (idx == 0 ) {
+			model.addAttribute("msg", "차량을 선택하여 주십시오");
+			model.addAttribute("targetURL", "reservation");
+			return "err/fail";
+		} 
+		
+		// db에서 받아온 idx에 맞는 차조회
+		car = service.getCar(idx);
+		
+		// 존재하지않는 idx를 조회했을 시
+		if(car == null) {
+			model.addAttribute("msg", "존재하지 않는 차량입니다");
+			model.addAttribute("targetURL", "reservation");
+			return "err/fail";
+		} else { // db에서 조회성공하였을 시
+			model.addAttribute("car", car);
+			return "reservation/reserv_detail";
+		}
 	}
 	
 	@GetMapping("review")

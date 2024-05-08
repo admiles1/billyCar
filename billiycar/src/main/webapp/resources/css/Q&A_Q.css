@@ -71,3 +71,13 @@
 	color : #fff;
 	border-radius : 10px;
 }
+
+/* 개인 정보 수집 동의 */
+.infoAgreeDiv {
+	width : 80%;
+	border-radius : 10px;
+	border : 1px solid #999;
+	margin-left : 70px;
+	padding : 10px;
+	box-shadow : 3px 3px 10px #e6e6e6;
+}

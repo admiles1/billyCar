@@ -37,4 +37,8 @@ public class AdminService {
 		return mapper.insertCar(car);
 	}
 
+	public int MemberStatusModify(MemberVO member) {
+		return mapper.updateMember(member);
+	}
+
 }

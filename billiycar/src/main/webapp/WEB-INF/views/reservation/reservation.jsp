@@ -129,7 +129,7 @@
    		 		<ul>
    		 			<c:forEach var="car" items="${cars}">
 	   		 			<li class="carList fadeIn row">
-	   		 				<a href="reservationdetail?returnDate=123" class="d-flex">
+	   		 				<a href="reservationdetail?idx=${car.car_idx}" class="d-flex">
 	   		 					<span class="carImg"><img src=""></span>
 	   		 					<span class="carInfo">
 	   		 						<span> ${car.car_model } </span>

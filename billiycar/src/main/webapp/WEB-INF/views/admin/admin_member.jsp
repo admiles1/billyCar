@@ -26,9 +26,12 @@
     white-space: nowrap;
   }
 </style>
+
+
 </head>
 <body>
 <main class="container">
+
 	<c:set var="pageNum" value="${empty param.pageNum ? 1 : param.pageNum }"/>
 
     <!-- 네비게이션 바 -->
@@ -64,7 +67,7 @@
 		
 		<!-- 회원 목록 테이블 -->
         <div class="table-responsive">
-          <table class="table table-striped">
+          <table class="table table-striped" style="text-align: center;">
             <thead>
               <tr>
                 <th>ID</th>
@@ -98,8 +101,11 @@
 		                </c:choose>
 		                
 		                <td>
-		                  <a href="#" class="btn btn-sm btn-primary">상세보기</a>
-		                  <a href="memberDelete" class="btn btn-sm btn-danger">삭제</a>
+				          	<div style="text-align: center;">
+		                  	<a class="btn btn-sm btn-primary" id="memberstatus"
+		                  		href="memberStatus?member_id=${member.member_id }" target="_blank" onclick="window.open('memberStatus?member_id=${member.member_id }', '회원 상태 수정', 'width=600, height=300, top=150, left=650'); return false;">상태 변경</a>
+		                  	<a href="memberDelete" class="btn btn-sm btn-danger">회원 삭제</a>
+		                  	</div>
 		                </td>
 		              </tr>
 		            </tbody>
@@ -110,7 +116,6 @@
           </table>
         </div>
         <!-- 목록 테이블 끝 -->
-        ${pageInfo }
         <section id = "pageList" style="text-align: center;">
 			
 			<input type="button" value="이전" onclick="location.href='adminMemberSearch?pageNum=${pageNum -1}&searchType=${searchType }&searchKeyword=${searchKeyword }&searchType=${searchType }&searchKeyword=${searchKeyword }'" 

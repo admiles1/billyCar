@@ -15,6 +15,10 @@
 			window.open("check_id", "아이디 중복확인", "width=600, height=300, top=150, left=650");
 		};
 		
+		document.querySelector("#member_inviter").onclick = function() { // 추천인 아이디 검색
+			window.open("check_inviter", "추천인 아이디 검색", "width=600, height=300, top=150, left=650");
+		};
+		
 		$("#member_passwd").keyup(function() { // 비밀번호 유효성 검사
 			
 		    let passwd = $("#member_passwd").val();
@@ -155,7 +159,7 @@
 	<header><jsp:include page="../inc/top.jsp"></jsp:include></header>
 	<!--  메인 시작 -->
 	<article class="sign-up-container">
-		<form action="joinPro" class="box2_form" method="post" name="fr">
+		<form action="join" class="box2_form" method="post" name="fr">
 			<div class="title">
 				<b style="color: #00AAFF">Billycar</b>
 			</div>
@@ -203,7 +207,7 @@
 				<input type="text" placeholder="인증번호"/>
 			</div>
 				<div>
-				<input type="text" placeholder="추천인 아이디" name="inviter" id="member_inviter"/>
+				<input type="text" placeholder="추천인 아이디(선택)" name="inviter" id="member_inviter"/>
 			</div>
 			<div>
 				<input type="submit" value="회원가입" class="btn btn-4" onsubmit="submit()">

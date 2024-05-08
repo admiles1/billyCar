@@ -45,9 +45,16 @@
   		</div>
   		
   		<div class = "btn-view">
-  			<a href = "noticeModify?notice_idx=${notice.board_idx}&pageNum=${param.pageNum}">수정</a>
-  			<input type = "button" value="삭제" onclick="confirmDelete()" />
-  			<a href = "notice">목록</a>
+  		<c:choose>
+  			<c:when test="${sessionScope.member_id eq 'admin'}">
+	  			<a href = "noticeModify?notice_idx=${notice.board_idx}&pageNum=${param.pageNum}">수정</a>
+	  			<input type = "button" value="삭제" onclick="confirmDelete()" />
+	  			<a href = "notice">목록</a>
+  			</c:when>
+  			<c:otherwise>
+  				<a href = "notice" style="margin-left:50px"> 목록 </a>
+  			</c:otherwise>
+  		</c:choose>
   		</div>
   		
   	</div>

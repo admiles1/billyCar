@@ -51,7 +51,9 @@
 <!-- 	 </div>	 -->
 	 
 	  <div class = "write_btn">
-	 	<a href = "noticeWrite"> 글쓰기 </a>
+	  	<c:if test="${sessionScope.member_id eq 'admin'}">
+		 	<a href = "noticeWrite"> 글쓰기 </a>
+	  	</c:if>
 	 </div>
 	 
 	 <!-- 게시글 -->
@@ -66,8 +68,8 @@
 		<thead>
 			<tr>
 				<th class="text-left" width = "10px">글 번호</th>
-				<th class="text-left" width = "200px">제목</th>
-				<th class="text-left" width = "70px">작성자</th>
+				<th class="text-left" width = "270px">제목</th>
+				<th class="text-left" width = "40px">작성자</th>
 				<th class="text-left" width = "50px">작성일</th>
 				<th class="text-left" width = "30px">조회수</th>
 			</tr>
@@ -78,7 +80,7 @@
 					<td class="text-left">${notice.board_idx}</td>
 					<td class="text-left"><a href = "noticeDetail?notice_idx=${notice.board_idx}&pageNum=${pageNum}">${notice.board_subject}</a></td>
 					<td class="text-left">${notice.board_writer}</td>
-					<td class="text-left"><fmt:formatDate value="${notice.board_date}" pattern = "yy-MM-dd HH:mm"/></td>
+					<td class="text-left"><fmt:formatDate value="${notice.board_date}" pattern = "yy-MM-dd"/></td>
 					<td class="text-left">${notice.board_readcount}</td>
 				</tr>
 			</c:forEach>

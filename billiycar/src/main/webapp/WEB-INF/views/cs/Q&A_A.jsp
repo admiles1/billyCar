@@ -24,6 +24,13 @@
 	
 	<!-- 화살표 이미지 -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+	
+	<style type="text/css">
+		 textarea::placeholder {
+		 	color : #00aaff;
+		 }
+	</style>
+	
 </head>
 <body>
 	
@@ -44,12 +51,12 @@
  			<div class = "cus_info">
  				작성자 <input type = "text" value="${qna.qna_writer}" name="qna_writer" readonly="readonly">
  				문의 주제 
- 				<select name="qna_category" id="qna_category" style = "margin-left : 15px">
+ 				<select name="qna_category" id="qna_category" style = "margin-left : 15px" disabled="disabled">
  					<option value =""> 문의 주제 </option>
- 					<option value ="reservation"> 예약 </option>
- 					<option value ="function"> 부름 </option>
- 					<option value ="fee"> 가격 </option>
- 					<option value ="return"> 반납 </option>
+ 					<option value ="reservation" <c:if test="${qna.qna_category eq 'reservation'}">selected</c:if>> 예약 </option>
+ 					<option value ="function" <c:if test="${qna.qna_category eq 'function'}">selected</c:if>> 부름 </option>
+ 					<option value ="price" <c:if test="${qna.qna_category eq 'price'}">selected</c:if>> 가격 </option>
+ 					<option value ="return" <c:if test="${qna.qna_category eq 'return'}">selected</c:if>> 반납 </option>
  					<option value ="etc"> 기타 </option>
  				</select>
  			</div>
@@ -64,15 +71,13 @@
  				<div style="margin-left:50px;">
 	 				파일
 	 				<c:if test="${not empty qna.qna_file}">
-						<div>
 							<c:set var="original_fileName" value="${fn:substringAfter(qna.qna_file, '_')}"/>
 							${original_fileName}
 							<%-- 다운로드 --%>
 							<%-- 다운로드 속성값에 파일명 지정 시 그 이름으로 다운됨 --%>
 							<a href="${pageContext.request.contextPath}/resources/upload/${qna.qna_file}" download="${original_fileName}">
-								<input type="button" value="다운로드">
+								<input type="button" value="다운로드" id="downBtn">
 							</a>
-						</div>
 					</c:if>
 				</div>
  			</div>
@@ -81,10 +86,19 @@
  			<div class = "content_wr" style="margin-top:30px;">
  				<span class="material-symbols-outlined">
 					subdirectory_arrow_right
-					
-					
-				<%-- 답변 --%>
-				</span> 답변 <textarea placeholder="내용을 입력하세요" style = "resize : none"></textarea>
+				</span>
+				
+				
+				
+				<%-- 답변 상태에 따라 답변 보여주기 --%>
+				<c:choose>
+					<c:when test="${qna.qna_status eq 1}"> <%-- 답변 완료 --%>
+						 답변 <textarea readonly="readonly" style = "resize : none">${qna.admin_content}</textarea>
+					</c:when>
+					<c:otherwise> <%-- 미답변 --%>
+						 답변 <textarea placeholder="답변 대기 중입니다. 조금만 기다려 주세요." readonly="readonly" style = "resize : none;"></textarea>
+					</c:otherwise>
+				</c:choose>
 				
 			</div>
  		</div>

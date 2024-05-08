@@ -108,6 +108,30 @@ public class AdminController {
 		
 		return "admin/admin_member";
 	}
+	
+	//회원 상태 수정 폼 
+	@GetMapping("memberStatus")
+	public String memberStatus(MemberVO member) {
+		return "admin/member_status";
+	}
+	
+	//회원 상태 수정 PRO
+	@PostMapping("memberStatus")
+	public String memberStatusPro(MemberVO member, Model model) {
+		
+		int UpdateSuccess = service.MemberStatusModify(member);
+		System.out.println("UpdateSuccess(member_id) : " + UpdateSuccess);
+		
+		if(UpdateSuccess > 0 ) {
+			return "admin/member_status";
+		}else {
+			model.addAttribute("msg", "변경되지 않았습니다.");
+			model.addAttribute("targetURL", "admin/admin_member");
+			
+			return "error/fail";
+		}
+		
+	}
 
 	
 	
