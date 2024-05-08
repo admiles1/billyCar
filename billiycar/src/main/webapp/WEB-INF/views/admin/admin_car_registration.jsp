@@ -30,44 +30,43 @@ button[type="submit"] { width: 100%; }
                     <h1 class="h2">차량 등록</h1>
                 </div>
                 <!-- 폼의 method를 POST로 변경하여 데이터 보안 강화 -->
-                <form action="carUpload" method="post">
+				<form action="carUpload" method="post" enctype="multipart/form-data" onsubmit="submitForm()">
                     <div class="form-group">
                         <label for="manufacturer">제조사</label>
                         <select id="manufacturer" name="car_maker" class="form-control" required>
                             <option value="">제조사를 선택하세요</option>
-                            <option value="hyundai">현대</option>
-                            <option value="kia">기아</option>
-                            <option value="chevrolet">쉐보레</option>
-                            <option value="bmw">BMW</option>
-                            <option value="toyota">토요타</option>
-                            <option value="nissan">닛산</option>
+                            <option value="현대">현대</option>
+                            <option value="기아">기아</option>
+                            <option value="쉐보레">쉐보레</option>
+                            <option value="BMW">BMW</option>
+                            <option value="토요타">토요타</option>
+                            <option value="닛산">닛산</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="model">모델</label>
-                        <!-- 모델 선택 드롭다운을 초기에 비활성화하여 접근성 향상 -->
                         <select id="model" name= "car_model" class="form-control" required disabled>
                             <option value="">모델을 선택하세요</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="carType">차량 종류</label>
-                        <!-- 새로운 차량 종류 선택 드롭다운 추가 -->
-                        <select id="carType" name="car_them" class="form-control" required>
+                        <select id="carType" name="car_type" class="form-control" required>
                             <option value="">차량 종류를 선택하세요</option>
-                            <option value="compact">소형</option>
-                            <option value="midsize">준중형</option>
-                            <option value="sedan">중형</option>
-                            <option value="large">대형</option>
-                            <option value="suv">SUV</option>
+                            <option value="소형">소형</option>
+                            <option value="준중형">준중형</option>
+                            <option value="중형">중형</option>
+                            <option value="대형">대형</option>
+                            <option value="SUV">SUV</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="year">연식</label>
                         <select id="year" name="car_year" class="form-control" required>
                             <option value="">연식을 선택하세요</option>
+                            <!-- 연도 선택 범위 변경 -->
                             <script>
-                                for (let year = 2023; year >= 2010; year--) {
+                                for (let year = new Date().getFullYear(); year >= 2010; year--) { // 현재 연도부터 2010년까지
                                     document.write('<option value="' + year + '">' + year + '년</option>');
                                 }
                             </script>
@@ -77,11 +76,11 @@ button[type="submit"] { width: 100%; }
                         <label for="fuel">연료</label>
                         <select id="fuel" name="car_fuel" class="form-control" required>
                             <option value="">연료를 선택하세요</option>
-                            <option value="gasoline">가솔린</option>
-                            <option value="diesel">디젤</option>
-                            <option value="electric">전기</option>
-                            <option value="hybrid">하이브리드</option>
-                            <option value="lpg">LPG</option>
+                            <option value="가솔린">가솔린</option>
+                            <option value="디젤">디젤</option>
+                            <option value="전기">전기</option>
+                            <option value="하이브리드">하이브리드</option>
+                            <option value="LPG">LPG</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -94,13 +93,22 @@ button[type="submit"] { width: 100%; }
                     </div>
                     <div class="form-group">
                         <label for="image">차량 이미지</label>
-                        <input type="file" class="form-control" id="image" name="car_img">
-                        <input type of="file" class="form-control" id="image1" name="image1">
-                        <input type of="file" class="form-control" id="image2" name="image2">
-                        <input type of="file" class="form-control" id="image3" name="image3">
-                        <input type of="file" class="form-control" id="image4" name="image4">
-                        <input type of="file" class="form-control" id="image5" name="image5">
+                        <!-- 여러 이미지를 업로드할 수 있도록 수정 -->
+                        <input type="file" class="form-control" id="image" name="mfc_img" multiple> <!-- multiple 속성 추가 -->
                     </div>
+                    <div class="form-group">
+                        <label for="gearType">기어 타입</label>
+                        <select id="gearType" name="gear_type" class="form-control" required>
+                            <option value="">기어 타입을 선택하세요</option>
+                            <option value="0">자동</option>
+                            <option value="1">수동</option>
+                        </select>
+                    </div>
+                  	<div class="form-group">
+					    <label for="maxPassenger">최대 인원 수</label>
+					    <!-- min과 max를 사용하여 최소값과 최대값을 지정하고, step을 사용하여 값이 얼마나 증가 또는 감소할지를 설정 -->
+					    <input type="number" id="maxPassenger" name="car_capacity" class="form-control" min="1" max="20" step="1" placeholder="최대 인원 수를 입력하세요" required>
+					</div>
                     <button type="submit" class="btn btn-primary d-block mx-auto">등록</button>
                 </form>
             </main>
@@ -108,7 +116,7 @@ button[type="submit"] { width: 100%; }
     </div>
 </main>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
 $(document).ready(function() {
     // 제조사가 변경될 때 모델 드롭다운을 업데이트
@@ -116,12 +124,12 @@ $(document).ready(function() {
         var manufacturer = $(this).val();
         $('#model').prop('disabled', !manufacturer); // 모델 선택 활성화/비활성화
         var models = {
-            hyundai: ["소나타", "그랜저", "아이오닉", "팰리세이드"],
-            kia: ["K5", "스팅어", "니로", "셀토스"],
-            chevrolet: ["말리부", "트래버스", "스파크", "콜로라도"],
-            bmw: ["320i", "520i", "X3", "X5"],
-            toyota: ["캠리", "프리우스", "RAV4", "하이랜더"],
-            nissan: ["알티마", "맥시마", "로그", "리프"]
+            현대: ["소나타", "그랜저", "아이오닉", "팰리세이드"],
+            기아: ["K5", "스팅어", "니로", "셀토스"],
+            쉐보레: ["말리부", "트래버스", "스파크", "콜로라도"],
+            BMW: ["320i", "520i", "X3", "X5"],
+            토요타: ["캠리", "프리우스", "RAV4", "하이랜더"],
+            닛산: ["알티마", "맥시마", "로그", "리프"]
         };
         var selectedModel = models[manufacturer] || [];
         $('#model').empty().append('<option value="">모델을 선택하세요</option>');
@@ -130,6 +138,8 @@ $(document).ready(function() {
         });
     });
 });
+
+
 </script>
 </body>
 </html>

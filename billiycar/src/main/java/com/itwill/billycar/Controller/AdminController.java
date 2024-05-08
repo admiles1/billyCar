@@ -133,10 +133,73 @@ public class AdminController {
 	@PostMapping("carUpload")
 	public String carUpload(CarVO car, HttpServletRequest request, Model model) {
 		System.out.println(car); // 차량정보
+		
+		// 차량최대인수를 숫자 + "인승" 으로 DB에 넣기위해 사전작업
+		car.setCar_capacity(car.getCar_capacity() + "인승"); 
+		
+		
+		// 1) 경로
+		String uploadDir = "/resources/upload"; // 가상 경로
+		String saveDir = session.getServletContext().getRealPath(uploadDir); // 실제 경로
+		
+		// 2) 날짜별 서브 디렉토리 나누기
+		String subDir = ""; 
+		LocalDate today = LocalDate.now();
+		String datePattern = "yyyy" + File.separator + "MM" + File.separator + "dd";
+		
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern(datePattern);
+		
+		// 3) 서브디렉토리에 저장
+		subDir = today.format(dtf);
+		
+		// 4) 기존 업로드 실제 경로에 서브 디렉토리 결합
+		saveDir += File.separator + subDir;
+		
+		// 5) 해당 디렉토리가 실제 경로가 존재하지 않을 경우 자동 생성
+		try {
+			// (1) java.nio.file.Paths의 get() 호출하여 path 객체 리턴
+			Path path = Paths.get(saveDir); 
+			
+			// (2) files 클래스의 createDirectories()로 실제 경로 생성
+			Files.createDirectories(path);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		// 6) 실제 파일 다루기
+		MultipartFile mfile = car.getMfc_img(); // 여기 폼에 있는 file 이름으로 가져오기
+		System.out.println(mfile.getOriginalFilename());
 
+		// 7) 중복 이름 방지
+		String uuid = UUID.randomUUID().toString();
+		
+		// 7-1) 업로드 안 됐을 시 널스트링
+		car.setCar_img(""); // DB에 있는 file 이름 설정
+		
+		// 7-2) 결합
+		String fileName = uuid.substring(0,8) + "_" + mfile.getOriginalFilename();
+		
+		if(!mfile.getOriginalFilename().equals("")) {
+			car.setCar_img(subDir+ File.separator +fileName);
+		}
+		
+		// DB 작업 ON 
 		int insertCount = service.carUpload(car);
 		
-		if(insertCount > 0) {
+		try {
+			if(!mfile.getOriginalFilename().equals("")) {
+				mfile.transferTo(new File(saveDir, fileName));
+			}
+				
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} // 이것도 밑에 추가
+		
+		
+		if(insertCount > 0) { // 성공 시 
 			
 			return "redirect:/admin_car_registration";
 		} else { // 실패 시
@@ -176,6 +239,7 @@ public class AdminController {
 		
 		return "admin/admin_answerList_form";
 	}
+	
 	
 	
 	
