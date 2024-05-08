@@ -151,7 +151,7 @@ public class CsController {
 		System.out.println(notice.getBoard_idx());
 		int insertCount = service.modifyNotice(notice);
 		
-		return "cs/notice";
+		return "redirect:/notice";
 	}
 	
 	// 삭제폼
@@ -213,6 +213,7 @@ public class CsController {
 	}
 	
 	// QnA -------------------------------
+	// 문의내역 목록
 	@GetMapping("qna")
 	public String qna(QnaVO qna, Model model, @RequestParam(defaultValue = "1") int pageNum) {
 		// 페이징 
@@ -226,13 +227,25 @@ public class CsController {
 		return "cs/Q&A_list";
 	}
 	
+	// 문의하기 폼
 	@GetMapping("qna_q")
 	public String qna_q(QnaVO qna, Model model) {
-		qna.setQna_writer((String)session.getAttribute("member_id"));
+		
+		// 회원이 아닌 경우, 튕구기
+		String id = (String)session.getAttribute("member_id");
+		
+		if(id == null ) {
+			model.addAttribute("msg","로그인 후 이용해 주세요");
+			model.addAttribute("targetURL", "login");
+			return "err/fail";
+		}
+		
+		qna.setQna_writer(id);
 		model.addAttribute("qna", qna);
 		return "cs/Q&A_Q";
 	}
 	
+	// 문의하기 처리
 	@PostMapping("qna_q")
 	public String qna_q_pro(QnaVO qna, Model model) {
 		
@@ -308,14 +321,18 @@ public class CsController {
 		return "redirect:/qna";
 	}
 	
+	// 답변 폼
 	@GetMapping("qna_a")
-	public String qna_a() {
+	public String qna_a(QnaVO qna, Model model) {
 		return "cs/Q&A_A";
 	}
 	
-	// 질문 가져오기
+	// 답변 가져오기
 	@GetMapping("qnaAnswerDetail")
-	public String Answer() {
+	public String Answer(QnaVO qna, Model model) {
+		qna.setQna_writer((String)session.getAttribute("member_id"));
+		qna = service.getQnaDetail(qna);
+		model.addAttribute("qna",qna);
 		System.out.println("qna_a");
 		return "cs/Q&A_A";
 	}

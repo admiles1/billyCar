@@ -9,7 +9,7 @@
 </head>
 <body>
  	<div class="sign-in-container">
-    	<form action="loginPro">
+    	<form action="login" method="post">
      		 <a href="./" class="logo">Billycar</a>
       		 <input type="text" placeholder="아이디" name="member_id" class="member_id"/>
      		 <input type="password" placeholder="비밀번호" name="member_passwd" class="member_passwd"/>

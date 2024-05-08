@@ -64,15 +64,13 @@
  				<div style="margin-left:50px;">
 	 				파일
 	 				<c:if test="${not empty qna.qna_file}">
-						<div>
 							<c:set var="original_fileName" value="${fn:substringAfter(qna.qna_file, '_')}"/>
 							${original_fileName}
 							<%-- 다운로드 --%>
 							<%-- 다운로드 속성값에 파일명 지정 시 그 이름으로 다운됨 --%>
 							<a href="${pageContext.request.contextPath}/resources/upload/${qna.qna_file}" download="${original_fileName}">
-								<input type="button" value="다운로드">
+								<input type="button" value="다운로드" id="downBtn">
 							</a>
-						</div>
 					</c:if>
 				</div>
  			</div>
@@ -81,10 +79,19 @@
  			<div class = "content_wr" style="margin-top:30px;">
  				<span class="material-symbols-outlined">
 					subdirectory_arrow_right
-					
-					
-				<%-- 답변 --%>
-				</span> 답변 <textarea placeholder="내용을 입력하세요" style = "resize : none"></textarea>
+				</span>
+				
+				
+				
+				<%-- 답변 상태에 따라 --%>
+				<c:choose>
+					<c:when test="${qna.qna_status eq 1}"> <%-- 답변 완료 --%>
+						 답변 <textarea readonly="readonly" style = "resize : none">${qna.admin_content}</textarea>
+					</c:when>
+					<c:otherwise> <%-- 미답변 --%>
+						 답변 <textarea placeholder="답변 대기 중입니다. 조금만 기다려 주세요." readonly="readonly" style = "resize : none"></textarea>
+					</c:otherwise>
+				</c:choose>
 				
 			</div>
  		</div>

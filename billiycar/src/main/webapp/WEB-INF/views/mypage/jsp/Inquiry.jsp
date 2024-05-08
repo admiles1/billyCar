@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,18 +55,33 @@
        <thead>
             <tr>
                 <th>문의 주제</th>
-                <th>문의 제목</th>
+                <th>문의 내용</th>
                 <th>문의 일자</th>
+                <th>문의 상태</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-            	<td>차량예약 관련 문의</td>
-                <td>차량 예약에 관한 문의입니다.</td>
-                <td>2024-04-29</td>
-            </tr>
+        	<c:forEach var="qna" items="${qna}">
+	            <tr>
+	            	<td>${qna.qna_subject}</td>
+	                <td><a href = "qnaAnswerDetail?qna_idx=${qna.qna_idx}&pageNum=${pageNum}">${qna.qna_content}</a></td>
+	                <td>
+	                	<fmt:formatDate value="${qna.qna_date}" pattern="yy-MM-dd HH:mm"/>
+	                </td>
+	                <td>
+	                	<c:choose>
+                            <c:when test="${qna.qna_status == 0}">답변 대기</c:when>
+                            <c:when test="${qna.qna_status == 1}">답변 완료</c:when>
+                        </c:choose>
+                    </td>
+	            </tr>
+            </c:forEach>
         </tbody>
     </table>
 </form>
+<script type="text/javascript">
+
+
+</script>
 </body>
 </html>

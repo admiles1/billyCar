@@ -63,4 +63,9 @@ public class CsService {
 		return mapper.insertQna(qna);
 	}
 
+	// 작성한 큐엔에이 가져오기
+	public QnaVO getQnaDetail(QnaVO qna) {
+		return mapper.selectQnaDetail(qna);
+	}
+
 }

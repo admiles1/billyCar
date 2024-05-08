@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,8 +59,12 @@ public class MemberController {
 		
 	}
 	
-	@PostMapping("joinPro")
-	public String joinPro(MemberVO member, Model model) {
+	@PostMapping("join")
+	public String joinPro(MemberVO member, Model model, BCryptPasswordEncoder passwordEncoder) {
+		
+		String securePasswd = passwordEncoder.encode(member.getMember_passwd());
+		member.setMember_passwd(securePasswd);
+		
 		if(service.registMember(member) > 0) {
 			model.addAttribute("member_id", member.getMember_id());
 			System.out.println(member.getMember_id());
@@ -78,17 +83,33 @@ public class MemberController {
 		return "login/login_form";
 	}
 	
-	@GetMapping("loginPro")
-	public String loginPro(MemberVO member,  HttpSession session , Model model) {
-
-		boolean isCorrectUser = service.isCorrectUser(member);
+	@PostMapping("login")
+	public String loginPro(MemberVO member,  HttpSession session , Model model, BCryptPasswordEncoder passwordEncoder) {
 		
-		if(isCorrectUser) {
-			session.setAttribute("member_id",  member.getMember_id());
-			return "redirect:/./";
-		} else {
+		
+		MemberVO dbMember = service.getMember(member);
+		
+		
+		if(dbMember == null || !passwordEncoder.matches(member.getMember_passwd(), dbMember.getMember_passwd())) { // 로그인 실패
+			model.addAttribute("msg", "로그인 실패!");
 			return "redirect:/error";
+		} else { // 로그인 성공
+			// 세션 객체에 로그인 성공한 아이디를 "sId" 속성값으로 추가
+			session.setAttribute("member_id", member.getMember_id());
+			
+			// 메인페이지 리다이렉트
+			return "redirect:/";
 		}
+		
+		
+//		boolean isCorrectUser = service.isCorrectUser(member);
+//		
+//		if(isCorrectUser) {
+//			session.setAttribute("member_id",  member.getMember_id());
+//			return "redirect:/./";
+//		} else {
+//			return "redirect:/error";
+//		}
 	}
 
 	@GetMapping("error")
