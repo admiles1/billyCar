@@ -297,7 +297,7 @@ h3 {
 		</p>
 	</div>
 </div>
-<form id="license-register" action="license" method="post">
+<form id="license-register" action="license" method="post" onsubmit="return validateForm()">
     <h2>면허 등록 및 갱신</h2>
     <hr>
     <div class="license-example">
@@ -311,6 +311,7 @@ h3 {
         <select id="licenseType" name="license_name">
             <option value="면허 종류">면허 종류를 선택해주세요</option>
             <option value="2종 보통">2종 보통</option>
+            <option value="1종 보통">1종 보통</option>
             <option value="1종 보통">1종 대형</option>
             <option value="1종 보통">1종 특수-대형견인차(트레일러)</option>
             <option value="1종 보통">1종 특수-구난차(레커)</option>
@@ -425,12 +426,15 @@ h3 {
     </div>
 </div>
 <script>
-    function registerOrUpdateLicense() {
-        var licenseNumber = document.getElementById("licenseNumber").value;
-        var expirationDate = document.getElementById("expirationDate").value;
-        var licenseType = document.getElementById("licenseType").value;
-    }
-    
+	function validateForm() {
+	    if (!document.getElementById('totalChk').checked) { // 전체동의 체크 확인
+	        alert("약관에 동의해주세요.");
+	        document.getElementById('terms').scrollIntoView();
+	        return false; // 폼 제출 막기
+	    }
+	    return true; // 약관에 동의했을 때만 제출
+	}
+
     const modal = document.querySelector('.modal');
     const modalOpen = document.querySelector('.modal_btn');
     const modalClose = document.querySelector('.close_btn');
