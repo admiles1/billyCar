@@ -22,7 +22,7 @@
 <header><jsp:include page="../inc/top.jsp"></jsp:include></header>
 
 <body>
-	<form method="post" action="processPasswordChange">
+	<form method="post" action="passwdChange">
 	    <div class="container">
 	        <div class="button">
 	            <a href="forgot_id" class="forgot_id">아이디 찾기</a> |
@@ -40,7 +40,7 @@
 	        	<div class="g-recaptcha" data-sitekey="6LfQ8swpAAAAAMfwmMU-_UGqKZL_96D04eJGk2CA"></div>
 		    </div>
 	        <div class="next">
-	        <input type="submit" value="완료" onclick="location.href='login'">
+	        <input type="submit" value="완료">
 	        </div>
 	    </div>
     </form>

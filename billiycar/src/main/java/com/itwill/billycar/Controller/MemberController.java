@@ -133,6 +133,9 @@ public class MemberController {
 		return "login/forgot_pw3";
 	}
 	
-	
+	@PostMapping ("passwdChange")
+	public String passwdChange() {
+		return "redirect:/./";
+	}
 	
 }
