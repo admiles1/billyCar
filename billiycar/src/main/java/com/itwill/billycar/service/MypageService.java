@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itwill.billycar.mapper.MypageMapper;
+import com.itwill.billycar.vo.LicenseVO;
 import com.itwill.billycar.vo.MemberVO;
 import com.itwill.billycar.vo.QnaVO;
 
@@ -31,6 +32,10 @@ public class MypageService {
 
 	public List<QnaVO> getMemberQna(String memberId) {
 		return mapper.selcetMemberQna(memberId);
+	}
+
+	public int registLicense(LicenseVO license) {
+		return mapper.insertLicense(license);
 	}
 
 

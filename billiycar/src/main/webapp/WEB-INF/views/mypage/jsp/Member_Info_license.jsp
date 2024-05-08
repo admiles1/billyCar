@@ -34,7 +34,7 @@ input[type="password"] {
     box-sizing: border-box;
 }
     
-#license-register button {
+#license-register input[type="submit"] {
 	display: block; /* 블록 요소로 지정하여 다른 요소와 가로로 정렬되도록 합니다. */
 	margin: 0 auto; /* 좌우 마진을 자동으로 설정하여 가운데 정렬합니다. */
   	border: none;
@@ -47,7 +47,7 @@ input[type="password"] {
   	color: white; /* 글자색 지정 */
  }
    
-#license-register button:hover {
+#license-register input[type="submit"]:hover {
     background-color: #555;
 }
     
@@ -297,7 +297,7 @@ h3 {
 		</p>
 	</div>
 </div>
-<form id="license-register">
+<form id="license-register" action="license" method="post">
     <h2>면허 등록 및 갱신</h2>
     <hr>
     <div class="license-example">
@@ -305,8 +305,10 @@ h3 {
     </div>
     
     <div class="license-info">
+        <label for="licenseNumber">면허 번호 *</label>
+        <input type="text" id="licenseNumber" name="license_user_id" placeholder="면허 번호를 입력하세요" maxlength="12">
         <label for="licenseType">면허 종류 *</label>
-        <select id="licenseType">
+        <select id="licenseType" name="license_name">
             <option value="면허 종류">면허 종류를 선택해주세요</option>
             <option value="2종 보통">2종 보통</option>
             <option value="1종 보통">1종 대형</option>
@@ -315,13 +317,11 @@ h3 {
             <option value="1종 보통">1종 특수-소형견인차</option>
             <option value="국제 면허">국제 면허</option>
         </select>
-        <label for="licenseNumber">면허 번호 *</label>
-        <input type="text" id="licenseNumber" placeholder="면허 번호를 입력하세요" maxlength="12">
         <label for="issueDate">발급일 *</label>
-        <input type="text" id="issueDate" placeholder= "발급일을 입력하세요 (예: YYYY-MM-DD)" maxlength="8">
+        <input type="text" id="issueDate" name="license_issue_date" placeholder= "발급일을 입력하세요 (예: YYYYMMDD)" maxlength="8">
         <label for="expirationDate">만료일 *</label>
-        <input type="text" id="expirationDate" placeholder="만료일을 입력하세요 (예: YYYY-MM-DD)" maxlength="8">
-        <button onclick="registerOrUpdateLicense()">면허 등록 및 갱신</button>
+        <input type="text" id="expirationDate" name="license_expiration_date" placeholder="만료일을 입력하세요 (예: YYYYMMDD)" maxlength="8">
+        <input type="submit" value="면허 등록 및 갱신">
     </div>
 </form>
 
