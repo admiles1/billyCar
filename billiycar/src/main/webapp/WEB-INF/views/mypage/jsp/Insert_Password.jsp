@@ -70,7 +70,7 @@
     <p>회원정보 수정을 위해 비밀번호를 입력해주세요<p>
     <div class="passwd-check">
     	<input type="password" id="password" placeholder="비밀번호를 입력해주세요">
-    	<button type="submit">다음</button>	
+    	<button type="submit">완료</button>	
 	</div>
 </form>
 
