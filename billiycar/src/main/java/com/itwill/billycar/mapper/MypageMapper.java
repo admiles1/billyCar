@@ -21,7 +21,9 @@ public interface MypageMapper {
 	int checkLicenseMatch(LicenseVO license);
 
 	int withdrawMember(MemberVO member);
-	
+
+	int updateInfo(MemberVO member);
+
 	
 
 	

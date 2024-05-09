@@ -48,6 +48,11 @@ public class MypageService {
 	}
 
 
+	public int modifyInfo(MemberVO member) {
+		
+		return mapper.updateInfo(member);
+	}
+
 
 	
 
