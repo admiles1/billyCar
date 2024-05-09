@@ -26,6 +26,7 @@ import com.itwill.billycar.vo.AdminVO;
 import com.itwill.billycar.vo.CarVO;
 import com.itwill.billycar.vo.MemberVO;
 import com.itwill.billycar.vo.PageInfo;
+import com.itwill.billycar.vo.QnaVO;
 
 @Controller
 public class AdminController {
@@ -247,11 +248,21 @@ public class AdminController {
 		return "admin/admin_review";
 	}
 	
-	@GetMapping("admin_answerList")
-	public String admin_answerList() {
+	@GetMapping("adminAnswerList")
+	public String adminAnswerList(Model model) {
+		System.out.println("qnaList(controller)");
+		List<QnaVO> qna = service.adminAnswerList();
+		System.out.println(qna);
+		model.addAttribute("qna", qna);
 		
 		return "admin/admin_answerList";
 	}
+	
+	@GetMapping("adminAnswerForm")
+	public String adminAnswer() {
+		return "admin/admin_answerList_form";
+	}
+	
 	
 	@GetMapping("admin_counsel")
 	public String admin_counsel() {

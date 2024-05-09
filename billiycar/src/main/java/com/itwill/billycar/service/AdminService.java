@@ -9,6 +9,7 @@ import com.itwill.billycar.mapper.AdminMapper;
 import com.itwill.billycar.vo.AdminVO;
 import com.itwill.billycar.vo.CarVO;
 import com.itwill.billycar.vo.MemberVO;
+import com.itwill.billycar.vo.QnaVO;
 
 @Service
 public class AdminService {
@@ -43,6 +44,10 @@ public class AdminService {
 
 	public List<CarVO> getCar(CarVO car) {
 		return mapper.selectCar(car);
+	}
+	
+	public List<QnaVO> adminAnswerList() {
+		return mapper.selectQnaList();
 	}
 
 }

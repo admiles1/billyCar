@@ -18,6 +18,14 @@ public interface MypageMapper {
 
 	int insertLicense(LicenseVO license);
 
+	int checkLicenseMatch(LicenseVO license);
+
+	int withdrawMember(MemberVO member);
+
+	int updateInfo(MemberVO member);
+
+	
+
 	
 
 	

@@ -22,6 +22,11 @@
 		)
 	</insert>
 	
+	<select id="selectListCount" resultType="int">
+		SELECT COUNT(*)
+		FROM notice
+	</select>
+	
 	<select id="selectNoticeList" resultType="com.itwill.billycar.vo.NoticeVO">
 		SELECT *
 		FROM notice
@@ -58,6 +63,15 @@
 	</delete>
 	
 	<!-- ==================================================================  -->
+	<!-- ** [자주묻는질문] ** -->
+	<select id = "selectFaqList" resultType="com.itwill.billycar.vo.FaqVO">
+		SELECT *
+		FROM faq
+		ORDER BY faq_idx DESC
+		LIMIT  #{listLimit}, #{startRow}
+	</select>
+	
+	<!-- ==================================================================  -->
 	<!-- ** [큐엔에이] ** -->
 	<select id="selectQnaList" resultType="com.itwill.billycar.vo.QnaVO">
 		SELECT *
@@ -65,6 +79,11 @@
 		WHERE qna_writer = #{id}
 		ORDER BY qna_idx DESC
 		LIMIT #{startRow}, #{listLimit}
+	</select>
+	
+	<select id="selectQnaListCount" resultType="int">
+		SELECT COUNT(*)
+		FROM qna
 	</select>
 	
 	<insert id="insertQna">
@@ -94,4 +113,5 @@
 		FROM qna
 		WHERE qna_writer = #{qna_writer} AND qna_idx=#{qna_idx}
 	</select>
+	
 </mapper>

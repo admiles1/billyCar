@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="ko">
 <meta charset="UTF-8">
@@ -29,6 +30,11 @@
 <main class="container">
 	<div class = "faq_arti">
 	
+		<c:set var = "pageNum" value = "1"/>
+			<c:if test="${not empty param.pageNum}">
+				<c:set var = "pageNum" value = "${param.pageNum}"/>
+			</c:if>
+	
 		<!-- 타이틀 -->
 		<div class = "faq_title">
   			<em class = "faq_title_1">FAQ</em><br>
@@ -38,84 +44,90 @@
   		
   		<!-- 카테고리 -->
   		<div id = "btn_tag">
-  			<span id = "tag1" style="padding:1px 2px 3px 4px;">
-				<button class="white_btn">전체</button>
-  			</span>
-  			<span id = "tag2" style="padding:1px 2px 3px 4px;">
-				<button class="white_btn">고장 및 사고</button>
-			</span>	
-			<span id = "tag3" style="padding:1px 2px 3px 4px;">
-				<button class="white_btn">요금 및 결제</button>
-			</span>	
-			<span id = "tag4" style="padding:1px 2px 3px 4px;">
-				<button class="white_btn">예약 변경 및 취소</button>
-			</span>	
-			<span id = "tag5" style="padding:1px 2px 3px 4px;">
-				<button class="white_btn">기타</button>
-			</span>	
+	  		<form>
+	  			<span id = "tag1" style="padding:1px 2px 3px 4px;">
+					<button class="white_btn" name="category" value="all">전체</button>
+	  			</span>
+	  			<span id = "tag2" style="padding:1px 2px 3px 4px;">
+					<button class="white_btn" name="category" value="accident">고장 및 사고</button>
+				</span>	
+				<span id = "tag3" style="padding:1px 2px 3px 4px;">
+					<button class="white_btn" name="category" value="price">요금 및 결제</button>
+				</span>	
+				<span id = "tag4" style="padding:1px 2px 3px 4px;">
+					<button class="white_btn" name="category" value="reservation">예약</button>
+				</span>	
+				<span id = "tag5" style="padding:1px 2px 3px 4px;">
+					<button class="white_btn" name="category" value="etc">기타</button>
+				</span>	
+			</form>
   		</div>
   		
   		<!-- dribbble -->
 		<a class="dribbble" href="https://dribbble.com/shots/7441241-Button-Hover-Effects" target="_blank"><img src="https://cdn.dribbble.com/assets/dribbble-ball-mark-2bd45f09c2fb58dbbfb44766d5d1d07c5a12972d602ef8b32204d28fa3dda554.svg" alt=""></a>
 		
 		<!-- 검색창 -->
-<!-- 		<div class = "searc"> -->
-<!-- 		  	<form action=""> -->
-<!-- 			  	<div class = "faq_se"> -->
-<!-- 				  	<div class="group"> -->
-<!-- 			  			<svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><g><path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"></path></g></svg> -->
-<!-- 			  			<input placeholder="Search" type="search" class="input" name = "notice_search"> -->
-<!-- 					</div> -->
-<!-- 			  	</div> -->
-<!-- 			 </form>  -->
-<!-- 		 </div>	 -->
+		<div class = "searc">
+		  	<form action="">
+			  	<div class = "faq_se">
+				  	<div class="group">
+			  			<svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><g><path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"></path></g></svg>
+			  			<input placeholder="Search" type="search" class="input" name = "faq_search">
+					</div>
+			  	</div>
+			 </form> 
+		 </div>	
 		
 		
 		<!-- 자주묻는질문들 -->
 	<div class="container-fluid">
-      <div class="panel-group" id="accParent" role="tablist">
-        
-        <!-- 첫번째 질문 -->
-        <div class="panel panel-default">
-          <div class="panel-heading" role="tab">
-            <a role="button" data-toggle="collapse" data-parent="#accParent" href="#accEx1" aria-constrols="addEx1">
-              첫번째 질문
-            </a>
-          </div>
-          <div id="accEx1" class="panel-collapse collapse in" role="tabpanel">
-            <div class="panel-body">
-              답변 ~
-            </div>
-          </div>
-        </div>
-        
-        <!-- 두번째 질문 -->
-        <div class="panel panel-default">
-          <div class="panel-heading" role="tab">
-            <a role="button" data-toggle="collapse" data-parent="#accParent" data-target="#accEx2" aria-constrols="addEx2">
-              두번째 질문
-            </a>
-          </div>
-          <div id="accEx2" class="panel-collapse collapse" role="tabpanel">
-            <div class="panel-body">
-              답변 ~
-            </div>
-          </div>
-        </div>
+	    <div class="panel-group" id="accParent" role="tablist">
+	        <c:forEach var="faq" items="${faqList}" varStatus="loop">
+	            <!-- 첫번째 질문 -->
+	            <div class="panel panel-default">
+	                <div class="panel-heading" role="tab">
+	                    <a role="button" data-toggle="collapse" data-parent="#accParent" href="#accEx${loop.index}" aria-controls="accEx${loop.index}">
+	                        ${faq.faq_subject}
+	                    </a>
+	                </div>
+	                <div id="accEx${loop.index}" class="panel-collapse collapse" role="tabpanel">
+	                    <div class="panel-body">
+	                        ${faq.faq_content} 
+	                    </div>
+	                </div>
+	            </div>
+	        </c:forEach>
+	    </div>
+	</div>
 
-        <!-- 세번째 질문 -->
-        <div class="panel panel-default">
-          <div class="panel-heading" role="tab">
-            <a role="button" data-toggle="collapse" data-parent="#accParent" data-target="#accEx2" aria-constrols="addEx2">
-              두번째 질문
-            </a>
-          </div>
-          <div id="accEx2" class="panel-collapse collapse" role="tabpanel">
-            <div class="panel-body">
-              답변 ~
-            </div>
-          </div>
-        </div>
+        
+<!--         두번째 질문 -->
+<!--         <div class="panel panel-default"> -->
+<!--           <div class="panel-heading" role="tab"> -->
+<!--             <a role="button" data-toggle="collapse" data-parent="#accParent" data-target="#accEx2" aria-constrols="addEx2"> -->
+<!--               두번째 질문 -->
+<!--             </a> -->
+<!--           </div> -->
+<!--           <div id="accEx2" class="panel-collapse collapse" role="tabpanel"> -->
+<!--             <div class="panel-body"> -->
+<!--               답변 ~ -->
+<!--             </div> -->
+<!--           </div> -->
+<!--         </div> -->
+
+<!--         세번째 질문 -->
+<!--         <div class="panel panel-default"> -->
+<!--           <div class="panel-heading" role="tab"> -->
+<!--             <a role="button" data-toggle="collapse" data-parent="#accParent" data-target="#accEx2" aria-constrols="addEx2"> -->
+<!--               두번째 질문 -->
+<!--             </a> -->
+<!--           </div> -->
+<!--           <div id="accEx2" class="panel-collapse collapse" role="tabpanel"> -->
+<!--             <div class="panel-body"> -->
+<!--               답변 ~ -->
+<!--             </div> -->
+<!--           </div> -->
+<!--         </div> -->
         
       </div> <!-- id=accParent -->
     </div>

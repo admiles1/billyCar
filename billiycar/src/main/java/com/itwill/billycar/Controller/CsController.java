@@ -24,7 +24,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.itwill.billycar.service.CsService;
 import com.itwill.billycar.vo.AdminVO;
+import com.itwill.billycar.vo.FaqVO;
 import com.itwill.billycar.vo.NoticeVO;
+import com.itwill.billycar.vo.PageInfo;
 import com.itwill.billycar.vo.QnaVO;
 import com.mysql.cj.protocol.x.SyncFlushDeflaterOutputStream;
 
@@ -45,11 +47,29 @@ public class CsController {
 	
 	// 공지사항 ----------------------------
 	@GetMapping("notice")
-	public String notice(Model model, @RequestParam(defaultValue = "1") int pageNum) {
+	public String notice( Model model, @RequestParam(defaultValue = "1") int pageNum) {
 		// 페이징 
 		int listLimit = 5;
 		int startRow = (pageNum-1)*listLimit;
 		
+		// 1) 전체 게시물 수 조회
+		int listCount = service.getBoardListCount();
+		int pageListLimit = 3;
+		
+		//----------------------------------------------------------------
+		int maxPage = listCount/listLimit + (listCount%listLimit > 0 ? 1 : 0);
+		System.out.println(maxPage);
+		//----------------------------------------------------------------
+		//시작페이지 설정
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		//끝페이지 설정
+		int endPage = startPage + pageListLimit - 1;
+				
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		model.addAttribute("pageInfo", new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage));
 		
 		// 조회수
 		
@@ -207,10 +227,20 @@ public class CsController {
 	}
 	
 	// FAQ -------------------------------
+	// 자주묻는질문 페이지
 	@GetMapping("faq")
-	public String faq() {
+	public String faq(FaqVO faq, Model model, @RequestParam(defaultValue ="1") int pageNum) {
+		// 페이징
+		int listLimit = 4;
+		int startRow = (pageNum-1)*listLimit;
+		
+		List<FaqVO> faqList = service.getFaqList(listLimit, startRow);
+		model.addAttribute("faqList", faqList);
+		
 		return "cs/FAQ";
 	}
+	
+	
 	
 	// QnA -------------------------------
 	// 문의내역 목록
@@ -219,6 +249,27 @@ public class CsController {
 		// 페이징 
 		int listLimit = 5;
 		int startRow = (pageNum-1)*listLimit;
+		
+		
+		// 1) 전체 게시물 수 조회
+		int listCount = service.getQnaListCount();
+		int pageListLimit = 3;
+		
+		//----------------------------------------------------------------
+		int maxPage = listCount/listLimit + (listCount%listLimit > 0 ? 1 : 0);
+		System.out.println(maxPage);
+		//----------------------------------------------------------------
+		//시작페이지 설정
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		//끝페이지 설정
+		int endPage = startPage + pageListLimit - 1;
+				
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		model.addAttribute("pageInfo", new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage));
+		
 		
 		String id = (String)session.getAttribute("member_id");
 		

@@ -43,7 +43,11 @@
 	</select>
 	
 	<select id="selectForgotId" resultType="com.itwill.billycar.vo.MemberVO">
-		SELECT * FROM member WHERE member_name = #{member_name} AND member_email = #{member_email}
+		SELECT CONCAT(LEFT(member_id,4), '****') AS member_id    
+		  FROM member 
+		 WHERE 1=1
+		   AND member_name = #{member_name}  
+		   AND member_email = #{member_email}
 	</select>
 	
 </mapper>

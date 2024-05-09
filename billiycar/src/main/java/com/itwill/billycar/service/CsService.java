@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.itwill.billycar.mapper.CsMapper;
+import com.itwill.billycar.vo.FaqVO;
 import com.itwill.billycar.vo.NoticeVO;
 import com.itwill.billycar.vo.QnaVO;
 
@@ -26,6 +27,11 @@ public class CsService {
 		return mapper.selectNoticeList(startRow, listLimit);
 	}
 
+	// 공지사항 글 개수 조회
+	public int getBoardListCount() {
+		return mapper.selectListCount();
+	}
+	
 	// 공지사항 내용 보기
 	public NoticeVO getNoticeDetail(int notice_idx) {
 		return mapper.selectNoticeDetail(notice_idx);
@@ -52,12 +58,23 @@ public class CsService {
 	}
 	
 	// ------------------------------------------------------------------------------------------------
+	// ** [자주묻는질문] **
+	public List<FaqVO> getFaqList(int listLimit, int startRow) {
+		return mapper.selectFaqList(listLimit, startRow);
+	}
+	
+	// ------------------------------------------------------------------------------------------------
 	// ** [QnA] **
 	// 큐엔에이 목록 불러오기
 	public List<QnaVO> getQnaList(int startRow, int listLimit, String id) {
 		return mapper.selectQnaList(startRow, listLimit, id);
 	}
 
+	// 큐엔에이 페이지 수 조회
+	public int getQnaListCount() {
+		return mapper.selectQnaListCount();
+	}
+	
 	// 큐엔에이 글작성
 	public int writeQna(QnaVO qna) {
 		return mapper.insertQna(qna);
@@ -67,5 +84,8 @@ public class CsService {
 	public QnaVO getQnaDetail(QnaVO qna) {
 		return mapper.selectQnaDetail(qna);
 	}
+
+
+
 
 }

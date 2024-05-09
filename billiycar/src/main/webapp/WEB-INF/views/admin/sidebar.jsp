@@ -72,7 +72,7 @@
                             <a class="nav-link" href="admin_counsel"><i class="fas fa-comments"></i> 1:1 문의 상담 내역</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="admin_answerList"><i class= "fas fa-reply"></i> 답변 내역</a>
+                            <a class="nav-link" href="adminAnswerList"><i class= "fas fa-reply"></i> 답변 내역</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="admin_review"><i class="fas fa-star"></i> 리뷰 관리</a>

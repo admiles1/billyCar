@@ -38,6 +38,20 @@ public class MypageService {
 		return mapper.insertLicense(license);
 	}
 
+	public boolean checkLicenseMatch(LicenseVO license) {
+		int count = mapper.checkLicenseMatch(license);
+		return count > 0;
+	}
+
+	public int withdrawMember(MemberVO member) {
+		return mapper.withdrawMember(member);
+	}
+
+
+	public int modifyInfo(MemberVO member) {
+		
+		return mapper.updateInfo(member);
+	}
 
 
 	

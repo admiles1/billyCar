@@ -8,5 +8,5 @@ public class FaqVO {
 	private String faq_category;
 	private String faq_subject;
 	private String faq_content;
-	private int faq_writer;
+	private String faq_writer;
 }

@@ -44,16 +44,8 @@ public class MemberController {
 	@PostMapping("check_id")
 	public String check_id_pro(String member_id, Model model, HttpServletResponse response) {
 		boolean isEmptyId = service.isEmptyId(member_id);
-		if(!isEmptyId) {
-			
-			model.addAttribute("member_id", member_id);
-			model.addAttribute("isValid", true);
-			
-		} else {
-			
-			model.addAttribute("member_id", member_id);
-			model.addAttribute("isValid", false);
-		}
+		model.addAttribute("member_id", member_id);
+		model.addAttribute("isValid", !isEmptyId);
 		
 		return "redirect:/check_id";
 		
@@ -69,16 +61,8 @@ public class MemberController {
 	@PostMapping("check_inviter")
 	public String check_inviter(String member_inviter, Model model, HttpServletResponse response) {
 		boolean isEmptyId = service.isEmptyId(member_inviter);
-		if(isEmptyId) {
-			
-			model.addAttribute("member_inviter", member_inviter);
-			model.addAttribute("isValid", true);
-			
-		} else {
-			
-			model.addAttribute("member_inviter", member_inviter);
-			model.addAttribute("isValid", false);
-		}
+		model.addAttribute("member_inviter", member_inviter);
+		model.addAttribute("isValid", isEmptyId);
 		
 		return "redirect:/check_inviter";
 		
@@ -203,3 +187,4 @@ public class MemberController {
 		return "join/join_form";
 	}
 }
+
