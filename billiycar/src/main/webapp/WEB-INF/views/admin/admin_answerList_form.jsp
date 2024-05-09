@@ -41,11 +41,12 @@
 		                String answer = "어떤 차든 시속 500km 가 나오기는 힘듭니다. ^^";
 		            %>
 		            ${qna}
-		            <h5 class="card-title">질문 ID: <%= request.getParameter("qid") %></h5>
-		            <p class="card-text"><strong>질문 내용:</strong> <%= question %></p>
-		            <p class="card-text"><strong>답변 내용:</strong> <%= answer %></p>
-		            <a href="admin_main" class="btn btn-primary"><i class="fas fa-arrow-left"></i> 관리자 메인으로 돌아가기</a>
-		            <a href="edit_answer.jsp?qid=<%= request.getParameter("qid") %>" class="btn btn-warning"><i class="fas fa-edit"></i> 답변 수정</a>
+		            <h5 class="card-title">질문 ID: ${qna.qna_writer}</h5>
+		            <p class="card-text"><strong>질문 제목:</strong> ${qna.qna_subject}</p>
+		            <p class="card-text"><strong>질문 내용:</strong> ${qna.qna_content}</p>
+		            <p class="card-text"><strong>답변 내용:</strong> ${qna.admin_content}</p>
+		            <a href="adminAnswerList" class="btn btn-primary"><i class="fas fa-arrow-left"></i> 답변 내역</a>
+		            <a href="edit_answer.jsp?qid=<%= request.getParameter("qid") %>" class="btn btn-warning"><i class="fas fa-edit"></i> 답변 달기</a>
 		        </div>
               </div>
             </div>

@@ -31,6 +31,12 @@
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
           <h1 class="h2">답변 내역</h1>
         </div>
+        
+        	<c:set var = "pageNum" value = "1"/>
+					<c:if test="${not empty param.pageNum}">
+						<c:set var = "pageNum" value = "${param.pageNum}"/>
+					</c:if>
+        
         	 <c:forEach var="qna" items="${qna }">
                    		<div class="container">
        						<div class="row">
@@ -44,7 +50,7 @@
 					                    	<hr class="my-4">
 					                    	<c:choose>
 					                    		<c:when test="${qna.admin_content ne ''}">
-					                    			<a href="adminAnswerForm" class="btn btn-sm btn-danger">답변 달기</a>
+					                    			<a href="adminAnswerForm?qna_idx=${qna.qna_idx}&pageNum=${pageNum}" class="btn btn-sm btn-danger">답변 달기</a>
 					                    		</c:when>
 					                    		<c:otherwise>
 					                    			<a class="btn btn-sm btn-danger">답변완료</a>

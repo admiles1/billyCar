@@ -261,7 +261,9 @@ public class AdminController {
 	}
 	
 	@GetMapping("adminAnswerForm")
-	public String adminAnswer() {
+	public String adminAnswer(Model model, QnaVO qna) {
+		
+		
 		return "admin/admin_answerList_form";
 	}
 	
