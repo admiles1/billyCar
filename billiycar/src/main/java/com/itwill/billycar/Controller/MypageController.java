@@ -44,8 +44,14 @@ public class MypageController {
 	public String modifyInfo(Model model) {
 		String MemberId = (String)session.getAttribute("member_id");
 		model.addAttribute("info", service.getMemberInfo(MemberId));
+		return "mypage/page/Mypage_Insert_Password";
+	}
+	
+	@GetMapping("modifyMemberInfo")
+	public String modifyMemberInfo() {
 		return "mypage/page/Mypage_Modify_Info";
 	}
+	
 	
 	@GetMapping("checkPasswd")
 	public String checkPasswd() {
