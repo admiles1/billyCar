@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,22 +15,32 @@
  <style type="text/css">
  	.subject{
 	font: bold;
-/* 	height : 30px; */
 	margin-bottom : 15px;
-	padding : 5px;
+ 	padding: 5px; 
 	text-align : left;
 	background-color : lightgray;
 	border-radius : 10px;
 	height: 45px;
-	
 	}
-
+	.subject2{
+	font: bold;
+	margin-bottom : 15px;
+ 	padding: 5px; 
+	text-align : left;
+	background-color : lightgray;
+	border-radius : 10px;
+	height: 45px;
+	}
+		
 	.accordion-body {
             max-height: 200px; /* 최대 높이 설정 */
             overflow-y: auto; /* 내용이 넘치는 경우 스크롤 표시 */
     }
     .list-table-v02{
 		border-top: 2px solid black;
+ 		width: 870px; 
+		margin-left: 15px;
+/* 		margin-right: 10px; */
 		
 	}
     .c , th{
@@ -52,15 +62,51 @@
 		height: 80px;
 		 
 	}
-     
+	#paymentMain{
+	border: 1px solid lightgray;
+	border-radius: 10px;
+/* 	margin-left: 0px;  */
+/* 	margin-right: 0px; */
+	padding-left: 0px;
+	padding-right: 0px;
+	
+	}
+  	#paymentSide{  
+ 		position:fixed;  
+  		left:1190px; top:230px;  
+   		width: 500px;  
+   		height: 570px;  
+		margin: 0px;
+		padding: 0px;
+  		border: 1px solid lightgray;
+  		border-radius: 10px;
+  	}
+  	
+  	label {
+  		margin-left: 10px;
+  	}
+/*   	#tabels{ */
+/*   		margin-left: 5px; */
+/*   		margin-right: 5px; */
+/*   		padding-left: 5px; */
+/*   		padding-right: 5px; */
+/* 		width: 850px; */
+/*   	} */
+  	
+/* 		#sidePayment{    
+   		position: relative;   
+ 		left:1130px; top:184px; 
+  	}
+ */
  </style>
 </head>
 <body>
 	<header><jsp:include page="../inc/top.jsp"></jsp:include></header>
 	<div class="container">
 	      <!-- row div 다 닫기 -->
-	<!-- 	<div class="col-md-7 col-lg-12"> -->
-		<div class="col-lg-12">
+<!-- 		<div class="col-md-7 col-lg-12"> -->
+		<div class="row g-5">
+		<div class="col-md-7 col-lg-8 " id="paymentMain">
 	<!--         <form class="needs-validation" > -->
 	    <h4 class="subject">예약정보</h4>
 	    	<div class="row g-3">
@@ -69,7 +115,7 @@
 	            </div>
 	
 	            <div class="col-sm-9">
-	              <input type="text" class="form-control" id="dateInfo" placeholder="" value="대여 날짜받아올꺼" required>
+	            	<input type="text" class="form-control" id="dateInfo"  value="날짜 받아 올꺼" >
 	            </div>
 	        </div>
 	        
@@ -79,12 +125,14 @@
 	            </div>
 				
 	            <div class="col-sm-9">
-	            	<select class="form-select" aria-label="Default select example">
-						<option selected>대역지역</option>
-						<option value="1">대여지역1</option>
-						<option value="2">대여지역2</option>
-						<option value="3">대여지역3</option>
-					</select>
+	            	<input type="text" class="form-control" id="locatrionInfo"  value="대여지역 받아 올꺼" >
+<!-- 	            	<select class="form-select" aria-label="Default select example"> -->
+<!-- 						<option selected>대역지역</option> -->
+<!-- 						<option value="1">대여지역1</option> -->
+<!-- 						<option value="2">대여지역2</option> -->
+<!-- 						<option value="3">대여지역3</option> -->
+<!-- 					</select> -->
+					
 	            </div>
 			</div>
 			
@@ -94,7 +142,7 @@
 	            </div>
 	
 	            <div class="col-sm-9">
-	            	<input type="text" class="form-control" id="dateInfo" placeholder="" value="반납 날짜받아올꺼" required>
+	            	<input type="text" class="form-control" id="dateInfo" value="반납 날짜받아올꺼" >
 	            </div>
 				
 			</div>
@@ -105,24 +153,25 @@
 	            </div>
 	
 	            <div class="col-sm-9">
-	            	<select class="form-select" aria-label="Default select example">
-						<option selected>반납지역</option>
-						<option value="1">반납지역1</option>
-						<option value="2">반납지역2</option>
-						<option value="3">반납지역3</option>
-					</select>
+	            	<input type="text" class="form-control" id="locatrionInfo" value="반납 지역 받아올꺼" >
+<!-- 	            	<select class="form-select" aria-label="Default select example"> -->
+<!-- 						<option selected>반납지역</option> -->
+<!-- 						<option value="1">반납지역1</option> -->
+<!-- 						<option value="2">반납지역2</option> -->
+<!-- 						<option value="3">반납지역3</option> -->
+<!-- 					</select> -->
 	            </div>
 			</div>
 			
-			<div class="row g-3">
-				<div class="col-sm-3">
-	            	<label>총 대여시간</label>
-	        	</div>
+<!-- 			<div class="row g-3">  --> <!--  필요 없을듯 --> 
+<!-- 				<div class="col-sm-3"> -->
+<!-- 	            	<label>총 대여시간</label> -->
+<!-- 	        	</div> -->
 	
-	            <div class="col-sm-9">
-	            	<input type="text" class="form-control" id="dateInfo" placeholder="" value="총 대여시간 받아올꺼" required>
-	            </div>
-	        </div>
+<!-- 	            <div class="col-sm-9"> -->
+<!-- 	            	<input type="text" class="form-control" id="dateInfo" placeholder="" value="총 대여시간 받아올꺼" required> -->
+<!-- 	            </div> -->
+<!-- 	        </div> -->
 			<hr>            
 	        
 		<h4 class="subject">운전자정보(필수입력)</h4>
@@ -132,7 +181,7 @@
 	           	</div>
 	
 	           	<div class="col-sm-4">
-	            	<input type="text" class="form-control" id="dateInfo" placeholder="[필수]이름" value="" required>
+	            	<input type="text" class="form-control" id="nameInfo" placeholder="[필수]이름" value="" required>
 	       		</div>
 	           		 
 	           	<div class="col-sm-2">
@@ -140,7 +189,7 @@
 	            </div>
 				
 	            <div class="col-sm-4">
-	           		<input type="text" class="form-control" id="dateInfo" placeholder="[필수]생년월일" value="" required>
+	           		<input type="text" class="form-control" id="birthInfo" placeholder="[필수]생년월일" value="" required>
 	       		</div>
 			</div>
 				
@@ -150,7 +199,7 @@
 	           	</div>
 	
 	           	<div class="col-sm-4">
-	       			<input type="text" class="form-control" id="dateInfo" placeholder="[필수]핸드폰번호(-제외)" value="" required>
+	       			<input type="text" class="form-control" id="tellInfo" placeholder="[필수]핸드폰번호(-제외)" value="" required>
 	   			</div>
 	           		 
 	      		<div class="col-sm-2">
@@ -158,16 +207,17 @@
 	           	</div>
 	
 	           	<div class="col-sm-4">
-	            	<input type="text" class="form-control" id="dateInfo" placeholder="[필수]이메일" value="" required>
+	            	<input type="text" class="form-control" id="eMailInfo" placeholder="[필수]이메일" value="" required>
 	       		</div>
 	           		 
 	        </div>
 			
-			<hr>	
+		<hr>
+				
 		<h4 class="subject">이벤트정보</h4>
 			
-			<div class="row g-3">
-				<table class="list-table-v02" width="100%"  >
+			<div class="row g-3" id="tables">
+				<table class="list-table-v02"   >
 					<colgroup span="1">
 						<col width="45%">
 						<col width="25%">
@@ -183,15 +233,15 @@
 					<tbody>
 						<tr class="eventChk" bordercolor="black">
 							<td colspan="1" class="c" bordercolor="black">
-								<input name="event" class="chk event_data" id="event0" type="radio" value="0|선택안함" checked="checked"> 
+								<input name="event" class="chk event_data" id="event0" type="radio" checked="checked"> 
 								<label for="event0" >선택안함</label>
 							</td>
 							<td colspan="1" class="c">없음</td>
-							<td colspan="1" class="c	">없음</td>
+							<td colspan="1" class="c">없음</td>
 						</tr>
 						<tr class="eventChk" bordercolor="black">
 							<td colspan="1" class="c" bordercolor="black">
-								<input name="event" class="chk event_data" id="event1" type="radio" value="0|선택안함" > 
+								<input name="event" class="chk event_data" id="event1" type="radio"> 
 								<label for="event1" >유아용 카시트 무료 이벤트</label>
 							</td>
 							<td colspan="1" class="c">카시트 무료 제공</td>
@@ -199,7 +249,7 @@
 						</tr>
 						<tr class="eventChk" bordercolor="black">
 							<td colspan="1" class="c" bordercolor="black">
-								<input name="event" class="chk event_data" id="event2" type="radio" value="0|선택안함" > 
+								<input name="event" class="chk event_data" id="event2" type="radio"> 
 								<label for="event1" >현대차 렌트 할인 이벤트</label>
 							</td>
 							<td colspan="1" class="c">5000원 쿠폰 제공</td>
@@ -268,7 +318,7 @@
 				</table>
 			</div>	
 					
-					
+			<br>		
 			<div class="row g-3">			
 				<h5>종합보험(기본)</h5>
 				<table class="list-table-v02" width="100%"  >
@@ -315,16 +365,16 @@
 		<h4 class="subject">추가옵션</h4>
 			<div class="row row-cols-2">
 				<div class="opt_chk">
-					<input type="checkbox" name="opt_chk" id="opt_chk8" value="8|0">&emsp;카시트(영유아용)1개
-					<br>무료대여
+					&nbsp;<input type="checkbox" name="opt_chk" id="opt_chk8" value="8|0">&emsp;카시트(영유아용)1개
+					<br>&nbsp;무료대여
 				</div>
 				<div class="opt_chk">
 					<input type="checkbox" name="opt_chk" id="opt_chk8" value="8|0">&emsp;카시트(주니어)1개
 					<br>무료대여
 				</div>
 				<div class="opt_chk">
-					<input type="checkbox" name="opt_chk" id="opt_chk8" value="8|0">&emsp;카시트(영유아용)2개
-					<br>5000원
+					&nbsp;<input type="checkbox" name="opt_chk" id="opt_chk8" value="8|0">&emsp;카시트(영유아용)2개
+					<br>&nbsp;5000원
 				</div>
 				<div class="opt_chk">
 					<input type="checkbox" name="opt_chk" id="opt_chk8" value="8|0">&emsp;카시트(주니어)2개
@@ -336,7 +386,7 @@
 		<h4 class="subject">결제수단 선택</h4>
 			<div class="row">
 				<div class="col pay_radio">
-					<input type="radio" name="payment">&emsp;신용/체크카드
+					&nbsp;<input type="radio" name="payment">&emsp;신용/체크카드
 				</div>
 				<div class="col pay_radio">
 					<input type="radio" name="payment">&emsp;가상계좌이체
@@ -348,10 +398,12 @@
 			<hr>
 		<h4 class="subject">할인정보(중복할인불가)</h4>
 			<div class="row g-3">
-				<div class="col-sm-3">
-	            	<label>쿠폰사용&emsp;<input type="text"></label>
+				<div class="col-sm-4">
+	            	<label>쿠폰사용&emsp;<input type="text">
+	            	</label>
 	            </div>
-	            <div class="col-sm-9">
+	            <div class="col-sm-8">
+	            	<br>
 	            	<input type="button" value="적용">
 	            </div>
 			</div>
@@ -605,90 +657,104 @@
 		        </div>
 		    </div>
 			<hr>    
-		<h4 class="subject">결제 전 예약 확인</h4>
+		
+			
+		</div>
+<!-- 		<div class="col-lg-4"> -->
+<!-- 		<div class="col-md-7 col-lg-4"> -->
+		<div class="col-md-5 col-lg-4 order-md-last" id="paymentSide">
+			<h4 class="subject2">결제 전 예약 확인</h4>
 			<div class="container last_check">
-				<h5>예약자 정보</h5>
-				<div class="row row-cols-2">
-					<div class="col">예약자 이름</div>
-					<div class="col">예약자명 표시</div>
-					<div class="col">휴대폰 번호</div>
-					<div class="col">예약자 휴대폰 번호 표시</div>
-					<div class="col">생년월일</div>
-					<div class="col">예약자 생년원일 표시</div>
-					<div class="col">이메일</div>
-					<div class="col">예약자 이메일 표시</div>
+				<p><b>예약자 정보</b></p>
+				<div class="row">
+					<div class="col-3">예약자 이름</div>
+					<div class="col-9">예약자명 표시</div>
+					<div class="col-3">휴대폰 번호</div>
+					<div class="col-9">예약자 휴대폰 번호 표시</div>
+					<div class="col-3">생년월일</div>
+					<div class="col-9">예약자 생년원일 표시</div>
+					<div class="col-3">이메일</div>
+					<div class="col-9">예약자 이메일 표시</div>
 				</div>
-				<br>
-				<h5>차량 정보</h5>
-				<div class="row row-cols-2">
-					<div class="col">차량</div>
-					<div class="col">차량이름(차량크기 정보->ex.중형,대형)표시</div>
-					<div class="col">기본정보</div>
-					<div class="col">차량 수용인원/기어방식/기름종류 표시</div>
-					<div class="col">세부정보</div>
-					<div class="col">차 옵션 표시</div>
-					<div class="col">이용일</div>
-					<div class="col">빌린 날짜 표기(대여일 및 시간 ~ 반납일 및 시간)</div>
-					<div class="col">대여지역</div>
-					<div class="col">대여지역 표시</div>
-					<div class="col">반납지역</div>
-					<div class="col">반납지역 표시</div>
-					<div class="col">제한나이</div>
-					<div class="col">만23세 이상</div>
-					<div class="col">운전경력</div>
-					<div class="col">면허취득 1년이상</div>
-					<div class="col">면허종류</div>
-					<div class="col">면허종류 표시</div>
+				
+				<p><b>차량 정보</b></p>
+				<div class="row ">
+					<div class="col-3">차량</div>
+					<div class="col-9">차량이름(차량크기 정보->ex.중형,대형)표시</div>
+<!-- 					<div class="col">기본정보</div> -->
+<!-- 					<div class="col">차량 수용인원/기어방식/기름종류 표시</div> -->
+<!-- 					<div class="col">세부정보</div> -->
+<!-- 					<div class="col">차 옵션 표시</div> -->
+					<div class="col-3">이용일</div>
+					<div class="col-9">빌린 날짜 표기(대여일 및 시간 ~ 반납일 및 시간)</div>
+					<div class="col-3">대여지역</div>
+					<div class="col-9">대여지역 표시</div>
+					<div class="col-3">반납지역</div>
+					<div class="col-9">반납지역 표시</div>
+<!-- 					<div class="col">제한나이</div> -->
+<!-- 					<div class="col">만23세 이상</div> -->
+<!-- 					<div class="col">운전경력</div> -->
+<!-- 					<div class="col">면허취득 1년이상</div> -->
+<!-- 					<div class="col">면허종류</div> -->
+<!-- 					<div class="col">면허종류 표시</div> -->
 				</div>
-				<br>
-				<h5>추가 옵션</h5>
-				<div class="row row-cols-2">
-					<div class="col">추가 옵션 표시</div>
-					<div class="col">추가 옵션에 따른 추가 비용 표시 없으면(+0원)</div>
+				
+				<p font><b>추가 옵션</b></p>
+				<div class="row">
+					<div class="col-3">추가 옵션 표시</div>
+					<div class="col-9">추가 옵션에 따른 추가 비용 표시 없으면(+0원)</div>
 				</div>
-				<br>
-				<h5>결제 정보</h5>
-				<div class="row row-cols-2">
-					<div class="col">이용금액</div>
-					<div class="col">이용금액 표시</div>
-					<div class="col">결제금액</div>
-					<div class="col">결제금액 표시</div>
-					<div class="col">결제수단</div>
-					<div class="col">결제수단 표시</div>
+				
+				<p><b>결제 정보</b></p>
+				<div class="row">
+					<div class="col-3">이용금액</div>
+					<div class="col-9">이용금액 표시</div>
+					<div class="col-3">결제금액</div>
+					<div class="col-9">결제금액 표시</div>
+					<div class="col-3">결제수단</div>
+					<div class="col-9">결제수단 표시</div>
 				</div>
-				<br>
+				<br><br><br>
 			</div>			
 			<div align="center">
 <!-- 				<button class="sub_btn w-50 btn btn-primary btn-lg" type="submit" >결제하기</button> -->
-				<input class="sub_btn w-50 btn btn-primary btn-lg" type="submit" >결제하기
+<!-- 				<input class="sub_btn w-50 btn btn-primary btn-lg" value="결제하기" type="submit" > -->
 <!-- 				<button  class="testBtn" >테스트용 버튼</button> -->
 <!-- 				 <button id="pay-button">결제하기</button> -->
-				 <button type="button" onclick="startPayment();">결제하기</button>
+<!-- 				 <button type="button" onclick="startPayment();">결제하기</button> -->
+<!-- 				 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br> -->
+			</div>
+			
+				<input class="sub_btn w-100 btn btn-primary btn-lg" value="결제하기" onclick="startPayment();" >
+		</div>
+		</div>
+	</div>
 
     <!-- 아임포트 스크립트 -->
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
     <script>
-        const IMP = window.IMP; // 아임포트 라이브러리 추출
-        IMP.init('imp47235683'); // 가맹점 식별 코드
+        const IMP = window.IMP; 
+        IMP.init('imp47235683'); // 내 가맹점 식별 코드
 
         function startPayment() {
             IMP.request_pay({
-                pg: 'html5_inicis', // 결제 과정에 사용될 결제사
+                pg: 'html5_inicis', // 결제 과정에 사용될 결제사 이니시스
                 pay_method: 'card', // 결제 수단
-                merchant_uid: 'merchant_' + new Date().getTime(), // 주문번호
-                name: '렌트카 예약', // 주문 명
+                merchant_uid: 'merchant_' + new Date().getTime(), // 주문번호 어칼지 고민
+                name: '렌트카 예약', // 주문 명 '렌트카 되어있는 곳에 차명 따와야 할듯'
                 amount: 100, // 금액
-                buyer_email: 'customer@example.com', // 구매자 이메일
-                buyer_name: '홍길동', // 구매자 이름
-                buyer_tel: '010-1234-5678', // 구매자 전화번호
-                buyer_addr: '서울특별시 강남구 삼성동', // 구매자 주소
-                buyer_postcode: '123-456', // 구매자 우편번호
-                m_redirect_url: 'https://www.yoursite.com/payments/complete' // 모바일 결제시 리다이렉션될 URL
+                buyer_email: 'customer@example.com', // 구매자 이메일 결제 페이지에서 적는거 고대로 가져오면댈듯
+                buyer_name: '홍길동', // 구매자 이름 가져오기
+                buyer_tel: '010-1234-5678', // 구매자 전화번호 필요 하려나
+                buyer_addr: '서울특별시 강남구 삼성동', // 구매자 주소 필요 없을듯
+                buyer_postcode: '123-456', // 구매자 우편번호 필요없을듯
+                m_redirect_url: 'https://www.yoursite.com/payments/complete' // 모바일 결제시 리다이렉션될 URL이건 그냥 메인으로 보내면 될듯 이거안쓰고 보내도 될듯
             }, function(rsp) {
                 if (rsp.success) {
                     alert('결제 성공');
                 } else {
                     alert('결제 실패');
+                    
                 }
             });
         }
@@ -696,27 +762,21 @@
 				
 				
 				
-			    <!-- 아임포트 스크립트 추가 -->
-			    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
-			
-			    <!-- 결제 스크립트 -->
-			    <script src="payment.js"></script>
-				<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-				<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-<!-- 				<script src="https://cdn.iamport.kr/vl/iamport.js"></script> -->
+    <!-- 아임포트 스크립트 추가 -->
+<!--     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script> -->
+
+    <!-- 결제 스크립트 -->
+<!--     <script src="payment.js"></script> -->
+<!-- 	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script> -->
+<!-- 	<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script> -->
+<!-- 					<script src="https://cdn.iamport.kr/vl/iamport.js"></script> -->
 <!-- 				<script src="./paymentButton.jsp"></script> -->
-<!-- 			</div> -->
-		</div>
-	</div>
 	<!-- 결제버튼 관련 js -->
 <!-- 	<script src="https://cdn.iamport.kr/vl/iamport.js"></script> -->
 <!-- 	<script src="./paymentButton.js"></script> -->
 <!-- 	<script src="payment/paymentButton.js"></script> -->
 	<!-- 부트스트랩 -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<!-- 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
-<!-- 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script> -->
-<!-- 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
-	<footer><jsp:include page="../inc/bottom.jsp"></jsp:include></footer>
+<%-- 	<footer><jsp:include page="../inc/bottom.jsp"></jsp:include></footer> --%>
 </body>
 </html>
