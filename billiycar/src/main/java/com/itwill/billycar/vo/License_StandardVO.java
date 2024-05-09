@@ -9,5 +9,4 @@ public class License_StandardVO {
 	private String license_sd_id;
 	private String license_sd_issue_date;
 	private String license_sd_expiration_date;
-	
 }

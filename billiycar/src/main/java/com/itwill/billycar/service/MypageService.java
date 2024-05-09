@@ -2,12 +2,14 @@ package com.itwill.billycar.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itwill.billycar.mapper.MypageMapper;
 import com.itwill.billycar.vo.LicenseVO;
+import com.itwill.billycar.vo.License_StandardVO;
 import com.itwill.billycar.vo.MemberVO;
 import com.itwill.billycar.vo.QnaVO;
 
@@ -38,11 +40,7 @@ public class MypageService {
 		return mapper.insertLicense(license);
 	}
 
-	public boolean checkLicenseMatch(LicenseVO license) {
-		int count = mapper.checkLicenseMatch(license);
-		return count > 0;
-	}
-
+	
 	public int withdrawMember(MemberVO member) {
 		return mapper.withdrawMember(member);
 	}
@@ -52,6 +50,15 @@ public class MypageService {
 		
 		return mapper.updateInfo(member);
 	}
+
+
+//	public List<License_StandardVO> getLicenseStandardInfo() {
+//		return mapper.selectLicenseStandard();
+//	}
+
+//	public int checkLicenseMatch(LicenseVO license) {
+//		return mapper.checkLicenseMatch(license);
+//	}
 
 
 	
@@ -69,4 +76,9 @@ public class MypageService {
 //		return mapper.selectMember(member);
 //	}
 	
+
+
+	public int getLicense(LicenseVO license) {
+		return mapper.compareLicense(license);
+	}
 }

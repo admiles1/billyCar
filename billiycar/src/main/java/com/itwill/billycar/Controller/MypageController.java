@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.billycar.service.MypageService;
 import com.itwill.billycar.vo.LicenseVO;
+import com.itwill.billycar.vo.License_StandardVO;
 import com.itwill.billycar.vo.MemberVO;
 import com.itwill.billycar.vo.QnaVO;
 
@@ -128,24 +129,37 @@ public class MypageController {
     }
 	
 	@PostMapping("license")
-	public String licensePro(LicenseVO license, Model model) {
+	public String licensePro(LicenseVO license, License_StandardVO licenseSt, Model model) {
 		String memberId = (String) session.getAttribute("member_id");
 		license.setLicense_id(memberId);
+		int isCorrectLiscense = service.getLicense(license);
+		
+		if(isCorrectLiscense < 1) {
+			model.addAttribute("msg", "조회된 정보가 없습니다.");
+			return "err/fail";
+		}
+		
+//		if(!stLicense.getLicense_sd_id().equals(license.getLicense_user_id())) {
+//			model.addAttribute("msg", "면허 번호를 확인해주세요.");
+//			return "err/fail";
+//		} 
+//		if(!stLicense.getLicense_sd_issue_date().equals(license.getLicense_issue_date())) {
+//			model.addAttribute("msg", "발급일을 확인해주세요.");
+//			return "err/fail";
+//		}
+//		if(!stLicense.getLicense_sd_expiration_date().equals(license.getLicense_expiration_date())) {
+//			model.addAttribute("msg", "만료일을 확인해주세요.");
+//			return "err/fail";
+//		}
 		
 		int insertCount = service.registLicense(license);
 		if(insertCount == 0) {
 			model.addAttribute("msg", "면허 등록 실패!");
-			return "error/fail";
-		} else {
-			boolean match = service.checkLicenseMatch(license);
-			if(match) {
-				return "redirect:/licenseInfo";
-			} else {
-				model.addAttribute("msg", "면허 정보를 다시 확인해주세요!");
-				return "error/fail";
-			}
+			return "err/fail";
 		}
+		return "redirect:/licenseInfo";
 	}
+
 
 	
 	@GetMapping("licenseInfo")
