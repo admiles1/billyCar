@@ -1,6 +1,5 @@
 package com.itwill.billycar.vo;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
 
 import lombok.Data;

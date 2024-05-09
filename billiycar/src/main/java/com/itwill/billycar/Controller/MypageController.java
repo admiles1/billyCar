@@ -9,6 +9,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -97,9 +98,14 @@ public class MypageController {
 			model.addAttribute("msg", "면허 등록 실패!");
 			return "error/fail";
 		} else {
-			return "redirect:/licenseInfo";
+			boolean match = service.checkLicenseMatch(license);
+			if(match) {
+				return "redirect:/licenseInfo";
+			} else {
+				model.addAttribute("msg", "면허 정보를 다시 확인해주세요!");
+				return "error/fail";
+			}
 		}
-		
 	}
 
 	
@@ -138,10 +144,50 @@ public class MypageController {
         return "mypage/page/Mypage_Delete_Account_Reason";
     }
 	
-	@GetMapping("resignPasswd")
-    public String resignPasswd() {
-        System.out.println("회원탈퇴 처리과정");
-        return "mypage/page/Mypage_Delete_Account";
-    }
+//	@GetMapping("resignPasswd")
+//    public String resignPasswd() {
+//        System.out.println("회원탈퇴 처리과정");
+//        return "mypage/page/Mypage_Delete_Account";
+//    }
+	
+	@GetMapping("MemberWithdraw")
+	public String withdrawForm(Model model) {
+		// 세션 아이디가 없을 경우 "error/fail" 페이지 포워딩 처리
+		// => msg 속성값 : "잘못된 접근입니다!", targetURL 속성값 : "./"(메인페이지)
+		String memberId = (String)session.getAttribute("member_id");
+		
+		if(memberId == null) {
+			model.addAttribute("msg", "잘못된 접근입니다!");
+			model.addAttribute("targetURL", "./");
+			return "err/fail";
+		}
+		
+		return "mypage/page/Mypage_Delete_Account";
+	}
+	
+	@PostMapping("MemberWithdraw")
+	public String withdrawPro(MemberVO member, BCryptPasswordEncoder passwordEncoder, Model model) {
+		String memberId = (String)session.getAttribute("member_id");
+		
+		if(memberId == null) {
+			model.addAttribute("msg", "잘못된 접근입니다!");
+			model.addAttribute("targetURL", "./");
+			return "err/fail";
+		}
+		
+//		System.out.println(memberId);
+		member.setMember_id(memberId);
+		MemberVO dbMember = service.getMemberInfo(memberId);
+		
+		if(dbMember != null && passwordEncoder.matches(member.getMember_passwd(), dbMember.getMember_passwd())) {
+			int updateCount = service.withdrawMember(member);
+			
+			session.invalidate();
+			return "redirect:/";
+		} else { 
+			model.addAttribute("msg", "비밀번호를 다시 확인해주세요!");
+			return "err/fail";
+		}
+	}
 	
 }

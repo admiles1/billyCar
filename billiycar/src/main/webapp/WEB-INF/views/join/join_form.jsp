@@ -82,11 +82,11 @@
 				alert("아이디를 확인해주세요!");
 				document.fr.member_id.focus();
 				return false;
-			} else if(checkPasswdResult == false) { // 비밀번호 확인
+			} else if(!checkPasswdResult) { // 비밀번호 확인
 				alert("비밀번호를 확인해주세요!");
 				document.fr.member_passwd.focus();
 				return false;
-			} else if(checkPasswd2Result == false) { // 비밀번호 일치확인 
+			} else if(!checkPasswd2Result) { // 비밀번호 일치확인 
 				alert("비밀번호가 일치하지 않습니다!");
 				document.fr.member_passwd2.focus();
 				return false;
