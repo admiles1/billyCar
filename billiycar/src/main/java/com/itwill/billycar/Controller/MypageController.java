@@ -1,9 +1,6 @@
 package com.itwill.billycar.Controller;
 
 
-import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -13,7 +10,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -41,7 +37,7 @@ public class MypageController {
 	public String memberInfo(Model model) {
 		String MemberId = (String)session.getAttribute("member_id");
 		model.addAttribute("info", service.getMemberInfo(MemberId));
-		return "mypage/page/Mypage_Modify_Info";
+		return "mypage/page/Mypage_Member_Info";
 	}
 	
 	@GetMapping("modifyInfo")
