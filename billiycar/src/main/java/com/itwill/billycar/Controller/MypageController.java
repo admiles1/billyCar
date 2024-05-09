@@ -74,15 +74,11 @@ public class MypageController {
 		
 		int updateCount = service.modifyInfo(member);
 		
-		System.out.println("dddddd"+member);
-		
 		
 		if(updateCount <= 0) {
 			model.addAttribute("msg", "회원정보 업데이트 실패");
 			return "err/fail";
 		}
-		
-		model.addAttribute("info", service.getMemberInfo(member.getMember_id()));
 		
 		return "redirect:/mypage";
 	}
