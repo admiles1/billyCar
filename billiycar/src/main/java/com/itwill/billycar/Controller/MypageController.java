@@ -64,6 +64,36 @@ public class MypageController {
 
 	}
 	
+	
+	@PostMapping("mypage")
+	public String modifyMemberInfoPro(Model model, MemberVO member) {
+	
+		member.setMember_id((String)session.getAttribute("member_id"));
+		member.setMember_email(member.getMember_email());
+		member.setMember_phone(member.getMember_phone());
+		
+		int updateCount = service.modifyInfo(member);
+		
+		System.out.println("dddddd"+member);
+		
+		
+		if(updateCount <= 0) {
+			model.addAttribute("msg", "회원정보 업데이트 실패");
+			return "err/fail";
+		}
+		
+		model.addAttribute("info", service.getMemberInfo(member.getMember_id()));
+		
+		return "redirect:/mypage";
+	}
+
+
+
+
+	
+	
+	
+	
 //	@GetMapping("checkPasswd")
 //	public String checkPasswd() {
 //		return "mypage/page/Mypage_Insert_Password";
