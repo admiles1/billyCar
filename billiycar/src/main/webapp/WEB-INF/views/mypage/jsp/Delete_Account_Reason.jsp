@@ -71,7 +71,7 @@
         resize: none;
     }
     
-    #delete-reason button {
+    #delete-reason input[type="submit"] {
         border: none;
 		border-radius: 20px;
 		font-size: 16px;
@@ -83,14 +83,14 @@
 	    margin-top: 20px;
     }
     
-    #delete-reason button:hover {
+    #delete-reason input[type="submit"]:hover {
         background-color: #555;
     }
 </style>
 </head>
 <body>
 
-<form id="delete-reason" action="resignPasswd">
+<form id="delete-reason" action="MemberWithdraw">
     <h2>회원 탈퇴</h2>
     <hr>
     <p>회원 탈퇴를 진행하기 전에 탈퇴 사유를 선택해주세요.</p>
@@ -117,7 +117,7 @@
 	    
 	    <textarea id="otherReasonText" placeholder="기타 사유를 입력해주세요" rows="4"></textarea>
 	    
-	    <button>다음</button>
+	    <input type="submit" value="다음">
     </div>
 </form>
 

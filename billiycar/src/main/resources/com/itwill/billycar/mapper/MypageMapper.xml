@@ -36,4 +36,22 @@
     		, #{license_expiration_date}
     	)
     </insert>
+    
+     <select id="checkLicenseMatch" parameterType="com.itwill.billycar.vo.LicenseVO" resultType="int">
+        SELECT COUNT(*) 
+        FROM license_standard ls
+        INNER JOIN license l ON ls.license_id = l.license_id 
+        WHERE ls.license_id = #{license_id}
+        AND ls.license_issue_date = #{license_issue_date}
+        AND ls.license_expiration_date = #{license_expiration_date}
+    </select>
+    
+    <update id="withdrawMember">
+    	UPDATE member
+    	SET 
+    		member_status = 3
+		WHERE 
+			member_id = #{member_id}    		
+    </update>
+    
 </mapper>

@@ -34,7 +34,7 @@
         box-sizing: border-box;
     }
     
-    #delete-acc button {
+    #delete-acc input[type="submit"] {
         border: none;
 		border-radius: 20px;
 		font-size: 16px;
@@ -45,7 +45,7 @@
 	    color: white; 
     }
     
-    #delete-acc button:hover {
+    #delete-acc input[type="submit"]:hover {
         background-color: #555;
     }
     
@@ -59,22 +59,16 @@
 </head>
 <body>
 
-<form id="delete-acc" action="logout">
+<form id="delete-acc" action="MemberWithdraw" method="post">
     <h2>회원탈퇴</h2>
     <hr>
     <p>회원탈퇴를 진행하시려면 비밀번호를 입력해주세요.</p>
     <div class="delete-check">
-    <input type="password" id="password" placeholder="비밀번호를 입력하세요">
-    <button onclick="withdraw()">회원탈퇴</button>
+	    <input type="password" id="password" placeholder="비밀번호를 입력하세요" name="member_passwd" required>
+	    <input type="submit" value="회원탈퇴">
 	</div>
 </form>
 
-<script>
-    function withdraw() {
-        var password = document.getElementById("password").value;
-        
-        // 회원탈퇴 로직 추가 필요
-    }
-</script>
+
 </body>
 </html>
