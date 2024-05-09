@@ -40,23 +40,34 @@ public class MypageController {
 		return "mypage/page/Mypage_Member_Info";
 	}
 	
-	@GetMapping("modifyInfo")
+	@GetMapping("modifyInfo") //회원정보수정 클릭시
 	public String modifyInfo(Model model) {
 		String MemberId = (String)session.getAttribute("member_id");
 		model.addAttribute("info", service.getMemberInfo(MemberId));
 		return "mypage/page/Mypage_Insert_Password";
 	}
 	
-	@GetMapping("modifyMemberInfo")
-	public String modifyMemberInfo() {
-		return "mypage/page/Mypage_Modify_Info";
+	@PostMapping("modifyInfo")
+	public String modifyMemberInfo(MemberVO member, String member_passwd , Model model, BCryptPasswordEncoder passwordEncoder) {
+		
+		String MemberId = (String)session.getAttribute("member_id");
+		MemberVO dbMember = service.getMemberInfo(MemberId);
+		
+		if(dbMember == null || !passwordEncoder.matches(member_passwd, dbMember.getMember_passwd())) { // 비밀번호 확인 실패
+			model.addAttribute("msg", "비밀번호를 확인해주세요.");
+			return "err/fail";
+		} else { // 비밀번호 확인 성공
+			
+			model.addAttribute("info", service.getMemberInfo(MemberId));
+			return "mypage/page/Mypage_Modify_Info";
+		}
+
 	}
 	
-	
-	@GetMapping("checkPasswd")
-	public String checkPasswd() {
-		return "mypage/page/Mypage_Insert_Password";
-	}
+//	@GetMapping("checkPasswd")
+//	public String checkPasswd() {
+//		return "mypage/page/Mypage_Insert_Password";
+//	}
 //	@GetMapping("mypage")
 //	public String mypage(HttpSession session, MemberVO member) {
 //		session.getAttribute("memberid");
