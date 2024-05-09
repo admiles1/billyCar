@@ -41,4 +41,8 @@ public class AdminService {
 		return mapper.updateMember(member);
 	}
 
+	public List<CarVO> getCar(CarVO car) {
+		return mapper.selectCar(car);
+	}
+
 }

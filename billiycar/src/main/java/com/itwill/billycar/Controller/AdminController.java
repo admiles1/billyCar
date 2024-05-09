@@ -142,7 +142,10 @@ public class AdminController {
 	}
 	
 	@GetMapping("admin_car")
-	public String admin_car() {
+	public String admin_car(CarVO car, Model model) {
+		
+		List<CarVO> carList = service.getCar(car);
+		model.addAttribute("carList", carList);
 		
 		return "admin/admin_car";
 	}
@@ -160,8 +163,6 @@ public class AdminController {
 		
 		// 차량최대인수를 숫자 + "인승" 으로 DB에 넣기위해 사전작업
 		car.setCar_capacity(car.getCar_capacity() + "인승"); 
-		
-		
 		// 1) 경로
 		String uploadDir = "/resources/upload"; // 가상 경로
 		String saveDir = session.getServletContext().getRealPath(uploadDir); // 실제 경로

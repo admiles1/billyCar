@@ -28,4 +28,6 @@ public interface AdminMapper {
 
 	int updateMember(MemberVO member);
 
+	List<CarVO> selectCar(CarVO car);
+
 }
