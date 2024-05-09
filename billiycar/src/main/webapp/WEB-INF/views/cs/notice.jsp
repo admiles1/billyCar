@@ -90,19 +90,24 @@
 		<div class = "paging">
 	  		<ul class="pagination">
 	    		<li class="page-item">
-	    		
-	      			<a class="page-link" href="#" aria-label="Previous">
+	      			<a class="page-link" href="notice?pageNum=${pageNum -1}" aria-label="Previous">
 	        			<span aria-hidden="true">&laquo;</span>
 	     			 </a>
 	   			 </li>
-			    <li class="page-item"><a class="page-link" href="#">1</a></li>
-			    <li class="page-item"><a class="page-link" href="#">2</a></li>
-			    <li class="page-item"><a class="page-link" href="#">3</a></li>
+	   			 <c:forEach var="i"  begin = "${pageInfo.startPage}" end = "${pageInfo.endPage}">
+					<c:choose>
+						<c:when test = "${i != pageNum}"> 
+				    		<li class="page-item"><a class="page-link" href="notice?pageNum=${i}">${i}</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item"><a class="page-link" >${i}</a>
+						</c:otherwise>
+					</c:choose>
+	   			 </c:forEach>
 			    <li class="page-item">
-			     	 <a class="page-link" href="#" aria-label="Next">
+			     	 <a class="page-link" href="notice?pageNum=${pageNum + 1}" aria-label="Next">
 			        	<span aria-hidden="true">&raquo;</span>
 			     	 </a>
-			     	 
 	    		</li>
 	  		</ul>
   		</div>

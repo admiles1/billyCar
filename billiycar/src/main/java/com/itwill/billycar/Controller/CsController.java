@@ -24,7 +24,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.itwill.billycar.service.CsService;
 import com.itwill.billycar.vo.AdminVO;
+import com.itwill.billycar.vo.FaqVO;
 import com.itwill.billycar.vo.NoticeVO;
+import com.itwill.billycar.vo.PageInfo;
 import com.itwill.billycar.vo.QnaVO;
 import com.mysql.cj.protocol.x.SyncFlushDeflaterOutputStream;
 
@@ -45,12 +47,45 @@ public class CsController {
 	
 	// 공지사항 ----------------------------
 	@GetMapping("notice")
-	public String notice(Model model, @RequestParam(defaultValue = "1") int pageNum) {
+	public String notice(PageInfo page, Model model, @RequestParam(defaultValue = "1") int pageNum) {
 		// 페이징 
 		int listLimit = 5;
 		int startRow = (pageNum-1)*listLimit;
 		
+		// 1) 전체 게시물 수 조회
+		int listCount = service.getBoardListCount();
 		
+		// 2) 페이지 번호 몇 개 표시할 건지
+		int pageListLimit = 3; 
+		
+		// 3) 전체 페이지 목록 몇 개인지
+		int maxPage = listCount / listLimit;
+		
+		if(listCount % listLimit != 0) {
+			maxPage++;
+		}
+		
+		// 4) 시작 페이지 번호 계산
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		
+		// 5) 끝 페이지 번호 계산
+		int endPage = startPage + pageListLimit - 1;
+		
+		// 1-6) 끝 페이지 > max보다 크면 x
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		page.setListCount(listCount);
+		page.setPageListLimit(pageListLimit);
+		page.setMaxPage(maxPage);
+		page.setStartPage(startPage);
+		page.setEndPage(endPage);
+		
+		if(pageNum < 1 || pageNum > maxPage) {
+			model.addAttribute("msg", "더이상 페이지가 없습니다");
+			return "err/fail";
+		}
 		// 조회수
 		
 		// 글 목록
@@ -207,18 +242,64 @@ public class CsController {
 	}
 	
 	// FAQ -------------------------------
+	// 자주묻는질문 페이지
 	@GetMapping("faq")
-	public String faq() {
+	public String faq(FaqVO faq, Model model, @RequestParam(defaultValue ="1") int pageNum) {
+		// 페이징
+		int listLimit = 4;
+		int startRow = (pageNum-1)*listLimit;
+		
+		List<FaqVO> faqList = service.getFaqList(listLimit, startRow);
+		model.addAttribute("faqList", faqList);
+		
 		return "cs/FAQ";
 	}
+	
+	
 	
 	// QnA -------------------------------
 	// 문의내역 목록
 	@GetMapping("qna")
-	public String qna(QnaVO qna, Model model, @RequestParam(defaultValue = "1") int pageNum) {
+	public String qna(PageInfo page ,QnaVO qna, Model model, @RequestParam(defaultValue = "1") int pageNum) {
 		// 페이징 
 		int listLimit = 5;
 		int startRow = (pageNum-1)*listLimit;
+		
+		// 1) 전체 게시물 수 조회
+		int listCount = service.getQnaListCount();
+				
+		// 2) 페이지 번호 몇 개 표시할 건지
+		int pageListLimit = 3; 
+		
+		// 3) 전체 페이지 목록 몇 개인지
+		int maxPage = listCount / listLimit;
+		
+		if(listCount % listLimit != 0) {
+			maxPage++;
+		}
+		
+		// 4) 시작 페이지 번호 계산
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		
+		// 5) 끝 페이지 번호 계산
+		int endPage = startPage + pageListLimit - 1;
+		
+		// 1-6) 끝 페이지 > max보다 크면 x
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		page.setListCount(listCount);
+		page.setPageListLimit(pageListLimit);
+		page.setMaxPage(maxPage);
+		page.setStartPage(startPage);
+		page.setEndPage(endPage);
+		
+		if(pageNum < 1 || pageNum > maxPage) {
+			model.addAttribute("msg", "더이상 페이지가 없습니다");
+			return "err/fail";
+		}
+		
 		
 		String id = (String)session.getAttribute("member_id");
 		

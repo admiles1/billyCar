@@ -14,7 +14,6 @@
     
 	<!-- css -->
 	<link rel ="stylesheet" href = "${pageContext.request.contextPath}/resources/css/Q&A_list.css">
-	<link rel ="stylesheet" href = "css/font.css">
 	
 	<!-- 글꼴 -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -98,10 +97,10 @@
 							<%-- 답변상태 --%>
 							<c:choose>
 								<c:when test="${qna.qna_status eq 0}">
-									답변 대기
+									<span style="color:red">답변 대기</span>
 								</c:when>
 								<c:otherwise>
-									답변 완료
+									<span style="color:#00aaff">답변 완료</span>
 								</c:otherwise>
 							</c:choose>
 						</td>
@@ -120,15 +119,22 @@
 					<div class = "paging">
 				  		<ul class="pagination">
 				    		<li class="page-item">
-				      			<a class="page-link" href="#" aria-label="Previous">
+				      			<a class="page-link" href="qna?pageNum=${pageNum -1}" aria-label="Previous">
 				        			<span aria-hidden="true">&laquo;</span>
 				     			 </a>
-				   			 </li>
-						    <li class="page-item"><a class="page-link" href="#">1</a></li>
-						    <li class="page-item"><a class="page-link" href="#">2</a></li>
-						    <li class="page-item"><a class="page-link" href="#">3</a></li>
+	   			 			</li>
+				   			 <c:forEach var="i"  begin = "${pageInfo.startPage}" end = "${pageInfo.endPage}">
+								<c:choose>
+									<c:when test = "${i != pageNum}"> 
+							    		<li class="page-item"><a class="page-link" href="qna?pageNum=${i}">${i}</a></li>
+									</c:when>
+									<c:otherwise>
+										<li class="page-item"><a class="page-link" >${i}</a>
+									</c:otherwise>
+								</c:choose>
+				   			 </c:forEach>
 						    <li class="page-item">
-						     	 <a class="page-link" href="#" aria-label="Next">
+						     	 <a class="page-link" href="qna?pageNum=${pageNum + 1}" aria-label="Next">
 						        	<span aria-hidden="true">&raquo;</span>
 						     	 </a>
 				    		</li>
