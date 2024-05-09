@@ -76,6 +76,7 @@
 			, now()
 		)
 	</insert>
+	
 	<update id="updateMember" parameterType="int">
 		UPDATE member SET member_id = #{member_id}
 		
@@ -93,6 +94,12 @@
 		</if>
 		where member_id = #{member_id}
 	</update>
+	
+	<!-- qnaList -->
+	<select id="selectQnaList" resultType="com.itwill.billycar.vo.QnaVO">
+		select * from qna
+	</select>
+	
 </mapper>
 
 

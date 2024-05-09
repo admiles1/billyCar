@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import com.itwill.billycar.vo.AdminVO;
 import com.itwill.billycar.vo.CarVO;
 import com.itwill.billycar.vo.MemberVO;
+import com.itwill.billycar.vo.QnaVO;
 
 @Mapper
 public interface AdminMapper {
@@ -27,5 +28,7 @@ public interface AdminMapper {
 	int insertCar(CarVO car);
 
 	int updateMember(MemberVO member);
+
+	List<QnaVO> selectQnaList();
 
 }

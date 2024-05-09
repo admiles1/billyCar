@@ -40,6 +40,7 @@
 		                String question = "페라리를 빌렸는데 아무리 밟아도 시속 500km 가 안나와요,,ㅠㅠ 왜 그러나요?";
 		                String answer = "어떤 차든 시속 500km 가 나오기는 힘듭니다. ^^";
 		            %>
+		            ${qna}
 		            <h5 class="card-title">질문 ID: <%= request.getParameter("qid") %></h5>
 		            <p class="card-text"><strong>질문 내용:</strong> <%= question %></p>
 		            <p class="card-text"><strong>답변 내용:</strong> <%= answer %></p>
