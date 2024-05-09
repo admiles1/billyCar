@@ -169,11 +169,11 @@
 <!-- 				<div id="checkIdResult"></div> -->
 <!-- 			</div> -->
 			<div>
-				<input type="password" placeholder="비밀번호(8-12자리 특수문자 !@#$%^&* 포함)" name="member_passwd" id="member_passwd"/><br>
+				<input type="password" placeholder="비밀번호(8-12자리 특수문자 !@#$%^&* 포함)" name="member_passwd" id="member_passwd" maxlength="12"/><br>
 				<div id="checkPwResult"></div>
 			</div>
 			<div>
-				<input type="password" placeholder="비밀번호 확인" name="member_passwd2" id="member_passwd2"/><br>
+				<input type="password" placeholder="비밀번호 확인" name="member_passwd2" id="member_passwd2" maxlength="12"/><br>
 				<div id="checkPwResult2"></div>
 			</div>
 			<div>
@@ -181,10 +181,10 @@
 			</div>
 			<br>
 			<div>
-				<input type="text" placeholder="이름" name="member_name" id="member_name"/><br>
+				<input type="text" placeholder="이름" name="member_name" id="member_name" maxlength="5"/><br>
 			</div>
 			<div>
-				<input type="text" placeholder="생년월일 8자리" name="member_birth" id="member_birth"/>
+				<input type="text" placeholder="생년월일 8자리" name="member_birth" id="member_birth" maxlength="8"/>
 			</div>
 	<!-- 		<div class="check_gender"> -->
 	<!-- 			<input type="checkbox" value="여자" class="gender woman">여자 -->
@@ -200,14 +200,14 @@
 					<option value="KTaff">KT 알뜰폰</option>
 					<option value="LGU+aff">LG U+ 알뜰폰</option>
 				</select>
-				<input type="text" placeholder="전화번호(숫자만입력)" class="telephone_num" name="member_phone" id="member_phone"/>
+				<input type="text" placeholder="전화번호(숫자만입력)" class="telephone_num" name="member_phone" id="member_phone" maxlength="11"/>
 				<input type="button" class="check_tel" value="인증하기"><br>
 			</div>
 			<div>
 				<input type="text" placeholder="인증번호"/>
 			</div>
 				<div>
-				<input type="text" placeholder="추천인 아이디(선택)" name="inviter" id="member_inviter"/>
+				<input type="text" placeholder="추천인 아이디(선택)" name="inviter" id="member_inviter" maxlength="12"/>
 			</div>
 			<div>
 				<input type="submit" value="회원가입" class="btn btn-4" onsubmit="submit()">
