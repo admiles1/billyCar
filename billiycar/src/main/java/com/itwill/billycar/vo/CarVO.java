@@ -1,6 +1,5 @@
 package com.itwill.billycar.vo;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.Year;
 
@@ -24,6 +23,4 @@ public class CarVO {
 	private int car_price;
 	private int car_canReserve;
 	private LocalDateTime car_reg_date;
-	
-	
 }

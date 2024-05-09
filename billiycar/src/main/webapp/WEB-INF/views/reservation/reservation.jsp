@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,8 +27,21 @@
 		display : inline-block;
 		width : 150px;
 	}
-
 </style>
+
+<script>
+	function goDetail(idx){
+		if($("#reserv_pickupdate").val() == "") {
+			alert('일정을 검색하여 주세요');
+			return;
+		}
+		
+		let pickupDate = $("#reserv_pickupdate").val() + "T" + $("#reserv_pickuptime").val();
+		let returnDate = $("#reserv_returndate").val() + "T" + $("#reserv_returntime").val();
+		location.href="reservationdetail?idx=" + idx + "&pickupDate=" + pickupDate + "&returnDate=" + returnDate;
+	}
+
+</script>
 </head>
 <body>	
 	<header><jsp:include page="../inc/top.jsp"></jsp:include></header>
@@ -42,12 +57,12 @@
 		    			<div class="">
 					    	<div class="col-sm-9 col-12 px-0 mb-2" align="center" style="width : 100%">
 					    		<div class="input-daterange" align="center" style="width : 100%">
-					    			<input type="text" class="form-control datetext" placeholder="대여 날짜 선택" readonly name="pickupDate"
-					    				<c:if test="${not empty pickupDate}"> value="${pickupDate}"</c:if>>
-					    			<input type="text" class="form-control datetext" placeholder="반납 날짜 선택" readonly name="returnDate"
-					    				<c:if test="${not empty returnDate}"> value="${returnDate}"</c:if>>
+					    			<input type="text" class="form-control datetext" placeholder="대여 날짜 선택" readonly name="reserv_pickupdate"
+					    				<c:if test="${not empty pickupDate}"> value="${pickupDate}"</c:if> id="reserv_pickupdate">
+					    			<input type="text" class="form-control datetext" placeholder="반납 날짜 선택" readonly name="reserv_returndate"
+					    				<c:if test="${not empty returnDate}"> value="${returnDate}"</c:if> id="reserv_returndate">
 					    			<br>	
-				    				<select name="pickupTime">
+				    				<select name="pickupTime" id="reserv_pickuptime">
 										<option value="06">오전 06:00</option>
 										<option value="07">오전 07:00</option>
 										<option value="08">오전 08:00</option>
@@ -64,7 +79,7 @@
 									    <option value="19">오후 19:00</option>
 									    <option value="20">오후 20:00</option>
 									</select>
-				    				<select name="returnTime">
+				    				<select name="returnTime" id="reserv_returntime">
 										<option value="06">오전 06:00</option>
 										<option value="07">오전 07:00</option>
 										<option value="08">오전 08:00</option>
@@ -86,9 +101,9 @@
 					    </div>
 			    	</div>
 			    	<div class="location_area">
-			    		<input type="text" class="selectArea" name="pickupLocation"  value=":: 대여지점 ::" readonly style="padding-right: 17px;" onclick="alert('api예정')">
-				    	<select  class="selectArea" name="returnLocation">
-				    		<option selected> :: 반납지점 :: </option>
+			    		<input type="text" class="selectArea" name="reserv_pickuplocation"  value=":: 대여지점 ::" readonly style="padding-right: 17px;" onclick="alert('api예정')">
+				    	<select  class="selectArea" name="reserv_returnlocation">
+				    		<option selected value=""> :: 반납지점 :: </option>
 				    		<option value="direct"> 지점에 직접 반납하기 </option>
 				    		<option value="direct"> 호출장소에 반납하기 </option>
 				    	</select>
@@ -96,52 +111,61 @@
 			    	<div class="car_option_sel">
 			    		<hr>
 			    		<h3> 차종 </h3>
-			    		<span class="carList1">
-			    			<label><input type="checkbox" value="경형" name="carType"> 경형 </label><br>
-			    			<label><input type="checkbox" value="중형" name="carType"> 중형	</label><br>
-			    			<label><input type="checkbox" value="SUV" name="carType"> SUV	</label><br>
-			    			<label><input type="checkbox" value="승합" name="carType"> 승합	</label><br>
-			    			<label><input type="checkbox" value="기타" name="carType"> 기타 </label>
-						</span>
-			    		<span class="carList2">
-			    			<label><input type="checkbox" value="준중형" name="carType"> 준중형 </label><br>
-			    			<label><input type="checkbox" value="대형" name="carType"> 대형 </label><br>
-			    			<label><input type="checkbox" value="전기" name="carType"> 전기 </label><br>
-			    			<label><input type="checkbox" value="수입" name="carType"> 수입 </label><br>
-						</span>
+			    		<ul class="car-type-list">
+							<li><label class="car-type"><input type="checkbox" value="소형" name="car_type"
+							 	<c:if test="${fn:contains(hasThisType, '소형')}"> checked </c:if>>소형 </label></li>
+			    			<li><label class="car-type"><input type="checkbox" value="준중형" name="car_type"
+			    				<c:if test="${fn:contains(hasThisType, '준중형')}"> checked </c:if>> 준중형</label></li>
+			    			<li><label class="car-type"><input type="checkbox" value="중형" name="car_type"
+			    				<c:if test="${fn:contains(hasThisType, '중형')}"> checked </c:if>> 중형</label></li>
+			    			<li><label class="car-type"><input type="checkbox" value="대형" name="car_type"
+			    				<c:if test="${fn:contains(hasThisType, '대형')}"> checked </c:if>> 대형</label></li>
+			    			<li><label class="car-type"><input type="checkbox" value="SUV" name="car_type"
+			    				<c:if test="${fn:contains(hasThisType, 'SUV')}"> checked </c:if>> SUV </label></li>	
+			    		</ul>
 			    	</div>
 			    	<div class="car_option_sel">
 			    		<hr>
 			    		<h3> 연료 </h3>
-			    		<span class="fuelList1">
-			    			<label><input type="checkbox" value="가솔린" name="fuelType"> 휘발유 </label><br>
-			    			<label><input type="checkbox" value="LPG" name="fuelType"> LPG </label>
-						</span>
-			    		<span class="fuelList2">
-			    			<label><input type="checkbox" value="디젤" name="fuelType"> 경유 </label><br>
-			    			<label><input type="checkbox" value="전기" name="fuelType"> 전기 </label>
-						</span>
+			    		<ul class="car-type-list">
+							<li><label class="car-fuel"><input type="checkbox" value="경유" name="car_fuel"> 경유 </label></li>
+			    			<li><label class="car-fuel"><input type="checkbox" value="휘발유" name="car_fuel"> 휘발유 </label></li>
+			    			<li><label class="car-fuel"><input type="checkbox" value="전기" name="car_fuel"> 전기	</label></li>
+			    			<li><label class="car-fuel"><input type="checkbox" value="하이브리드" name="car_fuel"> 하이브리드	</label></li>
+			    		</ul>
 			    	</div>
 			    	<input type="submit" value="차	량	검	색" id="searchCar">
 			    </form>
     		</div>
-   		 	<div class="col-8" id="selectResult">
-   		 		<ul>
-   		 			<c:forEach var="car" items="${cars}">
-	   		 			<li class="carList fadeIn row">
-	   		 				<a href="reservationdetail?idx=${car.car_idx}" class="d-flex">
-	   		 					<span class="carImg"><img src=""></span>
-	   		 					<span class="carInfo">
-	   		 						<span> ${car.car_model } </span>
-	   		 						<span> ${car.car_type} / ${car.car_capacity}</span>
-	   		 						<span> ${car.car_price}</span>
-	   		 					</span>
-	   		 				</a>
-	   		 			</li>
-   		 			</c:forEach>
-   		 		</ul>
-    		</div>
-  		</div>
+    		<c:choose>
+    			<c:when test="${needSearch}">
+    				<div class="col-8" id="selectResult">
+    					검색을 먼저해주세요
+    				</div>
+    			</c:when>
+    			<c:otherwise>
+    				<div class="col-8" id="selectResult">
+		   		 		<ul>
+		   		 			<c:forEach var="car" items="${cars}">
+			   		 			<li class="carList fadeIn row">
+			   		 				<a class="d-flex" onclick="goDetail('${car.car_idx}')">
+			   		 					<span class="carImg"><img src="${car.car_img}"></span>
+			   		 					<span class="carInfo">
+			   		 						<span> ${car.car_model} </span>
+			   		 						<span> ${car.car_type} / ${car.car_capacity}</span>
+			   		 						<span><fmt:formatNumber value="${car.car_price}" pattern="#,###"/></span>
+			   		 					</span>
+			   		 				</a>
+			   		 			</li>
+		   		 			</c:forEach>
+		   		 		 </ul>
+		   		 		 <div> 
+		   		 			<input type="button" value="이전" onclick="location.href='reservation?num='"> 
+		   		 			<input type="button" value="다음" onclick="location.href='reservation?num='">	
+			 			 </div>
+	    			</div>
+    			</c:otherwise>
+ 			</c:choose>
 	</main>
 	<footer><jsp:include page="../inc/bottom.jsp"></jsp:include></footer>
 

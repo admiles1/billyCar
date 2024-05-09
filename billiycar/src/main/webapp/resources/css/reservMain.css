@@ -67,6 +67,19 @@ input[name="reserveWhere"] {
 	margin-bottom : 5px;
 }
 
+.car-type-list {
+	list-style-type : none;
+	display : flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.car-type {
+	width : 50%;
+	height : 50px;
+	text-align : left;
+}
+
 .carList1, .carList2, .fuelList1, .fuelList2 {
 	display : inline-block;
 	position : relative;
