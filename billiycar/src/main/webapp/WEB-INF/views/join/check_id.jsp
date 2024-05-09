@@ -87,7 +87,7 @@
 	</script>
 </c:if>
 	<form action="check_id"  name="fr" method="post">
-		<input type="text" placeholder="아이디" class="id_box" name="member_id" id="member_id" value="${param.member_id}"/>
+		<input type="text" placeholder="아이디" class="id_box" name="member_id" id="member_id" value="${param.member_id}" maxlength="12"/>
 		<div id="checkIdResult"></div>
 		
 		<div>
