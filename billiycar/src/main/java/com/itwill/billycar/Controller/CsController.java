@@ -229,12 +229,14 @@ public class CsController {
 	// FAQ -------------------------------
 	// 자주묻는질문 페이지
 	@GetMapping("faq")
-	public String faq(FaqVO faq, Model model, @RequestParam(defaultValue ="1") int pageNum) {
+	public String faq(FaqVO faq, Model model, @RequestParam(defaultValue ="1") int pageNum, String category) {
 		// 페이징
 		int listLimit = 4;
 		int startRow = (pageNum-1)*listLimit;
 		
-		List<FaqVO> faqList = service.getFaqList(listLimit, startRow);
+		// 목록 불러오기
+		
+		List<FaqVO> faqList = service.getFaqList(listLimit, startRow, category);
 		model.addAttribute("faqList", faqList);
 		
 		return "cs/FAQ";

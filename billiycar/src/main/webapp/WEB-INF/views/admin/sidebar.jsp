@@ -69,7 +69,7 @@
                 <div id="customerMenu" class="collapse">
                     <ul class="nav flex-column pl-3">
                         <li class="nav-item">
-                            <a class="nav-link" href="admin_counsel"><i class="fas fa-comments"></i> 1:1 문의 상담 내역</a>
+                            <a class="nav-link" href="admin_counsel"><i class="fas fa-comments"></i> 자주 묻는 질문</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="adminAnswerList"><i class= "fas fa-reply"></i> 답변 내역</a>

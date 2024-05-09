@@ -21,9 +21,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.itwill.billycar.service.AdminCusService;
 import com.itwill.billycar.service.AdminService;
 import com.itwill.billycar.vo.AdminVO;
 import com.itwill.billycar.vo.CarVO;
+import com.itwill.billycar.vo.FaqVO;
 import com.itwill.billycar.vo.MemberVO;
 import com.itwill.billycar.vo.PageInfo;
 import com.itwill.billycar.vo.QnaVO;
@@ -264,11 +266,7 @@ public class AdminController {
 	}
 	
 	
-	@GetMapping("admin_counsel")
-	public String admin_counsel() {
-		
-		return "admin/admin_counsel";
-	}
+	
 	
 	@GetMapping("admin_answerList_form")
 	public String admin_answerList_form() {
