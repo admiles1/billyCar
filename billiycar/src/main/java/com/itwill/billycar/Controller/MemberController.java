@@ -101,7 +101,6 @@ public class MemberController {
 		
 		
 		if(dbMember == null || !passwordEncoder.matches(member.getMember_passwd(), dbMember.getMember_passwd())) { // 로그인 실패
-			model.addAttribute("msg", "로그인 실패!");
 			return "redirect:/error";
 		} else { // 로그인 성공
 			// 세션 객체에 로그인 성공한 아이디를 "sId" 속성값으로 추가
