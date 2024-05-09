@@ -86,7 +86,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	<nav aria-label="Page navigation example">
+ 	<nav aria-label="Page navigation example">
 		<div class = "paging">
 	  		<ul class="pagination">
 	    		<li class="page-item">
@@ -111,7 +111,7 @@
 	    		</li>
 	  		</ul>
   		</div>
-	</nav>
+	</nav> 
 </div>
 </div> <!-- arti -->
 
