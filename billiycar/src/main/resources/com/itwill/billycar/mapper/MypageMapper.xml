@@ -29,13 +29,14 @@
     <insert id="insertLicense">
     	INSERT INTO license
     	VALUES (
-    		#{license_id}
-    		, #{license_user_id}
-    		, #{license_name}
-    		, #{license_issue_date}
-    		, #{license_expiration_date}
-    	)
+    		   #{license_id}
+    		 , #{license_user_id}
+    		 , #{license_name}
+    		 , #{license_issue_date}
+    		 , #{license_expiration_date}
+    		 )
     </insert>
+
     
      <select id="checkLicenseMatch" parameterType="com.itwill.billycar.vo.LicenseVO" resultType="int">
         SELECT COUNT(*) 
@@ -54,4 +55,12 @@
 			member_id = #{member_id}    		
     </update>
     
+    <update id="updateInfo">
+		UPDATE member
+		SET
+			member_email = #{member_email}
+		  , member_phone = #{member_phone}
+		WHERE
+			member_id = #{member_id}
+	</update>
 </mapper>
