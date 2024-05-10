@@ -71,7 +71,6 @@
 				<th class="text-left" width = "270px">제목</th>
 				<th class="text-left" width = "40px">작성자</th>
 				<th class="text-left" width = "50px">작성일</th>
-				<th class="text-left" width = "30px">조회수</th>
 			</tr>
 		</thead>
 		<tbody class="table-hover">
@@ -81,7 +80,6 @@
 					<td class="text-left"><a href = "noticeDetail?notice_idx=${notice.board_idx}&pageNum=${pageNum}">${notice.board_subject}</a></td>
 					<td class="text-left">${notice.board_writer}</td>
 					<td class="text-left"><fmt:formatDate value="${notice.board_date}" pattern = "yy-MM-dd"/></td>
-					<td class="text-left">${notice.board_readcount}</td>
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -90,7 +88,10 @@
 		<div class = "paging">
 	  		<ul class="pagination">
 	    		<li class="page-item">
-	      			<a class="page-link" href="notice?pageNum=${pageNum -1}" aria-label="Previous">
+	      			<a class="page-link" href="notice?pageNum=${pageNum -1}" aria-label="Previous" 
+	      				<c:if test="${pageNum eq 1 }"></c:if>
+					>
+	      			
 	        			<span aria-hidden="true">&laquo;</span>
 	     			 </a>
 	   			 </li>
@@ -105,7 +106,9 @@
 					</c:choose>
 	   			 </c:forEach>
 			    <li class="page-item">
-			     	 <a class="page-link" href="notice?pageNum=${pageNum + 1}" aria-label="Next">
+			     	 <a class="page-link" href="notice?pageNum=${pageNum + 1}" aria-label="Next" 
+			     	 <c:if test="${pageNum eq pageInfo.maxPage }"></c:if>
+					>
 			        	<span aria-hidden="true">&raquo;</span>
 			     	 </a>
 	    		</li>

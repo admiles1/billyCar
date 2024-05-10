@@ -47,6 +47,7 @@
 					                    	<a href="adminAnswer"></a>
 					                    	<h3 class="question">제목 : ${qna.qna_subject }</h3>
 					                    	<h6 class="answer">내용 : ${qna.qna_content }</h6>
+					                    	<h6 class="wrtier">작성자 ${qna.qna_writer} 님</h6>
 					                    	<hr class="my-4">
 					                    	<c:choose>
 					                    		<c:when test="${qna.admin_content ne ''}">

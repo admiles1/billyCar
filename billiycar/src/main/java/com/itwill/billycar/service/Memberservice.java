@@ -37,4 +37,9 @@ public class Memberservice {
 		
 		return mapper.selectForgotId(member);
 	}
+
+
+	public int selectMemberCount() {
+		return mapper.selectMemberCount();
+	}
 }

@@ -16,6 +16,14 @@
 		  FROM car
 		 WHERE car_idx = #{idx}
 	</select>
+	
+	<!-- 예약 가능한 총 차량 -->
+	<select id="selectReservCountCar">
+		select count(*) from car
+<!-- 		<if test="res"> -->
+<!-- 		where reserv_status = 1; -->
+<!-- 		</if> -->
+	</select>
 </mapper>
 
 

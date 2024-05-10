@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.itwill.billycar.service.AdminCusService;
 import com.itwill.billycar.vo.FaqVO;
 import com.itwill.billycar.vo.PageInfo;
+import com.itwill.billycar.vo.QnaVO;
 
 @Controller
 public class AdminCusController {
@@ -24,6 +25,7 @@ public class AdminCusController {
 	@Autowired
 	private HttpSession session;
 	
+	// 자주묻는질문 목록
 	@GetMapping("admin_counsel")
 	public String admin_counsel(FaqVO faq, Model model, @RequestParam(defaultValue ="1") int pageNum) {
 		
@@ -124,6 +126,66 @@ public class AdminCusController {
 		}
 		
 		return "redirect:/admin_counsel";
+	}
+	
+	// -------------------------------------------------------------------------------------------------
+	// ** [문의내역] **
+	@GetMapping("adminAnswerList")
+	public String adminAnswerList(Model model, QnaVO qna, @RequestParam(defaultValue ="1") int pageNum) {
+		
+		int listLimit = 5;
+		int startRow = (pageNum-1)*listLimit;
+		int pageListLimit = 3;
+		int listCount = service.getQnaListCount();
+		
+		//----------------------------------------------------------------
+		int maxPage = listCount/listLimit + (listCount%listLimit > 0 ? 1 : 0);
+		//----------------------------------------------------------------
+		//시작페이지 설정
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		//끝페이지 설정
+		int endPage = startPage + pageListLimit - 1;
+				
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		model.addAttribute("pageInfo", new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage));
+		
+		List<QnaVO> qnaList = service.getQnaList(startRow, listLimit);
+		model.addAttribute("qnaList", qnaList);
+		
+		return "admin/admin_answerList_form";
+	}
+	
+	// 문의내역 답변폼
+	@GetMapping("adminAnswer")
+	public String adminAnswerForm(QnaVO qna, Model model, int qna_idx) {
+		
+		// 문의내역 불러오기
+		qna.setQna_idx(qna_idx);
+		qna = service.getQna(qna);
+		
+		
+		model.addAttribute("qna",qna);
+		
+		return "admin/admin_QnaAnswer_form";
+	}
+	
+	@PostMapping("adminAnswer")
+	public String adminAnswerPro(QnaVO qna, Model model, int qna_idx) {
+		
+		// 답변 작성한 거 저장하기
+		qna.setQna_idx(qna_idx);
+		int answerCnt = service.wrtieAnswer(qna);
+		
+		if(answerCnt <= 0) {
+			model.addAttribute("msg", "답변 달기 실패하셨습니다. \\n 다시 시도해 주세요");
+			return "err/fail";
+		}
+				
+		
+		return "redirect:/adminAnswerForm";
 	}
 	
 	

@@ -46,7 +46,7 @@
   		<div id = "btn_tag">
 	  		<form>
 	  			<span id = "tag1" style="padding:1px 2px 3px 4px;">
-					<button class="white_btn" name="category" value="all">전체</button>
+					<button class="white_btn" onclick="location.href='faq'">전체</button>
 	  			</span>
 	  			<span id = "tag2" style="padding:1px 2px 3px 4px;">
 					<button class="white_btn" name="category" value="accident">고장 및 사고</button>
@@ -105,34 +105,6 @@
 	    </div>
 	</div>
 
-        
-<!--         두번째 질문 -->
-<!--         <div class="panel panel-default"> -->
-<!--           <div class="panel-heading" role="tab"> -->
-<!--             <a role="button" data-toggle="collapse" data-parent="#accParent" data-target="#accEx2" aria-constrols="addEx2"> -->
-<!--               두번째 질문 -->
-<!--             </a> -->
-<!--           </div> -->
-<!--           <div id="accEx2" class="panel-collapse collapse" role="tabpanel"> -->
-<!--             <div class="panel-body"> -->
-<!--               답변 ~ -->
-<!--             </div> -->
-<!--           </div> -->
-<!--         </div> -->
-
-<!--         세번째 질문 -->
-<!--         <div class="panel panel-default"> -->
-<!--           <div class="panel-heading" role="tab"> -->
-<!--             <a role="button" data-toggle="collapse" data-parent="#accParent" data-target="#accEx2" aria-constrols="addEx2"> -->
-<!--               두번째 질문 -->
-<!--             </a> -->
-<!--           </div> -->
-<!--           <div id="accEx2" class="panel-collapse collapse" role="tabpanel"> -->
-<!--             <div class="panel-body"> -->
-<!--               답변 ~ -->
-<!--             </div> -->
-<!--           </div> -->
-<!--         </div> -->
         
       </div> <!-- id=accParent -->
     </div>
