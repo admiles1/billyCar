@@ -97,7 +97,7 @@
 	            </div>
 	
 	            <div class="col-sm-9">
-	            	<input type="text" class="form-control" id="dateInfo"  value="날짜 받아 올꺼" >
+	            	<input type="text" class="form-control" id="dateInfo"  value="${reserve.reserv_pickupdate}" readonly>
 	            </div>
 	        </div>
 	        
@@ -107,14 +107,7 @@
 	            </div>
 				
 	            <div class="col-sm-9">
-	            	<input type="text" class="form-control" id="locatrionInfo"  value="대여지역 받아 올꺼" >
-<!-- 	            	<select class="form-select" aria-label="Default select example"> -->
-<!-- 						<option selected>대역지역</option> -->
-<!-- 						<option value="1">대여지역1</option> -->
-<!-- 						<option value="2">대여지역2</option> -->
-<!-- 						<option value="3">대여지역3</option> -->
-<!-- 					</select> -->
-					
+	            	<input type="text" class="form-control" id="locatrionInfo"  value="${reserve.reserv_returnlocation}" readonly>
 	            </div>
 			</div>
 			
@@ -124,7 +117,7 @@
 	            </div>
 	
 	            <div class="col-sm-9">
-	            	<input type="text" class="form-control" id="dateInfo" value="반납 날짜받아올꺼" >
+	            	<input type="text" class="form-control" id="dateInfo" value="${reserv.reserv_returndate}" readonly >
 	            </div>
 				
 			</div>
@@ -135,7 +128,7 @@
 	            </div>
 	
 	            <div class="col-sm-9">
-	            	<input type="text" class="form-control" id="locatrionInfo" value="반납 지역 받아올꺼" >
+	            	<input type="text" class="form-control" id="locatrionInfo" value="${reserv.reserv_returnlocation}" readonly>
 <!-- 	            	<select class="form-select" aria-label="Default select example"> -->
 <!-- 						<option selected>반납지역</option> -->
 <!-- 						<option value="1">반납지역1</option> -->
@@ -163,7 +156,7 @@
 	           	</div>
 	
 	           	<div class="col-sm-4">
-	            	<input type="text" class="form-control" id="nameInfo" placeholder="[필수]이름" value="" required>
+	            	<input type="text" class="form-control" id="nameInfo" value="" readonly>
 	       		</div>
 	           		 
 	           	<div class="col-sm-2">
@@ -171,7 +164,7 @@
 	            </div>
 				
 	            <div class="col-sm-4">
-	           		<input type="text" class="form-control" id="birthInfo" placeholder="[필수]생년월일" value="" required>
+	           		<input type="text" class="form-control" id="birthInfo" value="" readonly>
 	       		</div>
 			</div>
 				
@@ -181,7 +174,7 @@
 	           	</div>
 	
 	           	<div class="col-sm-4">
-	       			<input type="text" class="form-control" id="tellInfo" placeholder="[필수]핸드폰번호(-제외)" value="" required>
+	       			<input type="text" class="form-control" id="tellInfo" value="" readonly>
 	   			</div>
 	           		 
 	      		<div class="col-sm-2">
@@ -189,7 +182,7 @@
 	           	</div>
 	
 	           	<div class="col-sm-4">
-	            	<input type="text" class="form-control" id="eMailInfo" placeholder="[필수]이메일" value="" required>
+	            	<input type="text" class="form-control" id="eMailInfo" value="" readonly>
 	       		</div>
 	           		 
 	        </div>
@@ -642,43 +635,47 @@
 <!-- 		<div class="col-lg-4"> -->
 <!-- 		<div class="col-md-7 col-lg-4"> -->
 		<div class="col-md-5 col-lg-4 order-md-last" id="paymentSide">
-			<h4 class="subject2">결제 전 예약 확인</h4>
+			<h4 class="subject2">결제 정보 확인</h4>
 			<div class="container last_check">
-				<p><b>예약자 정보</b></p>
-				<div class="row">
-					<div class="col-3">예약자 이름</div>
-					<div class="col-9" id="displayInfoName"></div>
-					<div class="col-3">생년월일</div>
-					<div class="col-9" id="displayInfoBirth"></div>
-					<div class="col-3">전화번호</div>
-					<div class="col-9" id="displayInfoTell"></div>
-					<div class="col-3">이메일</div>
-					<div class="col-9" id="displayInfoEmail"></div>
+				<div>
+<%-- 					<img src="${car.car_img}" width="430" > --%> <!-- 차이미지 받아 오기 -->
+					<img src="resources/event_images/envent_page_event2-1.webp" width="430" ><!-- 임시 -->
 				</div>
+<!-- 				<p><b>예약자 정보</b></p> -->
+<!-- 				<div class="row"> -->
+<!-- 					<div class="col-3">예약자 이름</div> -->
+<!-- 					<div class="col-9" id="displayInfoName"></div> -->
+<!-- 					<div class="col-3">생년월일</div> -->
+<!-- 					<div class="col-9" id="displayInfoBirth"></div> -->
+<!-- 					<div class="col-3">전화번호</div> -->
+<!-- 					<div class="col-9" id="displayInfoTell"></div> -->
+<!-- 					<div class="col-3">이메일</div> -->
+<!-- 					<div class="col-9" id="displayInfoEmail"></div> -->
+<!-- 				</div> -->
 				
-				<p><b>차량 정보</b></p>
-				<div class="row ">
-					<div class="col-3">차량</div>
-					<div class="col-9">차량이름(차량크기 정보->ex.중형,대형)표시</div>
-<!-- 					<div class="col">기본정보</div> -->
-<!-- 					<div class="col">차량 수용인원/기어방식/기름종류 표시</div> -->
-<!-- 					<div class="col">세부정보</div> -->
-<!-- 					<div class="col">차 옵션 표시</div> -->
-					<div class="col-3">이용일</div>
-					<div class="col-9">빌린 날짜 표기(대여일 및 시간 ~ 반납일 및 시간)</div>
-					<div class="col-3">대여지역</div>
-					<div class="col-9">대여지역 표시</div>
-					<div class="col-3">반납지역</div>
-					<div class="col-9">반납지역 표시</div>
-<!-- 					<div class="col">제한나이</div> -->
-<!-- 					<div class="col">만23세 이상</div> -->
-<!-- 					<div class="col">운전경력</div> -->
-<!-- 					<div class="col">면허취득 1년이상</div> -->
-<!-- 					<div class="col">면허종류</div> -->
-<!-- 					<div class="col">면허종류 표시</div> -->
-				</div>
+<!-- 				<p><b>차량 정보</b></p> -->
+<!-- 				<div class="row "> -->
+<!-- 					<div class="col-3">차량</div> -->
+<!-- 					<div class="col-9">차량이름(차량크기 정보->ex.중형,대형)표시</div> -->
+<!-- <!-- 					<div class="col">기본정보</div> --> 
+<!-- <!-- 					<div class="col">차량 수용인원/기어방식/기름종류 표시</div> --> 
+<!-- <!-- 					<div class="col">세부정보</div> --> 
+<!-- <!-- 					<div class="col">차 옵션 표시</div> -->
+<!-- 					<div class="col-3">이용일</div> -->
+<!-- 					<div class="col-9">빌린 날짜 표기(대여일 및 시간 ~ 반납일 및 시간)</div> -->
+<!-- 					<div class="col-3">대여지역</div> -->
+<!-- 					<div class="col-9">대여지역 표시</div> -->
+<!-- 					<div class="col-3">반납지역</div> -->
+<!-- 					<div class="col-9">반납지역 표시</div> -->
+<!-- <!-- 					<div class="col">제한나이</div> --> 
+<!-- <!-- 					<div class="col">만23세 이상</div> --> 
+<!-- <!-- 					<div class="col">운전경력</div> -->
+<!-- <!-- 					<div class="col">면허취득 1년이상</div> --> 
+<!-- <!-- 					<div class="col">면허종류</div> -->
+<!-- <!-- 					<div class="col">면허종류 표시</div> --> 
+<!-- 				</div> -->
 				
-				<p font><b>추가 옵션</b></p>
+				<p><b>추가 옵션</b></p>
 				<div class="row">
 					<div class="col-3">추가 옵션 표시</div>
 					<div class="col-9">추가 옵션에 따른 추가 비용 표시 없으면(+0원)</div>
@@ -686,12 +683,15 @@
 				
 				<p><b>결제 정보</b></p>
 				<div class="row">
-					<div class="col-3">이용금액</div>
-					<div class="col-9">이용금액 표시</div>
-					<div class="col-3">결제금액</div>
-					<div class="col-9">결제금액 표시</div>
-					<div class="col-3">결제수단</div>
-					<div class="col-9">결제수단 표시</div>
+					<div class="col-3">대여금액</div>
+					<div class="col-9" align="right">대여금액 표시</div>
+					<div class="col-3">보험금액</div>
+					<div class="col-9" align="right">보험금액 표시</div>
+					<div class="col-3">할인금액</div>
+					<div class="col-9" align="right">할인금액 표시</div>
+					<hr>
+					<div class="col-3">총 결제 금액(VAT 포함)</div>
+					<div class="col-9" align="right">할인금액 표시</div>
 				</div>
 				<br><br>
 			</div>			
