@@ -254,7 +254,16 @@ input[type="password"], input[type="text"] {
 		return true;
 	}
 	
-	
+	$(function() {
+        $("form").submit(function(event) {
+            // reCAPTCHA가 확인 체크
+            var response = grecaptcha.getResponse();
+            if (response.length == 0) { // reCAPTCHA가 확인안된 경우
+                alert("자동입력 방지 체크를 완료해주세요!");
+                event.preventDefault();
+            }
+        });
+    });
 	
 </script>
 </body>
