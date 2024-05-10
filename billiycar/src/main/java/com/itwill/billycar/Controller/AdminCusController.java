@@ -130,12 +130,10 @@ public class AdminCusController {
 	
 	// -------------------------------------------------------------------------------------------------
 	// ** [문의내역] **
-	@GetMapping("adminAnswerForm")
+	@GetMapping("adminAnswerList")
 	public String adminAnswerList(Model model, QnaVO qna, @RequestParam(defaultValue ="1") int pageNum) {
 		
-		System.out.println("매핑");
-		
-		int listLimit = 10;
+		int listLimit = 5;
 		int startRow = (pageNum-1)*listLimit;
 		int pageListLimit = 3;
 		int listCount = service.getQnaListCount();

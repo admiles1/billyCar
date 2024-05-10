@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>     
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -14,10 +15,18 @@
 <style>
   .card { margin-bottom: 20px; }
   .nav-link, .card-text { white-space: nowrap; }
-  .question, .answer { cursor: pointer; }
-  .question { font-family: 'Arial', sans-serif; color: #007bff; }
-  .answer { font-family: 'Calibri', sans-serif; color: #28a745; }
+  #question, #answer { cursor: pointer; }
+  #question { font-family: 'Arial', sans-serif; color: #007bff; }
+  #answer { font-family: 'Calibri', sans-serif; color: #28a745; }
   .edit-btn { float: right; margin-top: -20px; color: #dc3545; } /* Modified color for visibility */
+   #downBtn {
+   	border : none;
+  	background-color : #00aaff;
+	color : white;
+	border-radius: 10px;
+	margin-left: 10px;
+}
+  
 </style>
 </head>
 <body>
@@ -42,10 +51,26 @@
 	                 <form action="adminAnswer?qna_idx=${qna.qna_idx}&pageNum=${param.pageNum}" method="post">
 			            <%-- Assume that data is fetched from the server based on the qid parameter --%>
 			            <h5 class="card-title">질문 ID: ${qna.qna_writer}</h5>
-			            <p class="card-text"><strong>제목:</strong> ${qna.qna_subject}</p>
-			            <p class="card-text"><strong>내용:</strong> ${qna.qna_content}</p>
-			            <p class="card-text"><strong>답변</strong></p>
+			            <p class="card-text" id="question">
+			            	<strong>제목:</strong> ${qna.qna_subject} <br> 
+			            	<strong>내용:</strong> ${qna.qna_content} <br>
+			            	
+			            		<%-- 파일 처리 --%>
+			            		<c:if test="${not empty qna.qna_file}">
+									<c:set var="original_fileName" value="${fn:substringAfter(qna.qna_file, '_')}"/>
+										 파일 : ${original_fileName}
+										<%-- 다운로드 --%>
+										<%-- 다운로드 속성값에 파일명 지정 시 그 이름으로 다운됨 --%>
+										<a href="${pageContext.request.contextPath}/resources/upload/${qna.qna_file}" download="${original_fileName}">
+									<input type="button" value="다운로드" id="downBtn">
+										</a>
+								</c:if> 
+			            </p>	        
+			            <p class="card-text" id="answer">
+			            	<strong>답변</strong>
+			            </p>
 			            <textarea name="admin_content" style="width:900px; height:300px; resize : none; margin-left:30px"></textarea><br>
+			            
 			            <div class="btn">
 				            <a href="adminAnswerList" class="btn btn-primary"><i class="fas fa-arrow-left"></i> 답변 내역</a>
 				          	<input type="submit" class="btn btn-warning" value="작성" >

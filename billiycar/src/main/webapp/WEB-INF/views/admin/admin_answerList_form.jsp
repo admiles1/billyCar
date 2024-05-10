@@ -14,9 +14,9 @@
 <style>
   .card { margin-bottom: 20px; }
   .nav-link, .card-text { white-space: nowrap; }
-  .question, .answer { cursor: pointer; }
-  .question { font-family: 'Arial', sans-serif; color: #007bff; }
-  .answer { font-family: 'Calibri', sans-serif; color: #28a745; }
+  #question, .answer { cursor: pointer; }
+  #question { font-family: 'Arial', sans-serif; color: #007bff; }
+  #answer { font-family: 'Calibri', sans-serif; color: #28a745; }
   .edit-btn { float: right; margin-top: -20px; color: #dc3545; } /* Modified color for visibility */
 </style>
 </head>
@@ -38,34 +38,56 @@
 					<c:set var = "pageNum" value = "${param.pageNum}"/>
 				</c:if>
 		
-		<c:forEach var="qna" items="${qnaList}">
-	        <div class="container">
-	          <div class="row">
-	            <div class="col-md-12">
-	              <div class="card">
-	                 <div class="card-body">
-			            <%-- Assume that data is fetched from the server based on the qid parameter --%>
-			            <h5 class="card-title">질문 ID: ${qna.qna_writer}</h5>
-			            <p class="card-text"><strong>제목:</strong> ${qna.qna_subject}</p>
-			            <p class="card-text"><strong>내용:</strong> ${qna.qna_content}</p>
-			            <p class="card-text"><strong>답변 내용:</strong>
-							<c:choose>
-								<c:when test="${qna.qna_status eq 0}">
-									<span style="color:#00aaff; font-size: bold">아직 답변하지 않으셨습니다.</span> 
-								</c:when>
-								<c:otherwise>
-						             ${qna.admin_content}
-								</c:otherwise>
-							</c:choose>
-						</p>
-			            <a href="adminAnswerList" class="btn btn-primary"><i class="fas fa-arrow-left"></i> 답변 내역</a>
-			            <a href="adminAnswer?qna_idx=${qna.qna_idx}&pageNum=${param.pageNum}" class="btn btn-warning"><i class="fas fa-edit"></i> 답변 달기</a>
+				<c:forEach var="qna" items="${qnaList}">
+			        <div class="container">
+			          <div class="row">
+			            <div class="col-md-12">
+			              <div class="card">
+			                 <div class="card-body">
+					            <%-- Assume that data is fetched from the server based on the qid parameter --%>
+					            <h5 class="card-title">질문 ID: ${qna.qna_writer}</h5>
+					            <p class="card-text" id="question"><strong>제목:</strong> ${qna.qna_subject}</p>
+					            <p class="card-text" id="question"><strong>내용:</strong> ${qna.qna_content}</p>
+					            <p class="card-text" id="answer"><strong>답변 내용:</strong>
+									<c:choose>
+										<c:when test="${qna.qna_status eq 0}">
+											<span style="color:#00aaff; font-size: bold">아직 답변하지 않으셨습니다.</span> 
+										</c:when>
+										<c:otherwise>
+								             ${qna.admin_content}
+										</c:otherwise>
+									</c:choose>
+								</p>
+<!-- 					            <a href="adminAnswerList" class="btn btn-primary"><i class="fas fa-arrow-left"></i> 답변 내역</a> -->
+					            <a href="adminAnswer?qna_idx=${qna.qna_idx}&pageNum=${pageNum}" class="btn btn-warning" style="background-color:#00aaff; border-color: #00aaff; color:white;"><i class="fas fa-edit"></i> 답변 달기</a>
+					        </div>
+			              </div>
+			            </div>
+			          </div>
 			        </div>
-	              </div>
-	            </div>
-	          </div>
-	        </div>
-		</c:forEach>
+				</c:forEach>
+		
+				<%-- 페이징 --%>
+				<section id = "pageList" style="text-align: center;">
+			
+					<input type="button" value="이전" onclick="location.href='adminAnswerList?pageNum=${pageNum -1}'" 
+						<c:if test="${pageNum eq 1 }">disabled</c:if>
+					>
+					
+					<c:forEach  var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }" step="1">
+						<c:choose>
+							<c:when test="${i eq pageNum }">
+								${i}
+							</c:when>
+							<c:otherwise>
+								<a href="adminAnswerList?pageNum=${i}">${i}</a>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>		
+				<input type="button" value="다음" onclick="location.href='adminAnswerList?pageNum=${pageNum +1}'"
+					<c:if test="${pageNum eq pageInfo.maxPage }">disabled</c:if>
+				>
+				</section>
 		
       </main>
     </div>

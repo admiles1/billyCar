@@ -250,15 +250,15 @@ public class AdminController {
 		return "admin/admin_review";
 	}
 	
-	@GetMapping("adminAnswerList")
-	public String adminAnswerList(Model model) {
-		System.out.println("qnaList(controller)");
-		List<QnaVO> qna = service.adminAnswerList();
-		System.out.println(qna);
-		model.addAttribute("qna", qna);
-		
-		return "admin/admin_answerList";
-	}
+//	@GetMapping("adminAnswerList")
+//	public String adminAnswerList(Model model) {
+//		System.out.println("qnaList(controller)");
+//		List<QnaVO> qna = service.adminAnswerList();
+//		System.out.println(qna);
+//		model.addAttribute("qna", qna);
+//		
+//		return "admin/admin_answerList";
+//	}
 	
 	
 }
