@@ -83,38 +83,6 @@ public class MypageController {
 		
 		return "redirect:/mypage";
 	}
-
-
-
-
-	
-	
-	
-	
-//	@GetMapping("checkPasswd")
-//	public String checkPasswd() {
-//		return "mypage/page/Mypage_Insert_Password";
-//	}
-//	@GetMapping("mypage")
-//	public String mypage(HttpSession session, MemberVO member) {
-//		session.getAttribute("memberid");
-//		return "mypage/page/Mypage_Insert_Password";
-//	}
-//	@GetMapping("mypage")
-//	public String mypage(HttpSession session, Model model) {
-//	    // 세션에서 회원 아이디 가져오기
-//		String memberId = (String) session.getAttribute("member_id");
-//	    // 가져온 회원 아이디를 모델에 추가
-//	    MemberVO memberPasswd = service.getMemberPasswd(memberId);
-//	    if(memberPasswd == null) {
-//	    	model.addAttribute("msg", "비밀번호를 다시 확인해주세요");
-//	    	return "err/fail";
-//	    } else {
-//	    	model.addAttribute("memberPasswd", memberPasswd);
-//	    	return "mypage/page/Mypage_Insert_Password";
-//	    }
-//	}
-	
 	
 	@GetMapping("modifyPasswd")
     public String modifyPasswd() {
@@ -135,22 +103,9 @@ public class MypageController {
 		int isCorrectLiscense = service.getLicense(license);
 		
 		if(isCorrectLiscense < 1) {
-			model.addAttribute("msg", "조회된 정보가 없습니다.");
+			model.addAttribute("msg", "유효하지 않은 면허 정보입니다. 면허 정보를 다시 확인해주세요!");
 			return "err/fail";
 		}
-		
-//		if(!stLicense.getLicense_sd_id().equals(license.getLicense_user_id())) {
-//			model.addAttribute("msg", "면허 번호를 확인해주세요.");
-//			return "err/fail";
-//		} 
-//		if(!stLicense.getLicense_sd_issue_date().equals(license.getLicense_issue_date())) {
-//			model.addAttribute("msg", "발급일을 확인해주세요.");
-//			return "err/fail";
-//		}
-//		if(!stLicense.getLicense_sd_expiration_date().equals(license.getLicense_expiration_date())) {
-//			model.addAttribute("msg", "만료일을 확인해주세요.");
-//			return "err/fail";
-//		}
 		
 		int insertCount = service.registLicense(license);
 		if(insertCount == 0) {
@@ -159,12 +114,14 @@ public class MypageController {
 		}
 		return "redirect:/licenseInfo";
 	}
-
-
 	
 	@GetMapping("licenseInfo")
-	public String licenseInfo(Model model) {
-		return "mypage/page/Mypage_License_register";
+	public String licenseInfo(Model model, LicenseVO license) {
+		String MemberId = (String)session.getAttribute("member_id");
+		
+		model.addAttribute("licenseInfo", service.getLicenseInfo(MemberId));
+
+		return "mypage/page/Mypage_License_Info";
 	}
 	
 	

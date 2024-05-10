@@ -306,7 +306,7 @@ h3 {
     
     <div class="license-info">
         <label for="licenseNumber">면허 번호 *</label>
-        <input type="text" id="licenseNumber" name="license_user_id" placeholder="면허 번호를 입력하세요" maxlength="12">
+        <input type="text" id="licenseNumber" name="license_user_id" placeholder="면허 번호를 입력하세요 (예: 000000000000)" maxlength="12">
         <label for="licenseType">면허 종류 *</label>
         <select id="licenseType" name="license_name">
             <option value="면허 종류">면허 종류를 선택해주세요</option>
@@ -340,7 +340,7 @@ h3 {
 				<span class="chk-box">
 					<input type="checkbox" id="agree01" name="chk">
 					<label for="agree01">
-						개인정보 수집 및 이용 동의(선택)					
+						개인정보 수집 및 이용 동의(필수)					
 					</label>				
 				</span>
 				<span class="view1">
@@ -351,7 +351,7 @@ h3 {
 				<span class="chk-box">
 					<input type="checkbox" id="agree02" name="chk">
 					<label for="agree02">
-						고유식별정보 수집 및 이용 동의(선택)					
+						고유식별정보 수집 및 이용 동의(필수)					
 					</label>
 				</span>
 				<span class="view2">
@@ -426,14 +426,29 @@ h3 {
     </div>
 </div>
 <script>
-	function validateForm() {
-	    if (!document.getElementById('totalChk').checked) { // 전체동의 체크 확인
-	        alert("약관에 동의해주세요.");
-	        document.getElementById('terms').scrollIntoView();
-	        return false; // 폼 제출 막기
-	    }
-	    return true; // 약관에 동의했을 때만 제출
-	}
+function scrollToTermsForm() {
+    // 이용약관 체크 폼의 위치를 가져옵니다.
+    const termsForm = document.getElementById('terms');
+
+    // 이용약관 체크 폼이 있는 위치까지 화면을 스크롤합니다.
+    termsForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function validateForm() {
+    // 각각의 약관 동의 상태를 가져옵니다.
+    let agree01Checked = document.getElementById('agree01').checked;
+    let agree02Checked = document.getElementById('agree02').checked;
+
+    // 모든 약관에 동의되어 있는지 확인합니다.
+    if (agree01Checked && agree02Checked) {
+        
+        return true; // 모든 약관에 동의되어 있고, 전체 동의도 되어 있을 때만 제출
+    } else {
+        alert("모든 약관에 동의해주세요.");
+        scrollToTermsForm();
+        return false; // 폼 제출 막기
+    }
+}
 
     const modal = document.querySelector('.modal');
     const modalOpen = document.querySelector('.modal_btn');
