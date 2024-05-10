@@ -67,8 +67,13 @@
 	<select id = "selectFaqList" resultType="com.itwill.billycar.vo.FaqVO">
 		SELECT *
 		FROM faq
+		<if test="category != null">
+			WHERE faq_category = #{category}
+		</if>
 		ORDER BY faq_idx DESC
+		<if test="startRow != 0">
 		LIMIT  #{listLimit}, #{startRow}
+		</if>
 	</select>
 	
 	<!-- ==================================================================  -->

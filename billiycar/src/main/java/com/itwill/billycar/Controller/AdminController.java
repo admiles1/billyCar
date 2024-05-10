@@ -23,10 +23,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.itwill.billycar.service.AdminCusService;
 import com.itwill.billycar.service.AdminService;
 import com.itwill.billycar.vo.AdminVO;
 import com.itwill.billycar.vo.CarVO;
 import com.itwill.billycar.vo.CommonVO;
+import com.itwill.billycar.vo.FaqVO;
 import com.itwill.billycar.vo.MemberVO;
 import com.itwill.billycar.vo.PageInfo;
 import com.itwill.billycar.vo.QnaVO;
@@ -282,39 +284,15 @@ public class AdminController {
 		return "admin/admin_review";
 	}
 	
-	@GetMapping("adminAnswerList")
-	public String adminAnswerList(Model model) {
-		System.out.println("qnaList(controller)");
-		List<QnaVO> qna = service.adminAnswerList();
-		System.out.println(qna);
-		model.addAttribute("qna", qna);
-		
-		return "admin/admin_answerList";
-	}
-	
-	@GetMapping("adminAnswerForm")
-	public String adminAnswer() {
-		return "admin/admin_answerList_form";
-	}
-	
-	
-	@GetMapping("admin_counsel")
-	public String admin_counsel() {
-		
-		return "admin/admin_counsel";
-	}
-	
-	@GetMapping("admin_answerList_form")
-	public String admin_answerList_form() {
-		
-		return "admin/admin_answerList_form";
-	}
-	
-	
-	
-	
-	
-	
+//	@GetMapping("adminAnswerList")
+//	public String adminAnswerList(Model model) {
+//		System.out.println("qnaList(controller)");
+//		List<QnaVO> qna = service.adminAnswerList();
+//		System.out.println(qna);
+//		model.addAttribute("qna", qna);
+//		
+//		return "admin/admin_answerList";
+//	}
 	
 	
 }

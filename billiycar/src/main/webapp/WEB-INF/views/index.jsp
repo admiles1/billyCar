@@ -261,7 +261,7 @@ function redirectToAdminPage() {
                     <img src="resources/main_images/icon2.png" width="53" height="53" alt="예약가능차량">
                     <div class="mt-2">
                         <div class="font-weight-bold">예약 가능 차량</div>
-                        <div id="ableRsv" class="text-primary">3885</div>
+                        <div id="ableRsv" class="text-primary">${carCount }</div>
                     </div>
                 </div>
             </div>
@@ -269,8 +269,8 @@ function redirectToAdminPage() {
                 <div class="about-reason text-center">
                     <img src="resources/main_images/icon3.png" width="53" height="53" alt="제주도입점업체">
                     <div class="mt-2">
-                        <div class="font-weight-bold">제주도 입점 업체</div>
-                        <div id="inCorp" class="text-primary">79</div>
+                        <div class="font-weight-bold">누적 회원 수</div>
+                        <div id="inCorp" class="text-primary">${memberCount }</div>
                     </div>
                 </div>
             </div>
@@ -354,72 +354,20 @@ function redirectToAdminPage() {
 		<!-- 구분  -->
 		<div class="accordion noto-sans-kr" id="accordionExample">
 		<!-- 1번 -->
-		<div class="accordion-item">
-			<h2 class="accordion-header">
-				<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-				01. 카시트 등 부가서비스는 어떻게 이용하나요?
-				</button>
-			</h2>
-			<div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-				<div class="accordion-body">
-					■ 위드렌터카는 유아용카시트, 주니어용 카시트를 무료로 대여해드리고 있습니다. 
-					예약하실 때, 선택하시거나 차량이용일 이전에 전화로 알려주시면 배차 시 제공해드리고 있습니다. 
-					(단, 한정수량인 관계로 단일품목을 2개이상 이용시에는  추가비용이 발생됨을 알려드립니다.
+		<c:forEach var="faq" items="${faqList }">
+			<div class="accordion-item">
+				<h2 class="accordion-header">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${faq.faq_idx}" aria-expanded="false" aria-controls="collapse${faq.faq_idx}">
+						${faq.faq_subject }
+					</button>
+				</h2>
+				<div id="collapse${faq.faq_idx}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+					<div class="accordion-body">
+						■ ${faq.faq_content }
+					</div>
 				</div>
 			</div>
-		</div>
-		<!-- 2번 -->
-		<div class="accordion-item">
-			<h2 class="accordion-header">
-				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-				02. 사고 또는 고장 발생시 어떻게 해야하나요?
-				</button>
-			</h2>
-			<div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-				<div class="accordion-body">
-					■ 사고 또는 고장 발생 시
-					당황하지 마시고 먼저 자사 직통전화로 연락을 하시고 기다리시면
-					보험접수 및 보험사 출동 등 자사에서 필요하다고 판단되는 부분에 대해서 일괄 신청 및 처리하고 있습니다.
-					직통전화 : 051-808-600 / 010-9700-6615 
-				</div>
-			</div>
-		</div>
-		<!-- 3번 -->
-		<div class="accordion-item">
-			<h2 class="accordion-header">
-				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseTwo">
-				03. 현금 영수증 발급이 가능한가요?
-				</button>
-			</h2>
-			<div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-				<div class="accordion-body">
-					■ 렌터카는 차량을 구매하는 것이 아닌 대여 품목으로 현금영수증 발급 및 소득공제제외 대상입니다.
-					상세한 내용은 국세청 홈페이지에서 확인이 가능합니다.
-					<br>
-					■ 관련 법령 - 소득세법 제 162조의 3 및 동법시행령 제 210조의 3 - 조세특례제한법 제 121조의 2 ⑥ 5번(리스료)  
-				</div>
-			</div>
-		</div>
-		<!-- 4번 -->
-		<div class="accordion-item">
-			<h2 class="accordion-header">
-				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseTwo">
-				04. 해외에 거주하고 있는데 예약 및 이용이 가능하나요?
-				</button>
-			</h2>
-			<div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-				<div class="accordion-body">
-					■ 외국인 및 해외체류자 대여시에는 전화상담이 직접 어려울 경우 국내에 거주중인
-  					지인을 통해 대리예약이 가능하나 운전자의 조건이 확인 되어야 합니다.
-					<br>
-					■ 임차인은 필히 국적이 한국인이어야 하고, 국내주소지, 국내 휴대폰번호, 차량대여기준 (연령/운전경력)이 적합한 경우 등록가능하며
-					<br>
-					■ 외국인은 제 2운전자(추가운전자)로 등록이 가능하며 아래의 조건을 충족해야합니다.
-
-					
-				</div>
-			</div>
-		</div>
+		</c:forEach>
 	</div>
 		
 	</section>

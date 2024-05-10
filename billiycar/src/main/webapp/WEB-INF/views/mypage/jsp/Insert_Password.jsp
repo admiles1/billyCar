@@ -38,7 +38,7 @@
         box-sizing: border-box;
     }
     
-    #passwd-insert button {
+    #passwd-insert input[type="submit"] {
         border: none;
 		border-radius: 20px;
 		font-size: 16px;
@@ -49,7 +49,7 @@
 	    color: white; /* 글자색 지정 */
     }
    
-    #passwd-insert button:hover {
+    #passwd-insert input[type="submit"]:hover {
         background-color: #555;
     }
     
@@ -64,13 +64,13 @@
 </head>
 <body>
 
-<form id="passwd-insert" action="modifyInfo">
+<form id="passwd-insert" action="modifyInfo" method="post">
 	<h2>회원정보 수정</h2>
 	<hr>
     <p>회원정보 수정을 위해 비밀번호를 입력해주세요<p>
     <div class="passwd-check">
-    	<input type="password" id="password" placeholder="비밀번호를 입력해주세요">
-    	<button type="submit">완료</button>	
+    	<input type="password" id="password" name="member_passwd" placeholder="비밀번호를 입력해주세요">
+    	<input type="submit" value="완료">	
 	</div>
 </form>
 

@@ -12,11 +12,15 @@ import com.itwill.billycar.vo.CarVO;
 public class ReservService {
 	@Autowired ReservMapper mapper;
 	
-	public List<CarVO> selectCarList() {
-		return mapper.selectCarList();
+	public List<CarVO> selectCarList(CarVO car) {
+		return mapper.selectCarList(car);
 	}
 	
 	public CarVO getCar(int idx) {
 		return mapper.selectCar(idx);
+	}
+
+	public int selectReservCountCar() {
+		return mapper.selectReservCountCar();
 	}
 }

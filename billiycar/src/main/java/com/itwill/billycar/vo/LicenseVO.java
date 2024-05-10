@@ -10,5 +10,4 @@ public class LicenseVO {
 	private String license_name;
 	private String license_issue_date;
 	private String license_expiration_date;
-	
 }

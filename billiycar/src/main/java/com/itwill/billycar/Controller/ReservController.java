@@ -1,7 +1,10 @@
 package com.itwill.billycar.Controller;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.StringJoiner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,49 +24,78 @@ public class ReservController {
 	// 조건검색하지않고 예약페이지 진입시 (모든 차량검색, 페이징처리)
 	@GetMapping("reservation")
 	public String reservationget(Model model) {
-		List<CarVO> cars = service.selectCarList();
-		model.addAttribute("cars", cars);
+		model.addAttribute("needSearch", true);
 		return "reservation/reservation";
 	}
 	
 	// 메인페이지, 예약페이지에서 조건을 입력하였을 시 (조건에 맞는 차량 검색 및 받아온 값 표시)
 	@PostMapping("reservation")
-	public String reservationpost(@RequestParam(defaultValue = "") Map<String, String> map, 
-								  @RequestParam(defaultValue = "") List<String> carType, 
-								  @RequestParam(defaultValue = "") List<String> fuelType, 
-								  Model model) {
-		// 1. 차종류, 연료 각 값으로 빼서 가지고감
-		// 2. select *
-		//		from car 
-		//	   where 자동차타입 in ('XX','OO') AND 자동차연료 in ('ㅁㅁ','ㅇㅇ');
+	public String reservationpost(CarVO car
+								, @RequestParam(defaultValue = "") Map<String,String> map 
+								, Model model) {
+		List<CarVO> cars = null;
+		if(car.getCar_type() != null && car.getCar_fuel() == null) { 	// 자동차타입 조건만 존재 할 경우
+			// search메소드로 스트링 포맷 변환 후 초기화
+			car.setCar_type(searchMethod(car.getCar_type()));
+			
+			cars = service.selectCarList(car);
+			
+			Set<String> hasThisType = new HashSet<String>();
+			
+			for (CarVO c : cars) {
+				hasThisType.add(c.getCar_type());
+			}
+			
+			model.addAttribute("hasThisType", hasThisType);
+			
+		} else if (car.getCar_type() == null && car.getCar_fuel() != null) { // 자동차연료 조건만 존재 할 경우
+			car.setCar_fuel(searchMethod(car.getCar_fuel()));
+			cars = service.selectCarList(car);
+			
+			Set<String> hasThisFuel = new HashSet<String>();
+			for (CarVO c : cars) {
+				hasThisFuel.add(c.getCar_fuel());
+			}
+			
+			model.addAttribute("hasThisFuel", hasThisFuel);
+			
+		} else { // 두 가지 모두 검색 할 경우
+			
+			car.setCar_fuel(searchMethod(car.getCar_fuel()));
+			car.setCar_type(searchMethod(car.getCar_type()));
+			cars = service.selectCarList(car);
+			
+			Set<String> hasThisType = new HashSet<String>();
+			Set<String> hasThisFuel = new HashSet<String>();
+			
+			for (CarVO c : cars) {
+				hasThisType.add(c.getCar_type());
+				hasThisFuel.add(c.getCar_fuel());
+			}
+			
+			model.addAttribute("hasThisType", hasThisType);
+			model.addAttribute("hasThisFuel", hasThisFuel);
+		}
 		
-		//TODO
-		// 페이징처리
-		// 받아온 조건들을 Map으로 관리 후 Model로 다시 넘겨주기
+		model.addAttribute("cars", cars);
 		
-		// 1. 예약 일정
-		model.addAttribute("pickupDate", map.get("pickupDate"));
-		model.addAttribute("returnDate", map.get("returnDate"));
-		model.addAttribute("pickupTime", map.get("pickupDate"));
-		model.addAttribute("returnTime", map.get("returnDate"));
-		
-		// 2. 예약 지점과 반납 지점
-	    // 3. 예약 자동차의 타입 (List객체로 받아옴(임시)
-		// 4. 예약 자동차의 연료종류 (List객체로 받아옴(임시)
 		return "reservation/reservation";
 	}
 	
 	@GetMapping("reservationdetail")
-	public String reservationdetail(CarVO car, int idx, Model model) {
+	public String reservationdetail(CarVO car 
+			                        , @RequestParam(defaultValue = "") Map<String, String> map 
+			                        , Model model) {
+		System.out.println(map);
 		// idx없이 강제로 상세예약페이지 진입시
-		if (idx == 0 ) {
+		if (map.get("idx") == null) {
 			model.addAttribute("msg", "차량을 선택하여 주십시오");
 			model.addAttribute("targetURL", "reservation");
 			return "err/fail";
 		} 
 		
 		// db에서 받아온 idx에 맞는 차조회
-		car = service.getCar(idx);
+		car = service.getCar(Integer.parseInt(map.get("idx")));
 		
 		// 존재하지않는 idx를 조회했을 시
 		if(car == null) {
@@ -81,4 +113,15 @@ public class ReservController {
 		return "reservation/review";
 	}
 	
+	
+	// 호출용 메소드
+	public String searchMethod(String option) {
+		String[] strArr = option.split(",");
+		StringJoiner options = new StringJoiner(",");
+		for(String s : strArr) {
+			s = "'" + s + "'";
+			options.add(s);
+		}
+		return options.toString();
+	}
 }

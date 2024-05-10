@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.itwill.billycar.vo.LicenseVO;
+import com.itwill.billycar.vo.License_StandardVO;
 import com.itwill.billycar.vo.MemberVO;
 import com.itwill.billycar.vo.QnaVO;
 
@@ -18,11 +19,17 @@ public interface MypageMapper {
 
 	int insertLicense(LicenseVO license);
 
-	int checkLicenseMatch(LicenseVO license);
 
 	int withdrawMember(MemberVO member);
 
 	int updateInfo(MemberVO member);
+
+	int compareLicense(LicenseVO license);
+
+
+//	List<License_StandardVO> selectLicenseStandard();
+
+//	int checkLicenseMatch(LicenseVO license);
 
 	
 

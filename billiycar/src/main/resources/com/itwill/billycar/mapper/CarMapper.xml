@@ -7,12 +7,22 @@
 	<select id="selectCarList" resultType="com.itwill.billycar.vo.CarVO">
 		SELECT *
 		  FROM car
+		 WHERE 1 = 1
+		 <if test="car_type != null"> AND car_type IN (${car_type})</if>
+		 <if test="car_fuel != null"> AND car_fuel IN (${car_fuel})</if>
 	</select>
-	
 	<select id="selectCar" resultType="com.itwill.billycar.vo.CarVO">
 		SELECT *
 		  FROM car
 		 WHERE car_idx = #{idx}
+	</select>
+	
+	<!-- 예약 가능한 총 차량 -->
+	<select id="selectReservCountCar">
+		select count(*) from car
+<!-- 		<if test="res"> -->
+<!-- 		where reserv_status = 1; -->
+<!-- 		</if> -->
 	</select>
 </mapper>
 

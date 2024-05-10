@@ -89,9 +89,8 @@ h2 {
 
 
 </style>
-</head>
 <body>
-	<form id="signup" action="mypage" method="post">
+	<form id="signup" action="mypage" method="post" name="fr">
 		<fieldset>
 			<h2>회원정보 수정</h2>
 			<hr>
@@ -116,7 +115,7 @@ h2 {
 		        </li>
 		        <li>
 		          <label for="email">메일 주소</label>
-		          <input id="email" name="member_email" type="email" value="${info.member_email}" autocomplete="off">
+		          <input id="email" name="member_email" type="email" id="member_email" value="${info.member_email}" autocomplete="off" >
 		        </li>
 		         <li>
 		          <label for="memberBirth">생년 월일</label>
@@ -129,7 +128,8 @@ h2 {
 		        
 		        <li>
 		          <label for="tel">연락처</label>
-		          <input id="tel" name="member_phone" type="tel" value="${info.member_phone}" autocomplete="off">
+		          <input id="tel" name="member_phone" type="tel" value="${info.member_phone}" autocomplete="off"
+		          		pattern="^[0-9]{10,11}$">
 		        </li>  
 		      </ul>
 		      <input type="submit" value="회원정보 변경">
@@ -145,6 +145,18 @@ h2 {
         // 자른 날짜 설정
         document.getElementById("memberRegDate").value = slicedDate;
     }
+
+
+
+	document.fr.onsubmit = function() {
+	    let email = document.getElementById("email").value;
+	    let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+	    if (!emailPattern.test(email)) { // 이메일 양식이 맞는지 확인
+	        alert("유효한 이메일을 입력해주세요.");
+	        document.getElementById("email").focus();
+	        return false; // 폼 제출 방지
+	    }
+	}
 
   </script>
 </body>

@@ -7,6 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>비밀번호 변경</title>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
+
 <style>
 #passwd-modify {
 	margin-top: 30px;
@@ -98,7 +101,7 @@ input[type="password"], input[type="text"] {
 </head>
 <body>
 
-<form id="passwd-modify" method="post" action="processPasswordChange" >
+<form id="passwd-modify" method="post" action="modifyPasswd"  name="fr">
     <h2>비밀번호 변경</h2>
     <hr>
     <div class="passwd-notice">
@@ -112,11 +115,11 @@ input[type="password"], input[type="text"] {
 	    </p>
     </div>
     <div class="passwd-info">
-	    <input type="password" id="currentPassword" placeholder="현재 비밀번호">
+	    <input type="password" id="currentPassword" placeholder="현재 비밀번호" name="member_passwd">
 	    <input type="password" id="newPassword" placeholder="새로운 비밀번호">
 	    <input type="password" id="confirmPassword" placeholder="새로운 비밀번호 확인">
-	   	<span id="passwordMatchMsg"></span>
-        <span id="passwordMismatchMsg"></span>
+	   	<div id="passwordMatchMsg"></div>
+<!--         <span id="passwordMismatchMsg"></span> -->
        	<div class="g-recaptcha-container">
         	<div class="g-recaptcha" data-sitekey="6LfQ8swpAAAAAMfwmMU-_UGqKZL_96D04eJGk2CA"></div>
 	    </div>
@@ -124,36 +127,134 @@ input[type="password"], input[type="text"] {
 	</div>
 </form>
 
-<script>
-	var newPasswordInput = document.getElementById("newPassword");
-	var confirmPasswordInput = document.getElementById("confirmPassword");
-	var matchMsg = document.getElementById("passwordMatchMsg");
-	var mismatchMsg = document.getElementById("passwordMismatchMsg");
-	
-	newPasswordInput.addEventListener('input', function() {
-	    checkPasswordMatch();
-	});
-	
-	confirmPasswordInput.addEventListener('input', function() {
-	    checkPasswordMatch();
-	});
+<script type="text/javascript">
+// 	var newPasswordInput = document.getElementById("newPassword");
+// 	var confirmPasswordInput = document.getElementById("confirmPassword");
+// 	var matchMsg = document.getElementById("passwordMatchMsg");
+// 	var mismatchMsg = document.getElementById("passwordMismatchMsg");
+	let checkPasswdResult = false;
+	let checkPasswd2Result = false;
+	let id = '${sessionScope.member_id}';
 
-	function checkPasswordMatch() {
-	    var newPassword = newPasswordInput.value;
-	    var confirmPassword = confirmPasswordInput.value;
+	$(function() {
+		$("#newPassword").keyup(function() { // 비밀번호 유효성 검사
+			
+		    let passwd = $("#newPassword").val();
+			
+		    let msg = "";
+			let color = "";
+			
+			let lengthRegex = /^[A-Za-z0-9!@#$%]{8,16}$/;
+		    
+		    if(lengthRegex.exec(passwd)) {
+		    	let engUpperRegex = /[A-Z]/; // 대문자
+		    	let engLowerRegex = /[a-z]/; // 소문자
+		    	let numRegex = /\d/; // / [0-9]
+		    	let specRegex = /[!@#$%^&*]/; // 특수문자
+		    	
+		    	let count = 0;
+		    	
+		    	if(engUpperRegex.exec(passwd)) { count++; } // 대문자 포함할 경우
+		    	if(engLowerRegex.exec(passwd)) { count++; } // 소문자 포함할 경우
+		    	if(numRegex.exec(passwd)) { count++; }      // 숫자 포함할 경우
+		    	if(specRegex.exec(passwd)) { count++; }     // 특수문자 포함할 경우
+ 		    	
+		    	switch (count) {
+					case 4: msg = "안전"; color = "GREEN"; checkPasswdResult = true; break;
+					case 3: msg = "보통"; color = "ORANGE"; checkPasswdResult = true; break;
+					case 2: msg = "위험"; color = "RED"; checkPasswdResult = true; break;
+					case 1:
+					case 0: 
+						msg = "영문 대소문자,숫자,특수문자 중 2개 이상을 포함시켜주세요."; 
+						color = "RED"; 
+						checkPasswdResult = false;
+				}
+		    	
+		    } else {
+				msg = "영문 대소문자,숫자,특수문자 중 2개 이상을 포함시켜주세요."; 
+				color = "RED";
+				
+		    	checkPasswdResult = false;
+		    }
+		    
+			if(passwd.search(id) > -1) {
+				msg = "비밀번호에 아이디가 포함되었습니다.";
+				color = "RED";
+				
+				checkPasswdResult = false;
+		    }    
+			
+			
+		    $("#passwordMatchMsg").text(msg);
+			$("#passwordMatchMsg").css("color", color);
+			
+		}); //비밀번호 유효성 검사 끝
+		
+		$("#confirmPassword").keyup(checkSamePasswd); // 비밀번호 일치 확인
+		$("#newPassword").change(checkSamePasswd); // 비밀번호 변경시 일치 확인
 	
-	    if (newPassword === confirmPassword) {
-	        matchMsg.innerText = "*비밀번호가 일치합니다.";
-	        mismatchMsg.innerText = "";
-	        matchMsg.style.display = "block";
-	        mismatchMsg.style.display = "none";
-	    } else {
-	        mismatchMsg.innerText = "*비밀번호가 일치하지 않습니다.";
-	        matchMsg.innerText = "";
-	        mismatchMsg.style.display = "block";
-	        matchMsg.style.display = "none";
-	    }
+	}); 
+	
+	
+	function checkSamePasswd() { // 비밀번호 확인 일치 검사
+		let passwd = document.fr.newPassword.value; 
+		let passwd2 = document.fr.confirmPassword.value;
+		
+		if(passwd == passwd2) { // 패스워드 일치
+	    	$("#passwordMatchMsg").text("*비밀번호가 일치합니다.");
+			$("#passwordMatchMsg").css("color", "BLUE");
+	    	
+	    	checkPasswd2Result = true;
+		} else { // 패스워드 불일치
+	    	$("#passwordMatchMsg").text("*비밀번호가 일치하지 않습니다.");
+			$("#passwordMatchMsg").css("color", "RED");
+	    	
+	    	checkPasswd2Result = false;
+		}
 	}
+	
+// 	newPasswordInput.addEventListener('input', function() {
+// 	    checkPasswordMatch();
+// 	});
+	
+// 	confirmPasswordInput.addEventListener('input', function() {
+// 	    checkPasswordMatch();
+// 	});
+
+// 	function checkPasswordMatch() {
+// 	    var newPassword = newPasswordInput.value;
+// 	    var confirmPassword = confirmPasswordInput.value;
+	
+//	    if (newPassword === confirmPassword) {
+// 	        matchMsg.innerText = "*비밀번호가 일치합니다.";
+// 	        mismatchMsg.innerText = "";
+// 	        matchMsg.style.display = "block";
+// 	        mismatchMsg.style.display = "none";
+// 	        checkPasswd2Result = true;
+// 	    } else {
+// 	        mismatchMsg.innerText = "*비밀번호가 일치하지 않습니다.";
+// 	        matchMsg.innerText = "";
+// 	        mismatchMsg.style.display = "block";
+// 	        matchMsg.style.display = "none";
+// 	        checkPasswd2Result = false;
+// 	    }
+// 	}
+	
+	
+	document.fr.onsubmit = function() {
+		if(!checkPasswdResult) { // 비밀번호 확인
+			alert("새 비밀번호를 확인해주세요!");
+			document.fr.newPassword.focus();
+			return false;
+		} else if(!checkPasswd2Result) { // 비밀번호 일치확인 
+			alert("비밀번호가 일치하지 않습니다!");
+			document.fr.confirmPassword.focus();
+			return false;
+		} 
+		return true;
+	}
+	
+	
 	
 </script>
 </body>

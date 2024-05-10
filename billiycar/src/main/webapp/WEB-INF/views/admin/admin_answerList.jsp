@@ -31,6 +31,12 @@
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
           <h1 class="h2">답변 내역</h1>
         </div>
+        
+        	<c:set var = "pageNum" value = "1"/>
+					<c:if test="${not empty param.pageNum}">
+						<c:set var = "pageNum" value = "${param.pageNum}"/>
+					</c:if>
+        
         	 <c:forEach var="qna" items="${qna }">
                    		<div class="container">
        						<div class="row">
@@ -41,10 +47,11 @@
 					                    	<a href="adminAnswer"></a>
 					                    	<h3 class="question">제목 : ${qna.qna_subject }</h3>
 					                    	<h6 class="answer">내용 : ${qna.qna_content }</h6>
+					                    	<h6 class="wrtier">작성자 ${qna.qna_writer} 님</h6>
 					                    	<hr class="my-4">
 					                    	<c:choose>
 					                    		<c:when test="${qna.admin_content ne ''}">
-					                    			<a href="adminAnswerForm" class="btn btn-sm btn-danger">답변 달기</a>
+					                    			<a href="adminAnswerForm?qna_idx=${qna.qna_idx}&pageNum=${pageNum}" class="btn btn-sm btn-danger">답변 달기</a>
 					                    		</c:when>
 					                    		<c:otherwise>
 					                    			<a class="btn btn-sm btn-danger">답변완료</a>

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.billycar.service.MypageService;
 import com.itwill.billycar.vo.LicenseVO;
+import com.itwill.billycar.vo.License_StandardVO;
 import com.itwill.billycar.vo.MemberVO;
 import com.itwill.billycar.vo.QnaVO;
 
@@ -40,17 +41,60 @@ public class MypageController {
 		return "mypage/page/Mypage_Member_Info";
 	}
 	
-	@GetMapping("modifyInfo")
+	@GetMapping("modifyInfo") //회원정보수정 클릭시
 	public String modifyInfo(Model model) {
 		String MemberId = (String)session.getAttribute("member_id");
 		model.addAttribute("info", service.getMemberInfo(MemberId));
-		return "mypage/page/Mypage_Modify_Info";
-	}
-	
-	@GetMapping("checkPasswd")
-	public String checkPasswd() {
 		return "mypage/page/Mypage_Insert_Password";
 	}
+	
+	@PostMapping("modifyInfo")
+	public String modifyMemberInfo(MemberVO member, String member_passwd , Model model, BCryptPasswordEncoder passwordEncoder) {
+		
+		String MemberId = (String)session.getAttribute("member_id");
+		MemberVO dbMember = service.getMemberInfo(MemberId);
+		
+		if(dbMember == null || !passwordEncoder.matches(member_passwd, dbMember.getMember_passwd())) { // 비밀번호 확인 실패
+			model.addAttribute("msg", "비밀번호를 확인해주세요.");
+			return "err/fail";
+		} else { // 비밀번호 확인 성공
+			
+			model.addAttribute("info", service.getMemberInfo(MemberId));
+			return "mypage/page/Mypage_Modify_Info";
+		}
+
+	}
+	
+	
+	@PostMapping("mypage")
+	public String modifyMemberInfoPro(Model model, MemberVO member) {
+	
+		member.setMember_id((String)session.getAttribute("member_id"));
+		member.setMember_email(member.getMember_email());
+		member.setMember_phone(member.getMember_phone());
+		
+		int updateCount = service.modifyInfo(member);
+		
+		
+		if(updateCount <= 0) {
+			model.addAttribute("msg", "회원정보 업데이트 실패");
+			return "err/fail";
+		}
+		
+		return "redirect:/mypage";
+	}
+
+
+
+
+	
+	
+	
+	
+//	@GetMapping("checkPasswd")
+//	public String checkPasswd() {
+//		return "mypage/page/Mypage_Insert_Password";
+//	}
 //	@GetMapping("mypage")
 //	public String mypage(HttpSession session, MemberVO member) {
 //		session.getAttribute("memberid");
@@ -85,24 +129,37 @@ public class MypageController {
     }
 	
 	@PostMapping("license")
-	public String licensePro(LicenseVO license, Model model) {
+	public String licensePro(LicenseVO license, License_StandardVO licenseSt, Model model) {
 		String memberId = (String) session.getAttribute("member_id");
 		license.setLicense_id(memberId);
+		int isCorrectLiscense = service.getLicense(license);
+		
+		if(isCorrectLiscense < 1) {
+			model.addAttribute("msg", "조회된 정보가 없습니다.");
+			return "err/fail";
+		}
+		
+//		if(!stLicense.getLicense_sd_id().equals(license.getLicense_user_id())) {
+//			model.addAttribute("msg", "면허 번호를 확인해주세요.");
+//			return "err/fail";
+//		} 
+//		if(!stLicense.getLicense_sd_issue_date().equals(license.getLicense_issue_date())) {
+//			model.addAttribute("msg", "발급일을 확인해주세요.");
+//			return "err/fail";
+//		}
+//		if(!stLicense.getLicense_sd_expiration_date().equals(license.getLicense_expiration_date())) {
+//			model.addAttribute("msg", "만료일을 확인해주세요.");
+//			return "err/fail";
+//		}
 		
 		int insertCount = service.registLicense(license);
 		if(insertCount == 0) {
 			model.addAttribute("msg", "면허 등록 실패!");
-			return "error/fail";
-		} else {
-			boolean match = service.checkLicenseMatch(license);
-			if(match) {
-				return "redirect:/licenseInfo";
-			} else {
-				model.addAttribute("msg", "면허 정보를 다시 확인해주세요!");
-				return "error/fail";
-			}
+			return "err/fail";
 		}
+		return "redirect:/licenseInfo";
 	}
+
 
 	
 	@GetMapping("licenseInfo")

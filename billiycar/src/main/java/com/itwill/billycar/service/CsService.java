@@ -59,8 +59,8 @@ public class CsService {
 	
 	// ------------------------------------------------------------------------------------------------
 	// ** [자주묻는질문] **
-	public List<FaqVO> getFaqList(int listLimit, int startRow) {
-		return mapper.selectFaqList(listLimit, startRow);
+	public List<FaqVO> getFaqList(int listLimit, int startRow, String category) {
+		return mapper.selectFaqList(listLimit, startRow, category);
 	}
 	
 	// ------------------------------------------------------------------------------------------------

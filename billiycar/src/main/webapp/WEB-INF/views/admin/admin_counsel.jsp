@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -45,41 +47,60 @@
 		<!-- 메인 컨텐츠 영역 -->
 <main role="main" class="col-md-10 col-lg-10 ml-sm-auto px-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">1:1 문의 상담 내역</h1>
+        <h1 class="h2">자주 묻는 질문 추가</h1>
     </div>
 
     <!-- 1:1 문의 상담 내역 표시 -->
     <div class="card">
         <div class="card-header">
-            1:1 문의 상담 내역
+            자주 묻는 질문
+            <a href="CounselWrite" style="float:right; text-decoration:none; margin-right:10px" > 글쓰기 </a>
         </div>
         <div class="card-body">
             <div class="list-group">
+            
                 <!-- 예시 1:1 문의 상담 내역 -->
-                <a href="#" class="list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">문의 제목 1</h5>
-                        <small>작성일: 2024-04-24</small>
-                    </div>
-                    <p class="mb-1">문의 내용이 여기에 표시됩니다. 문의 내용이 너무 길면 생략될 수 있습니다.</p>
-                    <small>작성자: 고객1</small>
-                </a>
-                <!-- 예시 추가 1:1 문의 상담 내역 -->
-                <a href="#" class="list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">문의 제목 2</h5>
-                        <small>작성일: 2024-04-23</small>
-                    </div>
-                    <p class="mb-1">문의 내용이 여기에 표시됩니다. 문의 내용이 너무 길면 생략될 수 있습니다.</p>
-                    <small>작성자: 고객2</small>
-                </a>
-                <!-- 추가적인 1:1 문의 상담 내역은 이어서 나열해주세요 -->
+                
+                	<c:set var = "pageNum" value = "1"/>
+					<c:if test="${not empty param.pageNum}">
+						<c:set var = "pageNum" value = "${param.pageNum}"/>
+					</c:if>
+                
+                <c:forEach var="faq" items="${faqList}">
+	                <a href="faqDetail?faq_idx=${faq.faq_idx}&pageNum=${pageNum}" class="list-group-item list-group-item-action">
+	                    <div class="d-flex w-100 justify-content-between">
+	                        <p class="mb-1">${faq.faq_subject}</p>
+	                    </div>
+	                </a>
+                </c:forEach>
+                
             </div>
         </div>
     </div>
 </main>
     </div>
   </div>
+  		<section id = "pageList" style="text-align: center; margin-left: 200px">
+			
+			<input type="button" value="이전" onclick="location.href='admin_counsel?pageNum=${pageNum -1}'" 
+				<c:if test="${pageNum eq 1 }">disabled</c:if>
+			>
+			
+			<c:forEach  var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }" step="1">
+				<c:choose>
+					<c:when test="${i eq pageNum }">
+						${i}
+					</c:when>
+					<c:otherwise>
+						<a href="admin_counsel?pageNum=${i}">${i}</a>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>		
+		<input type="button" value="다음" onclick="location.href='admin_counsel?pageNum=${pageNum +1}'"
+			<c:if test="${pageNum eq pageInfo.maxPage }">disabled</c:if>
+		>
+		</section>
+  
 </main>
   <!-- jQuery, Popper.js, 부트스트랩 JS -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

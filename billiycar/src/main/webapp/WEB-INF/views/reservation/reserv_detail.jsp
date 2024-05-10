@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,7 +42,7 @@
 	   		 		<h2 class="car-name"> ${car.car_model}
 	   		 			<span class="car-size"> ${car.car_type} </span>
    		 			</h2>
-	   		 		<h2 class="car-price"> ${car.car_price} </h2>
+	   		 		<h2 class="car-price"><fmt:formatNumber value="${car.car_price}" pattern="#,###"/></h2>
 	   		 		<hr>
 	   		 		<div>
 	   		 			데이트피커
