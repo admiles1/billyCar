@@ -50,6 +50,25 @@ public class AdminCusService {
 		return mapper.deleteFaq(faq_idx);
 	}
 
+	// ---------------------------------------------------------------------------------------------
+	
+	// 문의 내역 불러오기
+	public List<QnaVO> getQnaList(int startRow, int listLimit) {
+		return mapper.selectQnaList(startRow, listLimit);
+	}
+
+	public int getQnaListCount() {
+		return mapper.selectQnaListCount();
+	}
+
+	public QnaVO getQna(QnaVO qna) {
+		return mapper.selectQna(qna);
+	}
+
+	public int wrtieAnswer(QnaVO qna) {
+		return mapper.updateAnswer(qna);
+	}
+
 
 
 }

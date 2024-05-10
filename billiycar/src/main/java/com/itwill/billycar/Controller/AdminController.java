@@ -260,27 +260,5 @@ public class AdminController {
 		return "admin/admin_answerList";
 	}
 	
-	@GetMapping("adminAnswerForm")
-	public String adminAnswer(Model model, QnaVO qna) {
-		
-		
-		return "admin/admin_answerList_form";
-	}
-	
-	
-	
-	
-	@GetMapping("admin_answerList_form")
-	public String admin_answerList_form() {
-		
-		return "admin/admin_answerList_form";
-	}
-	
-	
-	
-	
-	
-	
-	
 	
 }
