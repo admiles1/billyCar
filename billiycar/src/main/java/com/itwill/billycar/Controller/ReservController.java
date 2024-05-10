@@ -1,6 +1,5 @@
 package com.itwill.billycar.Controller;
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -26,35 +25,60 @@ public class ReservController {
 	@GetMapping("reservation")
 	public String reservationget(Model model) {
 		model.addAttribute("needSearch", true);
-		
 		return "reservation/reservation";
 	}
 	
 	// 메인페이지, 예약페이지에서 조건을 입력하였을 시 (조건에 맞는 차량 검색 및 받아온 값 표시)
 	@PostMapping("reservation")
-	public String reservationpost(CarVO car, Model model) {
-		System.out.println(car);
-//		String str = "준중형,중형,테스트";
-//		String[] strArr = str.split(",");
-//		StringJoiner sj = new StringJoiner(",");
-//		for(String s : strArr) {
-//			s = "'" + s + "'";
-//			sj.add(s);
-//		}
-//		System.out.println(sj);
-//		
-		List<CarVO> cars = service.selectCarList(car);
-		
-		Set<String> hasThisType = new HashSet<String>();
-		Set<String> hasThisFuel = new HashSet<String>();
-		
-		for (CarVO c : cars) {
-			hasThisType.add(c.getCar_type());
-			hasThisFuel.add(c.getCar_fuel());
+	public String reservationpost(CarVO car
+								, @RequestParam(defaultValue = "") Map<String,String> map 
+								, Model model) {
+		List<CarVO> cars = null;
+		if(car.getCar_type() != null && car.getCar_fuel() == null) { 	// 자동차타입 조건만 존재 할 경우
+			// search메소드로 스트링 포맷 변환 후 초기화
+			car.setCar_type(searchMethod(car.getCar_type()));
+			
+			cars = service.selectCarList(car);
+			
+			Set<String> hasThisType = new HashSet<String>();
+			
+			for (CarVO c : cars) {
+				hasThisType.add(c.getCar_type());
+			}
+			
+			model.addAttribute("hasThisType", hasThisType);
+			
+		} else if (car.getCar_type() == null && car.getCar_fuel() != null) { // 자동차연료 조건만 존재 할 경우
+			car.setCar_fuel(searchMethod(car.getCar_fuel()));
+			cars = service.selectCarList(car);
+			
+			Set<String> hasThisFuel = new HashSet<String>();
+			for (CarVO c : cars) {
+				hasThisFuel.add(c.getCar_fuel());
+			}
+			
+			model.addAttribute("hasThisFuel", hasThisFuel);
+			
+		} else { // 두 가지 모두 검색 할 경우
+			
+			car.setCar_fuel(searchMethod(car.getCar_fuel()));
+			car.setCar_type(searchMethod(car.getCar_type()));
+			cars = service.selectCarList(car);
+			
+			Set<String> hasThisType = new HashSet<String>();
+			Set<String> hasThisFuel = new HashSet<String>();
+			
+			for (CarVO c : cars) {
+				hasThisType.add(c.getCar_type());
+				hasThisFuel.add(c.getCar_fuel());
+			}
+			
+			model.addAttribute("hasThisType", hasThisType);
+			model.addAttribute("hasThisFuel", hasThisFuel);
 		}
-		model.addAttribute("hasThisType", hasThisType);
-		model.addAttribute("hasThisFuel", hasThisFuel);
+		
 		model.addAttribute("cars", cars);
+		
 		return "reservation/reservation";
 	}
 	
@@ -64,7 +88,7 @@ public class ReservController {
 			                        , Model model) {
 		System.out.println(map);
 		// idx없이 강제로 상세예약페이지 진입시
-		if (map.get("idx").equals("")) {
+		if (map.get("idx") == null) {
 			model.addAttribute("msg", "차량을 선택하여 주십시오");
 			model.addAttribute("targetURL", "reservation");
 			return "err/fail";
@@ -86,12 +110,18 @@ public class ReservController {
 	
 	@GetMapping("review")
 	public String review() {
-		
-		
-		Date startDate = new Date();
-		
-		
 		return "reservation/review";
 	}
 	
+	
+	// 호출용 메소드
+	public String searchMethod(String option) {
+		String[] strArr = option.split(",");
+		StringJoiner options = new StringJoiner(",");
+		for(String s : strArr) {
+			s = "'" + s + "'";
+			options.add(s);
+		}
+		return options.toString();
+	}
 }

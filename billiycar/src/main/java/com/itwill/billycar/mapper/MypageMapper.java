@@ -26,6 +26,11 @@ public interface MypageMapper {
 
 	int compareLicense(LicenseVO license);
 
+	LicenseVO getMemberLicense(String memberId);
+
+	int updatePasswd(MemberVO member);
+
+
 
 //	List<License_StandardVO> selectLicenseStandard();
 

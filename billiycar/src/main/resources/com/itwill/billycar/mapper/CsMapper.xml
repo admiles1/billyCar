@@ -76,6 +76,11 @@
 		</if>
 	</select>
 	
+	<select id="selectFaqCount" resultType="int">
+		SELECT COUNT(*)
+		FROM faq
+	</select>	
+	
 	<!-- ==================================================================  -->
 	<!-- ** [큐엔에이] ** -->
 	<select id="selectQnaList" resultType="com.itwill.billycar.vo.QnaVO">

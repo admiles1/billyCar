@@ -21,11 +21,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.itwill.billycar.service.AdminCusService;
 import com.itwill.billycar.service.AdminService;
 import com.itwill.billycar.service.Memberservice;
 import com.itwill.billycar.vo.AdminVO;
 import com.itwill.billycar.vo.CarVO;
+import com.itwill.billycar.vo.CommonVO;
 import com.itwill.billycar.vo.FaqVO;
 import com.itwill.billycar.vo.MemberVO;
 import com.itwill.billycar.vo.PageInfo;
@@ -164,10 +167,41 @@ public class AdminController {
 	}
 	
 	@GetMapping("admin_car_registration")
-	public String admin_car_registration() {
+	public String admin_car_registration(CommonVO common, Model model) {
+//		System.out.println(common);
 		
+//		List<CommonVO> dbCommon = service.getCommon(common);
+//		System.out.println(dbCommon);
+//		model.addAttribute("common",dbCommon);
+		
+		// 제조사 정보 가져오기
+	    List<CommonVO> brands = service.getBrands();
+	    model.addAttribute("brands", brands);
+		
+	    
+	    // 모델 정보 가져오기
+	    List<CommonVO> models = service.getModel();
+	    JsonArray jArr = new JsonArray(); // Json 배열만들기 (List 개념)
+	    for(CommonVO vo : models) {
+	    	JsonObject json = new JsonObject(); // Json 객체 생성 (VO개념) 
+	    	json.addProperty("name", vo.getName()); // 모델 name json 객체에 주입
+	    	json.addProperty("code", vo.getCode()); // 모델 code json 객체에 주입
+	    	jArr.add(json); // json 배열에 json 객체 넣기
+	    }
+	    
+	    model.addAttribute("models", jArr); // 그 json 배열을 모델에 넣기
+	    
+	    // 연료 정보 가져오기
+	    List<CommonVO> fuels = service.getFuels();
+	    model.addAttribute("fuels", fuels);
+	    
+	    // 타입 정보 가져오기
+	    List<CommonVO> types = service.getTypes();
+	    model.addAttribute("types", types);
+	    
 		return "admin/admin_car_registration";
 	}
+	
 	
 	// 차량 등록
 	@PostMapping("carUpload")

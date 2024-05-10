@@ -78,4 +78,20 @@
 		AND license_sd_expiration_date = #{license_expiration_date}
 	</select>
 	
+	<select id="getMemberLicense">
+		SELECT *
+		FROM license
+		WHERE license_id = #{memberId}
+	</select>
+	
+	<update id="updatePasswd">
+		UPDATE member
+		SET
+			member_passwd = #{member_passwd}
+		WHERE
+			member_id = #{member_id}
+	</update>
+	
+	
+	
 </mapper>

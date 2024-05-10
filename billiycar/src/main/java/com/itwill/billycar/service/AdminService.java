@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.itwill.billycar.mapper.AdminMapper;
 import com.itwill.billycar.vo.AdminVO;
 import com.itwill.billycar.vo.CarVO;
+import com.itwill.billycar.vo.CommonVO;
 import com.itwill.billycar.vo.MemberVO;
 import com.itwill.billycar.vo.QnaVO;
 
@@ -48,6 +49,27 @@ public class AdminService {
 	
 	public List<QnaVO> adminAnswerList() {
 		return mapper.selectQnaList();
+	}
+
+
+	public List<CommonVO> getBrands() {
+		
+		return mapper.selectBrands();
+	}
+
+	public List<CommonVO> getModel() {
+		
+		return mapper.selectModel();
+	}
+
+	public List<CommonVO> getTypes() {
+		
+		return mapper.selectTypes();
+	}
+
+	public List<CommonVO> getFuels() {
+
+		return mapper.selectFuels();
 	}
 
 }

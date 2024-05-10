@@ -71,7 +71,6 @@ public class CsController {
 		
 		model.addAttribute("pageInfo", new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage));
 		
-		// 조회수
 		
 		// 글 목록
 		List<NoticeVO> noticeList = service.getNoticeList(startRow, listLimit);
@@ -233,6 +232,27 @@ public class CsController {
 		// 페이징
 		int listLimit = 4;
 		int startRow = (pageNum-1)*listLimit;
+		
+		// 1) 전체 게시물 수 조회
+		int listCount = service.getFaqListCount();
+		int pageListLimit = 3;
+		
+		//----------------------------------------------------------------
+		int maxPage = listCount/listLimit + (listCount%listLimit > 0 ? 1 : 0);
+		System.out.println(maxPage);
+		//----------------------------------------------------------------
+		//시작페이지 설정
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		//끝페이지 설정
+		int endPage = startPage + pageListLimit - 1;
+				
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		model.addAttribute("pageInfo", new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage));
+		
+		
 		
 		// 목록 불러오기
 		

@@ -33,8 +33,6 @@
 				<em class="em">${notice.board_writer}</em>
 				<em class="em"><b>날짜</b></em>
 				<em class="em"><fmt:formatDate value="${notice.board_date}" pattern = "yy-MM-dd HH시 mm분"/></em>
-				<em class="em"><b>조회</b></em>
-				<em class="em">${notice.board_readcount}</em>
   			</div>
   			
   			<div class = "view_cont">

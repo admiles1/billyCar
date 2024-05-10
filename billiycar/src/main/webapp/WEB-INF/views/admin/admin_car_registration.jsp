@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
@@ -35,12 +36,9 @@ button[type="submit"] { width: 100%; }
                         <label for="manufacturer">제조사</label>
                         <select id="manufacturer" name="car_maker" class="form-control" required>
                             <option value="">제조사를 선택하세요</option>
-                            <option value="현대">현대</option>
-                            <option value="기아">기아</option>
-                            <option value="쉐보레">쉐보레</option>
-                            <option value="BMW">BMW</option>
-                            <option value="토요타">토요타</option>
-                            <option value="닛산">닛산</option>
+                        	<c:forEach var="brand" items="${brands}">
+	                            <option value="${brand.code }">${brand.name }</option>
+                        	</c:forEach>
                         </select>
                     </div>
                     <div class="form-group">
@@ -53,11 +51,9 @@ button[type="submit"] { width: 100%; }
                         <label for="carType">차량 종류</label>
                         <select id="carType" name="car_type" class="form-control" required>
                             <option value="">차량 종류를 선택하세요</option>
-                            <option value="소형">소형</option>
-                            <option value="준중형">준중형</option>
-                            <option value="중형">중형</option>
-                            <option value="대형">대형</option>
-                            <option value="SUV">SUV</option>
+							<c:forEach var="type" items="${types}">
+								<option value="${type.code }">${type.name }</option>
+							</c:forEach>
                         </select>
                     </div>
                     <div class="form-group">
@@ -76,11 +72,9 @@ button[type="submit"] { width: 100%; }
                         <label for="fuel">연료</label>
                         <select id="fuel" name="car_fuel" class="form-control" required>
                             <option value="">연료를 선택하세요</option>
-                            <option value="가솔린">가솔린</option>
-                            <option value="디젤">디젤</option>
-                            <option value="전기">전기</option>
-                            <option value="하이브리드">하이브리드</option>
-                            <option value="LPG">LPG</option>
+							<c:forEach var="fuel" items="${fuels}">
+								<option value="${fuel.code }">${fuel.name }</option>
+							</c:forEach>
                         </select>
                     </div>
                     <div class="form-group">
@@ -118,28 +112,27 @@ button[type="submit"] { width: 100%; }
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
+
 $(document).ready(function() {
-    // 제조사가 변경될 때 모델 드롭다운을 업데이트
+    let models = JSON.parse('${models}');
+
+    // 제조사 선택 시 모델 드롭다운 업데이트
     $('#manufacturer').change(function() {
-        var manufacturer = $(this).val();
-        $('#model').prop('disabled', !manufacturer); // 모델 선택 활성화/비활성화
-        var models = {
-            현대: ["소나타", "그랜저", "아이오닉", "팰리세이드"],
-            기아: ["K5", "스팅어", "니로", "셀토스"],
-            쉐보레: ["말리부", "트래버스", "스파크", "콜로라도"],
-            BMW: ["320i", "520i", "X3", "X5"],
-            토요타: ["캠리", "프리우스", "RAV4", "하이랜더"],
-            닛산: ["알티마", "맥시마", "로그", "리프"]
-        };
-        var selectedModel = models[manufacturer] || [];
-        $('#model').empty().append('<option value="">모델을 선택하세요</option>');
-        $.each(selectedModel, function(index, value) {
-            $('#model').append($('<option>').text(value).attr('value', value));
+        var selectedBrand = $(this).val();
+        var filteredModels = models.filter(function(model) {
+            return model.code.startsWith(selectedBrand);
         });
+
+        $('#model').empty().append('<option value="">모델을 선택하세요</option>');
+        $.each(filteredModels, function(index, model) {
+            $('#model').append($('<option>').text(model.name).attr('value', model.code));
+        });
+        $('#model').prop('disabled', false); // 모델 선택 활성화
     });
 });
-
-
 </script>
+
+
+
 </body>
 </html>
