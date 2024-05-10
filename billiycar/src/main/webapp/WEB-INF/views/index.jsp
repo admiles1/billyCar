@@ -269,8 +269,8 @@ function redirectToAdminPage() {
                 <div class="about-reason text-center">
                     <img src="resources/main_images/icon3.png" width="53" height="53" alt="제주도입점업체">
                     <div class="mt-2">
-                        <div class="font-weight-bold">제주도 입점 업체</div>
-                        <div id="inCorp" class="text-primary">79</div>
+                        <div class="font-weight-bold">누적 회원 수</div>
+                        <div id="inCorp" class="text-primary">${memberCount }</div>
                     </div>
                 </div>
             </div>

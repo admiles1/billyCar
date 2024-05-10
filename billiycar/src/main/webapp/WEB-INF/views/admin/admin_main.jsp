@@ -107,14 +107,17 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
     // 차트 데이터 생성
+    
+    //2D 그래픽 컨텍스트를 가져온다
     var ctx = document.getElementById('myChart').getContext('2d');
+    
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['1월', '2월', '3월', '4월', '5월', '6월'],
+            labels: ['1월', '2월', '3월', '4월', '5월', '6월','7월', '8월', '9월', '10월', '11월', '12월'],
             datasets: [{
                 label: '매출 현황',
-                data: [100, 200, 300, 400, 500, 600],
+                data: [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',

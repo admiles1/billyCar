@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.itwill.billycar.service.AdminService;
 import com.itwill.billycar.service.CsService;
+import com.itwill.billycar.service.Memberservice;
 import com.itwill.billycar.service.ReservService;
 import com.itwill.billycar.vo.FaqVO;
 
@@ -30,10 +31,10 @@ public class HomeController {
 	private CsService csService;
 	
 	@Autowired
-	private AdminService carService;
+	private ReservService reservService;
 	
 	@Autowired
-	private ReservService reservService;
+	private Memberservice memberService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
@@ -52,6 +53,14 @@ public class HomeController {
 		System.out.println("예약 가능 차량 : " + carCount);
 		
 		model.addAttribute("carCount", carCount);
+		
+		//누적 회원 수 보이기
+		int memberCount = memberService.selectMemberCount();
+		System.out.println("지금까지 누적 회원 수 : " + memberCount);
+		
+		model.addAttribute("memberCount", memberCount);
+		
+		
 		return "index";
 	}
 	

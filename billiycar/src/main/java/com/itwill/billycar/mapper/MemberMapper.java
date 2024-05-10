@@ -16,5 +16,7 @@ public interface MemberMapper {
 	MemberVO selectMember(MemberVO member); 
 
 	MemberVO selectForgotId(MemberVO member); // 이름과 이메일로 아이디 찾기
+
+	int selectMemberCount();
 	
 }
