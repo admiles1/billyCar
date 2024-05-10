@@ -116,7 +116,6 @@ h2 {
 		        <li>
 		          <label for="email">메일 주소</label>
 		          <input id="email" name="member_email" type="email" id="member_email" value="${info.member_email}" autocomplete="off" >
-		          		<!-- pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"  -->
 		        </li>
 		         <li>
 		          <label for="memberBirth">생년 월일</label>
@@ -146,18 +145,18 @@ h2 {
         // 자른 날짜 설정
         document.getElementById("memberRegDate").value = slicedDate;
     }
-  
-//   function isValidEmail(email) { //이메일 유효성 검사
-// 	    return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
-// 	}
-	
-// 	document.fr.onsubmit = function() {
-// 		if(!isValidEmail($("#member_email").val())) { // 이메일 확인
-// 	        alert("E-Mail을 확인해주세요.");
-// 	        document.fr.member_email.focus();
-// 	        return false;
-// 		}
-// 	}
+
+
+
+	document.fr.onsubmit = function() {
+	    let email = document.getElementById("email").value;
+	    let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+	    if (!emailPattern.test(email)) { // 이메일 양식이 맞는지 확인
+	        alert("유효한 이메일을 입력해주세요.");
+	        document.getElementById("email").focus();
+	        return false; // 폼 제출 방지
+	    }
+	}
 
   </script>
 </body>
