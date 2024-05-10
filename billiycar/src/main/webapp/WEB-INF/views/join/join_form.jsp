@@ -47,13 +47,13 @@
 					case 2: msg = "위험"; color = "RED"; checkPasswdResult = true; break;
 					case 1:
 					case 0: 
-						msg = "사용 불가능한 패스워드"; 
+						msg = "영문 대소문자,숫자,특수문자 중 2개 이상을 포함시켜주세요."; 
 						color = "RED"; 
 						checkPasswdResult = false;
 				}
 		    	
 		    } else {
-				msg = "사용 불가능한 패스워드"; 
+				msg = "영문 대소문자,숫자,특수문자 중 2개 이상을 포함시켜주세요."; 
 				color = "RED";
 				
 		    	checkPasswdResult = false;
@@ -121,12 +121,12 @@
 		let passwd2 = document.fr.member_passwd2.value;
 		
 		if(passwd == passwd2) { // 패스워드 일치
-	    	$("#checkPwResult2").text("비밀번호 일치");
+	    	$("#checkPwResult2").text("*비밀번호가 일치합니다.");
 			$("#checkPwResult2").css("color", "BLUE");
 	    	
 	    	checkPasswd2Result = true;
 		} else { // 패스워드 불일치
-	    	$("#checkPwResult2").text("비밀번호 불일치");
+	    	$("#checkPwResult2").text("*비밀번호가 일치하지 않습니다.");
 			$("#checkPwResult2").css("color", "RED");
 	    	
 	    	checkPasswd2Result = false;
@@ -169,7 +169,7 @@
 <!-- 				<div id="checkIdResult"></div> -->
 <!-- 			</div> -->
 			<div>
-				<input type="password" placeholder="비밀번호(8-12자리 특수문자 !@#$%^&* 포함)" name="member_passwd" id="member_passwd" maxlength="12"/><br>
+				<input type="password" placeholder="비밀번호(8-12자리 특수문자 !@#$%^&* 사용가능)" name="member_passwd" id="member_passwd" maxlength="12"/><br>
 				<div id="checkPwResult"></div>
 			</div>
 			<div>
