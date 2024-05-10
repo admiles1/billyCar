@@ -41,8 +41,6 @@ public class ReservController {
 								, Model model) {
 		
 		List<CarVO> cars = null;
-		System.out.println(car);
-		System.out.println(map);
 		if(car.getCar_type() != null && car.getCar_fuel() == null) { 	// 자동차타입 조건만 존재 할 경우
 			// search메소드로 스트링 포맷 변환 후 초기화
 			car.setCar_type(searchMethod(car.getCar_type()));
@@ -91,6 +89,8 @@ public class ReservController {
 		}
 		
 		// 공통 코드에서 type, fule 조회해서 가져오기
+		model.addAttribute("pickupDate", map.get("reserv_pickupdate"));
+		model.addAttribute("returnDate", map.get("reserv_returndate"));
 		model.addAttribute("types", adminService.getTypes());
 		model.addAttribute("fuels", adminService.getFuels());
 		model.addAttribute("cars", cars);
