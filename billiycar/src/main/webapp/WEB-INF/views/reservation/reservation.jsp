@@ -128,14 +128,19 @@
 			    		<hr>
 			    		<h3> 연료 </h3>
 			    		<ul class="car-type-list">
-							<li><label class="car-fuel"><input type="checkbox" value="경유" name="car_fuel"> 경유 </label></li>
-			    			<li><label class="car-fuel"><input type="checkbox" value="휘발유" name="car_fuel"> 휘발유 </label></li>
-			    			<li><label class="car-fuel"><input type="checkbox" value="전기" name="car_fuel"> 전기	</label></li>
-			    			<li><label class="car-fuel"><input type="checkbox" value="하이브리드" name="car_fuel"> 하이브리드	</label></li>
+							<li><label class="car-fuel"><input type="checkbox" value="경유" name="car_fuel"
+								<c:if test="${fn:contains(hasThisFuel, '경유')}"> checked </c:if>> 경유 </label></li>
+			    			<li><label class="car-fuel"><input type="checkbox" value="휘발유" name="car_fuel"
+			    				<c:if test="${fn:contains(hasThisFuel, '휘발유')}"> checked </c:if>> 휘발유 </label></li>
+			    			<li><label class="car-fuel"><input type="checkbox" value="전기" name="car_fuel"
+			    				<c:if test="${fn:contains(hasThisFuel, '전기')}"> checked </c:if>> 전기	</label></li>
+			    			<li><label class="car-fuel"><input type="checkbox" value="하이브리드" name="car_fuel"
+			    				<c:if test="${fn:contains(hasThisFuel, '하이브리드')}"> checked </c:if>> 하이브리드	</label></li>
 			    		</ul>
 			    	</div>
 			    	<input type="submit" value="차	량	검	색" id="searchCar">
 			    </form>
+    		</div>
     		</div>
     		<c:choose>
     			<c:when test="${needSearch}">
@@ -153,7 +158,7 @@
 			   		 					<span class="carInfo">
 			   		 						<span> ${car.car_model} </span>
 			   		 						<span> ${car.car_type} / ${car.car_capacity}</span>
-			   		 						<span><fmt:formatNumber value="${car.car_price}" pattern="#,###"/></span>
+			   		 						<small>종일가 <fmt:formatNumber value="${car.car_price}" pattern="#,###"/></small>
 			   		 					</span>
 			   		 				</a>
 			   		 			</li>
