@@ -211,7 +211,6 @@
 			</div>
 			<div>
 				<input type="submit" value="회원가입" class="btn btn-4" onsubmit="submit()">
-<!-- 				<button class="btn btn-4">회원가입</button> -->
 			</div>
 		</form>
 	</article>

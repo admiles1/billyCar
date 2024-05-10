@@ -4,24 +4,21 @@
 <html>
 <head>
 <script>
-window.onload = function(){
-	document.form.onsubmit = function(){
-		
-		if(!document.form.chk[0].checked || !document.form.chk[1].checked) {
-			alert("필수 약관 동의를 하셔야 가입이 가능합니다.");
-			return false;
-		} 
+	window.onload = function(){
+		document.form.onsubmit = function(){
+			
+			if(!document.form.chk[0].checked || !document.form.chk[1].checked) {
+				alert("필수 약관 동의를 하셔야 가입이 가능합니다.");
+				return false;
+			} 
+		}
 	}
 	
-}
-
-function checkAll() {
-	for(let chk of document.form.chk){
-		chk.checked =  document.querySelector("#chkAll").checked;
-	}
-};
-	
-	
+	function checkAll() {
+		for(let chk of document.form.chk){
+			chk.checked =  document.querySelector("#chkAll").checked;
+		}
+	};
 </script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/join_agree.css">
 <meta charset="UTF-8">
@@ -79,8 +76,5 @@ function checkAll() {
 	        <li><input type="submit" class="fpmgBt2" value="동의"></li>
 	    </ul>
 	</form>
-
 </body>
-
 </html>
-
