@@ -25,15 +25,18 @@ public interface AdminMapper {
 			@Param("searchKeyword") String searchKeyword,
 			@Param("startRow") int startRow,
 			@Param("listLimit") int listLimit);
-
+	
+	// 차 등록
 	int insertCar(CarVO car);
 
 	int updateMember(MemberVO member);
-
+	
+	// 차량 조회
 	List<CarVO> selectCar(CarVO car);
 	
 	List<QnaVO> selectQnaList();
-
+	
+	// 공통 코드 색출
 	List<CommonVO> selectBrands();
 
 	List<CommonVO> selectModel();
@@ -41,5 +44,5 @@ public interface AdminMapper {
 	List<CommonVO> selectTypes();
 
 	List<CommonVO> selectFuels();
-
+	// 여기까지
 }

@@ -63,14 +63,15 @@
 			null
 			, #{car_number}
 			, #{car_model}
-			, #{car_maker}
+			, #{car_brand}
 			, #{car_fuel}
 			, #{car_type}
 			, #{gear_type}
 			, #{car_capacity}
 			, #{car_img}
 			, #{car_year}
-			, #{car_price}
+			, #{car_dayprice}
+			, #{car_hourprice}
 			, 0
 			, 0
 			, now()

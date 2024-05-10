@@ -13,7 +13,6 @@
 
 <mapper namespace="com.itwill.billycar.mapper.MypageMapper">
     
-    
     <select id="selectMemberInfo" parameterType="String" resultType="com.itwill.billycar.vo.MemberVO">
         SELECT *
         FROM member
@@ -26,12 +25,6 @@
 		WHERE qna_writer = #{memberId}
 	</select>
     
-<!--     <select id="selectLicenseStandard" resultType="com.itwill.billycar.vo.License_StandardVO"> -->
-<!--     	SELECT * -->
-<!--     	FROM license_standard -->
-<!--     </select> -->
-    
-    
     <insert id="insertLicense">
     	INSERT INTO license
     	VALUES (
@@ -41,18 +34,14 @@
     		 , #{license_issue_date}
     		 , #{license_expiration_date}
     		 )
+    		 
+  		 ON DUPLICATE KEY UPDATE
+		        license_user_id = VALUES(license_user_id),
+		        license_name = VALUES(license_name),
+		        license_issue_date = VALUES(license_issue_date),
+		        license_expiration_date = VALUES(license_expiration_date);
     </insert>
 
-    
-<!--    <select id="checkLicenseMatch" parameterType="com.itwill.billycar.vo.LicenseVO" resultType="int"> -->
-<!--         SELECT COUNT(*)  -->
-<!--         FROM license_standard ls -->
-<!--         INNER JOIN license l ON ls.license_sd_id = l.license_id  -->
-<!--         WHERE ls.license_sd_id = #{license_id} -->
-<!--         AND ls.license_sd_issue_date = #{license_issue_date} -->
-<!--         AND ls.license_sd_expiration_date = #{license_expiration_date} -->
-<!--     </select> -->
-    
     <update id="withdrawMember">
     	UPDATE member
     	SET 
@@ -91,7 +80,4 @@
 		WHERE
 			member_id = #{member_id}
 	</update>
-	
-	
-	
 </mapper>
