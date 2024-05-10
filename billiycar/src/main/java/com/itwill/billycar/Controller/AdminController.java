@@ -195,8 +195,12 @@ public class AdminController {
 	
 	// 차량 등록
 	@PostMapping("carUpload")
-	public String carUpload(CarVO car, HttpServletRequest request, Model model) {
-		System.out.println(car); // 차량정보
+	public String carUpload(CarVO car, String car_number1, String car_number2, String car_number3,HttpServletRequest request, Model model) {
+//		System.out.println(car); // 차량정보
+		
+		// 차량 번포판 3개를 하나의 컬럼에 넣기 위해 합치기
+		car.setCar_number(car_number1+car_number2+car_number3);
+		System.out.println(car.getCar_number());
 		
 		// 차량최대인수를 숫자 + "인승" 으로 DB에 넣기위해 사전작업
 		car.setCar_capacity(car.getCar_capacity() + "인승"); 

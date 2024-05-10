@@ -34,7 +34,7 @@ button[type="submit"] { width: 100%; }
 				<form action="carUpload" method="post" enctype="multipart/form-data" onsubmit="submitForm()">
                     <div class="form-group">
                         <label for="manufacturer">제조사</label>
-                        <select id="manufacturer" name="car_maker" class="form-control" required>
+                        <select id="manufacturer" name="car_brand" class="form-control" required>
                             <option value="">제조사를 선택하세요</option>
                         	<c:forEach var="brand" items="${brands}">
 	                            <option value="${brand.code }">${brand.name }</option>
@@ -77,13 +77,25 @@ button[type="submit"] { width: 100%; }
 							</c:forEach>
                         </select>
                     </div>
+					<div class="form-group d-flex align-items-center justify-content-start">
+					    <label for="number1" class="mr-2">차량번호 :</label>
+					    <input type="text" class="form-control mr-2" id="number1" name="car_number1" placeholder="12" required maxlength="2" style="width: 80px;">
+					
+					    <select id="numberPlateLetter" class="form-control mr-2" name="car_number2" required style="width: 70px;">
+					        <option value="하">하</option>
+					        <option value="호">호</option>
+					        <option value="허">허</option>
+					    </select>
+					
+					    <input type="text" class="form-control" id="number2" name="car_number3" placeholder="3456" required maxlength="4" style="width: 100px;">
+					</div>
                     <div class="form-group">
-                        <label for="number">차량 번호</label>
-                        <input type="text" class="form-control" id="number" name="car_number" placeholder="차량 번호를 입력하세요" required>
+                        <label for="pricePerDay">1일 가격</label>
+                        <input type="text" class="form-control" id="pricePerDay" name="car_dayprice" placeholder="1일 가격을 입력하세요" required>
                     </div>
                     <div class="form-group">
-                        <label for="price">가격</label>
-                        <input type="text" class="form-control" id="price" name="car_price" placeholder="가격을 입력하세요" required>
+                        <label for="hourlyPrice">1시간 가격</label>
+                        <input type="text" class="form-control" id="hourlyPrice" name="car_hourprice" placeholder="1시간 가격을 입력하세요" required>
                     </div>
                     <div class="form-group">
                         <label for="image">차량 이미지</label>
@@ -112,7 +124,6 @@ button[type="submit"] { width: 100%; }
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
-
 $(document).ready(function() {
     let models = JSON.parse('${models}');
 
@@ -131,8 +142,5 @@ $(document).ready(function() {
     });
 });
 </script>
-
-
-
 </body>
 </html>

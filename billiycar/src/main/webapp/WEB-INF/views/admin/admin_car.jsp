@@ -72,14 +72,15 @@
                                     <th>기어</th>
                                     <th>연료</th>
                                     <th>인승</th>
-                                    <th>가격</th>
+                                    <th>1일가격</th>
+                                    <th>시간가격</th>
                                     <th>상태 변경</th>
                                 </tr>
                             </thead>
                             <c:forEach var="car" items="${carList }">
 	                            <tbody>
 	                                <tr>
-										<td>${car.car_maker }</td>
+										<td>${car.car_brand }</td>
 	                                    <td class="text-center">
 	                                    <img src="/resources/upload/${car.car_img }"></td>
 	                                    <td>${car.car_model }</td>
@@ -87,7 +88,8 @@
 	                                    <td>${car.gear_type}</td>
 	                                    <td>${car.car_fuel}</td>
 	                                    <td>${car.car_capacity}</td>
-	                                    <td>${car.car_price}</td>
+	                                    <td>${car.car_dayprice}</td>
+	                                    <td>${car.car_hourprice}</td>
 	                                    <td>
 	                                        <a href="#" class="btn btn-sm btn-primary">수정</a>
 	                                        <button class="btn btn-sm btn-danger">삭제</button>
