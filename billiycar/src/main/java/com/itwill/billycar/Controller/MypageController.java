@@ -68,13 +68,9 @@ public class MypageController {
 	
 	@PostMapping("mypage")
 	public String modifyMemberInfoPro(Model model, MemberVO member) {
-	
 		member.setMember_id((String)session.getAttribute("member_id"));
-		member.setMember_email(member.getMember_email());
-		member.setMember_phone(member.getMember_phone());
 		
 		int updateCount = service.modifyInfo(member);
-		
 		
 		if(updateCount <= 0) {
 			model.addAttribute("msg", "회원정보 업데이트 실패");
@@ -83,12 +79,40 @@ public class MypageController {
 		
 		return "redirect:/mypage";
 	}
+
 	
 	@GetMapping("modifyPasswd")
     public String modifyPasswd() {
         System.out.println("비밀번호 변경");
         return "mypage/page/Mypage_Modify_Password";
     }
+	
+	@PostMapping("modifyPasswd")
+	public String modifyPasswdPro(MemberVO member
+			                     , BCryptPasswordEncoder passwordEncoder
+			                     , Model model
+			                     , HttpSession session
+			                     , String newMember_passwd) {
+		System.out.println("비밀번호 변경");
+		MemberVO dbMember = service.getMemberInfo((String)session.getAttribute("member_id"));
+		if(dbMember == null || !passwordEncoder.matches(member.getMember_passwd(), dbMember.getMember_passwd())) { // 로그인 실패
+			model.addAttribute("msg", "비밀번호가 잘못 입력되었습니다.");
+			return "err/fail";
+		} else { // 비밀번호 일치시 비밀번호 업데이트
+			member.setMember_passwd(newMember_passwd);
+			member.setMember_id(dbMember.getMember_id());
+			String securePasswd = passwordEncoder.encode(member.getMember_passwd());
+			member.setMember_passwd(securePasswd);
+			if(service.ModifyPasswd(member) <= 0) {
+				model.addAttribute("msg", "비밀번호 변경 실패");
+				return "err/fail";
+			}
+			
+			// 마아페이지 리다이렉트
+			return "redirect:/mypage";
+		}
+		
+	}
 	
 	@GetMapping("license")
     public String license() {

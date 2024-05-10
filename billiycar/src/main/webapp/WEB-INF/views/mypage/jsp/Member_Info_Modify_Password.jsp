@@ -116,7 +116,7 @@ input[type="password"], input[type="text"] {
     </div>
     <div class="passwd-info">
 	    <input type="password" id="currentPassword" placeholder="현재 비밀번호" name="member_passwd">
-	    <input type="password" id="newPassword" placeholder="새로운 비밀번호">
+	    <input type="password" id="newPassword" placeholder="새로운 비밀번호" name = "newMember_passwd">
 	    <input type="password" id="confirmPassword" placeholder="새로운 비밀번호 확인">
 	   	<div id="passwordMatchMsg"></div>
 <!--         <span id="passwordMismatchMsg"></span> -->
