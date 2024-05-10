@@ -119,9 +119,7 @@
             stars.innerHTML = '<span class="star-rating">' + '★'.repeat(review.rating) + '</span>';
             row.insertCell(4).textContent = review.date;
             const actions = row.insertCell(5);
-            actions.innerHTML = '<button class="btn btn-success btn-sm">승인</button> ' +
-                                '<button class="btn btn-danger btn-sm">삭제</button> ' +
-                                '<button class="btn btn-info btn-sm">답글 달기</button>';
+            actions.innerHTML = '<button class="btn btn-danger btn-sm">삭제</button> ' 
         });
     }
 

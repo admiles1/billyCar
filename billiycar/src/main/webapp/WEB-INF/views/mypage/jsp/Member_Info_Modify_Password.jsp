@@ -116,7 +116,7 @@ input[type="password"], input[type="text"] {
     </div>
     <div class="passwd-info">
 	    <input type="password" id="currentPassword" placeholder="현재 비밀번호" name="member_passwd">
-	    <input type="password" id="newPassword" placeholder="새로운 비밀번호">
+	    <input type="password" id="newPassword" placeholder="새로운 비밀번호" name = "newMember_passwd">
 	    <input type="password" id="confirmPassword" placeholder="새로운 비밀번호 확인">
 	   	<div id="passwordMatchMsg"></div>
 <!--         <span id="passwordMismatchMsg"></span> -->
@@ -254,7 +254,16 @@ input[type="password"], input[type="text"] {
 		return true;
 	}
 	
-	
+	$(function() {
+        $("form").submit(function(event) {
+            // reCAPTCHA가 확인 체크
+            var response = grecaptcha.getResponse();
+            if (response.length == 0) { // reCAPTCHA가 확인안된 경우
+                alert("자동입력 방지 체크를 완료해주세요!");
+                event.preventDefault();
+            }
+        });
+    });
 	
 </script>
 </body>

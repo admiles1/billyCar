@@ -25,6 +25,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.itwill.billycar.service.AdminCusService;
 import com.itwill.billycar.service.AdminService;
+import com.itwill.billycar.service.Memberservice;
 import com.itwill.billycar.vo.AdminVO;
 import com.itwill.billycar.vo.CarVO;
 import com.itwill.billycar.vo.CommonVO;
@@ -37,6 +38,9 @@ import com.itwill.billycar.vo.QnaVO;
 public class AdminController {
 	@Autowired
 	private AdminService service;
+	
+	@Autowired
+	private Memberservice memberService;
 	
 	@Autowired
 	private HttpSession session;
@@ -65,8 +69,14 @@ public class AdminController {
 	}
 	
 	@GetMapping("admin")
-	public String admin() {
-		System.out.println("admin");
+	public String admin(Model model) {
+		//총 회원 수
+		int totalMember = memberService.selectMemberCount();
+		model.addAttribute("totalMember", totalMember);
+		
+		//오늘 등록한 회원 수
+		int todayMember = memberService.todayMemberCount();
+		System.out.println("오늘 등록한 회원 수 : " + todayMember);
 		
 		return "admin/admin_main";
 	}

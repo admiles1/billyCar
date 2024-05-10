@@ -68,13 +68,9 @@ public class MypageController {
 	
 	@PostMapping("mypage")
 	public String modifyMemberInfoPro(Model model, MemberVO member) {
-	
 		member.setMember_id((String)session.getAttribute("member_id"));
-		member.setMember_email(member.getMember_email());
-		member.setMember_phone(member.getMember_phone());
 		
 		int updateCount = service.modifyInfo(member);
-		
 		
 		if(updateCount <= 0) {
 			model.addAttribute("msg", "회원정보 업데이트 실패");
@@ -84,43 +80,39 @@ public class MypageController {
 		return "redirect:/mypage";
 	}
 
-
-
-
-	
-	
-	
-	
-//	@GetMapping("checkPasswd")
-//	public String checkPasswd() {
-//		return "mypage/page/Mypage_Insert_Password";
-//	}
-//	@GetMapping("mypage")
-//	public String mypage(HttpSession session, MemberVO member) {
-//		session.getAttribute("memberid");
-//		return "mypage/page/Mypage_Insert_Password";
-//	}
-//	@GetMapping("mypage")
-//	public String mypage(HttpSession session, Model model) {
-//	    // 세션에서 회원 아이디 가져오기
-//		String memberId = (String) session.getAttribute("member_id");
-//	    // 가져온 회원 아이디를 모델에 추가
-//	    MemberVO memberPasswd = service.getMemberPasswd(memberId);
-//	    if(memberPasswd == null) {
-//	    	model.addAttribute("msg", "비밀번호를 다시 확인해주세요");
-//	    	return "err/fail";
-//	    } else {
-//	    	model.addAttribute("memberPasswd", memberPasswd);
-//	    	return "mypage/page/Mypage_Insert_Password";
-//	    }
-//	}
-	
 	
 	@GetMapping("modifyPasswd")
     public String modifyPasswd() {
         System.out.println("비밀번호 변경");
         return "mypage/page/Mypage_Modify_Password";
     }
+	
+	@PostMapping("modifyPasswd")
+	public String modifyPasswdPro(MemberVO member
+			                     , BCryptPasswordEncoder passwordEncoder
+			                     , Model model
+			                     , HttpSession session
+			                     , String newMember_passwd) {
+		System.out.println("비밀번호 변경");
+		MemberVO dbMember = service.getMemberInfo((String)session.getAttribute("member_id"));
+		if(dbMember == null || !passwordEncoder.matches(member.getMember_passwd(), dbMember.getMember_passwd())) { // 로그인 실패
+			model.addAttribute("msg", "비밀번호가 잘못 입력되었습니다.");
+			return "err/fail";
+		} else { // 비밀번호 일치시 비밀번호 업데이트
+			member.setMember_passwd(newMember_passwd);
+			member.setMember_id(dbMember.getMember_id());
+			String securePasswd = passwordEncoder.encode(member.getMember_passwd());
+			member.setMember_passwd(securePasswd);
+			if(service.ModifyPasswd(member) <= 0) {
+				model.addAttribute("msg", "비밀번호 변경 실패");
+				return "err/fail";
+			}
+			
+			// 마아페이지 리다이렉트
+			return "redirect:/mypage";
+		}
+		
+	}
 	
 	@GetMapping("license")
     public String license() {
@@ -135,22 +127,9 @@ public class MypageController {
 		int isCorrectLiscense = service.getLicense(license);
 		
 		if(isCorrectLiscense < 1) {
-			model.addAttribute("msg", "조회된 정보가 없습니다.");
+			model.addAttribute("msg", "유효하지 않은 면허 정보입니다. 면허 정보를 다시 확인해주세요!");
 			return "err/fail";
 		}
-		
-//		if(!stLicense.getLicense_sd_id().equals(license.getLicense_user_id())) {
-//			model.addAttribute("msg", "면허 번호를 확인해주세요.");
-//			return "err/fail";
-//		} 
-//		if(!stLicense.getLicense_sd_issue_date().equals(license.getLicense_issue_date())) {
-//			model.addAttribute("msg", "발급일을 확인해주세요.");
-//			return "err/fail";
-//		}
-//		if(!stLicense.getLicense_sd_expiration_date().equals(license.getLicense_expiration_date())) {
-//			model.addAttribute("msg", "만료일을 확인해주세요.");
-//			return "err/fail";
-//		}
 		
 		int insertCount = service.registLicense(license);
 		if(insertCount == 0) {
@@ -159,12 +138,14 @@ public class MypageController {
 		}
 		return "redirect:/licenseInfo";
 	}
-
-
 	
 	@GetMapping("licenseInfo")
-	public String licenseInfo(Model model) {
-		return "mypage/page/Mypage_License_register";
+	public String licenseInfo(Model model, LicenseVO license) {
+		String MemberId = (String)session.getAttribute("member_id");
+		
+		model.addAttribute("licenseInfo", service.getLicenseInfo(MemberId));
+
+		return "mypage/page/Mypage_License_Info";
 	}
 	
 	

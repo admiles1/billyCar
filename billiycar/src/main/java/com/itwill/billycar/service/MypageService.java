@@ -52,33 +52,21 @@ public class MypageService {
 	}
 
 
-//	public List<License_StandardVO> getLicenseStandardInfo() {
-//		return mapper.selectLicenseStandard();
-//	}
-
-//	public int checkLicenseMatch(LicenseVO license) {
-//		return mapper.checkLicenseMatch(license);
-//	}
-
-
-	
-
-	
-
-	
-	
-	
-	
-	
-//	public MemberVO getMemberInfo(MemberVO member) {
-//		
-//		
-//		return mapper.selectMember(member);
-//	}
-	
-
 
 	public int getLicense(LicenseVO license) {
 		return mapper.compareLicense(license);
 	}
+
+
+	public LicenseVO getLicenseInfo(String memberId) {
+		return mapper.getMemberLicense(memberId);
+	}
+
+	public int ModifyPasswd(MemberVO member) {
+		
+		return mapper.updatePasswd(member);
+	}
+
+
+
 }

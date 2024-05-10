@@ -63,6 +63,11 @@ public class CsService {
 		return mapper.selectFaqList(listLimit, startRow, category);
 	}
 	
+	// 글 목록 개수
+	public int getFaqListCount() {
+		return mapper.selectFaqCount();
+	}
+	
 	// ------------------------------------------------------------------------------------------------
 	// ** [QnA] **
 	// 큐엔에이 목록 불러오기
@@ -84,8 +89,6 @@ public class CsService {
 	public QnaVO getQnaDetail(QnaVO qna) {
 		return mapper.selectQnaDetail(qna);
 	}
-
-
 
 
 }

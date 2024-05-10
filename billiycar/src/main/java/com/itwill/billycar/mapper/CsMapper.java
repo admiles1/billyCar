@@ -25,8 +25,7 @@ public interface CsMapper {
 	// ---------------------------------------------------------
 	// **  [자주묻는질문] **
 	List<FaqVO> selectFaqList(@Param(value = "startRow")int startRow, @Param(value = "listLimit") int listLimit,@Param(value = "category") String category); // 자주묻는질문 목록 가져오기
-	
-	
+	int selectFaqCount(); // 자주묻는질문 개수
 	
 	// ---------------------------------------------------------
 	// **  [QnA] **

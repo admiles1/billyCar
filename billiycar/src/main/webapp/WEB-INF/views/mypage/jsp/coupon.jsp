@@ -55,9 +55,9 @@
     <table>
         <thead>
             <tr>
+                <th>쿠폰 이름</th>
                 <th>쿠폰 코드</th>
-                <th>할인율</th>
-                <th>적용 차량</th>
+                <th>쿠폰 할인율</th>
                 <th>사용 기한</th>
             </tr>
         </thead>

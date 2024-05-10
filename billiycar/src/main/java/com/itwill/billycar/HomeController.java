@@ -1,6 +1,7 @@
 package com.itwill.billycar;
 
 import java.text.DateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -57,9 +58,7 @@ public class HomeController {
 		//누적 회원 수 보이기
 		int memberCount = memberService.selectMemberCount();
 		System.out.println("지금까지 누적 회원 수 : " + memberCount);
-		
 		model.addAttribute("memberCount", memberCount);
-		
 		
 		return "index";
 	}
