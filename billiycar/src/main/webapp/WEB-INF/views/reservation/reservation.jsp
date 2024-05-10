@@ -30,6 +30,7 @@
 </style>
 
 <script>
+
 	function goDetail(idx){
 		if($("#reserv_pickupdate").val() == "") {
 			alert('일정을 검색하여 주세요');
@@ -40,7 +41,19 @@
 		let returnDate = $("#reserv_returndate").val() + "T" + $("#reserv_returntime").val();
 		location.href="reservationdetail?idx=" + idx + "&pickupDate=" + pickupDate + "&returnDate=" + returnDate;
 	}
-
+	
+	function check() {
+		let pickupDate = $("#reserv_pickupdate").val();
+		let returnDate = $("#reserv_returndate").val();
+		
+		if(pickupDate == "") {
+			alert('대여날짜를 선택하여 주십시오');
+			return false;
+		} else if(pickupDate == "") {
+			alert('반납날짜를 선택하여 주십시오');
+			return false;
+		}
+	}
 </script>
 </head>
 <body>	
@@ -51,7 +64,7 @@
 	<main class="container text-center">
  		<div class="row">	
     		<div class="col-4">
-			    <form action="reservation" id="searchForm" method="post">
+			    <form action="reservation" id="searchForm" method="post" onsubmit="return check()">
 			    	<div class="car_option_sel"> <h3> 예약 일정 </h3></div>
 			    	<div>
 		    			<div class="">
@@ -111,45 +124,34 @@
 			    	<div class="car_option_sel">
 			    		<hr>
 			    		<h3> 차종 </h3>
-			    		<ul class="car-type-list">
-							<li><label class="car-type"><input type="checkbox" value="소형" name="car_type"
-							 	<c:if test="${fn:contains(hasThisType, '소형')}"> checked </c:if>>소형 </label></li>
-			    			<li><label class="car-type"><input type="checkbox" value="준중형" name="car_type"
-			    				<c:if test="${fn:contains(hasThisType, '준중형')}"> checked </c:if>> 준중형</label></li>
-			    			<li><label class="car-type"><input type="checkbox" value="중형" name="car_type"
-			    				<c:if test="${fn:contains(hasThisType, '중형')}"> checked </c:if>> 중형</label></li>
-			    			<li><label class="car-type"><input type="checkbox" value="대형" name="car_type"
-			    				<c:if test="${fn:contains(hasThisType, '대형')}"> checked </c:if>> 대형</label></li>
-			    			<li><label class="car-type"><input type="checkbox" value="SUV" name="car_type"
-			    				<c:if test="${fn:contains(hasThisType, 'SUV')}"> checked </c:if>> SUV </label></li>	
+			    		<ul class="car-option-list">
+							<c:forEach var="type" items="${types}">
+			    				<li><label class="car-type"><input type="checkbox" value="${type.name}" name="car_type"
+								<c:if test="${fn:contains(hasThisType, type.name)}"> checked </c:if>> ${type.name} </label></li>
+			    			</c:forEach>	
 			    		</ul>
 			    	</div>
 			    	<div class="car_option_sel">
 			    		<hr>
 			    		<h3> 연료 </h3>
-			    		<ul class="car-type-list">
-							<li><label class="car-fuel"><input type="checkbox" value="경유" name="car_fuel"
-								<c:if test="${fn:contains(hasThisFuel, '경유')}"> checked </c:if>> 경유 </label></li>
-			    			<li><label class="car-fuel"><input type="checkbox" value="휘발유" name="car_fuel"
-			    				<c:if test="${fn:contains(hasThisFuel, '휘발유')}"> checked </c:if>> 휘발유 </label></li>
-			    			<li><label class="car-fuel"><input type="checkbox" value="전기" name="car_fuel"
-			    				<c:if test="${fn:contains(hasThisFuel, '전기')}"> checked </c:if>> 전기	</label></li>
-			    			<li><label class="car-fuel"><input type="checkbox" value="하이브리드" name="car_fuel"
-			    				<c:if test="${fn:contains(hasThisFuel, '하이브리드')}"> checked </c:if>> 하이브리드	</label></li>
+			    		<ul class="car-option-list">
+			    			<c:forEach var="fuel" items="${fuels}">
+			    				<li><label class="car-fuel"><input type="checkbox" value="${fuel.name}" name="car_fuel"
+								<c:if test="${fn:contains(hasThisFuel, fuel.name)}"> checked </c:if>> ${fuel.name} </label></li>
+			    			</c:forEach>
 			    		</ul>
 			    	</div>
 			    	<input type="submit" value="차	량	검	색" id="searchCar">
 			    </form>
     		</div>
-    		</div>
-    		<c:choose>
-    			<c:when test="${needSearch}">
-    				<div class="col-8" id="selectResult">
-    					검색을 먼저해주세요
-    				</div>
-    			</c:when>
-    			<c:otherwise>
-    				<div class="col-8" id="selectResult">
+   			<c:choose>
+	   			<c:when test="${needSearch}">
+	   				<div class="col-8" id="selectResult">
+	   					검색을 먼저해주세요
+	   				</div>
+	   			</c:when>
+	   			<c:otherwise>
+	   				<div class="col-8" id="selectResult">
 		   		 		<ul>
 		   		 			<c:forEach var="car" items="${cars}">
 			   		 			<li class="carList fadeIn row">
@@ -169,8 +171,9 @@
 		   		 			<input type="button" value="다음" onclick="location.href='reservation?num='">	
 			 			 </div>
 	    			</div>
-    			</c:otherwise>
- 			</c:choose>
+	   			</c:otherwise>
+			</c:choose>
+   		</div>
 	</main>
 	<footer><jsp:include page="../inc/bottom.jsp"></jsp:include></footer>
 

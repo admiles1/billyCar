@@ -1,5 +1,7 @@
 package com.itwill.billycar.mapper;
 
+import java.time.LocalDate;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.itwill.billycar.vo.MemberVO;
@@ -18,5 +20,7 @@ public interface MemberMapper {
 	MemberVO selectForgotId(MemberVO member); // 이름과 이메일로 아이디 찾기
 
 	int selectMemberCount();
+
+	int selectTodayMember();
 	
 }

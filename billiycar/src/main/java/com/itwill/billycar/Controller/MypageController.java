@@ -29,10 +29,6 @@ public class MypageController {
 	@Autowired
 	private MypageService service;
 	
-//	@GetMapping("modifyInfo")
-//	public String modifyInfo() {
-//		return "mypage/page/Mypage_Modify_Info";
-//	}
 	
 	@GetMapping("mypage")
 	public String memberInfo(Model model) {
@@ -64,7 +60,6 @@ public class MypageController {
 		}
 
 	}
-	
 	
 	@PostMapping("mypage")
 	public String modifyMemberInfoPro(Model model, MemberVO member) {
@@ -142,9 +137,14 @@ public class MypageController {
 	@GetMapping("licenseInfo")
 	public String licenseInfo(Model model, LicenseVO license) {
 		String MemberId = (String)session.getAttribute("member_id");
-		
 		model.addAttribute("licenseInfo", service.getLicenseInfo(MemberId));
-
+//		int isSuccess = service.registLicense(license);
+//		
+//		if(isSuccess > 0) {
+//			license
+//		}
+		
+		
 		return "mypage/page/Mypage_License_Info";
 	}
 	
@@ -177,12 +177,6 @@ public class MypageController {
         System.out.println("회원탈퇴 사유 등록");
         return "mypage/page/Mypage_Delete_Account_Reason";
     }
-	
-//	@GetMapping("resignPasswd")
-//    public String resignPasswd() {
-//        System.out.println("회원탈퇴 처리과정");
-//        return "mypage/page/Mypage_Delete_Account";
-//    }
 	
 	@GetMapping("MemberWithdraw")
 	public String withdrawForm(Model model) {

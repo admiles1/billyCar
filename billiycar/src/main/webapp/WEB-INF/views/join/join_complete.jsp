@@ -8,8 +8,6 @@
 <title>회원가입 완료</title>
 </head>
 <body>
-	
-
 <div id="holder">
 	<h1 style="color:#00AAFF;">회원가입 완료</h1>
 	<h3 class="id_check">${member_id}님으로 회원가입이 완료되었습니다.</h3>
@@ -26,6 +24,5 @@
 	    </div>
 	 </div>
 </div>
-	
 </body>
 </html>

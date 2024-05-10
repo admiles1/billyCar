@@ -13,17 +13,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.itwill.billycar.service.AdminService;
 import com.itwill.billycar.service.ReservService;
 import com.itwill.billycar.vo.CarVO;
+import com.itwill.billycar.vo.CommonVO;
 
 @Controller
 public class ReservController {
-	@Autowired  ReservService service;
-	
+	@Autowired  ReservService reservService;
+	@Autowired  AdminService adminService;
 	
 	// 조건검색하지않고 예약페이지 진입시 (모든 차량검색, 페이징처리)
 	@GetMapping("reservation")
 	public String reservationget(Model model) {
+		List<CommonVO> fuels = adminService.getFuels();
+		List<CommonVO> types = adminService.getTypes();
+		model.addAttribute("types", types);
+		model.addAttribute("fuels", fuels);
 		model.addAttribute("needSearch", true);
 		return "reservation/reservation";
 	}
@@ -33,24 +39,25 @@ public class ReservController {
 	public String reservationpost(CarVO car
 								, @RequestParam(defaultValue = "") Map<String,String> map 
 								, Model model) {
+		
 		List<CarVO> cars = null;
 		if(car.getCar_type() != null && car.getCar_fuel() == null) { 	// 자동차타입 조건만 존재 할 경우
 			// search메소드로 스트링 포맷 변환 후 초기화
 			car.setCar_type(searchMethod(car.getCar_type()));
 			
-			cars = service.selectCarList(car);
 			
 			Set<String> hasThisType = new HashSet<String>();
+			cars = reservService.selectCarList(car);
 			
 			for (CarVO c : cars) {
 				hasThisType.add(c.getCar_type());
 			}
-			
 			model.addAttribute("hasThisType", hasThisType);
+			
 			
 		} else if (car.getCar_type() == null && car.getCar_fuel() != null) { // 자동차연료 조건만 존재 할 경우
 			car.setCar_fuel(searchMethod(car.getCar_fuel()));
-			cars = service.selectCarList(car);
+			cars = reservService.selectCarList(car);
 			
 			Set<String> hasThisFuel = new HashSet<String>();
 			for (CarVO c : cars) {
@@ -59,11 +66,15 @@ public class ReservController {
 			
 			model.addAttribute("hasThisFuel", hasThisFuel);
 			
+		} else if (car.getCar_type() == null && car.getCar_fuel() == null) { // 두 가지 모두 검색하지 않을 경우
+			
+			cars = reservService.selectCarList(car);
+			
 		} else { // 두 가지 모두 검색 할 경우
 			
 			car.setCar_fuel(searchMethod(car.getCar_fuel()));
 			car.setCar_type(searchMethod(car.getCar_type()));
-			cars = service.selectCarList(car);
+			cars = reservService.selectCarList(car);
 			
 			Set<String> hasThisType = new HashSet<String>();
 			Set<String> hasThisFuel = new HashSet<String>();
@@ -77,6 +88,11 @@ public class ReservController {
 			model.addAttribute("hasThisFuel", hasThisFuel);
 		}
 		
+		// 공통 코드에서 type, fule 조회해서 가져오기
+		model.addAttribute("pickupDate", map.get("reserv_pickupdate"));
+		model.addAttribute("returnDate", map.get("reserv_returndate"));
+		model.addAttribute("types", adminService.getTypes());
+		model.addAttribute("fuels", adminService.getFuels());
 		model.addAttribute("cars", cars);
 		
 		return "reservation/reservation";
@@ -95,7 +111,7 @@ public class ReservController {
 		} 
 		
 		// db에서 받아온 idx에 맞는 차조회
-		car = service.getCar(Integer.parseInt(map.get("idx")));
+		car = reservService.getCar(Integer.parseInt(map.get("idx")));
 		
 		// 존재하지않는 idx를 조회했을 시
 		if(car == null) {

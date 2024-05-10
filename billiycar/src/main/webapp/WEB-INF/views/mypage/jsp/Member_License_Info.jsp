@@ -142,6 +142,10 @@ h2 {
 	// 페이지 로드 시 알림창 띄우기
 	window.onload = function() {
 	    alert("면허 등록이 완료되었습니다!");
+	    var licenseNumberInput = document.getElementById("licenseNumber");
+        if (licenseNumberInput) {
+            licenseNumberInput.value = formatLicenseNumber(licenseNumberInput.value);
+        }
 	};
 </script>
 </body>

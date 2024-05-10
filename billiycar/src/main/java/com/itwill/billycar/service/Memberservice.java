@@ -1,5 +1,7 @@
 package com.itwill.billycar.service;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,5 +43,10 @@ public class Memberservice {
 
 	public int selectMemberCount() {
 		return mapper.selectMemberCount();
+	}
+
+
+	public int todayMemberCount() {
+		return mapper.selectTodayMember();
 	}
 }
