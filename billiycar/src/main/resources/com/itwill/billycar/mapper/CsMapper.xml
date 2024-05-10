@@ -71,7 +71,9 @@
 			WHERE faq_category = #{category}
 		</if>
 		ORDER BY faq_idx DESC
+		<if test="startRow != 0">
 		LIMIT  #{listLimit}, #{startRow}
+		</if>
 	</select>
 	
 	<!-- ==================================================================  -->
