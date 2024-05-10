@@ -1,8 +1,5 @@
 package com.itwill.billycar.Controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -100,8 +97,13 @@ public class MemberController {
 		MemberVO dbMember = service.getMember(member);
 		
 		
-		if(dbMember == null || !passwordEncoder.matches(member.getMember_passwd(), dbMember.getMember_passwd())) { // 로그인 실패
-			return "redirect:/error";
+		if(dbMember == null || !passwordEncoder.matches(member.getMember_passwd(), dbMember.getMember_passwd())
+							|| dbMember.getMember_status() == 3) { // 로그인 실패
+			model.addAttribute("msg", "아이디 또는 비밀번호를 잘못 입력했습니다.\\n입력하신 내용을 다시 확인해주세요.");
+			return "err/fail";
+		} else if(dbMember != null && dbMember.getMember_status() == 2) { 
+			model.addAttribute("msg", "휴면 회원입니다! 해제하시려면 관리자에게 문의하시기 바랍니다.");
+			return "err/fail";
 		} else { // 로그인 성공
 			// 세션 객체에 로그인 성공한 아이디를 "sId" 속성값으로 추가
 			session.setAttribute("member_id", member.getMember_id());
@@ -110,22 +112,8 @@ public class MemberController {
 			return "redirect:/";
 		}
 		
-		
-//		boolean isCorrectUser = service.isCorrectUser(member);
-//		
-//		if(isCorrectUser) {
-//			session.setAttribute("member_id",  member.getMember_id());
-//			return "redirect:/./";
-//		} else {
-//			return "redirect:/error";
-//		}
 	}
 
-	@GetMapping("error")
-	public String error(Model model) {
-		model.addAttribute("msg", "아이디 또는 비밀번호를 잘못 입력했습니다.\\n입력하신 내용을 다시 확인해주세요.");
-		return "err/fail";
-	}
 
 	@GetMapping("logout")
 	public String logout(HttpSession session) {
