@@ -80,7 +80,8 @@
 	                            <tbody>
 	                                <tr>
 										<td>${car.car_maker }</td>
-	                                    <td class="text-center">${car.car_img }</td>
+	                                    <td class="text-center">
+	                                    <img src="/resources/upload/${car.car_img }"></td>
 	                                    <td>${car.car_model }</td>
 	                                    <td>${car.car_year}</td>
 	                                    <td>${car.gear_type}</td>

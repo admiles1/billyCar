@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.itwill.billycar.vo.AdminVO;
 import com.itwill.billycar.vo.CarVO;
+import com.itwill.billycar.vo.CommonVO;
 import com.itwill.billycar.vo.MemberVO;
 import com.itwill.billycar.vo.QnaVO;
 
@@ -32,5 +33,13 @@ public interface AdminMapper {
 	List<CarVO> selectCar(CarVO car);
 	
 	List<QnaVO> selectQnaList();
+
+	List<CommonVO> selectBrands();
+
+	List<CommonVO> selectModel();
+
+	List<CommonVO> selectTypes();
+
+	List<CommonVO> selectFuels();
 
 }

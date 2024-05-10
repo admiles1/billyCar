@@ -105,6 +105,40 @@
 		select * from qna
 	</select>
 	
+	
+	<!-- 공통 코드에서 제조사만 가져오기 -->
+	<!-- B로 시작하는 컬럼에서 두글자까지만 제한되는 컬럼들을 가져오면 제조사이다. -->
+	<select id="selectBrands" resultType="com.itwill.billycar.vo.CommonVO">
+		SELECT code, name
+		FROM Common
+		WHERE code LIKE 'B%' AND LENGTH(code) = 2
+		ORDER BY code;
+	</select>
+	
+	<!-- 공통 코드에서 모델만 가져오기 -->
+	<select id="selectModel" resultType="com.itwill.billycar.vo.CommonVO">
+		SELECT code, name
+		FROM Common
+		WHERE code LIKE '%M%' -- 모델 코드에 'M'이 포함된 모든 데이터를 선택합니다.
+		ORDER BY code;
+	</select>
+	
+	<!-- 공통 코드에서 타입 가져오기 -->
+	<select id="selectTypes" resultType="com.itwill.billycar.vo.CommonVO">
+		SELECT code, name
+		FROM Common
+		WHERE code LIKE 'T%' 
+		ORDER BY code;
+	</select>
+	
+	<!-- 공통 코드에서 연료 가져오기 -->
+	<select id="selectFuels" resultType="com.itwill.billycar.vo.CommonVO">
+		SELECT code, name
+		FROM Common
+		WHERE code LIKE 'F%' 
+		ORDER BY code;
+	</select>
+	
 </mapper>
 
 
