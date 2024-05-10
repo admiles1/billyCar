@@ -40,14 +40,10 @@
 		border-top: 2px solid black;
  		width: 870px; 
 		margin-left: 15px;
-/* 		margin-right: 10px; */
 		
 	}
     .c , th{
     	border: 1px solid gray;
-    	
-/*     	border-top: 0.5px solid gray; */
-/*     	border-bottom: 0.5px solid gray; */
     }
     
     th:first-child, td:first-child {
@@ -65,39 +61,25 @@
 	#paymentMain{
 	border: 1px solid lightgray;
 	border-radius: 10px;
-/* 	margin-left: 0px;  */
-/* 	margin-right: 0px; */
 	padding-left: 0px;
 	padding-right: 0px;
 	
 	}
-  	#paymentSide{  
+#paymentSide{  
  		position:fixed;  
   		left:1190px; top:230px;  
-   		width: 500px;  
-   		height: 570px;  
+   		width: 450px;  
+   		height: 600px;  
 		margin: 0px;
 		padding: 0px;
   		border: 1px solid lightgray;
   		border-radius: 10px;
-  	}
+  	} 
   	
   	label {
   		margin-left: 10px;
   	}
-/*   	#tabels{ */
-/*   		margin-left: 5px; */
-/*   		margin-right: 5px; */
-/*   		padding-left: 5px; */
-/*   		padding-right: 5px; */
-/* 		width: 850px; */
-/*   	} */
-  	
-/* 		#sidePayment{    
-   		position: relative;   
- 		left:1130px; top:184px; 
-  	}
- */
+
  </style>
 </head>
 <body>
@@ -656,9 +638,6 @@
 		            </div>
 		        </div>
 		    </div>
-			<hr>    
-		
-			
 		</div>
 <!-- 		<div class="col-lg-4"> -->
 <!-- 		<div class="col-md-7 col-lg-4"> -->
@@ -668,13 +647,13 @@
 				<p><b>예약자 정보</b></p>
 				<div class="row">
 					<div class="col-3">예약자 이름</div>
-					<div class="col-9">예약자명 표시</div>
-					<div class="col-3">휴대폰 번호</div>
-					<div class="col-9">예약자 휴대폰 번호 표시</div>
+					<div class="col-9" id="displayInfoName"></div>
 					<div class="col-3">생년월일</div>
-					<div class="col-9">예약자 생년원일 표시</div>
+					<div class="col-9" id="displayInfoBirth"></div>
+					<div class="col-3">전화번호</div>
+					<div class="col-9" id="displayInfoTell"></div>
 					<div class="col-3">이메일</div>
-					<div class="col-9">예약자 이메일 표시</div>
+					<div class="col-9" id="displayInfoEmail"></div>
 				</div>
 				
 				<p><b>차량 정보</b></p>
@@ -714,19 +693,10 @@
 					<div class="col-3">결제수단</div>
 					<div class="col-9">결제수단 표시</div>
 				</div>
-				<br><br><br>
+				<br><br>
 			</div>			
-			<div align="center">
-<!-- 				<button class="sub_btn w-50 btn btn-primary btn-lg" type="submit" >결제하기</button> -->
-<!-- 				<input class="sub_btn w-50 btn btn-primary btn-lg" value="결제하기" type="submit" > -->
-<!-- 				<button  class="testBtn" >테스트용 버튼</button> -->
-<!-- 				 <button id="pay-button">결제하기</button> -->
-<!-- 				 <button type="button" onclick="startPayment();">결제하기</button> -->
-<!-- 				 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br> -->
-			</div>
-			
 				<input class="sub_btn w-100 btn btn-primary btn-lg" value="결제하기" onclick="startPayment();" >
-		</div>
+			</div>
 		</div>
 	</div>
 
@@ -759,8 +729,39 @@
             });
         }
     </script>
-				
-				
+	<!-- 운정자 정보 스크립트 -->
+	<script>
+		// 이름 값을 표시하는 함수
+		function displayName() {
+		    var nameValue = document.getElementById("nameInfo").value;
+		    document.getElementById("displayInfoName").innerText = nameValue;
+		}
+		
+		// 생년월일 상동
+		function displayBirth() {
+		    var birthValue = document.getElementById("birthInfo").value;
+		    document.getElementById("displayInfoBirth").innerText = birthValue;
+		}
+		
+		// 핸드폰번호 상동
+		function displayTell() {
+		    var tellValue = document.getElementById("tellInfo").value;
+		    document.getElementById("displayInfoTell").innerText = tellValue;
+		}
+		
+		// 이메일 상동
+		function displayEmail() {
+		    var emailValue = document.getElementById("eMailInfo").value;
+		    document.getElementById("displayInfoEmail").innerText = emailValue;
+		}
+		
+		// <input>에 값 입력 할 때마다 함수 호출
+		document.getElementById("nameInfo").addEventListener("input", displayName);
+		document.getElementById("birthInfo").addEventListener("input", displayBirth);
+		document.getElementById("tellInfo").addEventListener("input", displayTell);
+		document.getElementById("eMailInfo").addEventListener("input", displayEmail);
+	</script>
+
 				
     <!-- 아임포트 스크립트 추가 -->
 <!--     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script> -->
