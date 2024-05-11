@@ -15,6 +15,8 @@ public class ReservVO {
 	private int reserv_status;
 	private int reserv_option;
 	private LocalDateTime reserv_reg_date;
-	private int car_idx;
+	private String car_number;
 	private String member_id;
+	private int reserv_idx;
+	private int reserv_review_status;
 }

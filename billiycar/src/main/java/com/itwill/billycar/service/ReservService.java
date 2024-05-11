@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.itwill.billycar.mapper.ReservMapper;
 import com.itwill.billycar.vo.CarVO;
+import com.itwill.billycar.vo.MemberVO;
+import com.itwill.billycar.vo.ReservVO;
 
 @Service
 public class ReservService {
@@ -22,5 +24,11 @@ public class ReservService {
 
 	public int selectReservCountCar() {
 		return mapper.selectReservCountCar();
+	}
+	
+	//예약 현황 리스트
+	public List<ReservVO> selectReservList(MemberVO member) {
+		System.out.println("service에서 값 보기 : " + mapper.selectReservList(member));
+		return mapper.selectReservList(member);
 	}
 }

@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.billycar.service.MypageService;
+import com.itwill.billycar.service.ReservService;
 import com.itwill.billycar.vo.LicenseVO;
 import com.itwill.billycar.vo.License_StandardVO;
 import com.itwill.billycar.vo.MemberVO;
 import com.itwill.billycar.vo.QnaVO;
+import com.itwill.billycar.vo.ReservVO;
 
 
 @Controller
@@ -28,6 +30,9 @@ public class MypageController {
 	
 	@Autowired
 	private MypageService service;
+	
+	@Autowired
+	private ReservService reservService;
 	
 	
 	@GetMapping("mypage")
@@ -149,10 +154,18 @@ public class MypageController {
 	}
 	
 	
-	
+	//예약 현황 리스트 
 	@GetMapping("resvConfirm")
-    public String resvConfirm() {
+    public String resvConfirm(HttpSession session, MemberVO member, Model model) {
         System.out.println("예약확인");
+        
+        member.setMember_id((String)session.getAttribute("member_id"));
+        
+        List<ReservVO> reservList = reservService.selectReservList(member);
+        System.out.println("회원의 예약 리스트 보이기 : " + reservList);
+        
+        model.addAttribute("reservList", reservList);
+        
         return "mypage/page/Mypage_Reservation";
     }
 	
