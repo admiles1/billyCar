@@ -20,6 +20,7 @@ import com.itwill.billycar.vo.CarReviewVO;
 import com.itwill.billycar.vo.CarVO;
 import com.itwill.billycar.vo.CommonVO;
 import com.itwill.billycar.vo.ReviewVO;
+import com.itwill.billycar.vo.ReservVO;
 
 @Controller
 public class ReservController {
@@ -35,24 +36,29 @@ public class ReservController {
 		model.addAttribute("types", types);
 		model.addAttribute("fuels", fuels);
 		model.addAttribute("needSearch", true);
+		model.addAttribute("BHS", adminService.getBusinesshours().get(0).getName());
+		model.addAttribute("BHE", adminService.getBusinesshours().get(1).getName());
 		return "reservation/reservation";
 	}
 	
 	// 메인페이지, 예약페이지에서 조건을 입력하였을 시 (조건에 맞는 차량 검색 및 받아온 값 표시)
 	@PostMapping("reservation")
 	public String reservationpost(CarVO car
+								, ReservVO reserv
 								, @RequestParam(defaultValue = "") Map<String,String> map 
 								, Model model) {
 		
 		List<CarVO> cars = null;
+		String pickupdate = map.get("reserv_pickupdate") + "T" + map.get("pickupTime");
+		String returndate = map.get("reserv_returndate") + "T" + map.get("returnTime");
+		
+		
 		if(car.getCar_type() != null && car.getCar_fuel() == null) { 	// 자동차타입 조건만 존재 할 경우
 			// search메소드로 스트링 포맷 변환 후 초기화
 			car.setCar_type(searchMethod(car.getCar_type()));
-			
+			cars = reservService.selectCarList(car, pickupdate, returndate );
 			
 			Set<String> hasThisType = new HashSet<String>();
-			cars = reservService.selectCarList(car);
-			
 			for (CarVO c : cars) {
 				hasThisType.add(c.getCar_type());
 			}
@@ -61,7 +67,7 @@ public class ReservController {
 			
 		} else if (car.getCar_type() == null && car.getCar_fuel() != null) { // 자동차연료 조건만 존재 할 경우
 			car.setCar_fuel(searchMethod(car.getCar_fuel()));
-			cars = reservService.selectCarList(car);
+			cars = reservService.selectCarList(car, pickupdate, returndate );
 			
 			Set<String> hasThisFuel = new HashSet<String>();
 			for (CarVO c : cars) {
@@ -72,13 +78,13 @@ public class ReservController {
 			
 		} else if (car.getCar_type() == null && car.getCar_fuel() == null) { // 두 가지 모두 검색하지 않을 경우
 			
-			cars = reservService.selectCarList(car);
+			cars = reservService.selectCarList(car, pickupdate, returndate );
 			
 		} else { // 두 가지 모두 검색 할 경우
 			
 			car.setCar_fuel(searchMethod(car.getCar_fuel()));
 			car.setCar_type(searchMethod(car.getCar_type()));
-			cars = reservService.selectCarList(car);
+			cars = reservService.selectCarList(car, pickupdate, returndate );
 			
 			Set<String> hasThisType = new HashSet<String>();
 			Set<String> hasThisFuel = new HashSet<String>();
@@ -93,10 +99,16 @@ public class ReservController {
 		}
 		
 		// 공통 코드에서 type, fule 조회해서 가져오기
-		model.addAttribute("pickupDate", map.get("reserv_pickupdate"));
-		model.addAttribute("returnDate", map.get("reserv_returndate"));
+		model.addAttribute("pickupDate", pickupdate);
+		model.addAttribute("returnDate", returndate);
+		model.addAttribute("pickupLocation", map.get("reserv_pickuplocation"));
+		model.addAttribute("returnLocation", map.get("reserv_returnlocation"));
 		model.addAttribute("types", adminService.getTypes());
 		model.addAttribute("fuels", adminService.getFuels());
+		List<CommonVO> lll = adminService.getBusinesshours();
+		System.out.println(lll.get(0));
+		System.out.println(lll.get(1));
+		model.addAttribute("BH", adminService.getBusinesshours());
 		model.addAttribute("cars", cars);
 		
 		return "reservation/reservation";

@@ -6,11 +6,13 @@
 <mapper namespace="com.itwill.billycar.mapper.ReservMapper">
 	<select id="selectCarList" resultType="com.itwill.billycar.vo.CarVO">
 		SELECT *
-		  FROM car
-		 WHERE 1 = 1
-		 <if test="car_type != null"> AND car_type IN (${car_type})</if>
-		 <if test="car_fuel != null"> AND car_fuel IN (${car_fuel})</if>
+		  FROM car c JOIN Reservation rs
+		  	ON c.car_number = rs.car_number
+		 WHERE NOT(rs.reserv_pickupdate lte #{pickupDate} AND rs.reserv_returndate gte #{returnDate});
+		 <if test="car.car_type != null"> AND car_type IN (${car.car_type})</if>
+		 <if test="car.car_fuel != null"> AND car_fuel IN (${car.car_fuel})</if>
 	</select>
+	
 	<select id="selectCar" resultType="com.itwill.billycar.vo.CarVO">
 		SELECT *
 		  FROM car
