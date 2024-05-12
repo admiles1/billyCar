@@ -31,4 +31,8 @@ public class ReservService {
 		System.out.println("service에서 값 보기 : " + mapper.selectReservList(member));
 		return mapper.selectReservList(member);
 	}
+
+	public int updateReviewStatus(int review_idx) {
+		return mapper.updateReviewStatus(review_idx);
+	}
 }

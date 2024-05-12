@@ -8,6 +8,11 @@
 	<select id="selectReservList" resultType="com.itwill.billycar.vo.ReservVO">
 		select * from Reservation where member_id = #{member_id};
 	</select>
+	
+	<update id="updateReviewStatus">
+		update Reservation set reserv_review_status = 1 where reserv_idx = #{review_idx}
+	</update>
+	
 </mapper>
 
 

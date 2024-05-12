@@ -19,5 +19,7 @@ public interface ReservMapper {
 	
 	//예약 현황 리스트
 	List<ReservVO> selectReservList(MemberVO member);
+
+	int updateReviewStatus(int review_idx);
 	
 }

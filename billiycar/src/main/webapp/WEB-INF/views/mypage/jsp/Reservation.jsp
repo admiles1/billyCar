@@ -50,33 +50,35 @@
 </style>
 <script type="text/javascript">
 
+	if ("${message}" != null && "${message}" !== "") {
+	    alert("${message}");
+	}
+
 	function showReview(value){
+		console.log(value);
 		let review_id = document.querySelector("#reviewShow" + value);
 		review_id.style.display = 'table-row';
 	}
 	
 	function closeReview(value){
+		console.log(value);
 		let review_id = document.querySelector("#reviewShow" + value);
 		review_id.style.display = 'none';
 	}
 	
-	function setRating(value) {
-        document.getElementById("ratingValue").value = value;
-        var stars = document.querySelectorAll("#rating span");
-        for (var i = 0; i < stars.length; i++) {
-            if (i < value) {
-                stars[i].innerHTML  = '<i class="fa-solid fa-star" style="color: yellow;"></i>';
-            } else {
-                stars[i].innerHTML  = '<i class="fa-regular fa-star"></i>';
-            }
-        }
-    }
-	
-	if ("${message}" != null && "${message}" !== "") {
-        alert("${message}");
-    }
-	
-	
+	function setRating(value, reservIdx) {
+	    var ratingValueId = "ratingValue" + reservIdx;
+	    document.getElementById(ratingValueId).value = value;
+	    
+	    var stars = document.querySelectorAll("#rating" + reservIdx + " span");
+	    for (var i = 0; i < stars.length; i++) {
+	        if (i < value) {
+	            stars[i].innerHTML = '<i class="fa-solid fa-star" style="color: yellow;"></i>';
+	        } else {
+	            stars[i].innerHTML = '<i class="fa-regular fa-star"></i>';
+	        }
+	    }
+	}
 
 </script>
 </head>
@@ -147,16 +149,17 @@
 							    <input type="text" class="form-control" name="review_subject" width="200px;" style="margin-top: 10px;" placeholder="리뷰 제목을 입력해주세요"><br>
 			                	<label for="review">리뷰 내용</label><br>
 			    				<textarea id="review" name="review_content" class="form-control" rows="4" cols="50" style="margin-top: 10px;" placeholder="리뷰 내용을 입력해주세요"></textarea><br>
-			    				<div id="rating">
-							        <span onclick="setRating(1)"><i class="fa-regular fa-star"></i></span>
-							        <span onclick="setRating(2)"><i class="fa-regular fa-star"></i></span>
-							        <span onclick="setRating(3)"><i class="fa-regular fa-star"></i></span>
-							        <span onclick="setRating(4)"><i class="fa-regular fa-star"></i></span>
-							        <span onclick="setRating(5)"><i class="fa-regular fa-star"></i></span>
-							        <br>
-							         <p>별점을 선택해주세요</p>
-							    </div>
-							    <input type="hidden" id="ratingValue" name="review_score" value="0">
+			    				
+			    				<div id="rating${reserv.reserv_idx }">
+								    <span onclick="setRating(1, ${reserv.reserv_idx })"><i class="fa-regular fa-star"></i></span>
+								    <span onclick="setRating(2, ${reserv.reserv_idx })"><i class="fa-regular fa-star"></i></span>
+								    <span onclick="setRating(3, ${reserv.reserv_idx })"><i class="fa-regular fa-star"></i></span>
+								    <span onclick="setRating(4, ${reserv.reserv_idx })"><i class="fa-regular fa-star"></i></span>
+								    <span onclick="setRating(5, ${reserv.reserv_idx })"><i class="fa-regular fa-star"></i></span>
+								    <br>
+								    <p>별점을 선택해주세요</p>
+								</div>
+							    <input type="hidden" id="ratingValue${reserv.reserv_idx}" name="review_score" value="0">
 							    <input type="hidden"  name="review_id" value="${reserv.member_id }">
 							    <input type="hidden"  name="car_number" value="${reserv.car_number }">
 							    <input type="hidden"  name="review_idx" value="${reserv.reserv_idx }">
