@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.billycar.mapper.ReservMapper;
 import com.itwill.billycar.vo.CarVO;
@@ -14,8 +15,8 @@ import com.itwill.billycar.vo.ReservVO;
 public class ReservService {
 	@Autowired ReservMapper mapper;
 	
-	public List<CarVO> selectCarList(CarVO car) {
-		return mapper.selectCarList(car);
+	public List<CarVO> selectCarList(CarVO car, String pickupDate, String returnDate) {
+		return mapper.selectCarList(car, pickupDate, returnDate);
 	}
 	
 	public CarVO getCar(int idx) {

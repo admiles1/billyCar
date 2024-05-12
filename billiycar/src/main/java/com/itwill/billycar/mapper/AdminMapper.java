@@ -44,5 +44,7 @@ public interface AdminMapper {
 	List<CommonVO> selectTypes();
 
 	List<CommonVO> selectFuels();
+	
+	List<CommonVO> selectBusinesshours();
 	// 여기까지
 }

@@ -71,5 +71,10 @@ public class AdminService {
 
 		return mapper.selectFuels();
 	}
+	
+	public List<CommonVO> getBusinesshours() {
+		
+		return mapper.selectBusinesshours();
+	}
 
 }

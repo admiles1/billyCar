@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:if test="${BH eq ${pickupTime}">selected</c:if>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,20 +43,17 @@
 	   		 		<h2 class="car-name"> ${car.car_model}
 	   		 			<span class="car-size"> ${car.car_type} </span>
    		 			</h2>
-	   		 		<h2 class="car-price"><fmt:formatNumber value="${car.car_price}" pattern="#,###"/></h2>
+	   		 		<h2 class="car-price"><fmt:formatNumber value="${car.car_dayprice}" pattern="#,###"/></h2>
 	   		 		<hr>
 	   		 		<div>
-	   		 			데이트피커
+	   		 			${param.pickupDate} / ${param.returnDate}
+	   		 			${param.pickuplocation} / 
+	   		 			<c:choose>
+	   		 				<c:when test="${param.returnlocation eq 'branch'}"> 부산광역시 부산진구 동천로 109 삼한골든게이트빌딩 7층(아이티윌 부산교육센터)</c:when>
+	   		 				<c:otherwise> ${param.pickuplocation} </c:otherwise>
+	   		 			</c:choose>
 	   		 		</div>
 	   		 		<hr>
-   		 			<select id="selectArea">
-			    		<option selected> :: 대여지점 :: </option>
-			    		<option> 아이티윌본점 </option>
-			    	</select>
-			    	<select id="selectArea">
-			    		<option selected> :: 반납지점 :: </option>
-			    		<option> 아이티윌본점 </option>
-		    		</select>
 		    		<br>
 		    		<strong class="rental-criteria"> 대여 기준 </strong>
 		    		<ul class="rental-criteria-list">
@@ -64,7 +62,7 @@
 		    			<li><img src="${pageContext.request.contextPath}/resources/images/check-img.png" class="check-img">면허종류 : <span class="qua">2종 보통면허 이상</span></li>
 		    		</ul>
 		    		<a href="payment"><span class="make-rv"></span></a>
-		    		<a href="http://naver.com"><span class="contact-cs"></span></a>
+		    		<a href="faq"><span class="contact-cs"></span></a>
 	    		</div>
 	  		</div>
   		</div>
@@ -109,7 +107,7 @@
     						</li>
     						<li>
     							<small> 제조사 </small> <br>
-    							<strong> ${car.car_maker} </strong>
+    							<strong> ${car.car_brand} </strong>
     						</li>
     						<li>
     							<small> 모델 </small> <br>

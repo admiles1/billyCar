@@ -39,18 +39,25 @@
 		
 		let pickupDate = $("#reserv_pickupdate").val() + "T" + $("#reserv_pickuptime").val();
 		let returnDate = $("#reserv_returndate").val() + "T" + $("#reserv_returntime").val();
-		location.href="reservationdetail?idx=" + idx + "&pickupDate=" + pickupDate + "&returnDate=" + returnDate;
+		let pickupLocation = $("#reserv_pickuplocation").val();
+		let returnLocation = $("#reserv_returnlocation").val();
+		location.href="reservationdetail?idx=" + idx + "&pickupDate=" + pickupDate + "&returnDate=" + returnDate
+						+ "&pickuplocation=" + pickupLocation + "&returnlocation=" + returnLocation;
 	}
 	
 	function check() {
 		let pickupDate = $("#reserv_pickupdate").val();
 		let returnDate = $("#reserv_returndate").val();
+		let returnLocation = $("#reserv_returnlocation").val();
 		
 		if(pickupDate == "") {
 			alert('대여날짜를 선택하여 주십시오');
 			return false;
 		} else if(pickupDate == "") {
 			alert('반납날짜를 선택하여 주십시오');
+			return false;
+		} else if(returnLocation == "") {
+			alert('반납장소를 선택하여 주십시오');
 			return false;
 		}
 	}
@@ -76,49 +83,44 @@
 					    				<c:if test="${not empty returnDate}"> value="${returnDate}"</c:if> id="reserv_returndate">
 					    			<br>	
 				    				<select name="pickupTime" id="reserv_pickuptime">
-										<option value="06">오전 06:00</option>
-										<option value="07">오전 07:00</option>
-										<option value="08">오전 08:00</option>
-									    <option value="09">오전 09:00</option>
-									    <option value="10">오전 10:00</option>
-									    <option value="11">오전 11:00</option>
-									    <option value="12">오후 12:00</option>
-									    <option value="13">오후 13:00</option>
-									    <option value="14">오후 14:00</option>
-									    <option value="15">오후 15:00</option>
-									    <option value="16">오후 16:00</option>
-									    <option value="17">오후 17:00</option>
-									    <option value="18">오후 18:00</option>
-									    <option value="19">오후 19:00</option>
-									    <option value="20">오후 20:00</option>
+				    					<c:forEach var="BH" begin="${BHS}" end="${BHE}" >
+				    						<option value="">${BH}:00</option>
+				    					</c:forEach>
 									</select>
+									
 				    				<select name="returnTime" id="reserv_returntime">
-										<option value="06">오전 06:00</option>
-										<option value="07">오전 07:00</option>
-										<option value="08">오전 08:00</option>
-									    <option value="09">오전 09:00</option>
-									    <option value="10">오전 10:00</option>
-									    <option value="11">오전 11:00</option>
-									    <option value="12">오후 12:00</option>
-									    <option value="13">오후 13:00</option>
-									    <option value="14">오후 14:00</option>
-									    <option value="15">오후 15:00</option>
-									    <option value="16">오후 16:00</option>
-									    <option value="17">오후 17:00</option>
-									    <option value="18">오후 18:00</option>
-									    <option value="19">오후 19:00</option>
-									    <option value="20">오후 20:00</option>
+										<option value="06:00">06:00</option>
+										<option value="07:00">07:00</option>
+										<option value="08:00">08:00</option>
+									    <option value="09:00">09:00</option>
+									    <option value="10:00">10:00</option>
+									    <option value="11:00">11:00</option>
+									    <option value="12:00">12:00</option>
+									    <option value="13:00">13:00</option>
+									    <option value="14:00"> 14:00</option>
+									    <option value="15:00"> 15:00</option>
+									    <option value="16:00"> 16:00</option>
+									    <option value="17:00"> 17:00</option>
+									    <option value="18:00"> 18:00</option>
+									    <option value="19:00"> 19:00</option>
+									    <option value="20:00"> 20:00</option>
 									</select>
 					    		</div>
 					    	</div>
 					    </div>
 			    	</div>
 			    	<div class="location_area">
-			    		<input type="text" class="selectArea" name="reserv_pickuplocation"  value=":: 대여지점 ::" readonly style="padding-right: 17px;" onclick="alert('api예정')">
-				    	<select  class="selectArea" name="reserv_returnlocation">
-				    		<option selected value=""> :: 반납지점 :: </option>
-				    		<option value="direct"> 지점에 직접 반납하기 </option>
-				    		<option value="direct"> 호출장소에 반납하기 </option>
+			    		<input type="text" class="selectArea" name="reserv_pickuplocation" 
+			    			<c:if test="${not empty pickupLocation}"> value="${pickupLocation}"</c:if>
+			    				readonly style="padding-right: 17px;" onclick="alert('api예정')"
+			    				id="reserv_pickuplocation" placeholder=":: 대여지점 ::">
+				    	<select  class="selectArea" name="reserv_returnlocation" id="reserv_returnlocation">
+				    		<option selected value=""
+				    			<c:if test="${empty returnLocation}">selected</c:if>> :: 반납장소 :: </option>
+				    		<option value="branch"
+				    			<c:if test="${returnLocation eq 'branch'}">selected</c:if>> 지점에 직접 반납하기 </option>
+				    		<option value="samelocation"
+				    			<c:if test="${returnLocation eq 'samelocation'}">selected</c:if>> 호출장소에 반납하기 </option>
 				    	</select>
 			    	</div>
 			    	<div class="car_option_sel">
@@ -160,7 +162,8 @@
 			   		 					<span class="carInfo">
 			   		 						<span> ${car.car_model} </span>
 			   		 						<span> ${car.car_type} / ${car.car_capacity}</span>
-			   		 						<small>종일가 <fmt:formatNumber value="${car.car_price}" pattern="#,###"/></small>
+			   		 						<small>종일가 <fmt:formatNumber value="${car.car_dayprice}" pattern="#,###"/></small>
+			   		 						<small>시간당 <fmt:formatNumber value="${car.car_hourprice}" pattern="#,###"/></small>
 			   		 					</span>
 			   		 				</a>
 			   		 			</li>
