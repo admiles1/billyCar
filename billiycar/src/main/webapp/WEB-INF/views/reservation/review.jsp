@@ -1,24 +1,44 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>리뷰</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://kit.fontawesome.com/ef42a902c7.js" crossorigin="anonymous"></script>
+
 <style type="text/css">
 	.subject{
 		color:  #00AAFF;
 	}
 </style>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>리뷰</title>
-    
-<!--     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
-<!-- 폰트 -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+<script type="text/javascript">
+	$(document).ready(function(){
+	    $('#option').change(function(){
+	        var selectedOption = $('#options').val(); // 선택된 옵션 값 가져오기
+	        console.log(selectedOption);
+	        // AJAX를 사용하여 컨트롤러로 선택된 옵션 값을 전송
+	        $.ajax({
+	            type: 'GET',
+	            url: 'review',
+	            data: { option: selectedOption },
+	            success: function(response){
+	                // 서버로부터의 응답 처리
+	                console.log(response);
+	            },
+	            error: function(xhr, status, error){
+	                // 오류 처리
+	                console.error(error);
+	            }
+	        });
+	    });
+	});
+</script>
 </head>
 <body>
 	<header><jsp:include page="../inc/top.jsp"></jsp:include></header>
@@ -26,97 +46,71 @@
     	<h1 class="subject mt-5 mb-3" style="text-align: center; margin-bottom: 50px;">리뷰</h1>
     	
     <!-- 검색창 -->
-    <div class="card noto-sans-kr" style="margin-top: 20px; margin-bottom: 50px;">
-    <div class="card-body">	
-        <form>
-            <div class="mb-2 row">
-                <label for="carType" class="col-sm-2 col-form-label" style="text-align: center;">차량 종류</label>
-                <div class="col-sm-4">
-                    <select class="form-select form-select-sm" id="carType">
-                         <option selected>차종 선택</option>
-                         <option value="sedan">Sedan</option>
-                         <option value="suv">SUV</option>
-                         <option value="hatchback">Hatchback</option>
-                    </select>
-                </div>
-                <label for="carType" class="col-sm-2 col-form-label" style="text-align: center;">검색순</label>
-                <div class="col-sm-4">
-                    <select class="form-select form-select-sm" id="carType">
-                        <option selected>최신순</option>
-                        <option value="sedan">별점순</option>
-                        <option value="suv">조회순</option>
-                    </select>
-                </div>
-            </div>
-            <div class="mb-2 row">
-                <label for="searchText" class="col-sm-2 col-form-label" style="text-align: center;">차량 검색</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control form-control-sm" id="searchText" placeholder="차량 검색">
-                </div>
-            </div>
-            <div style="margin-top: 8px; text-align: center;">
-                <button type="submit" class="btn btn-primary" style="width: 100px;">검색</button>
-            </div>
-        </form>
-    </div>
-	</div>
+<!--     <div class="card noto-sans-kr" style="margin-top: 20px; margin-bottom: 50px;"> -->
+<!--     <div class="card-body">	 -->
+<!-- 		<div style="text-align: center; margin-bottom: 100px;"> -->
+<!-- 	        <form> -->
+<!-- 	            <div class="mb-2 row"> -->
+<!-- 	                <label for="carType" class="col-sm-2 col-form-label" style="text-align: center;">검색 타입</label> -->
+<!-- 	                <div class="col-sm-10"> -->
+<!-- 	                    <select class="form-select form-select-sm" id="carType"> -->
+<!-- 	                         <option selected>차종 선택</option> -->
+<!-- 	                         <option value="sedan">Sedan</option> -->
+<!-- 	                         <option value="suv">SUV</option> -->
+<!-- 	                         <option value="hatchback">Hatchback</option> -->
+<!-- 	                    </select> -->
+<!-- 	                </div> -->
+	<!--                 <label for="carType" class="col-sm-2 col-form-label" style="text-align: center;">검색순</label> -->
+	<!--                 <div class="col-sm-4"> -->
+	<!--                     <input type="text" class="form-control form-control-sm" id="searchText" placeholder="차량 검색"> -->
+	<!--                 </div> -->
+<!-- 	            </div> -->
+<!-- 	            <div class="mb-2 row"> -->
+<!-- 	                <label for="searchText" class="col-sm-2 col-form-label" style="text-align: center;">차량 검색</label> -->
+<!-- 	                <div class="col-sm-10"> -->
+<!-- 	                    <input type="text" class="form-control form-control-sm" id="searchText" placeholder="차량 검색"> -->
+<!-- 	                </div> -->
+<!-- 	            </div> -->
+<!-- 	            <div style="margin-top: 8px; text-align: center;"> -->
+<!-- 	                <button type="submit" class="btn btn-primary" style="width: 100px;">검색</button> -->
+<!-- 	            </div> -->
+<!-- 	        </form> -->
+<!--         </div> -->
+<!--     </div> -->
+<!-- 	</div> -->
     	
     	
     <!-- 검색창 -->
-    	
-    	<div class="row">
-        	<div class="col-md-3">
-        		<div class="card">
-                	<img src="./resources/main_images/rewiewCar1.png" class="card-img-top" alt="리뷰 이미지 1" width="300" height="300">
-                    <div class="card-body">
-                    	<h5 class="card-title">bmw i4</h5>
-                    	<h5 class="card-title"><img src="./resources/main_images/star5.png"/></h5>
-                    	<p class="card-text">좋아요</p>
-                    	<div class="card-footer">
-							<small class="text-body-secondary">admin 고객님</small>
+    	${reviewList}
+    	<div class="card-tools" id="option" style="width: 100px; margin-left: 1195px;">
+                <select class="form-select form-select-sm" aria-label="리뷰 정렬" id="options">
+                    <option value="latest">최신순</option>
+                    <option value="old">오래된순</option>
+                    <option value="rating">별점순</option>
+                </select>
+        </div>
+    	<div class="row" style="margin-top: 10px;">
+    		<c:forEach var="review" items="${reviewList }">
+	        	<div class="col-md-3">
+	        		<div class="card">
+	        			
+	                	<img src="./resources/main_images/rewiewCar1.png" class="card-img-top" alt="리뷰 이미지 1" width="300" height="300">
+	                    <div class="card-body">
+	                    	
+	                    	<h5 class="card-title">
+	                    		<c:forEach begin="1" end="${review.review_score }" varStatus="loop">
+	                    		<i class="fa-solid fa-star" style="color: #FFE000;"></i>
+	                    		</c:forEach>
+	                    	</h5>
+	                    	<h6 class="card-title">${review.car_img }</h6>
+	                    	<p class="card-text">${review.review_content }</p>
+	                    	<div class="card-footer">
+								<small all class="text-body-secondary">${review.review_id } 고객님<i></i></small>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="card">
-					<img src="./resources/main_images/rewiewCar2.png" class="card-img-top" alt="리뷰 이미지 2" width="300" height="300">
-					<div class="card-body">
-                    	<h5 class="card-title">bmw i4</h5>
-                    	<h5 class="card-title"><img src="./resources/main_images/star5.png"/></h5>
-                    	<p class="card-text">좋아요</p>
-                    	<div class="card-footer">
-							<small class="text-body-secondary">admin 고객님</small>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="card">
-					<img src="./resources/main_images/rewiewCar3.png" class="card-img-top" alt="리뷰 이미지 1" width="300" height="300">
-					<div class="card-body">
-                    	<h5 class="card-title">bmw i4</h5>
-                    	<h5 class="card-title"><img src="./resources/main_images/star5.png"/></h5>
-                    	<p class="card-text">좋아요</p>
-                    	<div class="card-footer">
-							<small class="text-body-secondary">admin 고객님</small>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="card">
-					<img src="./resources/main_images/rewiewCar4.png" class="card-img-top" alt="리뷰 이미지 1" width="300" height="300">
-					<div class="card-body">
-                    	<h5 class="card-title">bmw i4</h5>
-                    	<h5 class="card-title"><img src="./resources/main_images/star5.png"/></h5>
-                    	<p class="card-text">좋아요</p>
-                    	<div class="card-footer">
-							<small class="text-body-secondary">admin 고객님</small>
-						</div>
-					</div>
-				</div>
-			</div>
+			</c:forEach>
 		</div>
 	</div>
 
