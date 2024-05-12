@@ -17,14 +17,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.billycar.service.AdminService;
 import com.itwill.billycar.service.ReservService;
+import com.itwill.billycar.service.ReviewService;
+import com.itwill.billycar.vo.CarReviewVO;
 import com.itwill.billycar.vo.CarVO;
 import com.itwill.billycar.vo.CommonVO;
+import com.itwill.billycar.vo.ReviewVO;
 import com.itwill.billycar.vo.ReservVO;
 
 @Controller
 public class ReservController {
 	@Autowired  ReservService reservService;
 	@Autowired  AdminService adminService;
+	@Autowired ReviewService reviewService;
 	
 	// 조건검색하지않고 예약페이지 진입시 (모든 차량검색, 페이징처리)
 	@GetMapping("reservation")
@@ -140,7 +144,14 @@ public class ReservController {
 	}
 	
 	@GetMapping("review")
-	public String review() {
+	public String review(Model model, @RequestParam(value = "option", required = false) String option) {
+		if (option == null) {
+	        option = "latest"; // 기본값 설정
+	    }
+		
+		List<CarReviewVO> reviewList = reviewService.selectReviewList(option);
+		System.out.println("List<CarReviewVO> reviewList : " + reviewList);
+		model.addAttribute("reviewList", reviewList);
 		return "reservation/review";
 	}
 	

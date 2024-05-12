@@ -25,6 +25,21 @@
 	        #{review_idx}
    		 )
 	</insert>
+	<select id="selectReviewList" resultType="hashmap">
+		SELECT *
+   		FROM car c
+    	JOIN review r ON c.car_number = r.car_number
+    	<if test="option.equals('latest')">
+    		order by review_idx asc;
+    	</if>
+    	<if test="option.equals('old')">
+    		order by review_idx desc;
+    	</if>
+    	<if test="option.equals('rating')">
+    		order by review_score desc;
+    	</if>
+    	
+	</select>
 </mapper>
 
 

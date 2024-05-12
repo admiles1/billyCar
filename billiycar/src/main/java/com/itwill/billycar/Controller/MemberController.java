@@ -154,8 +154,25 @@ public class MemberController {
 		return "login/forgot_pw1";
 	}
 	
+	@PostMapping("forgot_pw")
+	public String forgot_pwPro(MemberVO member, Model model, HttpSession session) {
+		
+		System.out.println(member.getMember_id());
+		
+		MemberVO dbMember = service.getMember(member);
+		
+		if(dbMember != null) {
+			session.setAttribute("member_id", member.getMember_id());
+			return "redirect:/forgot_pw2";
+		} else {
+			model.addAttribute("msg", "존재하지 않는 회원입니다.");
+			return "err/fail";
+		}
+	}
+	
 	@GetMapping("forgot_pw2")
 	public String forgot_pw2() {
+		
 		return "login/forgot_pw2";
 	}
 	
