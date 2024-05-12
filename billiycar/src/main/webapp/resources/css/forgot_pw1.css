@@ -64,7 +64,7 @@ input[type="text"]{
     text-align: center; /* 버튼을 가운데 정렬 */
 }
 
-.next input[type="button"] {
+.next input[type="submit"] {
     background-color: #00AAFF;
     color: white;
     border: none;

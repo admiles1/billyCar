@@ -140,6 +140,13 @@
 		ORDER BY code;
 	</select>
 	
+	<select id="selectBusinesshours" resultType="com.itwill.billycar.vo.CommonVO">
+		SELECT code, name
+		FROM Common
+		WHERE code LIKE 'BH%' 
+		ORDER BY code DESC;
+	</select>
+	
 </mapper>
 
 

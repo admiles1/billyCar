@@ -1,5 +1,7 @@
 package com.itwill.billycar.Controller;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -15,13 +17,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.billycar.service.AdminService;
 import com.itwill.billycar.service.ReservService;
+import com.itwill.billycar.service.ReviewService;
+import com.itwill.billycar.vo.CarReviewVO;
 import com.itwill.billycar.vo.CarVO;
 import com.itwill.billycar.vo.CommonVO;
+import com.itwill.billycar.vo.ReviewVO;
+import com.itwill.billycar.vo.ReservVO;
 
 @Controller
 public class ReservController {
 	@Autowired  ReservService reservService;
 	@Autowired  AdminService adminService;
+	@Autowired ReviewService reviewService;
 	
 	// 조건검색하지않고 예약페이지 진입시 (모든 차량검색, 페이징처리)
 	@GetMapping("reservation")
@@ -31,6 +38,8 @@ public class ReservController {
 		model.addAttribute("types", types);
 		model.addAttribute("fuels", fuels);
 		model.addAttribute("needSearch", true);
+		model.addAttribute("BHS", adminService.getBusinesshours().get(0).getName());
+		model.addAttribute("BHE", adminService.getBusinesshours().get(1).getName());
 		return "reservation/reservation";
 	}
 	
@@ -39,16 +48,20 @@ public class ReservController {
 	public String reservationpost(CarVO car
 								, @RequestParam(defaultValue = "") Map<String,String> map 
 								, Model model) {
-		
 		List<CarVO> cars = null;
+		ReservVO reserv = new ReservVO();
+		String pickupdate = map.get("reserv_pickupdate") + " " + map.get("pickupTime");
+		String returndate = map.get("reserv_returndate") + " " + map.get("returnTime");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH");
+		reserv.setReserv_pickupdate(LocalDateTime.parse(pickupdate, formatter));
+		reserv.setReserv_returndate(LocalDateTime.parse(returndate, formatter));
+		
 		if(car.getCar_type() != null && car.getCar_fuel() == null) { 	// 자동차타입 조건만 존재 할 경우
 			// search메소드로 스트링 포맷 변환 후 초기화
 			car.setCar_type(searchMethod(car.getCar_type()));
-			
+			cars = reservService.selectCarList(car, reserv);
 			
 			Set<String> hasThisType = new HashSet<String>();
-			cars = reservService.selectCarList(car);
-			
 			for (CarVO c : cars) {
 				hasThisType.add(c.getCar_type());
 			}
@@ -57,7 +70,7 @@ public class ReservController {
 			
 		} else if (car.getCar_type() == null && car.getCar_fuel() != null) { // 자동차연료 조건만 존재 할 경우
 			car.setCar_fuel(searchMethod(car.getCar_fuel()));
-			cars = reservService.selectCarList(car);
+			cars = reservService.selectCarList(car, reserv);
 			
 			Set<String> hasThisFuel = new HashSet<String>();
 			for (CarVO c : cars) {
@@ -67,14 +80,14 @@ public class ReservController {
 			model.addAttribute("hasThisFuel", hasThisFuel);
 			
 		} else if (car.getCar_type() == null && car.getCar_fuel() == null) { // 두 가지 모두 검색하지 않을 경우
-			
-			cars = reservService.selectCarList(car);
+			cars = reservService.selectCarList(car, reserv);
 			
 		} else { // 두 가지 모두 검색 할 경우
 			
 			car.setCar_fuel(searchMethod(car.getCar_fuel()));
 			car.setCar_type(searchMethod(car.getCar_type()));
-			cars = reservService.selectCarList(car);
+			cars = reservService.selectCarList(car, reserv);
+
 			
 			Set<String> hasThisType = new HashSet<String>();
 			Set<String> hasThisFuel = new HashSet<String>();
@@ -90,9 +103,15 @@ public class ReservController {
 		
 		// 공통 코드에서 type, fule 조회해서 가져오기
 		model.addAttribute("pickupDate", map.get("reserv_pickupdate"));
+		model.addAttribute("pickupTime", map.get("pickupTime"));
 		model.addAttribute("returnDate", map.get("reserv_returndate"));
+		model.addAttribute("returnTime", map.get("returnTime"));
+		model.addAttribute("pickupLocation", map.get("reserv_pickuplocation"));
+		model.addAttribute("returnLocation", map.get("reserv_returnlocation"));
 		model.addAttribute("types", adminService.getTypes());
 		model.addAttribute("fuels", adminService.getFuels());
+		model.addAttribute("BHS", adminService.getBusinesshours().get(0).getName());
+		model.addAttribute("BHE", adminService.getBusinesshours().get(1).getName());
 		model.addAttribute("cars", cars);
 		
 		return "reservation/reservation";
@@ -125,7 +144,14 @@ public class ReservController {
 	}
 	
 	@GetMapping("review")
-	public String review() {
+	public String review(Model model, @RequestParam(value = "option", required = false) String option) {
+		if (option == null) {
+	        option = "latest"; // 기본값 설정
+	    }
+		
+		List<CarReviewVO> reviewList = reviewService.selectReviewList(option);
+		System.out.println("List<CarReviewVO> reviewList : " + reviewList);
+		model.addAttribute("reviewList", reviewList);
 		return "reservation/review";
 	}
 	
