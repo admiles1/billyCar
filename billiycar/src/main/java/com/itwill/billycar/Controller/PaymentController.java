@@ -19,7 +19,7 @@ public class PaymentController {
 	
 	// reservation_detail에서 예약하기 버튼 눌렀을 때 컨트롤러
 	@GetMapping("payment")
-	public String reservation(Model model ) {
+	public String reservation(Model model) {
 		
 		
 		return "payment/paymentPage";
