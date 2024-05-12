@@ -4,11 +4,23 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.itwill.billycar.mapper.ReservMapper">
-	<select id="selectCarList" resultType="com.itwill.billycar.vo.CarVO">
-		SELECT *
+	<select id="selectCarList" resultType="com.itwill.billycar.vo.CarVO" parameterType="map">
+		SELECT c.car_idx
+			 , c.car_number
+			 , c.car_model
+			 , c.car_brand
+			 , c.car_fuel
+			 , c.car_type
+			 , c.gear_type
+			 , c.car_capacity
+			 , c.car_img
+			 , c.car_year
+			 , c.car_dayprice
+			 , c.car_hourprice
 		  FROM car c JOIN Reservation rs
 		  	ON c.car_number = rs.car_number
-		 WHERE NOT(rs.reserv_pickupdate lte #{pickupDate} AND rs.reserv_returndate gte #{returnDate});
+		  	<![CDATA[WHERE NOT(rs.reserv_pickupdate <= #{reserv.reserv_pickupdate} AND rs.reserv_returndate >= #{reserv.reserv_returndate})]]>
+		   AND c.car_status = 0
 		 <if test="car.car_type != null"> AND car_type IN (${car.car_type})</if>
 		 <if test="car.car_fuel != null"> AND car_fuel IN (${car.car_fuel})</if>
 	</select>

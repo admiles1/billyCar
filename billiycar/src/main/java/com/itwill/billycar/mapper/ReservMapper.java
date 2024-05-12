@@ -13,7 +13,7 @@ import com.itwill.billycar.vo.ReservVO;
 
 @Mapper
 public interface ReservMapper {
-	List<CarVO> selectCarList(@Param("car")CarVO car, @Param("pickupDate")String pickupDate, @Param("returnDate") String returnDate);
+	List<CarVO> selectCarList(@Param("car")CarVO car, @Param("reserv")ReservVO reserv);
 	CarVO selectCar(int idx);
 	
 	int selectReservCountCar();
