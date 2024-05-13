@@ -81,6 +81,12 @@
 		FROM faq
 	</select>	
 	
+	<select id="selectFaqCategoryCount" resultType="int">
+		SELECT COUNT(*)
+		FROM faq
+		WHERE faq_category = #{category}
+	</select>
+	
 	<!-- ==================================================================  -->
 	<!-- ** [큐엔에이] ** -->
 	<select id="selectQnaList" resultType="com.itwill.billycar.vo.QnaVO">

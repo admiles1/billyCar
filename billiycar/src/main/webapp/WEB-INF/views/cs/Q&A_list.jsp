@@ -67,7 +67,6 @@
 				</tr>
 			</c:when>
 			
-			
 			<%-- 문의 내역이 존재할 경우 --%>
 			<c:otherwise>
 				<c:forEach var="qna" items="${qnaList}">

@@ -43,6 +43,8 @@
 		WHERE faq_idx=#{faq_idx}
 	</delete>
 	
+	<!--  Qna  -->
+	
 	<select id="selectQnaListCount" resultType="int">
 		SELECT COUNT(*)
 		FROM qna
@@ -66,5 +68,31 @@
 		SET admin_content = #{admin_content}, qna_status = 1
 		WHERE qna_idx = #{qna_idx}
 	</insert>
+	
+	<!-- 쿠폰 -->
+	<insert id="insertCoupon">
+	-- AdminCusMapper insertCoupon
+		<selectKey keyProperty="coupon_id" resultType="int" order="BEFORE">
+			SELECT IFNULL(MAX(coupon_id), 0)
+			FROM coupon
+		</selectKey>
+		INSERT INTO coupon
+		VALUES (#{coupon_id} + 1
+			 , #{coupon_code}
+			 , #{coupon_name}
+			 , #{coupon_discount_amount})
+	</insert>
+	
+	<select id="selectCouponList" resultType="com.itwill.billycar.vo.CouponVO">
+	-- AdminCusMapper selectCouponList
+	
+		SELECT *
+		FROM coupon
+	</select>
+	
+	<delete id="deleteCoupon">
+		DELETE FROM coupon
+		WHERE coupon_id = #{coupon_id}
+	</delete>
 	
 </mapper>

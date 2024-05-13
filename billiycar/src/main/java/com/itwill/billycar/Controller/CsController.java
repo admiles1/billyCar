@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -234,9 +235,20 @@ public class CsController {
 		int startRow = (pageNum-1)*listLimit;
 		
 		// 1) 전체 게시물 수 조회
-		int listCount = service.getFaqListCount();
-		int pageListLimit = 3;
 		
+//		System.out.println("카테고리" + category);
+		
+		int listCount = 0;
+		
+		if(category != null) { 
+			listCount = service.getCategoryListCount(category);
+		} else { 
+			listCount = service.getFaqListCount();
+		}
+		
+//		System.out.println("글 개수는?" + listCount);
+		
+		int pageListLimit = 3;
 		//----------------------------------------------------------------
 		int maxPage = listCount/listLimit + (listCount%listLimit > 0 ? 1 : 0);
 		System.out.println(maxPage);
@@ -245,7 +257,7 @@ public class CsController {
 		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
 		//끝페이지 설정
 		int endPage = startPage + pageListLimit - 1;
-				
+		
 		if(endPage > maxPage) {
 			endPage = maxPage;
 		}

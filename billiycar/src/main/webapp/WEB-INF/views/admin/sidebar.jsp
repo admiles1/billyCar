@@ -75,7 +75,7 @@
                             <a class="nav-link" href="adminAnswerList"><i class= "fas fa-reply"></i> 답변 내역</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="admin_review"><i class="fas fa-star"></i> 리뷰 관리</a>
+                            <a class="nav-link" href="couponList"><i class="fas fa-star"></i> 쿠폰 관리 </a>
                         </li>
                     </ul>
                 </div>
