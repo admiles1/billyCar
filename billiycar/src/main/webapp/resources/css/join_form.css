@@ -138,3 +138,9 @@ input {
 /* .email { */
 /* 	margin-left: 105px; */
 /* } */
+
+
+#checkPwResult , #checkPwResult2 {
+	width: 300px;
+    font-size: 12px;
+}

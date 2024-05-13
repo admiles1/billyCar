@@ -85,11 +85,18 @@ public class MemberController {
 		service.registMailAuthInfo(mailAuthInfo);
 		
 		// -------------------------------------------------------------------------------------
-//		boolean isEmptyEmail = service.isEmptyEmail(member.getMember_email());
-//		boolean isEmptyPhoneNum = service.isEmptyPhoneNum(member.getMember_phone());
+		boolean isEmptyEmail = service.isEmptyEmail(member.getMember_email());
+		boolean isEmptyPhoneNum = service.isEmptyPhoneNum(member.getMember_phone());
 		
+		if(!isEmptyEmail) {
+			model.addAttribute("msg", "이미 가입된 이메일 입니다.");
+			return "err/fail";
+		}
 		
-		
+		if(!isEmptyPhoneNum) {
+			model.addAttribute("msg", "이미 가입된 전화번호입니다.");
+			return "err/fail";
+		}
 		//--------------------------------------------------------------------------------------
 		String securePasswd = passwordEncoder.encode(member.getMember_passwd());
 		member.setMember_passwd(securePasswd);

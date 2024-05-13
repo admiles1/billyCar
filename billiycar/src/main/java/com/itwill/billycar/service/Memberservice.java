@@ -115,5 +115,11 @@ public class Memberservice {
 		
 		return mapper.selectEmptyEmail(member_email);
 	}
+
+
+	public boolean isEmptyPhoneNum(String member_phone) {
+		
+		return mapper.selectEmptyPhoneNum(member_phone);
+	}
 	
 }

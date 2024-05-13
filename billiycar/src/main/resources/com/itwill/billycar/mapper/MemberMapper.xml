@@ -87,6 +87,19 @@
 			member_email = #{member_email}
 	</update>
 	
+	<select id="selectEmptyEmail" resultType="boolean">
+		SELECT
+		IF(COUNT(*) = 1, 0, 1)
+		FROM member 
+		WHERE member_email = #{member_email}
+	</select>
+	
+	<select id="selectEmptyPhoneNum" resultType="boolean">
+		SELECT
+		IF(COUNT(*) = 1, 0, 1)
+		FROM member 
+		WHERE member_phone = #{member_phone}
+	</select>
 	
 </mapper>
 

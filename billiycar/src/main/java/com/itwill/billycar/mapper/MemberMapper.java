@@ -33,4 +33,6 @@ public interface MemberMapper {
 
 	boolean selectEmptyEmail(String member_email);
 
+	boolean selectEmptyPhoneNum(String member_phone);
+
 }
