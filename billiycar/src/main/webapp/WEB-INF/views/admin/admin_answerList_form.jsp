@@ -51,7 +51,7 @@
 					            <p class="card-text" id="answer"><strong>답변 내용:</strong>
 									<c:choose>
 										<c:when test="${qna.qna_status eq 0}">
-											<span style="color:#00aaff; font-size: bold">아직 답변하지 않으셨습니다.</span> 
+											<span style="color:red;background-color:#FFFFD2; font-size: bold;">아직 답변하지 않으셨습니다.</span> 
 										</c:when>
 										<c:otherwise>
 								             ${qna.admin_content}
