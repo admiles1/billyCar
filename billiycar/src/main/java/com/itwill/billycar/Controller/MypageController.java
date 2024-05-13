@@ -121,10 +121,11 @@ public class MypageController {
     }
 	
 	@PostMapping("license")
-	public String licensePro(LicenseVO license, License_StandardVO licenseSt, Model model) {
+	public String licensePro(LicenseVO license, License_StandardVO licenseSt, Model model, MemberVO member) {
 		String memberId = (String) session.getAttribute("member_id");
 		license.setLicense_id(memberId);
 		int isCorrectLiscense = service.getLicense(license);
+		MemberVO dbMember = service.getMemberInfo(memberId);
 		
 		if(isCorrectLiscense < 1) {
 			model.addAttribute("msg", "유효하지 않은 면허 정보입니다. 면허 정보를 다시 확인해주세요!");
@@ -136,6 +137,12 @@ public class MypageController {
 			model.addAttribute("msg", "면허 등록 실패!");
 			return "err/fail";
 		}
+		
+		int updateCount = service.changeLicenseStatus(dbMember);
+		if(updateCount == 0) {
+			model.addAttribute("msg", "면허 등록 실패!");
+			return "err/fail";
+		} 
 		return "redirect:/licenseInfo";
 	}
 	
@@ -216,7 +223,6 @@ public class MypageController {
 			return "err/fail";
 		}
 		
-//		System.out.println(memberId);
 		member.setMember_id(memberId);
 		MemberVO dbMember = service.getMemberInfo(memberId);
 		

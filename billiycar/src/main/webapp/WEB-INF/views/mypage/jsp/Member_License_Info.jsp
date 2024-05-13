@@ -137,11 +137,11 @@ h2 {
 	function formatLicenseNumber(licenseNumber) {
 	    // 숫자를 하이픈으로 구분하여 반환
 	    return licenseNumber.slice(0, 2) + '-' + licenseNumber.slice(2, 4) + '-' + licenseNumber.slice(4, 9) + '-' + licenseNumber.slice(9);
-	}
+	};
 	
 	// 페이지 로드 시 알림창 띄우기
 	window.onload = function() {
-	    alert("면허 등록이 완료되었습니다!");
+// 	    alert("면허 등록이 완료되었습니다!");
 	    var licenseNumberInput = document.getElementById("licenseNumber");
         if (licenseNumberInput) {
             licenseNumberInput.value = formatLicenseNumber(licenseNumberInput.value);
