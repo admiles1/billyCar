@@ -76,7 +76,7 @@ public class ReservController {
 		}
 		
 		// 자동차검색
-		List<CarVO> cars = reservService.selectCarList(car, reserv);
+		List<Map<String, String>> cars = reservService.selectCarList(car, reserv);
 		// 공통 코드에서 type, fule 조회해서 가져오기 TODO = 줄일것
 		model.addAttribute("hasThisType", hasThistype);
 		model.addAttribute("hasThisFuel", hasThisfuel);
