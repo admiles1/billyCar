@@ -59,7 +59,6 @@ h2 {
 	border: 1px solid #ccc;
 	border-radius: 12px;
 	text-align: center;
-	margin-top: 20px;
 	margin-bottom: 20px;
 	line-height: 15px;
 	padding: 15px;
@@ -82,8 +81,8 @@ h2 {
 }
 
 #signup em {
-	font-size: 13px; /* 원하는 크기로 조절하세요 */
-	color: red; /* 빨간색으로 변경 */
+	font-size: 13px; 
+	color: red; 
 	letter-spacing: -1px;
 }   
 
@@ -95,14 +94,11 @@ h2 {
 			<h2>회원정보 수정</h2>
 			<hr>
 			<div class="modify-notice">
-			<p>회원정보 수정을 위해 다음의 양식을 준수하여 주십시오.</p>
-			<p class="contxt-list"> 
-				<em>이름은 5자 미만</em>
-			</p>
 			<p class="contxt-list">
-				<em>이메일은 반드시 @를 포함</em>
-				하여 입력해주세요. 
-			</p>
+				회원정보 수정 시 다음 양식을 준수하여 기입해주세요! </p>
+				<p>이메일은<em> 반드시 @를 포함</em> 하여 입력해주세요.
+				
+				<p>전화번호는<em> '-' 제외한 숫자 정보</em> 만 기입해주세요! </p>
 		</div>
 		      <ul>
 		      	<li>

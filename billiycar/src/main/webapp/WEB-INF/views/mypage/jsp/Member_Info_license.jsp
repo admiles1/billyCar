@@ -312,14 +312,14 @@ h3 {
             <option value="면허 종류">면허 종류를 선택해주세요</option>
             <option value="2종 보통">2종 보통</option>
             <option value="1종 보통">1종 보통</option>
-            <option value="1종 보통">1종 대형</option>
-            <option value="1종 보통">1종 특수-대형견인차(트레일러)</option>
-            <option value="1종 보통">1종 특수-구난차(레커)</option>
-            <option value="1종 보통">1종 특수-소형견인차</option>
+            <option value="1종 대형">1종 대형</option>
+            <option value="1종 특수(대형견인차)">1종 특수-대형견인차(트레일러)</option>
+            <option value="1종 특수(소형견인차)">1종 특수-소형견인차</option>
+            <option value="1종 특수(구난차)">1종 특수-구난차(레커)</option>
             <option value="국제 면허">국제 면허</option>
         </select>
         <label for="issueDate">발급일 *</label>
-        <input type="text" id="issueDate" name="license_issue_date" placeholder= "발급일을 입력하세요 (예: YYYYMMDD)" maxlength="8">
+        <input type="text" id="issueDate" name="license_issue_date" placeholder="발급일을 입력하세요 (예: YYYYMMDD)" maxlength="8">
         <label for="expirationDate">만료일 *</label>
         <input type="text" id="expirationDate" name="license_expiration_date" placeholder="만료일을 입력하세요 (예: YYYYMMDD)" maxlength="8">
         <input type="submit" value="면허 등록 및 갱신">
