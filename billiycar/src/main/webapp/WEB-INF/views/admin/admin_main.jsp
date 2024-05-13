@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -81,6 +82,7 @@
             <div class="card col-md-4">
               <div class="card-body">
                 <h5 class="card-title">게시판 정보</h5>
+                
                 <hr>
                 <p class="card-text">총 리뷰 수 : ${allReview }</p>
                 <p class="card-text">평균 별점 : ${reviewAvg }</p>
@@ -112,7 +114,7 @@
             labels: ['1월', '2월', '3월', '4월', '5월', '6월','7월', '8월', '9월', '10월', '11월', '12월'],
             datasets: [{
                 label: '매출 현황',
-                data: [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200],
+                data: [100, 200, 300, 400, 500, 600, 700, 20000, 300000, 1000, 1100, 1200],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',

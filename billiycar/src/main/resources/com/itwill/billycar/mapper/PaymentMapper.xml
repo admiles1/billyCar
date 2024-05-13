@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.itwill.billycar.mapper.PaymentMapper">
+	<select id="salesMonthSelect" resultType="map">
+		SELECT IFNULL(SUM(payment_result_amount), 0) AS payment_result_amount
+		FROM (
+		    SELECT 1 AS month
+		    UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6
+		    UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12
+		) AS months
+		LEFT JOIN Payment ON MONTH(payment_date) = months.month
+		GROUP BY months.month;
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

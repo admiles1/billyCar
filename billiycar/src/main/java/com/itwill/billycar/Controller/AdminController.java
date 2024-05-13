@@ -26,6 +26,7 @@ import com.google.gson.JsonObject;
 import com.itwill.billycar.service.AdminCusService;
 import com.itwill.billycar.service.AdminService;
 import com.itwill.billycar.service.Memberservice;
+import com.itwill.billycar.service.PaymentService;
 import com.itwill.billycar.service.ReviewService;
 import com.itwill.billycar.vo.AdminVO;
 import com.itwill.billycar.vo.CarVO;
@@ -45,6 +46,9 @@ public class AdminController {
 	
 	@Autowired
 	private ReviewService reviewService;
+	
+	@Autowired
+	private PaymentService paymentService;
 	
 	
 	@Autowired
@@ -79,8 +83,6 @@ public class AdminController {
 		
 		admin.setAdmin_id((String)session.getAttribute("member_id"));
 		
-//		System.out.println(session.getAttribute("member_id"));
-//		System.out.println(admin.getAdmin_id());
 		
 		// 관리자 아닐 경우 돌려보내기
 		if(session.getAttribute("member_id")==null || !session.getAttribute("member_id").equals(admin.getAdmin_id())) {
@@ -116,6 +118,12 @@ public class AdminController {
 		double reviewAvg = reviewService.selectReviewAvg();
 		System.out.println("리뷰 평균 : " + reviewAvg);
 		model.addAttribute("reviewAvg", reviewAvg);
+		
+		//월별 매출 통계
+		List<Integer> paymentAmount = paymentService.salesMonthSelect();
+		System.out.println("총 매출 받아온 값(controller) : " + paymentAmount);
+		model.addAttribute("paymentAmount", paymentAmount);
+		
 		return "admin/admin_main";
 	}
 	

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.itwill.billycar.service.AdminService;
 import com.itwill.billycar.service.CsService;
 import com.itwill.billycar.service.Memberservice;
+import com.itwill.billycar.service.PaymentService;
 import com.itwill.billycar.service.ReservService;
 import com.itwill.billycar.vo.FaqVO;
 
@@ -35,11 +36,14 @@ public class HomeController {
 	
 	@Autowired
 	private Memberservice memberService;
+	
+	@Autowired
+	private PaymentService paymentService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
 
-
+		
 		//faq
 		List<FaqVO> faqList = csService.getFaqList(4, 0, null);
 		System.out.println("컨트롤러(FAQ) : " + faqList);
@@ -63,6 +67,8 @@ public class HomeController {
 		int reservCount = reservService.selecReservCount();
 		System.out.println("지금까지 누적 예약 수 : " + reservCount);
 		model.addAttribute("reservCount", reservCount);
+		
+		
 		
 		
 		return "index";
