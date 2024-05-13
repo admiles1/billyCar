@@ -4,7 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.itwill.billycar.mapper.PaymentMapper">
-	<select id="salesMonthSelect" resultType="map">
+	<select id="salesMonthSelect" resultType="INTEGER">
 		SELECT IFNULL(SUM(payment_result_amount), 0) AS payment_result_amount
 		FROM (
 		    SELECT 1 AS month

@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -122,8 +123,8 @@ public class AdminController {
 		//월별 매출 통계
 		List<Integer> paymentAmount = paymentService.salesMonthSelect();
 		System.out.println("총 매출 받아온 값(controller) : " + paymentAmount);
-		model.addAttribute("paymentAmount", paymentAmount);
 		
+		model.addAttribute("paymentAmount", paymentAmount);
 		return "admin/admin_main";
 	}
 	
