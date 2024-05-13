@@ -121,8 +121,7 @@
 							<c:forEach var="type" items="${types}">
 								<c:set var="cktype" value=" ,${fuel.name}" />
 			    				<li><label class="car-type">
-				    				<input type="checkbox" value="${type.name}" name="car_type">
-										<c:if test="${fn:contains(hasThisFuel, cktype)}" >checked </c:if> ${type.name} 
+				    				<input type="checkbox" value="${type.name}" name="car_type">${type.name} 
 								</label></li>
 			    			</c:forEach>	
 			    		</ul>
@@ -134,8 +133,7 @@
 			    			<c:forEach var="fuel" items="${fuels}">
 			    				<c:set var="ckfuel" value=" ,${fuel.name}" />
 			    				<li><label class="car-fuel">
-			    					<input type="checkbox" value="${fuel.name}" name="car_fuel"
-										<c:if test="${fn:contains(hasThisFuel, ckfuel)}"> checked </c:if>> ${fuel.name} 
+			    					<input type="checkbox" value="${fuel.name}" name="car_fuel"> ${fuel.name} 
 								</label></li>
 			    			</c:forEach>
 			    		</ul>

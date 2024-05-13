@@ -48,6 +48,7 @@ public class ReservController {
 	public String reservationpost(CarVO car
 								, @RequestParam(defaultValue = "") Map<String,String> map 
 								, Model model) {
+		System.out.println(car);
 		// 체크박스 checked용 값 따로 빼두기 
 		String hasThistype = "," + car.getCar_type();
 		String hasThisfuel = "," + car.getCar_fuel();
@@ -66,7 +67,8 @@ public class ReservController {
 			car.setCar_type(searchMethod(car.getCar_type()));
 		} else if (car.getCar_type() == null && car.getCar_fuel() != null) { // 자동차연료 조건만 존재 할 경우
 			car.setCar_fuel(searchMethod(car.getCar_fuel()));
-		}  else { // 두 가지 모두 검색 할 경우
+			
+		} else if (car.getCar_type() != null && car.getCar_fuel() != null) { // 두 가지 모두 검색 할 경우
 			car.setCar_fuel(searchMethod(car.getCar_fuel()));
 			car.setCar_type(searchMethod(car.getCar_type()));
 		}

@@ -7,7 +7,7 @@
 	<select id="selectCarList" resultType="com.itwill.billycar.vo.CarVO" parameterType="map">
 		SELECT c.car_idx
 			 , c.car_number
-			 , cm.name AS car_model
+			 , c.car_model
 			 , c.car_brand
 			 , c.car_fuel
 			 , c.car_type
@@ -17,15 +17,14 @@
 			 , c.car_year
 			 , c.car_dayprice
 			 , c.car_hourprice
-		  FROM car c JOIN Reservation rs
+		  FROM car c LEFT JOIN Reservation rs
 		  	ON c.car_number = rs.car_number
-		  JOIN Common cm
-		    ON c.car_model = cm.code
  			   <![CDATA[
    		 WHERE NOT(rs.reserv_pickupdate <= #{reserv.reserv_pickupdate} AND rs.reserv_returndate >= #{reserv.reserv_returndate})]]>
 		   AND c.car_status = 0
 		 <if test="car.car_type != null"> AND car_type IN (${car.car_type})</if>
 		 <if test="car.car_fuel != null"> AND car_fuel IN (${car.car_fuel})</if>
+		    OR #{reserv.reserv_pickupdate} = null AND #{reserv.reserv_returndate} = null
 	</select>
 	
 	<select id="selectCar" resultType="com.itwill.billycar.vo.CarVO">

@@ -61,7 +61,7 @@
 		    			<li><img src="${pageContext.request.contextPath}/resources/images/check-img.png" class="check-img">운전경력 : <span class="qua">1년 이상</span></li>
 		    			<li><img src="${pageContext.request.contextPath}/resources/images/check-img.png" class="check-img">면허종류 : <span class="qua">2종 보통면허 이상</span></li>
 		    		</ul>
-		    		<a href="payment"><span class="make-rv"></span></a>
+		    		<a href="payment?idx=${car.car_idx}&pickupDate=${param.pickupDate}&returnDate=${param.returnDate}"><span class="make-rv"></span></a>
 		    		<a href="faq"><span class="contact-cs"></span></a>
 	    		</div>
 	  		</div>
