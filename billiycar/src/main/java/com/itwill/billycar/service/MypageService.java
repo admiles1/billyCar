@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itwill.billycar.mapper.MypageMapper;
+import com.itwill.billycar.vo.CouponVO;
 import com.itwill.billycar.vo.LicenseVO;
 import com.itwill.billycar.vo.License_StandardVO;
 import com.itwill.billycar.vo.MemberVO;
@@ -74,6 +75,10 @@ public class MypageService {
 	public boolean isLicenseDuplicate(LicenseVO license) {
 		return mapper.selectDuplicateLicense(license);
 	}
+
+//	public List<CouponVO> getMemberCoupon(String memberId) {
+//		return mapper.selcetMemberCoupon(memberId);
+//	}
 
 	
 

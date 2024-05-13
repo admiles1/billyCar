@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.itwill.billycar.vo.CouponVO;
 import com.itwill.billycar.vo.LicenseVO;
 import com.itwill.billycar.vo.License_StandardVO;
 import com.itwill.billycar.vo.MemberVO;
@@ -33,6 +34,8 @@ public interface MypageMapper {
 	int updateLicenseStatus(MemberVO dbMember);
 
 	boolean selectDuplicateLicense(LicenseVO license);
+
+//	List<CouponVO> selcetMemberCoupon(String memberId);
 
 
 

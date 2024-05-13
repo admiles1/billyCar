@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.billycar.service.MypageService;
 import com.itwill.billycar.service.ReservService;
+import com.itwill.billycar.vo.CouponVO;
 import com.itwill.billycar.vo.LicenseVO;
 import com.itwill.billycar.vo.License_StandardVO;
 import com.itwill.billycar.vo.MemberVO;
@@ -186,11 +187,14 @@ public class MypageController {
         return "mypage/page/Mypage_Inquiry";
     }
 	
-	@GetMapping("MyCoupon")
-    public String MyCoupon() {
-        System.out.println("나의 쿠폰함");
-        return "mypage/page/Mypage_Coupon";
-    }
+//	@GetMapping("MyCoupon")
+//    public String MyCoupon(Model model) {
+//        System.out.println("나의 쿠폰함");
+//        String MemberId = (String)session.getAttribute("member_id");
+//        List<CouponVO> couponList = service.getMemberCoupon(MemberId);
+//        model.addAttribute("Coupon", couponList);
+//        return "mypage/page/Mypage_Coupon";
+//    }
 	
 	@GetMapping("resignReason")
     public String resignReason() {
