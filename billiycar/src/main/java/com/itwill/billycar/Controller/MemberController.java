@@ -118,7 +118,7 @@ public class MemberController {
 	@GetMapping("logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "redirect:/index";
+		return "redirect:/./";
 	}
 	
 	@GetMapping("forgot_id")

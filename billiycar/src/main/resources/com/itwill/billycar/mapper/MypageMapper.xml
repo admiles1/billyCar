@@ -36,7 +36,7 @@
     		 )
     		 
   		 ON DUPLICATE KEY UPDATE
-		        license_user_id = VALUES(license_user_id),
+        		license_user_id = VALUES(license_user_id),
 		        license_name = VALUES(license_name),
 		        license_issue_date = VALUES(license_issue_date),
 		        license_expiration_date = VALUES(license_expiration_date);
@@ -58,6 +58,15 @@
 		WHERE
 			member_id = #{member_id}
 	</update>
+	
+	<update id="updateLicenseStatus">
+		UPDATE member
+		SET 
+			member_license_checked = 1
+		WHERE 
+			member_id = #{member_id}
+	</update>
+	
 	
 	<select id="compareLicense" resultType="int">
 		SELECT count(*) 
