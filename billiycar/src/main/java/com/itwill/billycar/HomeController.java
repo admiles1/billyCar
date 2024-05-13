@@ -54,7 +54,13 @@ public class HomeController {
 		int memberCount = memberService.selectMemberCount();
 		System.out.println("지금까지 누적 회원 수 : " + memberCount);
 		model.addAttribute("memberCount", memberCount);
-
+		
+		//누적 예약
+		int reservCount = reservService.selecReservCount();
+		System.out.println("지금까지 누적 예약 수 : " + reservCount);
+		model.addAttribute("reservCount", reservCount);
+		
+		
 		return "index";
 	}
 

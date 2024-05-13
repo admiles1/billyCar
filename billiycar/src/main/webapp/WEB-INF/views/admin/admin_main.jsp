@@ -62,33 +62,28 @@
           
         </div>
         <div class="row">
-            <div class="card col-md-3">
+            <div class="card col-md-4">
               <div class="card-body">
                 <h5 class="card-title">회원 정보</h5>
-                <p class="card-text">총 회원 수: 100</p>
-                <p class="card-text">당일 가입 회원 수: 10</p>
-                <p class="card-text">미답변 문의 수: 5</p>
+                <hr>
+                <p class="card-text">총 회원 수 : ${totalMember }</p>
+                <p class="card-text">당일 가입 회원 수 : ${todayMember }</p>
               </div>
             </div>
-            <div class="card col-md-3">
+            <div class="card col-md-4">
               <div class="card-body">
                 <h5 class="card-title">차량 정보</h5>
-                <p class="card-text">출고된 차량 수: 50</p>
-                <p class="card-text">출고 가능한 차량 수: 20</p>
+                <hr>
+                <p class="card-text">총 차량 수 : ${allCarCount }</p>
+                <p class="card-text">현재 대여 가능 차량수 : ${rentCarCount }</p>
               </div>
             </div>
-            <div class="card col-md-3">
+            <div class="card col-md-4">
               <div class="card-body">
-                <h5 class="card-title">어떤 정보</h5>
-                <p class="card-text">출고된 차량 수: 50</p>
-                <p class="card-text">출고 가능한 차량 수: 20</p>
-              </div>
-            </div>
-            <div class="card col-md-3">
-              <div class="card-body">
-                <h5 class="card-title">저런 정보</h5>
-                <p class="card-text">출고된 차량 수: 50</p>
-                <p class="card-text">출고 가능한 차량 수: 20</p>
+                <h5 class="card-title">게시판 정보</h5>
+                <hr>
+                <p class="card-text">총 리뷰 수 : ${allReview }</p>
+                <p class="card-text">평균 별점 : ${reviewAvg }</p>
               </div>
             </div>
         </div>

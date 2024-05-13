@@ -26,7 +26,7 @@
 //             url: 'review',
 //             data: { option: selectedOption },
 //             success: function(response){
-//                 console.log(response); // 받은 데이터로 화면 업데이트
+//                 var result = response;// 받은 데이터로 화면 업데이트
 //             },
 //             error: function(xhr, status, error){
 //                 console.error(error);
@@ -89,6 +89,13 @@ function optionChange(option) {
                     <option value="rating">별점순</option>
                 </select>
         </div>
+<!--     	<div style="width: 100px; margin-left: 1195px;"> -->
+<!--                 <select class="form-select form-select-sm" aria-label="리뷰 정렬" id="options"> -->
+<!--                     <option value="latest">최신순</option> -->
+<!--                     <option value="old">오래된순</option> -->
+<!--                     <option value="rating">별점순</option> -->
+<!--                 </select> -->
+<!--         </div> -->
     	<div class="row" style="margin-top: 10px;">
     		<c:forEach var="review" items="${reviewList }">
 	        	<div class="col-md-3">

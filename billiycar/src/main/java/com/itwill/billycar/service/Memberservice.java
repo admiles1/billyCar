@@ -49,4 +49,6 @@ public class Memberservice {
 	public int todayMemberCount() {
 		return mapper.selectTodayMember();
 	}
+
+
 }

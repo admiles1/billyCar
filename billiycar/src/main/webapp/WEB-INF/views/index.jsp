@@ -249,10 +249,10 @@ function redirectToAdminPage() {
         <div class="row">
             <div class="col-md-4">
                 <div class="about-reason text-center">
-                    <img src="resources/main_images/icon1.png" width="53" height="53" alt="누적예약">
+                    <img src="resources/main_images/icon1.png" width="53" height="53" alt="누적 예약">
                     <div class="mt-2">
                         <div class="font-weight-bold">누적예약</div>
-                        <div id="allRsv" class="text-primary">180807</div>
+                        <div id="allRsv" class="text-primary">${reservCount }</div>
                     </div>
                 </div>
             </div>
@@ -267,7 +267,7 @@ function redirectToAdminPage() {
             </div>
             <div class="col-md-4">
                 <div class="about-reason text-center">
-                    <img src="resources/main_images/icon3.png" width="53" height="53" alt="제주도입점업체">
+                    <img src="resources/main_images/icon3.png" width="53" height="53" alt="누적 회원 수">
                     <div class="mt-2">
                         <div class="font-weight-bold">누적 회원 수</div>
                         <div id="inCorp" class="text-primary">${memberCount }</div>

@@ -38,7 +38,14 @@
     	<if test="option.equals('rating')">
     		order by review_score desc;
     	</if>
-    	
+	</select>
+	
+	<select id="selectReviewAvg">
+		select AVG(review_score) from review;
+	</select>
+	
+	<select id="selectAllReview">
+		select count(*) from review;
 	</select>
 </mapper>
 
