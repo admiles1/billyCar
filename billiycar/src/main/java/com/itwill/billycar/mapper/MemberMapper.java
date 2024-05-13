@@ -1,9 +1,11 @@
 package com.itwill.billycar.mapper;
 
 import java.time.LocalDate;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.itwill.billycar.vo.MailAuthInfoVO;
 import com.itwill.billycar.vo.MemberVO;
 
 @Mapper
@@ -22,5 +24,11 @@ public interface MemberMapper {
 	int selectMemberCount();
 
 	int selectTodayMember();
+
+	Map<String, String> selectMailAuthInfo(MailAuthInfoVO mailAuthInfo);
+
+	void insertMailAuthInfo(MailAuthInfoVO mailAuthInfo);
+
+	void updateMailAuthInfo(MailAuthInfoVO mailAuthInfo);
 
 }

@@ -60,6 +60,32 @@
 		WHERE DATE(member_reg_date) = CURDATE()
 	</select>
 	
+	<select id="selectMailAuthInfo" resultType="hashmap">
+		SELECT *
+		FROM mail_auth_info
+		WHERE 
+			member_email = #{member_email}
+	</select>
+	
+	<!-- 이메일 인증 정보 등록 - INSERT -->
+	<insert id="insertMailAuthInfo">
+		INSERT
+		INTO mail_auth_info
+		VALUES (
+			#{member_email}
+			, #{auth_code}
+		)
+	</insert>
+	
+	<!-- 이메일 인증 정보 수정 - UPDATE -->
+	<!-- id 에 해당하는 auth_code 컬럼값을 전달받은 코드값으로 변경 -->
+	<update id="updateMailAuthInfo">
+		UPDATE mail_auth_info
+		SET 
+			auth_code = #{auth_code}
+		WHERE
+			member_email = #{member_email}
+	</update>
 	
 </mapper>
 
