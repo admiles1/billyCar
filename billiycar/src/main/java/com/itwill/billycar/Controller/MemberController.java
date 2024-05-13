@@ -11,14 +11,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.itwill.billycar.service.MailService;
 import com.itwill.billycar.service.Memberservice;
+import com.itwill.billycar.vo.MailAuthInfoVO;
 import com.itwill.billycar.vo.MemberVO;
 
 @Controller
 public class MemberController {
 	@Autowired
 	private Memberservice service;
-	
+	@Autowired
+	private MailService mailService;
 	
 	// 회원가입 Controller
 	
@@ -70,6 +73,17 @@ public class MemberController {
 	@PostMapping("join")
 	public String joinPro(MemberVO member, Model model, BCryptPasswordEncoder passwordEncoder) {
 		
+//		System.out.println("ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ" + member.getMember_email());
+		// MailService - sendAuthMail() 메서드 호출하여 인증 메일 발송 요청
+		// => 파라미터 : MemberVO 객체   리턴타입 : MailAuthInfoVO(mailAuthInfo)
+		MailAuthInfoVO mailAuthInfo = mailService.sendAuthMail(member);
+		System.out.println("인증정보 : " + mailAuthInfo);
+		
+		// MemberService - registMailAuthInfo() 메서드 호출하여 인증 정보 등록 요청
+		// => 파라미터 : MailAuthInfoVO 객체   리턴타입 : void
+		service.registMailAuthInfo(mailAuthInfo);
+		
+		
 		String securePasswd = passwordEncoder.encode(member.getMember_passwd());
 		member.setMember_passwd(securePasswd);
 		
@@ -82,6 +96,47 @@ public class MemberController {
 			return "err/fail";
 		}
 	}
+	
+//	// 이메일 인증
+//	@GetMapping("SendAuthMail")
+//	public String sendAuthMail(MemberVO member, Model model) {
+//		System.out.println(member.getMember_email());
+//		// MailService - sendAuthMail() 메서드 호출하여 인증 메일 발송 요청
+//		// => 파라미터 : MemberVO 객체   리턴타입 : MailAuthInfoVO(mailAuthInfo)
+//		MailAuthInfoVO mailAuthInfo = mailService.sendAuthMail(member);
+//		System.out.println("인증정보 : " + mailAuthInfo);
+//		
+//		// MemberService - registMailAuthInfo() 메서드 호출하여 인증 정보 등록 요청
+//		// => 파라미터 : MailAuthInfoVO 객체   리턴타입 : void
+//		service.registMailAuthInfo(mailAuthInfo);
+//		
+//		// send_auth_mail_success.jsp 페이지 포워딩
+//		return "";
+//	}
+//	
+//	 [ 이메일 인증 비즈니스 로직 ] 
+//	 "MemberEmailAuth" 서블릿 주소 매핑(인증정보 파라미터 저장)
+//	@GetMapping("MemberEmailAuth")
+//	public String emailAuth(MailAuthInfoVO authInfo, Model model) {
+//		System.out.println("인증정보 : " + authInfo);
+//		
+//		// MemberService - requestEmailAuth() 메서드 호출하여 이메일 인증 요청
+//		// => 파라미터 : MailAuthInfoVO 객체   리턴타입 : boolean(isAuthSuccess)
+//		boolean isAuthSuccess = service.requestEmailAuth(authInfo);
+//		
+//		// 인증 요청 결과 판별
+//		// 임시) 성공/실패 모두 error/fail.jsp 페이지로 포워딩
+//		// 성공 시 : "인증 성공! 로그인 페이지로 이동합니다!" 메세지와 로그인 페이지 주소 전달
+//		// 실패 시 : "인증 실패!" 메세지 전달
+//		if(isAuthSuccess) {
+//			model.addAttribute("msg", "인증 성공!\\n로그인 페이지로 이동합니다!");
+//			model.addAttribute("targetURL", "MemberLogin");
+//		} else {
+//			model.addAttribute("msg", "인증 실패!");
+//		}
+//		
+//		return "error/fail";
+//	}
 	
 	// ==================================================================================================================
 	// 로그인 Controller

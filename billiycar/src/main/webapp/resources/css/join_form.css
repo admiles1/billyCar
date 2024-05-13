@@ -75,7 +75,7 @@ b{
 /*   margin:10px; */
 /* } */
 
-.id_check ,.check_tel{
+.id_check ,.check_tel, .check_eMail{
   border-radius: 20px;
   border: 1px solid #00AAFF;
   background-color: #00AAFF;
@@ -135,4 +135,6 @@ input {
 	padding: 15px 60px;
 }
 
-
+/* .email { */
+/* 	margin-left: 105px; */
+/* } */
