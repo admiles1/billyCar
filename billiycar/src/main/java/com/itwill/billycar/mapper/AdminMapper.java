@@ -52,4 +52,6 @@ public interface AdminMapper {
 	CarVO selectCarId(int carId);
 
 	int updateCar(CarVO car);
+	
+	int selectAllcar(int status);
 }

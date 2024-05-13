@@ -49,4 +49,10 @@ public class Memberservice {
 	public int todayMemberCount() {
 		return mapper.selectTodayMember();
 	}
+
+
+	// 네이버 정보 저장하기
+	public int saveNaverInfo(MemberVO member) {
+		return mapper.insertMember(member);
+	}
 }

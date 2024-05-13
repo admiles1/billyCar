@@ -30,6 +30,9 @@ public interface MypageMapper {
 
 	int updatePasswd(MemberVO member);
 
+	int updateLicenseStatus(MemberVO dbMember);
+
+
 
 
 //	List<License_StandardVO> selectLicenseStandard();

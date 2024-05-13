@@ -86,5 +86,10 @@ public class AdminService {
 		
 		return mapper.updateCar(car);
 	}
+	public int selectAllcar(int status) {
+		return mapper.selectAllcar(status);
+	}
+
+	
 
 }

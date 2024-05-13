@@ -9,11 +9,13 @@ import java.util.Set;
 import java.util.StringJoiner;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwill.billycar.service.AdminService;
 import com.itwill.billycar.service.ReservService;
@@ -48,7 +50,13 @@ public class ReservController {
 	public String reservationpost(CarVO car
 								, @RequestParam(defaultValue = "") Map<String,String> map 
 								, Model model) {
-		List<CarVO> cars = null;
+		System.out.println(car);
+		// 체크박스 checked용 값 따로 빼두기 
+		String hasThistype = "," + car.getCar_type();
+		String hasThisfuel = "," + car.getCar_fuel();
+		System.out.println(hasThistype);
+		System.out.println(hasThisfuel);
+		// 주입하면 변환해서 세팅못하니 따로 만들기
 		ReservVO reserv = new ReservVO();
 		String pickupdate = map.get("reserv_pickupdate") + " " + map.get("pickupTime");
 		String returndate = map.get("reserv_returndate") + " " + map.get("returnTime");
@@ -59,49 +67,19 @@ public class ReservController {
 		if(car.getCar_type() != null && car.getCar_fuel() == null) { 	// 자동차타입 조건만 존재 할 경우
 			// search메소드로 스트링 포맷 변환 후 초기화
 			car.setCar_type(searchMethod(car.getCar_type()));
-			cars = reservService.selectCarList(car, reserv);
-			
-			Set<String> hasThisType = new HashSet<String>();
-			for (CarVO c : cars) {
-				hasThisType.add(c.getCar_type());
-			}
-			model.addAttribute("hasThisType", hasThisType);
-			
-			
 		} else if (car.getCar_type() == null && car.getCar_fuel() != null) { // 자동차연료 조건만 존재 할 경우
 			car.setCar_fuel(searchMethod(car.getCar_fuel()));
-			cars = reservService.selectCarList(car, reserv);
 			
-			Set<String> hasThisFuel = new HashSet<String>();
-			for (CarVO c : cars) {
-				hasThisFuel.add(c.getCar_fuel());
-			}
-			
-			model.addAttribute("hasThisFuel", hasThisFuel);
-			
-		} else if (car.getCar_type() == null && car.getCar_fuel() == null) { // 두 가지 모두 검색하지 않을 경우
-			cars = reservService.selectCarList(car, reserv);
-			
-		} else { // 두 가지 모두 검색 할 경우
-			
+		} else if (car.getCar_type() != null && car.getCar_fuel() != null) { // 두 가지 모두 검색 할 경우
 			car.setCar_fuel(searchMethod(car.getCar_fuel()));
 			car.setCar_type(searchMethod(car.getCar_type()));
-			cars = reservService.selectCarList(car, reserv);
-
-			
-			Set<String> hasThisType = new HashSet<String>();
-			Set<String> hasThisFuel = new HashSet<String>();
-			
-			for (CarVO c : cars) {
-				hasThisType.add(c.getCar_type());
-				hasThisFuel.add(c.getCar_fuel());
-			}
-			
-			model.addAttribute("hasThisType", hasThisType);
-			model.addAttribute("hasThisFuel", hasThisFuel);
 		}
 		
-		// 공통 코드에서 type, fule 조회해서 가져오기
+		// 자동차검색
+		List<CarVO> cars = reservService.selectCarList(car, reserv);
+		// 공통 코드에서 type, fule 조회해서 가져오기 TODO = 줄일것
+		model.addAttribute("hasThisType", hasThistype);
+		model.addAttribute("hasThisFuel", hasThisfuel);
 		model.addAttribute("pickupDate", map.get("reserv_pickupdate"));
 		model.addAttribute("pickupTime", map.get("pickupTime"));
 		model.addAttribute("returnDate", map.get("reserv_returndate"));
@@ -143,11 +121,13 @@ public class ReservController {
 		}
 	}
 	
+	
 	@GetMapping("review")
 	public String review(Model model, @RequestParam(value = "option", required = false) String option) {
 		if (option == null) {
 	        option = "latest"; // 기본값 설정
 	    }
+		
 		
 		List<CarReviewVO> reviewList = reviewService.selectReviewList(option);
 		System.out.println("List<CarReviewVO> reviewList : " + reviewList);

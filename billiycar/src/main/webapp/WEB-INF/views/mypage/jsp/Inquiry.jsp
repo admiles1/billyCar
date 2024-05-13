@@ -54,6 +54,7 @@
     <table>
        <thead>
             <tr>
+                <th>문의 번호</th>
                 <th>문의 주제</th>
                 <th>문의 내용</th>
                 <th>문의 일자</th>
@@ -61,21 +62,22 @@
             </tr>
         </thead>
         <tbody>
-        	<c:forEach var="qna" items="${qna}">
-	            <tr>
-	            	<td>${qna.qna_subject}</td>
-	                <td><a href = "qnaAnswerDetail?qna_idx=${qna.qna_idx}&pageNum=${pageNum}">${qna.qna_content}</a></td>
-	                <td>
-	                	<fmt:formatDate value="${qna.qna_date}" pattern="yy-MM-dd HH:mm"/>
-	                </td>
-	                <td>
-	                	<c:choose>
-                            <c:when test="${qna.qna_status == 0}">답변 대기</c:when>
-                            <c:when test="${qna.qna_status == 1}">답변 완료</c:when>
-                        </c:choose>
-                    </td>
-	            </tr>
-            </c:forEach>
+        	<c:forEach var="qna" items="${qna}" varStatus="newIdx">
+			    <tr>
+			        <td><a href="qnaAnswerDetail?qna_idx=${qna.qna_idx}&pageNum=${pageNum}">${newIdx.index + 1}</a></td> <!-- 이 부분 수정 -->
+			        <td>${qna.qna_subject}</td>
+			        <td>${qna.qna_content}</td>
+			        <td>
+			            <fmt:formatDate value="${qna.qna_date}" pattern="yy-MM-dd HH:mm"/>
+			        </td>
+			        <td>
+			            <c:choose>
+			                <c:when test="${qna.qna_status == 0}">답변 대기</c:when>
+			                <c:when test="${qna.qna_status == 1}">답변 완료</c:when>
+			            </c:choose>
+			        </td>
+			    </tr>
+			</c:forEach>
         </tbody>
     </table>
 </form>

@@ -119,8 +119,10 @@
 			    		<h3> 차종 </h3>
 			    		<ul class="car-option-list">
 							<c:forEach var="type" items="${types}">
-			    				<li><label class="car-type"><input type="checkbox" value="${type.name}" name="car_type"
-								<c:if test="${fn:contains(hasThisType, type.name)}"> checked </c:if>> ${type.name} </label></li>
+								<c:set var="cktype" value=" ,${fuel.name}" />
+			    				<li><label class="car-type">
+				    				<input type="checkbox" value="${type.name}" name="car_type">${type.name} 
+								</label></li>
 			    			</c:forEach>	
 			    		</ul>
 			    	</div>
@@ -129,8 +131,10 @@
 			    		<h3> 연료 </h3>
 			    		<ul class="car-option-list">
 			    			<c:forEach var="fuel" items="${fuels}">
-			    				<li><label class="car-fuel"><input type="checkbox" value="${fuel.name}" name="car_fuel"
-								<c:if test="${fn:contains(hasThisFuel, fuel.name)}"> checked </c:if>> ${fuel.name} </label></li>
+			    				<c:set var="ckfuel" value=" ,${fuel.name}" />
+			    				<li><label class="car-fuel">
+			    					<input type="checkbox" value="${fuel.name}" name="car_fuel"> ${fuel.name} 
+								</label></li>
 			    			</c:forEach>
 			    		</ul>
 			    	</div>
@@ -151,6 +155,7 @@
 			   		 				<a class="d-flex" onclick="goDetail('${car.car_idx}')">
 			   		 					<span class="carImg"><img src="${car.car_img}"></span>
 			   		 					<span class="carInfo">
+			   		 						<span> ${car.car_number }</span>
 			   		 						<span> ${car.car_model} </span>
 			   		 						<span> ${car.car_type} / ${car.car_capacity}</span>
 			   		 						<small>종일가 <fmt:formatNumber value="${car.car_dayprice}" pattern="#,###"/></small>

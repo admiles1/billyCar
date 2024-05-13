@@ -26,6 +26,8 @@ import com.google.gson.JsonObject;
 import com.itwill.billycar.service.AdminCusService;
 import com.itwill.billycar.service.AdminService;
 import com.itwill.billycar.service.Memberservice;
+import com.itwill.billycar.service.PaymentService;
+import com.itwill.billycar.service.ReviewService;
 import com.itwill.billycar.vo.AdminVO;
 import com.itwill.billycar.vo.CarVO;
 import com.itwill.billycar.vo.CommonVO;
@@ -43,11 +45,18 @@ public class AdminController {
 	private Memberservice memberService;
 	
 	@Autowired
+	private ReviewService reviewService;
+	
+	@Autowired
+	private PaymentService paymentService;
+	
+	
+	@Autowired
 	private HttpSession session;
 	
 	
 	@GetMapping("adminForm")
-	public String adminForm() {
+	public String adminForm(Model model, AdminVO admin) {
 		System.out.println("adminForm");
 		
 		return "admin/admin_form";
@@ -64,12 +73,23 @@ public class AdminController {
 		}
 		
 		session.setAttribute("member_id", returnAdmin.getAdmin_id());
+		
 		System.out.println("관리자 아이디 : " + session.getAttribute("member_id"));
 		return "index";
 	}
 	
 	@GetMapping("admin")
-	public String admin(Model model) {
+	public String admin(Model model, AdminVO admin) {
+		
+		admin.setAdmin_id((String)session.getAttribute("member_id"));
+		
+		
+		// 관리자 아닐 경우 돌려보내기
+		if(session.getAttribute("member_id")==null || !session.getAttribute("member_id").equals(admin.getAdmin_id())) {
+			model.addAttribute("msg","접근 권한이 없습니다");
+			return "err/fail";
+		} 
+		
 		//총 회원 수
 		int totalMember = memberService.selectMemberCount();
 		model.addAttribute("totalMember", totalMember);
@@ -77,6 +97,32 @@ public class AdminController {
 		//오늘 등록한 회원 수
 		int todayMember = memberService.todayMemberCount();
 		System.out.println("오늘 등록한 회원 수 : " + todayMember);
+		model.addAttribute("todayMember", todayMember);
+		
+		//총 차량 수
+		int allCarCount = service.selectAllcar(5);
+		System.out.println("selectAllcar(총 차량) : " + allCarCount);
+		model.addAttribute("allCarCount", allCarCount);
+		
+		//대여 가능 차량 수
+		int rentCarCount = service.selectAllcar(0);
+		System.out.println("selectAllcar(대여 가능 차량) : " + rentCarCount);
+		model.addAttribute("rentCarCount", rentCarCount);
+		
+		//총 리뷰 수
+		int allReview = reviewService.selectAllReview();
+		System.out.println("총 리뷰 : " + allReview);
+		model.addAttribute("allReview", allReview);
+		
+		//평균 별점
+		double reviewAvg = reviewService.selectReviewAvg();
+		System.out.println("리뷰 평균 : " + reviewAvg);
+		model.addAttribute("reviewAvg", reviewAvg);
+		
+		//월별 매출 통계
+		List<Integer> paymentAmount = paymentService.salesMonthSelect();
+		System.out.println("총 매출 받아온 값(controller) : " + paymentAmount);
+		model.addAttribute("paymentAmount", paymentAmount);
 		
 		return "admin/admin_main";
 	}
@@ -149,8 +195,6 @@ public class AdminController {
 		
 	}
 
-	
-	
 	@GetMapping("admin_blackList")
 	public String admin_blackList() {
 		

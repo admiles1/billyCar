@@ -25,4 +25,13 @@ public class ReviewService {
 		return mapper.selectReviewList(option);
 	}
 
+	public double selectReviewAvg() {
+		System.out.println("mapper.selectReviewAvg() : " + mapper.selectReviewAvg());
+		return mapper.selectReviewAvg();
+	}
+
+	public int selectAllReview() {
+		return mapper.selectAllReview();
+	}
+
 }

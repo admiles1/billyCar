@@ -78,7 +78,9 @@
 				<tr>
 					<td class="text-left">${notice.board_idx}</td>
 					<td class="text-left"><a href = "noticeDetail?notice_idx=${notice.board_idx}&pageNum=${pageNum}">${notice.board_subject}</a></td>
-					<td class="text-left">${notice.board_writer}</td>
+					<td class="text-left">
+						<c:if test="${notice.board_writer eq 'admin'}"> 관리자 </c:if> 
+					</td>
 					<td class="text-left"><fmt:formatDate value="${notice.board_date}" pattern = "yy-MM-dd"/></td>
 				</tr>
 			</c:forEach>

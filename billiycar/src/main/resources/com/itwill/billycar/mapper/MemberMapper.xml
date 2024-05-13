@@ -59,6 +59,8 @@
 		FROM member
 		WHERE DATE(member_reg_date) = CURDATE()
 	</select>
+	
+	
 </mapper>
 
 
