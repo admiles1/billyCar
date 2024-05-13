@@ -47,4 +47,6 @@ public interface AdminMapper {
 	
 	List<CommonVO> selectBusinesshours();
 	// 여기까지
+
+	int selectAllcar(int status);
 }

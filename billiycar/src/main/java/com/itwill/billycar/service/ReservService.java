@@ -36,4 +36,8 @@ public class ReservService {
 	public int updateReviewStatus(int review_idx) {
 		return mapper.updateReviewStatus(review_idx);
 	}
+
+	public int selecReservCount() {
+		return mapper.selecReservCount();
+	}
 }

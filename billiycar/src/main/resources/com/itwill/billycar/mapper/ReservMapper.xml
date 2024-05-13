@@ -13,6 +13,9 @@
 		update Reservation set reserv_review_status = 1 where reserv_idx = #{review_idx}
 	</update>
 	
+	<select id="selecReservCount">
+		select count(*) from Reservation
+	</select>
 </mapper>
 
 

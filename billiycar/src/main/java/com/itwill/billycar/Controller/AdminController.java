@@ -26,6 +26,7 @@ import com.google.gson.JsonObject;
 import com.itwill.billycar.service.AdminCusService;
 import com.itwill.billycar.service.AdminService;
 import com.itwill.billycar.service.Memberservice;
+import com.itwill.billycar.service.ReviewService;
 import com.itwill.billycar.vo.AdminVO;
 import com.itwill.billycar.vo.CarVO;
 import com.itwill.billycar.vo.CommonVO;
@@ -41,6 +42,10 @@ public class AdminController {
 	
 	@Autowired
 	private Memberservice memberService;
+	
+	@Autowired
+	private ReviewService reviewService;
+	
 	
 	@Autowired
 	private HttpSession session;
@@ -90,7 +95,27 @@ public class AdminController {
 		//오늘 등록한 회원 수
 		int todayMember = memberService.todayMemberCount();
 		System.out.println("오늘 등록한 회원 수 : " + todayMember);
+		model.addAttribute("todayMember", todayMember);
 		
+		//총 차량 수
+		int allCarCount = service.selectAllcar(5);
+		System.out.println("selectAllcar(총 차량) : " + allCarCount);
+		model.addAttribute("allCarCount", allCarCount);
+		
+		//대여 가능 차량 수
+		int rentCarCount = service.selectAllcar(0);
+		System.out.println("selectAllcar(대여 가능 차량) : " + rentCarCount);
+		model.addAttribute("rentCarCount", rentCarCount);
+		
+		//총 리뷰 수
+		int allReview = reviewService.selectAllReview();
+		System.out.println("총 리뷰 : " + allReview);
+		model.addAttribute("allReview", allReview);
+		
+		//평균 별점
+		double reviewAvg = reviewService.selectReviewAvg();
+		System.out.println("리뷰 평균 : " + reviewAvg);
+		model.addAttribute("reviewAvg", reviewAvg);
 		return "admin/admin_main";
 	}
 	

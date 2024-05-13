@@ -15,4 +15,8 @@ public interface ReviewMapper {
 
 	List<CarReviewVO> selectReviewList(String option);
 
+	double selectReviewAvg();
+
+	int selectAllReview();
+
 }

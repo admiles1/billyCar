@@ -22,5 +22,5 @@ public interface MemberMapper {
 	int selectMemberCount();
 
 	int selectTodayMember();
-	
+
 }

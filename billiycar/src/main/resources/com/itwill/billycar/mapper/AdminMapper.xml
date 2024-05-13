@@ -147,6 +147,13 @@
 		ORDER BY code DESC;
 	</select>
 	
+	<select id="selectAllcar">
+		select count(*) from car
+		<if test="status == 0">
+			where car_status = 0
+		</if>
+	</select>
+	
 </mapper>
 
 

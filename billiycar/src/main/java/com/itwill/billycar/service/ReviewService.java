@@ -25,4 +25,12 @@ public class ReviewService {
 		return mapper.selectReviewList(option);
 	}
 
+	public double selectReviewAvg() {
+		return mapper.selectReviewAvg();
+	}
+
+	public int selectAllReview() {
+		return mapper.selectAllReview();
+	}
+
 }
