@@ -34,6 +34,7 @@ public interface MypageMapper {
 
 
 
+
 //	List<License_StandardVO> selectLicenseStandard();
 
 //	int checkLicenseMatch(LicenseVO license);

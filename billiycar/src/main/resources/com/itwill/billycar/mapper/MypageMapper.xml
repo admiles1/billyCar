@@ -20,7 +20,8 @@
     </select>
     
     <select id="selcetMemberQna" resultType="com.itwill.billycar.vo.QnaVO">
-		SELECT * 
+		SELECT *, 
+			 ROW_NUMBER() OVER (ORDER BY qna_date DESC) AS new_qna_idx
 		FROM qna
 		WHERE qna_writer = #{memberId}
 	</select>
