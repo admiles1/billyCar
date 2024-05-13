@@ -48,5 +48,10 @@ public interface AdminMapper {
 	List<CommonVO> selectBusinesshours();
 	// 여기까지
 
+	// 수정할 차량 정보 조회
+	CarVO selectCarId(int carId);
+
+	int updateCar(CarVO car);
+	
 	int selectAllcar(int status);
 }

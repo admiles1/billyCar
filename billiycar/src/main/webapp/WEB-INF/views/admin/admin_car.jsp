@@ -91,8 +91,8 @@
 	                                    <td>${car.car_dayprice}</td>
 	                                    <td>${car.car_hourprice}</td>
 	                                    <td>
-	                                        <a href="#" class="btn btn-sm btn-primary">수정</a>
-	                                        <button class="btn btn-sm btn-danger">삭제</button>
+	                                        <a class="btn btn-sm btn-primary" onclick="modifyCar('${car.car_idx}')">수정</a>
+	                                        <button class="btn btn-sm btn-danger" onclick="confirmDelete()">삭제</button>
 	                                    </td>
 	                                </tr>
 	                            </tbody>
@@ -106,5 +106,26 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   	<script type="text/javascript">
+		function confirmDelete(){
+			if(confirm("정말 삭제하시겠습니까?")){
+				
+			}
+		}
+		
+		function modifyCar(carId) {
+		    // 수정할 차량의 ID를 이용하여 해당 차량 정보를 가져옵니다.
+		    var carInfo = {
+		        carId: carId
+		        // 다른 필요한 정보들도 가져올 수 있습니다.
+		    };
+		    
+		    // URL에 쿼리 문자열로 정보를 전달합니다.
+		    var queryString = Object.keys(carInfo).map(key => key + '=' + carInfo[key]).join('&');
+		    
+		    // modify form으로 이동합니다.
+		    window.location.href = 'carModify?' + queryString;
+		}
+	</script>
 </body>
 </html>
