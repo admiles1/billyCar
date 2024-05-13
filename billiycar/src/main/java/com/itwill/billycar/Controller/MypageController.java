@@ -128,12 +128,12 @@ public class MypageController {
 		MemberVO dbMember = service.getMemberInfo(memberId);
 		
 		if(isCorrectLiscense < 1) {
-			model.addAttribute("msg", "유효하지 않은 면허 정보입니다. 면허 정보를 다시 확인해주세요!");
+			model.addAttribute("msg", "유효하지 않은 면허 정보입니다.\\n면허 정보를 다시 확인해주세요!");
 			return "err/fail";
 		}
 		
 		if (service.isLicenseDuplicate(license)) {
-	        model.addAttribute("msg", "이미 등록된 면허 정보입니다.");
+	        model.addAttribute("msg", "이미 등록된 면허 정보입니다.\\n면허 정보를 다시 확인해주세요!");
 	        return "err/fail";
 	    }
 		
