@@ -23,8 +23,4 @@ public interface MemberMapper {
 
 	int selectTodayMember();
 
-<<<<<<< HEAD
-=======
-	
->>>>>>> branch 'main' of https://github.com/admiles1/billyCar
 }
