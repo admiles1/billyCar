@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.billycar.service.Memberservice;
 import com.itwill.billycar.vo.MemberVO;
@@ -113,7 +114,17 @@ public class MemberController {
 		}
 		
 	}
-
+	
+	@GetMapping("loginNaver")
+	public String loginNaver( @RequestParam(value = "email", required = false) String email,
+            				  @RequestParam(value = "name", required = false) String name,
+            				  @RequestParam(value = "id", required = false) String id,
+            				  MemberVO member) {
+		
+		return "";
+    }
+	
+	
 
 	@GetMapping("logout")
 	public String logout(HttpSession session) {
