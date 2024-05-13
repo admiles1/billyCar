@@ -83,6 +83,12 @@
 		WHERE license_id = #{memberId}
 	</select>
 	
+	<select id="selectDuplicateLicense" parameterType="com.itwill.billycar.vo.LicenseVO" resultType="boolean">
+	    SELECT COUNT(*) 
+	    FROM license
+	    WHERE license_user_id = #{license_user_id}
+	</select>
+	
 	<update id="updatePasswd">
 		UPDATE member
 		SET

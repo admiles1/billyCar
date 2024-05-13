@@ -132,11 +132,18 @@ public class MypageController {
 			return "err/fail";
 		}
 		
+		if (service.isLicenseDuplicate(license)) {
+	        model.addAttribute("msg", "이미 등록된 면허 정보입니다.");
+	        return "err/fail";
+	    }
+		
+		
 		int insertCount = service.registLicense(license);
 		if(insertCount == 0) {
 			model.addAttribute("msg", "면허 등록 실패!");
 			return "err/fail";
 		}
+		
 		
 		int updateCount = service.changeLicenseStatus(dbMember);
 		if(updateCount == 0) {
@@ -148,15 +155,8 @@ public class MypageController {
 	
 	@GetMapping("licenseInfo")
 	public String licenseInfo(Model model, LicenseVO license) {
-		String MemberId = (String)session.getAttribute("member_id");
-		model.addAttribute("licenseInfo", service.getLicenseInfo(MemberId));
-//		int isSuccess = service.registLicense(license);
-//		
-//		if(isSuccess > 0) {
-//			license
-//		}
-		
-		
+		String memberId = (String)session.getAttribute("member_id");
+		model.addAttribute("licenseInfo", service.getLicenseInfo(memberId));
 		return "mypage/page/Mypage_License_Info";
 	}
 	

@@ -32,6 +32,8 @@ public interface MypageMapper {
 
 	int updateLicenseStatus(MemberVO dbMember);
 
+	boolean selectDuplicateLicense(LicenseVO license);
+
 
 
 
