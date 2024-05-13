@@ -21,11 +21,7 @@ public class PaymentController {
 	
 	// reservation_detail에서 예약하기 버튼 눌렀을 때 컨트롤러
 	@GetMapping("payment")
-<<<<<<< HEAD
 	public String reservation(Model model, CarVO car, MemberVO member) {
-=======
-	public String reservation(Model model) {
->>>>>>> branch 'main' of https://github.com/admiles1/billyCar.git
 		
 		
 		return "payment/paymentPage";
