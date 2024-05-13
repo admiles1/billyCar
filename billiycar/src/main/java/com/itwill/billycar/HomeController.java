@@ -45,10 +45,10 @@ public class HomeController {
 		//--------------------------------------------------------
 
 		//예약 가능 차량 보이기
-		int carCount = reservService.selectReservCountCar();
-		System.out.println("예약 가능 차량 : " + carCount);
+//		int carCount = reservService.selectReservCountCar();
+//		System.out.println("예약 가능 차량 : " + carCount);
 
-		model.addAttribute("carCount", carCount);
+//		model.addAttribute("carCount", carCount);
 
 		//누적 회원 수 보이기
 		int memberCount = memberService.selectMemberCount();

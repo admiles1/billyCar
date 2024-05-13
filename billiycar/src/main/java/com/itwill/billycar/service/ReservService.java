@@ -23,9 +23,6 @@ public class ReservService {
 		return mapper.selectCar(idx);
 	}
 
-	public int selectReservCountCar() {
-		return mapper.selectReservCountCar();
-	}
 	
 	//예약 현황 리스트
 	public List<ReservVO> selectReservList(MemberVO member) {
