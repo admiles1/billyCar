@@ -31,4 +31,6 @@ public interface MemberMapper {
 
 	void updateMailAuthInfo(MailAuthInfoVO mailAuthInfo);
 
+	boolean selectEmptyEmail(String member_email);
+
 }

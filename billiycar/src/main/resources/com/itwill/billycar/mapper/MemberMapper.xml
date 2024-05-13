@@ -87,6 +87,7 @@
 			member_email = #{member_email}
 	</update>
 	
+	
 </mapper>
 
 

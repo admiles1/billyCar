@@ -109,5 +109,11 @@ public class Memberservice {
 		
 		return isAuthSuccess;
 	}
+
+
+	public boolean isEmptyEmail(String member_email) {
+		
+		return mapper.selectEmptyEmail(member_email);
+	}
 	
 }

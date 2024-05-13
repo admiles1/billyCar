@@ -73,6 +73,7 @@ public class MemberController {
 	@PostMapping("join")
 	public String joinPro(MemberVO member, Model model, BCryptPasswordEncoder passwordEncoder) {
 		
+		// ------------------------------메일-----------------------------
 //		System.out.println("ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ" + member.getMember_email());
 		// MailService - sendAuthMail() 메서드 호출하여 인증 메일 발송 요청
 		// => 파라미터 : MemberVO 객체   리턴타입 : MailAuthInfoVO(mailAuthInfo)
@@ -83,7 +84,13 @@ public class MemberController {
 		// => 파라미터 : MailAuthInfoVO 객체   리턴타입 : void
 		service.registMailAuthInfo(mailAuthInfo);
 		
+		// -------------------------------------------------------------------------------------
+//		boolean isEmptyEmail = service.isEmptyEmail(member.getMember_email());
+//		boolean isEmptyPhoneNum = service.isEmptyPhoneNum(member.getMember_phone());
 		
+		
+		
+		//--------------------------------------------------------------------------------------
 		String securePasswd = passwordEncoder.encode(member.getMember_passwd());
 		member.setMember_passwd(securePasswd);
 		
