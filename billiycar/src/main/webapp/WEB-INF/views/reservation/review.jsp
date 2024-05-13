@@ -18,26 +18,27 @@
 	}
 </style>
 <script type="text/javascript">
-	$(document).ready(function(){
-	    $('#option').change(function(){
-	        var selectedOption = $('#options').val(); // 선택된 옵션 값 가져오기
-	        console.log(selectedOption);
-	        // AJAX를 사용하여 컨트롤러로 선택된 옵션 값을 전송
-	        $.ajax({
-	            type: 'GET',
-	            url: 'review',
-	            data: { option: selectedOption },
-	            success: function(response){
-	                // 서버로부터의 응답 처리
-	                console.log(response);
-	            },
-	            error: function(xhr, status, error){
-	                // 오류 처리
-	                console.error(error);
-	            }
-	        });
-	    });
-	});
+// $(document).ready(function(){
+//     $('#options').change(function(){
+//         var selectedOption = $('#options').val(); 
+//         $.ajax({
+//             type: 'GET',
+//             url: 'review',
+//             data: { option: selectedOption },
+//             success: function(response){
+//                 console.log(response); // 받은 데이터로 화면 업데이트
+//             },
+//             error: function(xhr, status, error){
+//                 console.error(error);
+//             }
+//         });
+//     });
+// });
+function optionChange(option) {
+    var selectedOption = option.value;
+    location.href = "review?option=" + selectedOption;
+}
+
 </script>
 </head>
 <body>
@@ -81,9 +82,8 @@
     	
     	
     <!-- 검색창 -->
-    	${reviewList}
-    	<div class="card-tools" id="option" style="width: 100px; margin-left: 1195px;">
-                <select class="form-select form-select-sm" aria-label="리뷰 정렬" id="options">
+    	<div style="width: 100px; margin-left: 1195px;">
+                <select class="form-select form-select-sm" aria-label="리뷰 정렬" id="options" onchange="optionChange(this)">
                     <option value="latest">최신순</option>
                     <option value="old">오래된순</option>
                     <option value="rating">별점순</option>
