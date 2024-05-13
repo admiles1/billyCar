@@ -155,6 +155,36 @@
             });
         }
     });
+    
+
+	
+	// 지점명 불러오기
+	/*
+	$(function() {
+		let urlParams = new URL(location.href).searchParams;
+		let category = urlParams.get('category');
+		console.log(category);
+		$.ajax({
+			type: "GET",
+			url: "getTheater",
+			success: function(result) {
+				for(let theater of result) {
+					if(theater_id != 0 && theater.theater_id == theater_id) {
+	                    $("#theater_id").append("<option value='" + theater.theater_id + "' selected>" + theater.theater_name + "</option>");
+	                } else {
+	                    $("#theater_id").append("<option value='" + theater.theater_id + "'>" + theater.theater_name + "</option>");
+	                }
+				}
+			},
+			error: function(request,status,error) {
+				alert("다시 시도해 주세요");
+			}
+			
+		});
+	});
+	
+*/
+
 </script>
 
 	<div class = "faq_cs">

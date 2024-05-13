@@ -166,7 +166,6 @@ public class AdminCusController {
 		qna.setQna_idx(qna_idx);
 		qna = service.getQna(qna);
 		
-		
 		model.addAttribute("qna",qna);
 		
 		return "admin/admin_QnaAnswer_form";
@@ -185,7 +184,7 @@ public class AdminCusController {
 		}
 				
 		
-		return "redirect:/adminAnswerForm";
+		return "redirect:/adminAnswerList";
 	}
 	
 	
