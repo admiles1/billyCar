@@ -64,8 +64,8 @@
         <tbody>
         	<c:forEach var="qna" items="${qna}" varStatus="newIdx">
 			    <tr>
-			        <td><a href="qnaAnswerDetail?qna_idx=${qna.qna_idx}&pageNum=${pageNum}">${newIdx.index + 1}</a></td> <!-- 이 부분 수정 -->
-			        <td>${qna.qna_subject}</td>
+			        <td>${newIdx.index + 1}</td> <!-- 이 부분 수정 -->
+			        <td><a href="qnaAnswerDetail?qna_idx=${qna.qna_idx}&pageNum=${pageNum}">${qna.qna_subject}</a></td>
 			        <td>${qna.qna_content}</td>
 			        <td>
 			            <fmt:formatDate value="${qna.qna_date}" pattern="yy-MM-dd HH:mm"/>

@@ -15,13 +15,14 @@ public class CarVO {
 	private String car_brand;
 	private String car_fuel;
 	private String car_type;
-	private int gear_type;
+	private String gear_type;
 	private String car_capacity;
 	private String car_img;
 	private MultipartFile mfc_img;
 	private Year car_year;
 	private int car_dayprice;
 	private int car_hourprice;
+	private int car_status;
 	private int car_canReserve;
 	private LocalDateTime car_reg_date;
 }

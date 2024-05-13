@@ -71,6 +71,12 @@ public class MypageService {
 		return mapper.updateLicenseStatus(dbMember);
 	}
 
+	public boolean isLicenseDuplicate(LicenseVO license) {
+		return mapper.selectDuplicateLicense(license);
+	}
+
+	
+
 
 
 

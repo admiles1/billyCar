@@ -263,15 +263,10 @@ public class AdminController {
 		String uploadDir = "/resources/upload"; // 가상 경로
 		String saveDir = session.getServletContext().getRealPath(uploadDir); // 실제 경로
 		
-		// 2) 날짜별 서브 디렉토리 나누기
-		String subDir = ""; 
-		LocalDate today = LocalDate.now();
-		String datePattern = "yyyy" + File.separator + "MM" + File.separator + "dd";
-		
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern(datePattern);
-		
-		// 3) 서브디렉토리에 저장
-		subDir = today.format(dtf);
+	    // 제조사와 모델을 사용한 서브 디렉토리 설정
+	    String carbrand = car.getCar_brand();
+	    String carmodel = car.getCar_model();
+		String subDir = carbrand + File.separator + carmodel;
 		
 		// 4) 기존 업로드 실제 경로에 서브 디렉토리 결합
 		saveDir += File.separator + subDir;
@@ -325,11 +320,39 @@ public class AdminController {
 			return "redirect:/admin_car_registration";
 		} else { // 실패 시
 			model.addAttribute("msg", "차량등록실패!");
-			return "error/fail";
+			return "err/fail";
 		}
 		
 	}
 	
+	@GetMapping("carModify")
+	public String carModify(@RequestParam("carId") int carId, Model model) {
+	    // 특정 차량의 정보 조회
+	    CarVO car = service.getCarById(carId);
+	    
+	    // 조회한 차량 정보를 수정 폼 페이지로 전달
+	    model.addAttribute("car", car);
+	    
+	    return "admin/admin_car_modify";
+	}
+	
+	@PostMapping("carModifyPro")
+	public String carModifyPro(@RequestParam("car_idx") int carId, CarVO car, Model model) {
+	    // 전달된 차량 정보를 사용하여 데이터베이스에 업데이트 수행
+		car.setCar_idx(carId);
+	    int updateCount = service.updateCar(car);
+	    
+	    // 업데이트 결과에 따라 적절한 응답 반환
+	    if (updateCount > 0) {
+	        // 업데이트 성공 시
+	        return "redirect:/admin_car";
+	    } else {
+	        // 업데이트 실패 시
+	    	model.addAttribute("msg", "수정 실패!");
+	        return "err/fail";
+	    }
+	}
+
 	
 	@GetMapping("admin_car_reservation")
 	public String admin_car_reservation() {

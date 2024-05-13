@@ -77,6 +77,15 @@ public class AdminService {
 		return mapper.selectBusinesshours();
 	}
 
+	public CarVO getCarById(int carId) {
+		
+		return mapper.selectCarId(carId);
+	}
+
+	public int updateCar(CarVO car) {
+		
+		return mapper.updateCar(car);
+	}
 	public int selectAllcar(int status) {
 		return mapper.selectAllcar(status);
 	}
