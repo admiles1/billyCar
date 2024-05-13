@@ -50,11 +50,13 @@ public class AdminController {
 	public String adminForm(Model model, AdminVO admin) {
 		System.out.println("adminForm");
 		
+/*		System.out.println(session.getAttribute("member_id"));
+		
 		// 관리자 아닐 경우 돌려보내기
-		if(!session.getAttribute("member_id").equals(admin.getAdmin_id())) {
+		if(!session.getAttribute("member_id").equals(admin.getAdmin_id()) || session.getAttribute("member_id") == null) {
 			model.addAttribute("msg","접근 권한이 없습니다");
 			return "err/fail";
-		}
+		} */
 		
 		return "admin/admin_form";
 	}
@@ -78,11 +80,11 @@ public class AdminController {
 	@GetMapping("admin")
 	public String admin(Model model, AdminVO admin) {
 		
-		// 관리자 아닐 경우 돌려보내기
-		if(!session.getAttribute("member_id").equals(admin.getAdmin_id())) {
+/*		// 관리자 아닐 경우 돌려보내기
+		if(!session.getAttribute("member_id").equals(admin.getAdmin_id()) || session.getAttribute("member_id") == null) {
 			model.addAttribute("msg","접근 권한이 없습니다");
 			return "err/fail";
-		}
+		} */
 		
 		//총 회원 수
 		int totalMember = memberService.selectMemberCount();
