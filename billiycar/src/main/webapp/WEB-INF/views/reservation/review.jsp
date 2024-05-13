@@ -26,7 +26,7 @@
 //             url: 'review',
 //             data: { option: selectedOption },
 //             success: function(response){
-//                 var result = response;// 받은 데이터로 화면 업데이트
+//                 var result = response;
 //             },
 //             error: function(xhr, status, error){
 //                 console.error(error);

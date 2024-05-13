@@ -26,6 +26,7 @@ public class ReviewService {
 	}
 
 	public double selectReviewAvg() {
+		System.out.println("mapper.selectReviewAvg() : " + mapper.selectReviewAvg());
 		return mapper.selectReviewAvg();
 	}
 

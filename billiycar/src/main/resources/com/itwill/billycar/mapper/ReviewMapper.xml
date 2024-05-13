@@ -41,7 +41,7 @@
 	</select>
 	
 	<select id="selectReviewAvg">
-		select AVG(review_score) from review;
+		SELECT IFNULL(AVG(review_score), 0) AS avg_score FROM review;
 	</select>
 	
 	<select id="selectAllReview">

@@ -37,4 +37,5 @@ public class ReservService {
 	public int selecReservCount() {
 		return mapper.selecReservCount();
 	}
+
 }

@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.itwill.billycar.service.AdminService;
 import com.itwill.billycar.service.CsService;
 import com.itwill.billycar.service.Memberservice;
 import com.itwill.billycar.service.ReservService;
@@ -28,7 +29,10 @@ public class HomeController {
 
 	@Autowired
 	private ReservService reservService;
-
+	
+	@Autowired
+	private AdminService adminService;
+	
 	@Autowired
 	private Memberservice memberService;
 
@@ -45,10 +49,10 @@ public class HomeController {
 		//--------------------------------------------------------
 
 		//예약 가능 차량 보이기
-//		int carCount = reservService.selectReservCountCar();
-//		System.out.println("예약 가능 차량 : " + carCount);
+		int carCount = adminService.selectAllcar(0);
+		System.out.println("예약 가능 차량 : " + carCount);
 
-//		model.addAttribute("carCount", carCount);
+		model.addAttribute("carCount", carCount);
 
 		//누적 회원 수 보이기
 		int memberCount = memberService.selectMemberCount();
