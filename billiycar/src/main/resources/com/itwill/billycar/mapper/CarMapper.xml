@@ -5,27 +5,50 @@
 
 <mapper namespace="com.itwill.billycar.mapper.ReservMapper">
 	<select id="selectCarList" resultType="com.itwill.billycar.vo.CarVO" parameterType="map">
-		SELECT c.car_idx
-			 , c.car_number
-			 , c.car_model
-			 , c.car_brand
-			 , c.car_fuel
-			 , c.car_type
-			 , c.gear_type
-			 , c.car_capacity
-			 , c.car_img
-			 , c.car_year
-			 , c.car_dayprice
-			 , c.car_hourprice
-		  FROM car c LEFT JOIN Reservation rs
-		  	ON c.car_number = rs.car_number
- 			   <![CDATA[
-   		 WHERE NOT(rs.reserv_pickupdate <= #{reserv.reserv_pickupdate} AND rs.reserv_returndate >= #{reserv.reserv_returndate})]]>
-		   AND c.car_status = 0
-		 <if test="car.car_type != null"> AND car_type IN (${car.car_type})</if>
+		SELECT car_idx
+		     , car_number
+		     , car_model
+		     , car_brand
+		     , car_fuel
+		     , car_type
+		     , gear_type
+		     , car_capacity
+		     , car_img
+		     , car_year
+		     , car_dayprice
+		     , car_hourprice
+		     , reserv_pickupdate
+		     , reserv_returndate
+		  FROM (
+		    SELECT car_idx
+			     , car_number
+			     , car_model
+			     , car_brand
+			     , car_fuel
+			     , car_type
+			     , gear_type
+			     , car_capacity
+			     , car_img
+			     , car_year
+			     , car_dayprice
+			     , car_hourprice
+			     , reserv_pickupdate
+			     , reserv_returndate
+		           ROW_NUMBER() OVER (PARTITION BY c.car_number ORDER BY rs.reserv_pickupdate) AS rn
+		      FROM car c
+    		  LEFT JOIN Reservation rs ON c.car_number = rs.car_number
+		     WHERE <![CDATA[(
+		           rs.reserv_pickupdate IS NULL  -- 예약 정보가 없는 경우
+		           OR (rs.reserv_returndate < #{reserv.reserv_returndate}) OR rs.reserv_pickupdate > #{reserv.reserv_pickupdate})
+		           OR (rs.reserv_pickupdate >= #{reserv.reserv_pickupdate} AND rs.reserv_returndate <= #{reserv.reserv_returndate}))
+		           OR (rs.reserv_returndate IS NULL AND rs.reserv_pickupdate IS NULL) -- 예약 정보가 모두 누락된 경우)
+		         ) AS ranked ]]>
+         <if test="car.car_type != null"> AND car_type IN (${car.car_type})</if>
 		 <if test="car.car_fuel != null"> AND car_fuel IN (${car.car_fuel})</if>
-		    OR #{reserv.reserv_pickupdate} = null AND #{reserv.reserv_returndate} = null
+		 WHERE rn = 1 
+		 ORDER BY reserv_pickupdate;
 	</select>
+	
 	
 	<select id="selectCar" resultType="com.itwill.billycar.vo.CarVO">
 		SELECT *
