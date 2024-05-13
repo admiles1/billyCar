@@ -31,7 +31,7 @@
 
 <script>
 
-	function goDetail(idx){
+	function goDetail(model,type,fuel){
 		if($("#reserv_pickupdate").val() == "") {
 			alert('일정을 검색하여 주세요');
 			return;
@@ -102,9 +102,9 @@
 			    	</div>
 			    	<div class="location_area">
 			    		<input type="text" class="selectArea" name="reserv_pickuplocation" 
-			    			<c:if test="${not empty pickupLocation}"> value="${pickupLocation}"</c:if>
-			    				readonly style="padding-right: 17px;" onclick="alert('api예정')"
-			    				id="reserv_pickuplocation" placeholder=":: 대여지점 ::">
+			    				value="아이티윌"  id="reserv_pickuplocation"
+			    				style="padding-right: 17px;" onclick="alert('api예정')"
+			    				placeholder=":: 대여지점 ::" readonly>
 				    	<select  class="selectArea" name="reserv_returnlocation" id="reserv_returnlocation">
 				    		<option selected value=""
 				    			<c:if test="${empty returnLocation}">selected</c:if>> :: 반납장소 :: </option>
@@ -152,11 +152,10 @@
 		   		 		<ul>
 		   		 			<c:forEach var="car" items="${cars}">
 			   		 			<li class="carList fadeIn row">
-			   		 				<a class="d-flex" onclick="goDetail('${car.car_idx}')">
+			   		 				<a class="d-flex" onclick="goDetail('${car.car_model}', '${car.car_type}', '${car.car_fuel}')">
 			   		 					<span class="carImg"><img src="${car.car_img}"></span>
 			   		 					<span class="carInfo">
 			   		 						<span> ${car.car_model}</span>
-			   		 						<span> ${car.car_model} </span>
 			   		 						<span> ${car.car_type} / ${car.car_capacity}</span>
 			   		 						<small>종일가 <fmt:formatNumber value="${car.car_dayprice}" pattern="#,###"/></small>
 			   		 						<small>시간당 <fmt:formatNumber value="${car.car_hourprice}" pattern="#,###"/></small>

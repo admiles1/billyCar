@@ -6,16 +6,16 @@
 <mapper namespace="com.itwill.billycar.mapper.ReservMapper">
 	<select id="selectCarList" resultType="hashmap" parameterType="map">
 	<![CDATA[
-		SELECT MAX(model.name)
-			 , MAX(brand.name)
-			 , MAX(fuel.name)
-			 , MAX(type.name)
-			 , MAX(gear_type)
-			 , MAX(car_capacity)
-			 , MAX(car_img)
-			 , MAX(car_year)
-			 , MAX(car_dayprice)
-			 , MAX(car_hourprice)
+		SELECT MAX(model.name) AS car_model
+			 , MAX(brand.name) AS car_brand
+			 , MAX(fuel.name) AS car_fuel
+			 , MAX(type.name) AS car_type
+			 , MAX(gear_type) AS gear_type
+			 , MAX(car_capacity) AS car_capacity
+			 , MAX(car_img) AS car_img
+			 , MAX(car_year) AS car_year
+			 , MAX(car_dayprice) AS car_dayprice
+			 , MAX(car_hourprice) AS car_hourprice
 			 , COUNT(*) AS canReserv
 		  FROM   car c
 		  LEFT JOIN Common model ON c.car_model = model.code  
@@ -27,9 +27,9 @@
 								   WHERE reserv_pickupdate between #{reserv.reserv_pickupdate} AND #{reserv.reserv_returndate}
 									  OR reserv_returndate between #{reserv.reserv_pickupdate} AND #{reserv.reserv_returndate})	]]> 
 		   AND car_status = 0
-		 <if test="car.car_type != null"> AND fuel.name IN (${car.car_type})</if>
-		 <if test="car.car_fuel != null"> AND type.name IN (${car.car_fuel})</if>
-		 GROUP BY model.name;
+		 <if test="car.car_fuel != null"> AND fuel.name IN (${car.car_fuel})</if>
+		 <if test="car.car_type != null"> AND type.name IN (${car.car_type})</if>
+		 GROUP BY car_model;
 	</select>
 	
 	<select id="selectCar" resultType="com.itwill.billycar.vo.CarVO">
