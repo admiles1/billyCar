@@ -155,7 +155,7 @@
 			   		 				<a class="d-flex" onclick="goDetail('${car.car_idx}')">
 			   		 					<span class="carImg"><img src="${car.car_img}"></span>
 			   		 					<span class="carInfo">
-			   		 						<span> ${car.car_number }</span>
+			   		 						<span> ${car.car_model}</span>
 			   		 						<span> ${car.car_model} </span>
 			   		 						<span> ${car.car_type} / ${car.car_capacity}</span>
 			   		 						<small>종일가 <fmt:formatNumber value="${car.car_dayprice}" pattern="#,###"/></small>
