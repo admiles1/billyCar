@@ -51,4 +51,11 @@ public class Memberservice {
 	}
 
 
+<<<<<<< HEAD
+=======
+	// 네이버 정보 저장하기
+	public int saveNaverInfo(MemberVO member) {
+		return mapper.insertMember(member);
+	}
+>>>>>>> branch 'main' of https://github.com/admiles1/billyCar
 }
