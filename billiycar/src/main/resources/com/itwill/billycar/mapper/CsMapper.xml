@@ -100,6 +100,7 @@
 	<select id="selectQnaListCount" resultType="int">
 		SELECT COUNT(*)
 		FROM qna
+		WHERE qna_writer =#{writer}
 	</select>
 	
 	<insert id="insertQna">
