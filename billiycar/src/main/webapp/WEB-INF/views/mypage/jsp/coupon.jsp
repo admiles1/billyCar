@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,30 +63,18 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Coupon123</td>
-                <td>10%</td>
-                <td>전체 차량</td>
-                <td>2024-06-30</td>
-            </tr>
-            <tr>
-                <td>Coupon456</td>
-                <td>20%</td>
-                <td>SUV</td>
-                <td>2024-07-15</td>
-            </tr>
-            <tr>
-                <td>Coupon789</td>
-                <td>15%</td>
-                <td>경차</td>
-                <td>2024-08-20</td>
-            </tr>
-            <tr>
-                <td>CouponABC</td>
-                <td>25%</td>
-                <td>전기차</td>
-                <td>2024-09-10</td>
-            </tr>
+           <c:forEach var="coupon" items="${Coupon}">
+			    <tr>
+			        <td>${coupon.coupon_id}</td> <!-- 이 부분 수정 -->
+			        <td>${coupon.issue_status}</td>
+			        <td>
+			            <c:choose>
+			                <c:when test="${qna.qna_status == 0}">답변 대기</c:when>
+			                <c:when test="${qna.qna_status == 1}">답변 완료</c:when>
+			            </c:choose>
+			        </td>
+			    </tr>
+			</c:forEach>
         </tbody>
     </table>
 </form>

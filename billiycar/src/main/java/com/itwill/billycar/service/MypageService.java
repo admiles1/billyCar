@@ -24,14 +24,6 @@ public class MypageService {
         // 회원 아이디를 이용하여 회원 정보를 가져오는 로직
         return mapper.selectMemberInfo(memberId);
     }
-//
-//	public MemberVO getMemberPasswd(String memberId) {
-//		return mapper.selectMemberPasswd(memberId);
-//	}
-
-//	public Object getMemberQna(String memberId) {
-//		return mapper.selectMemberQna(memberId);
-//	}
 
 	public List<QnaVO> getMemberQna(String memberId) {
 		return mapper.selcetMemberQna(memberId);
@@ -46,18 +38,14 @@ public class MypageService {
 		return mapper.withdrawMember(member);
 	}
 
-
 	public int modifyInfo(MemberVO member) {
 		
 		return mapper.updateInfo(member);
 	}
 
-
-
 	public int getLicense(LicenseVO license) {
 		return mapper.compareLicense(license);
 	}
-
 
 	public LicenseVO getLicenseInfo(String memberId) {
 		return mapper.getMemberLicense(memberId);
@@ -76,13 +64,9 @@ public class MypageService {
 		return mapper.selectDuplicateLicense(license);
 	}
 
-//	public List<CouponVO> getMemberCoupon(String memberId) {
-//		return mapper.selcetMemberCoupon(memberId);
-//	}
-
-	
-
-
+	public List<CouponVO> getMemberCoupon(String memberId) {
+		return mapper.selcetMemberCoupon(memberId);
+	}
 
 
 }
