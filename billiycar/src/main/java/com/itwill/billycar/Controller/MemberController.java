@@ -292,28 +292,28 @@ public class MemberController {
 		return "login/forgot_pw3";
 	}
 	
-	@PostMapping("forgot_pw3")
-	public String forgot_pw3Pro(MemberVO member
-								, BCryptPasswordEncoder passwordEncoder
-					            , Model model
-					            , String member_passwd) {
-		MypageService mypageService = new MypageService();
-		
-		System.out.println("sadflhawrilfhqeiorashgiuewqkarshdgilqwrheasdfilqwrehfd" + member);
-		
-		member.setMember_passwd(member.getMember_passwd());
-		String securePasswd = passwordEncoder.encode(member.getMember_passwd());
-		member.setMember_passwd(securePasswd);
-		
-		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + member);
-//		if(mypageService.modifyPasswd(member) <= 0) {
-		if(mypageService.modifyPasswd2(member) <= 0) {
-			model.addAttribute("msg", "비밀번호 변경 실패");
-			return "err/fail";
-		}
-		
-		return "redirect:/login";
-	}
+//	@PostMapping("forgot_pw3")
+//	public String forgot_pw3Pro(MemberVO member
+//								, BCryptPasswordEncoder passwordEncoder
+//					            , Model model
+//					            , String member_passwd) {
+//		MypageService mypageService = new MypageService();
+//		
+//		System.out.println("sadflhawrilfhqeiorashgiuewqkarshdgilqwrheasdfilqwrehfd" + member);
+//		
+//		member.setMember_passwd(member.getMember_passwd());
+//		String securePasswd = passwordEncoder.encode(member.getMember_passwd());
+//		member.setMember_passwd(securePasswd);
+//		
+//		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + member);
+////		if(mypageService.modifyPasswd(member) <= 0) {
+//		if(mypageService.modifyPasswd2(member) <= 0) {
+//			model.addAttribute("msg", "비밀번호 변경 실패");
+//			return "err/fail";
+//		}
+//		
+//		return "redirect:/login";
+//	}
 	
 	@PostMapping ("passwdChange")
 	public String passwdChange() {
