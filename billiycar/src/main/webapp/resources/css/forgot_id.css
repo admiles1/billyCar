@@ -81,7 +81,7 @@ label {
     font-size: 16px;
 }
 
-input[type="button"],  input[type="submit"]  {
+input[type="button"], input[type="submit"] {
     background-color: #00AAFF;
     color: white;
     border: none;
@@ -103,7 +103,7 @@ input[type="button"]:hover {
     text-align: center; /* 버튼을 가운데 정렬 */
 }
 
-.next input[type="button"], input[type="submit"] {
+#next{
     background-color: #00AAFF;
     color: white;
     border: none;

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.billycar.service.AdminCusService;
+import com.itwill.billycar.vo.CouponVO;
 import com.itwill.billycar.vo.FaqVO;
 import com.itwill.billycar.vo.PageInfo;
 import com.itwill.billycar.vo.QnaVO;
@@ -187,5 +188,43 @@ public class AdminCusController {
 		return "redirect:/adminAnswerList";
 	}
 	
+	// -------------------------------------------------------------------------------------------------
+	// ** [쿠폰] **
+	@GetMapping("couponList")
+	public String couponList(CouponVO coupon, Model model) {
+		
+		List<CouponVO> couponList = service.getCouponList();
+		model.addAttribute("couponList", couponList);
+		return "admin/couponList";
+	}
 	
+	@GetMapping("couponAdd")
+	public String couponAdd() {
+		return "admin/couponAdd";
+	}
+	
+	@PostMapping("couponAdd")
+	public String couponAddPro(CouponVO coupon, Model model) {
+		int insertCoupon = service.addCoupon(coupon);
+		
+		if(insertCoupon <= 0) {
+			model.addAttribute("msg", "쿠폰 등록 실패하셨습니다. \\n 다시 시도해 주세요");
+			return "err/fail";
+		}
+		return "redirect:/couponAdd";
+	}
+	
+	@GetMapping("couponDelete")
+	public String couponDelete(int coupon_id, Model model) {
+		
+		int deleteCount = service.removeCoupon(coupon_id);
+		
+		if(deleteCount <= 0) {
+			model.addAttribute("msg", "쿠폰 삭제 실패하셨습니다. \\n 다시 시도해 주세요");
+			return "err/fail";
+		}
+		
+		
+		return "redirect:/couponList";
+	}
 }

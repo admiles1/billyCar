@@ -19,6 +19,10 @@
 			window.open("check_inviter", "추천인 아이디 검색", "width=600, height=300, top=150, left=650");
 		};
 		
+// 		document.querySelector("#member_email").onclick = function() { //아이디 중복체크&유효성검사 새창 오픈
+// 			window.open("check_id", "이메일 인증", "width=600, height=300, top=150, left=650");
+// 		};
+		
 		$("#member_passwd").keyup(function() { // 비밀번호 유효성 검사
 			
 		    let passwd = $("#member_passwd").val();
@@ -149,7 +153,28 @@
 		return /^[0-9]{10,11}$/.test(phoneNumber);
 	}
 
-	
+	function sendAuthMail() {
+		// 아이디 입력 텍스트박스에 입력된 아이디 가져오기
+		let eMail = $("#member_email").val();
+		
+		if(!isValidEmail(eMail)) { // 이메일 확인
+	        alert("E-Mail을 정확히 입력해주세요.");
+	        document.fr.member_email.focus();
+	        return false;
+	    } 
+		
+		// 아이디가 입력되지 않았을 경우 경고창 출력
+		if(eMail == "") {
+			alert("이메일을 입력해주세요!");
+			$("#member_email").focus();
+			return;
+		}
+		
+		// SendAuthMail 서블릿 주소 요청 => 파라미터로 아이디 전달
+		
+		location.href = "SendAuthMail?member_email=" + eMail;
+		
+	}
 </script>
 <link href="${pageContext.request.contextPath}/resources/css/join_form.css" rel="stylesheet">
 <meta charset="UTF-8">
@@ -176,8 +201,9 @@
 				<input type="password" placeholder="비밀번호 확인" name="member_passwd2" id="member_passwd2" maxlength="12"/><br>
 				<div id="checkPwResult2"></div>
 			</div>
-			<div>
-				<input type="email" placeholder="E-Mail" name="member_email" id="member_email"/><br>
+			<div class = "email">
+				<input type="email" placeholder="E-Mail" name="member_email" id="member_email"/>
+<!-- 				<input type="button" class="check_eMail" id="check_eMail" name ="check_eMail" value="인증하기" onclick="sendAuthMail()"><br> -->
 			</div>
 			<br>
 			<div>

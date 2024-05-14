@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.itwill.billycar.mapper.GuideMapper">
+
+	<select id="selectCarList" resultType="HashMap">
+		SELECT model.name as model, carType.name as carType, fuel.name as fuel, c.car_img, c.car_dayprice, c.car_hourprice, c.car_capacity
+		FROM car c 
+		JOIN Common model ON model.code = c.car_model
+		JOIN Common carType ON carType.code = c.car_type
+		JOIN Common fuel ON fuel.code = c.car_fuel
+	</select>
+	
+</mapper>

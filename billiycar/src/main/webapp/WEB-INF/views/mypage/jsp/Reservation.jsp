@@ -77,6 +77,19 @@
 	        }
 	    }
 	}
+	
+	function check(){
+		let subject = $("#review_subject").val();
+		let content = $("#review_content").val();
+		
+		if(subject == ""){
+			return false;
+		}else if(content == ""){
+			return false;
+		}
+			
+		
+	}
 
 </script>
 </head>
@@ -104,13 +117,13 @@
 		            <td>${reserv.reserv_returnlocation }</td>
 		            <td>
 		            	<c:choose>
-		            		<c:when test="${reserv.reserv_insurance eq 1}">
+		            		<c:when test="${reserv.reserv_insurance eq 0}">
 		            			없음
 		            		</c:when>
-		            		<c:when test="${reserv.reserv_insurance eq 2}">
+		            		<c:when test="${reserv.reserv_insurance eq 1}">
 		            			일반자차
 		            		</c:when>
-		            		<c:when test="${reserv.reserv_insurance eq 3}">
+		            		<c:when test="${reserv.reserv_insurance eq 2}">
 		            			완전자차
 		            		</c:when>
 		            	</c:choose>
@@ -140,13 +153,13 @@
 			        	<td colspan="7">
 			<!--         		<a onclick="showReview()" class="btn btn-sm btn-primary">작성완료</a> -->
 			                <!-- 리뷰 작성 폼 요소들을 이곳에 추가 -->
-			                <form action="reviewWrite" method="post">
+			                <form action="reviewWrite" method="post" onsubmit="return check()">
 			                	
 							    
 							    <label for="review">리뷰 제목</label><br>
-							    <input type="text" class="form-control" name="review_subject" width="200px;" style="margin-top: 10px;" placeholder="리뷰 제목을 입력해주세요"><br>
+							    <input type="text" class="form-control" name="review_subject" id="review_subject" width="200px;" style="margin-top: 10px;" placeholder="리뷰 제목을 입력해주세요"><br>
 			                	<label for="review">리뷰 내용</label><br>
-			    				<textarea id="review" name="review_content" class="form-control" rows="4" cols="50" style="margin-top: 10px;" placeholder="리뷰 내용을 입력해주세요"></textarea><br>
+			    				<textarea id="review" name="review_content" id="review_content" class="form-control" rows="4" cols="50" style="margin-top: 10px;" placeholder="리뷰 내용을 입력해주세요"></textarea><br>
 			    				
 			    				<div id="rating${reserv.reserv_idx }">
 								    <span onclick="setRating(1, ${reserv.reserv_idx })"><i class="fa-regular fa-star"></i></span>

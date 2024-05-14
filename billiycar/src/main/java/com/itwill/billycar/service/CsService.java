@@ -68,6 +68,11 @@ public class CsService {
 		return mapper.selectFaqCount();
 	}
 	
+	// 특정 카테고리 선택했을 때의 목록 개수
+	public int getCategoryListCount(String category) {
+		return mapper.selectFaqCategoryCount(category);
+	}
+	
 	// ------------------------------------------------------------------------------------------------
 	// ** [QnA] **
 	// 큐엔에이 목록 불러오기
@@ -76,8 +81,8 @@ public class CsService {
 	}
 
 	// 큐엔에이 페이지 수 조회
-	public int getQnaListCount() {
-		return mapper.selectQnaListCount();
+	public int getQnaListCount(String writer) {
+		return mapper.selectQnaListCount(writer);
 	}
 	
 	// 큐엔에이 글작성
@@ -89,6 +94,9 @@ public class CsService {
 	public QnaVO getQnaDetail(QnaVO qna) {
 		return mapper.selectQnaDetail(qna);
 	}
+	
+	
+	
 
 
 }

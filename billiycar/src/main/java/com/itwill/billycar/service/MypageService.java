@@ -2,14 +2,12 @@ package com.itwill.billycar.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itwill.billycar.mapper.MypageMapper;
+import com.itwill.billycar.vo.CouponVO;
 import com.itwill.billycar.vo.LicenseVO;
-import com.itwill.billycar.vo.License_StandardVO;
 import com.itwill.billycar.vo.MemberVO;
 import com.itwill.billycar.vo.QnaVO;
 
@@ -23,14 +21,6 @@ public class MypageService {
         // 회원 아이디를 이용하여 회원 정보를 가져오는 로직
         return mapper.selectMemberInfo(memberId);
     }
-//
-//	public MemberVO getMemberPasswd(String memberId) {
-//		return mapper.selectMemberPasswd(memberId);
-//	}
-
-//	public Object getMemberQna(String memberId) {
-//		return mapper.selectMemberQna(memberId);
-//	}
 
 	public List<QnaVO> getMemberQna(String memberId) {
 		return mapper.selcetMemberQna(memberId);
@@ -45,25 +35,28 @@ public class MypageService {
 		return mapper.withdrawMember(member);
 	}
 
-
 	public int modifyInfo(MemberVO member) {
 		
 		return mapper.updateInfo(member);
 	}
 
-
-
 	public int getLicense(LicenseVO license) {
 		return mapper.compareLicense(license);
 	}
-
 
 	public LicenseVO getLicenseInfo(String memberId) {
 		return mapper.getMemberLicense(memberId);
 	}
 
-	public int ModifyPasswd(MemberVO member) {
-		
+	public int modifyPasswd(MemberVO member) {
+		return mapper.updatePasswd(member);
+	}
+	public int modifyPasswd2(MemberVO member) {
+		System.out.println("2222222222222222222"); //까지 나옴
+		System.out.println("222222222222222222의" + member);
+//		System.out.println(mapper.updatePasswd(member));
+		mapper.updatePasswd(member);
+		System.out.println("333333333333333333333333333나와라");
 		return mapper.updatePasswd(member);
 	}
 
@@ -71,7 +64,13 @@ public class MypageService {
 		return mapper.updateLicenseStatus(dbMember);
 	}
 
+	public boolean isLicenseDuplicate(LicenseVO license) {
+		return mapper.selectDuplicateLicense(license);
+	}
 
+	public List<CouponVO> getMemberCoupon(String memberId) {
+		return mapper.selcetMemberCoupon(memberId);
+	}
 
 
 }

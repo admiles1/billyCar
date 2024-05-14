@@ -26,7 +26,7 @@
                 	<img src="resources/event_images/envent_page_event1-1.webp" class="card-img-top" alt="이벤트 이미지 1" width="300" height="300">
                     <div class="card-body">
                     	<h5 class="card-title">유아용 카시트 무료 이벤트!</h5>
-                    	<p class="card-text">다자녀 고객 당신은 애국자! 애국자한테 드리는 유아용 카시트 무료 이벤트!(자녀3이상일 경우)</p>
+                    	<p class="card-text">다자녀 고객 당신은 애국자! 애국자한테 드리는 유아용 카시트 무료 이벤트!(자녀2이상일 경우)</p>
                     	<a href="event1" class="btn btn-primary">자세히 보기</a>
 					</div>
 				</div>

@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.itwill.billycar.vo.CouponVO;
 import com.itwill.billycar.vo.FaqVO;
 import com.itwill.billycar.vo.NoticeVO;
 import com.itwill.billycar.vo.QnaVO;
@@ -22,6 +23,8 @@ public interface AdminCusMapper {
 	int selectQnaListCount(); // 문의 내역 개수 가져오기
 	QnaVO selectQna(QnaVO qna); // 문의 내역 답변을 위해 불러오기
 	int updateAnswer(QnaVO qna); // 문의 내역 답변 저장하기
-
+	int insertCoupon(CouponVO coupon); // 쿠폰 등록하기
+	List<CouponVO> selectCouponList(); // 쿠폰 내역 불러오기
+	int deleteCoupon(int coupon_id); // 쿠폰 삭제하기
 
 }

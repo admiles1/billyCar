@@ -14,6 +14,7 @@
 <!-- Chart.js CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js">
 
+
 <!-- 관리자 페이지 스타일 -->
 <style>
   /* 추가적인 스타일링 */
@@ -50,7 +51,8 @@
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
           <h1 class="h2">관리자 메인</h1>
         </div>
-
+		
+		
         <!-- 메인 페이지의 내용 추가 -->
         <div class="row">
           <div class="col-md-12 px-0">
@@ -104,7 +106,8 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
     // 차트 데이터 생성
-    
+    var paymentAmount = ${paymentAmount};
+    console.log(paymentAmount);
     //2D 그래픽 컨텍스트를 가져온다
     var ctx = document.getElementById('myChart').getContext('2d');
     
@@ -114,7 +117,7 @@
             labels: ['1월', '2월', '3월', '4월', '5월', '6월','7월', '8월', '9월', '10월', '11월', '12월'],
             datasets: [{
                 label: '매출 현황',
-                data: [100, 200, 300, 400, 500, 600, 700, 20000, 300000, 1000, 1100, 1200],
+                data: paymentAmount,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',

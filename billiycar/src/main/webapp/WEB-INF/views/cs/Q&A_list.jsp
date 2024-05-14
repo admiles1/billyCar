@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>     
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+    
 <!doctype html>
 <html lang="ko">
 <meta charset="UTF-8">
@@ -66,7 +67,6 @@
 					<td colspan = "5"> 문의내역이 존재하지 않습니다 </td>
 				</tr>
 			</c:when>
-			
 			
 			<%-- 문의 내역이 존재할 경우 --%>
 			<c:otherwise>

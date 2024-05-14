@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.billycar.service.MypageService;
 import com.itwill.billycar.service.ReservService;
+import com.itwill.billycar.vo.CouponVO;
 import com.itwill.billycar.vo.LicenseVO;
 import com.itwill.billycar.vo.License_StandardVO;
 import com.itwill.billycar.vo.MemberVO;
@@ -103,7 +104,7 @@ public class MypageController {
 			member.setMember_id(dbMember.getMember_id());
 			String securePasswd = passwordEncoder.encode(member.getMember_passwd());
 			member.setMember_passwd(securePasswd);
-			if(service.ModifyPasswd(member) <= 0) {
+			if(service.modifyPasswd(member) <= 0) {
 				model.addAttribute("msg", "비밀번호 변경 실패");
 				return "err/fail";
 			}
@@ -128,15 +129,22 @@ public class MypageController {
 		MemberVO dbMember = service.getMemberInfo(memberId);
 		
 		if(isCorrectLiscense < 1) {
-			model.addAttribute("msg", "유효하지 않은 면허 정보입니다. 면허 정보를 다시 확인해주세요!");
+			model.addAttribute("msg", "유효하지 않은 면허 정보입니다.\\n면허 정보를 다시 확인해주세요!");
 			return "err/fail";
 		}
+		
+		if (service.isLicenseDuplicate(license)) {
+	        model.addAttribute("msg", "이미 등록된 면허 정보입니다.\\n면허 정보를 다시 확인해주세요!");
+	        return "err/fail";
+	    }
+		
 		
 		int insertCount = service.registLicense(license);
 		if(insertCount == 0) {
 			model.addAttribute("msg", "면허 등록 실패!");
 			return "err/fail";
 		}
+		
 		
 		int updateCount = service.changeLicenseStatus(dbMember);
 		if(updateCount == 0) {
@@ -148,15 +156,8 @@ public class MypageController {
 	
 	@GetMapping("licenseInfo")
 	public String licenseInfo(Model model, LicenseVO license) {
-		String MemberId = (String)session.getAttribute("member_id");
-		model.addAttribute("licenseInfo", service.getLicenseInfo(MemberId));
-//		int isSuccess = service.registLicense(license);
-//		
-//		if(isSuccess > 0) {
-//			license
-//		}
-		
-		
+		String memberId = (String)session.getAttribute("member_id");
+		model.addAttribute("licenseInfo", service.getLicenseInfo(memberId));
 		return "mypage/page/Mypage_License_Info";
 	}
 	
@@ -187,8 +188,11 @@ public class MypageController {
     }
 	
 	@GetMapping("MyCoupon")
-    public String MyCoupon() {
+    public String MyCoupon(Model model) {
         System.out.println("나의 쿠폰함");
+        String MemberId = (String)session.getAttribute("member_id");
+        List<CouponVO> couponList = service.getMemberCoupon(MemberId);
+        model.addAttribute("Coupon", couponList);
         return "mypage/page/Mypage_Coupon";
     }
 	

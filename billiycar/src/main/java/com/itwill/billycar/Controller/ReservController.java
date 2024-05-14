@@ -11,6 +11,7 @@ import java.util.StringJoiner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +25,7 @@ import com.itwill.billycar.vo.CarReviewVO;
 import com.itwill.billycar.vo.CarVO;
 import com.itwill.billycar.vo.CommonVO;
 import com.itwill.billycar.vo.ReviewVO;
+import com.mysql.cj.protocol.x.SyncFlushDeflaterOutputStream;
 import com.itwill.billycar.vo.ReservVO;
 
 @Controller
@@ -54,8 +56,7 @@ public class ReservController {
 		// 체크박스 checked용 값 따로 빼두기 
 		String hasThistype = "," + car.getCar_type();
 		String hasThisfuel = "," + car.getCar_fuel();
-		System.out.println(hasThistype);
-		System.out.println(hasThisfuel);
+		
 		// 주입하면 변환해서 세팅못하니 따로 만들기
 		ReservVO reserv = new ReservVO();
 		String pickupdate = map.get("reserv_pickupdate") + " " + map.get("pickupTime");
@@ -64,19 +65,38 @@ public class ReservController {
 		reserv.setReserv_pickupdate(LocalDateTime.parse(pickupdate, formatter));
 		reserv.setReserv_returndate(LocalDateTime.parse(returndate, formatter));
 		
-		if(car.getCar_type() != null && car.getCar_fuel() == null) { 	// 자동차타입 조건만 존재 할 경우
-			// search메소드로 스트링 포맷 변환 후 초기화
-			car.setCar_type(searchMethod(car.getCar_type()));
-		} else if (car.getCar_type() == null && car.getCar_fuel() != null) { // 자동차연료 조건만 존재 할 경우
-			car.setCar_fuel(searchMethod(car.getCar_fuel()));
-			
-		} else if (car.getCar_type() != null && car.getCar_fuel() != null) { // 두 가지 모두 검색 할 경우
-			car.setCar_fuel(searchMethod(car.getCar_fuel()));
-			car.setCar_type(searchMethod(car.getCar_type()));
+		String carType = car.getCar_type();
+		String carFuel = car.getCar_fuel();
+		
+		// from index
+		// 널이 아니지만 널로 바꿈 
+		// from reservation 아예 널로 넘어와서 메소드 호출불가
+		if(carType != null) {
+			if(carType.equals("")) {
+				car.setCar_type(null);
+				carType = null;
+			}
 		}
 		
+		if(carFuel != null) {
+			if(carFuel.equals("")) {
+				car.setCar_fuel(null);
+				carFuel = null;
+			}
+		}
+		
+		if(carType != null && carFuel == null) { 	// 자동차타입 조건만 존재 할 경우
+			// search메소드로 스트링 포맷 변환 후 초기화
+			car.setCar_type(searchMethod(carType));
+		} else if (carType == null && carFuel != null) { // 자동차연료 조건만 존재 할 경우
+			car.setCar_fuel(searchMethod(carFuel));
+		} else if (carType != null && carFuel != null) { // 두 가지 모두 검색 할 경우
+			car.setCar_fuel(searchMethod(carFuel));
+			car.setCar_type(searchMethod(carType));
+		} 
+		
 		// 자동차검색
-		List<CarVO> cars = reservService.selectCarList(car, reserv);
+		List<Map<String, String>> cars = reservService.selectCarList(car, reserv);
 		// 공통 코드에서 type, fule 조회해서 가져오기 TODO = 줄일것
 		model.addAttribute("hasThisType", hasThistype);
 		model.addAttribute("hasThisFuel", hasThisfuel);
@@ -99,26 +119,16 @@ public class ReservController {
 	public String reservationdetail(CarVO car 
 			                        , @RequestParam(defaultValue = "") Map<String, String> map 
 			                        , Model model) {
-		System.out.println(map);
-		// idx없이 강제로 상세예약페이지 진입시
-		if (map.get("idx") == null) {
+		
+		if (map.get("model") == null) {
 			model.addAttribute("msg", "차량을 선택하여 주십시오");
 			model.addAttribute("targetURL", "reservation");
 			return "err/fail";
 		} 
 		
-		// db에서 받아온 idx에 맞는 차조회
-		car = reservService.getCar(Integer.parseInt(map.get("idx")));
-		
-		// 존재하지않는 idx를 조회했을 시
-		if(car == null) {
-			model.addAttribute("msg", "존재하지 않는 차량입니다");
-			model.addAttribute("targetURL", "reservation");
-			return "err/fail";
-		} else { // db에서 조회성공하였을 시
-			model.addAttribute("car", car);
-			return "reservation/reserv_detail";
-		}
+		reservService.getCar(map.get("model"));
+		 
+		return "reservation/reserv_detail";
 	}
 	
 	

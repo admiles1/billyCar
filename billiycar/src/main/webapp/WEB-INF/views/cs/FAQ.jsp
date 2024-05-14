@@ -78,11 +78,6 @@
 <!-- 			 </form>  -->
 <!-- 		 </div>	 -->
 		
-		<c:if test="${faq_category eq 'all'}">
-			<script>
-				history.replaceState({}, null, location.pathname);
-			</script>
-		</c:if>
 		
 		<!-- 자주묻는질문들 -->
 	<div class="container-fluid">

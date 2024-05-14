@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 
 import com.itwill.billycar.mapper.AdminCusMapper;
 import com.itwill.billycar.mapper.CsMapper;
+import com.itwill.billycar.vo.CouponVO;
 import com.itwill.billycar.vo.FaqVO;
 import com.itwill.billycar.vo.NoticeVO;
 import com.itwill.billycar.vo.QnaVO;
@@ -67,6 +68,23 @@ public class AdminCusService {
 
 	public int wrtieAnswer(QnaVO qna) {
 		return mapper.updateAnswer(qna);
+	}
+
+	// ---------------------------------------------------------------------------------------------
+	
+	// 쿠폰 등록하기
+	public int addCoupon(CouponVO coupon) {
+		return mapper.insertCoupon(coupon);
+	}
+
+	// 쿠폰 내역 불러오기
+	public List<CouponVO> getCouponList() {
+		return mapper.selectCouponList();
+	}
+
+	// 쿠폰 삭제하기
+	public int removeCoupon(int coupon_id) {
+		return mapper.deleteCoupon(coupon_id);
 	}
 
 

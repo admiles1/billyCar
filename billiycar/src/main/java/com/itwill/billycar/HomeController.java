@@ -68,7 +68,11 @@ public class HomeController {
 		System.out.println("지금까지 누적 예약 수 : " + reservCount);
 		model.addAttribute("reservCount", reservCount);
 		
-		
+		// 자동차 타입, 연료, 영업시간
+		model.addAttribute("types", adminService.getTypes());
+		model.addAttribute("fuels", adminService.getFuels());
+		model.addAttribute("BHS", adminService.getBusinesshours().get(0).getName());
+		model.addAttribute("BHE", adminService.getBusinesshours().get(1).getName());
 		
 		
 		return "index";

@@ -1,10 +1,10 @@
 package com.itwill.billycar.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.billycar.mapper.ReservMapper;
 import com.itwill.billycar.vo.CarVO;
@@ -15,12 +15,12 @@ import com.itwill.billycar.vo.ReservVO;
 public class ReservService {
 	@Autowired ReservMapper mapper;
 	
-	public List<CarVO> selectCarList(CarVO car, ReservVO reserv) {
+	public List<Map<String, String>> selectCarList(CarVO car, ReservVO reserv) {
 		return mapper.selectCarList(car, reserv);
 	}
 	
-	public CarVO getCar(int idx) {
-		return mapper.selectCar(idx);
+	public CarVO getCar(String model) {
+		return mapper.selectCar(model);
 	}
 
 	
