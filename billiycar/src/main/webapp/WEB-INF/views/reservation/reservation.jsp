@@ -32,6 +32,7 @@
 <script>
 
 	function goDetail(model,type,fuel){
+		
 		if($("#reserv_pickupdate").val() == "") {
 			alert('일정을 검색하여 주세요');
 			return;
@@ -41,7 +42,8 @@
 		let returnDate = $("#reserv_returndate").val() + "T" + $("#reserv_returntime").val();
 		let pickupLocation = $("#reserv_pickuplocation").val();
 		let returnLocation = $("#reserv_returnlocation").val();
-		location.href="reservationdetail?idx=" + idx + "&pickupDate=" + pickupDate + "&returnDate=" + returnDate
+		
+		location.href="reservationdetail?model=" + model + "&pickupDate=" + pickupDate + "&returnDate=" + returnDate
 						+ "&pickuplocation=" + pickupLocation + "&returnlocation=" + returnLocation;
 	}
 	

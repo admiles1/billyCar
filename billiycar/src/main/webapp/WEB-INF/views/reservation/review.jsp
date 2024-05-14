@@ -26,7 +26,7 @@
 //             url: 'review',
 //             data: { option: selectedOption },
 //             success: function(response){
-//                 var result = response;
+//             	console.log(response);
 //             },
 //             error: function(xhr, status, error){
 //                 console.error(error);

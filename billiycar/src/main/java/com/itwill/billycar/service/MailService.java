@@ -49,6 +49,15 @@ public class MailService {
 		return authInfo;
 	}
 	
+	public void sendForgotId(MemberVO member) {
+
+		String subject = "[빌리카] 아이디를 확인해주세요.";
+		String content = "가입된 회원님의 아이디는 <b>" + member.getMember_id() + "</b>입니다.";
+		
+		SendMailClient mailClient = new SendMailClient();
+		mailClient.sendMail(member.getMember_email(), subject, content);
+	}
+	
 }
 
 

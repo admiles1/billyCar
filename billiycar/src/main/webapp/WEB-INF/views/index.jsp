@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 
 <html>
@@ -105,6 +107,19 @@ function redirectToAdminPage() {
     window.location.href = "review"; // 관리자 페이지의 URL로 리디렉션
 }
 
+function check() {
+	let pickupDate = $("#pickupDate").val();
+	let returnDate = $("#returnDate").val();
+	
+	if(pickupDate == "") {
+		alert('대여날짜를 선택하여 주십시오');
+		return false;
+	} else if(pickupDate == "") {
+		alert('반납날짜를 선택하여 주십시오');
+		return false;
+	}
+}
+
 </script>
 </head>
 <body class ="body">
@@ -140,99 +155,61 @@ function redirectToAdminPage() {
 <!-- 달력 -->
     <div class="card noto-sans-kr" style="margin-top: 20px;">
         <div class="card-body">	
-            <form action="reservation" method="post">
+            <form action="reservation" method="post" onsubmit="return check()">
                 <div class="input-daterange">
                     <div class="mb-2 row">
                         <label for="pickupDate" class="col-sm-2 col-form-label" style="text-align: center;"><i class="fa-regular fa-calendar-days"></i> 대여일</label>
                         <div class="col-sm-4">
-                            <input type="text" class="form-control form-control-sm" id="pickupDate" name="pickupDate" placeholder="대여 날짜 선택" readonly>
+                            <input type="text" class="form-control form-control-sm" id="pickupDate" name="reserv_pickupdate" placeholder="대여 날짜 선택" readonly>
                         </div>
-
+                        
                         <label for="pickupDate" class="col-sm-2 col-form-label" style="text-align: center;"><i class="fa-regular fa-calendar-days"></i> 반납일</label>
                         <div class="col-sm-4">
-                            <input type="text" class="form-control form-control-sm" id="returnDate" name="returnDate" placeholder="반납 날짜 선택" readonly>
+                            <input type="text" class="form-control form-control-sm" id="returnDate" name="reserv_returndate" placeholder="반납 날짜 선택" readonly>
                         </div>
                     </div>
                 </div>
-                <!--  연습 -->
                 <div class="mb-2 row">
-   				<label for="pickupDate" class="col-sm-2 col-form-label" style="text-align: center;">
-					<i class="fa-regular fa-clock"></i> 대여시간
-				</label>
-   				<div class="col-sm-4">
-				<select class="form-select form-select-sm" id="carType" name="pickupTime">
-					<option value="06">오전 06:00</option>
-					<option value="07">오전 07:00</option>
-					<option value="08">오전 08:00</option>
-				    <option value="09">오전 09:00</option>
-				    <option value="10">오전 10:00</option>
-				    <option value="11">오전 11:00</option>
-				    <option value="12">오후 12:00</option>
-				    <option value="13">오후 13:00</option>
-				    <option value="14">오후 14:00</option>
-				    <option value="15">오후 15:00</option>
-				    <option value="16">오후 16:00</option>
-				    <option value="17">오후 17:00</option>
-				    <option value="18">오후 18:00</option>
-				    <option value="19">오후 19:00</option>
-				    <option value="20">오후 20:00</option>
-				</select>
+	   				<label for="pickupDate" class="col-sm-2 col-form-label" style="text-align: center;">
+						<i class="fa-regular fa-clock"></i> 대여시간
+					</label>
+	   				<div class="col-sm-4">
+	   				   <select  class="form-select form-select-sm"  name="pickupTime">
+	    					<c:forEach var="BH" begin="${BHS}" end="${BHE}" >
+	    						<fmt:formatNumber value="${BH}" pattern="00" var="BHfmt" />
+	    						<option value="${BHfmt}">${BHfmt}:00</option>
+	    					</c:forEach>
+						</select>	
+					</div>
+					<label for="pickupDate" class="col-sm-2 col-form-label" style="text-align: center;">
+						<i class="fa-regular fa-clock"></i> 반납시간
+					</label>
+	   				<div class="col-sm-4">
+	   					<select class="form-select form-select-sm" name="returnTime">
+							<c:forEach var="BH" begin="${BHS}" end="${BHE}" >
+								<fmt:formatNumber value="${BH}" pattern="00" var="BHfmt" />
+								<option value="${BHfmt}"> ${BHfmt}:00 </option>
+		   					</c:forEach>
+						</select>
+					</div>
 				</div>
-				<label for="pickupDate" class="col-sm-2 col-form-label" style="text-align: center;">
-					<i class="fa-regular fa-clock"></i> 반납시간
-				</label>
-   				<div class="col-sm-4">
-				<select class="form-select form-select-sm" id="carType" name="returnTime">
-					<option value="06">오전 06:00</option>
-					<option value="07">오전 07:00</option>
-					<option value="08">오전 08:00</option>
-				    <option value="09">오전 09:00</option>
-				    <option value="10">오전 10:00</option>
-				    <option value="11">오전 11:00</option>
-				    <option value="12">오후 12:00</option>
-				    <option value="13">오후 13:00</option>
-				    <option value="14">오후 14:00</option>
-				    <option value="15">오후 15:00</option>
-				    <option value="16">오후 16:00</option>
-				    <option value="17">오후 17:00</option>
-				    <option value="18">오후 18:00</option>
-				    <option value="19">오후 19:00</option>
-				    <option value="20">오후 20:00</option>
-				</select>
-				</div>
-				</div>
-                <!-- 연습 -->
-                
-
-<!--                 <div class="mb-2 row"> -->
-<!--                     <label for="pickupTime" class="col-sm-2 col-form-label" style="text-align: center;"><i class="fa-regular fa-clock"></i> 대여시간</label> -->
-<!--                     <div class="col-sm-4"> -->
-<!--                         <input type="time" class="form-control form-control-sm" id="pickupTime" value="09:00" step="1800"> -->
-<!--                     </div> -->
-<!--                     <label for="pickupTime" class="col-sm-2 col-form-label" style="text-align: center;"><i class="fa-regular fa-clock"></i> 반납시간</label> -->
-<!--                     <div class="col-sm-4"> -->
-<!--                         <input type="time" class="form-control form-control-sm" id="pickupTime" value="21:00"> -->
-<!--                     </div> -->
-<!--                 </div> -->
-                
-                
                 <div class="mb-2 row">
                 	<label for="carType" class="col-sm-2 col-form-label" style="text-align: center;"><i class="fa-solid fa-car-side"></i> 차종</label>
                     <div class="col-sm-4">
-                        <select class="form-select form-select-sm" id="carType">
-                            <option selected>차종 선택</option>
-                            <option value="sedan">Sedan</option>
-                            <option value="suv">SUV</option>
-                            <option value="hatchback">Hatchback</option>
+                        <select class="form-select form-select-sm" id="carType" name="car_type">
+                            <option value='' selected>차종 선택</option>
+                           	<c:forEach var="type" items="${types}">
+                            	<option value="${type.name}" >${type.name} </option>
+                        	</c:forEach>
                         </select>
                     </div>
                     <label for="carType" class="col-sm-2 col-form-label" style="text-align: center;"><i class="fa-solid fa-gas-pump"></i> 연료</label>
                     <div class="col-sm-4">
-                        <select class="form-select form-select-sm" id="carType">
-                            <option selected>연료 선택</option>
-                            <option value="">휘발유</option>
-                            <option value="">경유</option>
-                            <option value="">LPG</option>
+                        <select class="form-select form-select-sm" id="carFuel" name="car_fuel">
+                            <option value='' selected>연료 선택</option>
+                       		<c:forEach var="fuel" items="${fuels}">
+			    				<option value="${fuel.name}" > ${fuel.name} </option>
+			    			</c:forEach>   
                         </select>
                     </div>
                 </div>
