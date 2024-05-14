@@ -104,7 +104,7 @@ public class MypageController {
 			member.setMember_id(dbMember.getMember_id());
 			String securePasswd = passwordEncoder.encode(member.getMember_passwd());
 			member.setMember_passwd(securePasswd);
-			if(service.ModifyPasswd(member) <= 0) {
+			if(service.modifyPasswd(member) <= 0) {
 				model.addAttribute("msg", "비밀번호 변경 실패");
 				return "err/fail";
 			}
