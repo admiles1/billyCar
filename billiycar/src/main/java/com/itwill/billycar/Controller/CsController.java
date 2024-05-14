@@ -284,9 +284,11 @@ public class CsController {
 		int listLimit = 5;
 		int startRow = (pageNum-1)*listLimit;
 		
-		
 		// 1) 전체 게시물 수 조회
-		int listCount = service.getQnaListCount();
+		String writer = (String)session.getAttribute("member_id");
+//		System.out.println("누구"+writer);
+		int listCount = service.getQnaListCount(writer);
+//		System.out.println(listCount);
 		int pageListLimit = 3;
 		
 		//----------------------------------------------------------------

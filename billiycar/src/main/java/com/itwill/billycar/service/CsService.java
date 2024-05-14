@@ -81,8 +81,8 @@ public class CsService {
 	}
 
 	// 큐엔에이 페이지 수 조회
-	public int getQnaListCount() {
-		return mapper.selectQnaListCount();
+	public int getQnaListCount(String writer) {
+		return mapper.selectQnaListCount(writer);
 	}
 	
 	// 큐엔에이 글작성

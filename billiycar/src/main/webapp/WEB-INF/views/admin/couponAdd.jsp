@@ -78,6 +78,7 @@
 		            <div class="form-group text-center">
 			            <button type="submit" class="btn btn-primary">쿠폰 등록하기</button>
 		            </div>
+		            
 		          </form>
 		        </div>
 		      </div>
@@ -88,8 +89,6 @@
         
         
       </main>
-    </div>
-  </div>
 </main>
   <!-- jQuery, Popper.js, 부트스트랩 JS -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

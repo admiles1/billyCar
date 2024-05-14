@@ -84,7 +84,7 @@ public class MemberController {
 		// => 파라미터 : MailAuthInfoVO 객체   리턴타입 : void
 		service.registMailAuthInfo(mailAuthInfo);
 		
-		// -------------------------------------------------------------------------------------
+		// ----------------------중복 이메일 전화번호 확인------------------------------
 		boolean isEmptyEmail = service.isEmptyEmail(member.getMember_email());
 		boolean isEmptyPhoneNum = service.isEmptyPhoneNum(member.getMember_phone());
 		
@@ -97,7 +97,7 @@ public class MemberController {
 			model.addAttribute("msg", "이미 가입된 전화번호입니다.");
 			return "err/fail";
 		}
-		//--------------------------------------------------------------------------------------
+		//-------------------------비밀번호 암호화-------------------------------------
 		String securePasswd = passwordEncoder.encode(member.getMember_passwd());
 		member.setMember_passwd(securePasswd);
 		
@@ -206,22 +206,37 @@ public class MemberController {
 		return "login/forgot_id";
 	}
 	
+//	@PostMapping("forgot_id")
+//	public String forgot_idPro(MemberVO member, Model model) {
+//		member = service.forgotId(member);
+//		if(member != null) {
+//			String id = member.getMember_id().substring(0,4) + "****";
+//			model.addAttribute("member_id",  id);
+//			return "login/show_id";
+//		} else {
+//			model.addAttribute("msg", "이름 또는 E-Mail 주소를 잘못 입력했습니다.");
+//			return "err/fail";
+//		}
+//	}
+	
 	@PostMapping("forgot_id")
 	public String forgot_idPro(MemberVO member, Model model) {
 		
 		member = service.forgotId(member);
 		
+//		MailAuthInfoVO mailAuthInfo = mailService.sendAuthMail(member);
+//		System.out.println("인증정보 : " + mailAuthInfo);
+//		service.registMailAuthInfo(mailAuthInfo);
+		mailService.sendForgotId(member);
+		
 		if(member != null) {
-			
-			String id = member.getMember_id().substring(0,4) + "****";
-			
-			model.addAttribute("member_id",  id);
-			return "login/show_id";
+			model.addAttribute("msg", "이메일 전송이 완료되었습니다.\\n메일을 확인해주세요");
+			model.addAttribute("targetURL", "login");
+			return "err/fail";
 		} else {
 			model.addAttribute("msg", "이름 또는 E-Mail 주소를 잘못 입력했습니다.");
 			return "err/fail";
 		}
-		
 	}
 	
 	@GetMapping("show_id")
