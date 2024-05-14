@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -141,7 +143,7 @@
     <main class="container vehicle-details">
         <div class="cont_top">
             <div class="cont_tit">
-                <h2>차량소개</h2>
+                <h2 style="text-align: center">차량소개</h2>
             </div>
         </div>
         <div class="cont">
@@ -152,7 +154,11 @@
                 <li class="panel">
                     <div class="left">
                         <div class="img-wrap-responsive">
-                            <img onerror="this.src='resources/main_images/rewiewCar2.png'" src="/_files/cat_category/a106d5d03428fe453c42ffb564feaffc.png">
+                        	<c:if test="${not empty car.car_img}">
+								<c:set var="original_fileName" value="${fn:substringAfter(car.car_img, '_')}"/>
+								${original_fileName}
+							</c:if>
+	                            <img src="${pageContext.request.contextPath}/resources/upload/${car.car_img}">
                         </div>
                     </div>
                     <div class="right">
@@ -182,11 +188,12 @@
                                     <tbody>
                                         <tr>
                                             <td> 종일가 </td>
-                                            <td class="b_l1 r"><span style="color:#0b80ff">${car.car_dayprice}</span> 원</td>
+                                            <td class="b_l1 r"><span style="color:#0b80ff">
+                                            <fmt:formatNumber value="${car.car_dayprice}" type="currency" /></span></td>
                                         </tr>
                                         <tr>
                                             <td>1시간</td>
-                                            <td class="b_l1 r">${car.car_hourprice}</td>
+                                            <td class="b_l1 r"><fmt:formatNumber value="${car.car_hourprice}" type="currency" /></td> 
                                         </tr>
                                     </tbody>
                                 </table>

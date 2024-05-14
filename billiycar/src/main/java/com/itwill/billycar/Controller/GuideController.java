@@ -35,7 +35,7 @@ public class GuideController {
 	@GetMapping("guideCar")
 	public String guideCar(Model model) {
 		List<Map<String, Object>> carList = service.carList();
-		System.out.println(carList);
+//		System.out.println(carList);
 		model.addAttribute("carList", carList);
 		return "guidance/car_introduction";
 	}

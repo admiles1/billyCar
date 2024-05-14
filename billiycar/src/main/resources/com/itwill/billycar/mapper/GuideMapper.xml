@@ -11,7 +11,6 @@
 		JOIN Common model ON model.code = c.car_model
 		JOIN Common carType ON carType.code = c.car_type
 		JOIN Common fuel ON fuel.code = c.car_fuel
-		WHERE c.car_img IN (SELECT DISTINCT car_img FROM car);
 		</select>
 
 </mapper>
