@@ -51,7 +51,7 @@ public class MypageService {
 		return mapper.getMemberLicense(memberId);
 	}
 
-	public int ModifyPasswd(MemberVO member) {
+	public int modifyPasswd(MemberVO member) {
 		
 		return mapper.updatePasswd(member);
 	}
