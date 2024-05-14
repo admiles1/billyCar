@@ -49,9 +49,14 @@ public class MypageService {
 	}
 
 	public int modifyPasswd(MemberVO member) {
-		System.out.println("11111111111111"); //까지 나옴
-		System.out.println(mapper.updatePasswd(member));
-		System.out.println("2222222222222222222");
+		return mapper.updatePasswd(member);
+	}
+	public int modifyPasswd2(MemberVO member) {
+		System.out.println("2222222222222222222"); //까지 나옴
+		System.out.println("222222222222222222의" + member);
+//		System.out.println(mapper.updatePasswd(member));
+		mapper.updatePasswd(member);
+		System.out.println("333333333333333333333333333나와라");
 		return mapper.updatePasswd(member);
 	}
 
