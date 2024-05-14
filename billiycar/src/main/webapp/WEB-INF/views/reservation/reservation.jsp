@@ -205,8 +205,9 @@
 						                // 클릭한 마커만 표시합니다.
 						                marker.setMap(map);
 						                
-						                    
-						                //위도를 주소로 변환
+						                console.log("marker : " + marker);
+						                
+// 						                //위도를 주소로 변환
 						                var geocoder = new kakao.maps.services.Geocoder();
 						            	// 좌표를 주소로 변환하는 함수 호출
 		 							    geocoder.coord2Address(marker.getPosition().getLat(), marker.getPosition().getLng(), function(result, status) {
