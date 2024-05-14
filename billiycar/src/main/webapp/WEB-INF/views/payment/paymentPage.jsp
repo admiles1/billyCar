@@ -699,8 +699,10 @@
 					<div class="col-9" align="right"></div>
 				</div>
 				<br><br>
-			</div>			
-				<input type="button" class="sub_btn w-100 btn btn-primary btn-lg" value="결제하기" onclick="startPayment();" >
+			</div>
+				<form action="payment" method="post">
+					<input type="button" class="sub_btn w-100 btn btn-primary btn-lg" value="결제하기" onclick="startPayment();" >
+				</form>			
 			</div>
 		</div>
 	</div>
@@ -734,7 +736,7 @@
             }, function(rsp) {
                 if (rsp.success) {
                     alert("결제 성공");
-                    location.href ="http://localhost:8080/billycar/";
+                    location.href ="paymentComplete";
                 } else {
                     alert("결제 취소");
                     
@@ -765,8 +767,8 @@
 	<!-- 추가옵션 스크립트 -->
 		 <script>
         function updateOptionPrice() {
-            var checkboxes = document.querySelectorAll('input[name="opt_chk"]:checked'); // 체크된 모든 체크박스 선택
-            var total = 0;
+            let checkboxes = document.querySelectorAll('input[name="opt_chk"]:checked'); // 체크된 모든 체크박스 선택
+            let total = 0;
             checkboxes.forEach(function(checkbox) {
                 total += parseInt(checkbox.value, 10); // 체크박스의 값(가격)을 합산
             });
@@ -775,7 +777,7 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            var checkboxes = document.querySelectorAll('input[name="opt_chk"]');
+            let checkboxes = document.querySelectorAll('input[name="opt_chk"]');
             checkboxes.forEach(function(checkbox) {
                 checkbox.addEventListener('change', updateOptionPrice); // 각 체크박스에 이벤트 리스너 추가
             });
