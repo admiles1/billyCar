@@ -72,6 +72,65 @@
 		}
 		
 		.car-option-list li {width : 20%;}
+		
+   /* 	========================================= */
+   
+   /* div 인라인 */
+    .title {
+   		display: inline-block;
+	    overflow: hidden;
+	    position: relative;
+	    margin-bottom: 10px;
+	    background-color: #f5f5f5;
+	    border-radius: 10px;
+	    padding: 15px 10px 15px 20px;
+	    display: flex;
+	    align-items: center;
+   }
+   
+   .type-list {
+   		width : 300px;
+   		display: flex;
+	    margin-left: 20px;
+	    color: #727272;
+   }
+		
+	.type-list span {
+    padding: 0 10px;
+    position: relative;
+	}
+	
+	.search-car-result-cont {
+		display: flex;
+	    position: relative;
+	}
+	
+	/* 요금 정보 */
+	.search-car-result-cont-left {
+		margin-top: 30px;
+		margin-left: 60px;
+		width : 500px;
+	}
+	
+	/* 옵션 정보 */
+	.search-car-result-cont-right {
+		margin-top : 10px;
+		margin-left: -60px;
+		width : 70%;
+	}
+	
+	/* 옵션 이미지 */
+	#optionImg {
+		width : 50px;
+	}
+	
+	/* 옵션 */
+	.car-option-list {
+		
+		margin-left: -20px;
+		padding : 5px;
+	}
+	
     </style>
 </head>
 <body>
@@ -86,6 +145,9 @@
             </div>
         </div>
         <div class="cont">
+        
+        <c:forEach var="car" items="${carList}">
+        
             <ul class="search-car-result-list">
                 <li class="panel">
                     <div class="left">
@@ -95,16 +157,16 @@
                     </div>
                     <div class="right">
                         <div class="title">
-                            <h3>SM6</h3>
+                            <h3>${car.model}</h3>
                             <div class="type-list">
-                                <span>중형</span>
-                                <span>5인승</span>
-                                <span>LPG</span>
+                                <span>${car.carType}</span> /
+                                <span>${car.car_capacity}</span> /
+                                <span>${car.fuel}</span>
                             </div>
                         </div>
                         <div class="search-car-result-cont">
                             <div class="search-car-result-cont-left">
-                                <h3 class="title-01 f14">요금정보</h3>
+                                <h5 class="title-01 f14">요금정보</h5>
                                 <table class="cont-list-table-v04">
                                     <colgroup>
                                         <col width="20%">
@@ -114,103 +176,91 @@
                                     <thead>
                                         <tr>
                                             <th class="first">구분</th>
-                                            <th>주중 대여료</th>
-                                            <th>주말 대여료</th>
+                                            <th>대여료</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>24시간</td>
-                                            <td class="b_l1 r"><span style="color:#0b80ff">53,000</span> 원</td>
-                                            <td class="b_l1 r"><span style="color:#0b80ff">58,000</span> 원</td>
-                                        </tr>
-                                        <tr>
-                                            <td>6시간</td>
-                                            <td class="b_l1 r">50,000 원</td>
-                                            <td class="b_l1 r">55,000 원</td>
+                                            <td> 종일가 </td>
+                                            <td class="b_l1 r"><span style="color:#0b80ff">${car.car_dayprice}</span> 원</td>
                                         </tr>
                                         <tr>
                                             <td>1시간</td>
-                                            <td class="b_l1 r">7,000 원</td>
-                                            <td class="b_l1 r">7,000 원</td>
+                                            <td class="b_l1 r">${car.car_hourprice}</td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                             <div class="search-car-result-cont-right">
-                                <h3 class="title-01 f14">옵션정보</h3>
-                                <div class="text-box">
+	                            <div class="text-box">
                                     <div class="car-option">
-    					<h5 class="div-tap"> 옵션</h5>
-    					<ul class="car-option-list">
-    						<li>
-    							<img src="../resources/images/option_2ndlinsece.png"><p>
-    							<small>국제운전면허증 가능</small>
-    						</li>
-    						<li>
-    							<img src="../resources/images/option_2ndlinsece.png"><p>
-    							<small> 긴급출동무료</small>
-    						</li>
-    						<li>
-    							<img src="../resources/images/option_2ndlinsece.png"><p>
-    							<small> 충전기제공 </small>
-    						</li>
-    						<li>
-    							<img src="../resources/images/option_2ndlinsece.png"><p>
-    							<small> 연료적립 </small>
-    						</li>
-    						<li>
-    							<img src="../resources/images/option_2ndlinsece.png"><p>
-    							<small> 카시트 무료 </small>
-    						</li>
-    						<li>
-    							<img src="../resources/images/option_2ndlinsece.png"><p>
-    							<small> 금연 </small>
-    						</li>
-    						<li>
-    							<img src="../resources/images/option_2ndlinsece.png"><p>
-    							<small> 열선시트 </small>
-    						</li>
-    						<li>
-    							<img src="../resources/images/option_2ndlinsece.png"><p>
-    							<small> 스마트키 </small>
-    						</li>
-    						<li>
-    							<img src="../resources/images/option_2ndlinsece.png"><p>
-    							<small> 제2운전자 등록가능 </small>
-    						</li>
-    						<li>
-    							<img src="../resources/images/option_2ndlinsece.png"><p>
-    							<small> 네비게이션 </small>
-    						</li>
-    						<li>
-    							<img src="../resources/images/option_2ndlinsece.png"><p>
-    							<small> 후방카메라 </small>
-    						</li>
-    						<li>
-    							<img src="../resources/images/option_2ndlinsece.png"><p>
-    							<small> 블랙박스 </small>
-    						</li>
-    						<li>
-    							<img src="../resources/images/option_2ndlinsece.png"><p>
-    							<small> 하이패스 </small>
-    						</li>
-    						<li>
-    							<img src="../resources/images/option_2ndlinsece.png"><p>
-    							<small> 블루투스 </small>
-    						</li>
-    					</ul>
-    				</div>
+				    					<h5 class="div-tap"> 옵션</h5>
+				    					<ul class="car-option-list">
+				    						<li>
+				    							<img src="${pageContext.request.contextPath}/resources/images/option/option_linsece.png" id="optionImg"><p>
+				    							<small>국제운전면허</small>
+				    						</li>
+				    						<li>
+				    							<img src="${pageContext.request.contextPath}/resources/images/option/option_sos.png" id="optionImg"><p>
+				    							<small> 긴급출동무료</small>
+				    						</li>
+				    						<li>
+				    							<img src="${pageContext.request.contextPath}/resources/images/option/option_charger.png" id="optionImg"><p>
+				    							<small> 충전기제공 </small>
+				    						</li>
+				    						<li>
+				    							<img src="${pageContext.request.contextPath}/resources/images/option/option_seat.png" id="optionImg"><p>
+				    							<small> 카시트 무료 </small>
+				    						</li>
+				    						<li>
+				    							<img src="${pageContext.request.contextPath}/resources/images/option/option_nosmoking.png" id="optionImg"><p>
+				    							<small> 금연 </small>
+				    						</li>
+				    						<li>
+				    							<img src="${pageContext.request.contextPath}/resources/images/option/option_heatseat.png" id="optionImg"><p>
+				    							<small> 열선시트 </small>
+				    						</li>
+				    						<li>
+				    							<img src="${pageContext.request.contextPath}/resources/images/option/option_smartkey.png" id="optionImg"><p>
+				    							<small> 스마트키 </small>
+				    						</li>
+				    						<li>
+				    							<img src="${pageContext.request.contextPath}/resources/images/option/option_2ndlinsece.png" id="optionImg"><p>
+				    							<small> 제2운전자 </small>
+				    						</li>
+				    						<li>
+				    							<img src="${pageContext.request.contextPath}/resources/images/option/option_navigation.png" id="optionImg"><p>
+				    							<small> 네비게이션 </small>
+				    						</li>
+				    						<li>
+				    							<img src="${pageContext.request.contextPath}/resources/images/option/option_backcamera.png" id="optionImg"><p>
+				    							<small> 후방카메라 </small>
+				    						</li>
+				    						<li>
+				    							<img src="${pageContext.request.contextPath}/resources/images/option/option_blackbox.png" id="optionImg"><p>
+				    							<small> 블랙박스 </small>
+				    						</li>
+				    						<li>
+				    							<img src="${pageContext.request.contextPath}/resources/images/option/option_highpass.png" id="optionImg"><p>
+				    							<small> 하이패스 </small>
+				    						</li>
+				    						<li>
+				    							<img src="${pageContext.request.contextPath}/resources/images/option/option_bluetooth.png" id="optionImg"><p>
+				    							<small> 블루투스 </small>
+				    						</li>
+				    					</ul>
+				    				</div>
                                 </div>
                             </div>
                         </div>
                         <div class="btn-wrap">
-                            <a class="call" href="javascript:;" title="전화상담" onclick="return Common.openLayerPage('/?pCode=1541884045&amp;mode=contactUs&amp;pmode=ajax&amp;c_idx=118','450','330','전화상담요청')">전화상담</a>
-                            <a class="reservation" href="/?pCode=1541884045&amp;idx=118">실시간 예약</a>
+<!--                             <a class="reservation" href="/?pCode=1541884045&amp;idx=118">실시간 예약</a> -->
                         </div>
                     </div>
                 </li>
             </ul>
+        </c:forEach>
+        
         </div>
     </main>
 
