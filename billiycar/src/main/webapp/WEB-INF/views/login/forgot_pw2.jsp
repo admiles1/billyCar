@@ -17,14 +17,14 @@
             <a href="forgot_pw" class="forgot_pw">비밀번호 찾기</a>
         </div>
 		<hr>
-		<form action="">
+		<form action="forgot_pw2" method="post">
 	        <h4>본인확인 이메일로 인증</h4>
-	        <div class="email">
+	        <div class="email"> <input type="hidden" value="${member_id}" name="member_id">
 	            <br>
 	            <input type="text" placeholder="이름" class="name" id="member_name" name="member_name"/>
 	            <br>
 	            <input type="email" placeholder="Email" class="email_ad" id="member_email" name="member_email"/>
-	            <input type="button" class="check_btn" value="인증하기" >
+	            <input type="submit" class="check_btn" value="인증하기" >
 	            <br>
 	        </div>
 	    </form>   
@@ -52,7 +52,7 @@
 	            </div>
 	        </div>
 	        <div class="next">
-	        <input type="submit" value="다음" class="next">
+	        <input type="submit" value="다음" id="next">
 	        </div>
         </form>
     </div>

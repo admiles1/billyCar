@@ -58,6 +58,17 @@ public class MailService {
 		mailClient.sendMail(member.getMember_email(), subject, content);
 	}
 	
+	public void sendForgotPw(MemberVO member) {
+		String subject = "[빌리카] 비밀번호 변경 이메일입니다.";
+		String content = "<a href='http://localhost:8081/billycar/forgot_pw3?member_id=" + member.getMember_id() 
+																		 + "&member_email=" + member.getMember_email()
+																		 + "&member_name=" + member.getMember_name()
+																		 + "'>클릭 시 새 비밀번호 설정 페이지로 이동합니다.</a>";
+		
+		SendMailClient mailClient = new SendMailClient();
+		mailClient.sendMail(member.getMember_email(), subject, content);
+	}
+	
 }
 
 
