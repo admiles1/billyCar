@@ -43,6 +43,10 @@
 		let pickupLocation = $("#reserv_pickuplocation").val();
 		let returnLocation = $("#reserv_returnlocation").val();
 		
+		if(returnLocatin == "sameLocaion") {
+			returnLocation = pickupLocation
+		}
+		
 		location.href="reservationdetail?model=" + model + "&pickupDate=" + pickupDate + "&returnDate=" + returnDate
 						+ "&pickuplocation=" + pickupLocation + "&returnlocation=" + returnLocation;
 	}
@@ -318,15 +322,12 @@
 			   		 						<span> ${car.car_type} / ${car.car_capacity}</span>
 			   		 						<small>종일가 <fmt:formatNumber value="${car.car_dayprice}" pattern="#,###"/></small>
 			   		 						<small>시간당 <fmt:formatNumber value="${car.car_hourprice}" pattern="#,###"/></small>
+			   		 						예약 가능 차량 ${car.canReserv} 
 			   		 					</span>
 			   		 				</a>
 			   		 			</li>
 		   		 			</c:forEach>
 		   		 		 </ul>
-		   		 		 <div> 
-		   		 			<input type="button" value="이전" onclick="location.href='reservation?num='"> 
-		   		 			<input type="button" value="다음" onclick="location.href='reservation?num='">	
-			 			 </div>
 	    			</div>
 	   			</c:otherwise>
 			</c:choose>

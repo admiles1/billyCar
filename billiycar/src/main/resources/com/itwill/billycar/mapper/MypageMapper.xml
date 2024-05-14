@@ -97,6 +97,14 @@
 			member_id = #{member_id}
 	</update>
 	
+	<update id="updatePasswd2">
+		UPDATE member
+		SET
+			member_passwd = #{member_passwd}
+		WHERE
+			member_id = #{member_id}
+	</update>
+	
 	<select id="selcetMemberCoupon" resultType="com.itwill.billycar.vo.CouponIssueVO">
 		SELECT * 
 		FROM coupon_issue

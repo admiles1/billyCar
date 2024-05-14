@@ -15,7 +15,7 @@ import com.itwill.billycar.vo.ReservVO;
 public interface ReservMapper {
 	List<Map<String, String>> selectCarList(@Param("car")CarVO car, @Param("reserv")ReservVO reserv);
 	
-	CarVO selectCar(int idx);
+	CarVO selectCar(String model);
 	
 	//예약 현황 리스트
 	List<ReservVO> selectReservList(MemberVO member);

@@ -19,8 +19,8 @@ public class ReservService {
 		return mapper.selectCarList(car, reserv);
 	}
 	
-	public CarVO getCar(int idx) {
-		return mapper.selectCar(idx);
+	public CarVO getCar(String model) {
+		return mapper.selectCar(model);
 	}
 
 	

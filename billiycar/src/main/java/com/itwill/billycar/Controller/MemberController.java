@@ -306,7 +306,8 @@ public class MemberController {
 		member.setMember_passwd(securePasswd);
 		
 		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + member);
-		if(mypageService.modifyPasswd(member) <= 0) {
+//		if(mypageService.modifyPasswd(member) <= 0) {
+		if(mypageService.modifyPasswd2(member) <= 0) {
 			model.addAttribute("msg", "비밀번호 변경 실패");
 			return "err/fail";
 		}
