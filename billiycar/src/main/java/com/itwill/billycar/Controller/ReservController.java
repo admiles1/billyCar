@@ -11,6 +11,7 @@ import java.util.StringJoiner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -118,12 +119,15 @@ public class ReservController {
 	public String reservationdetail(CarVO car 
 			                        , @RequestParam(defaultValue = "") Map<String, String> map 
 			                        , Model model) {
-		// idx없이 강제로 상세예약페이지 진입시
+		
 		if (map.get("model") == null) {
 			model.addAttribute("msg", "차량을 선택하여 주십시오");
 			model.addAttribute("targetURL", "reservation");
 			return "err/fail";
 		} 
+		
+		reservService.getCar(map.get("model"));
+		 
 		return "reservation/reserv_detail";
 	}
 	
