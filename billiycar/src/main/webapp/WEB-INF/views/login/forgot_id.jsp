@@ -50,7 +50,7 @@
 	                <input type="text" placeholder="인증번호" class="cernum"/>
 	                <br>
 		        <div class="next">
-		        <input type="submit" value="다음" >
+		        <input type="submit" value="다음"  id="next">
 		        </div>
 	            </div>
 	        </div>

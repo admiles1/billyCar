@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.billycar.service.MailService;
 import com.itwill.billycar.service.Memberservice;
+import com.itwill.billycar.service.MypageService;
 import com.itwill.billycar.vo.MailAuthInfoVO;
 import com.itwill.billycar.vo.MemberVO;
 
 @Controller
 public class MemberController {
+	
 	@Autowired
 	private Memberservice service;
 	@Autowired
@@ -224,12 +226,8 @@ public class MemberController {
 		
 		member = service.forgotId(member);
 		
-//		MailAuthInfoVO mailAuthInfo = mailService.sendAuthMail(member);
-//		System.out.println("인증정보 : " + mailAuthInfo);
-//		service.registMailAuthInfo(mailAuthInfo);
-		mailService.sendForgotId(member);
-		
 		if(member != null) {
+			mailService.sendForgotId(member);
 			model.addAttribute("msg", "이메일 전송이 완료되었습니다.\\n메일을 확인해주세요");
 			model.addAttribute("targetURL", "login");
 			return "err/fail";
@@ -252,12 +250,12 @@ public class MemberController {
 	@PostMapping("forgot_pw")
 	public String forgot_pwPro(MemberVO member, Model model, HttpSession session) {
 		
-		System.out.println(member.getMember_id());
+		System.out.println(member);
 		
 		MemberVO dbMember = service.getMember(member);
 		
 		if(dbMember != null) {
-			session.setAttribute("member_id", member.getMember_id());
+			model.addAttribute("member_id", dbMember.getMember_id());
 			return "redirect:/forgot_pw2";
 		} else {
 			model.addAttribute("msg", "존재하지 않는 회원입니다.");
@@ -266,14 +264,54 @@ public class MemberController {
 	}
 	
 	@GetMapping("forgot_pw2")
-	public String forgot_pw2() {
-		
+	public String forgot_pw2(MemberVO member, Model model) {
+		model.addAttribute("member_id", member.getMember_id());
 		return "login/forgot_pw2";
 	}
 	
+	@PostMapping("forgot_pw2")
+	public String forgot_pw2Pro(MemberVO member, Model model, String member_id) {
+		
+		member = service.forgotPw(member);
+		
+		if(member != null) {
+			mailService.sendForgotPw(member);
+			model.addAttribute("msg", "이메일 전송이 완료되었습니다.\\n메일을 확인해주세요");
+			model.addAttribute("targetURL", "login");
+			return "err/fail";
+		} else {
+			model.addAttribute("msg", "이름 또는 E-Mail 주소를 잘못 입력했습니다.");
+			return "err/fail";
+		}
+	}
+	
 	@GetMapping("forgot_pw3")
-	public String forgot_pw3() {
+	public String forgot_pw3(MemberVO member, Model model) {
+		model.addAttribute("member_id", member.getMember_id());
+		System.out.println("655555555555555555" + member.getMember_id());
 		return "login/forgot_pw3";
+	}
+	
+	@PostMapping("forgot_pw3")
+	public String forgot_pw3Pro(MemberVO member
+								, BCryptPasswordEncoder passwordEncoder
+					            , Model model
+					            , String member_passwd) {
+		MypageService mypageService = new MypageService();
+		
+		System.out.println("sadflhawrilfhqeiorashgiuewqkarshdgilqwrheasdfilqwrehfd" + member);
+		
+		member.setMember_passwd(member.getMember_passwd());
+		String securePasswd = passwordEncoder.encode(member.getMember_passwd());
+		member.setMember_passwd(securePasswd);
+		
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + member);
+		if(mypageService.modifyPasswd(member) <= 0) {
+			model.addAttribute("msg", "비밀번호 변경 실패");
+			return "err/fail";
+		}
+		
+		return "redirect:/login";
 	}
 	
 	@PostMapping ("passwdChange")

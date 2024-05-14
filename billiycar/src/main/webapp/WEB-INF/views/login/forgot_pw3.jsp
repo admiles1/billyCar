@@ -22,19 +22,19 @@
 <header><jsp:include page="../inc/top.jsp"></jsp:include></header>
 
 <body>
-	<form method="post" action="passwdChange">
+	<form method="post" action="forgot_pw3">
 	    <div class="container">
 	        <div class="button">
 	            <a href="forgot_id" class="forgot_id">아이디 찾기</a> |
 	            <a class="forgot_pw">비밀번호 찾기</a>
 	        </div>
 			<hr>
-	   
+	   		 <input type="hidden" value="${member_id}" name="member_id">
 	        <div>
-				<input type="password" placeholder="새 비밀번호" /><br>
+				<input type="password" placeholder="새 비밀번호"  name="member_passwd"/><br>
 			</div>
 			<div>
-				<input type="password" placeholder="새 비밀번호 확인" /><br>
+				<input type="password" placeholder="새 비밀번호 확인" name="member_passwd2" /><br>
 			</div>
 			<div class="g-recaptcha-container">
 	        	<div class="g-recaptcha" data-sitekey="6LfQ8swpAAAAAMfwmMU-_UGqKZL_96D04eJGk2CA"></div>

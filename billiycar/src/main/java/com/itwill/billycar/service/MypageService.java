@@ -2,15 +2,12 @@ package com.itwill.billycar.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itwill.billycar.mapper.MypageMapper;
 import com.itwill.billycar.vo.CouponVO;
 import com.itwill.billycar.vo.LicenseVO;
-import com.itwill.billycar.vo.License_StandardVO;
 import com.itwill.billycar.vo.MemberVO;
 import com.itwill.billycar.vo.QnaVO;
 
@@ -52,7 +49,9 @@ public class MypageService {
 	}
 
 	public int modifyPasswd(MemberVO member) {
-		
+		System.out.println("11111111111111"); //까지 나옴
+		System.out.println(mapper.updatePasswd(member));
+		System.out.println("2222222222222222222");
 		return mapper.updatePasswd(member);
 	}
 
