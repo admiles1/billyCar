@@ -35,36 +35,49 @@
 <!-- 	</select> -->
 	
 	<select id="selectMember" resultType="com.itwill.billycar.vo.MemberVO">
-			SELECT * FROM member WHERE member_id = #{member_id}
+			SELECT * 
+			FROM  member 
+			WHERE member_id = #{member_id}
 	</select>
 	
 	<select id="selectCheckID" resultType="boolean">
-		SELECT IF(COUNT(*) = 1, 1, 0) FROM member WHERE member_id = #{member_id}
+		SELECT IF(COUNT(*) = 1, 1, 0)0
+		FROM  member 
+		WHERE member_id = #{member_id}
 	</select>
 	
+<!-- 	<select id="selectForgotId" resultType="com.itwill.billycar.vo.MemberVO"> -->
+<!-- 		SELECT CONCAT(LEFT(member_id,4), '****') AS member_id     -->
+<!-- 		  FROM member  -->
+<!-- 		 WHERE 1=1 -->
+<!-- 		   AND member_name = #{member_name}   -->
+<!-- 		   AND member_email = #{member_email} -->
+<!-- 	</select> -->
+	
 	<select id="selectForgotId" resultType="com.itwill.billycar.vo.MemberVO">
-		SELECT CONCAT(LEFT(member_id,4), '****') AS member_id    
+		SELECT *
 		  FROM member 
-		 WHERE 1=1
-		   AND member_name = #{member_name}  
-		   AND member_email = #{member_email}
+		 WHERE
+			   member_name = #{member_name}  
+		 AND   member_email = #{member_email}
 	</select>
 	
 	<select id="selectMemberCount">
-		SELECT count(member_idx) FROM member
+		SELECT count(member_idx)
+	      FROM member
 	</select>
 	
 	<select id="selectTodayMember">
 		SELECT COUNT(*)
-		FROM member
-		WHERE DATE(member_reg_date) = CURDATE()
+		  FROM member
+		 WHERE DATE(member_reg_date) = CURDATE()
 	</select>
 	
 	<select id="selectMailAuthInfo" resultType="hashmap">
 		SELECT *
-		FROM mail_auth_info
-		WHERE 
-			member_email = #{member_email}
+		  FROM mail_auth_info
+		  WHERE 
+			   member_email = #{member_email}
 	</select>
 	
 	<!-- 이메일 인증 정보 등록 - INSERT -->
@@ -72,7 +85,7 @@
 		INSERT
 		INTO mail_auth_info
 		VALUES (
-			#{member_email}
+			  #{member_email}
 			, #{auth_code}
 		)
 	</insert>
@@ -89,16 +102,16 @@
 	
 	<select id="selectEmptyEmail" resultType="boolean">
 		SELECT
-		IF(COUNT(*) = 1, 0, 1)
-		FROM member 
-		WHERE member_email = #{member_email}
+		    IF (COUNT(*) = 1, 0, 1)
+	  	  FROM member 
+		 WHERE member_email = #{member_email}
 	</select>
 	
 	<select id="selectEmptyPhoneNum" resultType="boolean">
 		SELECT
-		IF(COUNT(*) = 1, 0, 1)
-		FROM member 
-		WHERE member_phone = #{member_phone}
+		    IF(COUNT(*) = 1, 0, 1)
+		  FROM member 
+		 WHERE member_phone = #{member_phone}
 	</select>
 	
 </mapper>
