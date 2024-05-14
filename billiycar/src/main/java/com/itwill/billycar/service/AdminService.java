@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.billycar.mapper.AdminMapper;
 import com.itwill.billycar.vo.AdminVO;
@@ -88,6 +89,11 @@ public class AdminService {
 	}
 	public int selectAllcar(int status) {
 		return mapper.selectAllcar(status);
+	}
+
+	public int addBrandModel(String newBrandName) {
+		
+		return mapper.insertNewBrand(newBrandName);
 	}
 
 	

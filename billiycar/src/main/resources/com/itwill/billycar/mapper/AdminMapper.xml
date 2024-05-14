@@ -218,6 +218,26 @@
 		</if>
 	</select>
 	
+	
+	
+<!-- 	<selectKey keyProperty="newCarBrand" resultType="String" order="BEFORE"> -->
+<!-- 		SELECT  CONCAT('B', LPAD(IFNULL(MAX(CAST(SUBSTRING(code, 2) AS UNSIGNED)) + 1, 1), 1, '0')) -->
+<!-- 		FROM Common -->
+<!-- 		WHERE code LIKE 'B%' -->
+<!-- 	</selectKey> -->
+<!-- 		INSERT  -->
+<!-- 		  INTO Common -->
+<!-- 		VALUES (#{newCarBrand}, #{newBrand}) -->
+	
+	<insert id="insertNewBrand">
+		INSERT INTO Common 
+		VALUES ((SELECT *
+			  	   FROM (SELECT  CONCAT('B', LPAD(IFNULL(MAX(CAST(SUBSTRING(code, 2) AS UNSIGNED)) + 1, 1), 1, '0'))
+						   FROM Common
+				  WHERE code LIKE 'B%')A) 
+			 , #{newBrand})
+	</insert>
+	
 </mapper>
 
 

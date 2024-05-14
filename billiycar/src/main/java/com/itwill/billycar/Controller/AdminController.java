@@ -324,6 +324,25 @@ public class AdminController {
 		
 	}
 	
+	@GetMapping("addBrand")
+    public String showAddBrandModelPage() {
+        return "admin/addBrand"; // addBrandModel.jsp 파일의 경로
+    }
+	
+	@PostMapping("addBrandModel")
+    public String addBrandModel(Model model, String newBrandName) {
+        System.out.println("새 브랜드 : " + newBrandName);
+        int insertCount = service.addBrandModel(newBrandName);
+        
+//        if (insertCount > 0) { // 성공 시 
+//            return "redirect:/admin_car_registration"; // 작업 후 차량 등록 페이지로 이동
+//        } else { // 실패 시
+//            model.addAttribute("msg", "차량등록실패!");
+//            return "err/fail";
+//        }
+		return "";
+    }
+	
 	@GetMapping("carModify")
 	public String carModify(@RequestParam("carId") int carId, Model model) {
 	    // 특정 차량의 정보 조회

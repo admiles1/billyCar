@@ -31,19 +31,22 @@ button[type="submit"] { width: 100%; }
                     <h1 class="h2">차량 등록</h1>
                 </div>
                 <!-- 폼의 method를 POST로 변경하여 데이터 보안 강화 -->
-				<form action="carUpload" method="post" enctype="multipart/form-data" onsubmit="submitForm()">
+                <form action="carUpload" method="post" enctype="multipart/form-data" onsubmit="submitForm()">
                     <div class="form-group">
                         <label for="manufacturer">제조사</label>
-                        <select id="manufacturer" name="car_brand" class="form-control" required>
-                            <option value="">제조사를 선택하세요</option>
-                        	<c:forEach var="brand" items="${brands}">
-	                            <option value="${brand.code }">${brand.name }</option>
-                        	</c:forEach>
-                        </select>
+                        <div class="d-flex align-items-center">
+                            <select id="manufacturer" name="car_brand" class="form-control" required>
+                                <option value="">제조사를 선택하세요</option>
+                                <c:forEach var="brand" items="${brands}">
+                                    <option value="${brand.code }">${brand.name }</option>
+                                </c:forEach>
+                            </select>
+                            <button type="button" class="btn btn-primary ml-2" onclick="openAddBrandModelWindow()">추가</button>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="model">모델</label>
-                        <select id="model" name= "car_model" class="form-control" required disabled>
+                        <select id="model" name="car_model" class="form-control" required disabled>
                             <option value="">모델을 선택하세요</option>
                         </select>
                     </div>
@@ -51,16 +54,15 @@ button[type="submit"] { width: 100%; }
                         <label for="carType">차량 종류</label>
                         <select id="carType" name="car_type" class="form-control" required>
                             <option value="">차량 종류를 선택하세요</option>
-							<c:forEach var="type" items="${types}">
-								<option value="${type.code }">${type.name }</option>
-							</c:forEach>
+                            <c:forEach var="type" items="${types}">
+                                <option value="${type.code }">${type.name }</option>
+                            </c:forEach>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="year">연식</label>
                         <select id="year" name="car_year" class="form-control" required>
                             <option value="">연식을 선택하세요</option>
-                            <!-- 연도 선택 범위 변경 -->
                             <script>
                                 for (let year = new Date().getFullYear(); year >= 2010; year--) { // 현재 연도부터 2010년까지
                                     document.write('<option value="' + year + '">' + year + '년</option>');
@@ -72,23 +74,23 @@ button[type="submit"] { width: 100%; }
                         <label for="fuel">연료</label>
                         <select id="fuel" name="car_fuel" class="form-control" required>
                             <option value="">연료를 선택하세요</option>
-							<c:forEach var="fuel" items="${fuels}">
-								<option value="${fuel.code }">${fuel.name }</option>
-							</c:forEach>
+                            <c:forEach var="fuel" items="${fuels}">
+                                <option value="${fuel.code }">${fuel.name }</option>
+                            </c:forEach>
                         </select>
                     </div>
-					<div class="form-group d-flex align-items-center justify-content-start">
-					    <label for="number1" class="mr-2">차량번호 :</label>
-					    <input type="text" class="form-control mr-2" id="number1" name="car_number1" placeholder="12" required maxlength="2" style="width: 80px;">
-					
-					    <select id="numberPlateLetter" class="form-control mr-2" name="car_number2" required style="width: 70px;">
-					        <option value="하">하</option>
-					        <option value="호">호</option>
-					        <option value="허">허</option>
-					    </select>
-					
-					    <input type="text" class="form-control" id="number2" name="car_number3" placeholder="3456" required maxlength="4" style="width: 100px;">
-					</div>
+                    <div class="form-group d-flex align-items-center justify-content-start">
+                        <label for="number1" class="mr-2">차량번호 :</label>
+                        <input type="text" class="form-control mr-2" id="number1" name="car_number1" placeholder="12" required maxlength="2" style="width: 80px;">
+                    
+                        <select id="numberPlateLetter" class="form-control mr-2" name="car_number2" required style="width: 70px;">
+                            <option value="하">하</option>
+                            <option value="호">호</option>
+                            <option value="허">허</option>
+                        </select>
+                    
+                        <input type="text" class="form-control" id="number2" name="car_number3" placeholder="3456" required maxlength="4" style="width: 100px;">
+                    </div>
                     <div class="form-group">
                         <label for="pricePerDay">1일 가격</label>
                         <input type="text" class="form-control" id="pricePerDay" name="car_dayprice" placeholder="1일 가격을 입력하세요" required>
@@ -110,11 +112,11 @@ button[type="submit"] { width: 100%; }
                             <option value="1">수동</option>
                         </select>
                     </div>
-                  	<div class="form-group">
-					    <label for="maxPassenger">최대 인원 수</label>
-					    <!-- min과 max를 사용하여 최소값과 최대값을 지정하고, step을 사용하여 값이 얼마나 증가 또는 감소할지를 설정 -->
-					    <input type="number" id="maxPassenger" name="car_capacity" class="form-control" min="1" max="20" step="1" placeholder="최대 인원 수를 입력하세요" required>
-					</div>
+                    <div class="form-group">
+                        <label for="maxPassenger">최대 인원 수</label>
+                        <!-- min과 max를 사용하여 최소값과 최대값을 지정하고, step을 사용하여 값이 얼마나 증가 또는 감소할지를 설정 -->
+                        <input type="number" id="maxPassenger" name="car_capacity" class="form-control" min="1" max="20" step="1" placeholder="최대 인원 수를 입력하세요" required>
+                    </div>
                     <button type="submit" class="btn btn-primary d-block mx-auto">등록</button>
                 </form>
             </main>
@@ -141,6 +143,10 @@ $(document).ready(function() {
         $('#model').prop('disabled', false); // 모델 선택 활성화
     });
 });
+
+function openAddBrandModelWindow() {
+    window.open('${pageContext.request.contextPath}/addBrand', 'newwindow', 'width=400,height=400');
+}
 </script>
 </body>
 </html>

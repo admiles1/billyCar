@@ -54,4 +54,8 @@ public interface AdminMapper {
 	int updateCar(CarVO car);
 	
 	int selectAllcar(int status);
+
+	int insertNewBrand(String newBrandName);
+	
+	
 }

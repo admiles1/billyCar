@@ -79,7 +79,7 @@
                             </thead>
                             <c:forEach var="car" items="${carList }">
 	                            <tbody>
-	                                <tr>
+	                                <tr> 
 										<td>${car.car_brand }</td>
 	                                    <td class="text-center">
 	                                    <img src="/resources/upload/${car.car_img }"></td>
