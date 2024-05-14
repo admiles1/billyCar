@@ -343,11 +343,11 @@
 		<h4 class="subject">추가옵션</h4>
 			<div class="row row-cols-2">
 				<div class="opt_chk">
-					&nbsp;<input type="checkbox" name="opt_chk" id="opt_chk8" value="5000">&emsp;카시트(영유아용)1개 &emsp;5000원
+					&nbsp;<input type="checkbox" name="opt_chk" id="opt_chk1" value="5000">&emsp;카시트(영유아용)1개 &emsp;5000원
 					
 				</div>
 				<div class="opt_chk">
-					<input type="checkbox" name="opt_chk" id="opt_chk9" value="5000">&emsp;카시트(주니어)1개 &emsp;5000원
+					<input type="checkbox" name="opt_chk" id="opt_chk2" value="5000">&emsp;카시트(주니어)1개 &emsp;5000원
 					
 				</div>
 <!-- 				<div class="opt_chk"> -->
@@ -691,7 +691,7 @@
 					<div class="col-9" align="right"><fmt:formatNumber value="${car.car_dayprice}" pattern="#,###"/></div>
 					<div class="col-3">보험금액</div>
 <!-- 					<div class="col-9 incurance" id="insurance_price" align="right">0</div> -->
-					<div class="col-9 incurance" id="insurance_price" align="right">${empty param.insurance ? '0' : param.insurance}</div>
+					<div class="col-9 incurance" id="insurance_price" align="right">${empty param.insurance ? '(+)0' : param.insurance}</div>
 					<div class="col-3">할인금액</div>
 					<div class="col-9" align="right">할인금액 표시</div>
 					<hr>
@@ -709,64 +709,34 @@
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
     <script>
         const IMP = window.IMP; 
-        IMP.init('imp47235683'); // 내 가맹점 식별 코드
+        IMP.init("imp47235683"); // 내 가맹점 식별 코드
 
         function startPayment() {
             IMP.request_pay({
-                pg: 'html5_inicis', // 결제 과정에 사용될 결제사 이니시스
-                pay_method: 'card', // 결제 수단
-                merchant_uid: 'merchant_' + new Date().getTime(), // 주문번호 어칼지 고민
-                name: '렌트카 예약', // 주문 명 '렌트카 되어있는 곳에 차명 따와야 할듯'
+                pg: "html5_inicis", // 결제 과정에 사용될 결제사 이니시스
+                pay_method: "card", // 결제 수단
+                merchant_uid: "merchant_" + new Date().getTime(), // 주문번호 어칼지 고민
+                name: "렌트카 예약", // 주문 명 '렌트카 되어있는 곳에 차명 따와야 할듯'
                 amount: 100, // 금액
-                buyer_email: 'customer@example.com', // 구매자 이메일 필요한가 싶네
+                buyer_email: "${info.member_email}", // 구매자 이메일 필요한가 싶네
 //                 buyer_name: '홍길동', // 구매자 이름 가져오기
-                buyer_name: '${info.member_name}', // 구매자 이름 가져오기
-                buyer_tel: '010-1234-5678', // 구매자 전화번호 필요 하려나
-                buyer_addr: '서울특별시 강남구 삼성동', // 구매자 주소 필요 없을듯
+                buyer_name: "${info.member_name}" // 구매자 이름 가져오기
+//                 buyer_tel: '010-1234-5678', // 구매자 전화번호 필요 하려나
+//                 buyer_addr: '서울특별시 강남구 삼성동', // 구매자 주소 필요 없을듯
 //                 m_redirect_url: 'http://localhost:8080/billycar/' // 모바일 결제시 리다이렉션될 URL이건 그냥 메인으로 보내면 될듯 이거안쓰고 보내도 될듯
-                m_redirect_url: 'http://www.naver.com' // 모바일 결제시 리다이렉션될 URL이건 그냥 메인으로 보내면 될듯 이거안쓰고 보내도 될듯
+//                 m_redirect_url: 'http://www.naver.com' // 모바일 결제시 리다이렉션될 URL이건 그냥 메인으로 보내면 될듯 이거안쓰고 보내도 될듯
             }, function(rsp) {
                 if (rsp.success) {
-                    alert('결제 성공');
+                    alert("결제 성공");
+                    location.href ="http://localhost:8080/billycar/";
                 } else {
-                    alert('결제 실패');
+                    alert("결제 취소");
                     
                 }
             });
         }
     </script>
-	<!-- 운정자 정보 스크립트 -->
-	<script>
-		// 이름 값을 표시하는 함수
-		function displayName() {
-		    var nameValue = document.getElementById("nameInfo").value;
-		    document.getElementById("displayInfoName").innerText = nameValue;
-		}
-		
-		// 생년월일 상동
-		function displayBirth() {
-		    var birthValue = document.getElementById("birthInfo").value;
-		    document.getElementById("displayInfoBirth").innerText = birthValue;
-		}
-		
-		// 핸드폰번호 상동
-		function displayTell() {
-		    var tellValue = document.getElementById("tellInfo").value;
-		    document.getElementById("displayInfoTell").innerText = tellValue;
-		}
-		
-		// 이메일 상동
-		function displayEmail() {
-		    var emailValue = document.getElementById("eMailInfo").value;
-		    document.getElementById("displayInfoEmail").innerText = emailValue;
-		}
-		
-		// <input>에 값 입력 할 때마다 함수 호출
-		document.getElementById("nameInfo").addEventListener("input", displayName);
-		document.getElementById("birthInfo").addEventListener("input", displayBirth);
-		document.getElementById("tellInfo").addEventListener("input", displayTell);
-		document.getElementById("eMailInfo").addEventListener("input", displayEmail);
-	</script>
+	
 	
 	<!-- 보험 값 받아오는 스크립트 -->
 	 <script>
@@ -787,34 +757,6 @@
 	
 	
 	<!-- 추가옵션 스크립트 -->
-<!-- 	<script> -->
-<!-- 
-// 		document.addEventListener('DOMContentLoaded', function() {
-// 		    // 체크박스 요소들을 가져옵니다.
-// 		    var checkboxes = document.querySelectorAll('input[type="checkbox"][name="opt_chk"]');
-// 		    // 결과를 표시할 div
-// 		    var displayDiv = document.getElementById('optionPrice');
-// 		    // 체크박스의 변경사항을 감지하는 함수
-// 		    function updateTotalPrice() {
-// 		        var total = 0;
-// 		        // 선택된 체크박스의 값들을 합산
-// 		        checkboxes.forEach(function(checkbox) {
-// 		            if (checkbox.checked) {
-// 		                total += parseInt(checkbox.value, 10);
-// 		            }
-// 		        });
-// 		        // 결과 div에 표시
-// 		        displayDiv.textContent = '(+)' + total;
-// 		    }
-// 		    // 이벤트 리스너를 체크박스에 추가
-// 		    checkboxes.forEach(function(checkbox) {
-// 		        checkbox.addEventListener('change', updateTotalPrice);
-// 		    });
-// 		    // 초기값 설정
-// 		    updateTotalPrice();  // 페이지 로드 시 기본값 '0원'을 설정
-// 		});
- -->
-<!-- 	</script> -->
 		 <script>
         function updateOptionPrice() {
             var checkboxes = document.querySelectorAll('input[name="opt_chk"]:checked'); // 체크된 모든 체크박스 선택
