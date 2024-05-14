@@ -32,6 +32,7 @@
 <script>
 
 	function goDetail(model,type,fuel){
+		
 		if($("#reserv_pickupdate").val() == "") {
 			alert('일정을 검색하여 주세요');
 			return;
