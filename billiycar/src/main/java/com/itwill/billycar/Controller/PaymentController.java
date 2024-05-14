@@ -35,6 +35,8 @@ public class PaymentController {
 		String MemberId = (String)session.getAttribute("member_id");
 		model.addAttribute("info", MyPageService.getMemberInfo(MemberId));
 		
+		
+		
 		return "payment/paymentPage";
 	}
 	
