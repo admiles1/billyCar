@@ -146,7 +146,7 @@
                 <h2 style="text-align: center">차량소개</h2>
             </div>
         </div>
-        <div class="cont">
+        <div class="cont" id="listEnd">
         
         <c:forEach var="car" items="${carList}">
         
@@ -156,9 +156,8 @@
                         <div class="img-wrap-responsive">
                         	<c:if test="${not empty car.car_img}">
 								<c:set var="original_fileName" value="${fn:substringAfter(car.car_img, '_')}"/>
-								${original_fileName}
+	                            <img src="${pageContext.request.contextPath}/resources/upload/${car.original_fileName}">
 							</c:if>
-	                            <img src="${pageContext.request.contextPath}/resources/upload/${car.car_img}">
                         </div>
                     </div>
                     <div class="right">
@@ -270,7 +269,7 @@
         
         </div>
     </main>
-
+	
     <footer>
         <jsp:include page="../inc/bottom.jsp" />
     </footer>

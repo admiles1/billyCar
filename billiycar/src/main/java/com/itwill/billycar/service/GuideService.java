@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itwill.billycar.mapper.GuideMapper;
+import com.itwill.billycar.vo.CarVO;
 
 @Service
 public class GuideService {
@@ -15,7 +16,7 @@ public class GuideService {
 	private GuideMapper mapper;
 
 	public List<Map<String, Object>> carList() {
-		return mapper.selectCarList();
+        return mapper.selectCarList();
 	}
 
 }
