@@ -96,4 +96,12 @@
 		WHERE
 			member_id = #{member_id}
 	</update>
+	
+	<select id="selcetMemberCoupon" resultType="com.itwill.billycar.vo.CouponIssueVO">
+		SELECT * 
+		FROM coupon_issue
+		WHERE member_id = #{member_id}
+		
+	</select>
+	
 </mapper>

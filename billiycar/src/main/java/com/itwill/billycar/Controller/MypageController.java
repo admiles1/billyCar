@@ -104,7 +104,7 @@ public class MypageController {
 			member.setMember_id(dbMember.getMember_id());
 			String securePasswd = passwordEncoder.encode(member.getMember_passwd());
 			member.setMember_passwd(securePasswd);
-			if(service.ModifyPasswd(member) <= 0) {
+			if(service.modifyPasswd(member) <= 0) {
 				model.addAttribute("msg", "비밀번호 변경 실패");
 				return "err/fail";
 			}
@@ -187,14 +187,14 @@ public class MypageController {
         return "mypage/page/Mypage_Inquiry";
     }
 	
-//	@GetMapping("MyCoupon")
-//    public String MyCoupon(Model model) {
-//        System.out.println("나의 쿠폰함");
-//        String MemberId = (String)session.getAttribute("member_id");
-//        List<CouponVO> couponList = service.getMemberCoupon(MemberId);
-//        model.addAttribute("Coupon", couponList);
-//        return "mypage/page/Mypage_Coupon";
-//    }
+	@GetMapping("MyCoupon")
+    public String MyCoupon(Model model) {
+        System.out.println("나의 쿠폰함");
+        String MemberId = (String)session.getAttribute("member_id");
+        List<CouponVO> couponList = service.getMemberCoupon(MemberId);
+        model.addAttribute("Coupon", couponList);
+        return "mypage/page/Mypage_Coupon";
+    }
 	
 	@GetMapping("resignReason")
     public String resignReason() {

@@ -118,26 +118,13 @@ public class ReservController {
 	public String reservationdetail(CarVO car 
 			                        , @RequestParam(defaultValue = "") Map<String, String> map 
 			                        , Model model) {
-		System.out.println(map);
 		// idx없이 강제로 상세예약페이지 진입시
-		if (map.get("idx") == null) {
+		if (map.get("model") == null) {
 			model.addAttribute("msg", "차량을 선택하여 주십시오");
 			model.addAttribute("targetURL", "reservation");
 			return "err/fail";
 		} 
-		
-		// db에서 받아온 idx에 맞는 차조회
-		car = reservService.getCar(Integer.parseInt(map.get("idx")));
-		
-		// 존재하지않는 idx를 조회했을 시
-		if(car == null) {
-			model.addAttribute("msg", "존재하지 않는 차량입니다");
-			model.addAttribute("targetURL", "reservation");
-			return "err/fail";
-		} else { // db에서 조회성공하였을 시
-			model.addAttribute("car", car);
-			return "reservation/reserv_detail";
-		}
+		return "reservation/reserv_detail";
 	}
 	
 	

@@ -40,6 +40,11 @@ public class Memberservice {
 		
 		return mapper.selectForgotId(member);
 	}
+	
+	public MemberVO forgotPw(MemberVO member) { // 비밀번호 찾기
+		
+		return mapper.selectForgotPw(member);
+	}
 
 
 	public int selectMemberCount() {
@@ -121,5 +126,8 @@ public class Memberservice {
 		
 		return mapper.selectEmptyPhoneNum(member_phone);
 	}
+
+
+	
 	
 }

@@ -42,7 +42,8 @@
 		let returnDate = $("#reserv_returndate").val() + "T" + $("#reserv_returntime").val();
 		let pickupLocation = $("#reserv_pickuplocation").val();
 		let returnLocation = $("#reserv_returnlocation").val();
-		location.href="reservationdetail?idx=" + idx + "&pickupDate=" + pickupDate + "&returnDate=" + returnDate
+		
+		location.href="reservationdetail?model=" + model + "&pickupDate=" + pickupDate + "&returnDate=" + returnDate
 						+ "&pickuplocation=" + pickupLocation + "&returnlocation=" + returnLocation;
 	}
 	

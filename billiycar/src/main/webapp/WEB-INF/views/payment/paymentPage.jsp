@@ -711,11 +711,17 @@
         const IMP = window.IMP; 
         IMP.init("imp47235683"); // 내 가맹점 식별 코드
 
+//         var date = new Date();
+        
+		
+//         merchant_20240514
+//         let a = "mer_" + (new Date().getTime());
+        
         function startPayment() {
             IMP.request_pay({
                 pg: "html5_inicis", // 결제 과정에 사용될 결제사 이니시스
                 pay_method: "card", // 결제 수단
-                merchant_uid: "merchant_" + new Date().getTime(), // 주문번호 어칼지 고민
+                merchant_uid: "payDone_" + new Date().getTime(), // 주문번호 어칼지 고민
                 name: "렌트카 예약", // 주문 명 '렌트카 되어있는 곳에 차명 따와야 할듯'
                 amount: 100, // 금액
                 buyer_email: "${info.member_email}", // 구매자 이메일 필요한가 싶네

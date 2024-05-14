@@ -35,7 +35,7 @@ public interface MypageMapper {
 
 	boolean selectDuplicateLicense(LicenseVO license);
 
-//	List<CouponVO> selcetMemberCoupon(String memberId);
+	List<CouponVO> selcetMemberCoupon(String memberId);
 
 
 
