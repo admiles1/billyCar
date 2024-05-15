@@ -20,9 +20,9 @@ public class ReviewService {
 		return mapper.insertReview(review);
 	}
 
-	public List<CarReviewVO> selectReviewList(String option) {
-		System.out.println("mapper.selectReviewList(service) : " + mapper.selectReviewList(option));
-		return mapper.selectReviewList(option);
+	public List<CarReviewVO> selectReviewList(String option,int startRow,int listLimit) {
+		System.out.println("mapper.selectReviewList(service) : " + mapper.selectReviewList(option,startRow,listLimit));
+		return mapper.selectReviewList(option,startRow,listLimit);
 	}
 
 	public double selectReviewAvg() {
@@ -33,5 +33,6 @@ public class ReviewService {
 	public int selectAllReview() {
 		return mapper.selectAllReview();
 	}
+
 
 }

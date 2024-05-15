@@ -131,7 +131,7 @@
 		            <td>
 		            	<c:choose>
 		            		<c:when test="${reserv.reserv_status eq 1}">
-		            			O
+		            			 <a href="pamentDetail?idx=${reserv.reserv_idx}">O</a>
 		            		</c:when>
 		            		<c:when test="${reserv.reserv_status eq 0}">
 		            			X

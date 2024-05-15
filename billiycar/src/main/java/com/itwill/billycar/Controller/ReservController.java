@@ -2,6 +2,7 @@ package com.itwill.billycar.Controller;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,7 @@ import com.itwill.billycar.service.ReviewService;
 import com.itwill.billycar.vo.CarReviewVO;
 import com.itwill.billycar.vo.CarVO;
 import com.itwill.billycar.vo.CommonVO;
+import com.itwill.billycar.vo.PageInfo;
 import com.itwill.billycar.vo.ReviewVO;
 import com.mysql.cj.protocol.x.SyncFlushDeflaterOutputStream;
 
@@ -148,6 +150,7 @@ public class ReservController {
 		return cars;
 	}
 	
+<<<<<<< HEAD
 	@GetMapping("detail")
 	public String reservdetail(CarVO car
 							, @RequestParam(defaultValue = "") Map<String, String> map 
@@ -202,29 +205,104 @@ public class ReservController {
 		System.out.println(carO);
 		return "";
 	}
+=======
+	// 호출용 메소드
+		public String searchMethod(String option) {
+			String[] strArr = option.split(",");
+			StringJoiner options = new StringJoiner(",");
+			for(String s : strArr) {
+				s = "'" + s + "'";
+				options.add(s);
+			}
+			return options.toString();
+		}
+>>>>>>> branch 'main' of https://github.com/admiles1/billyCar.git
 	
 	@GetMapping("review")
-	public String review(Model model, @RequestParam(value = "option", required = false) String option) {
+	public String review(Model model,
+					@RequestParam(defaultValue = "latest") String option,
+					@RequestParam(defaultValue = "1") int pageNum
+					) {
+		System.out.println("review");
+		int listLimit = 4;
+		int startRow = (pageNum - 1) * listLimit;
+		
 		if (option == null) {
 	        option = "latest"; // 기본값 설정
 	    }
 		
-		
-		List<CarReviewVO> reviewList = reviewService.selectReviewList(option);
+		System.out.println(listLimit);
+		System.out.println(startRow);
+		System.out.println(option);
+		List<CarReviewVO> reviewList = reviewService.selectReviewList(option,startRow,listLimit);
 		System.out.println("List<CarReviewVO> reviewList : " + reviewList);
+		
+		int reviewListCount = reviewService.selectAllReview();
+		int pageListLimit = 4;
+		
+		//----------------------------------------------------------------
+		int maxPage = reviewListCount/listLimit + (reviewListCount%listLimit > 0 ? 1 : 0);
+		System.out.println(maxPage);
+		//----------------------------------------------------------------
+		//시작페이지 설정
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		//끝페이지 설정
+		int endPage = startPage + pageListLimit - 1;
+				
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
 		model.addAttribute("reviewList", reviewList);
+		model.addAttribute("option", option);
+		model.addAttribute("pageInfo", new PageInfo(reviewListCount, pageListLimit, maxPage, startPage, endPage));
+		
 		return "reservation/review";
 	}
 	
 	
-	// 호출용 메소드
-	public String searchMethod(String option) {
-		String[] strArr = option.split(",");
-		StringJoiner options = new StringJoiner(",");
-		for(String s : strArr) {
-			s = "'" + s + "'";
-			options.add(s);
+	@ResponseBody
+	@GetMapping("reviewOption")
+	public Map<String, Object> reviewOption(@RequestParam(defaultValue = "latest") String option,
+											@RequestParam(defaultValue = "1") int pageNum
+											) {
+		System.out.println("option 값 : " + option);
+		if (option == null) {
+	        option = "latest"; // 기본값 설정
+	    }
+		
+		int listLimit = 4;
+		int startRow = (pageNum - 1) * listLimit;
+		
+		System.out.println("ajax사용했을때 option : " + option);
+		
+		List<CarReviewVO> reviewList = reviewService.selectReviewList(option,startRow,listLimit);
+		System.out.println("List<CarReviewVO> reviewList : " + reviewList);
+		
+		int reviewListCount = reviewService.selectAllReview();
+		int pageListLimit = 4;
+		
+		//----------------------------------------------------------------
+		int maxPage = reviewListCount/listLimit + (reviewListCount%listLimit > 0 ? 1 : 0);
+		System.out.println(maxPage);
+		//----------------------------------------------------------------
+		//시작페이지 설정
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		//끝페이지 설정
+		int endPage = startPage + pageListLimit - 1;
+				
+		if(endPage > maxPage) {
+			endPage = maxPage;
 		}
-		return options.toString();
+		
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("reviewList", reviewList);
+		data.put("option", option);
+		data.put("pageInfo", new PageInfo(reviewListCount, pageListLimit, maxPage, startPage, endPage));
+		System.out.println("data : " + data);
+		return data;
 	}
+	
+	
+	
 }
