@@ -1,11 +1,13 @@
 package com.itwill.billycar.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itwill.billycar.mapper.MypageMapper;
+import com.itwill.billycar.vo.CouponIssueVO;
 import com.itwill.billycar.vo.CouponVO;
 import com.itwill.billycar.vo.LicenseVO;
 import com.itwill.billycar.vo.MemberVO;
@@ -68,9 +70,23 @@ public class MypageService {
 		return mapper.selectDuplicateLicense(license);
 	}
 
-	public List<CouponVO> getMemberCoupon(String memberId) {
-		return mapper.selcetMemberCoupon(memberId);
+	public List<Map<String, Object>> getMemberCoupon(String member_id) {
+		return mapper.selcetMemberCoupon(member_id);
 	}
+
+	public int couponUpdate(String member_id, String coupon_code) {
+		return mapper.insertMyCoupon(member_id, coupon_code);
+	}
+
+	public int couponCheck(String member_id, String coupon_code) {
+		return mapper.selectDuplicateCoupon(member_id, coupon_code);
+	}
+
+	public int couponExist(String coupon_code) {
+		return mapper.selectCouponCode(coupon_code);
+	}
+
+
 
 
 }
