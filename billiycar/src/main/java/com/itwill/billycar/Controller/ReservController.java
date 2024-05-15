@@ -150,7 +150,6 @@ public class ReservController {
 		return cars;
 	}
 	
-<<<<<<< HEAD
 	@GetMapping("detail")
 	public String reservdetail(CarVO car
 							, @RequestParam(defaultValue = "") Map<String, String> map 
@@ -205,7 +204,6 @@ public class ReservController {
 		System.out.println(carO);
 		return "";
 	}
-=======
 	// 호출용 메소드
 		public String searchMethod(String option) {
 			String[] strArr = option.split(",");
@@ -216,7 +214,6 @@ public class ReservController {
 			}
 			return options.toString();
 		}
->>>>>>> branch 'main' of https://github.com/admiles1/billyCar.git
 	
 	@GetMapping("review")
 	public String review(Model model,
