@@ -114,4 +114,35 @@
 		
 	</select>
 	
+	<select id="selectDuplicateCoupon" resultType="int">
+		SELECT COUNT(coupon.coupon_id)
+		FROM coupon_issue
+		JOIN coupon
+		ON coupon.coupon_id = coupon_issue.coupon_id
+		WHERE coupon_issue.member_id = #{member_id} AND coupon_code = #{coupon_code}
+	</select>
+	
+	<select id="selectCouponCode" resultType="int">
+		SELECT COUNT(coupon_id)
+		FROM coupon
+		WHERE coupon_code = #{coupon_code}
+	</select>
+	
+	<insert id="insertMyCoupon">
+	
+		<selectKey keyProperty="coupon_id" resultType="int" order="BEFORE">
+			SELECT coupon_id
+			FROM coupon
+			WHERE coupon_code = #{coupon_code}
+		</selectKey>
+		
+		INSERT INTO coupon_issue
+		VALUES (
+				null
+				, #{coupon_id}
+				, #{member_id}
+				, default
+		)
+	</insert>
+	
 </mapper>
