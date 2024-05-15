@@ -62,6 +62,15 @@ public class PaymentController {
 		
 	}
 	
+	@GetMapping("pamentDetail")
+	public String paymentDetail(CarVO car , Model model, MemberVO member, ReservVO reserv, Map<String, String> map) {
+		String MemberId = (String)session.getAttribute("member_id");
+		model.addAttribute("info", MyPageService.getMemberInfo(MemberId));
+		model.addAttribute("car", car);
+		model.addAttribute("reserv", reserv);
+		return "payment/paymentDetail";
+	}
+	
 //	@GetMapping("paymentComplete")
 //	public String paymentComplet(Model model, Map<String, String> map) {
 //		

@@ -18,84 +18,77 @@
 	}
 </style>
 <script type="text/javascript">
-// $(document).ready(function(){
-//     $('#options').change(function(){
-//         var selectedOption = $('#options').val(); 
-//         $.ajax({
-//             type: 'GET',
-//             url: 'review',
-//             data: { option: selectedOption },
-//             success: function(response){
-//             	console.log(response);
-//             },
-//             error: function(xhr, status, error){
-//                 console.error(error);
-//             }
-//         });
-//     });
-// });
-function optionChange(option) {
-    var selectedOption = option.value;
-    location.href = "review?option=" + selectedOption;
-}
+$(function(){
+	
+	$('#options').on('change', function() {
+        let option = $('#options').val();
+        console.log(option);
+
+        $.ajax({
+            type: 'GET',
+            url: 'reviewOption',
+            dataType: 'json',
+            data: { option: option, pageNum: pageNum },
+            success: function(data) {
+            	console.log(data);
+                updateReviewList(data.reviewList);
+                updatePageInfo(data.pageInfo);
+            },
+            error: function(xhr, status, error) {
+                console.error('Error fetching data:', status, error);
+            }
+        });
+    });
+
+    function updateReviewList(reviews) {
+        var html = '';
+        reviews.forEach(function(review) {
+            html += '<div class="col-md-3">' +
+                        '<div class="card">' +
+                            '<img src="./resources/main_images/rewiewCar1.png" class="card-img-top" alt="리뷰 이미지 1" width="300" height="300">' +
+                            '<div class="card-body">' +
+                                '<h5 class="card-title">';
+            for (var i = 0; i < review.review_score; i++) {
+                html += '<i class="fa-solid fa-star" style="color: #FFE000;"></i>';
+            }
+            html +=         '</h5>' +
+                            '<h6 class="card-title">' + review.car_img + '</h6>' +
+                            '<p class="card-text">' + review.review_content + '</p>' +
+                            '<div class="card-footer">' +
+                                '<small class="text-body-secondary">' + review.review_id + ' 고객님</small>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>';
+        });
+        $('.row').html(html);  
+    }
+    function updatePageInfo(pageInfos) {
+    	var html = '';
+    	pageInfos.forEach(function(pageInfo){
+    		html += '<input type="button" value="이전" onclick="location.href='review?pageNum=pageInfo.pageNum'"'
+    	});
+    	$('#pageList').html(html);
+    }
+});
 
 </script>
 </head>
 <body>
 	<header><jsp:include page="../inc/top.jsp"></jsp:include></header>
 	<div class="container">
+	<c:set var="pageNum" value="${empty param.pageNum ? 1 : param.pageNum }"/>
     	<h1 class="subject mt-5 mb-3" style="text-align: center; margin-bottom: 50px;">리뷰</h1>
-    	
-    <!-- 검색창 -->
-<!--     <div class="card noto-sans-kr" style="margin-top: 20px; margin-bottom: 50px;"> -->
-<!--     <div class="card-body">	 -->
-<!-- 		<div style="text-align: center; margin-bottom: 100px;"> -->
-<!-- 	        <form> -->
-<!-- 	            <div class="mb-2 row"> -->
-<!-- 	                <label for="carType" class="col-sm-2 col-form-label" style="text-align: center;">검색 타입</label> -->
-<!-- 	                <div class="col-sm-10"> -->
-<!-- 	                    <select class="form-select form-select-sm" id="carType"> -->
-<!-- 	                         <option selected>차종 선택</option> -->
-<!-- 	                         <option value="sedan">Sedan</option> -->
-<!-- 	                         <option value="suv">SUV</option> -->
-<!-- 	                         <option value="hatchback">Hatchback</option> -->
-<!-- 	                    </select> -->
-<!-- 	                </div> -->
-	<!--                 <label for="carType" class="col-sm-2 col-form-label" style="text-align: center;">검색순</label> -->
-	<!--                 <div class="col-sm-4"> -->
-	<!--                     <input type="text" class="form-control form-control-sm" id="searchText" placeholder="차량 검색"> -->
-	<!--                 </div> -->
-<!-- 	            </div> -->
-<!-- 	            <div class="mb-2 row"> -->
-<!-- 	                <label for="searchText" class="col-sm-2 col-form-label" style="text-align: center;">차량 검색</label> -->
-<!-- 	                <div class="col-sm-10"> -->
-<!-- 	                    <input type="text" class="form-control form-control-sm" id="searchText" placeholder="차량 검색"> -->
-<!-- 	                </div> -->
-<!-- 	            </div> -->
-<!-- 	            <div style="margin-top: 8px; text-align: center;"> -->
-<!-- 	                <button type="submit" class="btn btn-primary" style="width: 100px;">검색</button> -->
-<!-- 	            </div> -->
-<!-- 	        </form> -->
-<!--         </div> -->
-<!--     </div> -->
-<!-- 	</div> -->
     	
     	
     <!-- 검색창 -->
     	<div style="width: 100px; margin-left: 1195px;">
-                <select class="form-select form-select-sm" aria-label="리뷰 정렬" id="options" onchange="optionChange(this)">
+                <select class="form-select form-select-sm" aria-label="리뷰 정렬" id="options">
                     <option value="latest">최신순</option>
                     <option value="old">오래된순</option>
                     <option value="rating">별점순</option>
                 </select>
         </div>
-<!--     	<div style="width: 100px; margin-left: 1195px;"> -->
-<!--                 <select class="form-select form-select-sm" aria-label="리뷰 정렬" id="options"> -->
-<!--                     <option value="latest">최신순</option> -->
-<!--                     <option value="old">오래된순</option> -->
-<!--                     <option value="rating">별점순</option> -->
-<!--                 </select> -->
-<!--         </div> -->
     	<div class="row" style="margin-top: 10px;">
     		<c:forEach var="review" items="${reviewList }">
 	        	<div class="col-md-3">
@@ -118,7 +111,29 @@ function optionChange(option) {
 					</div>
 				</div>
 			</c:forEach>
+			<section id = "pageList" style="text-align: center; margin-top: 20px;">
+			
+			<input type="button" value="이전" onclick="location.href='review?pageNum=${pageNum -1}'" 
+				<c:if test="${pageNum eq 1 }">disabled</c:if>
+			>
+			
+			<c:forEach  var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }" step="1">
+				<c:choose>
+					<c:when test="${i eq pageNum }">
+						${i}
+					</c:when>
+					<c:otherwise>
+						<a href="review?pageNum=${i}">${i}</a>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>		
+			<input type="button" value="다음" onclick="location.href='review?pageNum=${pageNum +1}'"
+			<c:if test="${pageNum eq pageInfo.maxPage }">disabled</c:if>
+			>
+			</section>
 		</div>
+		
+		
 	</div>
 
     <!-- 부트스트랩 자바스크립트 CDN -->

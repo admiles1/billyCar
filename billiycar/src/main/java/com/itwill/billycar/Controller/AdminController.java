@@ -20,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.JsonArray;
@@ -326,23 +327,40 @@ public class AdminController {
 	}
 	
 	@GetMapping("addBrand")
-    public String showAddBrandModelPage() {
+    public String showAddBrandPage() {
         return "admin/addBrand"; // addBrandModel.jsp 파일의 경로
     }
 	
-	@PostMapping("addBrandModel")
-    public String addBrandModel(Model model, String newBrandName) {
+	@GetMapping("addModel")
+	public String showAddModelPage(){
+		return "admin/addModel"; // addBrandModel.jsp 파일의 경로
+	}
+	
+	@ResponseBody
+	@PostMapping("addBrand")
+    public String addBrand(Model model, String newBrandName) {
         System.out.println("새 브랜드 : " + newBrandName);
         int insertCount = service.addBrandModel(newBrandName);
         
-//        if (insertCount > 0) { // 성공 시 
-//            return "redirect:/admin_car_registration"; // 작업 후 차량 등록 페이지로 이동
-//        } else { // 실패 시
-//            model.addAttribute("msg", "차량등록실패!");
-//            return "err/fail";
-//        }
-		return "";
+        if (insertCount > 0) { // 성공 시 
+            return "redirect:/admin_car_registration"; // 작업 후 차량 등록 페이지로 이동
+        } else { // 실패 시
+            model.addAttribute("msg", "차량등록실패!");
+            return "err/fail";
+        }
     }
+	
+	@PostMapping("addModel")
+	public String addModel(Model model, String brandName, String newModelName) {
+		System.out.println("제조사 : " + brandName);
+		System.out.println("새 차량모델 : " + newModelName);
+		
+		int insertCnt = service.addModel(brandName,newModelName);
+		System.out.println("dsakjfhkalsdhfkljasdhfkjdslf" + insertCnt);
+		
+		
+		return "";
+	}
 	
 	@GetMapping("carModify")
 	public String carModify(@RequestParam("carId") int carId, Model model) {

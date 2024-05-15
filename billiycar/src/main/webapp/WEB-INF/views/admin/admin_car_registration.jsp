@@ -34,14 +34,14 @@ button[type="submit"] { width: 100%; }
                 <form action="carUpload" method="post" enctype="multipart/form-data" onsubmit="submitForm()">
                     <div class="form-group">
                         <label for="manufacturer">제조사</label>
-                        <div class="d-flex align-items-center">
+                        <div class="form-group">
                             <select id="manufacturer" name="car_brand" class="form-control" required>
                                 <option value="">제조사를 선택하세요</option>
                                 <c:forEach var="brand" items="${brands}">
                                     <option value="${brand.code }">${brand.name }</option>
                                 </c:forEach>
                             </select>
-                            <button type="button" class="btn btn-primary ml-2" onclick="openAddBrandModelWindow()">추가</button>
+                            <button type="button" class="btn btn-primary ml-1" onclick="openAddBrandWindow()">추가</button>
                         </div>
                     </div>
                     <div class="form-group">
@@ -49,6 +49,7 @@ button[type="submit"] { width: 100%; }
                         <select id="model" name="car_model" class="form-control" required disabled>
                             <option value="">모델을 선택하세요</option>
                         </select>
+						<button type="button" class="btn btn-primary ml-1" onclick="openAddModelWindow('${brand.name }')">추가</button>
                     </div>
                     <div class="form-group">
                         <label for="carType">차량 종류</label>
@@ -144,8 +145,14 @@ $(document).ready(function() {
     });
 });
 
-function openAddBrandModelWindow() {
+function openAddBrandWindow() {
     window.open('${pageContext.request.contextPath}/addBrand', 'newwindow', 'width=400,height=400');
+}
+function openAddModelWindow(brand) {
+	var brandSelect = document.getElementById("manufacturer");
+    var brandName = brandSelect.options[brandSelect.selectedIndex].text;
+// 	console.log("현재선택된 제조사 : " + brandName);
+    window.open('${pageContext.request.contextPath}/addModel?brand='+brandName, 'newwindow', 'width=400,height=400');
 }
 </script>
 </body>

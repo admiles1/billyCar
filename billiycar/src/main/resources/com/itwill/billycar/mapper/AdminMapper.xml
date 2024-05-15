@@ -229,14 +229,41 @@
 <!-- 		  INTO Common -->
 <!-- 		VALUES (#{newCarBrand}, #{newBrand}) -->
 	
-	<insert id="insertNewBrand">
-		INSERT INTO Common 
-		VALUES ((SELECT *
-			  	   FROM (SELECT  CONCAT('B', LPAD(IFNULL(MAX(CAST(SUBSTRING(code, 2) AS UNSIGNED)) + 1, 1), 1, '0'))
-						   FROM Common
-				  WHERE code LIKE 'B%')A) 
-			 , #{newBrand})
+	<insert id="insertNewBrand" parameterType="java.lang.String">
+	    <selectKey resultType="String" keyProperty="newCode" order="BEFORE">
+	        WITH max_code AS (
+	            SELECT MAX(CAST(SUBSTRING(code, 2) AS UNSIGNED)) AS max_code
+	            FROM Common
+	            WHERE code REGEXP '^B[0-9]+$'
+	        )
+	        SELECT CONCAT('B', LPAD(IFNULL(max_code + 1, 1), 1, '0')) AS new_code
+	        FROM max_code
+	    </selectKey>
+	    
+	    INSERT INTO Common (code, name)
+	    VALUES (#{newCode}, #{newBrandName})
 	</insert>
+
+<!-- 	<insert id="insertNewModel" parameterType="map"> -->
+<!--     <selectKey resultType="String" keyProperty="code" order="BEFORE"> -->
+<!--         SELECT code -->
+<!--         FROM Common -->
+<!--         WHERE name = #{brandName} -->
+<!--     </selectKey> -->
+    
+<!--     <selectKey resultType="int" keyProperty="modelNum" order="BEFORE"> -->
+<!--         SELECT count(*) + 1 -->
+<!--         FROM Common -->
+<!--         WHERE code LIKE CONCAT(#{code}, 'M%') -->
+<!--     </selectKey> -->
+    
+<!--     INSERT INTO Common (code, name) -->
+<!--     VALUES ( -->
+<!--         CONCAT(#{code}, 'M', #{modelNum}), -->
+<!--         #{newModelName} -->
+<!--     ) -->
+<!-- 	</insert> -->
+
 	
 </mapper>
 
