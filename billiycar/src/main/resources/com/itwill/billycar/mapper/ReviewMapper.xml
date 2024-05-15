@@ -30,14 +30,15 @@
    		FROM car c
     	JOIN review r ON c.car_number = r.car_number
     	<if test="option.equals('latest')">
-    		order by review_idx asc;
+    		order by review_idx desc
     	</if>
     	<if test="option.equals('old')">
-    		order by review_idx desc;
+    		order by review_idx asc
     	</if>
     	<if test="option.equals('rating')">
-    		order by review_score desc;
+    		order by review_score desc
     	</if>
+    	LIMIT #{startRow},#{listLimit}
 	</select>
 	
 	<select id="selectReviewAvg">
@@ -47,6 +48,7 @@
 	<select id="selectAllReview">
 		select count(*) from review;
 	</select>
+	
 </mapper>
 
 
