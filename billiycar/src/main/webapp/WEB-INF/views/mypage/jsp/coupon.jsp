@@ -50,9 +50,9 @@
 </head>
 <body>
 
-    <h2>나의 쿠폰 확인</h2>
-    <hr>
-	<form action="couponUpdate" method="post">
+	<form id="coupon" action="couponUpdate" method="post">
+    	<h2>나의 쿠폰 확인</h2>
+    	<hr>
 		<div style="float:right; margin-bottom:10px;">
 	    	<input type="text" placeholder="쿠폰 코드를 입력하시오" name="coupon_code">
 	    	<input type="submit" value="쿠폰 등록" style="background-color: #00AAFF; color: white">

@@ -54,8 +54,6 @@ public class ReservController {
 								, Model model) {
 		System.out.println(car);
 		// 체크박스 checked용 값 따로 빼두기 
-		String hasThistype = "," + car.getCar_type();
-		String hasThisfuel = "," + car.getCar_fuel();
 		
 		// 주입하면 변환해서 세팅못하니 따로 만들기
 		ReservVO reserv = new ReservVO();
@@ -98,8 +96,6 @@ public class ReservController {
 		// 자동차검색
 		List<Map<String, String>> cars = reservService.selectCarList(car, reserv);
 		// 공통 코드에서 type, fule 조회해서 가져오기 TODO = 줄일것
-		model.addAttribute("hasThisType", hasThistype);
-		model.addAttribute("hasThisFuel", hasThisfuel);
 		model.addAttribute("pickupDate", map.get("reserv_pickupdate"));
 		model.addAttribute("pickupTime", map.get("pickupTime"));
 		model.addAttribute("returnDate", map.get("reserv_returndate"));
@@ -112,23 +108,41 @@ public class ReservController {
 		model.addAttribute("BHE", adminService.getBusinesshours().get(1).getName());
 		model.addAttribute("cars", cars);
 		
+		System.out.println(cars);
 		return "reservation/reservation";
 	}
 	
-	@GetMapping("reservationdetail")
-	public String reservationdetail(CarVO car 
-			                        , @RequestParam(defaultValue = "") Map<String, String> map 
-			                        , Model model) {
+	@ResponseBody
+	@PostMapping("SelectCarList")
+	public List<Map<String, String>> SelectCarList(CarVO car
+							, @RequestParam(defaultValue = "") Map<String, String> map 
+				            , Model model) {
+		System.out.println(car);
+		System.out.println(map);
+		ReservVO reserv = new ReservVO();
+		String pickupdate = map.get("reserv_pickupdate") + " " + map.get("pickupTime");
+		String returndate = map.get("reserv_returndate") + " " + map.get("returnTime");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH");
+		reserv.setReserv_pickupdate(LocalDateTime.parse(pickupdate, formatter));
+		reserv.setReserv_returndate(LocalDateTime.parse(returndate, formatter));
 		
-		if (map.get("model") == null) {
-			model.addAttribute("msg", "차량을 선택하여 주십시오");
-			model.addAttribute("targetURL", "reservation");
-			return "err/fail";
+		String carType = car.getCar_type();
+		String carFuel = car.getCar_fuel();
+		
+		if(carType != null && carFuel == null) { 	// 자동차타입 조건만 존재 할 경우
+			// search메소드로 스트링 포맷 변환 후 초기화
+			car.setCar_type(searchMethod(carType));
+		} else if (carType == null && carFuel != null) { // 자동차연료 조건만 존재 할 경우
+			car.setCar_fuel(searchMethod(carFuel));
+		} else if (carType != null && carFuel != null) { // 두 가지 모두 검색 할 경우
+			car.setCar_fuel(searchMethod(carFuel));
+			car.setCar_type(searchMethod(carType));
 		} 
 		
-		reservService.getCar(map.get("model"));
-		 
-		return "reservation/reserv_detail";
+		List<Map<String, String>> cars = reservService.selectCarList(car, reserv);
+		System.out.println(cars);
+		System.out.println("---------------------------------");
+		return cars;
 	}
 	
 	

@@ -30,24 +30,60 @@
 </style>
 
 <script>
+	
+	$(function(){
+		
+		$("#searchCar").on("click", function(){
+			check();
+			let formData = $("#searchForm").serialize();
+			
+			$.ajax({
+				type : "POST" ,
+				url : "SelectCarList",
+				data : formData,
+				dataType : "json",
+				success : function(response) {
+					$("#selectResult").empty();
+					$("#selectResult").html("<ul>");
+					
+					for(let car of response) {
+						let dayPrice = car.car_dayprice.toLocaleString();
+						let hourPrice = car.car_hourprice.toLocaleString();
+						
+						$("#selectResult > ul").append(
+								"<li class='carList fadeIn row'>"
+								+ "<a class='d-flex'>"
+								+ "<span class='carImg'><img src='" + car.car_img + "'></span>"
+								+ "<span class='carInfo'>"
+								+ "<span>" + car.car_model + " / " + car.car_capacity + "</span>"
+								+ "<small>종일가 "+ dayPrice + "</small><br>"
+								+ "<small>시간당 "+ hourPrice + "</small><br>"
+								+ "<small>예약가능차량" + car.canReserv + "</small>"
+								+ "</span>"
+								+ "</a>"
+								+ "</li>"
+						);
+					}
+					$("#selectResult").append("</ul>");
+				}
+			}) // ajax 끝
+		}); // 차량검색 클릭 이벤트
+	}); //ready 끝
 
-	function goDetail(model,type,fuel){
-		
-		if($("#reserv_pickupdate").val() == "") {
-			alert('일정을 검색하여 주세요');
-			return;
-		}
-		
+	
+	
+	
+	function goDetail(model){
 		let pickupDate = $("#reserv_pickupdate").val() + "T" + $("#reserv_pickuptime").val();
 		let returnDate = $("#reserv_returndate").val() + "T" + $("#reserv_returntime").val();
 		let pickupLocation = $("#reserv_pickuplocation").val();
 		let returnLocation = $("#reserv_returnlocation").val();
 		
-		if(returnLocatin == "sameLocaion") {
+		if(returnLocation == "sameLocaion") {
 			returnLocation = pickupLocation
 		}
 		
-		location.href="reservationdetail?model=" + model + "&pickupDate=" + pickupDate + "&returnDate=" + returnDate
+		location.href="reservationdetail?car_model=" + model + "&pickupDate=" + pickupDate + "&returnDate=" + returnDate
 						+ "&pickuplocation=" + pickupLocation + "&returnlocation=" + returnLocation;
 	}
 	
@@ -82,7 +118,7 @@
 			    	<div>
 						<div>
 							<input type="text" id="keyword" placeholder="주소를 검색하세요">
-       						<button onclick="searchPlaces()">검색</button>
+       						<input type="button" value="검색" onclick="searchPlaces()"> 
        						<div id="selected-location"></div>
 							<div style="margin: auto;" style="margin-top: 20px;">
 								<div id="map" style="width: 400px; height: 400px; margin-left: 5px; margin-top: 20px;">
@@ -194,7 +230,6 @@
 						}
 					    </script>
 							
-							
 				    	</div>
 				    	<div id="clicked-location"></div>
 		    			<div class="" style="margin-top: 20px;">
@@ -261,37 +296,13 @@
 			    			</c:forEach>
 			    		</ul>
 			    	</div>
-			    	<input type="submit" value="차	량	검	색" id="searchCar">
+			    	<input type="button" value="차	량	검	색" id="searchCar">
 			    </form>
     		</div>
-   			<c:choose>
-	   			<c:when test="${needSearch}">
-	   				<div class="col-8" id="selectResult">
-	   					검색을 먼저해주세요
-	   				</div>
-	   			</c:when>
-	   			<c:otherwise>
-	   				<div class="col-8" id="selectResult">
-		   		 		<ul>
-		   		 			<c:forEach var="car" items="${cars}">
-			   		 			<li class="carList fadeIn row">
-			   		 				<a class="d-flex" onclick="goDetail('${car.car_model}', '${car.car_type}', '${car.car_fuel}')">
-			   		 					<span class="carImg"><img src="${car.car_img}"></span>
-			   		 					<span class="carInfo">
-			   		 						<span> ${car.car_model}</span>
-			   		 						<span> ${car.car_type} / ${car.car_capacity}</span>
-			   		 						<small>종일가 <fmt:formatNumber value="${car.car_dayprice}" pattern="#,###"/></small>
-			   		 						<small>시간당 <fmt:formatNumber value="${car.car_hourprice}" pattern="#,###"/></small>
-			   		 						예약 가능 차량 ${car.canReserv} 
-			   		 					</span>
-			   		 				</a>
-			   		 			</li>
-		   		 			</c:forEach>
-		   		 		 </ul>
-	    			</div>
-	   			</c:otherwise>
-			</c:choose>
    		</div>
+		<div class="col-8" id="selectResult">
+			검색을 먼저해주세요
+		</div>
 	</main>
 	<footer><jsp:include page="../inc/bottom.jsp"></jsp:include></footer>
 
