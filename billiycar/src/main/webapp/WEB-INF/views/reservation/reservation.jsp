@@ -118,7 +118,7 @@
 			    	<div>
 						<div>
 							<input type="text" id="keyword" placeholder="주소를 검색하세요">
-       						<button onclick="searchPlaces()">검색</button>
+       						<input type="button" value="검색" onclick="searchPlaces()"> 
        						<div id="selected-location"></div>
 							<div style="margin: auto;" style="margin-top: 20px;">
 								<div id="map" style="width: 400px; height: 400px; margin-left: 5px; margin-top: 20px;">
