@@ -97,7 +97,7 @@
 							//지도의 초기생성
 					        var mapOption = {
 					            center: new kakao.maps.LatLng(35.17988104101734, 129.07510440921163),
-					            level: 7
+					            level: 1
 					        };
 							
 							//변수선언(장소 검색, 지오코딩, 인포윈도우)
@@ -126,58 +126,72 @@
 					            }
 					        }
 							
-					        //이전검색결과를 제거하고 검색목록을 li.text에 뿌리고 목록 아이템에 대한 인텍스를 부여
-					        //해당 장소에 marker를 표시하고 marker에 표시된 place의 위도 경도를 지오코딩을 통해 주소로 변환하고 reserv_pickuplocation id의 value에 저장 
+					     // 장소 목록을 select 태그로 생성하여 목록에 표시함
 					        function displayPlaces(places) {
 					            var selectedLocation = document.getElementById('selected-location');
-					            selectedLocation.innerHTML = ''; 
-					            var ul = document.createElement('ul');
-					            for (var i = 0; i < places.length; i++) {
-					                var li = document.createElement('li');
-					                li.textContent = places[i].place_name;
-					                li.setAttribute('data-index', i); 
-					                li.addEventListener('click', function() {
-					                    var index = parseInt(this.getAttribute('data-index'));
-					                    var place = places[index];
-					                    addMarker(place);
-					                    geocoder.coord2Address(place.x, place.y, function(result, status) {
-					                        if (status === kakao.maps.services.Status.OK) {
-					                            document.getElementById('reserv_pickuplocation').value = result[0].address.address_name;
-					                        } else {
-					                            selectedLocation.textContent = '\n주소 변환에 실패했습니다.';
-					                        }
-					                    });
+					            selectedLocation.innerHTML = ''; // 기존 내용을 비웁니다
+					            var select = document.createElement('select'); // select 요소 생성
+					            //css
+					            select.classList.add('col-form-label');
+					            select.style.marginTop = '20px';
+					            
+					            select.id = 'place-select'; // select 태그에 ID 부여
+
+					            // 선택 이벤트 핸들러
+					            select.addEventListener('change', function() {
+					                var selectedIndex = this.selectedIndex; // 선택된 인덱스
+					                var selectedPlace = places[selectedIndex]; // 선택된 장소 객체
+					                addMarker(selectedPlace); // 선택된 장소에 마커 추가
+					                geocoder.coord2Address(selectedPlace.x, selectedPlace.y, function(result, status) {
+					                    if (status === kakao.maps.services.Status.OK) {
+					                        document.getElementById('reserv_pickuplocation').value = result[0].address.address_name;
+					                    } else {
+					                        selectedLocation.textContent = '\n주소 변환에 실패했습니다.';
+					                    }
 					                });
-					                ul.appendChild(li);
-					            }
-					            selectedLocation.appendChild(ul);
+					            });
+
+					            // 드롭다운 목록에 각 장소를 옵션으로 추가
+					            places.forEach(function(place, index) {
+					                var option = document.createElement('option');
+					                option.textContent = place.place_name;
+					                option.value = index; // index를 value로 저장
+					                select.appendChild(option);
+					            });
+
+					            selectedLocation.appendChild(select); // 완성된 select 요소를 페이지에 추가
 					        }
 							
 					        //추가적으로 마커를 변경하고 싶을때 새로운 위치에 위도 경도를 생성 
 					        function addMarker(place) {
-					            var latlng = new kakao.maps.LatLng(place.y, place.x);
-					            if (!marker) {
-					                marker = new kakao.maps.Marker({
-					                    position: latlng,
-					                    map: map,
-					                    draggable: true
-					                });
-					            } else {
-					                marker.setPosition(latlng);
-					            }
-					            map.setCenter(latlng);
-								//지오코딩을 통해 새로운 위도경도를 주소로 변환
-					            kakao.maps.event.addListener(marker, 'dragend', function() {
-					                var position = marker.getPosition();
-					                geocoder.coord2Address(position.getLng(), position.getLat(), function(result, status) {
-					                    if (status === kakao.maps.services.Status.OK) {
-					                        document.getElementById('reserv_pickuplocation').value = result[0].address.address_name;
-					                    } else {
-					                        document.getElementById('selected-location').textContent += '\n주소 변환에 실패했습니다.';
-					                    }
-					                });
-					            });
-					        }
+						    var latlng = new kakao.maps.LatLng(place.y, place.x);
+						    if (!marker) {
+						        marker = new kakao.maps.Marker({
+						            position: latlng,
+						            map: map,
+						            draggable: true
+						        });
+						    } else {
+						        marker.setPosition(latlng);
+						    }
+						    map.setCenter(latlng);
+						
+						    // 드래그 끝났을 때의 이벤트 리스너
+						    kakao.maps.event.addListener(marker, 'dragend', function() {
+						        // 마커 위치 가져오기
+						        var position = marker.getPosition();
+						
+						        // 지오코딩 실행 (위도, 경도 순서 주의)
+						        geocoder.coord2Address(position.getLng(), position.getLat(), function(result, status) {
+						            var selectedLocation = document.getElementById('selected-location');
+						            if (status === kakao.maps.services.Status.OK) {
+						                document.getElementById('reserv_pickuplocation').value = result[0].address.address_name;
+						            } else {
+						                selectedLocation.textContent = '주소 변환에 실패했습니다.';
+						            }
+						        });
+						    });
+						}
 					    </script>
 							
 							
