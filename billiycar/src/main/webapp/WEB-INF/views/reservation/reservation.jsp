@@ -43,16 +43,19 @@
 				data : formData,
 				dataType : "json",
 				success : function(response) {
-					$("#selectResult").empty();
+					if(!$("#selectResult").empty()) {
+						return;
+					}
 					$("#selectResult").html("<ul>");
 					
 					for(let car of response) {
 						let dayPrice = car.car_dayprice.toLocaleString();
 						let hourPrice = car.car_hourprice.toLocaleString();
+						let carModel = "\"" + car.car_model + "\"";
 						
 						$("#selectResult > ul").append(
 								"<li class='carList fadeIn row'>"
-								+ "<a class='d-flex'>"
+								+ "<a class='d-flex' onclick='goDetail(" + carModel + ")'>"
 								+ "<span class='carImg'><img src='" + car.car_img + "'></span>"
 								+ "<span class='carInfo'>"
 								+ "<span>" + car.car_model + " / " + car.car_capacity + "</span>"
@@ -64,6 +67,7 @@
 								+ "</li>"
 						);
 					}
+					
 					$("#selectResult").append("</ul>");
 				}
 			}) // ajax 끝
@@ -74,17 +78,33 @@
 	
 	
 	function goDetail(model){
-		let pickupDate = $("#reserv_pickupdate").val() + "T" + $("#reserv_pickuptime").val();
-		let returnDate = $("#reserv_returndate").val() + "T" + $("#reserv_returntime").val();
-		let pickupLocation = $("#reserv_pickuplocation").val();
-		let returnLocation = $("#reserv_returnlocation").val();
-		
-		if(returnLocation == "sameLocaion") {
-			returnLocation = pickupLocation
+		let types = [];
+		let fuels = [];
+		let pud = $("#reserv_pickupdate").val() + " " + $("#reserv_pickuptime").val();
+		let rtd = $("#reserv_returndate").val() + " " + $("#reserv_returntime").val();
+		let pul = $("#reserv_pickuplocation").val();
+		let rtl = $("#reserv_returnlocation").val();
+		if(rtl == "same"){
+			rtl = pul;
 		}
 		
-		location.href="reservationdetail?car_model=" + model + "&pickupDate=" + pickupDate + "&returnDate=" + returnDate
-						+ "&pickuplocation=" + pickupLocation + "&returnlocation=" + returnLocation;
+		let schedule = [pud, rtd,pul,rtl];
+		
+		$("input[name=car_type]:checked").each(function() {
+			var chkReceiver = $(this).val();
+			types.push(chkReceiver);
+		});
+		
+		$("input[name=car_fuel]:checked").each(function() {
+			var chkReceiver = $(this).val();
+			fuels.push(chkReceiver);
+		});
+		
+		
+		location.href="detail?car_model=" + model
+				 + "&car_type=" + types
+				 + "&car_fuel=" + fuels
+				 + "&schedule=" + schedule;
 	}
 	
 	function check() {
@@ -95,10 +115,7 @@
 		if(pickupDate == "") {
 			alert('대여날짜를 선택하여 주십시오');
 			return false;
-		} else if(pickupDate == "") {
-			alert('반납날짜를 선택하여 주십시오');
-			return false;
-		} else if(returnLocation == "") {
+		}  else if(returnLocation == "") {
 			alert('반납장소를 선택하여 주십시오');
 			return false;
 		}
@@ -261,14 +278,13 @@
 			    	<div class="location_area">
 			    		<input type="text" class="selectArea" name="reserv_pickuplocation" 
 			    				value="아이티윌"  id="reserv_pickuplocation"
-			    				style="padding-right: 17px;" onclick="alert('api예정')"
-			    				placeholder=":: 대여지점 ::" readonly>
+			    				style="padding-right: 17px;" placeholder=":: 대여지점 ::" readonly>
 				    	<select  class="selectArea" name="reserv_returnlocation" id="reserv_returnlocation">
 				    		<option selected value=""
 				    			<c:if test="${empty returnLocation}">selected</c:if>> :: 반납장소 :: </option>
 				    		<option value="branch"
 				    			<c:if test="${returnLocation eq 'branch'}">selected</c:if>> 지점에 직접 반납하기 </option>
-				    		<option value="samelocation"
+				    		<option value="same"
 				    			<c:if test="${returnLocation eq 'samelocation'}">selected</c:if>> 호출장소에 반납하기 </option>
 				    	</select>
 			    	</div>
@@ -299,9 +315,9 @@
 			    	<input type="button" value="차	량	검	색" id="searchCar">
 			    </form>
     		</div>
-   		</div>
-		<div class="col-8" id="selectResult">
-			검색을 먼저해주세요
+	   		<div class="col-8" id="selectResult">
+				검색을 먼저해주세요
+			</div>
 		</div>
 	</main>
 	<footer><jsp:include page="../inc/bottom.jsp"></jsp:include></footer>

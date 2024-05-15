@@ -4,7 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.itwill.billycar.mapper.ReservMapper">
-	<select id="selectCarList" resultType="hashmap" parameterType="map">
+	<select id="selectCar" resultType="hashmap" parameterType="map">
 	<![CDATA[
 		SELECT MAX(model.name) AS car_model
 			 , MAX(brand.name) AS car_brand
@@ -27,36 +27,13 @@
 								   WHERE reserv_pickupdate between #{reserv.reserv_pickupdate} AND #{reserv.reserv_returndate}
 									  OR reserv_returndate between #{reserv.reserv_pickupdate} AND #{reserv.reserv_returndate})	]]> 
 		   AND car_status = 0
-		 <if test="car.car_fuel != null"> AND fuel.name IN (${car.car_fuel})</if>
-		 <if test="car.car_type != null"> AND type.name IN (${car.car_type})</if>
-		 GROUP BY car_model;
-	</select>
-	
-	<select id="selectCar" resultType="com.itwill.billycar.vo.CarVO" parameterType="map">
-		<![CDATA[
-		SELECT MAX(model.name) AS car_model
-			 , MAX(brand.name) AS car_brand
-			 , MAX(fuel.name) AS car_fuel
-			 , MAX(type.name) AS car_type
-			 , MAX(gear_type) AS gear_type
-			 , MAX(car_capacity) AS car_capacity
-			 , MAX(car_img) AS car_img
-			 , MAX(car_year) AS car_year
-			 , MAX(car_dayprice) AS car_dayprice
-			 , MAX(car_hourprice) AS car_hourprice
-			 , COUNT(*) AS canReserv
-		  FROM   car c
-		  LEFT JOIN Common model ON c.car_model = model.code  
-		  LEFT JOIN Common brand ON c.car_brand = brand.code  
-		  LEFT JOIN Common fuel ON c.car_fuel = fuel.code     
-		  LEFT JOIN Common type ON c.car_type = type.code   	
-		 WHERE car_number NOT IN (SELECT car_number
-									FROM Reservation
-								   WHERE reserv_pickupdate between #{reserv.reserv_pickupdate} AND #{reserv.reserv_returndate}
-									  OR reserv_returndate between #{reserv.reserv_pickupdate} AND #{reserv.reserv_returndate})	]]> 
-		   AND car_status = 0
-		   AND model.name = #{model}
-		 LIMIT 1
+		 <if test="car.car_fuel != null"> 
+		   AND fuel.name IN (${car.car_fuel})</if>
+		 <if test="car.car_type != null"> 
+		   AND type.name IN (${car.car_type})</if>
+		 <if test="car.car_model != null">   
+		   AND model.name = #{car.car_model}
+		 LIMIT 1 </if>
 		 GROUP BY car_model
 	</select>
 	

@@ -26,6 +26,9 @@ import com.itwill.billycar.vo.CarVO;
 import com.itwill.billycar.vo.CommonVO;
 import com.itwill.billycar.vo.ReviewVO;
 import com.mysql.cj.protocol.x.SyncFlushDeflaterOutputStream;
+
+import retrofit2.http.GET;
+
 import com.itwill.billycar.vo.ReservVO;
 
 @Controller
@@ -94,7 +97,7 @@ public class ReservController {
 		} 
 		
 		// 자동차검색
-		List<Map<String, String>> cars = reservService.selectCarList(car, reserv);
+		List<Map<String, String>> cars = reservService.getCar(car, reserv);
 		// 공통 코드에서 type, fule 조회해서 가져오기 TODO = 줄일것
 		model.addAttribute("pickupDate", map.get("reserv_pickupdate"));
 		model.addAttribute("pickupTime", map.get("pickupTime"));
@@ -139,12 +142,66 @@ public class ReservController {
 			car.setCar_type(searchMethod(carType));
 		} 
 		
-		List<Map<String, String>> cars = reservService.selectCarList(car, reserv);
-		System.out.println(cars);
+		List<Map<String, String>> cars = reservService.getCar(car, reserv);
+		System.out.println(car);
 		System.out.println("---------------------------------");
 		return cars;
 	}
 	
+	@GetMapping("detail")
+	public String reservdetail(CarVO car
+							, @RequestParam(defaultValue = "") Map<String, String> map 
+				            , Model model) {
+		
+		String[] schedule = map.get("schedule").split(",");
+		String pickupdate = schedule[0];
+		String returndate = schedule[1];
+		String pickupLocation = schedule[2];
+		String returnLocation = schedule[3];
+		
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH");
+		ReservVO reserv = new ReservVO();
+		reserv.setReserv_pickupdate(LocalDateTime.parse(pickupdate, formatter));
+		reserv.setReserv_returndate(LocalDateTime.parse(returndate, formatter));
+		
+		String carType = car.getCar_type();
+		String carFuel = car.getCar_fuel();
+		// from index
+		// 널이 아니지만 널로 바꿈 
+		// from reservation 아예 널로 넘어와서 메소드 호출불가
+		if(carType != null) {
+			if(carType.equals("")) {
+				car.setCar_type(null);
+				carType = null;
+			}
+		};
+		
+		if(carFuel != null) {
+			if(carFuel.equals("")) {
+				car.setCar_fuel(null);
+				carFuel = null;
+			}
+		};
+		
+		System.out.println(car);
+		
+		if(carType != null && carFuel == null) { 	// 자동차타입 조건만 존재 할 경우
+			// search메소드로 스트링 포맷 변환 후 초기화
+			car.setCar_type(searchMethod(carType));
+		} else if (carType == null && carFuel != null) { // 자동차연료 조건만 존재 할 경우
+			car.setCar_fuel(searchMethod(carFuel));
+		} else if (carType != null && carFuel != null) { // 두 가지 모두 검색 할 경우
+			car.setCar_fuel(searchMethod(carFuel));
+			car.setCar_type(searchMethod(carType));
+		} 
+		
+		// 자동차검색
+		List<Map<String, String>> carO = reservService.getCar(car, reserv);
+		System.out.println("==========================");
+		System.out.println(carO);
+		return "";
+	}
 	
 	@GetMapping("review")
 	public String review(Model model, @RequestParam(value = "option", required = false) String option) {
