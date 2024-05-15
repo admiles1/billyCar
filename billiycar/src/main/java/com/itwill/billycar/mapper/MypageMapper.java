@@ -1,13 +1,19 @@
 package com.itwill.billycar.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.itwill.billycar.vo.CouponIssueVO;
 import com.itwill.billycar.vo.CouponVO;
 import com.itwill.billycar.vo.LicenseVO;
 import com.itwill.billycar.vo.MemberVO;
 import com.itwill.billycar.vo.QnaVO;
+
+import lombok.Builder.Default;
 
 @Mapper
 public interface MypageMapper {
@@ -36,7 +42,13 @@ public interface MypageMapper {
 
 	boolean selectDuplicateLicense(LicenseVO license);
 
-	List<CouponVO> selcetMemberCoupon(String memberId);
+	List<Map<String, Object>> selcetMemberCoupon(String member_id);
+
+	int insertMyCoupon(@Param(value = "member_id") String member_id, @Param(value = "coupon_code") String coupon_code);
+
+	int selectDuplicateCoupon(@Param(value = "member_id") String member_id, @Param(value = "coupon_code") String coupon_code);
+
+	int selectCouponCode(String coupon_code); 
 
 
 

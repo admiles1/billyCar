@@ -17,6 +17,7 @@ import com.itwill.billycar.service.ReservService;
 import com.itwill.billycar.vo.CarVO;
 import com.itwill.billycar.vo.MemberVO;
 import com.itwill.billycar.vo.PaymentVO;
+import com.itwill.billycar.vo.ReservVO;
 
 @Controller
 public class PaymentController {
@@ -32,11 +33,11 @@ public class PaymentController {
 	private PaymentService paymentService;
 	// reservation_detail에서 예약하기 버튼 눌렀을 때 컨트롤러
 	@GetMapping("payment")
-	public String payment(CarVO car , Model model, MemberVO member
+	public String payment(CarVO car , Model model, MemberVO member, ReservVO reserv
             				, @RequestParam(defaultValue = "") Map<String, String> map) {
 		
 		model.addAttribute("car", car);
-		
+		model.addAttribute("reserv", reserv);
 		String MemberId = (String)session.getAttribute("member_id");
 		model.addAttribute("info", MyPageService.getMemberInfo(MemberId));
 //		map.put(MemberId, MemberId)

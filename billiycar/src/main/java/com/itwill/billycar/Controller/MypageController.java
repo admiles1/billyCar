@@ -2,6 +2,7 @@ package com.itwill.billycar.Controller;
 
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.billycar.service.MypageService;
 import com.itwill.billycar.service.ReservService;
+import com.itwill.billycar.vo.CouponIssueVO;
 import com.itwill.billycar.vo.CouponVO;
 import com.itwill.billycar.vo.LicenseVO;
 import com.itwill.billycar.vo.License_StandardVO;
@@ -190,11 +192,52 @@ public class MypageController {
 	@GetMapping("MyCoupon")
     public String MyCoupon(Model model) {
         System.out.println("나의 쿠폰함");
-        String MemberId = (String)session.getAttribute("member_id");
-        List<CouponVO> couponList = service.getMemberCoupon(MemberId);
+        String member_id = (String)session.getAttribute("member_id");
+        List<Map<String, Object>> couponList = service.getMemberCoupon(member_id);
+        System.out.println(couponList);
         model.addAttribute("Coupon", couponList);
         return "mypage/page/Mypage_Coupon";
     }
+	
+	
+	@PostMapping("couponUpdate")
+	public String MyCouponUpdate(Model model, String coupon_code) {
+		String member_id= (String)session.getAttribute("member_id");
+//		System.out.println(couponIssue);
+		
+		// 중복된 쿠폰인지 확인
+		int duplicateCoupon = service.couponCheck(member_id, coupon_code);
+		
+		if(duplicateCoupon > 0) {
+			model.addAttribute("msg", "이미 등록된 쿠폰입니다");
+			return "err/fail";
+		}
+		
+		int existCoupon = service.couponExist(coupon_code);
+		
+		if(existCoupon <= 0) {
+			model.addAttribute("msg", "쿠폰 코드를 확인해 주세요");
+			return "err/fail";
+		} else {
+			// 쿠폰 등록
+			int insertCnt = service.couponUpdate(member_id, coupon_code);
+			
+			System.out.println(insertCnt);
+			if(insertCnt <= 0) {
+				model.addAttribute("msg", "쿠폰 등록 실패하셨습니다. \\n 다시 시도해 주세요");
+				return "err/fail";
+			} else {
+				model.addAttribute("msg", "쿠폰 등록되었습니다");
+				model.addAttribute("targetURL", "MyCoupon");
+				return "err/fail";
+			}
+		}
+		
+		
+			
+		
+	}
+	
 	
 	@GetMapping("resignReason")
     public String resignReason() {
