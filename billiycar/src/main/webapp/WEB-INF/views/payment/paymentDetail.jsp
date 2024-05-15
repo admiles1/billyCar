@@ -345,41 +345,7 @@
 <%-- 					<img src="${car.car_img}" width="430" > --%> <!-- 차이미지 받아 오기 -->
 					<img src="resources/event_images/envent_page_event2-1.webp" width="390" ><!-- 임시 -->
 				</div>
-<!-- 				<p><b>예약자 정보</b></p> -->
-<!-- 				<div class="row"> -->
-<!-- 					<div class="col-3">예약자 이름</div> -->
-<!-- 					<div class="col-9" id="displayInfoName"></div> -->
-<!-- 					<div class="col-3">생년월일</div> -->
-<!-- 					<div class="col-9" id="displayInfoBirth"></div> -->
-<!-- 					<div class="col-3">전화번호</div> -->
-<!-- 					<div class="col-9" id="displayInfoTell"></div> -->
-<!-- 					<div class="col-3">이메일</div> -->
-<!-- 					<div class="col-9" id="displayInfoEmail"></div> -->
-<!-- 				</div> -->
-				
-<!-- 				<p><b>차량 정보</b></p> -->
-<!-- 				<div class="row "> -->
-<!-- 					<div class="col-3">차량</div> -->
-<!-- 					<div class="col-9">차량이름(차량크기 정보->ex.중형,대형)표시</div> -->
-<!-- <!-- 					<div class="col">기본정보</div> --> 
-<!-- <!-- 					<div class="col">차량 수용인원/기어방식/기름종류 표시</div> --> 
-<!-- <!-- 					<div class="col">세부정보</div> --> 
-<!-- <!-- 					<div class="col">차 옵션 표시</div> -->
-<!-- 					<div class="col-3">이용일</div> -->
-<!-- 					<div class="col-9">빌린 날짜 표기(대여일 및 시간 ~ 반납일 및 시간)</div> -->
-<!-- 					<div class="col-3">대여지역</div> -->
-<!-- 					<div class="col-9">대여지역 표시</div> -->
-<!-- 					<div class="col-3">반납지역</div> -->
-<!-- 					<div class="col-9">반납지역 표시</div> -->
-<!-- <!-- 					<div class="col">제한나이</div> --> 
-<!-- <!-- 					<div class="col">만23세 이상</div> --> 
-<!-- <!-- 					<div class="col">운전경력</div> -->
-<!-- <!-- 					<div class="col">면허취득 1년이상</div> --> 
-<!-- <!-- 					<div class="col">면허종류</div> -->
-<!-- <!-- 					<div class="col">면허종류 표시</div> --> 
-<!-- 				</div> -->
-				
-<!-- 				<p><b>추가 옵션</b></p> -->
+
 				<h6><b>추가 옵션</b></h6>
 				<div class="row">
 					<div class="col-3">추가 옵션</div>
@@ -465,43 +431,10 @@
 
 	
 	
-	<!-- 추가옵션 스크립트 -->
-		 <script>
-        function updateOptionPrice() {
-            let checkboxes = document.querySelectorAll('input[name="opt_chk"]:checked'); // 체크된 모든 체크박스 선택
-            let total = 0;
-            checkboxes.forEach(function(checkbox) {
-                total += parseInt(checkbox.value, 10); // 체크박스의 값(가격)을 합산
-            });
-
-            document.getElementById('optionPrice').innerText = '(+)' + total; // 결과를 div에 표시
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            let checkboxes = document.querySelectorAll('input[name="opt_chk"]');
-            checkboxes.forEach(function(checkbox) {
-                checkbox.addEventListener('change', updateOptionPrice); // 각 체크박스에 이벤트 리스너 추가
-            });
-
-            updateOptionPrice(); // 페이지 로드 시 초기값 업데이트
-        });
-    </script>
+	
 		
 				
-    <!-- 아임포트 스크립트 추가 -->
-<!--     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script> -->
-
-    <!-- 결제 스크립트 -->
-<!--     <script src="payment.js"></script> -->
-<!-- 	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script> -->
-<!-- 	<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script> -->
-<!-- 					<script src="https://cdn.iamport.kr/vl/iamport.js"></script> -->
-<!-- 				<script src="./paymentButton.jsp"></script> -->
-	<!-- 결제버튼 관련 js -->
-<!-- 	<script src="https://cdn.iamport.kr/vl/iamport.js"></script> -->
-<!-- 	<script src="./paymentButton.js"></script> -->
-<!-- 	<script src="payment/paymentButton.js"></script> -->
-	<!-- 부트스트랩 -->
+  
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <%-- 	<footer><jsp:include page="../inc/bottom.jsp"></jsp:include></footer> --%>
 </body>
