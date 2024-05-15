@@ -1,6 +1,7 @@
 package com.itwill.billycar.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -68,8 +69,8 @@ public class MypageService {
 		return mapper.selectDuplicateLicense(license);
 	}
 
-	public List<CouponVO> getMemberCoupon(String memberId) {
-		return mapper.selcetMemberCoupon(memberId);
+	public List<Map<String, Object>> getMemberCoupon(String member_id) {
+		return mapper.selcetMemberCoupon(member_id);
 	}
 
 

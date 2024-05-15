@@ -2,6 +2,7 @@ package com.itwill.billycar.Controller;
 
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -190,8 +191,9 @@ public class MypageController {
 	@GetMapping("MyCoupon")
     public String MyCoupon(Model model) {
         System.out.println("나의 쿠폰함");
-        String MemberId = (String)session.getAttribute("member_id");
-        List<CouponVO> couponList = service.getMemberCoupon(MemberId);
+        String member_id = (String)session.getAttribute("member_id");
+        List<Map<String, Object>> couponList = service.getMemberCoupon(member_id);
+        System.out.println(couponList);
         model.addAttribute("Coupon", couponList);
         return "mypage/page/Mypage_Coupon";
     }

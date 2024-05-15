@@ -59,18 +59,19 @@
                 <th>쿠폰 이름</th>
                 <th>쿠폰 코드</th>
                 <th>쿠폰 할인율</th>
-                <th>사용 기한</th>
+                <th>사용 상태</th>
             </tr>
         </thead>
         <tbody>
            <c:forEach var="coupon" items="${Coupon}">
 			    <tr>
-			        <td>${coupon.coupon_id}</td> <!-- 이 부분 수정 -->
-			        <td>${coupon.issue_status}</td>
+			        <td>${coupon.coupon_name}</td> <!-- 이 부분 수정 -->
+			        <td>${coupon.coupon_code}</td>
+			        <td>${coupon.coupon_discount_amount}%</td>
 			        <td>
 			            <c:choose>
-			                <c:when test="${qna.qna_status == 0}">답변 대기</c:when>
-			                <c:when test="${qna.qna_status == 1}">답변 완료</c:when>
+			                <c:when test="${coupon.coupon_used_status == 1}">사용 가능</c:when>
+			                <c:when test="${coupon.coupon_used_status == 2}">사용 불가</c:when>
 			            </c:choose>
 			        </td>
 			    </tr>

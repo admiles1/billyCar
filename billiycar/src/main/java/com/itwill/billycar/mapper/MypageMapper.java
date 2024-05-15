@@ -1,6 +1,7 @@
 package com.itwill.billycar.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -36,7 +37,7 @@ public interface MypageMapper {
 
 	boolean selectDuplicateLicense(LicenseVO license);
 
-	List<CouponVO> selcetMemberCoupon(String memberId);
+	List<Map<String, Object>> selcetMemberCoupon(String member_id);
 
 
 

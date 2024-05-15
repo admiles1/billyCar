@@ -105,10 +105,12 @@
 			member_id = #{member_id}
 	</update>
 	
-	<select id="selcetMemberCoupon" resultType="com.itwill.billycar.vo.CouponIssueVO">
-		SELECT * 
-		FROM coupon_issue
-		WHERE member_id = #{member_id}
+	<select id="selcetMemberCoupon" resultType="hashmap">
+
+		SELECT c.coupon_name , c.coupon_code ,c.coupon_discount_amount, ci.coupon_used_status
+		FROM coupon c JOIN coupon_issue ci
+		ON c.coupon_id  = ci.coupon_id 
+		WHERE ci.member_id = #{member_id};
 		
 	</select>
 	
