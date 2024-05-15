@@ -66,26 +66,59 @@
 	border-radius: 10px;
 	padding-left: 0px;
 	padding-right: 0px;
-	
+/*     flex: 1; */
 	}
-#paymentSide{  
+	/* 데스크탑용 사이드*/
+/* #paymentSide{   
+  		position:fixed;   
+   		left:1190px; top:230px;   
+   		width: 410px;   
+   		height: 600px;   
+ 		margin: 0px; 
+ 		padding: 0px; 
+   		border: 1px solid lightgray; 
+   		border-radius: 10px; 
+   		overflow-y: auto; 
+   	}  */
+   	/*놑북용 사이드 */
+   	/*
+	#paymentSide{  
  		position:fixed;  
-  		left:1190px; top:230px;  
-   		width: 410px;  
-   		height: 600px;  
+  		left:1000px; top:140px;  
+   		width: 410px;   
+   		height: 600px;   
 		margin: 0px;
 		padding: 0px;
   		border: 1px solid lightgray;
   		border-radius: 10px;
-  	} 
-  	
+   		overflows-y: auto; 
+  	} */
+  	#paymentSide{
+  	 position: fixed;  
+    right: 120px; /* 화면의 오른쪽 끝에 위치하도록 설정 */
+    top: 230px; /* 화면의 상단부터 시작하도록 설정 */
+    width: 400px; /* 적절한 너비 설정 */
+    height: 100%; /* 전체 높이 */
+    margin: 0;
+    padding: 10px; /* 내부 여백 */
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    overflow-y: auto; /* 내용이 많을 경우 스크롤 가능하게 설정 */
+    background-color: #fff; /* 배경색 설정 */
+ 		} 
   	label {
   		margin-left: 10px;
   	}
-
+	#mine {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row-reverse;
+}
  </style>
 </head>
-<body>
+<body class="mine">
 	<header><jsp:include page="../inc/top.jsp"></jsp:include></header>
 	<div class="container">
 	      <!-- row div 다 닫기 -->
@@ -642,7 +675,7 @@
 			<div class="container last_check">
 				<div>
 <%-- 					<img src="${car.car_img}" width="430" > --%> <!-- 차이미지 받아 오기 -->
-					<img src="resources/event_images/envent_page_event2-1.webp" width="390" ><!-- 임시 -->
+<!-- 					<img src="resources/event_images/envent_page_event2-1.webp" width="350" >임시 -->
 				</div>
 <!-- 				<p><b>예약자 정보</b></p> -->
 <!-- 				<div class="row"> -->
@@ -695,14 +728,14 @@
 					<div class="col-3">할인금액</div>
 					<div class="col-9" align="right">할인금액 표시</div>
 					<hr>
-					<div class="col-3">총 결제 금액(VAT 포함)</div>
+					<div class="col-3">결제 금액(VAT 포함)</div>
 					<div class="col-9" align="right"></div>
 				</div>
 				<br><br>
-			</div>
 				<form action="payment" method="post">
 					<input type="button" class="sub_btn w-100 btn btn-primary btn-lg" value="결제하기" onclick="startPayment();" >
 				</form>			
+			</div>
 			</div>
 		</div>
 	</div>
