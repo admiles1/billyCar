@@ -55,7 +55,9 @@ public interface AdminMapper {
 	
 	int selectAllcar(int status);
 
-	int insertNewBrand(String newBrandName);
+	int insertNewBrand(@Param("newBrandName") String newBrandName);
+
+	int insertNewModel(String brandName, String newModelName);
 	
 	
 }
