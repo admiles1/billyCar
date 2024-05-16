@@ -1,5 +1,6 @@
 package com.itwill.billycar.Controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -22,6 +23,8 @@ import com.itwill.billycar.vo.ReservVO;
 @Controller
 public class PaymentController {
 	
+	@Autowired
+	private ReservService service;
 	
 	@Autowired
 	private HttpSession session;
@@ -68,11 +71,11 @@ public class PaymentController {
 	}
 	
 	@GetMapping("pamentDetail")
-	public String paymentDetail(CarVO car , Model model, MemberVO member, ReservVO reserv, Map<String, String> map) {
+	public String paymentDetail(CarVO car , Model model, MemberVO member, ReservVO reserv) {
 		String MemberId = (String)session.getAttribute("member_id");
 		model.addAttribute("info", MyPageService.getMemberInfo(MemberId));
-		model.addAttribute("car", car);
-		model.addAttribute("reserv", reserv);
+		List<ReservVO> reservList = service.selectReservList(member);
+		model.addAttribute("reservList", reservList);
 		return "payment/paymentDetail";
 	}
 	

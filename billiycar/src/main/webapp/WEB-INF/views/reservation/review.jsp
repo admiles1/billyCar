@@ -19,10 +19,11 @@
 </style>
 <script type="text/javascript">
 $(function(){
-	
-	$('#options').on('change', function() {
+    $('#options').on('change', function() {
+        let pageNum = 1;
+        console.log(pageNum);
         let option = $('#options').val();
-        console.log(option);
+        console.log("옵션값 : " + option);
 
         $.ajax({
             type: 'GET',
@@ -30,12 +31,14 @@ $(function(){
             dataType: 'json',
             data: { option: option, pageNum: pageNum },
             success: function(data) {
-            	console.log(data);
+                let pageInfo = data.pageInfo;
+                console.log("data.pageInfo:", pageInfo);
+                console.log("data.reviewList:", data.reviewList);
+                console.log("option:", option);
+                console.log("pageNum:", pageNum);
+
                 updateReviewList(data.reviewList);
-                updatePageInfo(data.pageInfo);
-            },
-            error: function(xhr, status, error) {
-                console.error('Error fetching data:', status, error);
+                updatePageInfo(pageInfo, pageNum, option);
             }
         });
     });
@@ -63,12 +66,41 @@ $(function(){
         });
         $('.row').html(html);  
     }
-    function updatePageInfo(pageInfos) {
-    	var html = '';
-    	pageInfos.forEach(function(pageInfo){
-    		html += '<input type="button" value="이전" onclick="location.href='review?pageNum=pageInfo.pageNum'"'
-    	});
-    	$('#pageList').html(html);
+
+    function updatePageInfo(pageInfo, pageNum, option) {
+        console.log("updatePageInfo(안)pageInfo:", pageInfo);
+        console.log("updatePageInfo(안)pageNum:", pageNum);
+        console.log("option(안):", option);
+
+        var html = '';
+
+        // 이전 버튼
+        html += '<input type="button" value="동기이전" onclick="location.href=\'review?pageNum=' + (pageNum - 1) + '&option=' + option + '\'"';
+        if (pageNum == 1) {
+            html += ' disabled';
+        }
+        html += '>';
+
+        // 페이지 번호 링크
+        for (var i = pageInfo.startPage; i <= pageInfo.endPage; i++) {
+            if (i == pageNum) {
+                html += ' ' + i + ' ';
+            } else {
+                html += ' <a href="review?pageNum=' + i + '&option=' + option + '">' + i + '</a> ';
+            }
+        }
+
+        // 다음 버튼
+        html += '<input type="button" value="동기다음" onclick="location.href=\'review?pageNum=' + (pageNum + 1) + '&option=' + option + '\'"';
+        if (pageNum == pageInfo.maxPage) {
+            html += ' disabled';
+        }
+        html += '>';
+
+        console.log("html값:", html);
+
+        // 결과를 페이지에 추가
+        $('.pageList').html(html);
     }
 });
 
@@ -78,6 +110,7 @@ $(function(){
 	<header><jsp:include page="../inc/top.jsp"></jsp:include></header>
 	<div class="container">
 	<c:set var="pageNum" value="${empty param.pageNum ? 1 : param.pageNum }"/>
+	<c:set var="option" value="${empty param.option ? 1 : param.option }"/>
     	<h1 class="subject mt-5 mb-3" style="text-align: center; margin-bottom: 50px;">리뷰</h1>
     	
     	
@@ -111,9 +144,12 @@ $(function(){
 					</div>
 				</div>
 			</c:forEach>
-			<section id = "pageList" style="text-align: center; margin-top: 20px;">
 			
-			<input type="button" value="이전" onclick="location.href='review?pageNum=${pageNum -1}'" 
+		</div>
+		
+		<div class="pageList" style="text-align: center; margin-top: 20px;">
+			
+			<input type="button" value="이전" onclick="location.href='review?pageNum=${pageNum -1}&option=${option }'" 
 				<c:if test="${pageNum eq 1 }">disabled</c:if>
 			>
 			
@@ -123,14 +159,13 @@ $(function(){
 						${i}
 					</c:when>
 					<c:otherwise>
-						<a href="review?pageNum=${i}">${i}</a>
+						<a href="review?pageNum=${i}&option=${option }">${i}</a>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>		
-			<input type="button" value="다음" onclick="location.href='review?pageNum=${pageNum +1}'"
+			<input type="button" value="다음" onclick="location.href='review?pageNum=${pageNum +1}&option=${option }'"
 			<c:if test="${pageNum eq pageInfo.maxPage }">disabled</c:if>
 			>
-			</section>
 		</div>
 		
 		

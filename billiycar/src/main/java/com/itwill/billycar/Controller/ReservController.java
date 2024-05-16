@@ -260,6 +260,7 @@ public class ReservController {
 			endPage = maxPage;
 		}
 		
+		System.out.println("option : " + option);
 		model.addAttribute("reviewList", reviewList);
 		model.addAttribute("option", option);
 		model.addAttribute("pageInfo", new PageInfo(reviewListCount, pageListLimit, maxPage, startPage, endPage));
@@ -271,43 +272,42 @@ public class ReservController {
 	@ResponseBody
 	@GetMapping("reviewOption")
 	public Map<String, Object> reviewOption(@RequestParam(defaultValue = "latest") String option,
-											@RequestParam(defaultValue = "1") int pageNum
-											) {
-		System.out.println("option 값 : " + option);
-		if (option == null) {
+	                                        @RequestParam(defaultValue = "1") int pageNum) {
+	    System.out.println("option 값 : " + option);
+	    if (option == null) {
 	        option = "latest"; // 기본값 설정
 	    }
-		
-		int listLimit = 4;
-		int startRow = (pageNum - 1) * listLimit;
-		
-		System.out.println("ajax사용했을때 option : " + option);
-		
-		List<CarReviewVO> reviewList = reviewService.selectReviewList(option,startRow,listLimit);
-		System.out.println("List<CarReviewVO> reviewList : " + reviewList);
-		
-		int reviewListCount = reviewService.selectAllReview();
-		int pageListLimit = 4;
-		
-		//----------------------------------------------------------------
-		int maxPage = reviewListCount/listLimit + (reviewListCount%listLimit > 0 ? 1 : 0);
-		System.out.println(maxPage);
-		//----------------------------------------------------------------
-		//시작페이지 설정
-		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
-		//끝페이지 설정
-		int endPage = startPage + pageListLimit - 1;
-				
-		if(endPage > maxPage) {
-			endPage = maxPage;
-		}
-		
-		Map<String, Object> data = new HashMap<String, Object>();
-		data.put("reviewList", reviewList);
-		data.put("option", option);
-		data.put("pageInfo", new PageInfo(reviewListCount, pageListLimit, maxPage, startPage, endPage));
-		System.out.println("data : " + data);
-		return data;
+
+	    int listLimit = 4;
+	    int startRow = (pageNum - 1) * listLimit;
+
+	    System.out.println("ajax사용했을때 option : " + option);
+
+	    List<CarReviewVO> reviewList = reviewService.selectReviewList(option, startRow, listLimit);
+	    System.out.println("List<CarReviewVO> reviewList : " + reviewList);
+
+	    int reviewListCount = reviewService.selectAllReview();
+	    int pageListLimit = 4;
+
+	    //----------------------------------------------------------------
+	    int maxPage = reviewListCount / listLimit + (reviewListCount % listLimit > 0 ? 1 : 0);
+	    System.out.println(maxPage);
+	    //----------------------------------------------------------------
+	    //시작페이지 설정
+	    int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+	    //끝페이지 설정
+	    int endPage = startPage + pageListLimit - 1;
+
+	    if (endPage > maxPage) {
+	        endPage = maxPage;
+	    }
+
+	    Map<String, Object> data = new HashMap<>();
+	    data.put("reviewList", reviewList);
+	    data.put("option", option);
+	    data.put("pageInfo", new PageInfo(reviewListCount, pageListLimit, maxPage, startPage, endPage));
+	    System.out.println("data : " + data);
+	    return data;
 	}
 	
 	
