@@ -78,11 +78,13 @@ public class MypageController {
 		if(updateCount <= 0) {
 			model.addAttribute("msg", "회원정보 업데이트 실패");
 			return "err/fail";
+		} else {
+			model.addAttribute("msg", "회원정보가 수정되었습니다!");
+			model.addAttribute("targetURL", "mypage");
+			return "success/success";
 		}
-		
-		return "redirect:/mypage";
+//		return "redirect:/mypage";
 	}
-
 	
 	@GetMapping("modifyPasswd")
     public String modifyPasswd() {
@@ -99,7 +101,7 @@ public class MypageController {
 		System.out.println("비밀번호 변경");
 		MemberVO dbMember = service.getMemberInfo((String)session.getAttribute("member_id"));
 		if(dbMember == null || !passwordEncoder.matches(member.getMember_passwd(), dbMember.getMember_passwd())) { // 로그인 실패
-			model.addAttribute("msg", "비밀번호가 잘못 입력되었습니다.");
+			model.addAttribute("msg", "현재 비밀번호가 잘못 입력되었습니다.");
 			return "err/fail";
 		} else { // 비밀번호 일치시 비밀번호 업데이트
 			member.setMember_passwd(newMember_passwd);
@@ -109,10 +111,12 @@ public class MypageController {
 			if(service.modifyPasswd(member) <= 0) {
 				model.addAttribute("msg", "비밀번호 변경 실패");
 				return "err/fail";
+			} else {
+				model.addAttribute("msg", "비밀번호가 정상적으로 변경되었습니다!");
+				model.addAttribute("targetURL", "mypage");
+				return "success/success";
 			}
-			
-			// 마아페이지 리다이렉트
-			return "redirect:/mypage";
+//			return "redirect:/mypage";
 		}
 		
 	}
@@ -147,13 +151,16 @@ public class MypageController {
 			return "err/fail";
 		}
 		
-		
 		int updateCount = service.changeLicenseStatus(dbMember);
 		if(updateCount == 0) {
 			model.addAttribute("msg", "면허 등록 실패!");
 			return "err/fail";
-		} 
-		return "redirect:/licenseInfo";
+		} else {
+			model.addAttribute("msg", "면허등록이 정상적으로 이루어졌습니다!");
+			model.addAttribute("targetURL", "licenseInfo");
+			return "success/success";
+		}
+//		return "redirect:/licenseInfo";
 	}
 	
 	@GetMapping("licenseInfo")

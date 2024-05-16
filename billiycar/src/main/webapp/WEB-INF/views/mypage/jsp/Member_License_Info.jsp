@@ -142,10 +142,24 @@ h2 {
         return licenseIssue.slice(0, 4) + '-' + licenseIssue.slice(4, 6) + '-' + licenseIssue.slice(6, 8);
     }
 	
+	function formatLicenseExpirationDate(licenseExpiration) {
+		return licenseExpiration.slice(0, 4) + '-' + licenseExpiration.slice(4, 6) + '-' + licenseExpiration.slice(6, 8);
+	}
+	
 	window.onload = function() {
 	    let licenseNumberInput = document.getElementById("licenseNumber");
         if (licenseNumberInput) {
             licenseNumberInput.value = formatLicenseNumber(licenseNumberInput.value);
+        }
+        
+        let licenseIssueInput = document.getElementById("licenseIssue");
+        if (licenseIssueInput) {
+        	licenseIssueInput.value = formatLicenseIssueDate(licenseIssueInput.value);
+        }
+        
+        let licenseExpirationInput = document.getElementById("licenseExpiration");
+        if (licenseExpirationInput) {
+        	licenseExpirationInput.value = formatLicenseExpirationDate(licenseExpirationInput.value);
         }
 	};
 </script>
