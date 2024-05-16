@@ -24,7 +24,7 @@ import com.itwill.billycar.vo.ReservVO;
 public class PaymentController {
 	
 	@Autowired
-	private ReservService service;
+	private ReservService reservService;
 	
 	@Autowired
 	private HttpSession session;
@@ -39,6 +39,7 @@ public class PaymentController {
 	public String payment(CarVO car 
 						, Model model
 						, HttpSession session
+						, ReservVO reserv
             			, @RequestParam(defaultValue = "") Map<String, String> map) {
 		//TODO 카넘버로 조회하기 컬럼은 car_dayprice, car_hourprice, car_img / * 
 		// WHERE car_number = car.getCar_number 받아간값
@@ -51,6 +52,16 @@ public class PaymentController {
 		String MemberId = (String)session.getAttribute("member_id");
 		model.addAttribute("info", MyPageService.getMemberInfo(MemberId));
 		
+//		String carNumber = car.getCar_number();
+//		model.addAttribute("carInfo", reservService.getCar(carNumber));
+		Map<String, String> selectCar = reservService.getCar(car, reserv);
+		
+//		selectCar.get("car_number");
+//		String carNumber = selectCar.get("car_number");
+//		model.addAttribute("car", selectCar);
+//		model.addAttribute("car", selectCar.get("car_number"));
+		model.addAttribute("car", selectCar);
+		System.out.println(car);
 		return "payment/paymentPage";
 	}
 	
@@ -74,7 +85,7 @@ public class PaymentController {
 	public String paymentDetail(CarVO car , Model model, MemberVO member, ReservVO reserv) {
 		String MemberId = (String)session.getAttribute("member_id");
 		model.addAttribute("info", MyPageService.getMemberInfo(MemberId));
-		List<ReservVO> reservList = service.selectReservList(member);
+		List<ReservVO> reservList = reservService.selectReservList(member);
 		model.addAttribute("reservList", reservList);
 		return "payment/paymentDetail";
 	}
