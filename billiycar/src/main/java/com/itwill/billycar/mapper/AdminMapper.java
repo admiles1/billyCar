@@ -57,7 +57,7 @@ public interface AdminMapper {
 
 	int insertNewBrand(@Param("newBrandName") String newBrandName);
 
-	int insertNewModel(String brandName, String newModelName);
+	int insertNewModel(@Param("brandName")String brandName, @Param("newModelName") String newModelName);
 	
 	
 }

@@ -170,13 +170,10 @@ public class MemberController {
 		
 		
 		if(dbMember == null || !passwordEncoder.matches(member.getMember_passwd(), dbMember.getMember_passwd())
-							|| dbMember.getMember_status() == 3) { // 로그인 실패
+							|| dbMember.getMember_status() == 2) { // 로그인 실패
 			model.addAttribute("msg", "아이디 또는 비밀번호를 잘못 입력했습니다.\\n입력하신 내용을 다시 확인해주세요.");
 			return "err/fail";
-		} else if(dbMember != null && dbMember.getMember_status() == 2) { 
-			model.addAttribute("msg", "휴면 회원입니다! 해제하시려면 관리자에게 문의하시기 바랍니다.");
-			return "err/fail";
-		} else { // 로그인 성공
+		}  else { // 로그인 성공
 			// 세션 객체에 로그인 성공한 아이디를 "sId" 속성값으로 추가
 			session.setAttribute("member_id", member.getMember_id());
 			

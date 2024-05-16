@@ -34,7 +34,10 @@
 	$(function(){
 		
 		$("#searchCar").on("click", function(){
-			check();
+			if(!check()) {
+				return;
+			}
+			
 			let formData = $("#searchForm").serialize();
 			
 			$.ajax({
@@ -83,8 +86,12 @@
 		let pud = $("#reserv_pickupdate").val() + " " + $("#reserv_pickuptime").val();
 		let rtd = $("#reserv_returndate").val() + " " + $("#reserv_returntime").val();
 		let pul = $("#reserv_pickuplocation").val();
+		if(pul == "아이티윌") {
+			pul = "부산광역시 부산진구 동천로 109 삼한골든게이트빌딩 7층";
+		}
 		let rtl = $("#reserv_returnlocation").val();
-		if(rtl == "same"){
+		
+		if(rtl == "branch"){
 			rtl = pul;
 		}
 		
@@ -111,14 +118,16 @@
 		let pickupDate = $("#reserv_pickupdate").val();
 		let returnDate = $("#reserv_returndate").val();
 		let returnLocation = $("#reserv_returnlocation").val();
-		
 		if(pickupDate == "") {
 			alert('대여날짜를 선택하여 주십시오');
 			return false;
+			
 		}  else if(returnLocation == "") {
 			alert('반납장소를 선택하여 주십시오');
 			return false;
 		}
+		
+		return true;
 	}
 </script>
 </head>

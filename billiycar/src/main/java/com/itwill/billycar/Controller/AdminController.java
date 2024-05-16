@@ -197,11 +197,6 @@ public class AdminController {
 		
 	}
 
-	@GetMapping("admin_blackList")
-	public String admin_blackList() {
-		
-		return "admin/admin_blackList";
-	}
 	
 	@GetMapping("admin_car")
 	public String admin_car(CarVO car, Model model) {
@@ -210,6 +205,13 @@ public class AdminController {
 		model.addAttribute("carList", carList);
 		
 		return "admin/admin_car";
+	}
+	
+	@PostMapping("searchCars")
+	public String searchCars() {
+		
+		return "";
+				
 	}
 	
 	@GetMapping("admin_car_registration")
@@ -356,10 +358,13 @@ public class AdminController {
 		System.out.println("새 차량모델 : " + newModelName);
 		
 		int insertCnt = service.addModel(brandName,newModelName);
-		System.out.println("dsakjfhkalsdhfkljasdhfkjdslf" + insertCnt);
+		if (insertCnt > 0) { // 성공 시 
+            return "redirect:/admin_car_registration"; // 작업 후 차량 등록 페이지로 이동
+        } else { // 실패 시
+            model.addAttribute("msg", "차량등록실패!");
+            return "err/fail";
+        }
 		
-		
-		return "";
 	}
 	
 	@GetMapping("carModify")
