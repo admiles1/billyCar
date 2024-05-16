@@ -106,6 +106,7 @@
             <th>반납지역</th>
             <th>보험여부</th>
             <th>예약상태</th>
+            <th>예약상세</th>
             <th>리뷰</th>
         </tr>
         
@@ -131,11 +132,21 @@
 		            <td>
 		            	<c:choose>
 		            		<c:when test="${reserv.reserv_status eq 1}">
-		            			 <a href="pamentDetail?idx=${reserv.reserv_idx}">O</a>
+		            			예약완료
 		            		</c:when>
 		            		<c:when test="${reserv.reserv_status eq 0}">
-		            			X
+		            			예약취소
 		            		</c:when>
+		            	</c:choose>
+		            </td>
+		             <td>
+		            	<c:choose>
+		            		<c:when test="${reserv.reserv_status eq 1}">
+		            			<a href="pamentDetail?idx=${reserv.reserv_idx}">상세보기</a>
+		            		</c:when>
+		            		<c:otherwise>
+		            			-
+		            		</c:otherwise>
 		            	</c:choose>
 		            </td>
 		            <td>
@@ -148,6 +159,7 @@
 		            		</c:otherwise>
 		            	</c:choose>
 		            </td>
+		            
 		       		</tr>
 			        <tr style="display: none;" id = "reviewShow${reserv.reserv_idx }">
 			        	<td colspan="7">
