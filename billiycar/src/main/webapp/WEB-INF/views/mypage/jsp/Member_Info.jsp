@@ -131,7 +131,13 @@ h2 {
 		</fieldset>
 	</form>
 <script type="text/javascript">	
+	function formatBirth(memberBirth) {
+	    return memberBirth.slice(0, 4) + '-' + memberBirth.slice(4, 6) + '-' + memberBirth.slice(6, 8);
+	}
 	
+	function formatTel(tel) {
+		return tel.slice(0, 3) + '-' + tel.slice(3, 7) + '-' + tel.slice(7, 11);
+	}
   window.onload = function() {
         // 회원 가입일 가져와서 자르기
         let memberRegDate = "${info.member_reg_date}";
@@ -139,6 +145,17 @@ h2 {
         
         // 자른 날짜 설정
         document.getElementById("memberRegDate").value = slicedDate;
+        
+        let memberBirthInput = document.getElementById("memberBirth");
+        if (memberBirthInput) {
+        	memberBirthInput.value = formatBirth(memberBirthInput.value);
+        }
+      
+        let telInput = document.getElementById("tel");
+        if (telInput) {
+        	telInput.value = formatTel(telInput.value);
+        }
+        
     }
 
   </script>

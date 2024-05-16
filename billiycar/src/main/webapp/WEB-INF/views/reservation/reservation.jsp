@@ -34,7 +34,10 @@
 	$(function(){
 		
 		$("#searchCar").on("click", function(){
-			check();
+			if(!check()) {
+				return;
+			}
+			
 			let formData = $("#searchForm").serialize();
 			
 			$.ajax({
@@ -111,14 +114,16 @@
 		let pickupDate = $("#reserv_pickupdate").val();
 		let returnDate = $("#reserv_returndate").val();
 		let returnLocation = $("#reserv_returnlocation").val();
-		
 		if(pickupDate == "") {
 			alert('대여날짜를 선택하여 주십시오');
 			return false;
+			
 		}  else if(returnLocation == "") {
 			alert('반납장소를 선택하여 주십시오');
 			return false;
 		}
+		
+		return true;
 	}
 </script>
 </head>

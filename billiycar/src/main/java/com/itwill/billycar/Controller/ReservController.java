@@ -3,16 +3,12 @@ package com.itwill.billycar.Controller;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.StringJoiner;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,12 +22,8 @@ import com.itwill.billycar.vo.CarReviewVO;
 import com.itwill.billycar.vo.CarVO;
 import com.itwill.billycar.vo.CommonVO;
 import com.itwill.billycar.vo.PageInfo;
-import com.itwill.billycar.vo.ReviewVO;
-import com.mysql.cj.protocol.x.SyncFlushDeflaterOutputStream;
-
-import retrofit2.http.GET;
-
 import com.itwill.billycar.vo.ReservVO;
+import com.itwill.billycar.vo.ReviewVO;
 
 @Controller
 public class ReservController {
@@ -99,7 +91,7 @@ public class ReservController {
 		} 
 		
 		// 자동차검색
-		List<Map<String, String>> cars = reservService.getCar(car, reserv);
+		List<Map<String, String>> cars = reservService.getCarList(car, reserv);
 		// 공통 코드에서 type, fule 조회해서 가져오기 TODO = 줄일것
 		model.addAttribute("pickupDate", map.get("reserv_pickupdate"));
 		model.addAttribute("pickupTime", map.get("pickupTime"));
@@ -113,7 +105,6 @@ public class ReservController {
 		model.addAttribute("BHE", adminService.getBusinesshours().get(1).getName());
 		model.addAttribute("cars", cars);
 		
-		System.out.println(cars);
 		return "reservation/reservation";
 	}
 	
@@ -144,12 +135,13 @@ public class ReservController {
 			car.setCar_type(searchMethod(carType));
 		} 
 		
-		List<Map<String, String>> cars = reservService.getCar(car, reserv);
+		List<Map<String, String>> cars = reservService.getCarList(car, reserv);
 		System.out.println(car);
 		System.out.println("---------------------------------");
 		return cars;
 	}
 	
+	//상세 차량 조회 페이지
 	@GetMapping("detail")
 	public String reservdetail(CarVO car
 							, @RequestParam(defaultValue = "") Map<String, String> map 
@@ -186,7 +178,6 @@ public class ReservController {
 			}
 		};
 		
-		System.out.println(car);
 		
 		if(carType != null && carFuel == null) { 	// 자동차타입 조건만 존재 할 경우
 			// search메소드로 스트링 포맷 변환 후 초기화
@@ -199,11 +190,28 @@ public class ReservController {
 		} 
 		
 		// 자동차검색
-		List<Map<String, String>> carO = reservService.getCar(car, reserv);
-		System.out.println("==========================");
-		System.out.println(carO);
-		return "";
+		Map<String, String> selectCar = reservService.getCar(car, reserv);
+		String carNumber = selectCar.get("car_number");
+		List<ReviewVO> reviewes = reviewService.getReview(carNumber);
+		
+		while(true) {
+			if(reviewes.size() < 3) {
+				reviewes.add(new ReviewVO());
+			} else {
+				break;
+			}
+		}
+		
+		for(ReviewVO r : reviewes) {
+			System.out.println(r);
+		}
+		
+		model.addAttribute("reviewes", reviewes);
+		model.addAttribute("car", selectCar);
+		return "reservation/reserv_detail";
 	}
+	
+	
 	// 호출용 메소드
 		public String searchMethod(String option) {
 			String[] strArr = option.split(",");
@@ -215,6 +223,8 @@ public class ReservController {
 			return options.toString();
 		}
 	
+		
+		
 	@GetMapping("review")
 	public String review(Model model,
 					@RequestParam(defaultValue = "latest") String option,

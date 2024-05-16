@@ -197,11 +197,6 @@ public class AdminController {
 		
 	}
 
-	@GetMapping("admin_blackList")
-	public String admin_blackList() {
-		
-		return "admin/admin_blackList";
-	}
 	
 	@GetMapping("admin_car")
 	public String admin_car(CarVO car, Model model) {

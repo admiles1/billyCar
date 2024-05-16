@@ -39,7 +39,7 @@
   			</div>
   			
   			<div class = "view_info">
-				<input type="file" value="파일 추가하기" name="event_iamge_form" multiple>
+				<input type="file" value="파일 추가하기" name="event_image_form" multiple>
   			</div>
   			
 <!--   			<div class = "view_cont"> -->

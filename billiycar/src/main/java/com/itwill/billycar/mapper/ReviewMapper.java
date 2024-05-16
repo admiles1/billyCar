@@ -1,7 +1,6 @@
 package com.itwill.billycar.mapper;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -17,9 +16,12 @@ public interface ReviewMapper {
 	List<CarReviewVO> selectReviewList(@Param("option") String option
 										,@Param("startRow") int startRow
 										,@Param("listLimit") int listLimit);
-
+								
+	List<ReviewVO> selectReview(String carNumber);
+	
 	double selectReviewAvg();
 
 	int selectAllReview();
+	
 
 }

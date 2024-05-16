@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -74,27 +75,27 @@
     				<div class="review">
     					<h5 class="div-tap"> 이용후기 </h5>
     					<div style=" margin : 20px; display:flex">
-	    					<div class="card review-card col-4">
-							 	<div class="card-body">
-							    	<h5 class="card-title"> OOO 고객님 </h5>
-							    	<h6 class="card-subtitle mb-2 text-body-secondary"> 이 자리에 별점 넣기 </h6>
-							    	<p class="card-text">리뷰 내용 </p>
-							 	</div>
-							</div>
-	    					<div class="card review-card col-4">
-							 	<div class="card-body">
-							    	<h5 class="card-title"> 김유신 고객님 </h5>
-							    	<h6 class="card-subtitle mb-2 text-body-secondary"> 이 자리에 별점 넣기 </h6>
-						    		<textarea class="review-content" readonly cols="45" rows="10"> d기에 리뷰내용을 </textarea>
-						    	</div>
-							</div>
-	    					<div class="card review-card col-4">
-							 	<div class="card-body">
-							    	<h5 class="card-title"> OOO 고객님 </h5>
-							    	<h6 class="card-subtitle mb-2 text-body-secondary"> 이 자리에 별점 넣기 </h6>
-							    	<p class="card-text">리뷰 내용 </p>
-							 	</div>
-							</div>
+    						<c:forEach var="review" items="${reviewes}">
+   								<c:choose>
+   									<c:when test="${not empty review.review_id}">
+   										<div class="card review-card col-4">
+				 							<div class="card-body">
+										    	<h5 class="card-title"> ${review.review_id} 고객님 </h5>
+										    	<h6 class="card-subtitle mb-2 text-body-secondary"> 이 자리에 별점 넣기 </h6>
+										    	<p class="card-text"> ${review.review_content} </p>
+							    			</div>
+										</div>
+   									</c:when>
+   									<c:otherwise>
+   										<div class="card review-card col-4">
+				 							<div class="card-body">
+		   										<h5 class="card-title"> 아직 리뷰가 작성되지 않았습니다 </h5>
+		   										<p class="card-text"> 차량 이용 후 리뷰를 달아주세요! </p>
+											</div>
+										</div>
+   									</c:otherwise>
+   								</c:choose> 						
+    						</c:forEach>
 						</div>
     				</div>
     				<div class="car-info">
@@ -113,8 +114,9 @@
     							<strong> ${car.car_model} </strong>
     						</li>
     						<li>
+    							<c:set var="year" value="${car.car_year}"/>
     							<small> 연식 </small> <br>
-    							<strong> ${car.car_year} </strong>
+    							<strong>${fn:substring(year,0,4)}</strong>
     						</li>
     						<li>
     							<small> 변속타입 </small> <br>

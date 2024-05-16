@@ -92,7 +92,7 @@
 		                <td>${member.member_reg_date }</td>
 		               
 		                <c:choose>
-		                	<c:when test="${member.member_status eq 3}">
+		                	<c:when test="${member.member_status eq 4}">
 		                		<td>블랙리스트</td>
 		                	</c:when>
 		                	<c:when test="${member.member_status eq 1}">
