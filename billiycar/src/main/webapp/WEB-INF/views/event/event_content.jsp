@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,6 +19,12 @@
 	<header><jsp:include page="../inc/top.jsp"></jsp:include></header>
 	<div class="container">
 		<h1 class="text-center my-4"> 🎉 ${event.event_title} 🎉</h1>
+		<!-- 글쓰기 글 -->
+    	<c:if test="${sessionScope.member_id eq 'admin'}">
+	    	<div style="margin-left:1220px; margin-bottom:40px">
+				<input type="button" value="수정" style="background-color: #00aaff; color:white; border: none" onclick="location.href='eventModify?event_idx=${event.event_idx}'">
+	    	</div>
+    	</c:if>
 		<div class="card">
 			<div class="card-body">
 			

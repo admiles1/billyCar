@@ -39,7 +39,7 @@ public class EventController {
 	}
 	
 	@GetMapping("eventContent")
-	public String event1(Model model, EventVO event) {
+	public String eventContent(Model model, EventVO event) {
 		
 		event = service.selectEventContent(event.getEvent_idx());
 		System.out.println(event);
@@ -47,6 +47,7 @@ public class EventController {
 		
 		return "event/event_content";
 	}
+	
 	
 //	@GetMapping("event2")
 //	public String event2() {
@@ -137,5 +138,19 @@ public class EventController {
 		return "redirect:/event";
 	}
 	
+	@GetMapping("eventModify")
+	public String eventModify(EventVO event) {
+		event = service.selectEventContent(event.getEvent_idx());
+		return "event/event_modify";
+	}
+	
+	@PostMapping("eventModify")
+	public String eventModifyPro() {
+		
+		
+		
+		
+		return "redirect:/event";
+	}
 	
 }
