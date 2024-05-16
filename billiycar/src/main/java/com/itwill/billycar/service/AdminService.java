@@ -92,12 +92,13 @@ public class AdminService {
 	}
 
 	public int addBrandModel(String newBrandName) {
-		System.out.println("서비스까지 도착햇어");
+//		System.out.println("서비스까지 도착햇어");
 		
 		return mapper.insertNewBrand(newBrandName);
 	}
 
 	public int addModel(String brandName, String newModelName) {
+		System.out.println("서비스까지 도착햇어");
 		
 		return mapper.insertNewModel(brandName,newModelName);
 	}
