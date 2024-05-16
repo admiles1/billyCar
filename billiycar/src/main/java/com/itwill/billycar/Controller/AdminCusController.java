@@ -227,4 +227,14 @@ public class AdminCusController {
 		
 		return "redirect:/couponList";
 	}
+	
+	// ----------------------------------------------------------------------------------------------
+	// [ 블랙리스트 관리 ]
+
+	@GetMapping("admin_blackList")
+	public String admin_blackList() {
+		
+		return "admin/admin_blackList";
+	}
+	
 }

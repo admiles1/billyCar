@@ -21,9 +21,9 @@
 		<div class="form-group mr-2" style="text-align: center;">
             <select class="form-control" name="member_status">
               <option value="1">회원</option>
-              <option value="2">휴먼</option>
-              <option value="3">블랙리스트</option>
-              <option value="4">탈퇴회원</option>
+              <option value="2">탈퇴회원</option>
+              <option value="3">휴먼</option>
+              <option value="4">블랙리스트</option>
             </select>
             
             <input type="hidden" name="member_id" value="${param.member_id }">
