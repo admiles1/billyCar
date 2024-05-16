@@ -24,6 +24,10 @@ public class ReviewService {
 		System.out.println("mapper.selectReviewList(service) : " + mapper.selectReviewList(option,startRow,listLimit));
 		return mapper.selectReviewList(option,startRow,listLimit);
 	}
+	
+	public List<ReviewVO> getReview(String carNumber){
+		return mapper.selectReview(carNumber);
+	}
 
 	public double selectReviewAvg() {
 		System.out.println("mapper.selectReviewAvg() : " + mapper.selectReviewAvg());

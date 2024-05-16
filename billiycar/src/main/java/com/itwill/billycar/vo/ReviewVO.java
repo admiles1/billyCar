@@ -14,6 +14,4 @@ public class ReviewVO {
 	private int review_readcount;
 	private String car_number;
 	private LocalDateTime reg_date;
-	
-
 }

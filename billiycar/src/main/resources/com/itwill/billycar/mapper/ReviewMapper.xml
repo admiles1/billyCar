@@ -49,6 +49,15 @@
 		select count(*) from review;
 	</select>
 	
+	<select id="selectReview" resultType="com.itwill.billycar.vo.ReviewVO">
+		SELECT review_id
+		     , review_content 
+		     , review_score 
+		  FROM review
+		 WHERE car_number = #{carNumber}
+		 LIMIT 3;
+	</select>
+	
 </mapper>
 
 
