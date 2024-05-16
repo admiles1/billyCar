@@ -46,9 +46,7 @@
 				data : formData,
 				dataType : "json",
 				success : function(response) {
-					if(!$("#selectResult").empty()) {
-						return;
-					}
+					$("#selectResult").empty();
 					$("#selectResult").html("<ul>");
 					
 					for(let car of response) {
@@ -267,14 +265,14 @@
 					    				<c:if test="${not empty returnDate}"> value="${returnDate}"</c:if> id="reserv_returndate">
 					    			<br>	
 				    				<select name="pickupTime" id="reserv_pickuptime">
-				    					<c:forEach var="BH" begin="${BHS}" end="${BHE}" >
+				    					<c:forEach var="BH" begin="${BusinessHours[0].name}" end="${BusinessHours[1].name}" >
 				    						<fmt:formatNumber value="${BH}" pattern="00" var="BHfmt" />
 				    						<option value="${BHfmt}"
 				    							<c:if test="${pickupTime eq BHfmt}"> selected </c:if>>${BHfmt}:00</option>
 				    					</c:forEach>
 									</select>
 				    				<select name="returnTime" id="reserv_returntime">
-										<c:forEach var="BH" begin="${BHS}" end="${BHE}" >
+										<c:forEach var="BH" begin="${BusinessHours[0].name}" end="${BusinessHours[1].name}" >
 											<fmt:formatNumber value="${BH}" pattern="00" var="BHfmt" />
 											<option value="${BHfmt}"
 				    							<c:if test="${returnTime eq BHfmt}"> selected </c:if>>${BHfmt}:00</option>
@@ -325,7 +323,26 @@
 			    </form>
     		</div>
 	   		<div class="col-8" id="selectResult">
-				검색을 먼저해주세요
+	   			<c:choose>
+					<c:when test="${needSearch}"> 검색을 먼저해주세요 </c:when>   			
+	   				<c:otherwise>
+	   					<ul>
+	   						<c:forEach var="car" items="${cars}">
+		   						<li class='carList fadeIn row'>
+										<a class='d-flex' onclick='goDetail("${car.car_model}")'>
+											<span class='carImg'><img src=""></span>
+											<span class='carInfo'>
+												<span> ${car.car_model} / ${car.car_capacity} </span>
+												<small>종일가 : ${car.car_dayprice} </small><br>
+												<small>시간당 : ${car.car_hourprice} </small><br>
+												<small>예약가능차량 : ${car.canReserv} </small>
+										</span>
+									</a>
+								</li>
+	   						</c:forEach>
+	   					</ul>
+	   				</c:otherwise>
+	   			</c:choose>
 			</div>
 		</div>
 	</main>

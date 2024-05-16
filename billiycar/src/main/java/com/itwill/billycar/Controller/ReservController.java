@@ -32,27 +32,25 @@ public class ReservController {
 	@Autowired ReviewService reviewService;
 	
 	// 조건검색하지않고 예약페이지 진입시 (모든 차량검색, 페이징처리)
+	
 	@GetMapping("reservation")
 	public String reservationget(Model model) {
 		List<CommonVO> fuels = adminService.getFuels();
 		List<CommonVO> types = adminService.getTypes();
 		model.addAttribute("types", types);
 		model.addAttribute("fuels", fuels);
+		System.out.println(adminService.getBusinesshours());
+		model.addAttribute("BusinessHours", adminService.getBusinesshours());
 		model.addAttribute("needSearch", true);
-		model.addAttribute("BHS", adminService.getBusinesshours().get(0).getName());
-		model.addAttribute("BHE", adminService.getBusinesshours().get(1).getName());
 		return "reservation/reservation";
 	}
 	
-	// 메인페이지, 예약페이지에서 조건을 입력하였을 시 (조건에 맞는 차량 검색 및 받아온 값 표시)
+	// 메인페이지 조건을 입력하였을 시 (조건에 맞는 차량 검색 및 받아온 값 표시)
 	@PostMapping("reservation")
 	public String reservationpost(CarVO car
 								, @RequestParam(defaultValue = "") Map<String,String> map 
 								, Model model) {
-		System.out.println(car);
-		// 체크박스 checked용 값 따로 빼두기 
 		
-		// 주입하면 변환해서 세팅못하니 따로 만들기
 		ReservVO reserv = new ReservVO();
 		String pickupdate = map.get("reserv_pickupdate") + " " + map.get("pickupTime");
 		String returndate = map.get("reserv_returndate") + " " + map.get("returnTime");
@@ -63,21 +61,14 @@ public class ReservController {
 		String carType = car.getCar_type();
 		String carFuel = car.getCar_fuel();
 		
-		// from index
-		// 널이 아니지만 널로 바꿈 
-		// from reservation 아예 널로 넘어와서 메소드 호출불가
-		if(carType != null) {
-			if(carType.equals("")) {
-				car.setCar_type(null);
-				carType = null;
-			}
+		if(carType.equals("")) {
+			car.setCar_type(null);
+			carType = null;
 		}
 		
-		if(carFuel != null) {
-			if(carFuel.equals("")) {
-				car.setCar_fuel(null);
-				carFuel = null;
-			}
+		if(carFuel.equals("")) {
+			car.setCar_fuel(null);
+			carFuel = null;
 		}
 		
 		if(carType != null && carFuel == null) { 	// 자동차타입 조건만 존재 할 경우
@@ -97,12 +88,11 @@ public class ReservController {
 		model.addAttribute("pickupTime", map.get("pickupTime"));
 		model.addAttribute("returnDate", map.get("reserv_returndate"));
 		model.addAttribute("returnTime", map.get("returnTime"));
-		model.addAttribute("pickupLocation", map.get("reserv_pickuplocation"));
-		model.addAttribute("returnLocation", map.get("reserv_returnlocation"));
+//		model.addAttribute("schedule", map);
 		model.addAttribute("types", adminService.getTypes());
 		model.addAttribute("fuels", adminService.getFuels());
-		model.addAttribute("BHS", adminService.getBusinesshours().get(0).getName());
-		model.addAttribute("BHE", adminService.getBusinesshours().get(1).getName());
+		model.addAttribute("BusinessHours", adminService.getBusinesshours());
+		
 		model.addAttribute("cars", cars);
 		
 		return "reservation/reservation";
@@ -113,8 +103,6 @@ public class ReservController {
 	public List<Map<String, String>> SelectCarList(CarVO car
 							, @RequestParam(defaultValue = "") Map<String, String> map 
 				            , Model model) {
-		System.out.println(car);
-		System.out.println(map);
 		ReservVO reserv = new ReservVO();
 		String pickupdate = map.get("reserv_pickupdate") + " " + map.get("pickupTime");
 		String returndate = map.get("reserv_returndate") + " " + map.get("returnTime");
@@ -136,8 +124,6 @@ public class ReservController {
 		} 
 		
 		List<Map<String, String>> cars = reservService.getCarList(car, reserv);
-		System.out.println(car);
-		System.out.println("---------------------------------");
 		return cars;
 	}
 	
