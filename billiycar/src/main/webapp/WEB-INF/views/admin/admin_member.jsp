@@ -92,11 +92,17 @@
 		                <td>${member.member_reg_date }</td>
 		               
 		                <c:choose>
-		                	<c:when test="${member.member_status eq 4}">
-		                		<td>블랙리스트</td>
-		                	</c:when>
 		                	<c:when test="${member.member_status eq 1}">
 		                		<td>회원</td>
+		                	</c:when>
+		                	<c:when test="${member.member_status eq 2}">
+		                		<td>탈퇴회원</td>
+		                	</c:when>
+		                	<c:when test="${member.member_status eq 3}">
+		                		<td>휴면회원</td>
+		                	</c:when>
+		                	<c:when test="${member.member_status eq 4}">
+		                		<td>블랙리스트</td>
 		                	</c:when>
 		                </c:choose>
 		                

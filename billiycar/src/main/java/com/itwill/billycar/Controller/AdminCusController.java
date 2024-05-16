@@ -1,9 +1,12 @@
 package com.itwill.billycar.Controller;
 
+import java.net.http.HttpRequest;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.javassist.expr.Instanceof;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.itwill.billycar.service.AdminCusService;
 import com.itwill.billycar.vo.CouponVO;
 import com.itwill.billycar.vo.FaqVO;
+import com.itwill.billycar.vo.MemberVO;
 import com.itwill.billycar.vo.PageInfo;
 import com.itwill.billycar.vo.QnaVO;
 
@@ -229,12 +233,49 @@ public class AdminCusController {
 	}
 	
 	// ----------------------------------------------------------------------------------------------
-	// [ 블랙리스트 관리 ]
+	// [ 면허인증 관리 ]
 
-	@GetMapping("admin_blackList")
-	public String admin_blackList() {
+	@GetMapping("admin_license")
+	public String admin_blackList(Model model, @RequestParam(defaultValue ="1") int pageNum, String license) {
 		
-		return "admin/admin_blackList";
+		// 페이징
+		int listLimit = 10;
+		int startRow = (pageNum-1)*listLimit;
+		
+//		System.out.println(license);
+		
+		
+		int license_auth = 0;
+		
+		switch (license) {
+		case "license_unauth": license_auth = 2; break;
+		case "license_auth": license_auth = 1; break;
+		default: license_auth = 0; break;
+		}
+		// 목록 불러오기
+		List<Map<String, Object>> memberList = service.getLicenseList(listLimit, startRow, license_auth);
+		model.addAttribute("memberList", memberList);
+		model.addAttribute("license_auth", license);
+		
+		// 1) 전체 게시물 수 조회
+		int listCount = service.getMemberCount(license_auth);
+		int pageListLimit = 3;
+		
+		//----------------------------------------------------------------
+		int maxPage = listCount/listLimit + (listCount%listLimit > 0 ? 1 : 0);
+		//----------------------------------------------------------------
+		//시작페이지 설정
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		//끝페이지 설정
+		int endPage = startPage + pageListLimit - 1;
+				
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		model.addAttribute("pageInfo", new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage));
+		
+		return "admin/admin_license";
 	}
 	
 }
