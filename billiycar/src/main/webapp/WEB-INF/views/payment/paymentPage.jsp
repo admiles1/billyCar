@@ -134,7 +134,7 @@
 	            </div>
 	
 	            <div class="col-sm-9">
-	            	<input type="text" class="form-control" id="dateInfo"  value="${param.pickupDate}" readonly>
+	            	<input type="text" class="form-control" id="dateInfo"  value="${fn:split(param.schedule, ',')[0]}시" readonly>
 	            </div>
 	        </div>
 	        
@@ -144,7 +144,7 @@
 	            </div>
 				
 	            <div class="col-sm-9">
-	            	<input type="text" class="form-control" id="locatrionInfo"  value="${param.pickuplocation}" readonly>
+	            	<input type="text" class="form-control" id="locatrionInfo"  value="${fn:split(param.schedule, ',')[2]}" readonly>
 	            </div>
 			</div>
 			
@@ -154,7 +154,7 @@
 	            </div>
 	
 	            <div class="col-sm-9">
-	            	<input type="text" class="form-control" id="dateInfo" value="${param.returnDate}" readonly >
+	            	<input type="text" class="form-control" id="dateInfo" value="${fn:split(param.schedule, ',')[1]}시" readonly >
 	            </div>
 				
 			</div>
@@ -165,7 +165,7 @@
 	            </div>
 	
 	            <div class="col-sm-9">
-	            	<input type="text" class="form-control" id="locatrionInfo" value="${param.returnlocation}" readonly>
+	            	<input type="text" class="form-control" id="locatrionInfo" value="${fn:split(param.schedule, ',')[3]}" readonly>
 <!-- 	            	<select class="form-select" aria-label="Default select example"> -->
 <!-- 						<option selected>반납지역</option> -->
 <!-- 						<option value="1">반납지역1</option> -->
