@@ -69,17 +69,18 @@
 /*     flex: 1; */
 	}
 	/* 데스크탑용 사이드*/
-/* #paymentSide{   
+ #paymentSide{   
   		position:fixed;   
-   		left:1190px; top:230px;   
+   		right: 290px;; top:232px;   
    		width: 410px;   
-   		height: 600px;   
+/*    		height: 600px;    */
+		height: 70%;
  		margin: 0px; 
  		padding: 0px; 
    		border: 1px solid lightgray; 
    		border-radius: 10px; 
    		overflow-y: auto; 
-   	}  */
+   	}  
    	/*놑북용 사이드 */
    	/*
 	#paymentSide{  
@@ -93,19 +94,19 @@
   		border-radius: 10px;
    		overflows-y: auto; 
   	} */
-  	#paymentSide{
-  	 position: fixed;  
-    right: 120px; /* 화면의 오른쪽 끝에 위치하도록 설정 */
-    top: 230px; /* 화면의 상단부터 시작하도록 설정 */
-    width: 400px; /* 적절한 너비 설정 */
-    height: 100%; /* 전체 높이 */
-    margin: 0;
-    padding: 10px; /* 내부 여백 */
-    border: 1px solid lightgray;
-    border-radius: 10px;
-    overflow-y: auto; /* 내용이 많을 경우 스크롤 가능하게 설정 */
-    background-color: #fff; /* 배경색 설정 */
- 		} 
+ /* 	#paymentSide{
+	  	position: fixed;  
+	    right: 120px; /* 화면의 오른쪽 끝에 위치하도록 설정 */
+	    top: 230px; /* 화면의 상단부터 시작하도록 설정 */
+	    width: 400px; /* 적절한 너비 설정 */
+	    height: 100%; /* 전체 높이 */
+	    margin: 0;
+	    padding: 10px; /* 내부 여백 */
+	    border: 1px solid lightgray;
+	    border-radius: 10px;
+	    overflow-y: auto; /* 내용이 많을 경우 스크롤 가능하게 설정 */
+	    background-color: #fff; /* 배경색 설정 */
+	} */
   	label {
   		margin-left: 10px;
   	}
@@ -674,8 +675,8 @@
 			<h4 class="subject2">결제 정보 확인</h4>
 			<div class="container last_check">
 				<div>
-<%-- 					<img src="${car.car_img}" width="430" > --%> <!-- 차이미지 받아 오기 -->
-<!-- 					<img src="resources/event_images/envent_page_event2-1.webp" width="350" >임시 -->
+<%--  					<img src="${car.car_img}" width="430" > <!-- 차이미지 받아 오기 -->  --%>
+					<img src="resources/event_images/envent_page_event2-1.webp" width="350" >임시
 				</div>
 <!-- 				<p><b>예약자 정보</b></p> -->
 <!-- 				<div class="row"> -->
@@ -756,7 +757,7 @@
             IMP.request_pay({
                 pg: "html5_inicis", // 결제 과정에 사용될 결제사 이니시스
                 pay_method: "card", // 결제 수단
-                merchant_uid: "payDone_" + new Date().getTime(), // 주문번호 어칼지 고민
+//                 merchant_uid: "payDone_" + new Date().getTime(), // 주문번호 어칼지 고민
                 name: "렌트카 예약", // 주문 명 '렌트카 되어있는 곳에 차명 따와야 할듯'
                 amount: 100, // 금액
                 buyer_email: "${info.member_email}", // 구매자 이메일 필요한가 싶네
