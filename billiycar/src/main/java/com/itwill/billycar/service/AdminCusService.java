@@ -1,6 +1,7 @@
 package com.itwill.billycar.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import com.itwill.billycar.mapper.AdminCusMapper;
 import com.itwill.billycar.mapper.CsMapper;
 import com.itwill.billycar.vo.CouponVO;
 import com.itwill.billycar.vo.FaqVO;
+import com.itwill.billycar.vo.MemberVO;
 import com.itwill.billycar.vo.NoticeVO;
 import com.itwill.billycar.vo.QnaVO;
 
@@ -52,6 +54,7 @@ public class AdminCusService {
 	}
 
 	// ---------------------------------------------------------------------------------------------
+	// ** [문의] **
 	
 	// 문의 내역 불러오기
 	public List<QnaVO> getQnaList(int startRow, int listLimit) {
@@ -71,6 +74,7 @@ public class AdminCusService {
 	}
 
 	// ---------------------------------------------------------------------------------------------
+	// ** [쿠폰 등록] **
 	
 	// 쿠폰 등록하기
 	public int addCoupon(CouponVO coupon) {
@@ -86,6 +90,19 @@ public class AdminCusService {
 	public int removeCoupon(int coupon_id) {
 		return mapper.deleteCoupon(coupon_id);
 	}
+
+	// -----------------------------------------------------------------------------------------
+	// ** [면허 인증 관리] **
+	
+	// 회원 수 출력
+	public int getMemberCount(int license_auth) {
+		return mapper.selectMemberCount(license_auth);
+	}
+	
+	public List<Map<String, Object>> getLicenseList(int listLimit, int startRow, int license_auth) {
+		return mapper.selectLicense(listLimit, startRow, license_auth);
+	}
+
 
 
 

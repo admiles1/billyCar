@@ -95,4 +95,29 @@
 		WHERE coupon_id = #{coupon_id}
 	</delete>
 	
+	
+	<!-- 면허 인증 회원  -->
+	<select id="selectMemberCount" resultType="int">
+		SELECT COUNT(member_id)
+		FROM member
+		<if test="license_auth != 0">
+			WHERE member_license_checked = #{license_auth}
+		</if>
+	</select>
+	
+	<select id="selectLicense" resultType="HashMap">
+		SELECT CONCAT(SUBSTR(member_id, 1, 4),"***") AS member_id, member_name, member_email, member_license_checked,
+				CASE WHEN member_license_checked = 1 THEN '인증 완료'
+			    WHEN member_license_checked = 2 THEN '미인증'
+				END license_checked,
+				CASE WHEN member_license_checked = 1 THEN 'black'
+			    WHEN member_license_checked = 2 THEN 'red'
+				END color
+		FROM  member
+		<if test="license_auth != 0">
+			WHERE member_license_checked = #{license_auth}
+		</if>
+		ORDER BY member_idx DESC
+		LIMIT #{listLimit}, #{startRow}
+	</select>
 </mapper>

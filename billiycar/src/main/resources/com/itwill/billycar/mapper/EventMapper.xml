@@ -13,5 +13,17 @@
 			, #{event_image}
 		)
 	</insert>
+	
+	<select id="selectEventList">
+		SELECT *
+		FROM event
+		ORDER BY event_idx desc
+	</select>
+	
+	<select id="selectEventContent">
+		SELECT *
+		FROM event
+		WHERE event_idx = #{event_idx}
+	</select>
 
 </mapper>

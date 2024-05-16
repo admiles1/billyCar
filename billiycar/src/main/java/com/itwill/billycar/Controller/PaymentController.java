@@ -1,5 +1,6 @@
 package com.itwill.billycar.Controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -22,6 +23,8 @@ import com.itwill.billycar.vo.ReservVO;
 @Controller
 public class PaymentController {
 	
+	@Autowired
+	private ReservService service;
 	
 	@Autowired
 	private HttpSession session;
@@ -33,15 +36,20 @@ public class PaymentController {
 	private PaymentService paymentService;
 	// reservation_detail에서 예약하기 버튼 눌렀을 때 컨트롤러
 	@GetMapping("payment")
-	public String payment(CarVO car , Model model, MemberVO member, ReservVO reserv
-            				, @RequestParam(defaultValue = "") Map<String, String> map) {
+	public String payment(CarVO car 
+						, Model model
+						, HttpSession session
+            			, @RequestParam(defaultValue = "") Map<String, String> map) {
+		//TODO 카넘버로 조회하기 컬럼은 car_dayprice, car_hourprice, car_img / * 
+		// WHERE car_number = car.getCar_number 받아간값
+		// map.get("schedule").split("\\,") 로 짜른 스트링배열 컨트롤러에서 가공or자바스크립터에서 가공
+		System.out.println(session.getAttribute("member_id"));
+		System.out.println(car.getCar_number());
+		System.out.println(map.get("schedule"));
 		
-		model.addAttribute("car", car);
-		model.addAttribute("reserv", reserv);
+		
 		String MemberId = (String)session.getAttribute("member_id");
 		model.addAttribute("info", MyPageService.getMemberInfo(MemberId));
-//		map.put(MemberId, MemberId)
-		
 		
 		return "payment/paymentPage";
 	}
@@ -63,11 +71,11 @@ public class PaymentController {
 	}
 	
 	@GetMapping("pamentDetail")
-	public String paymentDetail(CarVO car , Model model, MemberVO member, ReservVO reserv, Map<String, String> map) {
+	public String paymentDetail(CarVO car , Model model, MemberVO member, ReservVO reserv) {
 		String MemberId = (String)session.getAttribute("member_id");
 		model.addAttribute("info", MyPageService.getMemberInfo(MemberId));
-		model.addAttribute("car", car);
-		model.addAttribute("reserv", reserv);
+		List<ReservVO> reservList = service.selectReservList(member);
+		model.addAttribute("reservList", reservList);
 		return "payment/paymentDetail";
 	}
 	

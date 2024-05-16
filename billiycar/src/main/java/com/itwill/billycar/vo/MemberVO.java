@@ -15,8 +15,8 @@ public class MemberVO {
 	private String member_birth;
 	private String member_phone;
 	private LocalDateTime member_reg_date;
-	private int member_license;
-	private String inviter;
+	private int member_license_checked;
+	private String member_inviter;
 	private int member_status;
 	
 	

@@ -1,12 +1,14 @@
 package com.itwill.billycar.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.itwill.billycar.vo.CouponVO;
 import com.itwill.billycar.vo.FaqVO;
+import com.itwill.billycar.vo.MemberVO;
 import com.itwill.billycar.vo.NoticeVO;
 import com.itwill.billycar.vo.QnaVO;
 
@@ -26,5 +28,7 @@ public interface AdminCusMapper {
 	int insertCoupon(CouponVO coupon); // 쿠폰 등록하기
 	List<CouponVO> selectCouponList(); // 쿠폰 내역 불러오기
 	int deleteCoupon(int coupon_id); // 쿠폰 삭제하기
+	int selectMemberCount(int license_auth); // 회원 수 출력
+	List<Map<String, Object>> selectLicense(@Param(value="startRow") int startRow, @Param(value = "listLimit") int listLimit, @Param(value = "license_auth") int license_auth); // 회원 목록 불러오기
 
 }

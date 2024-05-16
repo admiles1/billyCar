@@ -1,5 +1,7 @@
 package com.itwill.billycar.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,8 +14,15 @@ public class EventService {
 	private EventMapper mapper;
 	
 	public int updateEvent(EventVO event) {
-	
 		return mapper.updateEvent(event);
+	}
+
+	public List<EventVO> selectEventList() {
+		return mapper.selectEventList();
+	}
+
+	public EventVO selectEventContent(int event_idx) {
+		return mapper.selectEventContent(event_idx);
 	}
 
 }

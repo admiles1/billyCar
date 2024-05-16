@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -28,24 +29,34 @@ public class EventController {
 	private EventService service;
 	
 	@GetMapping("event")
-	public String event() {
+	public String event(Model model) {
+		
+		List<EventVO> eventList =  service.selectEventList();
+//		System.out.println(eventList);
+		model.addAttribute("eventList", eventList);
+		
 		return "event/eventPage";
 	}
 	
-	@GetMapping("event1")
-	public String event1() {
-		return "event/event1";
+	@GetMapping("eventContent")
+	public String event1(Model model, EventVO event) {
+		
+		event = service.selectEventContent(event.getEvent_idx());
+		System.out.println(event);
+		model.addAttribute("event", event);
+		
+		return "event/event_content";
 	}
 	
-	@GetMapping("event2")
-	public String event2() {
-		return "event/event2";
-	}
-	
-	@GetMapping("event3")
-	public String event3() {
-		return "event/event3";
-	}
+//	@GetMapping("event2")
+//	public String event2() {
+//		return "event/event2";
+//	}
+//	
+//	@GetMapping("event3")
+//	public String event3() {
+//		return "event/event3";
+//	}
 	
 	@GetMapping("eventWrite")
 	public String eventWrite() {
