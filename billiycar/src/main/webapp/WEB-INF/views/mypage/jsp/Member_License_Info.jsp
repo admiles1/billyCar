@@ -43,9 +43,8 @@ h2 {
 	margin-bottom: 15px;
 }
 
-#memberInfo input[type="text"],
-#memberInfo input[type="email"],
-#memberInfo input[type="tel"] {
+#memberInfo input[type="text"]
+ {
     margin-right: 60px; /* 입력창과 버튼 사이의 간격 조정 */
 	width: 350px;
 }
@@ -123,7 +122,7 @@ h2 {
 		        </li>
 		        <li>
 		          <label for="licenseIssue">발급일</label>
-		          <input id="licenseIssue" name="issue" type="email" value="${licenseInfo.license_issue_date}"  readonly>
+		          <input id="licenseIssue" name="issue" type="text" value="${licenseInfo.license_issue_date}"  readonly>
 		        </li>
 		         <li>
 		          <label for="licenseExpiration">만료일</label>
@@ -139,10 +138,12 @@ h2 {
 	    return licenseNumber.slice(0, 2) + '-' + licenseNumber.slice(2, 4) + '-' + licenseNumber.slice(4, 9) + '-' + licenseNumber.slice(9);
 	};
 	
-	// 페이지 로드 시 알림창 띄우기
+	function formatLicenseIssueDate(licenseIssue) {
+        return licenseIssue.slice(0, 4) + '-' + licenseIssue.slice(4, 6) + '-' + licenseIssue.slice(6, 8);
+    }
+	
 	window.onload = function() {
-// 	    alert("면허 등록이 완료되었습니다!");
-	    var licenseNumberInput = document.getElementById("licenseNumber");
+	    let licenseNumberInput = document.getElementById("licenseNumber");
         if (licenseNumberInput) {
             licenseNumberInput.value = formatLicenseNumber(licenseNumberInput.value);
         }

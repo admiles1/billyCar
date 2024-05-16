@@ -46,7 +46,7 @@
     <update id="withdrawMember">
     	UPDATE member
     	SET 
-    		member_status = 3
+    		member_status = 2
 		WHERE 
 			member_id = #{member_id}    		
     </update>
