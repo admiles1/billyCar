@@ -100,7 +100,7 @@
 	            </div>
 	
 	            <div class="col-sm-9">
-	            	<input type="text" class="form-control" id="dateInfo"  value="${param.pickupDate}" readonly>
+	            	<input type="text" class="form-control" id="dateInfo"  value="${reservList.reserv_pickupdate}" readonly>
 	            </div>
 	        </div>
 	        
