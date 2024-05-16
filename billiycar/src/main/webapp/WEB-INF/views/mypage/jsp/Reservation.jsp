@@ -142,7 +142,7 @@
 		             <td>
 		            	<c:choose>
 		            		<c:when test="${reserv.reserv_status eq 1}">
-		            			<a href="pamentDetail?idx=${reserv.reserv_idx}">상세보기</a>
+		            			<a href="paymentDetail?idx=${reserv.reserv_idx}">상세보기</a>
 		            		</c:when>
 		            		<c:otherwise>
 		            			-

@@ -100,7 +100,7 @@
 	            </div>
 	
 	            <div class="col-sm-9">
-	            	<input type="text" class="form-control" id="dateInfo"  value="${reservList.reserv_pickupdate}" readonly>
+	            	<input type="text" class="form-control" id="dateInfo"  value="${reservDetail.reserv_pickupdate}" readonly>
 	            </div>
 	        </div>
 	        
@@ -110,7 +110,7 @@
 	            </div>
 				
 	            <div class="col-sm-9">
-	            	<input type="text" class="form-control" id="locatrionInfo"  value="${param.pickuplocation}" readonly>
+	            	<input type="text" class="form-control" id="locatrionInfo"  value="${reservDetail.reserv_pickuplocation}" readonly>
 	            </div>
 			</div>
 			
@@ -120,7 +120,7 @@
 	            </div>
 	
 	            <div class="col-sm-9">
-	            	<input type="text" class="form-control" id="dateInfo" value="${param.returnDate}" readonly >
+	            	<input type="text" class="form-control" id="dateInfo" value="${reservDetail.reserv_returndate}" readonly >
 	            </div>
 				
 			</div>
@@ -131,7 +131,7 @@
 	            </div>
 	
 	            <div class="col-sm-9">
-	            	<input type="text" class="form-control" id="locatrionInfo" value="${param.returnlocation}" readonly>
+	            	<input type="text" class="form-control" id="locatrionInfo" value="${reservDetail.reserv_returnlocation}" readonly>
 <!-- 	            	<select class="form-select" aria-label="Default select example"> -->
 <!-- 						<option selected>반납지역</option> -->
 <!-- 						<option value="1">반납지역1</option> -->
@@ -212,7 +212,7 @@
 					<tbody>
 						<tr class="insuranceChk" >
 							<td colspan="1" class="c" >
-								<input name="insurance" class="chk insurance_data" id="insuranceCar0" type="radio" value="0" checked="checked"> 
+								<input name="insurance" class="chk insurance_data" id="insuranceCar0" type="radio" value="${reservDetail.reserv_insurance}" checked="checked"> 
 								<label>선택안함</label>
 							</td>
 							<td colspan="1" class="c" >없음</td>

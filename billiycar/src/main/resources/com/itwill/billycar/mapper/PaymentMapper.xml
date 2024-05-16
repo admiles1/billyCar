@@ -15,6 +15,12 @@
 		GROUP BY months.month;
 	</select>
 	
+	
+<select id="selectReservDetail" resultType="com.itwill.billycar.vo.ReservVO">
+		SELECT * FROM Reservation WHERE reserv_idx = #{idx}
+	</select>
+	
+	
 <!-- 	<insert id="insertPayment"> -->
 <!-- 		INSERT INTO payment -->
 <!-- 		VALUES ( -->
