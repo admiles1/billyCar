@@ -19,6 +19,17 @@
 </style>
 <script type="text/javascript">
 $(function(){
+	$('.heart').on('click',function(){
+		var heart = $(this).find('i');
+
+        if (heart.hasClass('fa-regular')) {
+        	heart.removeClass('fa-regular').addClass('fa-solid').css('color', 'red');
+        } else {
+        	heart.removeClass('fa-solid').addClass('fa-regular').css('color', 'grey');
+        }
+    });
+	
+	
     $('#options').on('change', function() {
         let pageNum = 1;
         let option = $('#options').val();
@@ -91,6 +102,7 @@ $(function(){
         // 결과를 페이지에 추가
         $('.pageList').html(html);
     }
+    
 });
 
 </script>
@@ -116,7 +128,8 @@ $(function(){
     	<div class="row">
     		<c:forEach var="review" items="${reviewList }">
 	        	<div class="col-md-3" style="margin-top: 20px;">
-	        		<div class="card">
+	        		<div class="card" style="position: relative;">
+	        			<div style="position: absolute; top: 10px; left: 10px; color: grey;" class="heart"><i class="fa-regular fa-heart"></i></div>
 	                	<img src="./resources/main_images/rewiewCar1.png" class="card-img-top" alt="리뷰 이미지 1" width="300" height="300">
 	                    <div class="card-body">
 	                    	
