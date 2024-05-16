@@ -103,6 +103,11 @@ public class AdminService {
 		return mapper.insertNewModel(brandName,newModelName);
 	}
 
+	public int deleteCar(int carId) {
+		
+		return mapper.deleteCar(carId);
+	}
+
 	
 
 }

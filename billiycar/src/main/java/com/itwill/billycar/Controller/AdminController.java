@@ -207,6 +207,22 @@ public class AdminController {
 		return "admin/admin_car";
 	}
 	
+	@PostMapping("deleteCar")
+	@ResponseBody
+	public String deleteCar(int carId, Model model) {
+//		System.out.println("차량삭제번호 : " + carId);  // 넘어왔고
+		
+		int deleteCount = service.deleteCar(carId);
+		
+		if(deleteCount > 0) { // 성공 시 
+			
+			return "redirect:/admin_car";
+		} else { // 실패 시
+			model.addAttribute("msg", "차량삭제실패!");
+			return "err/fail";
+		}		
+	}
+	
 	@PostMapping("searchCars")
 	public String searchCars() {
 		

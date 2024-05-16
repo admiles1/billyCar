@@ -117,7 +117,9 @@
 		    c.car_hourprice,
 		    c.car_status,
 		    c.car_countReserve,
-		    c.car_reg_date
+		    c.car_reg_date,
+		    CASE WHEN car_status = 1 THEN 'background-color: #ff5f6d'
+							 	     ELSE '' END AS color
 		FROM
 		    car c
 		    LEFT JOIN Common model ON c.car_model = model.code  -- 모델 코드와 매칭
@@ -129,6 +131,12 @@
 		    model.name       -- 모델명으로 정렬
 
 	</select>
+	
+	<delete id="deleteCar">
+		DELETE 
+		FROM car 
+		WHERE car_idx = #{carId}
+	</delete>
 	
 	<!-- qnaList -->
 	<select id="selectQnaList" resultType="com.itwill.billycar.vo.QnaVO">

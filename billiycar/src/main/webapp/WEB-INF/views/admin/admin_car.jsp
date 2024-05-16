@@ -47,6 +47,7 @@
         .search-container button {
             flex: 1;
         }
+        
     </style>
 </head>
 <body>
@@ -90,7 +91,7 @@
                             <tbody id="carTableBody">
                                 <c:forEach var="car" items="${carList}">
                                     <tr> 
-                                        <td>${car.car_brand}</td>
+                                        <td style="${car.color}">${car.car_brand}</td>
                                         <td class="text-center">
                                             <div class="img_area">
                                                 <img src="/resources/upload/${car.car_img}">
@@ -106,7 +107,7 @@
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic example">
                                                 <button type="button" class="btn btn-sm btn-primary" onclick="modifyCar('${car.car_idx}')">수정</button>
-                                                <button type="button" class="btn btn-sm btn-danger" onclick="confirmDelete()">삭제</button>
+                                                <button type="button" class="btn btn-sm btn-danger" onclick="confirmDelete('${car.car_idx}')">삭제</button>
                                             </div>
                                         </td>
                                     </tr>
@@ -122,11 +123,22 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script type="text/javascript">
-        function confirmDelete() {
-            if (confirm("정말 삭제하시겠습니까?")) {
-                // 삭제 로직 추가
-            }
-        }
+	    function confirmDelete(carId) {
+	        if (confirm("정말 삭제하시겠습니까?")) {
+	            $.ajax({
+	                type: 'POST',
+	                url: 'deleteCar',
+	                data: { carId: carId },
+	                success: function() {
+                        alert('삭제되었습니다.');
+                        location.reload(); // 페이지를 새로고침하여 목록을 업데이트합니다.
+	                },
+	                error: function() {
+	                    alert('삭제 중 오류가 발생했습니다.');
+	                }
+	            });
+	        }
+	    }
         
         function modifyCar(carId) {
             var carInfo = {
@@ -140,7 +152,8 @@
 //         	$.ajax({
 //         		type : "POST",
 //         		url : "searchCars",
-//         		type : 
+//         		data : category = 제조사 / 모델 판별
+                      // text 
 //         	});
 //         }
     </script>

@@ -58,6 +58,8 @@ public interface AdminMapper {
 	int insertNewBrand(@Param("newBrandName") String newBrandName);
 
 	int insertNewModel(@Param("brandName")String brandName, @Param("newModelName") String newModelName);
+
+	int deleteCar(int carId);
 	
 	
 }
