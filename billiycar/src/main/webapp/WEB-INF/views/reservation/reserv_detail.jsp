@@ -46,12 +46,11 @@
 	   		 		<h2 class="car-price"><fmt:formatNumber value="${car.car_dayprice}" pattern="#,###"/></h2>
 	   		 		<hr>
 	   		 		<div>
-	   		 			${param.pickupDate} / ${param.returnDate}
-	   		 			${param.pickuplocation} / 
-	   		 			<c:choose>
-	   		 				<c:when test="${param.returnlocation eq 'branch'}"> 부산광역시 부산진구 동천로 109 삼한골든게이트빌딩 7층(아이티윌 부산교육센터)</c:when>
-	   		 				<c:otherwise> ${param.pickuplocation} </c:otherwise>
-	   		 			</c:choose>
+	   		 			<c:set var="schedules" value="${fn:split(param.schedule, ',')}" />
+	   		 			<p> 대여 날짜 : ${schedules[0]}
+	   		 			<p> 반납 날짜 : ${schedules[1]}
+	   		 			<p> 대여 장소 : ${schedules[2]}
+	   		 			<p> 반납 장소 : ${schedules[3]}
 	   		 		</div>
 	   		 		<hr>
 		    		<br>
@@ -61,7 +60,7 @@
 		    			<li><img src="${pageContext.request.contextPath}/resources/images/check-img.png" class="check-img">운전경력 : <span class="qua">1년 이상</span></li>
 		    			<li><img src="${pageContext.request.contextPath}/resources/images/check-img.png" class="check-img">면허종류 : <span class="qua">2종 보통면허 이상</span></li>
 		    		</ul>
-		    		<a href="payment?idx=${car.car_idx}&pickupDate=${param.pickupDate}&returnDate=${param.returnDate}"><span class="make-rv"></span></a>
+		    		<a href="payment?car_number=${car.car_number}&schedule=${param.schedule}"><span class="make-rv"></span></a>
 		    		<a href="faq"><span class="contact-cs"></span></a>
 	    		</div>
 	  		</div>
@@ -81,7 +80,7 @@
    										<div class="card review-card col-4">
 				 							<div class="card-body">
 										    	<h5 class="card-title"> ${review.review_id} 고객님 </h5>
-										    	<h6 class="card-subtitle mb-2 text-body-secondary"> 이 자리에 별점 넣기 </h6>
+<!-- 										    	<h6 class="card-subtitle mb-2 text-body-secondary"> 이 자리에 별점 넣기 </h6> -->
 										    	<p class="card-text"> ${review.review_content} </p>
 							    			</div>
 										</div>
