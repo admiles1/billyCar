@@ -41,6 +41,7 @@
   			<div class = "view_info">
 				<em><b>작성자</b></em>
 				<em>${sessionScope.member_id}</em>
+				<input type="checkbox" name="important" value="important" style="margin-left:50px"> 주요공지 
   			</div>
   			
 <!--   			<div class = "view_cont"> -->

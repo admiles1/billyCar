@@ -98,7 +98,7 @@ public class CsController {
 	
 	// 글 작성 처리
 	@PostMapping("noticeWrite")
-	public String noticePro(NoticeVO notice, Model model) {
+	public String noticePro(NoticeVO notice, Model model, String important) {
 		// 작성자id에 admin 추가
 		String id = (String)session.getAttribute("member_id");
 		
@@ -106,6 +106,12 @@ public class CsController {
 			model.addAttribute("msg","잘못된 접근입니다");
 			model.addAttribute("targetURL","notice");
 			return "err/fail";
+		}
+		
+		if(important.equals("important")) {
+			notice.setBoard_important(1);
+		} else {
+			notice.setBoard_important(0);
 		}
 		
 		notice.setBoard_writer(id);
@@ -137,10 +143,16 @@ public class CsController {
 	
 	// 수정폼
 	@GetMapping("noticeModify")
-	public String noticeModify(Model model, NoticeVO notice, int notice_idx) {
+	public String noticeModify(Model model, NoticeVO notice, int notice_idx, String important) {
 		
 		// 작성자가 admin이 아닐 경우 튕구기
 		String id = (String)session.getAttribute("member_id");
+		
+		if(important.equals("important")) {
+			notice.setBoard_important(1);
+		} else {
+			notice.setBoard_important(0);
+		}
 		
 		if(id==null || !id.equals("admin")) {
 			model.addAttribute("msg","잘못된 접근입니다");
@@ -156,7 +168,7 @@ public class CsController {
 	
 	// 수정 처리
 	@PostMapping("noticeModify")
-	public String noticeModifyPro(Model model, NoticeVO notice, int notice_idx) {
+	public String noticeModifyPro(Model model, NoticeVO notice, int notice_idx, String important) {
 		
 		// 작성자가 admin이 아닐 경우 튕구기
 		String id = (String)session.getAttribute("member_id");
@@ -167,11 +179,22 @@ public class CsController {
 			return "err/fail";
 		}
 		
+//		System.out.println(important);
+		
+		if(important.equals("important")) {
+			notice.setBoard_important(1);
+		} else {
+			notice.setBoard_important(0);
+		}
+		
 		notice.setBoard_idx(notice_idx);
 		System.out.println(notice.getBoard_idx());
 		int insertCount = service.modifyNotice(notice);
 		
-		return "redirect:/notice";
+		
+		model.addAttribute("impoartant", important);
+		
+		return "redirect:/notice" ;
 	}
 	
 	// 삭제폼

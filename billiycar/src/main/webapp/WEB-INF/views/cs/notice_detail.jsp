@@ -45,7 +45,7 @@
   		<div class = "btn-view">
   		<c:choose>
   			<c:when test="${sessionScope.member_id eq 'admin'}">
-	  			<a href = "noticeModify?notice_idx=${notice.board_idx}&pageNum=${param.pageNum}">수정</a>
+	  			<a href = "noticeModify?notice_idx=${notice.board_idx}&pageNum=${param.pageNum}&important=${notice.board_important}">수정</a>
 	  			<input type = "button" value="삭제" onclick="confirmDelete()" />
 	  			<a href = "notice">목록</a>
   			</c:when>

@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.time.LocalDateTime" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -89,7 +91,18 @@
 		                <td>${member.member_id }</td>
 		                <td>${member.member_name }</td>
 		                <td>${member.member_email }</td>
-		                <td>${member.member_reg_date }</td>
+		                
+		                <%
+						  // LocalDateTime 객체 생성
+						  LocalDateTime regDate = LocalDateTime.now();
+						
+						  // DateTimeFormatter를 사용하여 원하는 형식으로 변환
+						  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY년 MM월 dd일");
+						  String formattedDate = regDate.format(formatter);
+						%>
+		                
+		                
+		                <td><%= formattedDate %></td>
 		               
 		                <c:choose>
 		                	<c:when test="${member.member_status eq 1}">
@@ -107,10 +120,10 @@
 		                </c:choose>
 		                
 		                <td>
-				          	<div style="text-align: center;">
-		                  	<a class="btn btn-sm btn-primary" id="memberstatus"
+				          	<div style="text-align: center;"> <!--  class="btn btn-sm btn-primary" -->
+		                  	<a  id="memberstatus" class="btn btn-sm btn-danger"
 		                  		href="memberStatus?member_id=${member.member_id }" target="_blank" onclick="window.open('memberStatus?member_id=${member.member_id }', '회원 상태 수정', 'width=600, height=300, top=150, left=650'); return false;">상태 변경</a>
-		                  	<a href="memberDelete" class="btn btn-sm btn-danger">회원 삭제</a>
+<!-- 		                  	<a href="memberDelete" class="btn btn-sm btn-danger">회원 삭제</a> -->
 		                  	</div>
 		                </td>
 		              </tr>

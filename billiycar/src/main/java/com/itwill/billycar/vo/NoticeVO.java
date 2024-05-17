@@ -12,4 +12,5 @@ public class NoticeVO {
 	private String board_writer;
 	private int board_readcount;
 	private Timestamp board_date;
+	private int board_important;
 }
