@@ -868,7 +868,7 @@
 	<script type="text/javascript">
     let startDate1 = "${fn:split(param.schedule, ',')[0]}";
     let endDate1 = "${fn:split(param.schedule, ',')[1]}";
-
+	
     // 문자열 형식 변경
     let startDate2 = startDate1.replace(" ", "T") + ":00:00";
     let endDate2 = endDate1.replace(" ", "T") + ":00:00";
@@ -887,7 +887,7 @@
     let differenceInSeconds = Math.floor((differenceInMilliseconds % (1000 * 60)) / 1000);
 
     // 결과 문자열 생성
-    let differenceString = "두 날짜의 차이: ${differenceInDays}일  ${differenceInHours} 시간 ";
+    let differenceString = "두 날짜의 차이:" +	differenceInDays + "일 " + differenceInHours+  "시간 ";
 
     // 페이지 로드 후 input 태그에 결과 표시
     window.onload = function() {

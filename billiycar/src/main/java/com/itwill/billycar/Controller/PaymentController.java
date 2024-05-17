@@ -71,6 +71,8 @@ public class PaymentController {
 			return "err/fail";
 		}
 		
+		
+		
 	}
 	
 	@GetMapping("paymentDetail")
