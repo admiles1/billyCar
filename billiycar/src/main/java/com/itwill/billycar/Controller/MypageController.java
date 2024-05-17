@@ -21,6 +21,7 @@ import com.itwill.billycar.vo.CouponVO;
 import com.itwill.billycar.vo.LicenseVO;
 import com.itwill.billycar.vo.License_StandardVO;
 import com.itwill.billycar.vo.MemberVO;
+import com.itwill.billycar.vo.PageInfo;
 import com.itwill.billycar.vo.QnaVO;
 import com.itwill.billycar.vo.ReservVO;
 
@@ -197,17 +198,18 @@ public class MypageController {
     }
 	
 //	@GetMapping("MyInquiry")
-//    public String MyInquiry(@RequestParam(defaultValue = "1") int pageNum, 
-//    						Model model) {
-//		int listLimit = 10;
-//		int startRow = (pageNum-1)*listLimit;
-//		
-//		String memberId = (String)session.getAttribute("member_id");
-//		List<QnaVO> qnaList = service.getMemberQna(memberId, startRow, listLimit);
-//		model.addAttribute("qna", qnaList);
-//        System.out.println("문의 내역");
-//        return "mypage/page/Mypage_Inquiry";
-//    }
+//	public String MyInquiry(@RequestParam(defaultValue = "1") int pageNum, Model model) {
+//	    String MemberId = (String)session.getAttribute("member_id");
+//	    List<QnaVO> qnaList = service.getMemberQna(MemberId, pageNum); // 수정된 부분
+//	    model.addAttribute("qna", qnaList);
+//	    
+//	    // 페이징 처리에 필요한 추가 정보를 가져와서 View로 전달하는 부분
+//	    PageInfo pageInfo = service.getPageInfo(MemberId, pageNum);
+//	    model.addAttribute("pageInfo", pageInfo);
+//	    
+//	    System.out.println("문의 내역");
+//	    return "mypage/page/Mypage_Inquiry";
+//	}
 	
 	@GetMapping("MyCoupon")
     public String MyCoupon(Model model) {

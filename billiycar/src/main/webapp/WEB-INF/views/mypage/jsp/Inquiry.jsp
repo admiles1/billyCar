@@ -86,6 +86,7 @@
 <form id="inquiry">
     <h2>나의 문의 내역</h2>
     <hr>
+    <c:set var="pageNum" value="${empty param.pageNum ? 1 : param.pageNum }"/>
     <table>
        <thead>
             <tr>
@@ -97,24 +98,62 @@
             </tr>
         </thead>
            <tbody>
-        	<c:forEach var="qna" items="${qna}" varStatus="newIdx">
-			    <tr>
-			        <td>${newIdx.index + 1}</td> <!-- 이 부분 수정 -->
-			        <td><a href="qnaAnswerDetail?qna_idx=${qna.qna_idx}&pageNum=${pageNum}">${qna.qna_subject}</a></td>
-			        <td>${qna.qna_content}</td>
-			        <td>
-			            <fmt:formatDate value="${qna.qna_date}" pattern="yy-MM-dd HH:mm"/>
-			        </td>
-			        <td>
-			            <c:choose>
-			                <c:when test="${qna.qna_status == 0}">답변 대기</c:when>
-			                <c:when test="${qna.qna_status == 1}">답변 완료</c:when>
-			            </c:choose>
-			        </td>
-			    </tr>
-			</c:forEach>
+<%--         	<c:forEach var="qna" items="${qna}" varStatus="newIdx"> --%>
+<!-- 			    <tr> -->
+<%-- 			        <td>${newIdx.index + 1}</td> <!-- 이 부분 수정 --> --%>
+<%-- 			        <td><a href="qnaAnswerDetail?qna_idx=${qna.qna_idx}&pageNum=${pageNum}">${qna.qna_subject}</a></td> --%>
+<%-- 			        <td>${qna.qna_content}</td> --%>
+<!-- 			        <td> -->
+<%-- 			            <fmt:formatDate value="${qna.qna_date}" pattern="yy-MM-dd HH:mm"/> --%>
+<!-- 			        </td> -->
+<!-- 			        <td> -->
+<%-- 			            <c:choose> --%>
+<%-- 			                <c:when test="${qna.qna_status == 0}">답변 대기</c:when> --%>
+<%-- 			                <c:when test="${qna.qna_status == 1}">답변 완료</c:when> --%>
+<%-- 			            </c:choose> --%>
+<!-- 			        </td> -->
+<!-- 			    </tr> -->
+<%-- 			</c:forEach> --%>
+				<c:forEach var="qna" items="${qna}">
+					<tr>
+						<td>${qna.qna_idx}</td>
+						<td><a href="qnaAnswerDetail?qna_idx=${qna.qna_idx}&pageNum=${pageNum}">${qna.qna_subject}</a></td>
+						<td>${qna.qna_content}</td>
+						<td>
+							 <fmt:formatDate value="${qna.qna_date}" pattern="yy-MM-dd HH:mm"/>
+						</td>
+						<td>
+							<c:choose>
+								<c:when test="${qna.qna_status == 0}">답변 대기</c:when>
+								<c:when test="${qna.qna_status == 1}">답변 완료</c:when>
+							</c:choose>
+						</td>
+					</tr>
+				</c:forEach>
         </tbody>
     </table>
+    <div class="pageList" style="text-align: center;">
+			
+			<input type="button" value="이전" onclick="location.href='MyInquiry?pageNum=${pageNum -1}'" 
+				<c:if test="${pageNum eq 1 }">disabled</c:if>
+			>
+			
+			<c:forEach  var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }" step="1">
+				<c:choose>
+					<c:when test="${i eq pageNum }">
+						${i}
+					</c:when>
+					<c:otherwise>
+						<a href="review?pageNum=${i}">${i}</a>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>		
+			<input type="button" value="다음" onclick="location.href='MyInquiry?pageNum=${pageNum +1}'"
+			<c:if test="${pageNum eq pageInfo.maxPage }">disabled</c:if>
+			>
+		</div>
+    
+    
 </form>
 <script type="text/javascript">
 

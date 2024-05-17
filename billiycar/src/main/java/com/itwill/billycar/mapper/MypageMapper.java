@@ -23,7 +23,6 @@ public interface MypageMapper {
 
 	List<QnaVO> selcetMemberQna(String memberId);
 	
-//	List<QnaVO> selectMemberQna(String memberId, int startRow, int listLimit); 
 
 	int insertLicense(LicenseVO license);
 
@@ -52,6 +51,12 @@ public interface MypageMapper {
 
 	int selectCouponCode(String coupon_code);
 
+//	List<QnaVO> selcetMemberQna(String memberId, int pageNum);
+//
+//	int selectQnaCount(String memberId);
+
+	
+	
 
 
 
