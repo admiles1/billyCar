@@ -33,4 +33,8 @@ public class EventService {
 		return mapper.updateEvent(event);
 	}
 
+	public String selectEventImage(EventVO event) {
+		return mapper.selectEventImage(event);
+	}
+
 }

@@ -42,5 +42,11 @@
 		WHERE
 			event_idx = #{event_idx}
 	</update>
+	
+	<select id="selectEventImage">
+		SELECT event_image
+		FROM event
+		WHERE event_idx = #{event_idx}
+	</select>
 
 </mapper>

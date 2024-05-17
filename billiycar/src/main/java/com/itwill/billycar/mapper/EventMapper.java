@@ -19,4 +19,6 @@ public interface EventMapper {
 
 	int updateEvent(EventVO event);
 
+	String selectEventImage(EventVO event);
+
 }
