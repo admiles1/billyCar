@@ -17,8 +17,8 @@
 			, #{board_subject}
 			, #{board_content}
 			, #{board_writer}
-			, #{board_readcount}
 			, now()
+			, #{board_important}
 		)
 	</insert>
 	
@@ -30,7 +30,7 @@
 	<select id="selectNoticeList" resultType="com.itwill.billycar.vo.NoticeVO">
 		SELECT *
 		FROM notice
-		ORDER BY board_idx DESC
+		ORDER BY board_important DESC, board_idx DESC
 		LIMIT #{startRow}, #{listLimit}
 	</select>
 	
@@ -48,7 +48,7 @@
 	
 	<update id="updateNotice">
 		UPDATE notice
-		SET board_subject=#{board_subject}, board_content=#{board_content} 
+		SET board_subject=#{board_subject}, board_content=#{board_content}, board_important=#{board_important} 
 		WHERE board_idx=#{board_idx}
 	</update>
 	

@@ -27,7 +27,11 @@ public class MypageService {
 	public List<QnaVO> getMemberQna(String memberId) {
 		return mapper.selcetMemberQna(memberId);
 	}
-
+	
+//	public List<QnaVO> getMemberQna(String memberId, int startRow, int listLimit) {
+//		return mapper.selectMemberQna(memberId, startRow, listLimit);
+//	}
+	
 	public int registLicense(LicenseVO license) {
 		return mapper.insertLicense(license);
 	}
@@ -85,6 +89,7 @@ public class MypageService {
 	public int couponExist(String coupon_code) {
 		return mapper.selectCouponCode(coupon_code);
 	}
+
 
 
 

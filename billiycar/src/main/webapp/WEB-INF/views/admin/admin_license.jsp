@@ -82,6 +82,7 @@
                 <th>아이디</th>
                 <th>이메일</th>
                 <th>면허 인증 여부</th>
+                <th>비고</th>
               </tr>
             </thead>
             <tbody>
@@ -94,6 +95,7 @@
 		                <td>${member.member_id}</td>
 		                <td>${member.member_email}</td>
 		                <td><span style="color:${member.color}">${member.license_checked}</span></td>
+		                <td <c:if test="${member.age_group != '만 23세 이상'}">style="color:red"</c:if>>${member.age_group}</td>
 		              </tr>
             	</c:forEach>
             	

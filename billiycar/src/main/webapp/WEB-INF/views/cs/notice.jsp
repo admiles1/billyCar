@@ -67,8 +67,8 @@
   	<table class="table-fill">
 		<thead>
 			<tr>
-				<th class="text-left" width = "10px">글 번호</th>
-				<th class="text-left" width = "270px">제목</th>
+				<th class="text-left" width = "5px">글 번호</th>
+				<th class="text-left" width = "290px">제목</th>
 				<th class="text-left" width = "40px">작성자</th>
 				<th class="text-left" width = "50px">작성일</th>
 			</tr>
@@ -76,11 +76,27 @@
 		<tbody class="table-hover">
 			<c:forEach var="notice" items="${noticeList}">
 				<tr>
-					<td class="text-left">${notice.board_idx}</td>
+					<%-- 글번호 --%>
+					<td class="text-left">
+						<c:choose>
+							<c:when test="${notice.board_important eq '1'}">
+								<img src="${pageContext.request.contextPath}/resources/images/notice.png" style="width: 70px; height:30px;">
+							</c:when>
+							<c:otherwise>
+								${notice.board_idx}
+							</c:otherwise>
+						</c:choose>
+					</td>
+					
+					<%-- 글제목 --%>
 					<td class="text-left"><a href = "noticeDetail?notice_idx=${notice.board_idx}&pageNum=${pageNum}">${notice.board_subject}</a></td>
+
+					<%-- 작성자 --%>
 					<td class="text-left">
 						<c:if test="${notice.board_writer eq 'admin'}"> 관리자 </c:if> 
 					</td>
+
+					<%-- 작성일 --%>
 					<td class="text-left"><fmt:formatDate value="${notice.board_date}" pattern = "yy-MM-dd"/></td>
 				</tr>
 			</c:forEach>

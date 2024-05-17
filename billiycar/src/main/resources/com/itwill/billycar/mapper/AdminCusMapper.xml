@@ -108,11 +108,15 @@
 	<select id="selectLicense" resultType="HashMap">
 		SELECT CONCAT(SUBSTR(member_id, 1, 4),"***") AS member_id, member_name, member_email, member_license_checked,
 				CASE WHEN member_license_checked = 1 THEN '인증 완료'
-			    WHEN member_license_checked = 2 THEN '미인증'
-				END license_checked,
+			    	WHEN member_license_checked = 2 THEN '미인증'
+					END license_checked, -- 인증 완료 여부
 				CASE WHEN member_license_checked = 1 THEN 'black'
-			    WHEN member_license_checked = 2 THEN 'red'
-				END color
+			   		 WHEN member_license_checked = 2 THEN 'red' 
+			  		END color, -- 인증 완료 여부에 따른 색상
+   				CASE WHEN TIMESTAMPDIFF(YEAR, STR_TO_DATE(member_birth, '%Y%m%d'), CURDATE()) IS NULL THEN '나이 인식 불가'
+       				  WHEN TIMESTAMPDIFF(YEAR, STR_TO_DATE(member_birth, '%Y%m%d'), CURDATE()) >= 23 THEN '만 23세 이상'
+        			  ELSE '만 23세 미만'
+    				  END age_group -- 나이
 		FROM  member
 		<if test="license_auth != 0">
 			WHERE member_license_checked = #{license_auth}
