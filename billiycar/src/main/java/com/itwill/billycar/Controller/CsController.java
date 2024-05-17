@@ -168,7 +168,7 @@ public class CsController {
 	
 	// 수정 처리
 	@PostMapping("noticeModify")
-	public String noticeModifyPro(Model model, NoticeVO notice, int notice_idx, String important) {
+	public String noticeModifyPro(Model model, NoticeVO notice, int notice_idx, @RequestParam(defaultValue = "") String important) {
 		
 		// 작성자가 admin이 아닐 경우 튕구기
 		String id = (String)session.getAttribute("member_id");
