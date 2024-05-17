@@ -373,17 +373,17 @@
 					</tbody>
 				</table>
 			</div>
-			<hr>	
-		<h4 class="subject">추가옵션</h4>
-			<div class="row row-cols-2">
-				<div class="opt_chk">
-					&nbsp;<input type="checkbox" name="opt_chk" id="opt_chk1" value="5000">&emsp;카시트(영유아용)1개 &emsp;5000원
+<!-- 			<hr>	 -->
+<!-- 		<h4 class="subject">추가옵션</h4> -->
+<!-- 			<div class="row row-cols-2"> -->
+<!-- 				<div class="opt_chk"> -->
+<!-- 					&nbsp;<input type="checkbox" name="opt_chk" id="opt_chk1" value="5000">&emsp;카시트(영유아용)1개 &emsp;5000원 -->
 					
-				</div>
-				<div class="opt_chk">
-					<input type="checkbox" name="opt_chk" id="opt_chk2" value="5000">&emsp;카시트(주니어)1개 &emsp;5000원
+<!-- 				</div> -->
+<!-- 				<div class="opt_chk"> -->
+<!-- 					<input type="checkbox" name="opt_chk" id="opt_chk2" value="5000">&emsp;카시트(주니어)1개 &emsp;5000원 -->
 					
-				</div>
+<!-- 				</div> -->
 <!-- 				<div class="opt_chk"> -->
 <!-- 					&nbsp;<input type="checkbox" name="opt_chk" id="opt_chk8" value="8|0">&emsp;카시트(영유아용)2개 -->
 <!-- 					<br>&nbsp;5000원 -->
@@ -392,7 +392,7 @@
 <!-- 					<input type="checkbox" name="opt_chk" id="opt_chk8" value="8|0">&emsp;카시트(주니어)2개 -->
 <!-- 					<br>5000원 -->
 <!-- 				</div> -->
-			</div>
+<!-- 			</div> -->
 			
 			<hr>
 		<h4 class="subject">결제수단 선택</h4>
@@ -693,12 +693,12 @@
 				<p><b>차량 정보</b></p>
 				<div class="row ">
 					<div class="col-3">차량</div>
-					<div class="col-9 car-name" >${car.car_model}</div>
+					<div class="col-9 car-name" align="right">${car.car_model}</div>
 <%-- 					<div class="col-9 car-name">${car.car_model}</div> --%>
  					<div class="col-3">기본정보</div> 
- 					<div class="col-9">${car.car_capacity}/${car.gear_type}/기름종류 표시</div> 
- 					<div class="col-3">세부정보</div> 
- 					<div class="col-9">차 옵션 표시</div>
+ 					<div class="col-9" align="right">${car.car_capacity}/${car.gear_type}/${car.car_fuel}</div> 
+<!--  					<div class="col-3">세부정보</div>  -->
+<!--  					<div class="col-9">차 옵션 표시</div> -->
 <!-- 					<div class="col-3">이용일</div> -->
 <!-- 					<div class="col-9">빌린 날짜 표기(대여일 및 시간 ~ 반납일 및 시간)</div> -->
 <!-- 					<div class="col-3">대여지역</div> -->
@@ -706,19 +706,21 @@
 <!-- 					<div class="col-3">반납지역</div> -->
 <!-- 					<div class="col-9">반납지역 표시</div> -->
 					<div class="col-3">제한나이</div> 
- 					<div class="col-9">만23세 이상</div> 
+ 					<div class="col-9" align="right">만23세 이상</div> 
  					<div class="col-3">운전경력</div>
- 					<div class="col-9">면허취득 1년이상</div> 
+ 					<div class="col-9" align="right">면허취득 1년이상</div> 
 <!--  					<div class="col-3">면허종류</div> -->
 <!--  					<div class="col-9">면허종류 표시</div>  -->
 				</div>
 				
 <!-- 				<p><b>추가 옵션</b></p> -->
-				<h6><b>추가 옵션</b></h6>
-				<div class="row">
-					<div class="col-3">추가 옵션</div>
-					<div class="col-9" id="optionPrice" align="right">0</div>
-				</div>
+<!-- 				<h6><b>추가 옵션</b></h6> -->
+<!-- 				<div class="row"> -->
+<!-- 					<div class="col-3">추가 옵션</div> -->
+<!-- 					<div class="col-9" id="optionPrice" align="right">0</div> -->
+<!-- 				</div> -->
+			 	
+				
 				<br>
 				<h6><b>결제 정보</b></h6>
 				<div class="row">
@@ -731,7 +733,11 @@
 					<div class="col-9" align="right">할인금액 표시</div>
 					<hr>
 					<div class="col-3">결제 금액(VAT 포함)</div>
-					<div class="col-9" align="right"></div>
+					<div class="col-9" align="right"><input type="text" id="dateDifferenceInput" readonly /></div>
+<!-- 					<div id="dateDifference"> -->
+<!-- <!-- 						<input type="text" id="dateDifference" value="dateDifference"> --> -->
+<!-- <!-- 						<input type="text" id="dateDifferenceInput" readonly /> --> -->
+<!-- 					</div> -->
 				</div>
 				<br><br>
 				<form action="payment" method="post">
@@ -821,7 +827,74 @@
         });
     </script>
 		
-				
+	<!-- 날짜 계산 스크립트 -->
+	 
+<%--      <c:set var="startDate" value="${fn:split(param.schedule, ',')[0]}"/> --%>
+<%--      <c:set var="endDate" value="${fn:split(param.schedule, ',')[1]}"/> --%>
+    <!-- 날짜 계산 2 -->
+<!--     <script type="text/javascript"> -->
+// // 	    let startDate1 = "startDate";
+// // 	    let endDate1 = "endDate";
+// 	    let startDate1 = "${fn:split(param.schedule, ',')[0]}";
+// 	    let endDate1 = "${fn:split(param.schedule, ',')[1]}";
+	
+// 	    // 문자열 형식 변경
+// 	    let startDate2 = startDate1.replace(" ", "T") + ":00:00";
+// 	    let endDate2 = endDate1.replace(" ", "T") + ":00:00";
+	
+// 	    // Date 객체로 변환
+// 	    let startDateObject = new Date(startDate2);
+// 	    let endDateObject = new Date(endDate2);
+	
+// 	    // 두 날짜 간의 차이를 밀리초 단위로 계산
+// 	    let differenceInMilliseconds = endDateObject - startDateObject;
+	
+// 	    // 밀리초를 일, 시간, 분, 초 단위로 변환
+// 	    let differenceInDays = Math.floor(differenceInMilliseconds / (1000 * 60 * 60 * 24));
+// 	    let differenceInHours = Math.floor((differenceInMilliseconds % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+// 	    let differenceInMinutes = Math.floor((differenceInMilliseconds % (1000 * 60 * 60)) / (1000 * 60));
+// 	    let differenceInSeconds = Math.floor((differenceInMilliseconds % (1000 * 60)) / 1000);
+	
+// 	    // 결과 문자열 생성
+// 	    let differenceString = `두 날짜의 차이: ${differenceInDays}일 ${differenceInHours}시간 ${differenceInMinutes}분 ${differenceInSeconds}초`;
+	
+// 	    // div 태그에 결과 표시
+// 	    window.onload = function() {
+// 	        document.getElementById('dateDifference').innerText = differenceString;
+// // 	        document.getElementById('dateDifferenceInput').value = differenceString;
+// 	    };
+<!-- 	</script>		 -->
+
+	<script type="text/javascript">
+    let startDate1 = "${fn:split(param.schedule, ',')[0]}";
+    let endDate1 = "${fn:split(param.schedule, ',')[1]}";
+
+    // 문자열 형식 변경
+    let startDate2 = startDate1.replace(" ", "T") + ":00:00";
+    let endDate2 = endDate1.replace(" ", "T") + ":00:00";
+
+    // Date 객체로 변환
+    let startDateObject = new Date(startDate2);
+    let endDateObject = new Date(endDate2);
+
+    // 두 날짜 간의 차이를 밀리초 단위로 계산
+    let differenceInMilliseconds = endDateObject - startDateObject;
+
+    // 밀리초를 일, 시간, 분, 초 단위로 변환
+    let differenceInDays = Math.floor(differenceInMilliseconds / (1000 * 60 * 60 * 24));
+    let differenceInHours = Math.floor((differenceInMilliseconds % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let differenceInMinutes = Math.floor((differenceInMilliseconds % (1000 * 60 * 60)) / (1000 * 60));
+    let differenceInSeconds = Math.floor((differenceInMilliseconds % (1000 * 60)) / 1000);
+
+    // 결과 문자열 생성
+    let differenceString = "두 날짜의 차이: ${differenceInDays}일  ${differenceInHours} 시간 ";
+
+    // 페이지 로드 후 input 태그에 결과 표시
+    window.onload = function() {
+        document.getElementById('dateDifferenceInput').value = differenceString;
+    };
+</script>
+	
     <!-- 아임포트 스크립트 추가 -->
 <!--     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script> -->
 
