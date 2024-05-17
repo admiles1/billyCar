@@ -197,7 +197,7 @@ public class AdminController {
 		
 	}
 
-	
+	// 차량 목록 조회
 	@GetMapping("admin_car")
 	public String admin_car(CarVO car, Model model) {
 		
@@ -207,6 +207,7 @@ public class AdminController {
 		return "admin/admin_car";
 	}
 	
+	// 차량 목록 중 차량 삭제
 	@PostMapping("deleteCar")
 	@ResponseBody
 	public String deleteCar(int carId, Model model) {
@@ -223,6 +224,7 @@ public class AdminController {
 		}		
 	}
 	
+	// 차량 검색
 	@PostMapping("searchCars")
 	public String searchCars() {
 		
@@ -230,6 +232,7 @@ public class AdminController {
 				
 	}
 	
+	// 차량브랜드 삭제
 	@PostMapping("deleteNewCar")
 	@ResponseBody
 	public String deleteNewCar(String code) {
@@ -243,6 +246,7 @@ public class AdminController {
 		return "success";
 	}
 	
+	// 차량 모델 삭제
 	@PostMapping("deleteNewModel")
 	@ResponseBody
 	public String deleteNewModel(String code) {
@@ -251,6 +255,7 @@ public class AdminController {
 		return "success";
 	}
 	
+	// 차량 등록 페이지에 공통코드 가져가기
 	@GetMapping("admin_car_registration")
 	public String admin_car_registration(CommonVO common, Model model) {
 //		System.out.println(common);
@@ -365,16 +370,19 @@ public class AdminController {
 		
 	}
 	
+	// 제조사 추가 페이지 이동
 	@GetMapping("addBrand")
     public String showAddBrandPage() {
         return "admin/addBrand"; // addBrandModel.jsp 파일의 경로
     }
 	
+	// 모델 추가 페이지 이동
 	@GetMapping("addModel")
 	public String showAddModelPage(){
 		return "admin/addModel"; // addBrandModel.jsp 파일의 경로
 	}
 	
+	// 새로운 제조사 추가
 	@ResponseBody
 	@PostMapping("addBrand")
     public String addBrand(Model model, String newBrandName) {
@@ -389,6 +397,7 @@ public class AdminController {
         }
     }
 	
+	// 세로운 모델 추가
 	@PostMapping("addModel")
 	public String addModel(Model model, String brandName, String newModelName) {
 		System.out.println("제조사 : " + brandName);
@@ -404,6 +413,7 @@ public class AdminController {
 		
 	}
 	
+	// 차량 상태 수정을 위한 조회
 	@GetMapping("carModify")
 	public String carModify(@RequestParam("carId") int carId, Model model) {
 	    // 특정 차량의 정보 조회
@@ -415,6 +425,7 @@ public class AdminController {
 	    return "admin/admin_car_modify";
 	}
 	
+	// 차량 상태 수정 처리
 	@PostMapping("carModifyPro")
 	public String carModifyPro(@RequestParam("car_idx") int carId, CarVO car, Model model) {
 	    // 전달된 차량 정보를 사용하여 데이터베이스에 업데이트 수행
