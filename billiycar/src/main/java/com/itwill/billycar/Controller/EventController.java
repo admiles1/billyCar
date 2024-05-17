@@ -2,6 +2,7 @@ package com.itwill.billycar.Controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -10,6 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +41,7 @@ public class EventController {
 	}
 	
 	@GetMapping("eventContent")
-	public String event1(Model model, EventVO event) {
+	public String eventContent(Model model, EventVO event) {
 		
 		event = service.selectEventContent(event.getEvent_idx());
 		System.out.println(event);
@@ -47,6 +49,7 @@ public class EventController {
 		
 		return "event/event_content";
 	}
+	
 	
 //	@GetMapping("event2")
 //	public String event2() {
@@ -112,10 +115,10 @@ public class EventController {
 		}
 		
 		// 게시물 등록
-		int updateCnt = service.updateEvent(event);
+		int insertCnt = service.insertEvent(event);
 		
 		// 실패시
-		if(updateCnt <= 0) {
+		if(insertCnt <= 0) {
 			model.addAttribute("msg", "이벤트 등록에 실패하였습니다. \\n 다시 시도해 주세요");
 			return "err/fail";
 		}
@@ -137,5 +140,42 @@ public class EventController {
 		return "redirect:/event";
 	}
 	
+	@GetMapping("eventModify")
+	public String eventModify(EventVO event, Model model) {
+		event = service.selectEventContent(event.getEvent_idx());
+		model.addAttribute("event", event);
+		return "event/event_modify";
+	}
+	
+	@PostMapping("eventModify")
+	public String eventModifyPro(EventVO event, Model model) {
+		System.out.println("ddddddddddddddddddddddddddddddddddddddddd" +event);
+		
+		if(event.getEvent_image() == null) {
+			event.setEvent_image("");
+		}
+		
+		int updateCnt = service.updateEvent(event);
+		
+		if(updateCnt <= 0) {
+			model.addAttribute("msg", "이벤트 수정에 실패하였습니다. \\n 다시 시도해 주세요");
+			return "err/fail";
+		}
+		
+		return "redirect:/eventContent?event_idx="+event.getEvent_idx();
+	}
+	
+	@GetMapping("eventDelete")
+	public String eventDelete(EventVO event, Model model, HttpServletResponse response) {
+		
+		int deleteCnt = service.deleteEvent(event);
+		
+		if(deleteCnt <= 0) {
+			model.addAttribute("msg", "이벤트 삭제에 실패하였습니다. \\n 다시 시도해 주세요");
+			return "err/fail";
+		}
+		
+		return "redirect:/event";
+	}
 	
 }

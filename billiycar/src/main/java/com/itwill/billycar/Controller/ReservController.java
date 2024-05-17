@@ -20,7 +20,6 @@ import com.itwill.billycar.service.ReservService;
 import com.itwill.billycar.service.ReviewService;
 import com.itwill.billycar.vo.CarReviewVO;
 import com.itwill.billycar.vo.CarVO;
-import com.itwill.billycar.vo.CommonVO;
 import com.itwill.billycar.vo.PageInfo;
 import com.itwill.billycar.vo.ReservVO;
 import com.itwill.billycar.vo.ReviewVO;
@@ -35,13 +34,11 @@ public class ReservController {
 	
 	@GetMapping("reservation")
 	public String reservationget(Model model) {
-		List<CommonVO> fuels = adminService.getFuels();
-		List<CommonVO> types = adminService.getTypes();
-		model.addAttribute("types", types);
-		model.addAttribute("fuels", fuels);
-		System.out.println(adminService.getBusinesshours());
+		model.addAttribute("types", adminService.getTypes());
+		model.addAttribute("fuels", adminService.getFuels());
 		model.addAttribute("BusinessHours", adminService.getBusinesshours());
 		model.addAttribute("needSearch", true);
+		
 		return "reservation/reservation";
 	}
 	
@@ -60,6 +57,9 @@ public class ReservController {
 		
 		String carType = car.getCar_type();
 		String carFuel = car.getCar_fuel();
+		
+		model.addAttribute("selType", carType);
+		model.addAttribute("selFuel", carFuel);
 		
 		if(carType.equals("")) {
 			car.setCar_type(null);
@@ -84,11 +84,7 @@ public class ReservController {
 		// 자동차검색
 		List<Map<String, String>> cars = reservService.getCarList(car, reserv);
 		// 공통 코드에서 type, fule 조회해서 가져오기 TODO = 줄일것
-		model.addAttribute("pickupDate", map.get("reserv_pickupdate"));
-		model.addAttribute("pickupTime", map.get("pickupTime"));
-		model.addAttribute("returnDate", map.get("reserv_returndate"));
-		model.addAttribute("returnTime", map.get("returnTime"));
-//		model.addAttribute("schedule", map);
+		model.addAttribute("schedule", map);
 		model.addAttribute("types", adminService.getTypes());
 		model.addAttribute("fuels", adminService.getFuels());
 		model.addAttribute("BusinessHours", adminService.getBusinesshours());
@@ -103,6 +99,7 @@ public class ReservController {
 	public List<Map<String, String>> SelectCarList(CarVO car
 							, @RequestParam(defaultValue = "") Map<String, String> map 
 				            , Model model) {
+		
 		ReservVO reserv = new ReservVO();
 		String pickupdate = map.get("reserv_pickupdate") + " " + map.get("pickupTime");
 		String returndate = map.get("reserv_returndate") + " " + map.get("returnTime");
@@ -140,16 +137,14 @@ public class ReservController {
 		String returnLocation = schedule[3];
 		
 		
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH");
 		ReservVO reserv = new ReservVO();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH");
 		reserv.setReserv_pickupdate(LocalDateTime.parse(pickupdate, formatter));
 		reserv.setReserv_returndate(LocalDateTime.parse(returndate, formatter));
 		
 		String carType = car.getCar_type();
 		String carFuel = car.getCar_fuel();
-		// from index
-		// 널이 아니지만 널로 바꿈 
-		// from reservation 아예 널로 넘어와서 메소드 호출불가
+		
 		if(carType != null) {
 			if(carType.equals("")) {
 				car.setCar_type(null);
@@ -178,6 +173,7 @@ public class ReservController {
 		// 자동차검색
 		Map<String, String> selectCar = reservService.getCar(car, reserv);
 		String carNumber = selectCar.get("car_number");
+		// 리뷰 검색
 		List<ReviewVO> reviewes = reviewService.getReview(carNumber);
 		
 		while(true) {
@@ -186,10 +182,6 @@ public class ReservController {
 			} else {
 				break;
 			}
-		}
-		
-		for(ReviewVO r : reviewes) {
-			System.out.println(r);
 		}
 		
 		model.addAttribute("reviewes", reviewes);
@@ -217,7 +209,7 @@ public class ReservController {
 					@RequestParam(defaultValue = "1") int pageNum
 					) {
 		System.out.println("review");
-		int listLimit = 4;
+		int listLimit = 8;
 		int startRow = (pageNum - 1) * listLimit;
 		
 		if (option == null) {
@@ -231,7 +223,7 @@ public class ReservController {
 		System.out.println("List<CarReviewVO> reviewList : " + reviewList);
 		
 		int reviewListCount = reviewService.selectAllReview();
-		int pageListLimit = 4;
+		int pageListLimit = 8;
 		
 		//----------------------------------------------------------------
 		int maxPage = reviewListCount/listLimit + (reviewListCount%listLimit > 0 ? 1 : 0);
@@ -264,7 +256,7 @@ public class ReservController {
 	        option = "latest"; // 기본값 설정
 	    }
 
-	    int listLimit = 4;
+	    int listLimit = 8;
 	    int startRow = (pageNum - 1) * listLimit;
 
 	    System.out.println("ajax사용했을때 option : " + option);
@@ -273,7 +265,7 @@ public class ReservController {
 	    System.out.println("List<CarReviewVO> reviewList : " + reviewList);
 
 	    int reviewListCount = reviewService.selectAllReview();
-	    int pageListLimit = 4;
+	    int pageListLimit = 8;
 
 	    //----------------------------------------------------------------
 	    int maxPage = reviewListCount / listLimit + (reviewListCount % listLimit > 0 ? 1 : 0);

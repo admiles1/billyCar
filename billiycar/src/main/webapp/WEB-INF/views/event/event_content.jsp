@@ -1,8 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script type="text/javascript">
+	$(function(){
+	    $("#modifyBtn").on("click", function() {
+	        if(confirm("삭제하시겠습니까?")) {
+	            location.href = "eventDelete?event_idx=${event.event_idx}";
+	        } else {
+	            return false;
+	        }
+	    });
+	});
+
+</script>
 <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>유아용 카시트 무료 이벤트</title>
@@ -18,6 +32,13 @@
 	<header><jsp:include page="../inc/top.jsp"></jsp:include></header>
 	<div class="container">
 		<h1 class="text-center my-4"> 🎉 ${event.event_title} 🎉</h1>
+		
+    	<c:if test="${sessionScope.member_id eq 'admin'}">
+	    	<div style="margin-left: 1200px; margin-bottom: 20px;">
+				<input type="button" value="수정" style="background-color: #00aaff; color:white; border: none" onclick="location.href='eventModify?event_idx=${event.event_idx}'">
+				<input type="button" value="삭제" style="background-color: #00aaff; color:white; border: none" id="modifyBtn">
+	    	</div>
+    	</c:if>
 		<div class="card">
 			<div class="card-body">
 			

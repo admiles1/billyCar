@@ -676,7 +676,7 @@
 			<div class="container last_check">
 				<div>
 <%--  					<img src="${car.car_img}" width="430" > <!-- 차이미지 받아 오기 -->  --%>
-					<img src="resources/event_images/envent_page_event2-1.webp" width="350" >임시
+<!-- 					<img src="resources/event_images/envent_page_event2-1.webp" width="350" >임시 -->
 				</div>
 <!-- 				<p><b>예약자 정보</b></p> -->
 <!-- 				<div class="row"> -->
@@ -690,27 +690,28 @@
 <!-- 					<div class="col-9" id="displayInfoEmail"></div> -->
 <!-- 				</div> -->
 				
-<!-- 				<p><b>차량 정보</b></p> -->
-<!-- 				<div class="row "> -->
-<!-- 					<div class="col-3">차량</div> -->
-<!-- 					<div class="col-9">차량이름(차량크기 정보->ex.중형,대형)표시</div> -->
-<!-- <!-- 					<div class="col">기본정보</div> --> 
-<!-- <!-- 					<div class="col">차량 수용인원/기어방식/기름종류 표시</div> --> 
-<!-- <!-- 					<div class="col">세부정보</div> --> 
-<!-- <!-- 					<div class="col">차 옵션 표시</div> -->
+				<p><b>차량 정보</b></p>
+				<div class="row ">
+					<div class="col-3">차량</div>
+					<div class="col-9 car-name" >${car.car_model}</div>
+<%-- 					<div class="col-9 car-name">${car.car_model}</div> --%>
+ 					<div class="col-3">기본정보</div> 
+ 					<div class="col-9">${car.car_capacity}/${car.gear_type}/기름종류 표시</div> 
+ 					<div class="col-3">세부정보</div> 
+ 					<div class="col-9">차 옵션 표시</div>
 <!-- 					<div class="col-3">이용일</div> -->
 <!-- 					<div class="col-9">빌린 날짜 표기(대여일 및 시간 ~ 반납일 및 시간)</div> -->
 <!-- 					<div class="col-3">대여지역</div> -->
 <!-- 					<div class="col-9">대여지역 표시</div> -->
 <!-- 					<div class="col-3">반납지역</div> -->
 <!-- 					<div class="col-9">반납지역 표시</div> -->
-<!-- <!-- 					<div class="col">제한나이</div> --> 
-<!-- <!-- 					<div class="col">만23세 이상</div> --> 
-<!-- <!-- 					<div class="col">운전경력</div> -->
-<!-- <!-- 					<div class="col">면허취득 1년이상</div> --> 
-<!-- <!-- 					<div class="col">면허종류</div> -->
-<!-- <!-- 					<div class="col">면허종류 표시</div> --> 
-<!-- 				</div> -->
+					<div class="col-3">제한나이</div> 
+ 					<div class="col-9">만23세 이상</div> 
+ 					<div class="col-3">운전경력</div>
+ 					<div class="col-9">면허취득 1년이상</div> 
+<!--  					<div class="col-3">면허종류</div> -->
+<!--  					<div class="col-9">면허종류 표시</div>  -->
+				</div>
 				
 <!-- 				<p><b>추가 옵션</b></p> -->
 				<h6><b>추가 옵션</b></h6>

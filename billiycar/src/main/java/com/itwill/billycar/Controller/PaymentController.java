@@ -24,7 +24,7 @@ import com.itwill.billycar.vo.ReservVO;
 public class PaymentController {
 	
 	@Autowired
-	private ReservService service;
+	private ReservService reservService;
 	
 	@Autowired
 	private HttpSession session;
@@ -39,6 +39,7 @@ public class PaymentController {
 	public String payment(CarVO car 
 						, Model model
 						, HttpSession session
+						, ReservVO reserv
             			, @RequestParam(defaultValue = "") Map<String, String> map) {
 		//TODO 카넘버로 조회하기 컬럼은 car_dayprice, car_hourprice, car_img / * 
 		// WHERE car_number = car.getCar_number 받아간값
@@ -51,6 +52,8 @@ public class PaymentController {
 		String MemberId = (String)session.getAttribute("member_id");
 		model.addAttribute("info", MyPageService.getMemberInfo(MemberId));
 		
+		CarVO dbcar = paymentService.getCarInfo(car);
+		model.addAttribute("car", dbcar);
 		return "payment/paymentPage";
 	}
 	
@@ -70,22 +73,21 @@ public class PaymentController {
 		
 	}
 	
-	@GetMapping("pamentDetail")
-	public String paymentDetail(CarVO car , Model model, MemberVO member, ReservVO reserv) {
+	@GetMapping("paymentDetail")
+	public String paymentDetail(Model model, MemberVO member, @RequestParam("idx") int idx, ReservVO reserv) {
 		String MemberId = (String)session.getAttribute("member_id");
 		model.addAttribute("info", MyPageService.getMemberInfo(MemberId));
-		List<ReservVO> reservList = service.selectReservList(member);
-		model.addAttribute("reservList", reservList);
-		return "payment/paymentDetail";
+		reserv = paymentService.getReservationByIdx(idx);
+        if (reserv != null && reserv.getReserv_status() == 1) {
+            model.addAttribute("reservDetail", reserv);
+        } 
+        return "payment/paymentDetail"; 
+//        else {
+//            // 예약 상태가 1이 아니거나 예약 정보가 없는 경우 처리할 내용
+//        	model.addAttribute("msg", "뭔가 잘못 댐");
+//			model.addAttribute("targetURL", "payment");
+//			return "err/fail"; // 오류 페이지로 이동하거나 다른 처리를 수행할 수 있습니다.
+//        }
+		
 	}
-	
-//	@GetMapping("paymentComplete")
-//	public String paymentComplet(Model model, Map<String, String> map) {
-//		
-//		System.out.println(model);
-//		
-//		
-//		return "payment/paymentComplete";
-//	}
-	
 }
