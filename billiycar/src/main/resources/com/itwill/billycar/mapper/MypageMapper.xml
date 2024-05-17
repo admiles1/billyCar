@@ -3,14 +3,6 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!-- <mapper namespace="com.itwill.billycar.mapper.MypageMapper"> -->
-<!-- 	<select id="selectMember" resultType="com.itwill.billycar.vo.MemberVO"> -->
-<!-- 		Select *  -->
-<!-- 		FROM member -->
-<!-- 		WHERE member_idx = #{member_idx} -->
-<!-- 	</select> -->
-<!-- </mapper> -->
-
 <mapper namespace="com.itwill.billycar.mapper.MypageMapper">
     
     <select id="selectMemberInfo" parameterType="String" resultType="com.itwill.billycar.vo.MemberVO">
@@ -25,6 +17,20 @@
 		FROM qna
 		WHERE qna_writer = #{memberId}
 	</select>
+    
+<!--    <select id="selcetMemberQna" resultType="com.itwill.billycar.vo.QnaVO"> -->
+<!-- 		 <![CDATA[ -->
+<!--     SELECT * FROM ( -->
+<!--         SELECT  -->
+<!--             q.*, -->
+<!--             ROW_NUMBER() OVER (ORDER BY q.qna_date DESC) AS row_num -->
+<!--         FROM qna q -->
+<!--         WHERE q.qna_writer = #{memberId} -->
+<!--     ) AS qna_with_rownum -->
+<!--     WHERE row_num BETWEEN #{startRow} AND #{endRow} -->
+<!--     ]]> -->
+<!-- 	</select> -->
+    
     
     <insert id="insertLicense">
     	INSERT INTO license

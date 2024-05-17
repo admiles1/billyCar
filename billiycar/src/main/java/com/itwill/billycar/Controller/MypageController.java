@@ -196,6 +196,19 @@ public class MypageController {
         return "mypage/page/Mypage_Inquiry";
     }
 	
+//	@GetMapping("MyInquiry")
+//    public String MyInquiry(@RequestParam(defaultValue = "1") int pageNum, 
+//    						Model model) {
+//		int listLimit = 10;
+//		int startRow = (pageNum-1)*listLimit;
+//		
+//		String memberId = (String)session.getAttribute("member_id");
+//		List<QnaVO> qnaList = service.getMemberQna(memberId, startRow, listLimit);
+//		model.addAttribute("qna", qnaList);
+//        System.out.println("문의 내역");
+//        return "mypage/page/Mypage_Inquiry";
+//    }
+	
 	@GetMapping("MyCoupon")
     public String MyCoupon(Model model) {
         System.out.println("나의 쿠폰함");
