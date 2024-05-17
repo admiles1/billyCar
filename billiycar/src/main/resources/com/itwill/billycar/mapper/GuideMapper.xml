@@ -6,11 +6,19 @@
 <mapper namespace="com.itwill.billycar.mapper.GuideMapper">
 
 	<select id="selectCarList" resultType="HashMap">
-		SELECT model.name as model, carType.name as carType, fuel.name as fuel, c.car_img, c.car_dayprice, c.car_hourprice, c.car_capacity
-		FROM car c 
-		JOIN Common model ON model.code = c.car_model
-		JOIN Common carType ON carType.code = c.car_type
-		JOIN Common fuel ON fuel.code = c.car_fuel
+		SELECT DISTINCT model.name AS model
+     		 , carType.name AS carType
+     		 , GROUP_CONCAT(DISTINCT fuel.name SEPARATOR ', ') AS fuel
+     		 , c.car_dayprice
+     		 , c.car_hourprice
+     		 , c.car_capacity 
+  		  FROM car c 
+  		  JOIN Common model ON model.code = c.car_model
+  		  JOIN Common carType ON carType.code = c.car_type
+  		  JOIN Common fuel ON fuel.code = c.car_fuel
+ 		 GROUP BY 
+    		   model.name, carType.name, c.car_dayprice, c.car_hourprice, c.car_capacity 
+ 		 ORDER BY model.name;
 	</select>
 	
-</mapper>
+</mapper>	
