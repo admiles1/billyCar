@@ -143,7 +143,7 @@ public class CsController {
 	
 	// 수정폼
 	@GetMapping("noticeModify")
-	public String noticeModify(Model model, NoticeVO notice, int notice_idx, String important) {
+	public String noticeModify(Model model, NoticeVO notice, int notice_idx, @RequestParam(defaultValue = "") String important) {
 		
 		// 작성자가 admin이 아닐 경우 튕구기
 		String id = (String)session.getAttribute("member_id");
