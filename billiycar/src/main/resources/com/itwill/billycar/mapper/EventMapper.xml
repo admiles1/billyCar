@@ -4,7 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.itwill.billycar.mapper.EventMapper">
-	<insert id="updateEvent">
+	<insert id="insertEvent">
 		INSERT INTO event
 		VALUES (
 			null
@@ -22,6 +22,29 @@
 	
 	<select id="selectEventContent">
 		SELECT *
+		FROM event
+		WHERE event_idx = #{event_idx}
+	</select>
+	
+
+	<delete id="deleteEvent">
+		DELETE
+		FROM event
+		WHERE event_idx = #{event_idx}
+	</delete>
+	
+	<update id="updateEvent">
+		UPDATE event
+		SET 
+			event_title = 	#{event_title}
+		  , event_content = #{event_content}
+		  , event_image =	#{event_image}
+		WHERE
+			event_idx = #{event_idx}
+	</update>
+	
+	<select id="selectEventImage">
+		SELECT event_image
 		FROM event
 		WHERE event_idx = #{event_idx}
 	</select>

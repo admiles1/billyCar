@@ -5,11 +5,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,17 +73,18 @@ public class EventController {
 		// 가상 경로의 실제 경로
 		String saveDir = session.getServletContext().getRealPath(uploadDir);
 		
-		// 날짜별 하위 디렉토리를 분류
-		String subDir = "";
-		LocalDate today = LocalDate.now();
-		
-		String datePattern = "yyyy" + File.separator + "MM" + File.separator + "dd"; 
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern(datePattern);
-		
-		subDir = today.format(dtf);
-		
-		// 실제 경로에 날짜 경로 추가
-		saveDir += File.separator + subDir;
+//		// 날짜별 하위 디렉토리를 분류
+//		String subDir = "";
+//		LocalDate today = LocalDate.now();
+//		
+//		String datePattern = "yyyy" + File.separator + "MM" + File.separator + "dd"; 
+//		DateTimeFormatter dtf = DateTimeFormatter.ofPattern(datePattern);
+//		
+//		subDir = today.format(dtf);
+//		
+//		// 실제 경로에 날짜 경로 추가
+//		saveDir += File.separator + subDir;
+//		System.out.println("파일경로" + saveDir);
 		
 		// 디렉토리 생성
 		try {
@@ -102,21 +102,21 @@ public class EventController {
 		String uuid = UUID.randomUUID().toString();
 		
 		// 파일을 추가 안할 경우를 위해 이미지 파일명 널스트링
-		event.setEvent_image("");
+//		event.setEvent_image("");
 		
 		// 이미지 파일 명에 난수 추가
-		String imageName = uuid.substring(0,8) + "_" + mfile.getOriginalFilename();
+//		String imageName = uuid.substring(0,8) + "_" + mfile.getOriginalFilename();
 		
 		// 업로드 파일이 존재할 경우에만 파일 경로 + 파일명 저장
 		if(!mfile.getOriginalFilename().equals("")) {
-			event.setEvent_image(imageName);
+			event.setEvent_image(mfile.getOriginalFilename());
 		}
 		
 		// 게시물 등록
-		int updateCnt = service.updateEvent(event);
+		int insertCnt = service.insertEvent(event);
 		
 		// 실패시
-		if(updateCnt <= 0) {
+		if(insertCnt <= 0) {
 			model.addAttribute("msg", "이벤트 등록에 실패하였습니다. \\n 다시 시도해 주세요");
 			return "err/fail";
 		}
@@ -124,7 +124,7 @@ public class EventController {
 		// 성공시
 		try {
 			if(!mfile.getOriginalFilename().equals("")) {
-				mfile.transferTo(new File(saveDir, imageName));
+				mfile.transferTo(new File(saveDir, mfile.getOriginalFilename()));
 			}
 		} catch (IllegalStateException e) {
 			// TODO Auto-generated catch block
@@ -139,16 +139,75 @@ public class EventController {
 	}
 	
 	@GetMapping("eventModify")
-	public String eventModify(EventVO event) {
+	public String eventModify(EventVO event, Model model) {
 		event = service.selectEventContent(event.getEvent_idx());
+		model.addAttribute("event", event);
 		return "event/event_modify";
 	}
 	
 	@PostMapping("eventModify")
-	public String eventModifyPro() {
+	public String eventModifyPro(EventVO event, Model model, HttpSession session) {
+		
+		String uploadDir = "/resources/upload";
+		
+		String saveDir = session.getServletContext().getRealPath(uploadDir);
+		
+		try {
+			Path path = Paths.get(saveDir); // 파라미터로 실제 업로드 경로 전달
+			Files.createDirectories(path); // 파라미터로 Path 객체 전달
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		MultipartFile mfile = event.getEvent_image_form();
+		
+//		String uuid = UUID.randomUUID().toString();
+		
+		event.setEvent_image("");
+		
+//		String imageName = uuid.substring(0,8) + "_" + mfile.getOriginalFilename();
+		
+		if(!mfile.getOriginalFilename().equals("")) {
+			event.setEvent_image(mfile.getOriginalFilename());
+		}
+		
+		if(event.getEvent_image().equals("")){
+			String event_image = service.selectEventImage(event);
+			event.setEvent_image(event_image);
+		}
 		
 		
+		int updateCnt = service.updateEvent(event);
 		
+		if(updateCnt <= 0) {
+			model.addAttribute("msg", "이벤트 수정에 실패하였습니다. \\n 다시 시도해 주세요");
+			return "err/fail";
+		}
+		
+		try {
+			if(!mfile.getOriginalFilename().equals("")) {
+				mfile.transferTo(new File(saveDir, mfile.getOriginalFilename()));
+			}
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "redirect:/eventContent?event_idx="+event.getEvent_idx();
+	}
+	
+	@GetMapping("eventDelete")
+	public String eventDelete(EventVO event, Model model, HttpServletResponse response) {
+		
+		int deleteCnt = service.deleteEvent(event);
+		
+		if(deleteCnt <= 0) {
+			model.addAttribute("msg", "이벤트 삭제에 실패하였습니다. \\n 다시 시도해 주세요");
+			return "err/fail";
+		}
 		
 		return "redirect:/event";
 	}

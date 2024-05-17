@@ -36,7 +36,7 @@
     		<c:forEach var="eventList" items="${eventList}" >
 	        	<div class="col-md-4" style="margin-top: 20px;">
 	        		<div class="card">
-	                	<img src="resources/event_images/envent_page_event1-1.webp" class="card-img-top" alt="이벤트 이미지 1" width="300" height="300">
+	                	<img src="<%= request.getContextPath() %>/resources/upload/${eventList.event_image}" class="card-img-top" alt="이벤트 이미지 1" width="300" height="300">
 	                    <div class="card-body">
 	                    	<h5 class="card-title">${eventList.event_title}</h5>
 	                    	<a href="eventContent?event_idx=${eventList.event_idx}" class="btn btn-primary">자세히 보기</a>

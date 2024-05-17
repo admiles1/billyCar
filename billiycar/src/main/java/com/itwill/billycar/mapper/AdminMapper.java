@@ -60,6 +60,12 @@ public interface AdminMapper {
 	int insertNewModel(@Param("brandName")String brandName, @Param("newModelName") String newModelName);
 
 	int deleteCar(int carId);
+
+	int deleteCode(String code);
+
+	List<String> selectSearchModel(String code);
+
+	int deleteNewModel(String code);
 	
 	
 }

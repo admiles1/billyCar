@@ -693,10 +693,10 @@
 				<p><b>차량 정보</b></p>
 				<div class="row ">
 					<div class="col-3">차량</div>
-					<div class="col-9 car-name" >${car.car_number}</div>
+					<div class="col-9 car-name" >${car.car_model}</div>
 <%-- 					<div class="col-9 car-name">${car.car_model}</div> --%>
  					<div class="col-3">기본정보</div> 
- 					<div class="col-9">차량 수용인원/기어방식/기름종류 표시</div> 
+ 					<div class="col-9">${car.car_capacity}/${car.gear_type}/기름종류 표시</div> 
  					<div class="col-3">세부정보</div> 
  					<div class="col-9">차 옵션 표시</div>
 <!-- 					<div class="col-3">이용일</div> -->

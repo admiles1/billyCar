@@ -15,6 +15,23 @@
 		GROUP BY months.month;
 	</select>
 	
+	<select id="selectCarInfo" resultType="com.itwill.billycar.vo.CarVO">
+		SELECT 
+		      model.name as car_model
+		    , type.name as car_type
+		 	, fuel.name as car_fuel
+		 	, c.car_img
+		 	, c.car_capacity 
+		 	, c.gear_type 
+		 	, c.car_hourprice 
+		 	, c.car_dayprice 
+	     FROM car c
+	     LEFT JOIN Common model ON c.car_model = model.code  
+	     LEFT JOIN Common fuel ON c.car_fuel = fuel.code     
+	     LEFT JOIN Common type ON c.car_type = type.code
+	    WHERE c.car_number = #{car_number}
+	</select>
+	
 	
 <select id="selectReservDetail" resultType="com.itwill.billycar.vo.ReservVO">
 		SELECT * FROM Reservation WHERE reserv_idx = #{idx}

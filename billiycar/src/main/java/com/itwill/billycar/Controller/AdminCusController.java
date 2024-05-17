@@ -244,7 +244,6 @@ public class AdminCusController {
 		
 //		System.out.println(license);
 		
-		
 		int license_auth = 0;
 		
 		switch (license) {

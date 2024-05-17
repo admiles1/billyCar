@@ -42,6 +42,7 @@ button[type="submit"] { width: 100%; }
                                 </c:forEach>
                             </select>
                             <button type="button" class="btn btn-primary ml-1" onclick="openAddBrandWindow()">추가</button>
+                            <button type="button" class="btn btn-danger ml-1" onclick="deleteNewCar()">삭제</button>
                         </div>
                     </div>
                     <div class="form-group">
@@ -50,6 +51,7 @@ button[type="submit"] { width: 100%; }
                             <option value="">모델을 선택하세요</option>
                         </select>
 						<button type="button" class="btn btn-primary ml-1" onclick="openAddModelWindow('${brand.name }')">추가</button>
+						<button type="button" class="btn btn-danger ml-1" onclick="deleteNewModel()">삭제</button>
                     </div>
                     <div class="form-group">
                         <label for="carType">차량 종류</label>
@@ -127,33 +129,88 @@ button[type="submit"] { width: 100%; }
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
-$(document).ready(function() {
-    let models = JSON.parse('${models}');
+	$(document).ready(function() {
+	    let models = JSON.parse('${models}');
+	
+	    // 제조사 선택 시 모델 드롭다운 업데이트
+	    $('#manufacturer').change(function() {
+	        var selectedBrand = $(this).val();
+	        var filteredModels = models.filter(function(model) {
+	            return model.code.startsWith(selectedBrand);
+	        });
+	
+	        $('#model').empty().append('<option value="">모델을 선택하세요</option>');
+	        $.each(filteredModels, function(index, model) {
+	            $('#model').append($('<option>').text(model.name).attr('value', model.code));
+	        });
+	        $('#model').prop('disabled', false); // 모델 선택 활성화
+	    });
+	});
+	
+	function openAddBrandWindow() {
+	    window.open('${pageContext.request.contextPath}/addBrand', 'newwindow', 'width=400,height=400');
+	}
+	
+	function openAddModelWindow(brand) {
+		var brandSelect = document.getElementById("manufacturer");
+	    var brandName = brandSelect.options[brandSelect.selectedIndex].text;
+	// 	console.log("현재선택된 제조사 : " + brandName);
+	    window.open('${pageContext.request.contextPath}/addModel?brand='+brandName, 'newwindow', 'width=400,height=400');
+	}
+	
+	function deleteNewCar() {
+		var selectedCar = document.getElementById('manufacturer').value;
+// 		console.log(selectedCar); // code 값 나옴
+		if(selectedCar){ // 값이 있을경우에만
+			console.log(selectedCar); // code 값 나옴
+			$.ajax({
+				type : "POST",
+				url : "deleteNewCar",
+				data : {
+					code : selectedCar
+				},
+				success: function(response) {
+                    if (response === "models_exist") {
+                        alert("모델이 있습니다. 삭제를 원하시면 모델을 먼저 삭제해주시길 바랍니다.");
+                    } else if (response === "success") {
+                        alert("삭제되었습니다.");
+                        location.reload(); 
+                    } else {
+                        alert("삭제에 실패했습니다. 다시 시도해주세요.");
+                    }
+                }
+			});
+		} else {
+			alert("삭제할 제조사를 선택하세요.");
+		}
 
-    // 제조사 선택 시 모델 드롭다운 업데이트
-    $('#manufacturer').change(function() {
-        var selectedBrand = $(this).val();
-        var filteredModels = models.filter(function(model) {
-            return model.code.startsWith(selectedBrand);
-        });
+	}
+	
+	function deleteNewModel() {
+		var selectedCar = document.getElementById('model').value;
+		console.log(selectedCar); // code 값 나옴
+		if(selectedCar){ // 값이 있을경우에만
+			console.log(selectedCar); // code 값 나옴
+			$.ajax({
+				type : "POST",
+				url : "deleteNewModel",
+				data : {
+					code : selectedCar
+				},
+				success: function(response) {
+					if (response === "success") {
+                        alert("삭제되었습니다.");
+                        location.reload(); 
+                    } else {
+                        alert("삭제에 실패했습니다. 다시 시도해주세요.");
+                    }
+                }
+			});
+		} else {
+			alert("삭제할 모델을 선택하세요.");
+		}
 
-        $('#model').empty().append('<option value="">모델을 선택하세요</option>');
-        $.each(filteredModels, function(index, model) {
-            $('#model').append($('<option>').text(model.name).attr('value', model.code));
-        });
-        $('#model').prop('disabled', false); // 모델 선택 활성화
-    });
-});
-
-function openAddBrandWindow() {
-    window.open('${pageContext.request.contextPath}/addBrand', 'newwindow', 'width=400,height=400');
-}
-function openAddModelWindow(brand) {
-	var brandSelect = document.getElementById("manufacturer");
-    var brandName = brandSelect.options[brandSelect.selectedIndex].text;
-// 	console.log("현재선택된 제조사 : " + brandName);
-    window.open('${pageContext.request.contextPath}/addModel?brand='+brandName, 'newwindow', 'width=400,height=400');
-}
+	}
 </script>
 </body>
 </html>
