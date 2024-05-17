@@ -15,6 +15,13 @@
 		GROUP BY months.month;
 	</select>
 	
+	<select id="selectCarInfo" resultType="com.itwill.billycar.vo.CarVO">
+		SELECT *
+		FROM CAR
+		WHERE 
+			car_number = #{car_number}
+	</select>
+	
 <!-- 	<insert id="insertPayment"> -->
 <!-- 		INSERT INTO payment -->
 <!-- 		VALUES ( -->

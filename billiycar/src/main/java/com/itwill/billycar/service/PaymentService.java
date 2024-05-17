@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itwill.billycar.mapper.PaymentMapper;
+import com.itwill.billycar.vo.CarVO;
 import com.itwill.billycar.vo.PaymentVO;
 
 
@@ -23,6 +24,12 @@ public class PaymentService {
 
 	public int regisetPayment(PaymentVO payment) {
 		return mapper.insertPayment(payment);
+	}
+
+
+
+	public CarVO getCarInfo(CarVO car) {
+		return mapper.selectCarInfo(car);
 	}
 	
 	

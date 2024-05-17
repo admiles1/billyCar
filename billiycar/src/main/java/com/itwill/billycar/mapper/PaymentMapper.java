@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.itwill.billycar.vo.CarVO;
 import com.itwill.billycar.vo.PaymentVO;
 
 
@@ -14,6 +15,8 @@ public interface PaymentMapper {
 	List<Integer> salesMonthSelect();
 
 	int insertPayment(PaymentVO payment);
+
+	CarVO selectCarInfo(CarVO car);
 
 	
 

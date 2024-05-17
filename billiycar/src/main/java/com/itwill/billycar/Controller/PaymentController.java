@@ -52,15 +52,18 @@ public class PaymentController {
 		String MemberId = (String)session.getAttribute("member_id");
 		model.addAttribute("info", MyPageService.getMemberInfo(MemberId));
 		
+		CarVO dbcar = paymentService.getCarInfo(car); 
+//		model.addAttribute("getCar", ); 
+//		model.addAttribute("getCar", paymentService.getCarInfo(car.getCar_number())); 
 //		String carNumber = car.getCar_number();
 //		model.addAttribute("carInfo", reservService.getCar(carNumber));
-		Map<String, String> selectCar = reservService.getCar(car, reserv);
+//		Map<String, String> selectCar = reservService.getCar(car, reserv);
 		
 //		selectCar.get("car_number");
 //		String carNumber = selectCar.get("car_number");
 //		model.addAttribute("car", selectCar);
 //		model.addAttribute("car", selectCar.get("car_number"));
-		model.addAttribute("car", selectCar);
+//		model.addAttribute("car", selectCar);
 		System.out.println(car);
 		return "payment/paymentPage";
 	}
