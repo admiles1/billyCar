@@ -9,6 +9,18 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reserv_detail.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+	function checkLogin(){
+		if(${sessionScope.member_id == null}) {
+			alert('로그인을 진행하여 주십시오');
+			location.href="login";
+			return;
+		}
+		
+		location.href="payment?car_number=${car.car_number}&schedule=${param.schedule}";
+	}
+
+</script>
 <title>:: 상세 예약페이지 ::</title>
 </head>
 <body>
@@ -60,7 +72,7 @@
 		    			<li><img src="${pageContext.request.contextPath}/resources/images/check-img.png" class="check-img">운전경력 : <span class="qua">1년 이상</span></li>
 		    			<li><img src="${pageContext.request.contextPath}/resources/images/check-img.png" class="check-img">면허종류 : <span class="qua">2종 보통면허 이상</span></li>
 		    		</ul>
-		    		<a href="payment?car_number=${car.car_number}&schedule=${param.schedule}"><span class="make-rv"></span></a>
+		    		<a onclick="checkLogin()"><span class="make-rv"></span></a>
 		    		<a href="faq"><span class="contact-cs"></span></a>
 	    		</div>
 	  		</div>

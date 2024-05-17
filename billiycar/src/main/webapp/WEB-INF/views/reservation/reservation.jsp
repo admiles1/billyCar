@@ -83,17 +83,22 @@
 		let fuels = [];
 		let pud = $("#reserv_pickupdate").val() + " " + $("#reserv_pickuptime").val();
 		let rtd = $("#reserv_returndate").val() + " " + $("#reserv_returntime").val();
+		
 		let pul = $("#reserv_pickuplocation").val();
+		
 		if(pul == "아이티윌") {
 			pul = "부산광역시 부산진구 동천로 109 삼한골든게이트빌딩 7층";
-		}
+		} 
+		
 		let rtl = $("#reserv_returnlocation").val();
 		
 		if(rtl == "branch"){
+			rtl = "부산광역시 부산진구 동천로 109 삼한골든게이트빌딩 7층";
+		} else if (rtl == "same") {
 			rtl = pul;
 		}
 		
-		let schedule = [pud, rtd,pul,rtl];
+		let schedule = [pud, rtd, pul, rtl];
 		
 		$("input[name=car_type]:checked").each(function() {
 			var chkReceiver = $(this).val();
@@ -260,22 +265,22 @@
 					    	<div class="col-sm-9 col-12 px-0 mb-2" align="center" style="width : 100%">
 					    		<div class="input-daterange" align="center" style="width : 100%">
 					    			<input type="text" class="form-control datetext" placeholder="대여 날짜 선택" readonly name="reserv_pickupdate"
-					    				<c:if test="${not empty pickupDate}"> value="${pickupDate}"</c:if> id="reserv_pickupdate">
+					    				<c:if test="${not empty schedule}"> value="${schedule.reserv_pickupdate}"</c:if> id="reserv_pickupdate">
 					    			<input type="text" class="form-control datetext" placeholder="반납 날짜 선택" readonly name="reserv_returndate"
-					    				<c:if test="${not empty returnDate}"> value="${returnDate}"</c:if> id="reserv_returndate">
+					    				<c:if test="${not empty schedule}"> value="${schedule.reserv_returndate}"</c:if> id="reserv_returndate">
 					    			<br>	
 				    				<select name="pickupTime" id="reserv_pickuptime">
 				    					<c:forEach var="BH" begin="${BusinessHours[0].name}" end="${BusinessHours[1].name}" >
 				    						<fmt:formatNumber value="${BH}" pattern="00" var="BHfmt" />
 				    						<option value="${BHfmt}"
-				    							<c:if test="${pickupTime eq BHfmt}"> selected </c:if>>${BHfmt}:00</option>
+				    							<c:if test="${schedule.pickupTime eq BHfmt}"> selected </c:if>>${BHfmt}:00</option>
 				    					</c:forEach>
 									</select>
 				    				<select name="returnTime" id="reserv_returntime">
 										<c:forEach var="BH" begin="${BusinessHours[0].name}" end="${BusinessHours[1].name}" >
 											<fmt:formatNumber value="${BH}" pattern="00" var="BHfmt" />
 											<option value="${BHfmt}"
-				    							<c:if test="${returnTime eq BHfmt}"> selected </c:if>>${BHfmt}:00</option>
+				    							<c:if test="${schedule.returnTime eq BHfmt}"> selected </c:if>>${BHfmt}:00</option>
 				    					</c:forEach>
 									</select>
 					    		</div>
@@ -302,7 +307,8 @@
 							<c:forEach var="type" items="${types}">
 								<c:set var="cktype" value=" ,${fuel.name}" />
 			    				<li><label class="car-type">
-				    				<input type="checkbox" value="${type.name}" name="car_type">${type.name} 
+				    				<input type="checkbox" value="${type.name}" name="car_type"
+				    				 <c:if test="${selType eq type.name}" > checked </c:if>>${type.name} 
 								</label></li>
 			    			</c:forEach>	
 			    		</ul>
@@ -312,9 +318,8 @@
 			    		<h3> 연료 </h3>
 			    		<ul class="car-option-list">
 			    			<c:forEach var="fuel" items="${fuels}">
-			    				<c:set var="ckfuel" value=" ,${fuel.name}" />
 			    				<li><label class="car-fuel">
-			    					<input type="checkbox" value="${fuel.name}" name="car_fuel"> ${fuel.name} 
+			    					<input type="checkbox" value="${fuel.name}" name="car_fuel" <c:if test="${selFuel eq fuel.name}" > checked </c:if>> ${fuel.name} 
 								</label></li>
 			    			</c:forEach>
 			    		</ul>
