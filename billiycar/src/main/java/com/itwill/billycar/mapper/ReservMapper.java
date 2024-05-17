@@ -26,5 +26,6 @@ public interface ReservMapper {
 	int updateReviewStatus(int review_idx);
 	
 	int selecReservCount();
+
 	
 }

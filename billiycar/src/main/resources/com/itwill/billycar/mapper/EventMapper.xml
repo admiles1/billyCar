@@ -25,5 +25,14 @@
 		FROM event
 		WHERE event_idx = #{event_idx}
 	</select>
+	
+	
+	
+	
+	<delete id="deleteEvent">
+		DELETE
+		FROM event
+		WHERE event_idx = #{event_idx}
+	</delete>
 
 </mapper>

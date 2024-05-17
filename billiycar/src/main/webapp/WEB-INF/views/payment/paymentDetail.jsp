@@ -100,7 +100,7 @@
 	            </div>
 	
 	            <div class="col-sm-9">
-	            	<input type="text" class="form-control" id="dateInfo"  value="${reservList.reserv_pickupdate}" readonly>
+	            	<input type="text" class="form-control" id="dateInfo"  value="${reservDetail.reserv_pickupdate}" readonly>
 	            </div>
 	        </div>
 	        
@@ -110,7 +110,7 @@
 	            </div>
 				
 	            <div class="col-sm-9">
-	            	<input type="text" class="form-control" id="locatrionInfo"  value="${param.pickuplocation}" readonly>
+	            	<input type="text" class="form-control" id="locatrionInfo"  value="${reservDetail.reserv_pickuplocation}" readonly>
 	            </div>
 			</div>
 			
@@ -120,7 +120,7 @@
 	            </div>
 	
 	            <div class="col-sm-9">
-	            	<input type="text" class="form-control" id="dateInfo" value="${param.returnDate}" readonly >
+	            	<input type="text" class="form-control" id="dateInfo" value="${reservDetail.reserv_returndate}" readonly >
 	            </div>
 				
 			</div>
@@ -131,25 +131,9 @@
 	            </div>
 	
 	            <div class="col-sm-9">
-	            	<input type="text" class="form-control" id="locatrionInfo" value="${param.returnlocation}" readonly>
-<!-- 	            	<select class="form-select" aria-label="Default select example"> -->
-<!-- 						<option selected>반납지역</option> -->
-<!-- 						<option value="1">반납지역1</option> -->
-<!-- 						<option value="2">반납지역2</option> -->
-<!-- 						<option value="3">반납지역3</option> -->
-<!-- 					</select> -->
+	            	<input type="text" class="form-control" id="locatrionInfo" value="${reservDetail.reserv_returnlocation}" readonly>
 	            </div>
 			</div>
-			
-<!-- 			<div class="row g-3">  --> <!--  필요 없을듯 --> 
-<!-- 				<div class="col-sm-3"> -->
-<!-- 	            	<label>총 대여시간</label> -->
-<!-- 	        	</div> -->
-	
-<!-- 	            <div class="col-sm-9"> -->
-<!-- 	            	<input type="text" class="form-control" id="dateInfo" placeholder="" value="총 대여시간 받아올꺼" required> -->
-<!-- 	            </div> -->
-<!-- 	        </div> -->
 			<hr>            
 	        
 		<h4 class="subject">운전자정보(필수입력)</h4>
@@ -194,52 +178,55 @@
 		<h4 class="subject">보험정보</h4>
 			<div class="row g-3">
 				<h5>자차보험(선택사항, 24시간기준)</h5>
-				<table class="list-table-v02" width="100%"  >
-					<colgroup span="1">
-						<col width="40%">
-						<col width="20%">
-						<col width="20%">
-						<col width="20%">
-					</colgroup>
-					<thead>
-						<tr>
-							<th>보험종류</th>
-							<th>보험료</th>
-							<th>보상한도</th>
-							<th class="last=child">고객부담금</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class="insuranceChk" >
-							<td colspan="1" class="c" >
-								<input name="insurance" class="chk insurance_data" id="insuranceCar0" type="radio" value="0" checked="checked"> 
-								<label>선택안함</label>
-							</td>
-							<td colspan="1" class="c" >없음</td>
-							<td colspan="1" class="c" >없음</td>
-							<td colspan="1" class="c" >전액부담</td>
-						</tr>
-						
-						<tr class="insuranceChk" >
-							<td colspan="1" class="c" >
-								<input name="insurance" class="chk insurance_data" id="insuranceCar1" type="radio" value="10000" > 
-								<label>일반자차</label>
-							</td>
-							<td colspan="1" class="c">1만원</td>
-							<td colspan="1" class="c">200만원</td>
-							<td colspan="1" class="c">50만원</td>
-						</tr>
-						
-						<tr class="insuranceChk" >
-							<td colspan="1" class="c" >
-								<input name="insurance" class="chk insurance_data" id="insuranceCar12" type="radio" value="26000" > 
-								<label>완전자차</label>
-							</td>
-							<td colspan="1" class="c">2만6천원</td>
-							<td colspan="1" class="c">200만원</td>
-							<td colspan="1" class="c">0만원</td>
-						</tr>
-					</tbody>
+				<table class="list-table-v02" width="100%">
+				    <colgroup span="1">
+				        <col width="40%">
+				        <col width="20%">
+				        <col width="20%">
+				        <col width="20%">
+				    </colgroup>
+				    <thead>
+				        <tr>
+				            <th>보험종류</th>
+				            <th>보험료</th>
+				            <th>보상한도</th>
+				            <th class="last=child">고객부담금</th>
+				        </tr>
+				    </thead>
+				    <tbody>
+				        <tr class="insuranceChk" id="insuranceNone">
+				            <td colspan="1" class="c">
+				                <input name="insurance" class="chk insurance_data" id="insuranceCar0" type="radio" value="0"
+				                ${reservDetail.reserv_insurance == 0 ? 'checked="checked"' : ''} disabled>
+				                <label>선택안함</label>
+				            </td>
+				            <td colspan="1" class="c">없음</td>
+				            <td colspan="1" class="c">없음</td>
+				            <td colspan="1" class="c">전액부담</td>
+				        </tr>
+				        
+				        <tr class="insuranceChk" id="insuranceGeneral">
+				            <td colspan="1" class="c">
+				                <input name="insurance" class="chk insurance_data" id="insuranceCar1" type="radio" value="10000"
+				                ${reservDetail.reserv_insurance == 1 ? 'checked="checked"' : ''} disabled>
+				                <label>일반자차</label>
+				            </td>
+				            <td colspan="1" class="c">1만원</td>
+				            <td colspan="1" class="c">200만원</td>
+				            <td colspan="1" class="c">50만원</td>
+				        </tr>
+				        
+				        <tr class="insuranceChk" id="insuranceFull">
+				            <td colspan="1" class="c">
+				                <input name="insurance" class="chk insurance_data" id="insuranceCar12" type="radio" value="26000"
+				                ${reservDetail.reserv_insurance == 2 ? 'checked="checked"' : ''} disabled>
+				                <label>완전자차</label>
+				            </td>
+				            <td colspan="1" class="c">2만6천원</td>
+				            <td colspan="1" class="c">200만원</td>
+				            <td colspan="1" class="c">0만원</td>
+				        </tr>
+				    </tbody>
 				</table>
 			</div>	
 					
@@ -287,92 +274,82 @@
 				</table>
 			</div>
 			<hr>	
-		<h4 class="subject">추가옵션</h4>
-			<div class="row row-cols-2">
-				<div class="opt_chk">
-					&nbsp;<input type="checkbox" name="opt_chk" id="opt_chk1" value="5000">&emsp;카시트(영유아용)1개 &emsp;5000원
-					
-				</div>
-				<div class="opt_chk">
-					<input type="checkbox" name="opt_chk" id="opt_chk2" value="5000">&emsp;카시트(주니어)1개 &emsp;5000원
-					
-				</div>
+<!-- 		<h4 class="subject">추가옵션</h4> -->
+<!-- 			<div class="row row-cols-2"> -->
 <!-- 				<div class="opt_chk"> -->
-<!-- 					&nbsp;<input type="checkbox" name="opt_chk" id="opt_chk8" value="8|0">&emsp;카시트(영유아용)2개 -->
-<!-- 					<br>&nbsp;5000원 -->
+<!-- 					&nbsp;<input type="checkbox" name="opt_chk" id="opt_chk1" value="5000">&emsp;카시트(영유아용)1개 &emsp;5000원 -->
+					
 <!-- 				</div> -->
 <!-- 				<div class="opt_chk"> -->
-<!-- 					<input type="checkbox" name="opt_chk" id="opt_chk8" value="8|0">&emsp;카시트(주니어)2개 -->
-<!-- 					<br>5000원 -->
+<!-- 					<input type="checkbox" name="opt_chk" id="opt_chk2" value="5000">&emsp;카시트(주니어)1개 &emsp;5000원 -->
+					
 <!-- 				</div> -->
-			</div>
-			
-			<hr>
-		<h4 class="subject">결제수단 선택</h4>
-			<div class="row">
-				<div class="col pay_radio">
-					&nbsp;<input type="radio" name="payment">&emsp;신용/체크카드
-				</div>
-				<div class="col pay_radio">
-					<input type="radio" name="payment">&emsp;가상계좌이체
-				</div>
-				 <div class="col pay_radio">
-					<input type="radio" name="payment">&emsp;무통장입금
-				</div>
-			</div>
-			<hr>
-		<h4 class="subject">할인정보(중복할인불가)</h4>
-			<div class="row g-3">
-				<div class="col-sm-4">
-	            	<label>쿠폰사용&emsp;<input type="text">
-	            	</label>
-	            </div>
-	            <div class="col-sm-8">
-	            	<br>
-	            	<input type="button" value="적용">
-	            </div>
-			</div>
-			<hr>
+<!-- 			</div> -->
+<!-- 		<h4 class="subject">결제수단 선택</h4> -->
+<!-- 			<div class="row"> -->
+<!-- 				<div class="col pay_radio"> -->
+<!-- 					&nbsp;<input type="radio" name="payment">&emsp;신용/체크카드 -->
+<!-- 				</div> -->
+<!-- 				<div class="col pay_radio"> -->
+<!-- 					<input type="radio" name="payment">&emsp;가상계좌이체 -->
+<!-- 				</div> -->
+<!-- 				 <div class="col pay_radio"> -->
+<!-- 					<input type="radio" name="payment">&emsp;무통장입금 -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 			<hr> -->
+<!-- 		<h4 class="subject">할인정보(중복할인불가)</h4> -->
+<!-- 			<div class="row g-3"> -->
+<!-- 				<div class="col-sm-4"> -->
+<!-- 	            	<label>쿠폰사용&emsp;<input type="text"> -->
+<!-- 	            	</label> -->
+<!-- 	            </div> -->
+<!-- 	            <div class="col-sm-8"> -->
+<!-- 	            	<br> -->
+<!-- 	            	<input type="button" value="적용"> -->
+<!-- 	            </div> -->
+<!-- 			</div> -->
+<!-- 			<hr> -->
 		
 			
-		</div>
+<!-- 		</div> -->
 <!-- 		<div class="col-lg-4"> -->
 <!-- 		<div class="col-md-7 col-lg-4"> -->
-		<div class="col-md-5 col-lg-4 order-md-last" id="paymentSide">
-			<h4 class="subject2">결제 정보 확인</h4>
-			<div class="container last_check">
-				<div>
-<%-- 					<img src="${car.car_img}" width="430" > --%> <!-- 차이미지 받아 오기 -->
-					<img src="resources/event_images/envent_page_event2-1.webp" width="390" ><!-- 임시 -->
-				</div>
+<!-- 		<div class="col-md-5 col-lg-4 order-md-last" id="paymentSide"> -->
+<!-- 			<h4 class="subject2">결제 정보 확인</h4> -->
+<!-- 			<div class="container last_check"> -->
+<!-- 				<div> -->
+<%-- <%-- 					<img src="${car.car_img}" width="430" > --%> <!-- 차이미지 받아 오기 --> 
+<!-- 					<img src="resources/event_images/envent_page_event2-1.webp" width="390" >임시 -->
+<!-- 				</div> -->
 
-				<h6><b>추가 옵션</b></h6>
-				<div class="row">
-					<div class="col-3">추가 옵션</div>
-					<div class="col-9" id="optionPrice" align="right">0</div>
-				</div>
-				<br>
-				<h6><b>결제 정보</b></h6>
-				<div class="row">
-					<div class="col-3">대여금액</div>
-					<div class="col-9" align="right"><fmt:formatNumber value="${car.car_dayprice}" pattern="#,###"/></div>
-					<div class="col-3">보험금액</div>
-<!-- 					<div class="col-9 incurance" id="insurance_price" align="right">0</div> -->
-					<div class="col-9 incurance" id="insurance_price" align="right">${empty param.insurance ? '(+)0' : param.insurance}</div>
-					<div class="col-3">할인금액</div>
-					<div class="col-9" align="right">할인금액 표시</div>
-					<hr>
-					<div class="col-3">총 결제 금액(VAT 포함)</div>
-					<div class="col-9" align="right"></div>
-				</div>
-				<br><br>
-			</div>
-				<form action="payment" method="post">
-					<input type="button" class="sub_btn w-100 btn btn-primary btn-lg" value="결제하기" onclick="startPayment();" >
-				</form>			
-			</div>
-		</div>
-	</div>
+<!-- 				<h6><b>추가 옵션</b></h6> -->
+<!-- 				<div class="row"> -->
+<!-- 					<div class="col-3">추가 옵션</div> -->
+<!-- 					<div class="col-9" id="optionPrice" align="right">0</div> -->
+<!-- 				</div> -->
+<!-- 				<br> -->
+<!-- 				<h6><b>결제 정보</b></h6> -->
+<!-- 				<div class="row"> -->
+<!-- 					<div class="col-3">대여금액</div> -->
+<%-- 					<div class="col-9" align="right"><fmt:formatNumber value="${car.car_dayprice}" pattern="#,###"/></div> --%>
+<!-- 					<div class="col-3">보험금액</div> -->
+<!-- <!-- 					<div class="col-9 incurance" id="insurance_price" align="right">0</div> --> 
+<%-- 					<div class="col-9 incurance" id="insurance_price" align="right">${empty param.insurance ? '(+)0' : param.insurance}</div> --%>
+<!-- 					<div class="col-3">할인금액</div> -->
+<!-- 					<div class="col-9" align="right">할인금액 표시</div> -->
+<!-- 					<hr> -->
+<!-- 					<div class="col-3">총 결제 금액(VAT 포함)</div> -->
+<!-- 					<div class="col-9" align="right"></div> -->
+<!-- 				</div> -->
+<!-- 				<br><br> -->
+<!-- 			</div> -->
+<!-- 				<form action="payment" method="post"> -->
+<!-- 					<input type="button" class="sub_btn w-100 btn btn-primary btn-lg" value="결제하기" onclick="startPayment();" > -->
+<!-- 				</form>			 -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
 
     <!-- 아임포트 스크립트 -->
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
@@ -410,6 +387,15 @@
                 }
             });
         }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            var reservInsurance = ${reservDetail.reserv_insurance};
+            document.getElementById('insuranceNone').style.display = reservInsurance == 0 ? '' : 'none';
+            document.getElementById('insuranceGeneral').style.display = reservInsurance == 1 ? '' : 'none';
+            document.getElementById('insuranceFull').style.display = reservInsurance == 2 ? '' : 'none';
+        });
+        
+        
     </script>
 	
 	

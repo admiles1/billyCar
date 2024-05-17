@@ -15,4 +15,6 @@ public interface EventMapper {
 
 	EventVO selectEventContent(int event_idx);
 
+	int deleteEvent(EventVO event);
+
 }

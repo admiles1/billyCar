@@ -25,4 +25,8 @@ public class EventService {
 		return mapper.selectEventContent(event_idx);
 	}
 
+	public int deleteEvent(EventVO event) {
+		return mapper.deleteEvent(event);
+	}
+
 }

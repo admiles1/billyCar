@@ -19,12 +19,21 @@
 </style>
 <script type="text/javascript">
 $(function(){
+	$('.heart').on('click',function(){
+		var heart = $(this).find('i');
+
+        if (heart.hasClass('fa-regular')) {
+        	heart.removeClass('fa-regular').addClass('fa-solid').css('color', 'red');
+        } else {
+        	heart.removeClass('fa-solid').addClass('fa-regular').css('color', 'grey');
+        }
+    });
+	
+	
     $('#options').on('change', function() {
         let pageNum = 1;
-        console.log(pageNum);
         let option = $('#options').val();
-        console.log("옵션값 : " + option);
-
+		
         $.ajax({
             type: 'GET',
             url: 'reviewOption',
@@ -32,13 +41,10 @@ $(function(){
             data: { option: option, pageNum: pageNum },
             success: function(data) {
                 let pageInfo = data.pageInfo;
-                console.log("data.pageInfo:", pageInfo);
-                console.log("data.reviewList:", data.reviewList);
-                console.log("option:", option);
-                console.log("pageNum:", pageNum);
-
                 updateReviewList(data.reviewList);
                 updatePageInfo(pageInfo, pageNum, option);
+                
+                $('#options').val(option);
             }
         });
     });
@@ -46,7 +52,7 @@ $(function(){
     function updateReviewList(reviews) {
         var html = '';
         reviews.forEach(function(review) {
-            html += '<div class="col-md-3">' +
+            html += '<div class="col-md-3" style="margin-top: 20px;">' +
                         '<div class="card">' +
                             '<img src="./resources/main_images/rewiewCar1.png" class="card-img-top" alt="리뷰 이미지 1" width="300" height="300">' +
                             '<div class="card-body">' +
@@ -68,14 +74,10 @@ $(function(){
     }
 
     function updatePageInfo(pageInfo, pageNum, option) {
-        console.log("updatePageInfo(안)pageInfo:", pageInfo);
-        console.log("updatePageInfo(안)pageNum:", pageNum);
-        console.log("option(안):", option);
 
         var html = '';
-
         // 이전 버튼
-        html += '<input type="button" value="동기이전" onclick="location.href=\'review?pageNum=' + (pageNum - 1) + '&option=' + option + '\'"';
+        html += '<input type="button" value="이전" onclick="location.href=\'review?pageNum=' + (pageNum - 1) + '&option=' + option + '\'"';
         if (pageNum == 1) {
             html += ' disabled';
         }
@@ -91,17 +93,16 @@ $(function(){
         }
 
         // 다음 버튼
-        html += '<input type="button" value="동기다음" onclick="location.href=\'review?pageNum=' + (pageNum + 1) + '&option=' + option + '\'"';
+        html += '<input type="button" value="다음" onclick="location.href=\'review?pageNum=' + (pageNum + 1) + '&option=' + option + '\'"';
         if (pageNum == pageInfo.maxPage) {
             html += ' disabled';
         }
         html += '>';
 
-        console.log("html값:", html);
-
         // 결과를 페이지에 추가
         $('.pageList').html(html);
     }
+    
 });
 
 </script>
@@ -109,24 +110,26 @@ $(function(){
 <body>
 	<header><jsp:include page="../inc/top.jsp"></jsp:include></header>
 	<div class="container">
-	<c:set var="pageNum" value="${empty param.pageNum ? 1 : param.pageNum }"/>
-	<c:set var="option" value="${empty param.option ? 1 : param.option }"/>
+		<!-- ? -->
+		<c:set var="pageNum" value="${empty param.pageNum ? 1 : param.pageNum }"/>
+		<c:set var="option" value="${empty param.option ? 1 : param.option }"/>
+	
     	<h1 class="subject mt-5 mb-3" style="text-align: center; margin-bottom: 50px;">리뷰</h1>
     	
     	
     <!-- 검색창 -->
     	<div style="width: 100px; margin-left: 1195px;">
                 <select class="form-select form-select-sm" aria-label="리뷰 정렬" id="options">
-                    <option value="latest">최신순</option>
-                    <option value="old">오래된순</option>
-                    <option value="rating">별점순</option>
-                </select>
+				    <option value="latest" <c:if test="${param.option == 'latest'}">selected</c:if>>최신순</option>
+				    <option value="old" <c:if test="${param.option == 'old'}">selected</c:if>>오래된순</option>
+				    <option value="rating" <c:if test="${param.option == 'rating'}">selected</c:if>>별점순</option>
+				</select>
         </div>
-    	<div class="row" style="margin-top: 10px;">
+    	<div class="row">
     		<c:forEach var="review" items="${reviewList }">
-	        	<div class="col-md-3">
-	        		<div class="card">
-	        			
+	        	<div class="col-md-3" style="margin-top: 20px;">
+	        		<div class="card" style="position: relative;">
+	        			<div style="position: absolute; top: 10px; left: 10px; color: grey;" class="heart"><i class="fa-regular fa-heart"></i></div>
 	                	<img src="./resources/main_images/rewiewCar1.png" class="card-img-top" alt="리뷰 이미지 1" width="300" height="300">
 	                    <div class="card-body">
 	                    	
@@ -167,8 +170,6 @@ $(function(){
 			<c:if test="${pageNum eq pageInfo.maxPage }">disabled</c:if>
 			>
 		</div>
-		
-		
 	</div>
 
     <!-- 부트스트랩 자바스크립트 CDN -->

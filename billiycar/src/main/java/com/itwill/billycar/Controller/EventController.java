@@ -2,6 +2,7 @@ package com.itwill.billycar.Controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -10,6 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -149,6 +151,19 @@ public class EventController {
 		
 		
 		
+		
+		return "redirect:/event";
+	}
+	
+	@GetMapping("eventDelete")
+	public String eventDelete(EventVO event, Model model, HttpServletResponse response) {
+		
+		int deleteCnt = service.deleteEvent(event);
+		
+		if(deleteCnt <= 0) {
+			model.addAttribute("msg", "이벤트 삭제에 실패하였습니다. \\n 다시 시도해 주세요");
+			return "err/fail";
+		}
 		
 		return "redirect:/event";
 	}
