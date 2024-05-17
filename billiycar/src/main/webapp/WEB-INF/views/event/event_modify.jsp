@@ -32,7 +32,7 @@
   			<em class = "notice_d_title">이벤트 작성</em><br>
   		</div>
   		
-  		<form action="eventWrite" method= "post" enctype="multipart/form-data">
+  		<form action="eventModify?event_idx=${event.event_idx}" method= "post" enctype="multipart/form-data">
   		<div class = "detail_view">
   			<div class ="view_tit">
   				<h3><input type = "text" id="title" placeholder="제목을 입력하시오" name = "event_title" style = "width : 400px" value="${event.event_title}"> </h3>
@@ -49,7 +49,7 @@
 <!--   			</div> -->
 			
 			<div class ="view_cont"></div>
-				<textarea id="summernote" style = "background-color:white" name = "event_content" value="${event.event_content}"></textarea>
+				<textarea id="summernote" style = "background-color:white" name = "event_content" >${event.event_content}</textarea>
 		    <script>
 		    $('#summernote').summernote({
 		        placeholder: '내용을 입력하시오',
@@ -69,7 +69,7 @@
   		</div>
   		
   		<div class = "btn-view">
-  			<input type = "submit" value = "작성" id = "writeGo">
+  			<input type = "submit" value = "수정" id = "writeGo">
   			<a href = "event">목록</a>
   		</div>
 		</form>

@@ -115,10 +115,10 @@ public class EventController {
 		}
 		
 		// 게시물 등록
-		int updateCnt = service.updateEvent(event);
+		int insertCnt = service.insertEvent(event);
 		
 		// 실패시
-		if(updateCnt <= 0) {
+		if(insertCnt <= 0) {
 			model.addAttribute("msg", "이벤트 등록에 실패하였습니다. \\n 다시 시도해 주세요");
 			return "err/fail";
 		}
@@ -141,18 +141,28 @@ public class EventController {
 	}
 	
 	@GetMapping("eventModify")
-	public String eventModify(EventVO event) {
+	public String eventModify(EventVO event, Model model) {
 		event = service.selectEventContent(event.getEvent_idx());
+		model.addAttribute("event", event);
 		return "event/event_modify";
 	}
 	
 	@PostMapping("eventModify")
-	public String eventModifyPro() {
+	public String eventModifyPro(EventVO event, Model model) {
+		System.out.println("ddddddddddddddddddddddddddddddddddddddddd" +event);
 		
+		if(event.getEvent_image() == null) {
+			event.setEvent_image("");
+		}
 		
+		int updateCnt = service.updateEvent(event);
 		
+		if(updateCnt <= 0) {
+			model.addAttribute("msg", "이벤트 수정에 실패하였습니다. \\n 다시 시도해 주세요");
+			return "err/fail";
+		}
 		
-		return "redirect:/event";
+		return "redirect:/eventContent?event_idx="+event.getEvent_idx();
 	}
 	
 	@GetMapping("eventDelete")

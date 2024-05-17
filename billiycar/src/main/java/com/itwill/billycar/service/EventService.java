@@ -13,8 +13,8 @@ public class EventService {
 	@Autowired
 	private EventMapper mapper;
 	
-	public int updateEvent(EventVO event) {
-		return mapper.updateEvent(event);
+	public int insertEvent(EventVO event) {
+		return mapper.insertEvent(event);
 	}
 
 	public List<EventVO> selectEventList() {
@@ -27,6 +27,10 @@ public class EventService {
 
 	public int deleteEvent(EventVO event) {
 		return mapper.deleteEvent(event);
+	}
+
+	public int updateEvent(EventVO event) {
+		return mapper.updateEvent(event);
 	}
 
 }
