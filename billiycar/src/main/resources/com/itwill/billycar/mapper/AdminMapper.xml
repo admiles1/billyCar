@@ -278,7 +278,25 @@
 	    INSERT INTO Common (code, name)
 	    VALUES (#{code}, #{newModelName})
 	</insert>
+	
+	<delete id="deleteCode">
+		DELETE 
+		FROM Common 
+		WHERE code = #{code}
+	</delete>
 
+	<select id="selectSearchModel">
+		SELECT code 
+		FROM Common 
+		WHERE code 
+		LIKE CONCAT(#{code}, 'M%');
+	</select>
+	
+	<delete id="deleteNewModel">
+		DELETE 
+		FROM Common 
+		WHERE code = #{code}
+	</delete>
 	
 </mapper>
 

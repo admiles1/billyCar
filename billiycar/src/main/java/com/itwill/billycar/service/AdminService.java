@@ -108,6 +108,21 @@ public class AdminService {
 		return mapper.deleteCar(carId);
 	}
 
+	public int deleteCode(String code) {
+		// TODO Auto-generated method stub
+		return mapper.deleteCode(code);
+	}
+
+	public List<String> searchModel(String code) {
+		
+		return mapper.selectSearchModel(code);
+	}
+
+	public int deleteModelCode(String code) {
+		
+		return mapper.deleteNewModel(code);
+	}
+
 	
 
 }

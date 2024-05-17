@@ -230,6 +230,27 @@ public class AdminController {
 				
 	}
 	
+	@PostMapping("deleteNewCar")
+	@ResponseBody
+	public String deleteNewCar(String code) {
+//		System.out.println(code);
+		List<String> models = service.searchModel(code);
+        if (!models.isEmpty()) {
+            return "models_exist";
+        }
+		
+		service.deleteCode(code);
+		return "success";
+	}
+	
+	@PostMapping("deleteNewModel")
+	@ResponseBody
+	public String deleteNewModel(String code) {
+		
+		service.deleteModelCode(code);
+		return "success";
+	}
+	
 	@GetMapping("admin_car_registration")
 	public String admin_car_registration(CommonVO common, Model model) {
 //		System.out.println(common);
