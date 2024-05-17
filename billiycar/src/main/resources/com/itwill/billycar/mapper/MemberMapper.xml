@@ -124,6 +124,15 @@
 		 WHERE member_phone = #{member_phone}
 	</select>
 	
+	<update id="updatePasswd">
+		UPDATE member
+		SET
+			member_passwd = #{member_passwd}
+		WHERE
+			member_id = #{member_id}
+	
+	</update>
+	
 </mapper>
 
 

@@ -36,5 +36,7 @@ public interface MemberMapper {
 
 	boolean selectEmptyPhoneNum(String member_phone);
 
+	int updatePasswd(MemberVO member);
+
 
 }

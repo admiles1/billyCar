@@ -128,6 +128,12 @@ public class Memberservice {
 	}
 
 
+	public int modifyPasswd(MemberVO member) {
+	
+		return mapper.updatePasswd(member);
+	}
+
+
 	
 	
 }
