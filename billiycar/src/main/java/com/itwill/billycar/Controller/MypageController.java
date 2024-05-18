@@ -101,7 +101,7 @@ public class MypageController {
 			                     , String newMember_passwd) {
 		System.out.println("비밀번호 변경");
 		MemberVO dbMember = service.getMemberInfo((String)session.getAttribute("member_id"));
-		if(dbMember == null || !passwordEncoder.matches(member.getMember_passwd(), dbMember.getMember_passwd())) { // 로그인 실패
+		if(dbMember == null || !passwordEncoder.matches(member.getMember_passwd(), dbMember.getMember_passwd())) {
 			model.addAttribute("msg", "현재 비밀번호가 잘못 입력되었습니다.");
 			return "err/fail";
 		} else { // 비밀번호 일치시 비밀번호 업데이트

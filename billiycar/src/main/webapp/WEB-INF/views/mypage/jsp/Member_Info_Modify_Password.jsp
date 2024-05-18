@@ -115,9 +115,9 @@ input[type="password"], input[type="text"] {
 	    </p>
     </div>
     <div class="passwd-info">
-	    <input type="password" id="currentPassword" placeholder="현재 비밀번호" name="member_passwd">
-	    <input type="password" id="newPassword" placeholder="새로운 비밀번호" name = "newMember_passwd">
-	    <input type="password" id="confirmPassword" placeholder="새로운 비밀번호 확인">
+	    <input type="password" id="currentPassword" placeholder="현재 비밀번호" name="member_passwd" required>
+	    <input type="password" id="newPassword" placeholder="새로운 비밀번호" name = "newMember_passwd" required>
+	    <input type="password" id="confirmPassword" placeholder="새로운 비밀번호 확인" required>
 	   	<div id="passwordMatchMsg"></div>
 <!--         <span id="passwordMismatchMsg"></span> -->
        	<div class="g-recaptcha-container">
@@ -242,6 +242,23 @@ input[type="password"], input[type="text"] {
 	
 	
 	document.fr.onsubmit = function() {
+	    let response = grecaptcha.getResponse();
+	    if (response.length == 0) { // reCAPTCHA가 확인 안 된 경우
+	        alert("자동입력 방지 체크를 완료해주세요!");
+	        return false; 
+	    }
+	    
+	    let currentPassword = $("#currentPassword").val();
+	    let newPassword = $("#newPassword").val();
+	    let confirmPassword = $("#confirmPassword").val();
+
+	 	// 현재 비밀번호와 새로운 비밀번호가 일치하는지 확인
+	    if (currentPassword == newPassword) {
+	        alert("변경하려는 비밀번호가 현재 비밀번호와 일치합니다.");
+	        $("#newPassword").focus(); 
+	        return false; 
+	    }
+	    
 		if(!checkPasswdResult) { // 비밀번호 확인
 			alert("새 비밀번호를 확인해주세요!");
 			document.fr.newPassword.focus();
@@ -254,16 +271,16 @@ input[type="password"], input[type="text"] {
 		return true;
 	}
 	
-	$(function() {
-        $("form").submit(function(event) {
-            // reCAPTCHA가 확인 체크
-            var response = grecaptcha.getResponse();
-            if (response.length == 0) { // reCAPTCHA가 확인안된 경우
-                alert("자동입력 방지 체크를 완료해주세요!");
-                event.preventDefault();
-            }
-        });
-    });
+// 	$(function() {
+//         $("form").submit(function(event) {
+//             // reCAPTCHA가 확인 체크
+//             var response = grecaptcha.getResponse();
+//             if (response.length == 0) { // reCAPTCHA가 확인안된 경우
+//                 alert("자동입력 방지 체크를 완료해주세요!");
+//                 event.preventDefault();
+//             }
+//         });
+//     });
 	
 </script>
 </body>
