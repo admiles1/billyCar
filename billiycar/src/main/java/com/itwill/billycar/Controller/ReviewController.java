@@ -75,7 +75,7 @@ public class ReviewController {
 	        int updateHeartSuccess = reviewService.updateReviewHeart(review_idx, 1);
 	        System.out.println("review_heart 증가: " + updateHeartSuccess);
 	        
-	        map.put("status", "증가");
+	        map.put("status", "증가"); 
 	    } else {
 	        //좋아요 제거
 	        if (heart != null) {

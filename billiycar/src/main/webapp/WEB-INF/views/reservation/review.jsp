@@ -87,12 +87,16 @@ $(function(){
     function updateReviewList(reviews) {
         var html = '';
         reviews.forEach(function(review) {
-            html += '<div class="col-md-3" style="margin-top: 20px;">' +
-                        '<div class="card" style="position: relative;">' +
-                        '<div style="position: absolute; top: 10px; left: 10px; color: grey;" class="heart">' + 
-                        '<input type="hidden" class="review_idx" value="' + review.review_idx + '">' +
-                        '<i class="fa-regular fa-heart"></i>' +
-                        '</div>' +
+        	html += '<div class="col-md-3" style="margin-top: 20px;">' +
+				            '<div class="card" style="position: relative;">' +
+				            '<div style="position: absolute; top: 10px; left: 10px; color: grey;" class="heart">' + 
+				            '<input type="hidden" class="review_idx" value="' + review.review_idx + '">';
+							if (review.member_id && review.member_id === member_id) {
+							    html += '<i class="fa-solid fa-heart" style="color: red;"></i>';
+							} else {
+							    html += '<i class="fa-regular fa-heart" style="color: gray;"></i>';
+							}
+							html += '</div>' +
                             '<img src="./resources/main_images/rewiewCar1.png" class="card-img-top" alt="리뷰 이미지 1" width="300" height="300">' +
                             '<div class="card-body">' +
                                 '<h5 class="card-title">';
