@@ -123,6 +123,11 @@ public class AdminService {
 		return mapper.deleteNewModel(code);
 	}
 
+	public List<CarVO> getCarModel(String modelCode) {
+		
+		return mapper.selectCarModel(modelCode);
+	}
+
 	
 
 }
