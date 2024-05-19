@@ -31,23 +31,44 @@
 
 <script>
 	
-	$(function(){
+	$(function(){	
 		
-		$("#searchCar").on("click", function(){
-			if(!check()) {
-				return;
-			}
-			
-			let formData = $("#searchForm").serialize();
+		let pageNum = 2;
+		
+		if('${empty schedule}' == "true") {
+			$("#reserv_pickupdate").val("2024-05-20");
+			$("#reserv_returndate").val("2024-05-21");
+			$("#reserv_pickuptime").val("06");
+			$("#reserv_returntime").val("07");
+		}
+		
+		$("#moreList").on("click", function(){
+			let selectedFuel = ''; // 선택된 연료를 저장할 문자열 변수
+		    $('input[name="car_fuel"]:checked').each(function() {
+		    	selectedFuel += $(this).val() + ',';
+		    });
+		    selectedFuel = selectedFuel.slice(0, -1);
+		    
+			let selectedType = ''; // 선택된 연료를 저장할 문자열 변수
+		    $('input[name="car_type"]:checked').each(function() {
+		    	selectedType += $(this).val() + ',';
+		    });
+		    selectedType = selectedType.slice(0, -1);
 			
 			$.ajax({
 				type : "POST" ,
-				url : "SelectCarList",
-				data : formData,
+				url : "MoreList",
+				data : {
+					reserv_pickupdate : $("#reserv_pickupdate").val(),
+					reserv_returndate : $("#reserv_returndate").val(),
+					pickupTime : $("#reserv_pickuptime").val(),
+					returnTime : $("#reserv_returntime").val(),
+					car_fuel : selectedFuel,
+					car_type : selectedType,
+					pageNum : pageNum
+				},
 				dataType : "json",
 				success : function(response) {
-					$("#selectResult").empty();
-					$("#selectResult").html("<ul>");
 					
 					for(let car of response) {
 						let dayPrice = car.car_dayprice.toLocaleString();
@@ -67,9 +88,48 @@
 								+ "</a>"
 								+ "</li>"
 						);
+						
 					}
-					
-					$("#selectResult").append("</ul>");
+					pageNum++;
+				}
+			}) // ajax 끝
+		}); // 더보기 클릭 이벤트
+// 		$("#moreList").css("display" ,"none");
+		$("#searchCar").on("click", function(){
+			if(!check()) {
+				return;
+			}
+			
+			let formData = $("#searchForm").serialize();
+			
+			$.ajax({
+				type : "POST" ,
+				url : "SelectCarList",
+				data : formData,
+				dataType : "json",
+				success : function(response) {
+					$("#selectResult > ul").empty();
+					for(let car of response) {
+						let dayPrice = car.car_dayprice.toLocaleString();
+						let hourPrice = car.car_hourprice.toLocaleString();
+						let carModel = "\"" + car.car_model + "\"";
+						
+						$("#selectResult > ul").append(
+								"<li class='carList fadeIn row'>"
+								+ "<a class='d-flex' onclick='goDetail(" + carModel + ")'>"
+								+ "<span class='carImg'><img src='" + car.car_img + "'></span>"
+								+ "<span class='carInfo'>"
+								+ "<span>" + car.car_model + " / " + car.car_capacity + "</span>"
+								+ "<small>종일가 "+ dayPrice + "</small><br>"
+								+ "<small>시간당 "+ hourPrice + "</small><br>"
+								+ "<small>예약가능차량" + car.canReserv + "</small>"
+								+ "</span>"
+								+ "</a>"
+								+ "</li>"
+						);
+					}
+					pageNum = 2;
+					$("#moreList").css("display" ,"inline");
 				}
 			}) // ajax 끝
 		}); // 차량검색 클릭 이벤트
@@ -77,8 +137,15 @@
 
 	
 	
-	
 	function goDetail(model){
+		let returnLocation = $("#reserv_returnlocation").val();
+		
+		if(returnLocation == "") {
+			alert('반납장소를 선택하여 주십시오');
+			$("#reserv_returnlocation").focus();
+			return false;
+		}
+		
 		let types = [];
 		let fuels = [];
 		let pud = $("#reserv_pickupdate").val() + " " + $("#reserv_pickuptime").val();
@@ -119,16 +186,12 @@
 	
 	function check() {
 		let pickupDate = $("#reserv_pickupdate").val();
-		let returnDate = $("#reserv_returndate").val();
-		let returnLocation = $("#reserv_returnlocation").val();
+		
 		if(pickupDate == "") {
 			alert('대여날짜를 선택하여 주십시오');
+			$("#reserv_pickupdate").focus();
 			return false;
-			
-		}  else if(returnLocation == "") {
-			alert('반납장소를 선택하여 주십시오');
-			return false;
-		}
+		}  
 		
 		return true;
 	}
@@ -328,26 +391,22 @@
 			    </form>
     		</div>
 	   		<div class="col-8" id="selectResult">
-	   			<c:choose>
-					<c:when test="${needSearch}"> 검색을 먼저해주세요 </c:when>   			
-	   				<c:otherwise>
-	   					<ul>
-	   						<c:forEach var="car" items="${cars}">
-		   						<li class='carList fadeIn row'>
-										<a class='d-flex' onclick='goDetail("${car.car_model}")'>
-											<span class='carImg'><img src=""></span>
-											<span class='carInfo'>
-												<span> ${car.car_model} / ${car.car_capacity} </span>
-												<small>종일가 : ${car.car_dayprice} </small><br>
-												<small>시간당 : ${car.car_hourprice} </small><br>
-												<small>예약가능차량 : ${car.canReserv} </small>
-										</span>
-									</a>
-								</li>
-	   						</c:forEach>
-	   					</ul>
-	   				</c:otherwise>
-	   			</c:choose>
+				<ul>
+					<c:forEach var="car" items="${cars}">
+						<li class='carList fadeIn row'>
+							<a class='d-flex' onclick='goDetail("${car.car_model}")'>
+								<span class='carImg'><img src=""></span>
+								<span class='carInfo'>
+									<span> ${car.car_model} / ${car.car_capacity} </span>
+									<small>종일가 : ${car.car_dayprice} </small><br>
+									<small>시간당 : ${car.car_hourprice} </small><br>
+									<small>예약가능차량 : ${car.canReserv} </small>
+								</span>
+							</a>
+						</li>
+					</c:forEach>
+				</ul>
+	   			<input type="button" value="차량 더보기" id="moreList">
 			</div>
 		</div>
 	</main>
