@@ -17,7 +17,7 @@
             <a href="forgot_pw" class="forgot_pw">비밀번호 찾기</a>
         </div>
 		<hr>
-		<form action="forgot_pw2" method="post">
+		<form action="forgot_pw_step2" method="post">
 	        <h4>본인확인 이메일로 인증</h4>
 	        <div class="email"> <input type="hidden" value="${member_id}" name="member_id">
 	            <br>

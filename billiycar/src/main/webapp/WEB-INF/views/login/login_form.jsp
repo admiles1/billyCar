@@ -18,7 +18,7 @@
      		 <input type="password" placeholder="비밀번호" name="member_passwd" class="member_passwd"/>
       		 <div class="forgot">
 	      		 <a href="forgot_id"><b>아이디찾기</b></a> | 
-	      		 <a href="forgot_pw"><b>비밀번호찾기</b></a> | 
+	      		 <a href="forgot_pw_step1"><b>비밀번호찾기</b></a> | 
 	      		 <a href="join"><b>회원가입</b></a>
       		 </div>
 			 <input type="submit" class="btn btn-4" value ="로그인">

@@ -22,7 +22,7 @@
 <header><jsp:include page="../inc/top.jsp"></jsp:include></header>
 
 <body>
-	<form method="post" action="forgot_pw3">
+	<form method="post" action="forgot_pw_step3">
 	    <div class="container">
 	        <div class="button">
 	            <a href="forgot_id" class="forgot_id">아이디 찾기</a> |
