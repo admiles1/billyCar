@@ -19,14 +19,49 @@
 </style>
 <script type="text/javascript">
 $(function(){
+	var member_id = "${sessionScope.member_id}";
+	
 	$('.heart').on('click',function(){
 		var heart = $(this).find('i');
-
-        if (heart.hasClass('fa-regular')) {
-        	heart.removeClass('fa-regular').addClass('fa-solid').css('color', 'red');
-        } else {
-        	heart.removeClass('fa-solid').addClass('fa-regular').css('color', 'grey');
-        }
+		var review_idx = $(this).find('.review_idx').val();
+		console.log(member_id);
+		console.log(review_idx);
+		
+		if(member_id == ""){
+			alert("로그인 후 좋아요 버튼을 눌러주세요!");
+			return;
+		}
+		
+		
+		var isHeart = heart.hasClass('fa-regular');
+//         if (heart.hasClass('fa-regular')) {
+//         	heart.removeClass('fa-regular').addClass('fa-solid').css('color', 'red');
+//         	count ++;
+//         } else if(heart.hasClass('fa-solid')){
+//         	heart.removeClass('fa-solid').addClass('fa-regular').css('color', 'grey');
+//         	count --;
+//         }
+        
+        $.ajax({
+        	type : "GET",
+        	url : "reviewHeart",
+        	data : {
+        		member_id : member_id,
+        		isHeart : isHeart,
+        		review_idx : review_idx
+        	},
+        	dataType : "JSON",
+        	success : function(data){
+        		console.log(data);
+        		 if (isHeart) {
+                     heart.removeClass('fa-regular').addClass('fa-solid').css('color', 'red');
+                 } else {
+                     heart.removeClass('fa-solid').addClass('fa-regular').css('color', 'grey');
+                 }
+        		
+        	}
+        });
+        
     });
 	
 	
@@ -37,7 +72,7 @@ $(function(){
         $.ajax({
             type: 'GET',
             url: 'reviewOption',
-            dataType: 'json',
+            dataType: 'JSON',
             data: { option: option, pageNum: pageNum },
             success: function(data) {
                 let pageInfo = data.pageInfo;
@@ -53,7 +88,11 @@ $(function(){
         var html = '';
         reviews.forEach(function(review) {
             html += '<div class="col-md-3" style="margin-top: 20px;">' +
-                        '<div class="card">' +
+                        '<div class="card" style="position: relative;">' +
+                        '<div style="position: absolute; top: 10px; left: 10px; color: grey;" class="heart">' + 
+                        '<input type="hidden" class="review_idx" value="' + review.review_idx + '">' +
+                        '<i class="fa-regular fa-heart"></i>' +
+                        '</div>' +
                             '<img src="./resources/main_images/rewiewCar1.png" class="card-img-top" alt="리뷰 이미지 1" width="300" height="300">' +
                             '<div class="card-body">' +
                                 '<h5 class="card-title">';
@@ -109,6 +148,7 @@ $(function(){
 </head>
 <body>
 	<header><jsp:include page="../inc/top.jsp"></jsp:include></header>
+	
 	<div class="container">
 		<!-- ? -->
 		<c:set var="pageNum" value="${empty param.pageNum ? 1 : param.pageNum }"/>
@@ -129,7 +169,19 @@ $(function(){
     		<c:forEach var="review" items="${reviewList }">
 	        	<div class="col-md-3" style="margin-top: 20px;">
 	        		<div class="card" style="position: relative;">
-	        			<div style="position: absolute; top: 10px; left: 10px; color: grey;" class="heart"><i class="fa-regular fa-heart"></i></div>
+	        			<div style="position: absolute; top: 10px; left: 10px; color: grey;" class="heart">
+	        				<input type="hidden" class="review_idx" value="${review.review_idx }">
+	        					<c:choose>
+	        						<c:when test="${not empty review.member_id && review.member_id eq member_id }">
+	        							<i class="fa-solid fa-heart" style="color: red;"></i>
+	        						</c:when>
+	        						<c:otherwise>
+	        							<i class="fa-regular fa-heart" style="color: gray;"></i>
+	        						</c:otherwise>
+	        					</c:choose>
+	        							
+		        						
+	        			</div>
 	                	<img src="./resources/main_images/rewiewCar1.png" class="card-img-top" alt="리뷰 이미지 1" width="300" height="300">
 	                    <div class="card-body">
 	                    	

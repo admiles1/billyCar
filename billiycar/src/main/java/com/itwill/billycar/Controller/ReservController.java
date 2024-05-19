@@ -20,6 +20,7 @@ import com.itwill.billycar.service.ReservService;
 import com.itwill.billycar.service.ReviewService;
 import com.itwill.billycar.vo.CarReviewVO;
 import com.itwill.billycar.vo.CarVO;
+import com.itwill.billycar.vo.HeartVO;
 import com.itwill.billycar.vo.PageInfo;
 import com.itwill.billycar.vo.ReservVO;
 import com.itwill.billycar.vo.ReviewVO;
@@ -237,6 +238,7 @@ public class ReservController {
 		if(endPage > maxPage) {
 			endPage = maxPage;
 		}
+		
 		
 		System.out.println("option : " + option);
 		model.addAttribute("reviewList", reviewList);
