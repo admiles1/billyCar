@@ -12,10 +12,15 @@
     </select>
     
     <select id="selcetMemberQna" resultType="com.itwill.billycar.vo.QnaVO">
-		SELECT *, 
-			 ROW_NUMBER() OVER (ORDER BY qna_date DESC) AS new_qna_idx
+<!-- 		SELECT *,  -->
+<!-- 			 ROW_NUMBER() OVER (ORDER BY qna_date DESC) AS new_qna_idx -->
+<!-- 		FROM qna -->
+<!-- 		WHERE qna_writer = #{memberId} -->
+SELECT *
 		FROM qna
 		WHERE qna_writer = #{memberId}
+		ORDER BY qna_idx DESC
+		LIMIT #{startRow}, #{listLimit}
 	</select>
     
 <!--     <select id="selcetMemberQna" resultMap="qnaResultMap" parameterType="map"> -->
@@ -149,5 +154,11 @@
 				, default
 		)
 	</insert>
+	
+	<select id="selectQnaListCount" resultType="int">
+		SELECT COUNT(*)
+		FROM qna
+		WHERE qna_writer =#{writer}
+	</select>
 	
 </mapper>

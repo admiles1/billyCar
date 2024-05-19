@@ -189,11 +189,35 @@ public class MypageController {
 	
 	@GetMapping("MyInquiry")
     public String MyInquiry(@RequestParam(defaultValue = "1") int pageNum, 
-    						Model model) {
+    						Model model, QnaVO qna) {
+		// 페이징 
+		int listLimit = 10;
+		int startRow = (pageNum-1)*listLimit;
+		// 1) 전체 게시물 수 조회
+		String writer = (String)session.getAttribute("member_id");
+//				System.out.println("누구"+writer);
+		int listCount = service.getQnaListCount(writer);
+//				System.out.println(listCount);
+		int pageListLimit = 3;
+		
+		//----------------------------------------------------------------
+		int maxPage = listCount/listLimit + (listCount%listLimit > 0 ? 1 : 0);
+		System.out.println(maxPage);
+		//----------------------------------------------------------------
+		//시작페이지 설정
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		//끝페이지 설정
+		int endPage = startPage + pageListLimit - 1;
+				
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		model.addAttribute("pageInfo", new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage));
 		String MemberId = (String)session.getAttribute("member_id");
-		List<QnaVO> qnaList = service.getMemberQna(MemberId);
+		List<QnaVO> qnaList = service.getMemberQna(startRow, listLimit, MemberId);
 		model.addAttribute("qna", qnaList);
-        System.out.println("문의 내역");
+//        System.out.println("문의 내역");
         return "mypage/page/Mypage_Inquiry";
     }
 	

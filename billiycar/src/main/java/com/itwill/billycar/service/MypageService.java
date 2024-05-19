@@ -25,8 +25,8 @@ public class MypageService {
         return mapper.selectMemberInfo(memberId);
     }
 
-	public List<QnaVO> getMemberQna(String memberId) {
-		return mapper.selcetMemberQna(memberId);
+	public List<QnaVO> getMemberQna(int startRow, int listLimit, String memberId) {
+		return mapper.selcetMemberQna(memberId, startRow, listLimit);
 	}
 	
 	public int registLicense(LicenseVO license) {
@@ -85,6 +85,10 @@ public class MypageService {
 
 	public int couponExist(String coupon_code) {
 		return mapper.selectCouponCode(coupon_code);
+	}
+
+	public int getQnaListCount(String writer) {
+		return mapper.selectQnaListCount(writer);
 	}
 
 //	public List<QnaVO> getMemberQna(String memberId, int pageNum) {
