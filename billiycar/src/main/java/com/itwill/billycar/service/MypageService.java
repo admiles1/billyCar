@@ -11,6 +11,7 @@ import com.itwill.billycar.vo.CouponIssueVO;
 import com.itwill.billycar.vo.CouponVO;
 import com.itwill.billycar.vo.LicenseVO;
 import com.itwill.billycar.vo.MemberVO;
+import com.itwill.billycar.vo.PageInfo;
 import com.itwill.billycar.vo.QnaVO;
 
 @Service
@@ -24,13 +25,9 @@ public class MypageService {
         return mapper.selectMemberInfo(memberId);
     }
 
-	public List<QnaVO> getMemberQna(String memberId) {
-		return mapper.selcetMemberQna(memberId);
+	public List<QnaVO> getMemberQna(int startRow, int listLimit, String memberId) {
+		return mapper.selcetMemberQna(memberId, startRow, listLimit);
 	}
-	
-//	public List<QnaVO> getMemberQna(String memberId, int startRow, int listLimit) {
-//		return mapper.selectMemberQna(memberId, startRow, listLimit);
-//	}
 	
 	public int registLicense(LicenseVO license) {
 		return mapper.insertLicense(license);
@@ -90,6 +87,19 @@ public class MypageService {
 		return mapper.selectCouponCode(coupon_code);
 	}
 
+	public int getQnaListCount(String writer) {
+		return mapper.selectQnaListCount(writer);
+	}
+
+//	public List<QnaVO> getMemberQna(String memberId, int pageNum) {
+//		return mapper.selcetMemberQna(memberId, pageNum);
+//	}
+
+//	public PageInfo getPageInfo(String memberId, int pageNum) {
+//		return null;
+//	}
+
+	
 
 
 

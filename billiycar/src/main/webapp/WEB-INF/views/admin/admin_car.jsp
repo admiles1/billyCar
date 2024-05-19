@@ -63,12 +63,12 @@
                         <h1 class="h2">차량 목록 조회</h1>
                     </div>
                     <form class="search-container" id="searchForm">
-                        <input type="text" id="searchKeyword" class="form-control" placeholder="검색어 입력">
+                        <input type="text" id="searchKeyword" class="form-control" placeholder="검색어 입력" value="${param.searchKeyword}">
                         <select id="searchType" class="form-control">
                             <option value="">전체</option>
-                            <option value="brand">제조사</option>
-                            <option value="model">모델</option>
-                            <option value="number">차량번호</option>
+                            <option value="brand" <c:if test="${param.searchType eq 'brand'}">selected</c:if>>제조사</option>
+                            <option value="model" <c:if test="${param.searchType eq 'model'}">selected</c:if>> 모델</option>
+                            <option value="number" <c:if test="${param.searchType eq 'number'}">selected</c:if>>차량번호</option>
                         </select>
                         <button type="button" class="btn btn-primary" onclick="searchCars()">검색</button>
                     </form>
@@ -153,7 +153,7 @@
 //         		type : "POST",
 //         		url : "searchCars",
 //         		data : category = 제조사 / 모델 판별
-                      // text 
+//                       text 
 //         	});
 //         }
     </script>

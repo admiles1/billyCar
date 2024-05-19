@@ -12,26 +12,30 @@
     </select>
     
     <select id="selcetMemberQna" resultType="com.itwill.billycar.vo.QnaVO">
-		SELECT *, 
-			 ROW_NUMBER() OVER (ORDER BY qna_date DESC) AS new_qna_idx
+<!-- 		SELECT *,  -->
+<!-- 			 ROW_NUMBER() OVER (ORDER BY qna_date DESC) AS new_qna_idx -->
+<!-- 		FROM qna -->
+<!-- 		WHERE qna_writer = #{memberId} -->
+SELECT *
 		FROM qna
 		WHERE qna_writer = #{memberId}
+		ORDER BY qna_idx DESC
+		LIMIT #{startRow}, #{listLimit}
 	</select>
     
-<!--    <select id="selcetMemberQna" resultType="com.itwill.billycar.vo.QnaVO"> -->
-<!-- 		 <![CDATA[ -->
-<!--     SELECT * FROM ( -->
-<!--         SELECT  -->
-<!--             q.*, -->
-<!--             ROW_NUMBER() OVER (ORDER BY q.qna_date DESC) AS row_num -->
-<!--         FROM qna q -->
-<!--         WHERE q.qna_writer = #{memberId} -->
-<!--     ) AS qna_with_rownum -->
-<!--     WHERE row_num BETWEEN #{startRow} AND #{endRow} -->
-<!--     ]]> -->
-<!-- 	</select> -->
-    
-    
+<!--     <select id="selcetMemberQna" resultMap="qnaResultMap" parameterType="map"> -->
+<!--     SELECT *,  -->
+<!--          ROW_NUMBER() OVER (ORDER BY qna_date DESC) AS new_qna_idx -->
+<!--     FROM qna -->
+<!--     WHERE qna_writer = #{memberId} -->
+<!--     ORDER BY qna_date DESC -->
+<!--     OFFSET ${(pageNum - 1) * 10} ROWS FETCH NEXT 10 ROWS ONLY -->
+<!-- </select> -->
+
+<select id="selectQnaCount" resultType="int" parameterType="String">
+    SELECT COUNT(*) FROM qna WHERE qna_writer = #{memberId}
+</select>	
+    	
     <insert id="insertLicense">
     	INSERT INTO license
     	VALUES (
@@ -150,5 +154,11 @@
 				, default
 		)
 	</insert>
+	
+	<select id="selectQnaListCount" resultType="int">
+		SELECT COUNT(*)
+		FROM qna
+		WHERE qna_writer =#{writer}
+	</select>
 	
 </mapper>

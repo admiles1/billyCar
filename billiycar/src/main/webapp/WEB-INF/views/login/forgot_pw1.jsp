@@ -11,7 +11,7 @@
 <header><jsp:include page="../inc/top.jsp"></jsp:include></header>
 
 <body>
-	<form action="forgot_pw" method="post">
+	<form action="forgot_pw_step1" method="post">
 	    <div class="container">
 	        <div class="button">
 	            <a href="forgot_id" class="forgot_id">아이디 찾기</a> |

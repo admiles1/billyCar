@@ -1,6 +1,5 @@
 package com.itwill.billycar.Controller;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -40,8 +39,9 @@ public class PaymentController {
 						, Model model
 						, HttpSession session
 						, ReservVO reserv
+						, @RequestParam(defaultValue = "1")int totalAmount
             			, @RequestParam(defaultValue = "") Map<String, String> map) {
-		//TODO 카넘버로 조회하기 컬럼은 car_dayprice, car_hourprice, car_img / * 
+		// 카넘버로 조회하기 컬럼은 car_dayprice, car_hourprice, car_img / * 
 		// WHERE car_number = car.getCar_number 받아간값
 		// map.get("schedule").split("\\,") 로 짜른 스트링배열 컨트롤러에서 가공or자바스크립터에서 가공
 		System.out.println(session.getAttribute("member_id"));
@@ -54,13 +54,23 @@ public class PaymentController {
 		
 		CarVO dbcar = paymentService.getCarInfo(car);
 		model.addAttribute("car", dbcar);
+		model.addAttribute("totalAmount", totalAmount);
+		
 		return "payment/paymentPage";
 	}
 	
 	@PostMapping("payment")
-	public String paymentPro(CarVO car , Model model, MemberVO member, PaymentVO payment
+	public String paymentPro(CarVO car , Model model, MemberVO member, PaymentVO payment,
+							@RequestParam(defaultValue = "totalAmount")int totalAmount
 							, @RequestParam(defaultValue = "") Map<String, String> map) {
-		int paymentCount = paymentService.regisetPayment(payment);
+		System.out.println("payment 포스트맵핑댐");
+		System.out.println(totalAmount);
+		payment.setPayment_result_amount(totalAmount);
+		System.out.println("결제값 왔나");
+		payment.setPayment_method(1); // 예시: 결제 수단 설정
+	    payment.setPayment_status(1); // 예시: 결제 상태 설정
+	    
+		int paymentCount = paymentService.registerPayment(payment);
 		
 		if(paymentCount > 0) {
 			
@@ -70,6 +80,8 @@ public class PaymentController {
 			model.addAttribute("targetURL", "payment");
 			return "err/fail";
 		}
+		
+		
 		
 	}
 	

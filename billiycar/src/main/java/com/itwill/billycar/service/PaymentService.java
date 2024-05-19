@@ -23,7 +23,8 @@ public class PaymentService {
 		return mapper.salesMonthSelect();
 	}
 
-	public int regisetPayment(PaymentVO payment) {
+	public int registerPayment(PaymentVO payment) {
+		System.out.println("registPayment 서비스 까진옴");
 		return mapper.insertPayment(payment);
 	}
 

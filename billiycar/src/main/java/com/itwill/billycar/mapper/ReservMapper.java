@@ -13,7 +13,8 @@ import com.itwill.billycar.vo.ReservVO;
 
 @Mapper
 public interface ReservMapper {
-	List<Map<String, String>> selectCarList(@Param("car")CarVO car, @Param("reserv")ReservVO reserv);
+	List<Map<String, String>> selectCarList(@Param("car")CarVO car, @Param("reserv")ReservVO reserv
+											, @Param("startRow") int startRow, @Param("listLimit") int listLimit);
 	
 	Map<String, String> selectCar(@Param("car")CarVO car, @Param("reserv")ReservVO reserv);
 	

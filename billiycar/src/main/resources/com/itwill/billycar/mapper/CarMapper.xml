@@ -35,11 +35,8 @@
 		   AND fuel.name IN (${car.car_fuel})</if>
 		 <if test="car.car_type != null"> 
 		   AND type.name IN (${car.car_type})</if>
-		 <if test="car.car_model != null">  
-		   AND model.name = #{car.car_model}</if>
 		 GROUP BY model.name
-		 <if test="car.car_model != null"> 
-		 LIMIT 1</if>
+	     LIMIT #{startRow} , #{listLimit}
 	</select>
 	
 	<select id="selectCar" resultType="hashmap" parameterType="map">

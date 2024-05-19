@@ -47,8 +47,20 @@
   			<div class = "view_info">
 				<em><b>작성자</b></em>
 				<em>${notice.board_writer}</em>
-				<input type="checkbox" name="important" value="important" style="margin-left:50px"> 주요공지
+				<input type="checkbox" name="important" value="important" style="margin-left:50px" id="importantCheckbox"> 주요공지
   			</div>
+  			
+  			 <script>
+		        // URLSearchParams 객체를 사용하여 URL 쿼리 파라미터를 읽어옵니다.
+		        const urlParams = new URLSearchParams(window.location.search);
+		        const importantValue = urlParams.get('important');
+// 		        alert(importantValue);
+		
+		        // 파라미터 값이 'important'인 경우 체크박스를 체크 상태로 설정합니다.
+		        if (importantValue === '1') {
+		            document.getElementById('importantCheckbox').checked = true;
+		        }
+		    </script>
   			
   			<div class = "view_cont">
 				<textarea rows="20" cols="150" id="summernote" name = "board_content" >${notice.board_content}</textarea>

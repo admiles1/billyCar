@@ -298,6 +298,13 @@
 		WHERE code = #{code}
 	</delete>
 	
+	<!-- 같은 모델의 차량들만 조회 -->
+	<select id="selectCarModel" resultType="com.itwill.billycar.vo.CarVO">
+		SELECT *
+		FROM car
+		WHERE car_model = #{modelCode}
+	</select>
+	
 </mapper>
 
 

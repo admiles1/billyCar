@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -9,13 +10,64 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
-        .reserved { color: red; font-weight: bold; }
-        .available { color: green; font-weight: bold; }
-        .nav-link { white-space: nowrap; }
-        .input-group { width: 40%; }
-        .form-select { margin-right: 2px; }
-        .table thead th { cursor: pointer; }
-        .pagination { justify-content: center; }
+        .card-group { margin-bottom: 20px; }
+        .card { 
+            flex: 1 0 21%; 
+            margin: 10px; 
+            cursor: pointer; 
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            border: none;
+        }
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+        .card-body {
+            text-align: center;
+        }
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+        }
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        .container-fluid {
+            margin-top: 20px;
+        }
+        .h2 {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        .car-details {
+            display: none;
+            margin-top: 10px;
+            transition: max-height 0.5s ease-out;
+            overflow: hidden;
+        }
+        .car-details.show {
+            display: block;
+            max-height: 500px; /* 충분히 큰 값으로 설정 */
+        }
+        .car-list {
+            list-style: none;
+            padding: 0;
+        }
+        .car-list li {
+            padding: 10px;
+            margin: 5px 0;
+            background: #f8f9fa;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            cursor: pointer;
+        }
+        .car-list li:hover {
+            background: #e9ecef;
+        }
     </style>
 </head>
 <body>
@@ -30,102 +82,84 @@
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">예약 차량 관리</h1>
                 </div>
-                <div class="input-group mb-3">
-                    <select class="form-select" id="searchType">
-                        <option value="carNumber">차량 번호</option>
-                        <option value="model">모델</option>
-                        <option value="reserver">예약자</option>
-                    </select>
-                    <input type="text" class="form-control" id="searchInput" placeholder="검색어를 입력하세요">
-                    <button class="btn btn-outline-secondary" type="button" onclick="searchCar()">검색</button>
+                <div id="carManufacturers">
+                    <!-- 제조사 반복문 시작 -->
+                    <c:forEach var="brand" items="${brands}">
+                        <div class="mb-4">
+                            <h2>${brand.name}</h2>
+                            <div class="card-group">
+                                <!-- 모델 반복문 시작 -->
+                                <c:forEach var="model" items="${models}">
+                                    <c:if test="${model.code.startsWith(brand.code)}">
+                                        <div class="card" onclick="toggleCarDetails('${model.code}', '${model.name}', this)">
+                                            <div class="card-body">
+                                                <h5 class="card-title">${model.name}</h5>
+                                            </div>
+                                        </div>
+                                        <div class="car-details"></div>
+                                    </c:if>
+                                </c:forEach>
+                                <!-- 모델 반복문 끝 -->
+                            </div>
+                        </div>
+                    </c:forEach>
+                    <!-- 제조사 반복문 끝 -->
                 </div>
-                <div class="table-responsive">
-                    <table class="table table-striped table-sm">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th onclick="sortTable(1)">차량 번호</th>
-                                <th onclick="sortTable(2)">모델</th>
-                                <th onclick="sortTable(3)">상태</th>
-                                <th onclick="sortTable(4)">예약자</th>
-                                <th onclick="sortTable(5)">예약 날짜</th>
-                                <th onclick="sortTable(6)">예약 시간</th>
-                                <th>액션</th>
-                            </tr>
-                        </thead>
-                        <tbody id="carTableBody">
-                            <!-- 차량 데이터 하드코딩 -->
-                            <tr>
-                                <td>1</td>
-                                <td>34가1234</td>
-                                <td>현대 아반떼</td>
-                                <td class="reserved">예약됨</td>
-                                <td>홍길동</td>
-                                <td>2024-05-17</td>
-                                <td>10:00 - 12:00</td>
-                                <td><button class="btn btn-sm btn-danger">예약 취소</button></td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>56나5678</td>
-                                <td>기아 K5</td>
-                                <td class="available">이용 가능</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td><button class="btn btn-sm btn-success">예약 추가</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                    </ul>
-                </nav>
             </main>
         </div>
     </div>
 </main>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
-    function searchCar() {
-        var searchType = document.getElementById('searchType').value;
-        var searchInput = document.getElementById('searchInput').value.toLowerCase();
-        var table = document.getElementById('carTableBody');
-        var rows = table.getElementsByTagName('tr');
-        for (var i = 0; i < rows.length; i++) {
-            var cells = rows[i].getElementsByTagName('td');
-            var match = false;
-            if (searchType === 'carNumber' && cells[1].innerText.toLowerCase().includes(searchInput)) {
-                match = true;
-            } else if (searchType === 'model' && cells[2].innerText.toLowerCase().includes(searchInput)) {
-                match = true;
-            } else if (searchType === 'reserver' && cells[4].innerText.toLowerCase().includes(searchInput)) {
-                match = true;
-            }
-            rows[i].style.display = match ? '' : 'none';
+    function toggleCarDetails(modelCode, modelName, element) {
+        console.log("모델 코드: " + modelCode);
+        var carDetails = $(element).next('.car-details');
+        if (carDetails.hasClass('show')) {
+            // 이미 열려 있는 경우, 숨기기
+            carDetails.removeClass('show').slideUp();
+        } else {
+            // 닫혀 있는 경우, AJAX 요청을 통해 열기
+            $.ajax({
+                method: "POST",
+                url: "showCarDetails",
+                data: { modelCode: modelCode },
+                dataType: "json",
+                success: function(cars) {
+                    console.log("AJAX 요청 성공");
+
+                    // 기존 차량 정보 제거
+                    carDetails.remove();
+
+                    // 새로운 차량 정보 추가
+                    carDetails = $('<div class="car-details show"></div>');
+                    var carList = $('<ul class="car-list"></ul>');
+                    cars.forEach(function(car) {
+                        var listItem = $('<li>' + car.car_number + ' (' + modelName + ')</li>');
+                        listItem.on('click', function() {
+                            openCarReservationWindow(car.car_number);
+                        });
+                        carList.append(listItem);
+                    });
+                    carDetails.append(carList);
+
+                    // 선택한 카드 아래에 차량 정보 표시
+                    $(element).after(carDetails);
+                    carDetails.slideDown();
+                },
+                error: function(error) {
+                    console.error("AJAX 요청 실패: ", error);
+                    alert("차량 정보를 불러오는 데 실패했습니다.");
+                }
+            });
         }
     }
 
-    function sortTable(n) {
-        var table = document.querySelector("tbody");
-        var rows = Array.from(table.rows);
-        var isAscending = table.getAttribute("data-sort") === "asc";
-        rows.sort((rowA, rowB) => {
-            var cellA = rowA.cells[n].innerText.toLowerCase();
-            var cellB = rowB.cells[n].innerText.toLowerCase();
-            return isAscending ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
-        });
-        table.innerHTML = "";
-        rows.forEach(row => table.appendChild(row));
-        table.setAttribute("data-sort", isAscending ? "desc" : "asc");
+    function openCarReservationWindow(carNumber) {
+        console.log("차량 번호: " + carNumber);
+        var url = "carReservationDetails?carNumber=" + carNumber;
+        window.open(url, "_blank", "width=800,height=600");
     }
 </script>
 </body>

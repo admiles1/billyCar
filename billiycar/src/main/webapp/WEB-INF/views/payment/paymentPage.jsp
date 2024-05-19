@@ -69,7 +69,7 @@
 /*     flex: 1; */
 	}
 	/* 데스크탑용 사이드*/
- #paymentSide{   
+/* #paymentSide{   
   		position:fixed;   
    		right: 290px;; top:232px;   
    		width: 410px;   
@@ -80,9 +80,10 @@
    		border: 1px solid lightgray; 
    		border-radius: 10px; 
    		overflow-y: auto; 
-   	}  
+   	}  */
    	/*놑북용 사이드 */
-   	/*
+   	
+	
 	#paymentSide{  
  		position:fixed;  
   		left:1000px; top:140px;  
@@ -93,7 +94,7 @@
   		border: 1px solid lightgray;
   		border-radius: 10px;
    		overflows-y: auto; 
-  	} */
+  	} 
  /* 	#paymentSide{
 	  	position: fixed;  
 	    right: 120px; /* 화면의 오른쪽 끝에 위치하도록 설정 */
@@ -116,7 +117,21 @@
     padding: 0;
     display: flex;
     flex-direction: row-reverse;
-}
+	}
+	#dateDifferenceInput {
+/* 	align-content: right; */
+	text-align: right;
+	border: none;
+	}
+	#firstAmount{
+	text-align: right;
+	border: none;
+	}
+	#differenceday{
+	text-align: left;
+	border: none;
+/* 	width: 30px; */
+	}
  </style>
 </head>
 <body class="mine">
@@ -724,8 +739,13 @@
 				<br>
 				<h6><b>결제 정보</b></h6>
 				<div class="row">
-					<div class="col-3">대여금액</div>
-					<div class="col-9" align="right"><fmt:formatNumber value="${car.car_dayprice}" pattern="#,###"/></div>
+					<div class="col-3">
+						<input type="text" id="differenceday" readonly/>
+					</div>
+<%-- 					<div class="col-9" align="right"><fmt:formatNumber value="${car.car_dayprice}" pattern="#,###"/></div> --%>
+					<div class="col-9" align="right">
+						<input type="text" id="firstAmount" readonly/>
+					</div>
 					<div class="col-3">보험금액</div>
 <!-- 					<div class="col-9 incurance" id="insurance_price" align="right">0</div> -->
 					<div class="col-9 incurance" id="insurance_price" align="right">${empty param.insurance ? '(+)0' : param.insurance}</div>
@@ -733,15 +753,18 @@
 					<div class="col-9" align="right">할인금액 표시</div>
 					<hr>
 					<div class="col-3">결제 금액(VAT 포함)</div>
-					<div class="col-9" align="right"><input type="text" id="dateDifferenceInput" readonly /></div>
+					<div class="col-9"  align="right"><input type="text" id="dateDifferenceInput"  readonly/></div>
+					<div></div>
 <!-- 					<div id="dateDifference"> -->
-<!-- <!-- 						<input type="text" id="dateDifference" value="dateDifference"> --> -->
-<!-- <!-- 						<input type="text" id="dateDifferenceInput" readonly /> --> -->
+<!-- <!-- 						<input type="text" id="dateDifference" value="dateDifference">  -->
+<!-- <!-- 						<input type="text" id="dateDifferenceInput" readonly />  -->
 <!-- 					</div> -->
 				</div>
 				<br><br>
 				<form action="payment" method="post">
-					<input type="button" class="sub_btn w-100 btn btn-primary btn-lg" value="결제하기" onclick="startPayment();" >
+					<input type="hidden" id="totalAmount" name="totalAmount" value="0">
+<%-- 					<input type="hidden" name="carNumber" value="${car.car_number}"> --%>
+					<input type="submit" class="sub_btn w-100 btn btn-primary btn-lg" value="결제하기" onclick="startPayment();" >
 				</form>			
 			</div>
 			</div>
@@ -761,23 +784,24 @@
 //         let a = "mer_" + (new Date().getTime());
         
         function startPayment() {
+        	let totalAmount = document.getElementById('totalAmount').value;
             IMP.request_pay({
                 pg: "html5_inicis", // 결제 과정에 사용될 결제사 이니시스
                 pay_method: "card", // 결제 수단
 //                 merchant_uid: "payDone_" + new Date().getTime(), // 주문번호 어칼지 고민
                 name: "렌트카 예약", // 주문 명 '렌트카 되어있는 곳에 차명 따와야 할듯'
-                amount: 100, // 금액
+//                 amount: 100, // 금액
+                amount: totalAmount, // 찐 금액 이걸로하면 ㄹㅇ 차금액 나옴!
                 buyer_email: "${info.member_email}", // 구매자 이메일 필요한가 싶네
 //                 buyer_name: '홍길동', // 구매자 이름 가져오기
                 buyer_name: "${info.member_name}" // 구매자 이름 가져오기
 //                 buyer_tel: '010-1234-5678', // 구매자 전화번호 필요 하려나
 //                 buyer_addr: '서울특별시 강남구 삼성동', // 구매자 주소 필요 없을듯
 //                 m_redirect_url: 'http://localhost:8080/billycar/' // 모바일 결제시 리다이렉션될 URL이건 그냥 메인으로 보내면 될듯 이거안쓰고 보내도 될듯
-//                 m_redirect_url: 'http://www.naver.com' // 모바일 결제시 리다이렉션될 URL이건 그냥 메인으로 보내면 될듯 이거안쓰고 보내도 될듯
             }, function(rsp) {
                 if (rsp.success) {
                     alert("결제 성공");
-                    location.href ="paymentComplete";
+                    location.href ="./";
                 } else {
                     alert("결제 취소");
                     
@@ -792,11 +816,23 @@
         // 문서 로드 시 이벤트 리스너 추가
         document.addEventListener('DOMContentLoaded', function() {
             let radios = document.querySelectorAll('.insurance_data'); // 모든 라디오 버튼을 선택
+            let previousInsuranceCost = 0;
+            
             radios.forEach(function(radio) {
                 radio.addEventListener('change', function() { // 라디오 버튼 변경 이벤트
                     if (this.checked) { // 라디오 버튼이 선택된 경우
-                        let price = this.value; // 선택된 라디오 버튼의 값 가져오기
-                        document.getElementById('insurance_price').innerText = '(+)' + price; // 값을 div에 표시
+						let price = parseInt(this.value); // 선택된 라디오 버튼의 값 가져오기
+		
+		                // P1의 입력 값 업데이트
+		                let inputField = document.getElementById('dateDifferenceInput');
+						let existingTotal = parseInt(inputField.value.replace(/,/g, ''));
+						let newTotal = existingTotal - previousInsuranceCost + price;
+						
+						inputField.value = newTotal.toLocaleString(); // 총액을 포맷하여 표시
+						document.getElementById('totalAmount').value = newTotal;
+						 
+		                previousInsuranceCost = price;
+						
                     }
                 });
             });
@@ -806,7 +842,7 @@
 	
 	
 	<!-- 추가옵션 스크립트 -->
-		 <script>
+<!--  		 <script>
         function updateOptionPrice() {
             let checkboxes = document.querySelectorAll('input[name="opt_chk"]:checked'); // 체크된 모든 체크박스 선택
             let total = 0;
@@ -826,13 +862,14 @@
             updateOptionPrice(); // 페이지 로드 시 초기값 업데이트
         });
     </script>
-		
+-->	
 	<!-- 날짜 계산 스크립트 -->
 	 
 <%--      <c:set var="startDate" value="${fn:split(param.schedule, ',')[0]}"/> --%>
 <%--      <c:set var="endDate" value="${fn:split(param.schedule, ',')[1]}"/> --%>
     <!-- 날짜 계산 2 -->
 <!--     <script type="text/javascript"> -->
+<!--  
 // // 	    let startDate1 = "startDate";
 // // 	    let endDate1 = "endDate";
 // 	    let startDate1 = "${fn:split(param.schedule, ',')[0]}";
@@ -862,38 +899,58 @@
 // 	    window.onload = function() {
 // 	        document.getElementById('dateDifference').innerText = differenceString;
 // // 	        document.getElementById('dateDifferenceInput').value = differenceString;
-// 	    };
+// 	    };-->
 <!-- 	</script>		 -->
 
 	<script type="text/javascript">
-    let startDate1 = "${fn:split(param.schedule, ',')[0]}";
-    let endDate1 = "${fn:split(param.schedule, ',')[1]}";
+	    let startDate1 = "${fn:split(param.schedule, ',')[0]}";
+	    let endDate1 = "${fn:split(param.schedule, ',')[1]}";
+		
+	    // 문자열 형식 변경
+	    let startDate2 = startDate1.replace(" ", "T") + ":00:00";
+	    let endDate2 = endDate1.replace(" ", "T") + ":00:00";
+	
+	    // Date 객체로 변환
+	    let startDateObject = new Date(startDate2);
+	    let endDateObject = new Date(endDate2);
+	
+	    // 두 날짜 간의 차이를 밀리초 단위로 계산
+	    let differenceInMilliseconds = endDateObject - startDateObject;
+	
+	    // 밀리초를 일, 시간, 분, 초 단위로 변환
+	    let differenceInDays = Math.floor(differenceInMilliseconds / (1000 * 60 * 60 * 24));
+	    let differenceInHours = Math.floor((differenceInMilliseconds % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+	//     let differenceInMinutes = Math.floor((differenceInMilliseconds % (1000 * 60 * 60)) / (1000 * 60));
+	//     let differenceInSeconds = Math.floor((differenceInMilliseconds % (1000 * 60)) / 1000);
+	
+	    // 결과 문자열 생성
+	    let differenceday = "대여금액(" + differenceInDays + "일 " + differenceInHours+  "시간)" ;
+	    let differenceString = 0;
+	    if(differenceInHours/4 > 1){
+		    differenceString = differenceInDays * ${car.car_dayprice} + ${car.car_dayprice}; 
+	    } else{
+	    	differenceString = differenceInDays * ${car.car_dayprice} + differenceInHours * ${car.car_hourprice};
+	    }
+	    
+	    // 페이지 로드 후 input 태그에 결과 표시
+	    window.onload = function() {
+	        document.getElementById('differenceday').value = differenceday.toLocaleString(); 
+	        document.getElementById('firstAmount').value = differenceString.toLocaleString(); 
+	        document.getElementById('dateDifferenceInput').value = differenceString.toLocaleString(); // toLocaleString() 이거 숫자표시 쉼표 넣어줌
+	    };
+	</script>
+	
+	<script type="text/javascript">
+	function submitPaymentForm() {
+	    // 필요한 데이터 설정
+	    let totalAmount = document.getElementById('totalAmount').value;
+	    let form = document.getElementById('paymentForm');
+	    form.totalAmount.value = totalAmount;
 
-    // 문자열 형식 변경
-    let startDate2 = startDate1.replace(" ", "T") + ":00:00";
-    let endDate2 = endDate1.replace(" ", "T") + ":00:00";
-
-    // Date 객체로 변환
-    let startDateObject = new Date(startDate2);
-    let endDateObject = new Date(endDate2);
-
-    // 두 날짜 간의 차이를 밀리초 단위로 계산
-    let differenceInMilliseconds = endDateObject - startDateObject;
-
-    // 밀리초를 일, 시간, 분, 초 단위로 변환
-    let differenceInDays = Math.floor(differenceInMilliseconds / (1000 * 60 * 60 * 24));
-    let differenceInHours = Math.floor((differenceInMilliseconds % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    let differenceInMinutes = Math.floor((differenceInMilliseconds % (1000 * 60 * 60)) / (1000 * 60));
-    let differenceInSeconds = Math.floor((differenceInMilliseconds % (1000 * 60)) / 1000);
-
-    // 결과 문자열 생성
-    let differenceString = "두 날짜의 차이: ${differenceInDays}일  ${differenceInHours} 시간 ";
-
-    // 페이지 로드 후 input 태그에 결과 표시
-    window.onload = function() {
-        document.getElementById('dateDifferenceInput').value = differenceString;
-    };
-</script>
+	    // 폼 제출
+	    form.submit();
+	}
+	</script>
 	
     <!-- 아임포트 스크립트 추가 -->
 <!--     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script> -->

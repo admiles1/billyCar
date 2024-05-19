@@ -98,7 +98,7 @@ public class CsController {
 	
 	// 글 작성 처리
 	@PostMapping("noticeWrite")
-	public String noticePro(NoticeVO notice, Model model, String important) {
+	public String noticePro(NoticeVO notice, Model model,  @RequestParam(defaultValue = "") String important) {
 		// 작성자id에 admin 추가
 		String id = (String)session.getAttribute("member_id");
 		
