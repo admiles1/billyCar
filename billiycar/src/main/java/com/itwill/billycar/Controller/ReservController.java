@@ -2,6 +2,7 @@ package com.itwill.billycar.Controller;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,9 +21,16 @@ import com.itwill.billycar.service.ReservService;
 import com.itwill.billycar.service.ReviewService;
 import com.itwill.billycar.vo.CarReviewVO;
 import com.itwill.billycar.vo.CarVO;
+<<<<<<< HEAD
+import com.itwill.billycar.vo.MemberVO;
+=======
+import com.itwill.billycar.vo.HeartVO;
+>>>>>>> branch 'main' of https://github.com/admiles1/billyCar.git
 import com.itwill.billycar.vo.PageInfo;
 import com.itwill.billycar.vo.ReservVO;
 import com.itwill.billycar.vo.ReviewVO;
+
+import retrofit2.http.GET;
 
 @Controller
 public class ReservController {
@@ -33,20 +41,41 @@ public class ReservController {
 	// 조건검색하지않고 예약페이지 진입시 (모든 차량검색, 페이징처리)
 	
 	@GetMapping("reservation")
-	public String reservationget(Model model) {
+	public String reservationget(CarVO car
+								, @RequestParam(defaultValue = "") Map<String,String> map 
+								, Model model
+								, @RequestParam(defaultValue = "1") int pageNum) {
+		
+		LocalDateTime now = LocalDateTime.now();
+		// 접속한 날짜 기준 다음날 06시 ~ 07시
+		// pickupDate 기준 날 + 1 06시
+		// returnDate 기준날  + 2 07시
+		ReservVO reserv = new ReservVO();
+		reserv.setReserv_pickupdate(now.withDayOfMonth(now.getDayOfMonth() +1).withHour(6).withMinute(0).withSecond(0).withNano(0));
+		reserv.setReserv_returndate(now.withDayOfMonth(now.getDayOfMonth() +2).withHour(7).withMinute(0).withSecond(0).withNano(0));
+		
+		 // 한 번 검색당 4개씩 보여주기
+	    int listLimit = 4;
+	    int startRow = (pageNum - 1) * listLimit;
+		
+		// 자동차검색
+		List<Map<String, String>> cars = reservService.getCarList(car, reserv, startRow , listLimit);
+		// 공통 코드에서 type, fule 조회해서 가져오기 TODO = 줄일것
+		model.addAttribute("schedule", map);
 		model.addAttribute("types", adminService.getTypes());
 		model.addAttribute("fuels", adminService.getFuels());
 		model.addAttribute("BusinessHours", adminService.getBusinesshours());
-		model.addAttribute("needSearch", true);
+		model.addAttribute("cars", cars);
 		
 		return "reservation/reservation";
 	}
 	
-	// 메인페이지 조건을 입력하였을 시 (조건에 맞는 차량 검색 및 받아온 값 표시)
+	// 메인페이지에서 조건을 입력하였을 시 (조건에 맞는 차량 검색 및 받아온 값 표시)
 	@PostMapping("reservation")
 	public String reservationpost(CarVO car
 								, @RequestParam(defaultValue = "") Map<String,String> map 
-								, Model model) {
+								, Model model
+								, @RequestParam(defaultValue = "1")int pageNum) {
 		
 		ReservVO reserv = new ReservVO();
 		String pickupdate = map.get("reserv_pickupdate") + " " + map.get("pickupTime");
@@ -81,25 +110,31 @@ public class ReservController {
 			car.setCar_type(searchMethod(carType));
 		} 
 		
+		 // 한 번 검색당 4개씩 보여주기
+	    int listLimit = 4;
+	    int startRow = (pageNum - 1) * listLimit;
+		
 		// 자동차검색
-		List<Map<String, String>> cars = reservService.getCarList(car, reserv);
+		List<Map<String, String>> cars = reservService.getCarList(car, reserv, startRow , listLimit);
 		// 공통 코드에서 type, fule 조회해서 가져오기 TODO = 줄일것
 		model.addAttribute("schedule", map);
 		model.addAttribute("types", adminService.getTypes());
 		model.addAttribute("fuels", adminService.getFuels());
 		model.addAttribute("BusinessHours", adminService.getBusinesshours());
-		
 		model.addAttribute("cars", cars);
 		
 		return "reservation/reservation";
 	}
 	
+	// ajax 차량검색
 	@ResponseBody
 	@PostMapping("SelectCarList")
 	public List<Map<String, String>> SelectCarList(CarVO car
 							, @RequestParam(defaultValue = "") Map<String, String> map 
-				            , Model model) {
-		
+				            , Model model
+				            , @RequestParam(defaultValue = "1")int pageNum) {
+		System.out.println(map);
+		pageNum = 1;
 		ReservVO reserv = new ReservVO();
 		String pickupdate = map.get("reserv_pickupdate") + " " + map.get("pickupTime");
 		String returndate = map.get("reserv_returndate") + " " + map.get("returnTime");
@@ -120,9 +155,58 @@ public class ReservController {
 			car.setCar_type(searchMethod(carType));
 		} 
 		
-		List<Map<String, String>> cars = reservService.getCarList(car, reserv);
+		int listLimit = 4;
+	    int startRow = (pageNum - 1) * listLimit;
+		List<Map<String, String>> cars = reservService.getCarList(car, reserv, startRow, listLimit);
+		
 		return cars;
 	}
+	
+	
+	// 차량 더보기
+	@ResponseBody
+	@PostMapping("MoreList")
+	public List<Map<String, String>> moreList(CarVO car
+											, @RequestParam(defaultValue = "") Map<String, String> map 
+											, Model model
+											, @RequestParam(defaultValue = "1")int pageNum) {
+		System.out.println("========================================================");
+		ReservVO reserv = new ReservVO();
+		String pickupdate = map.get("reserv_pickupdate") + " " + map.get("pickupTime");
+		String returndate = map.get("reserv_returndate") + " " + map.get("returnTime");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH");
+		reserv.setReserv_pickupdate(LocalDateTime.parse(pickupdate, formatter));
+		reserv.setReserv_returndate(LocalDateTime.parse(returndate, formatter));
+		
+		String carType = car.getCar_type();
+		String carFuel = car.getCar_fuel();
+		
+		if(carType.equals("")) {
+			car.setCar_type(null);
+			carType = null;
+		}
+		
+		if(carFuel.equals("")) {
+			car.setCar_fuel(null);
+			carFuel = null;
+		}
+		
+		if(carType != null && carFuel == null) { 	// 자동차타입 조건만 존재 할 경우
+			// search메소드로 스트링 포맷 변환 후 초기화
+			car.setCar_type(searchMethod(carType));
+		} else if (carType == null && carFuel != null) { // 자동차연료 조건만 존재 할 경우
+			car.setCar_fuel(searchMethod(carFuel));
+		} else if (carType != null && carFuel != null) { // 두 가지 모두 검색 할 경우
+			car.setCar_fuel(searchMethod(carFuel));
+			car.setCar_type(searchMethod(carType));
+		} 
+		
+		int listLimit = 4;
+		int startRow = (pageNum - 1) * listLimit;
+		List<Map<String, String>> cars = reservService.getCarList(car, reserv, startRow, listLimit);
+
+		return cars;
+	} // 차량 더보기
 	
 	//상세 차량 조회 페이지
 	@GetMapping("detail")
@@ -189,20 +273,6 @@ public class ReservController {
 		return "reservation/reserv_detail";
 	}
 	
-	
-	// 호출용 메소드
-		public String searchMethod(String option) {
-			String[] strArr = option.split(",");
-			StringJoiner options = new StringJoiner(",");
-			for(String s : strArr) {
-				s = "'" + s + "'";
-				options.add(s);
-			}
-			return options.toString();
-		}
-	
-		
-		
 	@GetMapping("review")
 	public String review(Model model,
 					@RequestParam(defaultValue = "latest") String option,
@@ -237,6 +307,7 @@ public class ReservController {
 		if(endPage > maxPage) {
 			endPage = maxPage;
 		}
+		
 		
 		System.out.println("option : " + option);
 		model.addAttribute("reviewList", reviewList);
@@ -288,6 +359,17 @@ public class ReservController {
 	    return data;
 	}
 	
+	// 맵핑메소드는 이 위에
+	// 호출용 메소드
+	public String searchMethod(String option) {
+		String[] strArr = option.split(",");
+		StringJoiner options = new StringJoiner(",");
+		for(String s : strArr) {
+			s = "'" + s + "'";
+			options.add(s);
+		}
+		return options.toString();
+	}
 	
 	
 }

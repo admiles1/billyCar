@@ -285,7 +285,6 @@ public class MemberController {
 	@GetMapping("forgot_pw_step3")
 	public String forgot_pw3(MemberVO member, Model model) {
 		model.addAttribute("member_id", member.getMember_id());
-		System.out.println("655555555555555555" + member.getMember_id());
 		return "login/forgot_pw3";
 	}
 	
@@ -293,7 +292,7 @@ public class MemberController {
 	public String forgot_pw3Pro(MemberVO member
 								, BCryptPasswordEncoder passwordEncoder
 					            , Model model
-					            , String member_passwd , MypageService myService) {
+					            , String member_passwd) {
 //		MypageService mypageService = new MypageService();
 		
 		System.out.println("sadflhawrilfhqeiorashgiuewqkarshdgilqwrheasdfilqwrehfd" + member);
@@ -302,10 +301,8 @@ public class MemberController {
 		member.setMember_passwd(securePasswd);
 		
 		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + member);
-//		if(mypageService.modifyPasswd(member) <= 0) {
 		int updateCnt = service.modifyPasswd(member);
-//		int updateCnt = myService.modifyPasswd(member);
-//		System.out.println("업데이트 카운트 " + updateCnt);
+		
 		if(updateCnt <= 0) {
 			model.addAttribute("msg", "비밀번호 변경 실패");
 			return "err/fail";

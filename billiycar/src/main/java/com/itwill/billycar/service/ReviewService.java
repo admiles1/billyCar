@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.itwill.billycar.mapper.ReviewMapper;
 import com.itwill.billycar.vo.CarReviewVO;
+import com.itwill.billycar.vo.HeartVO;
 import com.itwill.billycar.vo.ReviewVO;
 
 @Service
@@ -37,6 +38,32 @@ public class ReviewService {
 	public int selectAllReview() {
 		return mapper.selectAllReview();
 	}
+
+	public int updateReviewHeart(int review_idx, int count) {
+		return mapper.updateReviewHeart(review_idx,count);
+	}
+
+	public HeartVO selectHeart(int review_idx, String member_id) {
+		return mapper.selectHeart(review_idx,member_id);
+	}
+
+	public int insertHeart(int review_idx, String member_id) {
+		return mapper.insertHeart(review_idx,member_id);
+	}
+
+	public int deleteHeart(int review_idx, String member_id) {
+		return mapper.deleteHeart(review_idx,member_id);
+	}
+
+	public HeartVO heartStatus(int review_idx, String member_id) {
+		return mapper.selectheartStatus(review_idx,member_id);
+	}
+
+	
+
+	
+
+	
 
 
 }

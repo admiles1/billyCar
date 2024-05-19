@@ -15,8 +15,8 @@ import com.itwill.billycar.vo.ReservVO;
 public class ReservService {
 	@Autowired ReservMapper mapper;
 	
-	public List<Map<String, String>> getCarList(CarVO car, ReservVO reserv) {
-		return mapper.selectCarList(car, reserv);
+	public List<Map<String, String>> getCarList(CarVO car, ReservVO reserv, int startRow, int listLimit) {
+		return mapper.selectCarList(car, reserv, startRow , listLimit);
 	}
 	
 	public Map<String, String> getCar(CarVO car, ReservVO reserv){

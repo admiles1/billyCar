@@ -29,14 +29,15 @@
 		SELECT *
    		FROM car c
     	JOIN review r ON c.car_number = r.car_number
+    	LEFT JOIN heart h ON r.review_idx = h.review_idx
     	<if test="option.equals('latest')">
-    		order by review_idx desc
+    		order by r.review_idx desc
     	</if>
     	<if test="option.equals('old')">
-    		order by review_idx asc
+    		order by r.review_idx asc
     	</if>
     	<if test="option.equals('rating')">
-    		order by review_score desc
+    		order by r.review_score desc
     	</if>
     	LIMIT #{startRow},#{listLimit}
 	</select>
@@ -57,7 +58,31 @@
 		 WHERE car_number = #{carNumber}
 		 LIMIT 3;
 	</select>
+	<update id="updateReviewHeart">
+		update review
+		set review_heart = review_heart + #{count}
+		where review_idx = #{review_idx}
+	</update>
 	
+	<select id="selectHeart">
+		select *
+		from heart
+		where member_id = #{member_id} AND review_idx = #{review_idx}
+	</select>
+	<insert id="insertHeart">
+		insert into heart values (#{review_idx}, #{member_id})
+	</insert>
+	<delete id="deleteHeart">
+		delete from heart where review_idx = #{review_idx} and member_id = #{member_id}
+	</delete>
+	
+	<select id="selectheartStatus" resultType="com.itwill.billycar.vo.HeartVO">
+		select * from heart where member_id = #{member_id} and review_idx = #{review_idx};
+	</select>
+	
+	<select id="heartList" resultType="com.itwill.billycar.vo.HeartVO">
+		select * from heart;
+	</select>
 </mapper>
 
 
