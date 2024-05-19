@@ -66,6 +66,8 @@ public interface AdminMapper {
 	List<String> selectSearchModel(String code);
 
 	int deleteNewModel(String code);
+
+	List<CarVO> selectCarModel(String modelCode);
 	
 	
 }

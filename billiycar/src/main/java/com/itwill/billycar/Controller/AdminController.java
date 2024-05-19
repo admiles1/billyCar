@@ -444,11 +444,28 @@ public class AdminController {
 	}
 
 	
+	// 예약 차량 조회
 	@GetMapping("admin_car_reservation")
-	public String admin_car_reservation() {
+	public String admin_car_reservation(CommonVO common, Model model) {
 		
+		// 제조사 정보 가져오기
+	    List<CommonVO> brands = service.getBrands();
+	    model.addAttribute("brands", brands);
+	    // 모델 정보 가져오기
+		List<CommonVO> models = service.getModel();
+		model.addAttribute("models", models);
+
+	    
 		return "admin/admin_car_reservation";
 	}
+	
+	@ResponseBody
+	@PostMapping("showCarDetails")
+	 public List<CarVO> showCarDetails(@RequestParam String modelCode) {
+		System.out.println(modelCode);
+		
+        return service.getCarModel(modelCode);
+    }
 	
 	@GetMapping("admin_review")
 	public String admin_review() {
