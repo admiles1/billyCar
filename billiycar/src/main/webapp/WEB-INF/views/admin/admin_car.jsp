@@ -94,7 +94,7 @@
                                         <td style="${car.color}">${car.car_brand}</td>
                                         <td class="text-center">
                                             <div class="img_area">
-                                                <img src="/resources/upload/${car.car_img}">
+                                                <img src="<%= request.getContextPath() %>/resources/upload/${car.car_img}">
                                             </div>
                                         </td>
                                         <td>${car.car_model}</td>
