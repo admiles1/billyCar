@@ -52,21 +52,34 @@ public class MailService {
 	public void sendForgotId(MemberVO member) {
 
 		String subject = "[빌리카] 아이디를 확인해주세요.";
-		String content = "가입된 회원님의 아이디는 <b>" + member.getMember_id() + "</b>입니다.";
+		String content = "회원님의 가입된 아이디는 <b>" + member.getMember_id() + "</b>입니다.";
 		
 		SendMailClient mailClient = new SendMailClient();
-		mailClient.sendMail(member.getMember_email(), subject, content);
+		
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				mailClient.sendMail(member.getMember_email(), subject, content);
+			}
+		}).start();
+
 	}
 	
 	public void sendForgotPw(MemberVO member) {
 		String subject = "[빌리카] 비밀번호 변경 이메일입니다.";
-		String content = "<a href='http://localhost:8081/billycar/forgot_pw3?member_id=" + member.getMember_id() 
+		String content = "<a href='http://localhost:8081/billycar/forgot_pw_step3?member_id=" + member.getMember_id() 
 																		 + "&member_email=" + member.getMember_email()
 																		 + "&member_name=" + member.getMember_name()
 																		 + "'>클릭 시 새 비밀번호 설정 페이지로 이동합니다.</a>";
 		
 		SendMailClient mailClient = new SendMailClient();
-		mailClient.sendMail(member.getMember_email(), subject, content);
+		
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				mailClient.sendMail(member.getMember_email(), subject, content);
+			}
+		}).start();
 	}
 	
 }

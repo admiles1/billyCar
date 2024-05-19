@@ -21,7 +21,11 @@ import com.itwill.billycar.service.ReservService;
 import com.itwill.billycar.service.ReviewService;
 import com.itwill.billycar.vo.CarReviewVO;
 import com.itwill.billycar.vo.CarVO;
+<<<<<<< HEAD
 import com.itwill.billycar.vo.MemberVO;
+=======
+import com.itwill.billycar.vo.HeartVO;
+>>>>>>> branch 'main' of https://github.com/admiles1/billyCar.git
 import com.itwill.billycar.vo.PageInfo;
 import com.itwill.billycar.vo.ReservVO;
 import com.itwill.billycar.vo.ReviewVO;
@@ -303,6 +307,7 @@ public class ReservController {
 		if(endPage > maxPage) {
 			endPage = maxPage;
 		}
+		
 		
 		System.out.println("option : " + option);
 		model.addAttribute("reviewList", reviewList);

@@ -239,12 +239,12 @@ public class MemberController {
 		return "login/show_id";
 	}
 	
-	@GetMapping("forgot_pw")
+	@GetMapping("forgot_pw_step1")
 	public String forgot_pw() {
 		return "login/forgot_pw1";
 	}
 	
-	@PostMapping("forgot_pw")
+	@PostMapping("forgot_pw_step1")
 	public String forgot_pwPro(MemberVO member, Model model, HttpSession session) {
 		
 		System.out.println(member);
@@ -253,20 +253,20 @@ public class MemberController {
 		
 		if(dbMember != null) {
 			model.addAttribute("member_id", dbMember.getMember_id());
-			return "redirect:/forgot_pw2";
+			return "redirect:/forgot_pw_step2";
 		} else {
 			model.addAttribute("msg", "존재하지 않는 회원입니다.");
 			return "err/fail";
 		}
 	}
 	
-	@GetMapping("forgot_pw2")
+	@GetMapping("forgot_pw_step2")
 	public String forgot_pw2(MemberVO member, Model model) {
 		model.addAttribute("member_id", member.getMember_id());
 		return "login/forgot_pw2";
 	}
 	
-	@PostMapping("forgot_pw2")
+	@PostMapping("forgot_pw_step2")
 	public String forgot_pw2Pro(MemberVO member, Model model, String member_id) {
 		
 		member = service.forgotPw(member);
@@ -282,18 +282,17 @@ public class MemberController {
 		}
 	}
 	
-	@GetMapping("forgot_pw3")
+	@GetMapping("forgot_pw_step3")
 	public String forgot_pw3(MemberVO member, Model model) {
 		model.addAttribute("member_id", member.getMember_id());
-		System.out.println("655555555555555555" + member.getMember_id());
 		return "login/forgot_pw3";
 	}
 	
-	@PostMapping("forgot_pw3")
+	@PostMapping("forgot_pw_step3")
 	public String forgot_pw3Pro(MemberVO member
 								, BCryptPasswordEncoder passwordEncoder
 					            , Model model
-					            , String member_passwd , MypageService myService) {
+					            , String member_passwd) {
 //		MypageService mypageService = new MypageService();
 		
 		System.out.println("sadflhawrilfhqeiorashgiuewqkarshdgilqwrheasdfilqwrehfd" + member);
@@ -302,10 +301,8 @@ public class MemberController {
 		member.setMember_passwd(securePasswd);
 		
 		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + member);
-//		if(mypageService.modifyPasswd(member) <= 0) {
 		int updateCnt = service.modifyPasswd(member);
-//		int updateCnt = myService.modifyPasswd(member);
-//		System.out.println("업데이트 카운트 " + updateCnt);
+		
 		if(updateCnt <= 0) {
 			model.addAttribute("msg", "비밀번호 변경 실패");
 			return "err/fail";
