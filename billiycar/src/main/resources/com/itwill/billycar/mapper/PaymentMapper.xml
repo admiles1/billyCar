@@ -38,13 +38,15 @@
 	</select>
 	
 	
-<!-- 	<insert id="insertPayment"> -->
-<!-- 		INSERT INTO payment -->
-<!-- 		VALUES ( -->
-<!-- 			null -->
-<!-- 			, #{} -->
-<!-- 		) -->
-<!-- 	</insert> -->
+	<insert id="insertPayment" parameterType="com.itwill.billycar.vo.PaymentVO">
+		INSERT INTO Payment (payment_method, payment_status, payment_date, payment_result_amount)
+		VALUES (
+			  #{payment_method}
+	        , #{payment_status}
+	        , NOW()
+	        , #{payment_result_amount}
+		)
+	</insert>
 </mapper>
 
 
