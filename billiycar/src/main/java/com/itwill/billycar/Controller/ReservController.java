@@ -2,7 +2,6 @@ package com.itwill.billycar.Controller;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,16 +20,9 @@ import com.itwill.billycar.service.ReservService;
 import com.itwill.billycar.service.ReviewService;
 import com.itwill.billycar.vo.CarReviewVO;
 import com.itwill.billycar.vo.CarVO;
-<<<<<<< HEAD
-import com.itwill.billycar.vo.MemberVO;
-=======
-import com.itwill.billycar.vo.HeartVO;
->>>>>>> branch 'main' of https://github.com/admiles1/billyCar.git
 import com.itwill.billycar.vo.PageInfo;
 import com.itwill.billycar.vo.ReservVO;
 import com.itwill.billycar.vo.ReviewVO;
-
-import retrofit2.http.GET;
 
 @Controller
 public class ReservController {
