@@ -269,12 +269,13 @@ function check() {
 			</div>
 		</div>
 		
-		<!-- 구분  -->
+		<!-- 구분  varstatus 해야라 -->
 		<div class="row row-cols-1 row-cols-md-3 g-4 noto-sans-kr">
-		<c:forEach var="popular" items="${popularList}">
+		<c:forEach var="popular" items="${popularList}" varStatus="status">
 		<div class="col">
 			<div class="card h-100" style="position: relative;">
-				<div style="position: absolute; left: -50px; top: -50px;"><img width="100" height="100" src="https://img.icons8.com/carbon-copy/100/1-circle.png" alt="1-circle"/></div>
+<!-- 				<div style="position: absolute; left: -50px; top: -50px;"><img width="100" height="100" src="https://img.icons8.com/carbon-copy/100/1-circle.png" alt="1-circle"/></div> -->
+				<div style="position: absolute; left: -50px; top: -50px;"><img width="100" height="100" src="https://img.icons8.com/carbon-copy/100/${status.count}-circle.png" alt="${status.count}-circle"/></div>
 				<img src="resources/main_images/rewiewCar1.png" class="card-img-top" alt="...">
 				<div class="card-body">
 				    <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
