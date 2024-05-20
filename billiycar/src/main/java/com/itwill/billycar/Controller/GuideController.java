@@ -34,8 +34,13 @@ public class GuideController {
 	}
 	
 	@GetMapping("guideCar")
-	public String guideCar(Model model) {
-		List<Map<String, Object>> carList = service.carList();
+	public String guideCar(Model model
+							, @RequestParam(defaultValue = "1")int pageNum) {
+	    int listLimit = 4;
+	    int startRow = (pageNum - 1) * listLimit;
+	    
+		List<Map<String, Object>> carList = service.carList(startRow,listLimit);
+		
 		System.out.println(carList);
 		model.addAttribute("carList", carList);
 		return "guidance/car_introduction";

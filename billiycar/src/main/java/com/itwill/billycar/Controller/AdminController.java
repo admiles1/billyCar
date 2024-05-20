@@ -473,8 +473,12 @@ public class AdminController {
 //		System.out.println("차 번호 왔니? " + carNumber);
 		List<ReservVO> rsList = service.getReservation(carNumber);
 		
-		System.out.println("예약차량정보 : " + rsList);
+		System.out.println("=============================================");
+		for(ReservVO car : rsList) {
+			System.out.println(car);
+		}
 		
+		model.addAttribute("reservList", rsList);
 		return "admin/admin_car_reservationDetails";
 	}
 	
