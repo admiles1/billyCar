@@ -37,6 +37,7 @@ import com.itwill.billycar.vo.FaqVO;
 import com.itwill.billycar.vo.MemberVO;
 import com.itwill.billycar.vo.PageInfo;
 import com.itwill.billycar.vo.QnaVO;
+import com.itwill.billycar.vo.ReservVO;
 
 @Controller
 public class AdminController {
@@ -462,10 +463,21 @@ public class AdminController {
 	@ResponseBody
 	@PostMapping("showCarDetails")
 	 public List<CarVO> showCarDetails(@RequestParam String modelCode) {
-		System.out.println(modelCode);
+//		System.out.println(modelCode);
 		
         return service.getCarModel(modelCode);
     }
+	
+	@GetMapping("carReservationDetails")
+	public String carReservationDetails(String carNumber,Model model) {
+//		System.out.println("차 번호 왔니? " + carNumber);
+		List<ReservVO> rsList = service.getReservation(carNumber);
+		
+		System.out.println("예약차량정보 : " + rsList);
+		
+		return "admin/admin_car_reservationDetails";
+	}
+	
 	
 	@GetMapping("admin_review")
 	public String admin_review() {

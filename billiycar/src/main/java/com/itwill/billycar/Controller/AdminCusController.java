@@ -136,12 +136,26 @@ public class AdminCusController {
 	// -------------------------------------------------------------------------------------------------
 	// ** [문의내역] **
 	@GetMapping("adminAnswerList")
-	public String adminAnswerList(Model model, QnaVO qna, @RequestParam(defaultValue ="1") int pageNum) {
+	public String adminAnswerList(Model model, QnaVO qna, @RequestParam(defaultValue ="1") int pageNum, @RequestParam(defaultValue ="") String answer) {
+		
+		// 답변 상태 파라미터 int로 바꿔주기
+		int answer_status = 0;
+		
+		System.out.println("머가넘어오나"+answer);
+		
+		switch (answer) {
+			case "all":
+			case "": answer_status = 2; break;
+			case "ok": answer_status = 1; break;
+			case "no": answer_status = 0; break;
+		}
+		
+		System.out.println(answer_status);
 		
 		int listLimit = 5;
 		int startRow = (pageNum-1)*listLimit;
 		int pageListLimit = 3;
-		int listCount = service.getQnaListCount();
+		int listCount = service.getQnaListCount(answer_status);
 		
 		//----------------------------------------------------------------
 		int maxPage = listCount/listLimit + (listCount%listLimit > 0 ? 1 : 0);
@@ -157,7 +171,8 @@ public class AdminCusController {
 		
 		model.addAttribute("pageInfo", new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage));
 		
-		List<QnaVO> qnaList = service.getQnaList(startRow, listLimit);
+		
+		List<QnaVO> qnaList = service.getQnaList(startRow, listLimit, answer_status);
 		model.addAttribute("qnaList", qnaList);
 		
 		return "admin/admin_answerList_form";
