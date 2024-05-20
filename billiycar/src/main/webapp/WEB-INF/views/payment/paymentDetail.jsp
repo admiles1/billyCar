@@ -99,9 +99,9 @@
 	            	<label>대여날짜</label>
 	            </div>
 	
-	            <div class="col-sm-9">
-	            	<input type="text" class="form-control" id="dateInfo"  value="${reservDetail.reserv_pickupdate}" readonly>
-	            </div>
+	             <div class="col-sm-9">
+                    <input type="text" class="form-control" id="pickupDate" readonly>
+                </div>
 	        </div>
 	        
 	        <div class="row g-3">
@@ -120,8 +120,8 @@
 	            </div>
 	
 	            <div class="col-sm-9">
-	            	<input type="text" class="form-control" id="dateInfo" value="${reservDetail.reserv_returndate}" readonly >
-	            </div>
+                    <input type="text" class="form-control" id="returnDate" readonly>
+                </div>
 				
 			</div>
 			
@@ -416,6 +416,33 @@
     </script>	
 
 	
+	<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+        // 대여날짜를 ISO 8601 형식의 문자열에서 Date 객체로 변환
+        var pickupDate = new Date('${reservDetail.reserv_pickupdate}'.replace('T', ' '));
+        // 반납날짜를 ISO 8601 형식의 문자열에서 Date 객체로 변환
+        var returnDate = new Date('${reservDetail.reserv_returndate}'.replace('T', ' '));
+
+        // 대여날짜를 YYYY-MM-DD HH:MM 형식으로 변환
+        var formattedPickupDate = formatDate(pickupDate);
+        // 반납날짜를 YYYY-MM-DD HH:MM 형식으로 변환
+        var formattedReturnDate = formatDate(returnDate);
+
+        // 변환된 날짜를 해당 입력란에 설정
+        document.getElementById('pickupDate').value = formattedPickupDate;
+        document.getElementById('returnDate').value = formattedReturnDate;
+    });
+
+    function formatDate(date) {
+        var year = date.getFullYear();
+        var month = (date.getMonth() + 1).toString().padStart(2, '0');
+        var day = date.getDate().toString().padStart(2, '0');
+        var hours = date.getHours().toString().padStart(2, '0');
+        var minutes = date.getMinutes().toString().padStart(2, '0');
+
+        return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes;
+    }
+</script>
 	
 	
 		
