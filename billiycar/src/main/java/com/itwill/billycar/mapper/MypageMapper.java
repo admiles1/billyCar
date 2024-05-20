@@ -53,6 +53,8 @@ public interface MypageMapper {
 
 	int selectQnaListCount(String writer);
 
+	int selectReservListCount(String client);
+
 //	List<QnaVO> selcetMemberQna(String memberId, int pageNum);
 //
 //	int selectQnaCount(String memberId);

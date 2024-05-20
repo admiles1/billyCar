@@ -153,4 +153,10 @@
 		WHERE qna_writer = #{writer}
 	</select>
 	
+	<select id="selectReservListCount" resultType="int">
+		SELECT COUNT(*)
+		FROM Reservation
+		WHERE member_id = #{client}
+	</select>
+	
 </mapper>

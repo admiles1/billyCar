@@ -91,6 +91,10 @@ public class MypageService {
 		return mapper.selectQnaListCount(writer);
 	}
 
+	public int getReservListCount(String client) {
+		return mapper.selectReservListCount(client);
+	}
+
 //	public List<QnaVO> getMemberQna(String memberId, int pageNum) {
 //		return mapper.selcetMemberQna(memberId, pageNum);
 //	}
