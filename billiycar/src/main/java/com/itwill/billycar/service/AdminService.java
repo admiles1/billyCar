@@ -50,6 +50,10 @@ public class AdminService {
 		return mapper.selectCarList(startRow, listLimit);
 	}
 	
+	public List<CarVO> getCarList(String commonKeyword, String searchKeyword, int startRow, int listLimit) {
+		return mapper.selectcarList(commonKeyword, searchKeyword, startRow, listLimit);
+	}
+	
 	public List<QnaVO> adminAnswerList() {
 		return mapper.selectQnaList();
 	}
@@ -139,6 +143,14 @@ public class AdminService {
 	
 		return mapper.selectCarListCount();
 	}
+
+	public String getsearchTypeCommon(String searchKeyword) {
+		return mapper.selectSearchTypeCommon(searchKeyword);
+	}
+	public String getsearchTypeCar(String searchKeyword) {
+		return mapper.selectSearchTypeCar(searchKeyword);
+	}
+
 
 	
 

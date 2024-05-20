@@ -216,6 +216,40 @@ public class AdminController {
 		return "admin/admin_car";
 	}
 	
+	// 차량 검색
+	@ResponseBody
+	@PostMapping("admin_car")
+	public String searchCars(
+			@RequestParam(defaultValue = "") String searchType,
+			@RequestParam(defaultValue = "") String searchKeyword,
+			@RequestParam(defaultValue = "1") int pageNum,
+			Model model) {
+		
+		System.out.println("검색타입 : " + searchType);
+		System.out.println("검색어 : " + searchKeyword);
+		System.out.println("페이지번호 : " + pageNum);
+		
+		int listLimit = 10;
+		int startRow = (pageNum - 1) * listLimit;
+		
+		switch (searchType) {
+		case "car_brand"  : searchKeyword = service.getsearchTypeCommon(searchKeyword); break;
+		case "car_model"  : searchKeyword = service.getsearchTypeCommon(searchKeyword); break;
+		case "car_number"  : searchKeyword = service.getsearchTypeCar(searchKeyword); break;
+
+		}
+		
+		System.out.println(searchKeyword);
+		
+//		List<CarVO> carList = service.getCarList(searchType, searchKeyword, startRow, listLimit);
+
+		
+		
+		
+		return "";
+				
+	}
+	
 	// 차량 목록 중 차량 삭제
 	@PostMapping("deleteCar")
 	@ResponseBody
@@ -233,13 +267,7 @@ public class AdminController {
 		}		
 	}
 	
-	// 차량 검색
-	@PostMapping("searchCars")
-	public String searchCars() {
-		
-		return "";
-				
-	}
+
 	
 	// 차량브랜드 삭제
 	@PostMapping("deleteNewCar")

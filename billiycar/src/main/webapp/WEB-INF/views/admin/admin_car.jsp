@@ -72,9 +72,9 @@
                         <input type="text" id="searchKeyword" class="form-control" placeholder="검색어 입력" value="${param.searchKeyword}">
                         <select id="searchType" class="form-control">
                             <option value="">전체</option>
-                            <option value="brand" <c:if test="${param.searchType eq 'brand'}">selected</c:if>>제조사</option>
-                            <option value="model" <c:if test="${param.searchType eq 'model'}">selected</c:if>> 모델</option>
-                            <option value="number" <c:if test="${param.searchType eq 'number'}">selected</c:if>>차량번호</option>
+                            <option value="car_brand" <c:if test="${param.searchType eq 'car_brand'}">selected</c:if>>제조사</option>
+                            <option value="car_model" <c:if test="${param.searchType eq 'car_model'}">selected</c:if>> 모델</option>
+                            <option value="car_number" <c:if test="${param.searchType eq 'car_number'}">selected</c:if>>차량번호</option>
                         </select>
                         <button type="button" class="btn btn-primary" onclick="searchCars()">검색</button>
                     </form>
@@ -177,14 +177,27 @@
             window.location.href = 'carModify?' + queryString;
         }
 
-//         function searchCars() {
-//         	$.ajax({
-//         		type : "POST",
-//         		url : "admin_car",
-//         		data : category = 제조사 / 모델 판별
-//                       text 
-//         	});
-//         }
+        function searchCars() { // 차량검색
+            var searchType = $('#searchType').val(); // 검색 유형 가져오기
+            var searchKeyword = $('#searchKeyword').val(); // 검색어 가져오기
+
+            $.ajax({
+                type: 'POST',
+                url: 'admin_car', // 서버에서 검색을 처리할 URL
+                data: {
+                    searchType: searchType,
+                    searchKeyword: searchKeyword,
+                    pageNum: 1 // 페이지 번호를 1로 설정하여 처음 페이지로 검색
+                },
+                success: function(response) {
+                    $('#carTableBody').html(response); // 서버로부터 받은 응답을 테이블 본문에 업데이트
+                },
+                error: function() {
+                    alert('검색에 실패했습니다.');
+                }
+            });
+        }
+
     </script>
 </body>
 </html>
