@@ -1,6 +1,7 @@
 package com.itwill.billycar.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -70,7 +71,7 @@ public interface AdminMapper {
 
 	List<CarVO> selectCarModel(String modelCode);
 
-	List<ReservVO> selectReservation(String carNumber);
+	List<Map<String, Object>> selectReservation(String carNumber);
 	
 	
 }

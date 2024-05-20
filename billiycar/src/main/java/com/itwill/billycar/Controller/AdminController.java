@@ -471,13 +471,9 @@ public class AdminController {
 	@GetMapping("carReservationDetails")
 	public String carReservationDetails(String carNumber,Model model) {
 //		System.out.println("차 번호 왔니? " + carNumber);
-		List<ReservVO> rsList = service.getReservation(carNumber);
+		List<Map<String, Object>> rsList = service.getReservation(carNumber);
 		
-		System.out.println("=============================================");
-		for(ReservVO car : rsList) {
-			System.out.println(car);
-		}
-		
+		System.out.println("rsList" + rsList);
 		model.addAttribute("reservList", rsList);
 		return "admin/admin_car_reservationDetails";
 	}

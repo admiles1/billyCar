@@ -306,9 +306,10 @@
 	</select>
 	
 	<!-- 차량 번호에 대한 예약 조회 -->
-	<select id="selectReservation" resultType="com.itwill.billycar.vo.ReservVO">
+	<select id="selectReservation" resultType="hashmap">
 		SELECT *
-		FROM Reservation
+		FROM Reservation r
+		JOIN member m ON r.member_id = m.member_id
 		WHERE car_number = #{carNumber}
 	</select>
 	
