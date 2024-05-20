@@ -21,7 +21,7 @@ public interface ReservMapper {
 	CarVO selectCar(String model);
 	
 	//예약 현황 리스트
-	List<ReservVO> selectReservList(MemberVO member);
+	List<ReservVO> selectReservList(@Param(value = "memberId")String memberId, @Param(value = "startRow")int startRow, @Param(value = "listLimit")int listLimit);
 	
 	
 	int updateReviewStatus(int review_idx);

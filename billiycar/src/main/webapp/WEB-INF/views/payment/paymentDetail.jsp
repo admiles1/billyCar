@@ -99,9 +99,9 @@
 	            	<label>대여날짜</label>
 	            </div>
 	
-	            <div class="col-sm-9">
-	            	<input type="text" class="form-control" id="dateInfo"  value="${reservDetail.reserv_pickupdate}" readonly>
-	            </div>
+	             <div class="col-sm-9">
+                    <input type="text" class="form-control" id="pickupDate" readonly>
+                </div>
 	        </div>
 	        
 	        <div class="row g-3">
@@ -120,8 +120,8 @@
 	            </div>
 	
 	            <div class="col-sm-9">
-	            	<input type="text" class="form-control" id="dateInfo" value="${reservDetail.reserv_returndate}" readonly >
-	            </div>
+                    <input type="text" class="form-control" id="returnDate" readonly>
+                </div>
 				
 			</div>
 			
@@ -274,94 +274,49 @@
 				</table>
 			</div>
 			<hr>	
-<!-- 		<h4 class="subject">추가옵션</h4> -->
-<!-- 			<div class="row row-cols-2"> -->
-<!-- 				<div class="opt_chk"> -->
-<!-- 					&nbsp;<input type="checkbox" name="opt_chk" id="opt_chk1" value="5000">&emsp;카시트(영유아용)1개 &emsp;5000원 -->
-					
-<!-- 				</div> -->
-<!-- 				<div class="opt_chk"> -->
-<!-- 					<input type="checkbox" name="opt_chk" id="opt_chk2" value="5000">&emsp;카시트(주니어)1개 &emsp;5000원 -->
-					
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		<h4 class="subject">결제수단 선택</h4> -->
-<!-- 			<div class="row"> -->
-<!-- 				<div class="col pay_radio"> -->
-<!-- 					&nbsp;<input type="radio" name="payment">&emsp;신용/체크카드 -->
-<!-- 				</div> -->
-<!-- 				<div class="col pay_radio"> -->
-<!-- 					<input type="radio" name="payment">&emsp;가상계좌이체 -->
-<!-- 				</div> -->
-<!-- 				 <div class="col pay_radio"> -->
-<!-- 					<input type="radio" name="payment">&emsp;무통장입금 -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 			<hr> -->
-<!-- 		<h4 class="subject">할인정보(중복할인불가)</h4> -->
-<!-- 			<div class="row g-3"> -->
-<!-- 				<div class="col-sm-4"> -->
-<!-- 	            	<label>쿠폰사용&emsp;<input type="text"> -->
-<!-- 	            	</label> -->
-<!-- 	            </div> -->
-<!-- 	            <div class="col-sm-8"> -->
-<!-- 	            	<br> -->
-<!-- 	            	<input type="button" value="적용"> -->
-<!-- 	            </div> -->
-<!-- 			</div> -->
-<!-- 			<hr> -->
-		
-			
-<!-- 		</div> -->
-<!-- 		<div class="col-lg-4"> -->
-<!-- 		<div class="col-md-7 col-lg-4"> -->
-<!-- 		<div class="col-md-5 col-lg-4 order-md-last" id="paymentSide"> -->
-<!-- 			<h4 class="subject2">결제 정보 확인</h4> -->
-<!-- 			<div class="container last_check"> -->
-<!-- 				<div> -->
-<%-- <%-- 					<img src="${car.car_img}" width="430" > --%> <!-- 차이미지 받아 오기 --> 
-<!-- 					<img src="resources/event_images/envent_page_event2-1.webp" width="390" >임시 -->
-<!-- 				</div> -->
-
-<!-- 				<h6><b>추가 옵션</b></h6> -->
-<!-- 				<div class="row"> -->
-<!-- 					<div class="col-3">추가 옵션</div> -->
-<!-- 					<div class="col-9" id="optionPrice" align="right">0</div> -->
-<!-- 				</div> -->
-<!-- 				<br> -->
-<!-- 				<h6><b>결제 정보</b></h6> -->
-<!-- 				<div class="row"> -->
-<!-- 					<div class="col-3">대여금액</div> -->
-<%-- 					<div class="col-9" align="right"><fmt:formatNumber value="${car.car_dayprice}" pattern="#,###"/></div> --%>
-<!-- 					<div class="col-3">보험금액</div> -->
-<!-- <!-- 					<div class="col-9 incurance" id="insurance_price" align="right">0</div> --> 
-<%-- 					<div class="col-9 incurance" id="insurance_price" align="right">${empty param.insurance ? '(+)0' : param.insurance}</div> --%>
-<!-- 					<div class="col-3">할인금액</div> -->
-<!-- 					<div class="col-9" align="right">할인금액 표시</div> -->
-<!-- 					<hr> -->
-<!-- 					<div class="col-3">총 결제 금액(VAT 포함)</div> -->
-<!-- 					<div class="col-9" align="right"></div> -->
-<!-- 				</div> -->
-<!-- 				<br><br> -->
-<!-- 			</div> -->
-<!-- 				<form action="payment" method="post"> -->
-<!-- 					<input type="button" class="sub_btn w-100 btn btn-primary btn-lg" value="결제하기" onclick="startPayment();" > -->
-<!-- 				</form>			 -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!-- 	</div> -->
+			<div class="col-md-5 col-lg-4 order-md-last" id="paymentSide">
+			<h4 class="subject2">결제 정보 확인</h4>
+			<div class="container last_check">
+				<div>
+				</div>
+				
+				<p><b>차량 정보</b></p>
+				<div class="row ">
+					<div class="col-3">차량</div>
+					<div class="col-9 car-name" align="right">${car.car_model}</div>
+ 					<div class="col-3">기본정보</div> 
+ 					<div class="col-9" align="right">${car.car_capacity}/${car.gear_type}/${car.car_fuel}</div> 
+					<div class="col-3">제한나이</div> 
+ 					<div class="col-9" align="right">만23세 이상</div> 
+ 					<div class="col-3">운전경력</div>
+ 					<div class="col-9" align="right">면허취득 1년이상</div> 
+				</div>
+				<br>
+				<h6><b>결제 정보</b></h6>
+				<div class="row">
+					<div class="col-3">
+						<input type="text" id="differenceday" readonly/>
+					</div>
+					<div class="col-9" align="right">
+						<input type="text" id="firstAmount" readonly/>
+					</div>
+					<div class="col-3">보험금액</div>
+					<div class="col-9 incurance" id="insurance_price" align="right">${empty param.insurance ? '(+)0' : param.insurance}</div>
+					<div class="col-3">할인금액</div>
+					<div class="col-9" align="right">할인금액 표시</div>
+					<hr>
+					<div class="col-3">결제 금액(VAT 포함)</div>
+					<div class="col-9"  align="right"><input type="text" id="dateDifferenceInput" value="${paymentDetail.payment_result_amount }" readonly/></div>
+					<div></div>
+				</div>
+			</div>
+			</div>
 
     <!-- 아임포트 스크립트 -->
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
     <script>
         const IMP = window.IMP; 
         IMP.init("imp47235683"); // 내 가맹점 식별 코드
-
-//         var date = new Date();
-        
-		
-//         merchant_20240514
-//         let a = "mer_" + (new Date().getTime());
         
         function startPayment() {
             IMP.request_pay({
@@ -416,6 +371,33 @@
     </script>	
 
 	
+	<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+        // 대여날짜를 ISO 8601 형식의 문자열에서 Date 객체로 변환
+        var pickupDate = new Date('${reservDetail.reserv_pickupdate}'.replace('T', ' '));
+        // 반납날짜를 ISO 8601 형식의 문자열에서 Date 객체로 변환
+        var returnDate = new Date('${reservDetail.reserv_returndate}'.replace('T', ' '));
+
+        // 대여날짜를 YYYY-MM-DD HH:MM 형식으로 변환
+        var formattedPickupDate = formatDate(pickupDate);
+        // 반납날짜를 YYYY-MM-DD HH:MM 형식으로 변환
+        var formattedReturnDate = formatDate(returnDate);
+
+        // 변환된 날짜를 해당 입력란에 설정
+        document.getElementById('pickupDate').value = formattedPickupDate;
+        document.getElementById('returnDate').value = formattedReturnDate;
+    });
+
+    function formatDate(date) {
+        var year = date.getFullYear();
+        var month = (date.getMonth() + 1).toString().padStart(2, '0');
+        var day = date.getDate().toString().padStart(2, '0');
+        var hours = date.getHours().toString().padStart(2, '0');
+        var minutes = date.getMinutes().toString().padStart(2, '0');
+
+        return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes;
+    }
+</script>
 	
 	
 		

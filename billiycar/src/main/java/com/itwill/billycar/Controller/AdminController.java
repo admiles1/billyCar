@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -25,7 +23,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.itwill.billycar.service.AdminCusService;
 import com.itwill.billycar.service.AdminService;
 import com.itwill.billycar.service.Memberservice;
 import com.itwill.billycar.service.PaymentService;
@@ -33,10 +30,8 @@ import com.itwill.billycar.service.ReviewService;
 import com.itwill.billycar.vo.AdminVO;
 import com.itwill.billycar.vo.CarVO;
 import com.itwill.billycar.vo.CommonVO;
-import com.itwill.billycar.vo.FaqVO;
 import com.itwill.billycar.vo.MemberVO;
 import com.itwill.billycar.vo.PageInfo;
-import com.itwill.billycar.vo.QnaVO;
 
 @Controller
 public class AdminController {
@@ -199,12 +194,60 @@ public class AdminController {
 
 	// 차량 목록 조회
 	@GetMapping("admin_car")
-	public String admin_car(CarVO car, Model model) {
+	public String admin_car(CarVO car, Model model, @RequestParam(defaultValue = "1") int pageNum) {
 		
-		List<CarVO> carList = service.getCar(car);
+		int listLimit = 10;
+		int startRow = (pageNum - 1) * listLimit;
+		
+		int listCount = service.getCarListCount();
+		int pageListLimit = 3; // 페이지 번호 갯수를 3개로 지정(1 2 3 or 4 5 6 등...)
+		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0);
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		int endPage = startPage + pageListLimit - 1;
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		model.addAttribute("pageInfo", new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage));
+
+		List<CarVO> carList = service.getCarList(startRow, listLimit);
 		model.addAttribute("carList", carList);
 		
 		return "admin/admin_car";
+	}
+	
+	// 차량 검색
+	@ResponseBody
+	@PostMapping("admin_car")
+	public String searchCars(
+			@RequestParam(defaultValue = "") String searchType,
+			@RequestParam(defaultValue = "") String searchKeyword,
+			@RequestParam(defaultValue = "1") int pageNum,
+			Model model) {
+		
+		System.out.println("검색타입 : " + searchType);
+		System.out.println("검색어 : " + searchKeyword);
+		System.out.println("페이지번호 : " + pageNum);
+		
+		int listLimit = 10;
+		int startRow = (pageNum - 1) * listLimit;
+		
+		switch (searchType) {
+		case "car_brand"  : searchKeyword = service.getsearchTypeCommon(searchKeyword); break;
+		case "car_model"  : searchKeyword = service.getsearchTypeCommon(searchKeyword); break;
+		case "car_number"  : searchKeyword = service.getsearchTypeCar(searchKeyword); break;
+
+		}
+		
+		System.out.println(searchKeyword);
+		
+//		List<CarVO> carList = service.getCarList(searchType, searchKeyword, startRow, listLimit);
+
+		
+		
+		
+		return "";
+				
 	}
 	
 	// 차량 목록 중 차량 삭제
@@ -224,13 +267,7 @@ public class AdminController {
 		}		
 	}
 	
-	// 차량 검색
-	@PostMapping("searchCars")
-	public String searchCars() {
-		
-		return "";
-				
-	}
+
 	
 	// 차량브랜드 삭제
 	@PostMapping("deleteNewCar")
@@ -462,10 +499,21 @@ public class AdminController {
 	@ResponseBody
 	@PostMapping("showCarDetails")
 	 public List<CarVO> showCarDetails(@RequestParam String modelCode) {
-		System.out.println(modelCode);
+//		System.out.println(modelCode);
 		
         return service.getCarModel(modelCode);
     }
+	
+	@GetMapping("carReservationDetails")
+	public String carReservationDetails(String carNumber,Model model) {
+//		System.out.println("차 번호 왔니? " + carNumber);
+		List<Map<String, Object>> rsList = service.getReservation(carNumber);
+		
+		System.out.println("rsList" + rsList);
+		model.addAttribute("reservList", rsList);
+		return "admin/admin_car_reservationDetails";
+	}
+	
 	
 	@GetMapping("admin_review")
 	public String admin_review() {

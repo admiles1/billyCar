@@ -33,18 +33,41 @@
 	</select>
 	
 	
-<select id="selectReservDetail" resultType="com.itwill.billycar.vo.ReservVO">
+	<select id="selectReservDetail" resultType="com.itwill.billycar.vo.ReservVO">
 		SELECT * FROM Reservation WHERE reserv_idx = #{idx}
 	</select>
 	
+	<select id="selectPaymentDetail" resultType="com.itwill.billycar.vo.PaymentVO">
+		SELECT 
+	</select>
 	
-<!-- 	<insert id="insertPayment"> -->
-<!-- 		INSERT INTO payment -->
-<!-- 		VALUES ( -->
-<!-- 			null -->
-<!-- 			, #{} -->
-<!-- 		) -->
-<!-- 	</insert> -->
+	<insert id="insertPayment">
+		INSERT INTO Payment 
+		VALUES (NULL
+		     , 1 
+		     , 1 
+		     , now() 
+		     , #{payment_result_amount}
+		     , #{member_id}
+		     , #{car_number})
+	</insert>
+	
+	<insert id="insertRserv">
+		INSERT INTO Reservation 
+		VALUES (
+			   NULL
+			 , #{car_number}
+			 , #{reserv_pickupdate}
+			 , #{reserv_returndate}
+			 , #{reserv_pickuplocation}
+			 , #{reserv_returnlocation}
+			 , 0    -- car_in
+			 , 0    -- car_status
+			 , 0    -- car_option
+			 , now()  
+			 , #{member_id}
+			 , null);
+	</insert>
 </mapper>
 
 

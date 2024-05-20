@@ -6,7 +6,11 @@
 <mapper namespace="com.itwill.billycar.mapper.ReservMapper">
 
 	<select id="selectReservList" resultType="com.itwill.billycar.vo.ReservVO">
-		select * from Reservation where member_id = #{member_id};
+		select * 
+		from Reservation 
+		where member_id = #{memberId}
+		ORDER BY reserv_idx DESC
+		LIMIT #{startRow}, #{listLimit}
 	</select>
 	
 	<update id="updateReviewStatus">

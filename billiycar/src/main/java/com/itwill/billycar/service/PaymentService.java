@@ -23,8 +23,13 @@ public class PaymentService {
 		return mapper.salesMonthSelect();
 	}
 
-	public int regisetPayment(PaymentVO payment) {
+	public int registerPayment(PaymentVO payment) {
+		System.out.println("registPayment 서비스 까진옴");
 		return mapper.insertPayment(payment);
+	}
+	
+	public int registReserv(ReservVO reserv) {
+		return mapper.insertRserv(reserv);
 	}
 
 
@@ -35,6 +40,10 @@ public class PaymentService {
 
 	public ReservVO getReservationByIdx(int idx) {
 		return mapper.selectReservDetail(idx);
+	}
+
+	public PaymentVO getPaymentByIdx(int idx) {
+		return mapper.selectPaymentDetail(idx);
 	}
 	
 	

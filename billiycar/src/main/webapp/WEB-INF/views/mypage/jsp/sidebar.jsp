@@ -63,7 +63,7 @@
                         <li class="no-drop"><a href="logout">로그아웃<i class="fas fa-right-from-bracket"></i></a></li>
                     </ul>
                     <ul class="big_menu">
-                        <li class="no-drop"><a href="resignReason">회원탈퇴<i class="fas fa-user-slash"></i></a></li>
+                        <li class="no-drop"><a href="MemberWithdraw">회원탈퇴<i class="fas fa-user-slash"></i></a></li>
                     </ul>
                 </div>
             </div>

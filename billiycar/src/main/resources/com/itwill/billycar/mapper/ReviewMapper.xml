@@ -10,7 +10,7 @@
 	        review_subject,
 	        review_content,
 	        review_score,
-	        review_readcount,
+<!-- 	        review_readcount, -->
 	        review_reg_date,
 	        car_number,
 	        review_idx
@@ -19,7 +19,7 @@
 	        #{review_subject},
 	        #{review_content},
 	        #{review_score},
-	        0,
+<!-- 	        0, -->
 	        NOW(),
 	        #{car_number},
 	        #{review_idx}
@@ -82,6 +82,55 @@
 	
 	<select id="heartList" resultType="com.itwill.billycar.vo.HeartVO">
 		select * from heart;
+	</select>
+	
+	<select id="selectPopularCar" resultType="hashmap">
+		SELECT 
+		    car_number,
+		    car_img,
+		    car_model,
+		    car_fuel,
+		    car_type,
+		    AVG(review_score) AS review_score, 
+		    SUM(review_heart) AS review_heart, 
+		    SUM(car_countReserve) AS car_countReserve
+		FROM (
+		    SELECT 
+		        c.car_number,
+		        c.car_img,
+		        r.review_score,
+		        r.review_heart,
+		        c.car_countReserve,
+		        cm_model.name AS car_model,
+		        cm_fuel.name AS car_fuel,
+		        cm_type.name AS car_type
+		    FROM car c
+		    LEFT JOIN review r ON c.car_number = r.car_number
+		    LEFT JOIN Common cm_model ON c.car_model = cm_model.code
+		    LEFT JOIN Common cm_fuel ON c.car_fuel = cm_fuel.code
+		    LEFT JOIN Common cm_type ON c.car_type = cm_type.code
+		
+		    UNION ALL
+		
+		    SELECT 
+		        c.car_number,
+		        c.car_img,
+		        r.review_score,
+		        r.review_heart,
+		        c.car_countReserve,
+		        cm_model.name AS car_model,
+		        cm_fuel.name AS car_fuel,
+		        cm_type.name AS car_type
+		    FROM car c
+		    RIGHT JOIN review r ON c.car_number = r.car_number
+		    LEFT JOIN Common cm_model ON c.car_model = cm_model.code
+		    LEFT JOIN Common cm_fuel ON c.car_fuel = cm_fuel.code
+		    LEFT JOIN Common cm_type ON c.car_type = cm_type.code
+		) AS total
+		GROUP BY car_number, car_model, car_fuel, car_type, car_img
+		ORDER BY 
+		    (AVG(review_score) * 0.5) + (SUM(review_heart) * 0.3) + (SUM(car_countReserve) * 0.2) DESC
+		LIMIT 3;
 	</select>
 </mapper>
 

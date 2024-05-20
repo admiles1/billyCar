@@ -59,6 +59,10 @@ public class ReviewService {
 		return mapper.selectheartStatus(review_idx,member_id);
 	}
 
+	public List<Map<String, String>> selectPopularCar() {
+		return mapper.selectPopularCar();
+	}
+
 	
 
 	

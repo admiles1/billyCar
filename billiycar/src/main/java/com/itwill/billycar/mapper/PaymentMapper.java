@@ -16,11 +16,14 @@ public interface PaymentMapper {
 	List<Integer> salesMonthSelect();
 
 	int insertPayment(PaymentVO payment);
+	int insertRserv(ReservVO reserv);
 
 	CarVO selectCarInfo(CarVO car);
 	
 	
 	ReservVO selectReservDetail(int idx);
+
+	PaymentVO selectPaymentDetail(int idx);
 
 	
 

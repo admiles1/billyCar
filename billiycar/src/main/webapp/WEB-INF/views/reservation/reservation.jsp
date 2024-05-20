@@ -35,13 +35,6 @@
 		
 		let pageNum = 2;
 		
-		if('${empty schedule}' == "true") {
-			$("#reserv_pickupdate").val("2024-05-20");
-			$("#reserv_returndate").val("2024-05-21");
-			$("#reserv_pickuptime").val("06");
-			$("#reserv_returntime").val("07");
-		}
-		
 		$("#moreList").on("click", function(){
 			let selectedFuel = ''; // 선택된 연료를 저장할 문자열 변수
 		    $('input[name="car_fuel"]:checked').each(function() {
@@ -54,7 +47,8 @@
 		    	selectedType += $(this).val() + ',';
 		    });
 		    selectedType = selectedType.slice(0, -1);
-			
+		    
+		   
 			$.ajax({
 				type : "POST" ,
 				url : "MoreList",
@@ -69,6 +63,10 @@
 				},
 				dataType : "json",
 				success : function(response) {
+					if (response.length === 0) {
+						alert('마지막 항목입니다!');
+// 						$("#moreList").css("display", "none");
+					}
 					
 					for(let car of response) {
 						let dayPrice = car.car_dayprice.toLocaleString();

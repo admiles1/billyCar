@@ -21,7 +21,7 @@ public interface MypageMapper {
 
 	MemberVO selectMemberPasswd(String memberId);
 
-	List<QnaVO> selcetMemberQna(String memberId);
+	List<QnaVO> selcetMemberQna(@Param(value = "memberId")String memberId, @Param(value = "startRow")int startRow, @Param(value = "listLimit")int listLimit);
 	
 
 	int insertLicense(LicenseVO license);
@@ -50,6 +50,10 @@ public interface MypageMapper {
 	int selectDuplicateCoupon(@Param(value = "member_id") String member_id, @Param(value = "coupon_code") String coupon_code);
 
 	int selectCouponCode(String coupon_code);
+
+	int selectQnaListCount(String writer);
+
+	int selectReservListCount(String client);
 
 //	List<QnaVO> selcetMemberQna(String memberId, int pageNum);
 //

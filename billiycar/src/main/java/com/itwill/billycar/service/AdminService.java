@@ -1,6 +1,7 @@
 package com.itwill.billycar.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import com.itwill.billycar.vo.CarVO;
 import com.itwill.billycar.vo.CommonVO;
 import com.itwill.billycar.vo.MemberVO;
 import com.itwill.billycar.vo.QnaVO;
+import com.itwill.billycar.vo.ReservVO;
 
 @Service
 public class AdminService {
@@ -44,8 +46,12 @@ public class AdminService {
 		return mapper.updateMember(member);
 	}
 
-	public List<CarVO> getCar(CarVO car) {
-		return mapper.selectCar(car);
+	public List<CarVO> getCarList(int startRow, int listLimit) {
+		return mapper.selectCarList(startRow, listLimit);
+	}
+	
+	public List<CarVO> getCarList(String commonKeyword, String searchKeyword, int startRow, int listLimit) {
+		return mapper.selectcarList(commonKeyword, searchKeyword, startRow, listLimit);
 	}
 	
 	public List<QnaVO> adminAnswerList() {
@@ -127,6 +133,24 @@ public class AdminService {
 		
 		return mapper.selectCarModel(modelCode);
 	}
+
+	public List<Map<String, Object>> getReservation(String carNumber) {
+		
+		return mapper.selectReservation(carNumber);
+	}
+
+	public int getCarListCount() {
+	
+		return mapper.selectCarListCount();
+	}
+
+	public String getsearchTypeCommon(String searchKeyword) {
+		return mapper.selectSearchTypeCommon(searchKeyword);
+	}
+	public String getsearchTypeCar(String searchKeyword) {
+		return mapper.selectSearchTypeCar(searchKeyword);
+	}
+
 
 	
 

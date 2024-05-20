@@ -1,6 +1,7 @@
 package com.itwill.billycar.Controller;
 
-import java.util.List;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwill.billycar.service.MypageService;
 import com.itwill.billycar.service.PaymentService;
@@ -40,8 +42,9 @@ public class PaymentController {
 						, Model model
 						, HttpSession session
 						, ReservVO reserv
+						, @RequestParam(defaultValue = "1")int totalAmount
             			, @RequestParam(defaultValue = "") Map<String, String> map) {
-		//TODO 카넘버로 조회하기 컬럼은 car_dayprice, car_hourprice, car_img / * 
+		// 카넘버로 조회하기 컬럼은 car_dayprice, car_hourprice, car_img / * 
 		// WHERE car_number = car.getCar_number 받아간값
 		// map.get("schedule").split("\\,") 로 짜른 스트링배열 컨트롤러에서 가공or자바스크립터에서 가공
 		System.out.println(session.getAttribute("member_id"));
@@ -54,42 +57,64 @@ public class PaymentController {
 		
 		CarVO dbcar = paymentService.getCarInfo(car);
 		model.addAttribute("car", dbcar);
+		model.addAttribute("totalAmount", totalAmount);
+		
 		return "payment/paymentPage";
 	}
 	
+	@ResponseBody
 	@PostMapping("payment")
-	public String paymentPro(CarVO car , Model model, MemberVO member, PaymentVO payment
-							, @RequestParam(defaultValue = "") Map<String, String> map) {
-		int paymentCount = paymentService.regisetPayment(payment);
+	public String paymentPro(CarVO car 
+							, PaymentVO payment
+							, @RequestParam(defaultValue = "") Map<String, String> map
+							, Model model) {
+		System.out.println("====================================");
+		System.out.println(car);
+		System.out.println(payment);
+		System.out.println(map);
+		String memberId = (String)session.getAttribute("member_id");
+		String carNumber = car.getCar_number();
 		
-		if(paymentCount > 0) {
-			
-			return "reidrect:./";
-		} else {
-			model.addAttribute("msg", "뭔가 잘못 댐");
-			model.addAttribute("targetURL", "payment");
-			return "err/fail";
+		ReservVO reserv = new ReservVO();
+		String pickupdate = map.get("schedule").split(",")[0];
+		String returndate = map.get("schedule").split(",")[1];
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH");
+		reserv.setReserv_pickupdate(LocalDateTime.parse(pickupdate, formatter));
+		reserv.setReserv_returndate(LocalDateTime.parse(returndate, formatter));
+		reserv.setReserv_pickuplocation(map.get("schedule").split(",")[2]);
+		reserv.setReserv_returnlocation(map.get("schedule").split(",")[3]);
+		reserv.setMember_id(memberId);
+		reserv.setCar_number(carNumber);
+		System.out.println(reserv);
+
+		payment.setMember_id(memberId);
+		payment.setCar_number(carNumber);
+
+		int count1 = paymentService.registReserv(reserv);
+		System.out.println("예약테이블에 데이터 들어가씀 ㅇㄱㄹㅇ");
+		int count2 = paymentService.registerPayment(payment);
+		
+		if(count1 > 0 && count2 > 0) {
+			return "true";
 		}
-		
-		
-		
+		 
+		return "false";
 	}
 	
 	@GetMapping("paymentDetail")
-	public String paymentDetail(Model model, MemberVO member, @RequestParam("idx") int idx, ReservVO reserv) {
+	public String paymentDetail(Model model, MemberVO member, @RequestParam("idx") int idx, ReservVO reserv, PaymentVO payment) {
 		String MemberId = (String)session.getAttribute("member_id");
 		model.addAttribute("info", MyPageService.getMemberInfo(MemberId));
 		reserv = paymentService.getReservationByIdx(idx);
         if (reserv != null && reserv.getReserv_status() == 1) {
             model.addAttribute("reservDetail", reserv);
         } 
+        
+        payment = paymentService.getPaymentByIdx(idx);
+        if(payment != null && payment.getPayment_status() == 1) {
+        	model.addAttribute("paymentDetail", payment);
+        }
         return "payment/paymentDetail"; 
-//        else {
-//            // 예약 상태가 1이 아니거나 예약 정보가 없는 경우 처리할 내용
-//        	model.addAttribute("msg", "뭔가 잘못 댐");
-//			model.addAttribute("targetURL", "payment");
-//			return "err/fail"; // 오류 페이지로 이동하거나 다른 처리를 수행할 수 있습니다.
-//        }
 		
 	}
 }

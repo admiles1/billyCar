@@ -22,7 +22,7 @@
             <select class="form-control" name="member_status">
               <option value="1">회원</option>
               <option value="2">탈퇴회원</option>
-              <option value="3">휴먼</option>
+              <option value="3">휴면회원</option>
               <option value="4">블랙리스트</option>
             </select>
             

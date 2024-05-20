@@ -44,6 +44,7 @@
 
 <!-- 아이콘 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://kit.fontawesome.com/ef42a902c7.js" crossorigin="anonymous"></script>
 <style type="text/css">
 	
 	#optionSelect{
@@ -78,7 +79,7 @@
    width: 300px;
    height: 300px;
 }
-}
+
 
 
 
@@ -260,56 +261,76 @@ function check() {
 	<section class="py-5 text-center container noto-sans-kr" style="margin-top: 30px;">
 		<div class="row py-lg-5">
 			<div class="col-lg-6 col-md-8 mx-auto">
-				<h1 class="fw-light">고객 리뷰</h1>
-				<p class="lead text-body-secondary">위드 렌트카는 이미 많은 고객분들로부터 사랑받고 있습니다.</p>
-				<p>
-					<a href="review" class="btn btn-primary my-2">리뷰 더보기</a>
-				</p>
+				<h1 class="fw-light">맞춤 추천 차량</h1>
+				<p class="lead text-body-secondary">빌리카에게 가장 많은 인기 많은 차량입니다.</p>
+<!-- 				<p> -->
+<!-- 					<a href="review" class="btn btn-primary my-2">리뷰 더보기</a> -->
+<!-- 				</p> -->
 			</div>
 		</div>
 		
-		<!-- 구분  -->
+		<!-- 구분  varstatus 해야라 -->
 		<div class="row row-cols-1 row-cols-md-3 g-4 noto-sans-kr">
+		<c:forEach var="popular" items="${popularList}" varStatus="status">
 		<div class="col">
-			<div class="card h-100">
+			<div class="card h-100" style="position: relative;">
+<!-- 				<div style="position: absolute; left: -50px; top: -50px;"><img width="100" height="100" src="https://img.icons8.com/carbon-copy/100/1-circle.png" alt="1-circle"/></div> -->
+				<div style="position: absolute; left: -50px; top: -50px;"><img width="100" height="100" src="https://img.icons8.com/carbon-copy/100/${status.count}-circle.png" alt="${status.count}-circle"/></div>
 				<img src="resources/main_images/rewiewCar1.png" class="card-img-top" alt="...">
 				<div class="card-body">
-					<h5 class="card-title"><img src="resources/main_images/star5.png"/></h5>
-					<h6 class="card-title">bmw i4</h6>
-					<p class="card-text">좋아요</p>
+				    <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
+				        <h5 style="width: 100px; text-align: right; margin-right: 10px;">모델명</h5>
+				        <p class="lead text-body-secondary" style="margin: 0; width: 200px;">${popular.car_model}</p>
+				    </div>
+				    <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
+				        <h5 style="width: 100px; text-align: right; margin-right: 10px;">차번호</h5>
+				        <p class="lead text-body-secondary" style="margin: 0; width: 200px;">${popular.car_number}</p>
+				    </div>
+				    <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
+				        <h5 style="width: 100px; text-align: right; margin-right: 10px;">연료</h5>
+				        <p class="lead text-body-secondary" style="margin: 0; width: 200px;">${popular.car_fuel}</p>
+				    </div>
+				    <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
+				        <h5 style="width: 100px; text-align: right; margin-right: 10px;">차종류</h5>
+				        <p class="lead text-body-secondary" style="margin: 0; width: 200px;">${popular.car_type}</p>
+				    </div>
 				</div>
 				<div class="card-footer">
-				<small class="text-body-secondary">admin 고객님</small>
+				<small class="text-body-secondary">평균 별점:${popular.review_score}점</small>, 
+				<small class="text-body-secondary">종아요 수:${popular.review_heart }개</small>
 				</div>
 			</div>
 		</div>
-		<div class="col">
-			<div class="card h-100">
-				<img src="resources/main_images/rewiewCar2.png" class="card-img-top" alt="...">
-				<div class="card-body">
-					<h5 class="card-title"><img src="resources/main_images/star5.png"/></h5>
-					<h6 class="card-title">bmw X7</h6>
-					<p class="card-text">직원분들 친절하시고 차량 상태도 좋습니다.</p>
-				</div>
-				<div class="card-footer">
-				<small class="text-body-secondary">한성민 고객님</small>
-				</div>
-			</div>
-		</div>
+		</c:forEach>
+<!-- 		<div class="col"> -->
+<!-- 			<div class="card h-100" style="position: relative;"> -->
+<!-- 				<div style="position: absolute; left: -50px; top: -50px;"><img width="100" height="100" src="https://img.icons8.com/carbon-copy/100/2-circle-c.png" alt="2-circle-c"/></div> -->
+<!-- 				<img src="resources/main_images/rewiewCar2.png" class="card-img-top" alt="..."> -->
+<!-- 				<div class="card-body"> -->
+<!-- 					<h5 class="card-title"><img src="resources/main_images/star5.png"/></h5> -->
+<!-- 					<h6 class="card-title">bmw X7</h6> -->
+<!-- 					<p class="card-text">직원분들 친절하시고 차량 상태도 좋습니다.</p> -->
+<!-- 				</div> -->
+<!-- 				<div class="card-footer"> -->
+<!-- 				<small class="text-body-secondary">한성민 고객님</small> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
 
-		<div class="col">
-			<div class="card h-100">
-				<img src="resources/main_images/rewiewCar3.png" class="card-img-top" alt="...">
-				<div class="card-body">
-					<h5 class="card-title"><img src="resources/main_images/star5.png"/></h5>
-					<h6 class="card-title">기아 k5</h6>
-					<p class="card-text">차량이 너무 깨끗해서 이용하는 기간내내 쾌적해서 좋았어요.</p>
-				</div>
-				<div class="card-footer">
-				<small class="text-body-secondary">한성민 고객님</small>
-				</div>
-			</div>
-		</div>
+<!-- 		<div class="col"> -->
+<!-- 			<div class="card h-100" style="position: relative;"> -->
+<!-- 				<div style="position: absolute; left: -50px; top: -50px;"><img width="100" height="100" src="https://img.icons8.com/carbon-copy/100/3-circle-c.png" alt="3-circle-c"/></div> -->
+<!-- 				<img src="resources/main_images/rewiewCar3.png" class="card-img-top" alt="..."> -->
+<!-- 				<div class="card-body"> -->
+<!-- 					<h5 class="card-title"><img src="resources/main_images/star5.png"/></h5> -->
+<!-- 					<h6 class="card-title">기아 k5</h6> -->
+<!-- 					<p class="card-text">차량이 너무 깨끗해서 이용하는 기간내내 쾌적해서 좋았어요.</p> -->
+<!-- 				</div> -->
+<!-- 				<div class="card-footer"> -->
+<!-- 				<small class="text-body-secondary">한성민 고객님</small> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
 	</div>
 	</section>
    

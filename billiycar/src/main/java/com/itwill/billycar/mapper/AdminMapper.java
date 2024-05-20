@@ -1,6 +1,7 @@
 package com.itwill.billycar.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -10,6 +11,7 @@ import com.itwill.billycar.vo.CarVO;
 import com.itwill.billycar.vo.CommonVO;
 import com.itwill.billycar.vo.MemberVO;
 import com.itwill.billycar.vo.QnaVO;
+import com.itwill.billycar.vo.ReservVO;
 
 @Mapper
 public interface AdminMapper {
@@ -31,8 +33,6 @@ public interface AdminMapper {
 
 	int updateMember(MemberVO member);
 	
-	// 차량 조회
-	List<CarVO> selectCar(CarVO car);
 	
 	List<QnaVO> selectQnaList();
 	
@@ -68,6 +68,22 @@ public interface AdminMapper {
 	int deleteNewModel(String code);
 
 	List<CarVO> selectCarModel(String modelCode);
+
+	int selectCarListCount();
+	List<Map<String, Object>> selectReservation(String carNumber);
+
+	// 차량 조회
+	List<CarVO> selectCarList(@Param(value = "startRow") int startRow
+			,@Param(value = "listLimit") int listLimit);
+
+	List<CarVO> selectcarList(@Param(value = "commonKeyword")String commonKeyword
+							, @Param(value = "searchKeyword") String searchKeyword
+							, @Param(value = "startRow")int startRow
+							, @Param(value = "listLimit")int listLimit);
+
+	String selectSearchTypeCommon(String searchKeyword);
+	String selectSearchTypeCar(String searchKeyword);
+
 	
 	
 }

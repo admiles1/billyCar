@@ -174,14 +174,38 @@ public class MypageController {
 	
 	//예약 현황 리스트 
 	@GetMapping("resvConfirm")
-    public String resvConfirm(HttpSession session, MemberVO member, Model model) {
-        System.out.println("예약확인");
-        
-        member.setMember_id((String)session.getAttribute("member_id"));
-        
-        List<ReservVO> reservList = reservService.selectReservList(member);
+    public String resvConfirm(@RequestParam(defaultValue = "1") int pageNum, 
+    						  MemberVO member, Model model, ReservVO reserv) {
+        // 페이징 
+ 		int listLimit = 5;
+ 		int startRow = (pageNum-1)*listLimit;
+ 		// 1) 전체 예약 목록 갯수 조회
+		String client = (String)session.getAttribute("member_id");
+		int listCount = service.getReservListCount(client);
+		int pageListLimit = 2;
+		//----------------------------------------------------------------
+		int maxPage = listCount/listLimit + (listCount%listLimit > 0 ? 1 : 0);
+		System.out.println(maxPage);
+		//----------------------------------------------------------------
+		//시작페이지 설정
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		//끝페이지 설정
+		int endPage = startPage + pageListLimit - 1;
+		
+		 if (pageNum < 1) {
+			 pageNum = 1;
+	    } else if (pageNum > maxPage) {
+	        pageNum = maxPage;
+	    }
+		
+//		if(endPage > maxPage) {
+//			endPage = maxPage;
+//		}
+		model.addAttribute("pageInfo", new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage));
+		model.addAttribute("pageNum", pageNum);
+		String memberId = (String)session.getAttribute("member_id");
+        List<ReservVO> reservList = reservService.selectReservList(startRow, listLimit, memberId);
         System.out.println("회원의 예약 리스트 보이기 : " + reservList);
-        
         model.addAttribute("reservList", reservList);
         
         return "mypage/page/Mypage_Reservation";
@@ -189,11 +213,35 @@ public class MypageController {
 	
 	@GetMapping("MyInquiry")
     public String MyInquiry(@RequestParam(defaultValue = "1") int pageNum, 
-    						Model model) {
+    						Model model, QnaVO qna) {
+		// 페이징 
+		int listLimit = 10;
+		int startRow = (pageNum-1)*listLimit;
+		// 1) 전체 게시물 수 조회
+		String writer = (String)session.getAttribute("member_id");
+//				System.out.println("누구"+writer);
+		int listCount = service.getQnaListCount(writer);
+//				System.out.println(listCount);
+		int pageListLimit = 3;
+		
+		//----------------------------------------------------------------
+		int maxPage = listCount/listLimit + (listCount%listLimit > 0 ? 1 : 0);
+		System.out.println(maxPage);
+		//----------------------------------------------------------------
+		//시작페이지 설정
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		//끝페이지 설정
+		int endPage = startPage + pageListLimit - 1;
+				
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		model.addAttribute("pageInfo", new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage));
 		String MemberId = (String)session.getAttribute("member_id");
-		List<QnaVO> qnaList = service.getMemberQna(MemberId);
+		List<QnaVO> qnaList = service.getMemberQna(startRow, listLimit, MemberId);
 		model.addAttribute("qna", qnaList);
-        System.out.println("문의 내역");
+//        System.out.println("문의 내역");
         return "mypage/page/Mypage_Inquiry";
     }
 	
@@ -261,11 +309,11 @@ public class MypageController {
 	}
 	
 	
-	@GetMapping("resignReason")
-    public String resignReason() {
-        System.out.println("회원탈퇴 사유 등록");
-        return "mypage/page/Mypage_Delete_Account_Reason";
-    }
+//	@GetMapping("resignReason")
+//    public String resignReason() {
+//        System.out.println("회원탈퇴 사유 등록");
+//        return "mypage/page/Mypage_Delete_Account_Reason";
+//    }
 	
 	@GetMapping("MemberWithdraw")
 	public String withdrawForm(Model model) {

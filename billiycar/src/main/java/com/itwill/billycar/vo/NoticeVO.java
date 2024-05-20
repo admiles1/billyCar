@@ -1,6 +1,6 @@
 package com.itwill.billycar.vo;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import lombok.Data;
 
@@ -11,6 +11,6 @@ public class NoticeVO {
 	private String board_content;
 	private String board_writer;
 	private int board_readcount;
-	private Timestamp board_date;
+	private LocalDateTime board_date;
 	private int board_important;
 }

@@ -57,12 +57,12 @@ public class AdminCusService {
 	// ** [문의] **
 	
 	// 문의 내역 불러오기
-	public List<QnaVO> getQnaList(int startRow, int listLimit) {
-		return mapper.selectQnaList(startRow, listLimit);
+	public List<QnaVO> getQnaList(int startRow, int listLimit, int answer_status) {
+		return mapper.selectQnaList(startRow, listLimit, answer_status);
 	}
 
-	public int getQnaListCount() {
-		return mapper.selectQnaListCount();
+	public int getQnaListCount(int answer_status) {
+		return mapper.selectQnaListCount(answer_status);
 	}
 
 	public QnaVO getQna(QnaVO qna) {
