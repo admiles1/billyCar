@@ -1,6 +1,7 @@
 package com.itwill.billycar.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -33,6 +34,8 @@ public interface ReviewMapper {
 	int deleteHeart(@Param("review_idx") int review_idx,@Param("member_id") String member_id);
 
 	HeartVO selectheartStatus(@Param("review_idx") int review_idx,@Param("member_id") String member_id);
+
+	List<Map<String, String>> selectPopularCar();
 
 	
 

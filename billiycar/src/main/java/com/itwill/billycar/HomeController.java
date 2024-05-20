@@ -1,6 +1,7 @@
 package com.itwill.billycar;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,7 @@ import com.itwill.billycar.service.CsService;
 import com.itwill.billycar.service.Memberservice;
 import com.itwill.billycar.service.PaymentService;
 import com.itwill.billycar.service.ReservService;
+import com.itwill.billycar.service.ReviewService;
 import com.itwill.billycar.vo.FaqVO;
 
 /**
@@ -39,6 +41,9 @@ public class HomeController {
 	
 	@Autowired
 	private PaymentService paymentService;
+	
+	@Autowired
+	private ReviewService reviewService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
@@ -74,6 +79,11 @@ public class HomeController {
 		model.addAttribute("BHS", adminService.getBusinesshours().get(0).getName());
 		model.addAttribute("BHE", adminService.getBusinesshours().get(1).getName());
 		
+		//맞춤 인기 차량 조회
+		List<Map<String, String>>  popularList = reviewService.selectPopularCar();
+		System.out.println("popularCar : " + popularList);
+		
+		model.addAttribute("popularList", popularList);
 		
 		return "index";
 	}
