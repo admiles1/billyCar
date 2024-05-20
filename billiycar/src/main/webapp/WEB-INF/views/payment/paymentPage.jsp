@@ -764,7 +764,7 @@
 				<form action="payment" method="post">
 					<input type="hidden" id="totalAmount" name="totalAmount" value="0">
 <%-- 					<input type="hidden" name="carNumber" value="${car.car_number}"> --%>
-					<input type="button" class="sub_btn w-100 btn btn-primary btn-lg" value="결제하기" onclick="temp()" >
+					<input type="button" class="sub_btn w-100 btn btn-primary btn-lg" value="결제하기" onclick="startPayment()" >
 				</form>			
 			</div>
 			</div>
@@ -813,7 +813,10 @@
                 		dataType : "JSON",
                 		success : function(response) {
                 			if(response) {
-                			 alert("결제 성공");
+        	        			 alert("결제 성공");
+        	        			 location.href="./";
+                			} else {
+                				 alert("헐 실패;");
                 			}
                 		}
                 	
@@ -825,29 +828,7 @@
                 }
             });
         }
-        
-        function temp() {
-        	let totalAmount = document.getElementById('dateDifferenceInput').value.replace(",", "");
-        	$.ajax({
-        		type : "POST",
-        		url : "payment",
-        		data : {
-        			schedule : '${param.schedule}',
-        			car_number : '${param.car_number}',
-        			payment_result_amount : totalAmount
-        		},
-        		dataType : "JSON",
-        		success : function(response) {
-        			if(response) {
-	        			 alert("결제 성공");
-	        			 location.href="./";
-        			} else {
-        				 alert("헐 실패;");
-        			}
-        		}
         	
-        	})
-        }
     </script>
 	
 	
