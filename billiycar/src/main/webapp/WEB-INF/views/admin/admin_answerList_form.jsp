@@ -18,6 +18,16 @@
   #question { font-family: 'Arial', sans-serif; color: #007bff; }
   #answer { font-family: 'Calibri', sans-serif; color: #28a745; }
   .edit-btn { float: right; margin-top: -20px; color: #dc3545; } /* Modified color for visibility */
+  
+  .inline-elements {
+    display: inline-block;
+    vertical-align: middle;
+	}
+	
+	.mr-2 {
+	    margin-right: 0.5rem; /* Adjust as needed */
+	}
+  
 </style>
 </head>
 <body>
@@ -37,7 +47,24 @@
 				<c:if test="${not empty param.pageNum}">
 					<c:set var = "pageNum" value = "${param.pageNum}"/>
 				</c:if>
-		
+				
+				<form class="form-inline mb-3" name="fr" action="adminAnswerList">
+			          <div class="form-group inline-elements margin-right">
+					    <select class="form-control" name="answer">
+					        <option value="all" <c:if test="${param.answer eq 'all'}">selected</c:if>>전체</option>
+					        <option value="no" <c:if test="${param.answer eq 'no'}">selected</c:if>>답변 미완료</option>
+					        <option value="ok" <c:if test="${param.answer eq 'ok'}">selected</c:if>>답변 완료</option>
+					    </select>
+					 </div>
+					 <button type="submit" class="btn btn-primary inline-elements">검색</button>
+		        </form>
+				
+				<c:if test="${param.answer eq 'no'}">
+					<div style="color:#00aaff; text-align:center; margin-bottom : 5px;">
+						<b> 가장 오래된 질문 순으로 보여집니다 :) </b>
+					</div>
+				</c:if>
+				
 				<c:forEach var="qna" items="${qnaList}">
 			        <div class="container">
 			          <div class="row">
@@ -70,7 +97,7 @@
 				<%-- 페이징 --%>
 				<section id = "pageList" style="text-align: center;">
 			
-					<input type="button" value="이전" onclick="location.href='adminAnswerList?pageNum=${pageNum -1}'" 
+					<input type="button" value="이전" onclick="location.href='adminAnswerList?answer=${param.answer}&pageNum=${pageNum -1}'" 
 						<c:if test="${pageNum eq 1 }">disabled</c:if>
 					>
 					
@@ -80,11 +107,11 @@
 								${i}
 							</c:when>
 							<c:otherwise>
-								<a href="adminAnswerList?pageNum=${i}">${i}</a>
+								<a href="adminAnswerList?answer=${param.answer}&pageNum=${i}">${i}</a>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>		
-				<input type="button" value="다음" onclick="location.href='adminAnswerList?pageNum=${pageNum +1}'"
+				<input type="button" value="다음" onclick="location.href='adminAnswerList?answer=${param.answer}&pageNum=${pageNum +1}'"
 					<c:if test="${pageNum eq pageInfo.maxPage }">disabled</c:if>
 				>
 				</section>
