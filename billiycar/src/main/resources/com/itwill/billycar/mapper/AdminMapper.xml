@@ -305,6 +305,13 @@
 		WHERE car_model = #{modelCode}
 	</select>
 	
+	<!-- 차량 번호에 대한 예약 조회 -->
+	<select id="selectReservation" resultType="com.itwill.billycar.vo.ReservVO">
+		SELECT *
+		FROM Reservation
+		WHERE car_number = #{carNumber}
+	</select>
+	
 </mapper>
 
 

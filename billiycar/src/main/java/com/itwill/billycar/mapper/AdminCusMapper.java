@@ -21,8 +21,8 @@ public interface AdminCusMapper {
 	FaqVO selectFaqDetail(int faq_idx); // 자주묻는질문 자세히
 	int updateFaq(FaqVO faq); // 자주묻는질문 수정
 	int deleteFaq(int faq_idx); // 자주묻는질문 삭제
-	List<QnaVO> selectQnaList(@Param(value="startRow") int startRow, @Param(value = "listLimit") int listLimit); // 문의내역 목록 불러오기
-	int selectQnaListCount(); // 문의 내역 개수 가져오기
+	List<QnaVO> selectQnaList(@Param(value="startRow") int startRow, @Param(value = "listLimit") int listLimit, @Param(value = "answer_status") int answer_status); // 문의내역 목록 불러오기
+	int selectQnaListCount(int answer_status); // 문의 내역 개수 가져오기
 	QnaVO selectQna(QnaVO qna); // 문의 내역 답변을 위해 불러오기
 	int updateAnswer(QnaVO qna); // 문의 내역 답변 저장하기
 	int insertCoupon(CouponVO coupon); // 쿠폰 등록하기

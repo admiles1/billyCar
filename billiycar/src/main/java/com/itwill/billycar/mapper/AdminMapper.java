@@ -10,6 +10,7 @@ import com.itwill.billycar.vo.CarVO;
 import com.itwill.billycar.vo.CommonVO;
 import com.itwill.billycar.vo.MemberVO;
 import com.itwill.billycar.vo.QnaVO;
+import com.itwill.billycar.vo.ReservVO;
 
 @Mapper
 public interface AdminMapper {
@@ -68,6 +69,8 @@ public interface AdminMapper {
 	int deleteNewModel(String code);
 
 	List<CarVO> selectCarModel(String modelCode);
+
+	List<ReservVO> selectReservation(String carNumber);
 	
 	
 }

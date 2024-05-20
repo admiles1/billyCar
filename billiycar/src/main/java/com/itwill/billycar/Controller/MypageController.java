@@ -285,11 +285,11 @@ public class MypageController {
 	}
 	
 	
-	@GetMapping("resignReason")
-    public String resignReason() {
-        System.out.println("회원탈퇴 사유 등록");
-        return "mypage/page/Mypage_Delete_Account_Reason";
-    }
+//	@GetMapping("resignReason")
+//    public String resignReason() {
+//        System.out.println("회원탈퇴 사유 등록");
+//        return "mypage/page/Mypage_Delete_Account_Reason";
+//    }
 	
 	@GetMapping("MemberWithdraw")
 	public String withdrawForm(Model model) {

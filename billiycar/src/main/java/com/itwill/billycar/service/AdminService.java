@@ -12,6 +12,7 @@ import com.itwill.billycar.vo.CarVO;
 import com.itwill.billycar.vo.CommonVO;
 import com.itwill.billycar.vo.MemberVO;
 import com.itwill.billycar.vo.QnaVO;
+import com.itwill.billycar.vo.ReservVO;
 
 @Service
 public class AdminService {
@@ -126,6 +127,11 @@ public class AdminService {
 	public List<CarVO> getCarModel(String modelCode) {
 		
 		return mapper.selectCarModel(modelCode);
+	}
+
+	public List<ReservVO> getReservation(String carNumber) {
+		
+		return mapper.selectReservation(carNumber);
 	}
 
 	
