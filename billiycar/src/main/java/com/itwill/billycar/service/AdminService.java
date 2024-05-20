@@ -151,6 +151,11 @@ public class AdminService {
 		return mapper.selectSearchTypeCar(searchKeyword);
 	}
 
+	public List<Map<String, Object>> getPastReservation(String carNumber) {
+		
+		return mapper.selectPastReservation(carNumber);
+	}
+
 
 	
 

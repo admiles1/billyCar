@@ -84,6 +84,8 @@ public interface AdminMapper {
 	String selectSearchTypeCommon(String searchKeyword);
 	String selectSearchTypeCar(String searchKeyword);
 
+	List<Map<String, Object>> selectPastReservation(String carNumber);
+
 	
 	
 }

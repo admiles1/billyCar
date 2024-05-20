@@ -508,9 +508,12 @@ public class AdminController {
 	public String carReservationDetails(String carNumber,Model model) {
 //		System.out.println("차 번호 왔니? " + carNumber);
 		List<Map<String, Object>> rsList = service.getReservation(carNumber);
+		List<Map<String, Object>> rsPastList = service.getPastReservation(carNumber);
 		
-		System.out.println("rsList" + rsList);
+		System.out.println("rsList @@@" + rsList);
+		System.out.println("rsPastList @@@" + rsPastList);
 		model.addAttribute("reservList", rsList);
+		model.addAttribute("pastReservList", rsPastList);
 		return "admin/admin_car_reservationDetails";
 	}
 	

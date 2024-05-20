@@ -337,8 +337,17 @@
 		FROM Reservation r
 		JOIN member m ON r.member_id = m.member_id
 		WHERE car_number = #{carNumber}
+		AND reserv_pickupdate >= NOW()
 	</select>
 	
+	<select id="selectPastReservation" resultType="hashmap">
+		SELECT *
+		FROM Reservation r
+		JOIN member m ON r.member_id = m.member_id
+		WHERE car_number = #{carNumber}
+		AND reserv_pickupdate &lt; NOW()
+	
+	</select>
 	
 	
 </mapper>
