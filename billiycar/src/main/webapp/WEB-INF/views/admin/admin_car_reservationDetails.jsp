@@ -38,6 +38,7 @@
 <body>
 <div class="container">
     <h1 class="reservation-header">차량 예약 내역</h1>
+    <h3> ${reservList}</h3>
 <%--     <c:if test="${not empty reservations}"> --%>
 <%--         <c:forEach var="reservation" items="${reservations}"> --%>
 <!--             <div class="reservation-card"> -->
