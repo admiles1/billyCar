@@ -25,7 +25,7 @@
 			, #{member_phone}
 			, now()
 			, DEFAULT
-			, #{inviter}
+			, #{member_inviter}
 			, DEFAULT
 		)
 	</insert>

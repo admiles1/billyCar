@@ -48,12 +48,18 @@
 	<select id="selectQnaListCount" resultType="int">
 		SELECT COUNT(*)
 		FROM qna
+		<if test="answer_status!=2">
+			WHERE qna_status = #{answer_status}
+		</if>
 	</select>
 	
 	<select id="selectQnaList" resultType="com.itwill.billycar.vo.QnaVO">
 		SELECT *
 		FROM qna
-		ORDER BY qna_idx DESC
+		<if test="answer_status != 2">
+			WHERE qna_status = #{answer_status}
+		</if>
+		ORDER BY qna_status ASC, qna_idx <if test="answer_status != 0"> DESC </if>
 		LIMIT #{startRow}, #{listLimit}
 	</select>
 	
