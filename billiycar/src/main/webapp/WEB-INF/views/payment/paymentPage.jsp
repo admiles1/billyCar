@@ -764,7 +764,7 @@
 				<form action="payment" method="post">
 					<input type="hidden" id="totalAmount" name="totalAmount" value="0">
 <%-- 					<input type="hidden" name="carNumber" value="${car.car_number}"> --%>
-					<input type="submit" class="sub_btn w-100 btn btn-primary btn-lg" value="결제하기" onclick="startPayment();" >
+					<input type="button" class="sub_btn w-100 btn btn-primary btn-lg" value="결제하기" onclick="temp()" >
 				</form>			
 			</div>
 			</div>
@@ -784,7 +784,8 @@
 //         let a = "mer_" + (new Date().getTime());
         
         function startPayment() {
-        	let totalAmount = document.getElementById('totalAmount').value;
+        	let totalAmount = document.getElementById('dateDifferenceInput').value.replace(",", "");
+        	
             IMP.request_pay({
                 pg: "html5_inicis", // 결제 과정에 사용될 결제사 이니시스
                 pay_method: "card", // 결제 수단
@@ -800,13 +801,52 @@
 //                 m_redirect_url: 'http://localhost:8080/billycar/' // 모바일 결제시 리다이렉션될 URL이건 그냥 메인으로 보내면 될듯 이거안쓰고 보내도 될듯
             }, function(rsp) {
                 if (rsp.success) {
-                    alert("결제 성공");
-                    location.href ="./";
+                	
+                	$.ajax({
+                		type : "POST",
+                		url : "payment",
+                		data : {
+                			schedule : '${param.schedule}',
+                			car_number : '${param.car_number}',
+                			payment_result_amount : totalAmount
+                		},
+                		dataType : "JSON",
+                		success : function(response) {
+                			if(response) {
+                			 alert("결제 성공");
+                			}
+                		}
+                	
+                	})
+                	
                 } else {
                     alert("결제 취소");
                     
                 }
             });
+        }
+        
+        function temp() {
+        	let totalAmount = document.getElementById('dateDifferenceInput').value.replace(",", "");
+        	$.ajax({
+        		type : "POST",
+        		url : "payment",
+        		data : {
+        			schedule : '${param.schedule}',
+        			car_number : '${param.car_number}',
+        			payment_result_amount : totalAmount
+        		},
+        		dataType : "JSON",
+        		success : function(response) {
+        			if(response) {
+	        			 alert("결제 성공");
+	        			 location.href="./";
+        			} else {
+        				 alert("헐 실패;");
+        			}
+        		}
+        	
+        	})
         }
     </script>
 	
