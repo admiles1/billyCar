@@ -29,9 +29,9 @@ public class ReservService {
 
 	
 	//예약 현황 리스트
-	public List<ReservVO> selectReservList(MemberVO member) {
-		System.out.println("service에서 값 보기 : " + mapper.selectReservList(member));
-		return mapper.selectReservList(member);
+	public List<ReservVO> selectReservList(int startRow, int listLimit, String memberId) {
+		System.out.println("service에서 값 보기 : " + mapper.selectReservList(memberId, startRow, listLimit));
+		return mapper.selectReservList(memberId, startRow, listLimit);
 	}
 
 	public int updateReviewStatus(int review_idx) {
