@@ -23,6 +23,8 @@ public interface PaymentMapper {
 	
 	ReservVO selectReservDetail(int idx);
 
+	PaymentVO selectPaymentDetail(int idx);
+
 	
 
 	

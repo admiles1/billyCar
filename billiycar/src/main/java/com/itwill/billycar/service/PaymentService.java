@@ -41,6 +41,10 @@ public class PaymentService {
 	public ReservVO getReservationByIdx(int idx) {
 		return mapper.selectReservDetail(idx);
 	}
+
+	public PaymentVO getPaymentByIdx(int idx) {
+		return mapper.selectPaymentDetail(idx);
+	}
 	
 	
 

@@ -33,10 +33,13 @@
 	</select>
 	
 	
-<select id="selectReservDetail" resultType="com.itwill.billycar.vo.ReservVO">
+	<select id="selectReservDetail" resultType="com.itwill.billycar.vo.ReservVO">
 		SELECT * FROM Reservation WHERE reserv_idx = #{idx}
 	</select>
 	
+	<select id="selectPaymentDetail" resultType="com.itwill.billycar.vo.PaymentVO">
+		SELECT 
+	</select>
 	
 	<insert id="insertPayment">
 		INSERT INTO Payment 

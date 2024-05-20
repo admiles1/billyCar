@@ -102,20 +102,19 @@ public class PaymentController {
 	}
 	
 	@GetMapping("paymentDetail")
-	public String paymentDetail(Model model, MemberVO member, @RequestParam("idx") int idx, ReservVO reserv) {
+	public String paymentDetail(Model model, MemberVO member, @RequestParam("idx") int idx, ReservVO reserv, PaymentVO payment) {
 		String MemberId = (String)session.getAttribute("member_id");
 		model.addAttribute("info", MyPageService.getMemberInfo(MemberId));
 		reserv = paymentService.getReservationByIdx(idx);
         if (reserv != null && reserv.getReserv_status() == 1) {
             model.addAttribute("reservDetail", reserv);
         } 
+        
+        payment = paymentService.getPaymentByIdx(idx);
+        if(payment != null && payment.getPayment_status() == 1) {
+        	model.addAttribute("paymentDetail", payment);
+        }
         return "payment/paymentDetail"; 
-//        else {
-//            // 예약 상태가 1이 아니거나 예약 정보가 없는 경우 처리할 내용
-//        	model.addAttribute("msg", "뭔가 잘못 댐");
-//			model.addAttribute("targetURL", "payment");
-//			return "err/fail"; // 오류 페이지로 이동하거나 다른 처리를 수행할 수 있습니다.
-//        }
 		
 	}
 }
