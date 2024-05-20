@@ -1,5 +1,7 @@
 package com.itwill.billycar.Controller;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -10,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwill.billycar.service.MypageService;
 import com.itwill.billycar.service.PaymentService;
@@ -59,30 +62,43 @@ public class PaymentController {
 		return "payment/paymentPage";
 	}
 	
+	@ResponseBody
 	@PostMapping("payment")
-	public String paymentPro(CarVO car , Model model, MemberVO member, PaymentVO payment,
-							@RequestParam(defaultValue = "totalAmount")int totalAmount
-							, @RequestParam(defaultValue = "") Map<String, String> map) {
-		System.out.println("payment 포스트맵핑댐");
-		System.out.println(totalAmount);
-		payment.setPayment_result_amount(totalAmount);
-		System.out.println("결제값 왔나");
-		payment.setPayment_method(1); // 예시: 결제 수단 설정
-	    payment.setPayment_status(1); // 예시: 결제 상태 설정
-	    
-		int paymentCount = paymentService.registerPayment(payment);
+	public String paymentPro(CarVO car 
+							, PaymentVO payment
+							, @RequestParam(defaultValue = "") Map<String, String> map
+							, Model model) {
+		System.out.println("====================================");
+		System.out.println(car);
+		System.out.println(payment);
+		System.out.println(map);
+		String memberId = (String)session.getAttribute("member_id");
+		String carNumber = car.getCar_number();
 		
-		if(paymentCount > 0) {
-			
-			return "reidrect:./";
-		} else {
-			model.addAttribute("msg", "뭔가 잘못 댐");
-			model.addAttribute("targetURL", "payment");
-			return "err/fail";
+		ReservVO reserv = new ReservVO();
+		String pickupdate = map.get("schedule").split(",")[0];
+		String returndate = map.get("schedule").split(",")[1];
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH");
+		reserv.setReserv_pickupdate(LocalDateTime.parse(pickupdate, formatter));
+		reserv.setReserv_returndate(LocalDateTime.parse(returndate, formatter));
+		reserv.setReserv_pickuplocation(map.get("schedule").split(",")[2]);
+		reserv.setReserv_returnlocation(map.get("schedule").split(",")[3]);
+		reserv.setMember_id(memberId);
+		reserv.setCar_number(carNumber);
+		System.out.println(reserv);
+
+		payment.setMember_id(memberId);
+		payment.setCar_number(carNumber);
+
+		int count1 = paymentService.registReserv(reserv);
+		System.out.println("예약테이블에 데이터 들어가씀 ㅇㄱㄹㅇ");
+		int count2 = paymentService.registerPayment(payment);
+		
+		if(count1 > 0 && count2 > 0) {
+			return "true";
 		}
-		
-		
-		
+		 
+		return "false";
 	}
 	
 	@GetMapping("paymentDetail")

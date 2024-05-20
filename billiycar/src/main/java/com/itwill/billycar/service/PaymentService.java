@@ -27,6 +27,10 @@ public class PaymentService {
 		System.out.println("registPayment 서비스 까진옴");
 		return mapper.insertPayment(payment);
 	}
+	
+	public int registReserv(ReservVO reserv) {
+		return mapper.insertRserv(reserv);
+	}
 
 
 
