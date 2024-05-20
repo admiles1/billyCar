@@ -16,25 +16,17 @@
 <!-- 			 ROW_NUMBER() OVER (ORDER BY qna_date DESC) AS new_qna_idx -->
 <!-- 		FROM qna -->
 <!-- 		WHERE qna_writer = #{memberId} -->
-SELECT *
+		SELECT *
 		FROM qna
 		WHERE qna_writer = #{memberId}
 		ORDER BY qna_idx DESC
 		LIMIT #{startRow}, #{listLimit}
 	</select>
     
-<!--     <select id="selcetMemberQna" resultMap="qnaResultMap" parameterType="map"> -->
-<!--     SELECT *,  -->
-<!--          ROW_NUMBER() OVER (ORDER BY qna_date DESC) AS new_qna_idx -->
-<!--     FROM qna -->
-<!--     WHERE qna_writer = #{memberId} -->
-<!--     ORDER BY qna_date DESC -->
-<!--     OFFSET ${(pageNum - 1) * 10} ROWS FETCH NEXT 10 ROWS ONLY -->
-<!-- </select> -->
 
-<select id="selectQnaCount" resultType="int" parameterType="String">
-    SELECT COUNT(*) FROM qna WHERE qna_writer = #{memberId}
-</select>	
+<!-- <select id="selectQnaCount" resultType="int" parameterType="String"> -->
+<!--     SELECT COUNT(*) FROM qna WHERE qna_writer = #{memberId} -->
+<!-- </select>	 -->
     	
     <insert id="insertLicense">
     	INSERT INTO license
@@ -158,7 +150,7 @@ SELECT *
 	<select id="selectQnaListCount" resultType="int">
 		SELECT COUNT(*)
 		FROM qna
-		WHERE qna_writer =#{writer}
+		WHERE qna_writer = #{writer}
 	</select>
 	
 </mapper>
