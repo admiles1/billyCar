@@ -45,8 +45,8 @@ public class AdminService {
 		return mapper.updateMember(member);
 	}
 
-	public List<CarVO> getCar(CarVO car) {
-		return mapper.selectCar(car);
+	public List<CarVO> getCarList(int startRow, int listLimit) {
+		return mapper.selectCarList(startRow, listLimit);
 	}
 	
 	public List<QnaVO> adminAnswerList() {
@@ -132,6 +132,11 @@ public class AdminService {
 	public List<ReservVO> getReservation(String carNumber) {
 		
 		return mapper.selectReservation(carNumber);
+	}
+
+	public int getCarListCount() {
+	
+		return mapper.selectCarListCount();
 	}
 
 	

@@ -98,7 +98,7 @@
 	
 	
 	<!-- 자동차 조회 -->
-	<select id="selectCar" resultType="com.itwill.billycar.vo.CarVO">
+	<select id="selectCarList" resultType="com.itwill.billycar.vo.CarVO">
 		SELECT
 		    c.car_idx,
 		    c.car_number,
@@ -129,7 +129,12 @@
 		ORDER BY
 		    brand.name,       -- 브랜드명으로 정렬
 		    model.name       -- 모델명으로 정렬
-
+		LIMIT #{startRow}, #{listLimit}
+	</select>
+	
+	<select id="selectCarListCount" resultType="int">
+		SELECT COUNT(*)
+		FROM car
 	</select>
 	
 	<delete id="deleteCar">
@@ -311,6 +316,8 @@
 		FROM Reservation
 		WHERE car_number = #{carNumber}
 	</select>
+	
+	
 	
 </mapper>
 

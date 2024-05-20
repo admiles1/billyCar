@@ -47,6 +47,11 @@
         .search-container button {
             flex: 1;
         }
+        .paging {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
         
     </style>
 </head>
@@ -63,6 +68,7 @@
                         <h1 class="h2">차량 목록 조회</h1>
                     </div>
                     <form class="search-container" id="searchForm">
+                   		<c:set var="pageNum" value="${empty param.pageNum ? 1 : param.pageNum}" />
                         <input type="text" id="searchKeyword" class="form-control" placeholder="검색어 입력" value="${param.searchKeyword}">
                         <select id="searchType" class="form-control">
                             <option value="">전체</option>
@@ -114,6 +120,29 @@
                                 </c:forEach>
                             </tbody>
                         </table>
+                       	<nav aria-label="Page navigation example">
+							<div class = "paging">
+						  		<ul class="pagination">
+						    		<li class="page-item">
+								    <a id="previousPageLink" class="page-link" href="admin_car?pageNum=${pageNum - 1}" aria-label="Previous">
+								        <span aria-hidden="true">&laquo;</span>
+								    </a>
+									</li>
+								
+									<c:forEach var="i" begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
+									    <li class="page-item">
+									        <a class="page-link pageLink" href="admin_car?pageNum=${i}">${i}</a>
+									    </li>
+									</c:forEach>
+									
+									<li class="page-item">
+									    <a id="nextPageLink" class="page-link" href="admin_car?pageNum=${pageNum + 1}" aria-label="Next">
+									        <span aria-hidden="true">&raquo;</span>
+									    </a>
+									</li>
+						  		</ul>
+					  		</div>
+						</nav>
                     </div>
                 </main>
             </div>
@@ -151,7 +180,7 @@
 //         function searchCars() {
 //         	$.ajax({
 //         		type : "POST",
-//         		url : "searchCars",
+//         		url : "admin_car",
 //         		data : category = 제조사 / 모델 판별
 //                       text 
 //         	});

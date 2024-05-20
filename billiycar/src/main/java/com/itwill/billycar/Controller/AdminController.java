@@ -5,10 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.itwill.billycar.service.AdminCusService;
 import com.itwill.billycar.service.AdminService;
 import com.itwill.billycar.service.Memberservice;
 import com.itwill.billycar.service.PaymentService;
@@ -33,10 +29,8 @@ import com.itwill.billycar.service.ReviewService;
 import com.itwill.billycar.vo.AdminVO;
 import com.itwill.billycar.vo.CarVO;
 import com.itwill.billycar.vo.CommonVO;
-import com.itwill.billycar.vo.FaqVO;
 import com.itwill.billycar.vo.MemberVO;
 import com.itwill.billycar.vo.PageInfo;
-import com.itwill.billycar.vo.QnaVO;
 import com.itwill.billycar.vo.ReservVO;
 
 @Controller
@@ -200,9 +194,23 @@ public class AdminController {
 
 	// 차량 목록 조회
 	@GetMapping("admin_car")
-	public String admin_car(CarVO car, Model model) {
+	public String admin_car(CarVO car, Model model, @RequestParam(defaultValue = "1") int pageNum) {
 		
-		List<CarVO> carList = service.getCar(car);
+		int listLimit = 10;
+		int startRow = (pageNum - 1) * listLimit;
+		
+		int listCount = service.getCarListCount();
+		int pageListLimit = 3; // 페이지 번호 갯수를 3개로 지정(1 2 3 or 4 5 6 등...)
+		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0);
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		int endPage = startPage + pageListLimit - 1;
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		model.addAttribute("pageInfo", new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage));
+
+		List<CarVO> carList = service.getCarList(startRow, listLimit);
 		model.addAttribute("carList", carList);
 		
 		return "admin/admin_car";

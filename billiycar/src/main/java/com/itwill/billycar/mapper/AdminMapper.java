@@ -33,7 +33,7 @@ public interface AdminMapper {
 	int updateMember(MemberVO member);
 	
 	// 차량 조회
-	List<CarVO> selectCar(CarVO car);
+	List<CarVO> selectCarList(@Param(value = "startRow") int startRow,@Param(value = "listLimit") int listLimit);
 	
 	List<QnaVO> selectQnaList();
 	
@@ -71,6 +71,8 @@ public interface AdminMapper {
 	List<CarVO> selectCarModel(String modelCode);
 
 	List<ReservVO> selectReservation(String carNumber);
+
+	int selectCarListCount();
 	
 	
 }
