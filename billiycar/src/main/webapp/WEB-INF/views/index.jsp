@@ -92,6 +92,7 @@ $(document).ready(function(){
         startDate: '0d',
         orientation: "bottom"
     });
+    
 });
 
 var clickCount = 0;
@@ -214,6 +215,7 @@ function check() {
                         </select>
                     </div>
                 </div>
+                
                 <div style="margin-top: 8px;">
                     <button type="submit" class="btn btn-sm date_btn-black"><i class="fa-solid fa-magnifying-glass"></i> 차량 검색</button>
                 </div>
@@ -221,40 +223,40 @@ function check() {
         </div>
     </div>
 
-<!-- 연습란 -->
-<section class="content__banner bg-light py-5" style="margin-top: 20px;">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="about-reason text-center">
-                    <img src="resources/main_images/icon1.png" width="53" height="53" alt="누적 예약">
-                    <div class="mt-2">
-                        <div class="font-weight-bold">누적예약</div>
-                        <div id="allRsv" class="text-primary">${reservCount }</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="about-reason text-center">
-                    <img src="resources/main_images/icon2.png" width="53" height="53" alt="예약가능차량">
-                    <div class="mt-2">
-                        <div class="font-weight-bold">예약 가능 차량</div>
-                        <div id="ableRsv" class="text-primary">${carCount }</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="about-reason text-center">
-                    <img src="resources/main_images/icon3.png" width="53" height="53" alt="누적 회원 수">
-                    <div class="mt-2">
-                        <div class="font-weight-bold">누적 회원 수</div>
-                        <div id="inCorp" class="text-primary">${memberCount }</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>    	
+	<!-- 연습란 -->
+	<section class="content__banner bg-light py-5" style="margin-top: 20px;">
+	    <div class="container">
+	        <div class="row">
+	            <div class="col-md-4">
+	                <div class="about-reason text-center">
+	                    <img src="resources/main_images/icon1.png" width="53" height="53" alt="누적 예약">
+	                    <div class="mt-2">
+	                        <div class="font-weight-bold">누적예약</div>
+	                        <div id="allRsv" class="text-primary">${reservCount }</div>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="col-md-4">
+	                <div class="about-reason text-center">
+	                    <img src="resources/main_images/icon2.png" width="53" height="53" alt="예약가능차량">
+	                    <div class="mt-2">
+	                        <div class="font-weight-bold">예약 가능 차량</div>
+	                        <div id="ableRsv" class="text-primary">${carCount }</div>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="col-md-4">
+	                <div class="about-reason text-center">
+	                    <img src="resources/main_images/icon3.png" width="53" height="53" alt="누적 회원 수">
+	                    <div class="mt-2">
+	                        <div class="font-weight-bold">누적 회원 수</div>
+	                        <div id="inCorp" class="text-primary">${memberCount }</div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</section>    	
  
    
    <!-- 리뷰 -->
@@ -302,41 +304,9 @@ function check() {
 			</div>
 		</div>
 		</c:forEach>
-<!-- 		<div class="col"> -->
-<!-- 			<div class="card h-100" style="position: relative;"> -->
-<!-- 				<div style="position: absolute; left: -50px; top: -50px;"><img width="100" height="100" src="https://img.icons8.com/carbon-copy/100/2-circle-c.png" alt="2-circle-c"/></div> -->
-<!-- 				<img src="resources/main_images/rewiewCar2.png" class="card-img-top" alt="..."> -->
-<!-- 				<div class="card-body"> -->
-<!-- 					<h5 class="card-title"><img src="resources/main_images/star5.png"/></h5> -->
-<!-- 					<h6 class="card-title">bmw X7</h6> -->
-<!-- 					<p class="card-text">직원분들 친절하시고 차량 상태도 좋습니다.</p> -->
-<!-- 				</div> -->
-<!-- 				<div class="card-footer"> -->
-<!-- 				<small class="text-body-secondary">한성민 고객님</small> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-
-<!-- 		<div class="col"> -->
-<!-- 			<div class="card h-100" style="position: relative;"> -->
-<!-- 				<div style="position: absolute; left: -50px; top: -50px;"><img width="100" height="100" src="https://img.icons8.com/carbon-copy/100/3-circle-c.png" alt="3-circle-c"/></div> -->
-<!-- 				<img src="resources/main_images/rewiewCar3.png" class="card-img-top" alt="..."> -->
-<!-- 				<div class="card-body"> -->
-<!-- 					<h5 class="card-title"><img src="resources/main_images/star5.png"/></h5> -->
-<!-- 					<h6 class="card-title">기아 k5</h6> -->
-<!-- 					<p class="card-text">차량이 너무 깨끗해서 이용하는 기간내내 쾌적해서 좋았어요.</p> -->
-<!-- 				</div> -->
-<!-- 				<div class="card-footer"> -->
-<!-- 				<small class="text-body-secondary">한성민 고객님</small> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
 	</div>
 	</section>
    
-	
-
-
 	<!-- FAQ -->
 	<section class="py-2 text-center container noto-sans-kr" style="margin-top: 30px;">
 		<div class="row py-lg-5">
@@ -367,11 +337,8 @@ function check() {
 			</div>
 		</c:forEach>
 	</div>
-		
 	</section>
 
-	
-	
 	<!-- 맞춤 추천 theme-->
 	<section class="py-2 text-center container noto-sans-kr" style="margin-top: 100px;">
 		<div class="row py-lg-5">
@@ -381,10 +348,7 @@ function check() {
 			</div>
 		</div>
 	</section>  
-	
-
-	  <div class="container marketing noto-sans-kr" style="text-align: center;">
-
+	<div class="container marketing noto-sans-kr" style="text-align: center;">
     <div class="row">
         	<div class="col-md-4">
         		<div class="card">
@@ -418,8 +382,55 @@ function check() {
 			</div>
 		</div>
     </div>
+    
+    <!-- 지도 -->
+    
+    <section class="py-2 text-center container noto-sans-kr" style="margin-top: 100px;">
+		<div class="row py-lg-5">
+			<div class="col-lg-6 col-md-8 mx-auto">
+				<h1 class="fw-light">오시는 길</h1>
+				<p class="lead text-body-secondary">부산광역시 부산진구 동천로 109 삼한골든게이트 7층</p>
+			</div>
+		</div>
+	</section>  
+	
+	
+	
+	<!-- 지도 -->
+    <section class="py-5" style="margin-top: -50px;">
+        <div class="container d-flex justify-content-center align-items-center">
+            <div class="row">
+                <div id="map" style="width: 1296px; height: 400px;"></div>
+            </div>
+        </div>
+    </section>
+        
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=df9a4a8523d874b7750523a91471020a&libraries=services"></script>
+    <script type="text/javascript">
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = { 
+        center: new kakao.maps.LatLng(35.1584897298991, 129.06205146230675), // 지도의 중심좌표
+        level: 1 // 지도의 확대 레벨
+    };
+
+	var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+	
+	// 마커가 표시될 위치입니다 
+	var markerPosition  = new kakao.maps.LatLng(35.1584897298991, 129.06205146230675); 
+	
+	// 마커를 생성합니다
+	var marker = new kakao.maps.Marker({
+	    position: markerPosition
+	});
+	
+	// 마커가 지도 위에 표시되도록 설정합니다
+	marker.setMap(map);
+    
+	</script>
+    
     <div id="overlay" onclick="countClicks()"></div>
 <!--     <button id="adminButton" onclick="redirectToAdminPage()">관리자페이지 이동</button> -->
+	
 </main>
 <footer><jsp:include page="inc/bottom.jsp"></jsp:include></footer>
 
