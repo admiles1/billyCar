@@ -131,7 +131,7 @@ function check() {
 
  <!-- 메인 부분 -->
 <main class="container" style="position: relative; z-index: 1; margin-top: 37px;">
-
+	<c:set var="member_id" value="${sessionScope.member_id}"></c:set>
 	<div id="carouselExample" class="carousel slide">
   <div class="carousel-inner">
     <div class="carousel-item active">
@@ -350,36 +350,17 @@ function check() {
 	</section>  
 	<div class="container marketing noto-sans-kr" style="text-align: center;">
     <div class="row">
-        	<div class="col-md-4">
-        		<div class="card">
-                	<img src="resources/event_images/envent_page_event1-1.webp" class="card-img-top" alt="이벤트 이미지 1" width="300" height="300">
-                    <div class="card-body">
-                    	<h5 class="card-title">유아용 카시트 무료 이벤트!</h5>
-                    	<p class="card-text">다자녀 고객 당신은 애국자! 애국자한테 드리는 유아용 카시트 무료 이벤트!(자녀3이상일 경우)</p>
-                    	<a href="event1" class="btn btn-primary">자세히 보기</a>
+    		<c:forEach var="event" items="${eventList}">
+	        	<div class="col-md-4">
+	        		<div class="card">
+	                	<img src="resources/event_images/envent_page_event1-1.webp" class="card-img-top" alt="이벤트 이미지 1" width="300" height="300">
+	                    <div class="card-body">
+	                    	<h5 class="card-title">${event.event_title }</h5>
+								<a href="eventContent?event_idx=${event.event_idx}" class="btn btn-primary">쿠폰 받으러 가기</a>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="card">
-					<img src="resources/event_images/envent_page_event2-1.webp" class="card-img-top" alt="이벤트 이미지 2" width="300" height="300">
-					<div class="card-body">
-						<h5 class="card-title">현대차 렌트 할인 이벤트!</h5>
-						<p class="card-text">현대차 렌트 시 5000원 할인 이벤트!</p><br>
-						<a href="event2" class="btn btn-primary">자세히 보기</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="card">
-					<img src="resources/event_images/envent_page_event3-1.webp" class="card-img-top" alt="이벤트 이미지 1" width="300" height="300">
-					<div class="card-body">
-						<h5 class="card-title">첫 고객 할인 이벤트!</h5>
-						<p class="card-text">빌리카가 쏜다! 첫 고객 할인 이벤트!</p><br>
-						<a href="event3" class="btn btn-primary">자세히 보기</a>
-					</div>
-				</div>
-			</div>
+			</c:forEach>
 		</div>
     </div>
     

@@ -11,7 +11,7 @@ public interface EventMapper {
 
 	int insertEvent(EventVO event);
 
-	List<EventVO> selectEventList();
+	List<EventVO> selectEventList(int limit);
 
 	EventVO selectEventContent(int event_idx);
 

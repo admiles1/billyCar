@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.itwill.billycar.service.EventService;
@@ -30,7 +31,7 @@ public class EventController {
 	@GetMapping("event")
 	public String event(Model model) {
 		
-		List<EventVO> eventList =  service.selectEventList();
+		List<EventVO> eventList =  service.selectEventList(100);
 //		System.out.println(eventList);
 		model.addAttribute("eventList", eventList);
 		
@@ -39,13 +40,15 @@ public class EventController {
 	
 	@GetMapping("eventContent")
 	public String eventContent(Model model, EventVO event) {
-		
+		System.out.println("event : " + event);
 		event = service.selectEventContent(event.getEvent_idx());
 		System.out.println(event);
 		model.addAttribute("event", event);
 		
 		return "event/event_content";
 	}
+	
+	
 	
 	
 //	@GetMapping("event2")

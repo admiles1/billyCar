@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.itwill.billycar.service.AdminService;
 import com.itwill.billycar.service.CsService;
+import com.itwill.billycar.service.EventService;
 import com.itwill.billycar.service.Memberservice;
 import com.itwill.billycar.service.PaymentService;
 import com.itwill.billycar.service.ReservService;
 import com.itwill.billycar.service.ReviewService;
+import com.itwill.billycar.vo.EventVO;
 import com.itwill.billycar.vo.FaqVO;
 
 /**
@@ -27,23 +29,14 @@ public class HomeController {
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
-	@Autowired
-	private CsService csService;
-
-	@Autowired
-	private ReservService reservService;
+	@Autowired private CsService csService;
+	@Autowired private ReservService reservService;
+	@Autowired private AdminService adminService;
+	@Autowired private Memberservice memberService;
+	@Autowired private PaymentService paymentService;
+	@Autowired private ReviewService reviewService;
+	@Autowired private EventService eventService;
 	
-	@Autowired
-	private AdminService adminService;
-	
-	@Autowired
-	private Memberservice memberService;
-	
-	@Autowired
-	private PaymentService paymentService;
-	
-	@Autowired
-	private ReviewService reviewService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
@@ -85,6 +78,12 @@ public class HomeController {
 		
 		model.addAttribute("popularList", popularList);
 		
+		//이벤트 리스트
+		int limit = 3;
+		List<EventVO> eventList =  eventService.selectEventList(limit);
+		System.out.println("eventList : " + eventList);
+		
+		model.addAttribute("eventList", eventList);
 		return "index";
 	}
 

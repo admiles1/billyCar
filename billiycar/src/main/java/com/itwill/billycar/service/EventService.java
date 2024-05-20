@@ -17,8 +17,8 @@ public class EventService {
 		return mapper.insertEvent(event);
 	}
 
-	public List<EventVO> selectEventList() {
-		return mapper.selectEventList();
+	public List<EventVO> selectEventList(int limit) {
+		return mapper.selectEventList(limit);
 	}
 
 	public EventVO selectEventContent(int event_idx) {

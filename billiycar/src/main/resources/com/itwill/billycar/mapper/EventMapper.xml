@@ -18,6 +18,7 @@
 		SELECT *
 		FROM event
 		ORDER BY event_idx desc
+		limit #{limit}
 	</select>
 	
 	<select id="selectEventContent">

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -58,20 +59,30 @@
 		          <h5 class="card-title" style="text-align: center">쿠폰</h5>
 		          
 		          <form action="couponAdd" method="post">
-		          
+		          	
+		          	<!-- event_idx -->
+		            <div class="form-group">
+		               <label for="inquiry">이벤트 선택</label>
+		               <select class="form-control" name="event_idx">
+		               	   <c:forEach var="event" items="${eventList}">	
+				               <option value="${event.event_idx }">${event.event_title }</option>
+			               </c:forEach>
+			           </select>
+		            </div>
+		          	
 		            <!-- 쿠폰이름 -->
 		            <div class="form-group">
-		              <label for="inquiry">쿠폰 이름</label><input type="text" placeholder="쿠폰 이름을 입력하세요" required="required" name="coupon_name">
+		              <label for="inquiry">쿠폰 이름</label><input type="text" class="form-control" placeholder="쿠폰 이름을 입력하세요" required="required" name="coupon_name">
 		            </div>
 		            
 		            <!-- 쿠폰 번호 -->
 		            <div class="form-group">
-		              <label for="response">쿠폰 코드</label> <input type="text" placeholder="쿠폰코드를 입력하세요" required="required" name="coupon_code">
+		              <label for="response">쿠폰 코드</label> <input type="text" class="form-control" placeholder="쿠폰코드를 입력하세요" required="required" name="coupon_code">
 		            </div>
 		            
 		            <!-- 쿠폰 할인율 -->
 		            <div class="form-group">
-		              <label for="response">할인 금액</label> <input type="text" placeholder="금액을 입력하세요" required="required" name="coupon_discount_amount" style="width:200px">
+		              <label for="response">할인 금액</label> <input type="text" class="form-control" placeholder="금액을 입력하세요" required="required" name="coupon_discount_amount">
 		            </div>
 		            
 		            <!-- 제출 버튼 -->

@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.billycar.service.AdminCusService;
+import com.itwill.billycar.service.EventService;
 import com.itwill.billycar.vo.CouponVO;
+import com.itwill.billycar.vo.EventVO;
 import com.itwill.billycar.vo.FaqVO;
 import com.itwill.billycar.vo.MemberVO;
 import com.itwill.billycar.vo.PageInfo;
@@ -29,6 +31,9 @@ public class AdminCusController {
 	
 	@Autowired
 	private HttpSession session;
+	
+	@Autowired
+	private EventService eventService;
 	
 	// 자주묻는질문 목록
 	@GetMapping("admin_counsel")
@@ -214,7 +219,11 @@ public class AdminCusController {
 	}
 	
 	@GetMapping("couponAdd")
-	public String couponAdd() {
+	public String couponAdd(Model model) {
+		List<EventVO> eventList = eventService.selectEventList(100);
+		System.out.println(eventList);
+		
+		model.addAttribute("eventList", eventList);
 		return "admin/couponAdd";
 	}
 	

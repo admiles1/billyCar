@@ -7,6 +7,8 @@
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script type="text/javascript">
 	$(function(){
+		
+		
 	    $("#modifyBtn").on("click", function() {
 	        if(confirm("삭제하시겠습니까?")) {
 	            location.href = "eventDelete?event_idx=${event.event_idx}";
@@ -14,7 +16,13 @@
 	            return false;
 	        }
 	    });
+	    
 	});
+	
+	function couponIssue(){
+		var member_id = "${sessionScope.member_id}";
+    	var coupon_id = 1;
+     }
 
 </script>
 <meta charset="UTF-8">
@@ -40,10 +48,9 @@
 	    	</div>
     	</c:if>
 		<div class="card">
-			<div class="card-body">
-			
-				<div style="text-align: center;"> ${event.event_content}</div>
-                
+			<div class="card-body" style="text-align: center;">
+				<div> ${event.event_content}</div>
+                <a onclick="couponIssue()" class="btn btn-primary">쿠폰 받기</a>
 			</div>
 		</div>
 		<p class="mt-3">추가 문의사항이 있는 경우 이벤트 문의 메일(itwillbs_3@itwillbs.co.kr)로 연락 주시기 바랍니다.</p>
