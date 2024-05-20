@@ -86,6 +86,26 @@
     
 </style>
 <script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+    var previousPageLink = document.getElementById('previousPageLink');
+    var nextPageLink = document.getElementById('nextPageLink');
+
+    // pageNum이 1 이하일 경우 이전 페이지 링크를 비활성화합니다.
+    if (${pageNum le 1}) {
+        previousPageLink.addEventListener('click', function(event) {
+            event.preventDefault(); // 링크 클릭을 막음
+            alert("더이상 페이지가 없습니다");
+        });
+    }
+
+    // endPage가 maxPage보다 크거나 pageNum + 1이 maxPage보다 클 경우 다음 페이지 링크를 비활성화합니다.
+    if (${endPage gt pageInfo.maxPage} || ${pageNum + 1 gt pageInfo.maxPage}) {
+        nextPageLink.addEventListener('click', function(event) {
+            event.preventDefault(); // 링크 클릭을 막음
+            alert("더이상 페이지가 없습니다");
+        });
+    }
+});
 
 function showReview(value){
 	console.log(value);
@@ -130,26 +150,28 @@ function check(){
 	return true;
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    var previousPageLink = document.getElementById('previousPageLink');
-    var nextPageLink = document.getElementById('nextPageLink');
 
-    // pageNum이 1 이하일 경우 이전 페이지 링크를 비활성화합니다.
-    if (${pageNum le 1}) {
-        previousPageLink.addEventListener('click', function(event) {
-            event.preventDefault(); // 링크 클릭을 막음
-            alert("더이상 페이지가 없습니다");
-        });
-    }
 
-    // endPage가 maxPage보다 크거나 pageNum + 1이 maxPage보다 클 경우 다음 페이지 링크를 비활성화합니다.
-    if (${endPage gt pageInfo.maxPage} || ${pageNum + 1 gt pageInfo.maxPage}) {
-        nextPageLink.addEventListener('click', function(event) {
-            event.preventDefault(); // 링크 클릭을 막음
-            alert("더이상 페이지가 없습니다");
-        });
-    }
-});
+// document.addEventListener('DOMContentLoaded', function() {
+//     var previousPageLink = document.getElementById('previousPageLink');
+//     var nextPageLink = document.getElementById('nextPageLink');
+
+//     // pageNum이 1 이하일 경우 이전 페이지 링크를 비활성화합니다.
+//     if (${pageNum le 1}) {
+//         previousPageLink.addEventListener('click', function(event) {
+//             event.preventDefault(); // 링크 클릭을 막음
+//             alert("더이상 페이지가 없습니다");
+//         });
+//     }
+
+//     // endPage가 maxPage보다 크거나 pageNum + 1이 maxPage보다 클 경우 다음 페이지 링크를 비활성화합니다.
+//     if (${endPage gt pageInfo.maxPage} || ${pageNum + 1 gt pageInfo.maxPage}) {
+//         nextPageLink.addEventListener('click', function(event) {
+//             event.preventDefault(); // 링크 클릭을 막음
+//             alert("더이상 페이지가 없습니다");
+//         });
+//     }
+// });
 
 window.onload = function() {
     let message = "${message}";
@@ -172,6 +194,7 @@ window.onload = function() {
     <table border="1">
     	<thead>
 	        <tr>
+	        	<th>예약번호</th>
 	            <th>예약일</th>
 	            <th>대여일</th>
 	            <th>반납일</th>
@@ -185,12 +208,14 @@ window.onload = function() {
                 <%-- 문의 내역이 존재하지 않을 경우 --%>
                 <c:when test="${empty reservList}">
                     <tr>
-                        <td colspan="6">예약내역이 존재하지 않습니다</td>
+                        <td colspan="7">예약내역이 존재하지 않습니다</td>
                     </tr>
                 </c:when>
                 <c:otherwise>
 		        	<c:forEach var="reserv" items="${reservList}">
+			        	<c:set var="i" value="${i+1}"></c:set>
 			        	<tr>
+			        		<td>${i}</td>
 			        		<td>${reserv.reserv_reg_date}</td>
 				        	<td>${reserv.reserv_pickupdate }</td>
 				            <td>${reserv.reserv_returndate }</td>

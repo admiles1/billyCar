@@ -30,7 +30,6 @@ public class ReservService {
 	
 	//예약 현황 리스트
 	public List<ReservVO> selectReservList(int startRow, int listLimit, String memberId) {
-		System.out.println("service에서 값 보기 : " + mapper.selectReservList(memberId, startRow, listLimit));
 		return mapper.selectReservList(memberId, startRow, listLimit);
 	}
 

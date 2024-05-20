@@ -177,12 +177,12 @@ public class MypageController {
     public String resvConfirm(@RequestParam(defaultValue = "1") int pageNum, 
     						  MemberVO member, Model model, ReservVO reserv) {
         // 페이징 
- 		int listLimit = 10;
+ 		int listLimit = 5;
  		int startRow = (pageNum-1)*listLimit;
  		// 1) 전체 예약 목록 갯수 조회
 		String client = (String)session.getAttribute("member_id");
 		int listCount = service.getReservListCount(client);
-		int pageListLimit = 3;
+		int pageListLimit = 2;
 		//----------------------------------------------------------------
 		int maxPage = listCount/listLimit + (listCount%listLimit > 0 ? 1 : 0);
 		System.out.println(maxPage);
@@ -191,13 +191,20 @@ public class MypageController {
 		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
 		//끝페이지 설정
 		int endPage = startPage + pageListLimit - 1;
-				
-		if(endPage > maxPage) {
-			endPage = maxPage;
-		}
+		
+		 if (pageNum < 1) {
+			 pageNum = 1;
+	    } else if (pageNum > maxPage) {
+	        pageNum = maxPage;
+	    }
+		
+//		if(endPage > maxPage) {
+//			endPage = maxPage;
+//		}
 		model.addAttribute("pageInfo", new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage));
-		String MemberId = (String)session.getAttribute("member_id");
-        List<ReservVO> reservList = reservService.selectReservList(startRow, listLimit, MemberId);
+		model.addAttribute("pageNum", pageNum);
+		String memberId = (String)session.getAttribute("member_id");
+        List<ReservVO> reservList = reservService.selectReservList(startRow, listLimit, memberId);
         System.out.println("회원의 예약 리스트 보이기 : " + reservList);
         model.addAttribute("reservList", reservList);
         
