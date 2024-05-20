@@ -59,7 +59,7 @@
 </head>
 <body>
 
-<form id="delete-acc" action="MemberWithdraw" method="post">
+<form id="delete-acc" action="MemberWithdraw" method="post" onsubmit="return confirmDelete()">
     <h2>회원탈퇴</h2>
     <hr>
     <p>회원탈퇴를 진행하시려면 비밀번호를 입력해주세요.</p>
@@ -68,7 +68,11 @@
 	    <input type="submit" value="회원탈퇴">
 	</div>
 </form>
-
+<script>
+    function confirmDelete() {
+        return confirm('정말 탈퇴하시겠습니까?');
+    }
+</script>
 
 </body>
 </html>
