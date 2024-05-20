@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,24 +28,35 @@
         margin-bottom: 20px;
     }
     
-    table {
+     table {
         width: 100%;
         border-collapse: collapse;
-        border: 1px solid #ccc;
-        margin-top: 50px;
+        margin-top: 45px;
         text-align: center;
+        table-layout: fixed;
+        border-radius: 8px; /* 모서리 둥글게 처리 */
+        overflow: hidden;
     }
     
     th, td {
         border: 1px solid #ccc;
-        padding: 10px;
+        padding: 15px; /* 셀 간격 늘리기 */
         text-align: center;
-        white-space: nowrap; /* 한 줄로 표시되도록 설정 */
+        white-space: nowrap;
+        overflow: hidden;
     }
     
     th {
         background-color: #f2f2f2;
-        text-align: center;
+        font-weight: bold;
+    }
+    
+     tr:nth-child(even) {
+        background-color: #f9f9f9; /* 번갈아가는 행 색상 */
+    }
+
+    tr:hover {
+        background-color: #f5f5f5; /* 호버 효과 */
     }
     
      .pagination-container {
@@ -84,6 +96,33 @@
         border-color: #dee2e6;
     }
     
+    .reservNum {
+    	width: 10%;
+    }
+    
+    .reservRegDate {
+    	width: 25%;
+    }
+    
+    .reservPickupDate {
+    	width: 15%
+    }
+    
+    .reservReturnDate {
+    	width: 15%;
+    }
+    
+    .reservStatus {
+    	width: 15%;
+    }
+    
+    .reservDetail {
+    	width: 15%;
+    }
+    
+    .review {
+    	width: 15%;
+    }
 </style>
 <script type="text/javascript">
 document.addEventListener('DOMContentLoaded', function() {
@@ -150,29 +189,6 @@ function check(){
 	return true;
 }
 
-
-
-// document.addEventListener('DOMContentLoaded', function() {
-//     var previousPageLink = document.getElementById('previousPageLink');
-//     var nextPageLink = document.getElementById('nextPageLink');
-
-//     // pageNum이 1 이하일 경우 이전 페이지 링크를 비활성화합니다.
-//     if (${pageNum le 1}) {
-//         previousPageLink.addEventListener('click', function(event) {
-//             event.preventDefault(); // 링크 클릭을 막음
-//             alert("더이상 페이지가 없습니다");
-//         });
-//     }
-
-//     // endPage가 maxPage보다 크거나 pageNum + 1이 maxPage보다 클 경우 다음 페이지 링크를 비활성화합니다.
-//     if (${endPage gt pageInfo.maxPage} || ${pageNum + 1 gt pageInfo.maxPage}) {
-//         nextPageLink.addEventListener('click', function(event) {
-//             event.preventDefault(); // 링크 클릭을 막음
-//             alert("더이상 페이지가 없습니다");
-//         });
-//     }
-// });
-
 window.onload = function() {
     let message = "${message}";
     if (message) {
@@ -191,16 +207,16 @@ window.onload = function() {
     <c:if test="${not empty param.pageNum}">
         <c:set var="pageNum" value="${param.pageNum}"/>
     </c:if>
-    <table border="1">
+    <table>
     	<thead>
 	        <tr>
-	        	<th>예약번호</th>
-	            <th>예약일</th>
-	            <th>대여일</th>
-	            <th>반납일</th>
-	            <th>예약상태</th>
-	            <th>예약상세</th>
-	            <th>리뷰</th>
+	        	<th class="reservNum">예약번호</th>
+	            <th class="reservRegDate">예약일</th>
+	            <th class="reservPickupDate">대여일</th>
+	            <th class="reservReturnDate">반납일</th>
+	            <th class="reservStatus">예약상태</th>
+	            <th class="reservDetail">예약상세</th>
+	            <th class="review">리뷰</th>
 	        </tr>
         </thead>
         <tbody>
@@ -215,10 +231,15 @@ window.onload = function() {
 		        	<c:forEach var="reserv" items="${reservList}">
 			        	<c:set var="i" value="${i+1}"></c:set>
 			        	<tr>
-			        		<td>${i}</td>
-			        		<td>${reserv.reserv_reg_date}</td>
-				        	<td>${reserv.reserv_pickupdate }</td>
-				            <td>${reserv.reserv_returndate }</td>
+			        		
+			        		<td>${i} </td>
+			        		<c:set var="regDate" value="${fn:split(fn:split(reserv.reserv_reg_date, 'T')[0], '-')}" />
+							<c:set var="regDateTime" value="${fn:split(fn:split(reserv.reserv_reg_date, 'T')[1], ':')}" />
+							<td>${regDate[0]}-${regDate[1]}-${regDate[2]} ${regDateTime[0]}:${regDateTime[1]}</td>
+				        	<c:set var="pickupDate" value="${fn:split(reserv.reserv_pickupdate, 'T')[0]}" />
+							<td>${pickupDate}</td>
+							<c:set var="returnDate" value="${fn:split(reserv.reserv_returndate, 'T')[0]}" />
+				            <td>${returnDate}</td>
 				            <td>
 				            	<c:choose>
 				            		<c:when test="${reserv.reserv_status eq 1}">

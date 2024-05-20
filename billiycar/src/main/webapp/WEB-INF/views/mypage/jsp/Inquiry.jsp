@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -155,7 +155,9 @@
                             <td class="text-left">
                                 ${qna.qna_content}
                             </td>
-                            <td class="text-left"><fmt:formatDate value="${qna.qna_date}" pattern="yy-MM-dd HH:mm"/></td>
+                            <c:set var="qnaDate" value="${fn:split(fn:split(qna.qna_date, 'T')[0], '-')}" />
+							<c:set var="qnaDateTime" value="${fn:split(fn:split(qna.qna_date, 'T')[1], ':')}" />
+							<td>${qnaDate[0]}-${qnaDate[1]}-${qnaDate[2]} ${qnaDateTime[0]}:${qnaDateTime[1]}</td>
                             <td class="text-left">
                                 <c:choose>
                                     <c:when test="${qna.qna_status eq 0}">
