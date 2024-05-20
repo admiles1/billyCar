@@ -16,8 +16,8 @@ public class GuideService {
 	@Autowired
 	private GuideMapper mapper;
 
-	public List<Map<String, Object>> carList() {
-        return mapper.selectCarList();
+	public List<Map<String, Object>> carList(int startRow, int listLimit) {
+        return mapper.selectCarList(startRow,listLimit);
 	}
 
 }

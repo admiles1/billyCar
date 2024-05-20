@@ -18,7 +18,8 @@
   		  JOIN Common fuel ON fuel.code = c.car_fuel
  		 GROUP BY 
     		   model.name, carType.name, c.car_dayprice, c.car_hourprice, c.car_capacity 
- 		 ORDER BY model.name;
+ 		 ORDER BY model.name
+ 		 LIMIT #{startRow} , #{listLimit}
 	</select>
 	
 </mapper>	

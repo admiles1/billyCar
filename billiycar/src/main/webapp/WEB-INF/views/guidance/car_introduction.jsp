@@ -146,6 +146,14 @@
                 <h2 style="text-align: center">차량소개</h2>
             </div>
         </div>
+        <div align="center">
+        	<select>
+        		<option> 제조사 </option>
+        		<option> 모델명 </option>
+        	</select>
+        	<input type="text" placeholder="검색어 입력">
+        	<input type="button" value="검색">
+        </div>
         <div class="cont" id="listEnd">
         
         <c:forEach var="car" items="${carList}">
