@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,7 +32,6 @@ import com.itwill.billycar.vo.CarVO;
 import com.itwill.billycar.vo.CommonVO;
 import com.itwill.billycar.vo.MemberVO;
 import com.itwill.billycar.vo.PageInfo;
-import com.itwill.billycar.vo.ReservVO;
 
 @Controller
 public class AdminController {
@@ -479,13 +479,9 @@ public class AdminController {
 	@GetMapping("carReservationDetails")
 	public String carReservationDetails(String carNumber,Model model) {
 //		System.out.println("차 번호 왔니? " + carNumber);
-		List<ReservVO> rsList = service.getReservation(carNumber);
+		List<Map<String, Object>> rsList = service.getReservation(carNumber);
 		
-		System.out.println("=============================================");
-		for(ReservVO car : rsList) {
-			System.out.println(car);
-		}
-		
+		System.out.println("rsList" + rsList);
 		model.addAttribute("reservList", rsList);
 		return "admin/admin_car_reservationDetails";
 	}

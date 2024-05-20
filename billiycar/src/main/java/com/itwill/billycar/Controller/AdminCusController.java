@@ -141,16 +141,12 @@ public class AdminCusController {
 		// 답변 상태 파라미터 int로 바꿔주기
 		int answer_status = 0;
 		
-		System.out.println("머가넘어오나"+answer);
-		
 		switch (answer) {
 			case "all":
 			case "": answer_status = 2; break;
 			case "ok": answer_status = 1; break;
 			case "no": answer_status = 0; break;
 		}
-		
-		System.out.println(answer_status);
 		
 		int listLimit = 5;
 		int startRow = (pageNum-1)*listLimit;

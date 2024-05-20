@@ -1,6 +1,7 @@
 package com.itwill.billycar.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -129,7 +130,7 @@ public class AdminService {
 		return mapper.selectCarModel(modelCode);
 	}
 
-	public List<ReservVO> getReservation(String carNumber) {
+	public List<Map<String, Object>> getReservation(String carNumber) {
 		
 		return mapper.selectReservation(carNumber);
 	}

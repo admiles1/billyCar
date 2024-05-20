@@ -38,26 +38,28 @@
 <body>
 <div class="container">
     <h1 class="reservation-header">차량 예약 내역</h1>
-    <h3> ${reservList}</h3>
-<%--     <c:if test="${not empty reservations}"> --%>
-<%--         <c:forEach var="reservation" items="${reservations}"> --%>
-<!--             <div class="reservation-card"> -->
-<!--                 <dl class="reservation-details"> -->
-<!--                     <dt>예약자:</dt> -->
-<%--                     <dd>${reservation.reserver}</dd> --%>
-<!--                     <dt>예약 날짜:</dt> -->
-<%--                     <dd>${reservation.date}</dd> --%>
-<!--                     <dt>예약 시간:</dt> -->
-<%--                     <dd>${reservation.time}</dd> --%>
-<!--                 </dl> -->
-<!--             </div> -->
-<%--         </c:forEach> --%>
-<%--     </c:if> --%>
-<%--     <c:if test="${empty reservations}"> --%>
-<!--         <div class="alert alert-info"> -->
-<!--             예약 내역이 없습니다. -->
-<!--         </div> -->
-<%--     </c:if> --%>
+<%--     <h3> ${reservList}</h3> --%>
+    <c:if test="${not empty reservList}">
+        <c:forEach var="reservation" items="${reservList}">
+            <div class="reservation-card">
+                <dl class="reservation-details">
+                    <dt>예약자:</dt>
+                    <dd>${reservation.member_name}</dd>
+                    <dt>결제 시간:</dt>
+                    <dd>${reservation.reserv_reg_date}</dd>
+                    <dt>예약 시간:</dt>
+                    <dd>${reservation.reserv_pickupdate}</dd>
+                    <dt>반납 시간:</dt>
+                    <dd>${reservation.reserv_returndate}</dd>
+                </dl>
+            </div>
+        </c:forEach>
+    </c:if>
+    <c:if test="${empty reservations}">
+        <div class="alert alert-info">
+            예약 내역이 없습니다.
+        </div>
+    </c:if>
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
