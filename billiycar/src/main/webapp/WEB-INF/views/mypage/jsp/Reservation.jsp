@@ -45,58 +45,105 @@
         background-color: #f2f2f2;
         text-align: center;
     }
+    
+     .pagination-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .pagination {
+        display: flex;
+        list-style: none;
+        padding: 0;
+    }
+
+    .pagination .page-item {
+        margin: 0 5px;
+    }
+
+    .pagination .page-link {
+        display: block;
+        padding: 10px 15px;
+        color: #007bff;
+        text-decoration: none;
+        background-color: #fff;
+        border: 1px solid #dee2e6;
+        border-radius: 5px;
+    }
+
+    .pagination .page-link:hover {
+        background-color: #e9ecef;
+    }
+
+    .pagination .page-item.disabled .page-link {
+        pointer-events: none;
+        color: #6c757d;
+        background-color: #fff;
+        border-color: #dee2e6;
+    }
+    
 </style>
 <script type="text/javascript">
 
-	if ("${message}" != null && "${message}" !== "") {
-	    alert("${message}");
-	}
+function showReview(value){
+	console.log(value);
+	let review_id = document.querySelector("#reviewShow" + value);
+	review_id.style.display = 'table-row';
+}
 
-	function showReview(value){
-		console.log(value);
-		let review_id = document.querySelector("#reviewShow" + value);
-		review_id.style.display = 'table-row';
-	}
-	
-	function closeReview(value){
-		console.log(value);
-		let review_id = document.querySelector("#reviewShow" + value);
-		review_id.style.display = 'none';
-	}
-	
-	function setRating(value, reservIdx) {
-	    var ratingValueId = "ratingValue" + reservIdx;
-	    document.getElementById(ratingValueId).value = value;
-	    
-	    var stars = document.querySelectorAll("#rating" + reservIdx + " span");
-	    for (var i = 0; i < stars.length; i++) {
-	        if (i < value) {
-	            stars[i].innerHTML = '<i class="fa-solid fa-star" style="color: #FFE000;"></i>';
-	        } else {
-	            stars[i].innerHTML = '<i class="fa-regular fa-star"></i>';
-	        }
-	    }
-	}
-	
-	function check(){
-		let subject = $("#review_subject").val();
-		let content = $("#review_content").val();
-		
-		if(subject == ""){
-			return false;
-		}else if(content == ""){
-			return false;
-		}
-			
-		
-	}
+function closeReview(value){
+	console.log(value);
+	let review_id = document.querySelector("#reviewShow" + value);
+	review_id.style.display = 'none';
+}
 
+function setRating(value, reservIdx) {
+    var ratingValueId = "ratingValue" + reservIdx;
+    document.getElementById(ratingValueId).value = value;
+    
+    var stars = document.querySelectorAll("#rating" + reservIdx + " span");
+    for (var i = 0; i < stars.length; i++) {
+        if (i < value) {
+            stars[i].innerHTML = '<i class="fa-solid fa-star" style="color: #FFE000;"></i>';
+        } else {
+            stars[i].innerHTML = '<i class="fa-regular fa-star"></i>';
+        }
+    }
+}
+
+function check(){
+	let subject = document.getElementById("review_subject").value;
+	let content = document.getElementById("review_content").value;
+	console.log("Subject: " + subject);
+	console.log("Content: " + content);
+	
+	if(subject == ""){
+		alert("리뷰 제목을 입력해주세요.");
+		return false;
+	}
+	
+	if(content == ""){
+		alert("리뷰 내용을 입력해주세요.");
+		return false;
+	}
+	
+	return true;
+}
+
+window.onload = function() {
+    let message = "${message}";
+    if (message) {
+        alert(message);
+    }
+};
+	
 </script>
 </head>
 <body>
 
 <div id="resv-confirm">
-    <h2>예약내역 확인${message }</h2>
+    <h2>예약내역 확인</h2>
     <hr>
     <table border="1">
         <tr>
@@ -149,53 +196,65 @@
 		            		</c:otherwise>
 		            	</c:choose>
 		            </td>
-		            <td>
-		            	<c:choose>
-		            		<c:when test="${reserv.reserv_review_status eq 0}">
-		            			<a onclick="showReview('${reserv.reserv_idx}')" class="btn btn-sm btn-danger">리뷰쓰기</a>
-		            		</c:when>
-		            		<c:otherwise>
-		            			<a class="btn btn-sm btn-danger">리뷰완료</a>
-		            		</c:otherwise>
-		            	</c:choose>
-		            </td>
-		            
-		       		</tr>
-			        <tr style="display: none;" id = "reviewShow${reserv.reserv_idx }">
-			        	<td colspan="7">
-			<!--         		<a onclick="showReview()" class="btn btn-sm btn-primary">작성완료</a> -->
-			                <!-- 리뷰 작성 폼 요소들을 이곳에 추가 -->
-			                <form action="reviewWrite" method="post" onsubmit="return check()">
-			                	
-							    
-							    <label for="review">리뷰 제목</label><br>
-							    <input type="text" class="form-control" name="review_subject" id="review_subject" width="200px;" style="margin-top: 10px;" placeholder="리뷰 제목을 입력해주세요"><br>
-			                	<label for="review">리뷰 내용</label><br>
-			    				<textarea id="review" name="review_content" id="review_content" class="form-control" rows="4" cols="50" style="margin-top: 10px;" placeholder="리뷰 내용을 입력해주세요"></textarea><br>
-			    				
-			    				<div id="rating${reserv.reserv_idx }">
-								    <span onclick="setRating(1, ${reserv.reserv_idx })"><i class="fa-regular fa-star"></i></span>
-								    <span onclick="setRating(2, ${reserv.reserv_idx })"><i class="fa-regular fa-star"></i></span>
-								    <span onclick="setRating(3, ${reserv.reserv_idx })"><i class="fa-regular fa-star"></i></span>
-								    <span onclick="setRating(4, ${reserv.reserv_idx })"><i class="fa-regular fa-star"></i></span>
-								    <span onclick="setRating(5, ${reserv.reserv_idx })"><i class="fa-regular fa-star"></i></span>
-								    <br>
-								    <p>별점을 선택해주세요</p>
-								</div>
-							    <input type="hidden" id="ratingValue${reserv.reserv_idx}" name="review_score" value="0">
-							    <input type="hidden"  name="review_id" value="${reserv.member_id }">
-							    <input type="hidden"  name="car_number" value="${reserv.car_number }">
-							    <input type="hidden"  name="review_idx" value="${reserv.reserv_idx }">
-							    
-			                	<input type="submit" value="작성완료" class="btn btn-primary">
-			                	<input type="button" value="닫기" class="btn btn-primary" onclick="closeReview('${reserv.reserv_idx}')">
-			                </form>
-			        	</td>
-		        </tr>
+		             <td>
+		            <c:choose>
+		            	<c:when test="${reserv.reserv_review_status eq 0}">
+		            		<a onclick="showReview('${reserv.reserv_idx}')" class="btn btn-sm btn-danger">리뷰쓰기</a>
+		            	</c:when>
+		            	<c:otherwise><a class="btn btn-sm btn-danger">리뷰완료</a></c:otherwise>
+		            </c:choose>
+		        </td>
+	        </tr>
+	        <tr style="display: none;" id="reviewShow${reserv.reserv_idx}">
+		        <td colspan="8">
+			        <form action="reviewWrite" method="post" onsubmit="return check()">
+					    <label for="review_subject">리뷰 제목</label><br>
+					    <input type="text" class="form-control" name="review_subject" id="review_subject${reserv.reserv_idx}" width="200px" style="margin-top: 10px;" placeholder="리뷰 제목을 입력해주세요"><br>
+					    <label for="review_content${reserv.reserv_idx}">리뷰 내용</label><br>
+					    <textarea id="review_content" name="review_content" class="form-control" rows="4" cols="50" style="margin-top: 10px;" placeholder="리뷰 내용을 입력해주세요"></textarea><br>
+					    <div id="rating${reserv.reserv_idx}">
+						    <span onclick="setRating(1, ${reserv.reserv_idx})"><i class="fa-regular fa-star"></i></span>
+						    <span onclick="setRating(2, ${reserv.reserv_idx})"><i class="fa-regular fa-star"></i></span>
+						    <span onclick="setRating(3, ${reserv.reserv_idx})"><i class="fa-regular fa-star"></i></span>
+						    <span onclick="setRating(4, ${reserv.reserv_idx})"><i class="fa-regular fa-star"></i></span>
+						    <span onclick="setRating(5, ${reserv.reserv_idx})"><i class="fa-regular fa-star"></i></span>
+						    <br>
+						    <p>별점을 선택해주세요</p>
+					    </div>
+					    <input type="hidden" id="ratingValue${reserv.reserv_idx}" name="review_score" value="0">
+					    <input type="hidden" name="review_id" value="${reserv.member_id}">
+					    <input type="hidden" name="car_number" value="${reserv.car_number}">
+					    <input type="hidden" name="review_idx" value="${reserv.reserv_idx}">
+					    <input type="submit" value="작성완료" class="btn btn-primary">
+					    <input type="button" value="닫기" class="btn btn-primary" onclick="closeReview('${reserv.reserv_idx}')">
+				    </form>
+			    </td>
+		        	</tr>
         	</c:forEach>
-            
-        
     </table>
+    <nav class="pagination-container" aria-label="Page navigation example">
+        <div class="paging">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a id="previousPageLink" class="page-link" href="resvConfirm?pageNum=${pageNum - 1}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+
+                <c:forEach var="i" begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
+                    <li class="page-item">
+                        <a class="page-link pageLink" href="resvConfirm?pageNum=${i}">${i}</a>
+                    </li>
+                </c:forEach>
+
+                <li class="page-item">
+                    <a id="nextPageLink" class="page-link" href="resvConfirm?pageNum=${pageNum + 1}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 </div>
 </body>
 </html>
