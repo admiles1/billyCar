@@ -18,6 +18,7 @@ import com.itwill.billycar.service.MypageService;
 import com.itwill.billycar.service.PaymentService;
 import com.itwill.billycar.service.ReservService;
 import com.itwill.billycar.vo.CarVO;
+import com.itwill.billycar.vo.CouponIssueVO;
 import com.itwill.billycar.vo.MemberVO;
 import com.itwill.billycar.vo.PaymentVO;
 import com.itwill.billycar.vo.ReservVO;
@@ -42,6 +43,7 @@ public class PaymentController {
 						, Model model
 						, HttpSession session
 						, ReservVO reserv
+						, CouponIssueVO coupon
 						, @RequestParam(defaultValue = "1")int totalAmount
             			, @RequestParam(defaultValue = "") Map<String, String> map) {
 		// 카넘버로 조회하기 컬럼은 car_dayprice, car_hourprice, car_img / * 
@@ -50,7 +52,7 @@ public class PaymentController {
 		System.out.println(session.getAttribute("member_id"));
 		System.out.println(car.getCar_number());
 		System.out.println(map.get("schedule"));
-		
+//		coupon.getCoupon_id()
 		
 		String MemberId = (String)session.getAttribute("member_id");
 		model.addAttribute("info", MyPageService.getMemberInfo(MemberId));
@@ -89,10 +91,12 @@ public class PaymentController {
 
 		payment.setMember_id(memberId);
 		payment.setCar_number(carNumber);
-
+		
 		int count1 = paymentService.registReserv(reserv);
 		System.out.println("예약테이블에 데이터 들어가씀 ㅇㄱㄹㅇ");
 		int count2 = paymentService.registerPayment(payment);
+		
+		int carReserveCount = paymentService.updateCarReserveCount(car);
 		
 		if(count1 > 0 && count2 > 0) {
 			return "true";

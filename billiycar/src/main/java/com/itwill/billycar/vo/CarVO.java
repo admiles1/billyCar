@@ -23,7 +23,7 @@ public class CarVO {
 	private int car_dayprice;
 	private int car_hourprice;
 	private int car_status;
-	private int car_canReserve;
+	private int car_countReserve;
 	private LocalDateTime car_reg_date;
 	private String color;
 }

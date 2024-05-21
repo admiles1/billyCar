@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <!doctype html>
 <html lang="ko">
 <meta charset="UTF-8">
@@ -70,7 +71,7 @@
 				<th class="text-left" width = "5px">글 번호</th>
 				<th class="text-left" width = "290px">제목</th>
 				<th class="text-left" width = "40px">작성자</th>
-				<th class="text-left" width = "50px">작성일</th>
+				<th class="text-left" width = "70px">작성일</th>
 			</tr>
 		</thead>
 		<tbody class="table-hover">
@@ -97,7 +98,8 @@
 					</td>
 
 					<%-- 작성일 --%>
-					<td class="text-left"><fmt:formatDate value="${notice.board_date}" pattern = "yy-MM-dd"/></td>
+					<c:set var="noticeDate" value="${fn:split(fn:split(notice.board_date, 'T')[0], '-')}" />
+					<td>${noticeDate[1]}월${noticeDate[2]}일</td>
 				</tr>
 			</c:forEach>
 		</tbody>

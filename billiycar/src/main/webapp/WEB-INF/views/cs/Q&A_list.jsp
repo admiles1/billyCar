@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
     
 <!doctype html>
 <html lang="ko">
@@ -54,7 +55,7 @@
 				<th class="text-left" width = "10px">글 번호</th>
 				<th class="text-left" width = "190px">제목</th>
 				<th class="text-left" width = "40px">질문 유형</th>
-				<th class="text-left" width = "80px">작성일</th>
+				<th class="text-left" width = "100px">작성일</th>
 				<th class="text-left" width = "30px">답변 상태</th>
 			</tr>
 		</thead>
@@ -91,7 +92,9 @@
 						</td>
 
 						<%-- 시간 --%>
-						<td class="text-left"><fmt:formatDate value="${qna.qna_date}" pattern = "yy-MM-dd HH시 mm분"/></td>
+						<c:set var="qnaDate" value="${fn:split(qna.qna_date, 'T')}"></c:set>
+						<c:set var="qnaTime" value="${fn:split(fn:split(qna.qna_date,'T')[1], ':')}"></c:set>
+						<td class="text-left">${qnaDate[0]} ${qnaTime[0]}시 ${qnaTime[1]}분</td>
 						
 						<td class="text-left"> 
 							<%-- 답변상태 --%>

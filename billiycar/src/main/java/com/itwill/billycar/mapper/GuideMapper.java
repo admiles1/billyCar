@@ -10,6 +10,9 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface GuideMapper {
-	public List<Map<String, Object>> selectCarList(@Param("startRow") int startRow, @Param("listLimit") int listLimit);
+	public List<Map<String, Object>> selectCarList(@Param("startRow") int startRow
+												, @Param("listLimit") int listLimit
+												, @Param("searchType") String searchType
+												, @Param("searchKeyword") String searchKeyword);
 
 }

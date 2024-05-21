@@ -52,23 +52,27 @@
         </div>
 
         <!-- 회원 목록 검색 기능 -->
-        <form class="form-inline mb-3" action="adminMemberSearch" method="get">
-          <div class="form-group mr-2" style="text-align: center;">
+        <form action="adminMemberSearch" method="get">
+        <div class="row">
+          <div class="col-md-4" style="text-align: center;">
             <input type="text" name="searchKeyword" class="form-control" placeholder="검색어 입력">
           </div>
-          <div class="form-group mr-2" style="text-align: center;">
+          <div class="col-md-4" style="text-align: center;">
             <select class="form-control" name="searchType">
               <option value="all">전체</option>
               <option value="id">ID</option>
               <option value="name">이름</option>
               <option value="status">상태</option>
             </select>
+            </div>
+            <div class="col-md-4" style="margin-top: -30px;">
             <input type="submit" class="btn btn-primary" value="검색" style="margin-top: 30px;">
-          </div>
+			</div>
+		</div>          
         </form>
 		
 		<!-- 회원 목록 테이블 -->
-        <div class="table-responsive">
+        <div class="table-responsive" style="margin-top: 50px;">
           <table class="table table-striped" style="text-align: center;">
             <thead>
               <tr>
@@ -137,7 +141,7 @@
         <!-- 목록 테이블 끝 -->
         <section id = "pageList" style="text-align: center;">
 			
-			<input type="button" value="이전" onclick="location.href='adminMemberSearch?pageNum=${pageNum -1}&searchType=${searchType }&searchKeyword=${searchKeyword }&searchType=${searchType }&searchKeyword=${searchKeyword }'" 
+			<input type="button" value="이전" onclick="location.href='adminMemberSearch?pageNum=${pageNum -1}&searchType=${searchType }&searchKeyword=${searchKeyword }'" 
 				<c:if test="${pageNum eq 1 }">disabled</c:if>
 			>
 			

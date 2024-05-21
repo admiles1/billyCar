@@ -8,16 +8,26 @@
 	<select id="selectCarList" resultType="HashMap">
 		SELECT DISTINCT model.name AS model
      		 , carType.name AS carType
+   		 	 , brand.name AS car_brand
      		 , GROUP_CONCAT(DISTINCT fuel.name SEPARATOR ', ') AS fuel
      		 , c.car_dayprice
      		 , c.car_hourprice
      		 , c.car_capacity 
   		  FROM car c 
+  		  JOIN Common brand ON brand.code = c.car_brand
   		  JOIN Common model ON model.code = c.car_model
   		  JOIN Common carType ON carType.code = c.car_type
   		  JOIN Common fuel ON fuel.code = c.car_fuel
+  		<if test="!searchKeyword.equals('')">
+		 WHERE 
+		 <choose>
+		 	<when test="searchType.equals('brand')"> brand.name LIKE concat('%', #{searchKeyword} , '%') </when>
+		 	<when test="searchType.equals('model')"> model.name LIKE concat('%', #{searchKeyword} , '%') </when>
+		 	<otherwise> 1 = 1 </otherwise>
+		 </choose>
+		</if>
  		 GROUP BY 
-    		   model.name, carType.name, c.car_dayprice, c.car_hourprice, c.car_capacity 
+    		   model.name, carType.name, brand.name , c.car_dayprice, c.car_hourprice, c.car_capacity 
  		 ORDER BY model.name
  		 LIMIT #{startRow} , #{listLimit}
 	</select>

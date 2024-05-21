@@ -18,6 +18,13 @@
 
 <!-- css -->
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/resources/css/notice_write.css">
+
+<script>
+	function coupon(){
+		window.open("couponUpload");
+	}
+
+</script>
 </head>
 <body>
 	<header>
@@ -71,6 +78,7 @@
   		<div class = "btn-view">
   			<input type = "submit" value = "수정" id = "writeGo">
   			<a href = "event">목록</a>
+  			<a onclick="coupon()"> 쿠폰 등록 </a>
   		</div>
 		</form>
 	</div>

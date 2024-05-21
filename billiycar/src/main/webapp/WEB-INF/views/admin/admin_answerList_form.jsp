@@ -20,6 +20,8 @@
   .edit-btn { float: right; margin-top: -20px; color: #dc3545; } /* Modified color for visibility */
   
   .inline-elements {
+ 	 margin-left : 850px;
+	width : 150px;
     display: inline-block;
     vertical-align: middle;
 	}
@@ -29,7 +31,11 @@
 	}
   
 </style>
-
+<script type="text/javascript">
+	function selectSubmit () {
+		document.fr.submit();
+	}
+</script>
 </head>
 <body>
 <main class="container">
@@ -51,13 +57,12 @@
 				
 				<form class="form-inline mb-3" name="fr" action="adminAnswerList">
 			          <div class="form-group inline-elements margin-right">
-					    <select class="form-control" name="answer">
+					    <select class="form-control" name="answer" onchange="selectSubmit()">
 					        <option value="all" <c:if test="${param.answer eq 'all'}">selected</c:if>>전체</option>
 					        <option value="no" <c:if test="${param.answer eq 'no'}">selected</c:if>>답변 미완료</option>
 					        <option value="ok" <c:if test="${param.answer eq 'ok'}">selected</c:if>>답변 완료</option>
 					    </select>
 					 </div>
-					 <button type="submit" class="btn btn-primary inline-elements">검색</button>
 		        </form>
 				
 				<c:if test="${param.answer eq 'no'}">
