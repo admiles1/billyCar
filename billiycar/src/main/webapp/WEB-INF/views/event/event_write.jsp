@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>이벤트 작성</title>
-
+<script src="${pageContext.request.contextPath}/resources/util/jquery-3.7.1.js"></script>
  <!-- 부트스트랩 -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
@@ -18,6 +18,16 @@
 
 <!-- css -->
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/resources/css/notice_write.css">
+
+
+<script>
+	function coupon(){
+		window.open("couponUpload");
+	}
+
+</script>
+
+
 </head>
 <body>
 	<header>

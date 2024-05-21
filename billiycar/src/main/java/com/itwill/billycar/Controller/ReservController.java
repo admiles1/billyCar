@@ -66,6 +66,7 @@ public class ReservController {
 		
 		// 자동차검색
 		List<Map<String, String>> cars = reservService.getCarList(car, reserv, startRow , listLimit);
+		System.out.println(cars);
 		// 공통 코드에서 type, fule 조회해서 가져오기 TODO = 줄일것
 		model.addAttribute("schedule", map);
 		model.addAttribute("types", adminService.getTypes());
@@ -164,7 +165,7 @@ public class ReservController {
 		int listLimit = 4;
 	    int startRow = (pageNum - 1) * listLimit;
 		List<Map<String, String>> cars = reservService.getCarList(car, reserv, startRow, listLimit);
-		
+		System.out.println(cars);
 		return cars;
 	}
 	
@@ -262,6 +263,7 @@ public class ReservController {
 		
 		// 자동차검색
 		Map<String, String> selectCar = reservService.getCar(car, reserv);
+		System.out.println(selectCar);
 		String carNumber = selectCar.get("car_number");
 		// 리뷰 검색
 		List<ReviewVO> reviewes = reviewService.getReview(carNumber);
