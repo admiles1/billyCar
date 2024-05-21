@@ -45,6 +45,10 @@ public class PaymentService {
 	public PaymentVO getPaymentByIdx(int idx) {
 		return mapper.selectPaymentDetail(idx);
 	}
+
+	public int updateCarReserveCount(CarVO car) {
+		return mapper.updateCarCountReserve(car);
+	}
 	
 	
 

@@ -25,6 +25,8 @@ public interface PaymentMapper {
 
 	PaymentVO selectPaymentDetail(int idx);
 
+	int updateCarCountReserve(CarVO car);
+
 	
 
 	
