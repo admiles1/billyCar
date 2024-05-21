@@ -1,7 +1,10 @@
 package com.itwill.billycar.Controller;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -103,17 +106,37 @@ public class PaymentController {
 	
 	@GetMapping("paymentDetail")
 	public String paymentDetail(Model model, MemberVO member, @RequestParam("idx") int idx, ReservVO reserv, PaymentVO payment) {
-		String MemberId = (String)session.getAttribute("member_id");
-		model.addAttribute("info", MyPageService.getMemberInfo(MemberId));
-		reserv = paymentService.getReservationByIdx(idx);
-        if (reserv != null && reserv.getReserv_status() == 1) {
-            model.addAttribute("reservDetail", reserv);
-        } 
-        
-        payment = paymentService.getPaymentByIdx(idx);
-        if(payment != null && payment.getPayment_status() == 1) {
-        	model.addAttribute("paymentDetail", payment);
-        }
+		String memberId = (String)session.getAttribute("member_id");
+		model.addAttribute("info", MyPageService.getMemberInfo(memberId));
+		List<Map<String, Object>> reservDetails = paymentService.getReservDetails(idx);
+		
+		 // Date formatting
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	    for (Map<String, Object> reservDetail : reservDetails) {
+	        // Check if the object is instanceof java.util.Date
+	        Object pickupdateObj = reservDetail.get("reserv_pickupdate");
+	        if (pickupdateObj instanceof Date) {
+	            reservDetail.put("reserv_pickupdate", dateFormat.format((Date) pickupdateObj));
+	        }
+
+	        Object returndateObj = reservDetail.get("reserv_returndate");
+	        if (returndateObj instanceof Date) {
+	            reservDetail.put("reserv_returndate", dateFormat.format((Date) returndateObj));
+	        }
+	    }
+		
+		model.addAttribute("reservDetails", reservDetails);
+		
+		//		reserv = paymentService.getReservationByIdx(idx);
+//        if (reserv != null && reserv.getReserv_status() == 0) {
+//            model.addAttribute("reservDetail", reserv);
+//        } 
+//        
+//        payment = paymentService.getPaymentByIdx(idx);
+//        if(payment != null && payment.getPayment_status() == 1) {
+//        	model.addAttribute("paymentDetail", payment);
+//        }
+		
         return "payment/paymentDetail"; 
 		
 	}

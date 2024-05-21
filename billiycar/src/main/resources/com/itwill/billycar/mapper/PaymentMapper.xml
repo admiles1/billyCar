@@ -34,11 +34,17 @@
 	
 	
 	<select id="selectReservDetail" resultType="com.itwill.billycar.vo.ReservVO">
-		SELECT * FROM Reservation WHERE reserv_idx = #{idx}
+		SELECT * 
+		FROM Reservation 
+		WHERE reserv_idx = #{idx}
 	</select>
 	
-	<select id="selectPaymentDetail" resultType="com.itwill.billycar.vo.PaymentVO">
-		SELECT 
+	<select id="selectPaymentDetail" parameterType="int" resultType="map">
+<!-- 	    SELECT r.*, c.*, p.* -->
+	    FROM Reservation r
+	    JOIN car c ON r.car_number = c.car_number
+	    JOIN Payment p ON c.car_number = p.car_number
+	    WHERE r.reserv_idx = #{idx}
 	</select>
 	
 	<insert id="insertPayment">
