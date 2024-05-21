@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.billycar.service.GuideService;
 import com.itwill.billycar.vo.CarVO;
+import com.itwill.billycar.vo.CouponVO;
 
 @Controller
 public class GuideController {
@@ -35,11 +36,13 @@ public class GuideController {
 	
 	@GetMapping("guideCar")
 	public String guideCar(Model model
-							, @RequestParam(defaultValue = "1")int pageNum) {
+							, @RequestParam(defaultValue = "1") int pageNum
+							, @RequestParam(defaultValue = "") String searchType
+							, @RequestParam(defaultValue = "") String searchKeyword ) {
 	    int listLimit = 4;
 	    int startRow = (pageNum - 1) * listLimit;
 	    
-		List<Map<String, Object>> carList = service.carList(startRow,listLimit);
+		List<Map<String, Object>> carList = service.carList(startRow,listLimit,searchType,searchKeyword);
 		
 		System.out.println(carList);
 		model.addAttribute("carList", carList);

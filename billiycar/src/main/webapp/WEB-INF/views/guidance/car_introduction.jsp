@@ -146,13 +146,15 @@
                 <h2 style="text-align: center">차량소개</h2>
             </div>
         </div>
-        <div align="center">
-        	<select>
-        		<option> 제조사 </option>
-        		<option> 모델명 </option>
-        	</select>
-        	<input type="text" placeholder="검색어 입력">
-        	<input type="button" value="검색">
+        <div align="center">	
+       		<form action="guideCar">
+				<select name="searchType">
+					<option value="brand" <c:if test="${param.searchType eq 'brand'}"> selected</c:if>> 제조사</option>
+					<option value="model" <c:if test="${param.searchType eq 'model'}"> selected</c:if>> 모델</option>
+				</select>
+				<input type="text" name="searchKeyword" value="${param.searchKeyword}" placeholder="검색어를 입력하여주세요"> 
+				<input type="submit" value="검색" />
+			</form>
         </div>
         <div class="cont" id="listEnd">
         
@@ -179,10 +181,7 @@
                         </div>
                         <div class="search-car-result-cont">
                             <div class="search-car-result-cont-left">
-                                <h5 class="title-01 f14">연료별 요금정보</h5>
-                                <div>
-                                	<input type="button" value="디젤" class="fuelBtn">
-                                </div>
+                                <h5 class="title-01 f14"> 요금정보</h5>
                                 <table class="cont-list-table-v04">
                                     <colgroup>
                                         <col width="20%">

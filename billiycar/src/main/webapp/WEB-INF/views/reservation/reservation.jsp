@@ -111,10 +111,12 @@
 						let dayPrice = car.car_dayprice.toLocaleString();
 						let hourPrice = car.car_hourprice.toLocaleString();
 						let carModel = "\"" + car.car_model + "\"";
+						let carType = "\"" + car.car_type + "\"";
+						let carFuel = "\"" + car.car_fuel + "\"";
 						
 						$("#selectResult > ul").append(
 								"<li class='carList fadeIn row'>"
-								+ "<a class='d-flex' onclick='goDetail(" + carModel + ")'>"
+								+ "<a class='d-flex' onclick='goDetail(" + carModel + "," + carType + "," + carFuel + ")'>"
 								+ "<span class='carImg'><img src='" + car.car_img + "'></span>"
 								+ "<span class='carInfo'>"
 								+ "<span>" + car.car_model + " / " + car.car_capacity + "</span>"
@@ -135,17 +137,16 @@
 
 	
 	
-	function goDetail(model){
+	function goDetail(model,type,fuel){
 		let returnLocation = $("#reserv_returnlocation").val();
-		
 		if(returnLocation == "") {
 			alert('반납장소를 선택하여 주십시오');
 			$("#reserv_returnlocation").focus();
 			return false;
 		}
 		
-		let types = [];
 		let fuels = [];
+		
 		let pud = $("#reserv_pickupdate").val() + " " + $("#reserv_pickuptime").val();
 		let rtd = $("#reserv_returndate").val() + " " + $("#reserv_returntime").val();
 		
@@ -165,11 +166,6 @@
 		
 		let schedule = [pud, rtd, pul, rtl];
 		
-		$("input[name=car_type]:checked").each(function() {
-			var chkReceiver = $(this).val();
-			types.push(chkReceiver);
-		});
-		
 		$("input[name=car_fuel]:checked").each(function() {
 			var chkReceiver = $(this).val();
 			fuels.push(chkReceiver);
@@ -177,8 +173,8 @@
 		
 		
 		location.href="detail?car_model=" + model
-				 + "&car_type=" + types
-				 + "&car_fuel=" + fuels
+				 + "&car_type=" + type
+				 + "&car_fuel=" + fuel
 				 + "&schedule=" + schedule;
 	}
 	
@@ -222,9 +218,10 @@
 					        var mapContainer = document.getElementById('map');
 							//지도의 초기생성
 					        var mapOption = {
-					            center: new kakao.maps.LatLng(35.17988104101734, 129.07510440921163),
+					            center: new kakao.maps.LatLng(35.1584897298991, 129.06205146230675),
 					            level: 1
 					        };
+	
 							
 							//변수선언(장소 검색, 지오코딩, 인포윈도우)
 					        var map = new kakao.maps.Map(mapContainer, mapOption);
@@ -392,7 +389,7 @@
 				<ul>
 					<c:forEach var="car" items="${cars}">
 						<li class='carList fadeIn row'>
-							<a class='d-flex' onclick='goDetail("${car.car_model}")'>
+							<a class='d-flex' onclick='goDetail("${car.car_model}", "${car.car_type}", "${car.car_fuel}")'>
 								<span class='carImg'><img src=""></span>
 								<span class='carInfo'>
 									<span> ${car.car_model} / ${car.car_capacity} </span>

@@ -48,7 +48,6 @@ public class AdminController {
 	@Autowired
 	private PaymentService paymentService;
 	
-	
 	@Autowired
 	private HttpSession session;
 	
@@ -127,7 +126,15 @@ public class AdminController {
 	
 	
 	@GetMapping("adminMember")
-	public String adminMember() {
+	public String adminMember(AdminVO admin,Model model) {
+		admin.setAdmin_id((String)session.getAttribute("member_id"));
+		
+		
+		// 관리자 아닐 경우 돌려보내기
+		if(session.getAttribute("member_id")==null || !session.getAttribute("member_id").equals(admin.getAdmin_id())) {
+			model.addAttribute("msg","접근 권한이 없습니다");
+			return "err/fail";
+		} 
 		
 		return "admin/admin_member";
 	}

@@ -2,6 +2,7 @@ package com.itwill.billycar.mapper;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -23,7 +24,9 @@ public interface PaymentMapper {
 	
 	ReservVO selectReservDetail(int idx);
 
-	PaymentVO selectPaymentDetail(int idx);
+	List<Map<String, Object>> selectPaymentDetail(int idx);
+
+	int updateCarCountReserve(CarVO car);
 
 	
 

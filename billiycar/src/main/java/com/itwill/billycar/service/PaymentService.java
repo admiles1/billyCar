@@ -2,6 +2,7 @@ package com.itwill.billycar.service;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,12 +39,20 @@ public class PaymentService {
 		return mapper.selectCarInfo(car);
 	}
 
-	public ReservVO getReservationByIdx(int idx) {
-		return mapper.selectReservDetail(idx);
+//	public ReservVO getReservationByIdx(int idx) {
+//		return mapper.selectReservDetail(idx);
+//	}
+
+//	public PaymentVO getPaymentByIdx(int idx) {
+//		return mapper.selectPaymentDetail(idx);
+//	}
+
+	public List<Map<String, Object>> getReservDetails(int idx) {
+		return mapper.selectPaymentDetail(idx);
 	}
 
-	public PaymentVO getPaymentByIdx(int idx) {
-		return mapper.selectPaymentDetail(idx);
+	public int updateCarReserveCount(CarVO car) {
+		return mapper.updateCarCountReserve(car);
 	}
 	
 	

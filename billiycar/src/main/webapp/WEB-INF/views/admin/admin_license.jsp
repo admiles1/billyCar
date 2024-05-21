@@ -27,7 +27,9 @@
     white-space: nowrap;
   }
   
-.inline-elements {
+.form-control {
+	margin-left : 800px;
+	width : 150px;
     display: inline-block;
     vertical-align: middle;
 }
@@ -36,9 +38,23 @@
     margin-right: 0.5rem; /* Adjust as needed */
 }
 
+.form-control, .search {
+ 	display: inline-block;
+    vertical-align: middle;
+} 
+
+
+
 </style>
 
-
+<script type="text/javascript">
+	<%-- 셀렉트박스 바뀔 때 submit--%>
+	function selectboxSubmit() {
+		document.fr.submit();
+	}
+	
+	
+</script>
 </head>
 <body>
 <main class="container">
@@ -60,17 +76,29 @@
           <h1 class="h2">면허 인증 회원 관리</h1>
         </div>
 
-        <!-- 회원 목록 검색 기능 -->
+        <!-- 회원 정렬 -->
         <form class="form-inline mb-3" name="fr" action="admin_license">
 	          <div class="form-group inline-elements margin-right">
-			    <select class="form-control" name="license">
-			        <option value="" >전체</option>
+			    <select class="form-control" name="license" onchange="selectboxSubmit()" style="display:flex;">
+			        <option value="all" >전체</option>
 			        <option value="license_auth" <c:if test="${param.license eq 'license_auth'}">selected</c:if>>면허 인증 회원</option>
 			        <option value="license_unauth" <c:if test="${param.license eq 'license_unauth'}">selected</c:if>>미인증 회원</option>
 			    </select>
 			 </div>
-			 <button type="submit" class="btn btn-primary inline-elements">검색</button>
         </form>
+        
+        <!-- 검색 -->
+<!--         <form action="" method="get" style="width:400px;"> -->
+<!-- 	        <div class="search" > -->
+<!-- 	       	  <select class="form-control2" > -->
+<!-- 			        <option value="all" >전체</option> -->
+<%-- 			        <option value="license_auth" <c:if test="${param.license eq 'license_auth'}">selected</c:if>>면허 인증 회원</option> --%>
+<%-- 			        <option value="license_unauth" <c:if test="${param.license eq 'license_unauth'}">selected</c:if>>미인증 회원</option> --%>
+<!-- 			   </select> -->
+<!-- 			   <input type="text" > -->
+<!-- 			   <input type="button" value="검색"> -->
+<!-- 	        </div> -->
+<!--         </form> -->
 
         <!-- 회원 목록 테이블 -->
         <div class="table-responsive">
