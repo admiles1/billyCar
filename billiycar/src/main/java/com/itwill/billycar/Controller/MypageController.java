@@ -256,25 +256,29 @@ public class MypageController {
 	
 	@GetMapping("MyCoupon")
 	public String MyCoupon(@RequestParam(defaultValue = "1") int pageNum, 
-	                        Model model, CouponVO coupon, CouponIssueVO couponIs) {
+	                       HttpSession session,
+	                       Model model) {
 	    System.out.println("나의 쿠폰함");
-	    // 페이징 
-	    int listLimit = 10;
-	    int startRow = (pageNum - 1) * listLimit;
-	    String memberId = (String)session.getAttribute("member_id");
-	    int listCount = service.getCouponListCount(memberId);
-	    int pageListLimit = 3;
-	    
-	    int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0);
-	    int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
-	    int endPage = startPage + pageListLimit - 1;
-	    if(endPage > maxPage) {
+
+	    int listLimit = 1; // 한 페이지당 표시할 목록 개수
+	    int startRow = (pageNum - 1) * listLimit; // 시작 행 번호
+	    String memberId = (String) session.getAttribute("member_id");
+	    int listCount = service.getCouponListCount(memberId); // 총 목록 개수
+
+	    int pageListLimit = 3; // 한 번에 표시할 페이지 목록 개수
+	    int maxPage = (int) Math.ceil((double) listCount / listLimit); // 최대 페이지 번호
+	    int startPage = ((pageNum - 1) / pageListLimit) * pageListLimit + 1; // 시작 페이지 번호
+	    int endPage = startPage + pageListLimit - 1; // 끝 페이지 번호
+	    if (endPage > maxPage) {
 	        endPage = maxPage;
 	    }
-	    
+
 	    model.addAttribute("pageInfo", new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage));
 	    List<Map<String, Object>> couponList = service.getMemberCoupon(startRow, listLimit, memberId);
 	    model.addAttribute("Coupon", couponList);
+	    model.addAttribute("pageNum", pageNum); // 현재 페이지 번호를 모델에 추가
+
+	    System.out.println(pageNum);
 	    return "mypage/page/Mypage_Coupon";
 	}
 	
