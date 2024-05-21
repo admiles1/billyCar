@@ -230,17 +230,21 @@
 					        var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 					        var marker = null;
 							
-					        //키워드 텍스트에 장소를 검색하는 함수
 					        function searchPlaces() {
 					            var keyword = document.getElementById('keyword').value;
 					            if (!keyword.trim()) {
 					                alert('주소를 입력하세요.');
 					                return;
 					            }
-					            ps.keywordSearch(keyword, placesSearchCB);
+                               var center = new kakao.maps.LatLng(35.1795543, 129.0756416);
+                               var radius = 20000; 
+
+                               ps.keywordSearch(keyword, placesSearchCB, {
+                                   location: center,
+                                   radius: radius
+                               });
 					        }
 							
-					        //장소 목록을 생성하여 목록에 표시함
 					        function placesSearchCB(data, status, pagination) {
 					            if (status === kakao.maps.services.Status.OK) {
 					                displayPlaces(data);
@@ -249,16 +253,14 @@
 					            }
 					        }
 							
-					     // 장소 목록을 select 태그로 생성하여 목록에 표시함
 					        function displayPlaces(places) {
 					            var selectedLocation = document.getElementById('selected-location');
-					            selectedLocation.innerHTML = ''; // 기존 내용을 비웁니다
-					            var select = document.createElement('select'); // select 요소 생성
-					            //css
+					            selectedLocation.innerHTML = ''; 
+					            var select = document.createElement('select'); 
 					            select.classList.add('col-form-label');
 					            select.style.marginTop = '20px';
 					            
-					            select.id = 'place-select'; // select 태그에 ID 부여
+					            select.id = 'place-select';
 
 					            // 선택 이벤트 핸들러
 					            select.addEventListener('change', function() {

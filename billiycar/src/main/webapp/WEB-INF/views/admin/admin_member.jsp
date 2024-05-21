@@ -113,14 +113,14 @@
 		                		<td>회원</td>
 		                	</c:when>
 		                	<c:when test="${member.member_status eq 2}">
-		                		<td>탈퇴회원</td>
+		                		<td>탈퇴</td>
 		                	</c:when>
 		                	<c:when test="${member.member_status eq 3}">
-		                		<td>휴면회원</td>
-		                	</c:when>
-		                	<c:when test="${member.member_status eq 4}">
 		                		<td>블랙리스트</td>
 		                	</c:when>
+		                	<c:otherwise>
+		                		<td>없음</td>
+		                	</c:otherwise>
 		                </c:choose>
 		                
 		                <td>

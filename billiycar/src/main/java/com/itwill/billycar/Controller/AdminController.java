@@ -150,6 +150,8 @@ public class AdminController {
 		int listLimit = 3;
 		int startRow = (pageNum - 1) * listLimit;
 		
+		
+		
 		List<MemberVO> member = service.adminMemberList(searchType,searchKeyword,startRow,listLimit);
 		
 		int listCount = service.getMemberListCount(searchType,searchKeyword,startRow,listLimit);
@@ -190,14 +192,13 @@ public class AdminController {
 		System.out.println("UpdateSuccess(member_id) : " + UpdateSuccess);
 		
 		if(UpdateSuccess > 0 ) {
-			return "admin/member_status";
+			model.addAttribute("msg", "변경이 완료되었습니다. 닫기 버튼을 눌러주세요");
 		}else {
 			model.addAttribute("msg", "변경되지 않았습니다.");
 			model.addAttribute("targetURL", "admin/admin_member");
 			
-			return "error/fail";
 		}
-		
+		return "err/fail";
 	}
 
 	// 차량 목록 조회

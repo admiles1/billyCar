@@ -29,7 +29,20 @@
 		</if>
 		
 		<if test="searchType.equals('status')">
-			AND member_status LIKE CONCAT('%', #{searchKeyword}, '%')
+			<choose>
+				<when test="searchKeyword.equals('회원')">
+					AND member_status = 1				
+				</when>
+				<when test="searchKeyword.equals('탈퇴')">
+					AND member_status = 2				
+				</when>
+				<when test="searchKeyword.equals('블랙리스트')">
+					AND member_status = 3				
+				</when>
+				<otherwise>
+					and 1=0
+				</otherwise>
+			</choose>
 		</if>
 		
 		LIMIT #{startRow},#{listLimit}
@@ -47,7 +60,20 @@
 		</if>
 		
 		<if test="searchType.equals('status')">
-			AND member_status LIKE CONCAT('%', #{searchKeyword}, '%')
+			<choose>
+				<when test="searchKeyword.equals('회원')">
+					AND member_status = 1				
+				</when>
+				<when test="searchKeyword.equals('탈퇴')">
+					AND member_status = 2				
+				</when>
+				<when test="searchKeyword.equals('블랙리스트')">
+					AND member_status = 3				
+				</when>
+				<otherwise>
+					and 1=0
+				</otherwise>
+			</choose>	
 		</if>
 	</select>
 	
