@@ -147,11 +147,11 @@
             </div>
         </div>
         <div align="center">
-        	<select>
+        	<select name="searchType">
         		<option> 제조사 </option>
         		<option> 모델명 </option>
         	</select>
-        	<input type="text" placeholder="검색어 입력">
+        	<input type="text" name="searchKeyword" placeholder="검색어 입력">
         	<input type="button" value="검색">
         </div>
         <div class="cont" id="listEnd">
@@ -179,10 +179,7 @@
                         </div>
                         <div class="search-car-result-cont">
                             <div class="search-car-result-cont-left">
-                                <h5 class="title-01 f14">연료별 요금정보</h5>
-                                <div>
-                                	<input type="button" value="디젤" class="fuelBtn">
-                                </div>
+                                <h5 class="title-01 f14"> 요금정보</h5>
                                 <table class="cont-list-table-v04">
                                     <colgroup>
                                         <col width="20%">
