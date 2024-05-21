@@ -129,22 +129,21 @@ document.addEventListener('DOMContentLoaded', function() {
     var previousPageLink = document.getElementById('previousPageLink');
     var nextPageLink = document.getElementById('nextPageLink');
 
-    // pageNum이 1 이하일 경우 이전 페이지 링크를 비활성화합니다.
-    if (${pageNum le 1}) {
-        previousPageLink.addEventListener('click', function(event) {
-            event.preventDefault(); // 링크 클릭을 막음
+    previousPageLink.addEventListener('click', function(event) {
+        if (${pageNum} <= 1) {
+            event.preventDefault();
             alert("더이상 페이지가 없습니다");
-        });
-    }
+        }
+    });
 
-    // endPage가 maxPage보다 크거나 pageNum + 1이 maxPage보다 클 경우 다음 페이지 링크를 비활성화합니다.
-    if (${endPage gt pageInfo.maxPage} || ${pageNum + 1 gt pageInfo.maxPage}) {
-        nextPageLink.addEventListener('click', function(event) {
-            event.preventDefault(); // 링크 클릭을 막음
+    nextPageLink.addEventListener('click', function(event) {
+        if (${pageNum} >= ${pageInfo.maxPage}) {
+            event.preventDefault();
             alert("더이상 페이지가 없습니다");
-        });
-    }
+        }
+    });
 });
+
 
 function showReview(value){
 	console.log(value);
@@ -309,7 +308,7 @@ window.onload = function() {
                 </li>
 
                 <c:forEach var="i" begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
-                    <li class="page-item">
+                    <li class="page-item ${pageNum == i ? 'active' : ''}">
                         <a class="page-link pageLink" href="resvConfirm?pageNum=${i}">${i}</a>
                     </li>
                 </c:forEach>
