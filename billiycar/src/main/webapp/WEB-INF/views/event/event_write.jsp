@@ -18,11 +18,25 @@
 
 <!-- css -->
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/resources/css/notice_write.css">
+<style>
+	#couponCode {
+		background-color : rgb(243, 243, 243);
+		display : inline;
+		margin-top : 5px;
+		width : 200px;
+	}
 
+</style>
 
 <script>
 	function coupon(){
-		window.open("CouponUpload", "쿠폰 등록", "width=400px, height=500px");
+		let divContent = $(".note-editable").html();
+		
+		if (divContent === '<p><br></p>') {
+		    alert('내용을 먼저 입력해주세요');
+		} else {
+			window.open("CouponUpload", "쿠폰 등록", "width=100px, height=30px");
+		}
 	}
 
 </script>
@@ -42,47 +56,49 @@
   			<em class = "notice_d_title">이벤트 작성</em><br>
   		</div>
   		
-  		<form action="eventWrite" method= "post" enctype="multipart/form-data">
-  		<div class = "detail_view">
-  			<div class ="view_tit">
-  				<h3><input type = "text" id="title" placeholder="제목을 입력하시오" name = "event_title" style = "width : 400px"> </h3>
-  			</div>
-  			
-  			<div class = "view_info">
-				<input type="file" value="파일 추가하기" name="event_image_form" multiple>
-  			</div>
-  			
-<!--   			<div class = "view_cont"> -->
-<!--   				<p> -->
-<!--   				<textarea rows="20" cols="150" style = "resize : none" name = "board_content" placeholder="내용을 입력하세요"></textarea> -->
-<!-- 					</p> -->
-<!--   			</div> -->
-			
-			<div class ="view_cont"></div>
-				<textarea id="summernote" style = "background-color:white" name = "event_content"></textarea>
-		    <script>
-		    $('#summernote').summernote({
-		        placeholder: '내용을 입력하시오',
-		        tabsize: 2,
-		        height: 400,
-		        toolbar: [
-		          ['style', ['style']],
-		          ['font', ['bold', 'underline', 'clear']],
-		          ['color', ['color']],
-		          ['para', ['ul', 'ol', 'paragraph']],
-		          ['table', ['table']],
-// 		          ['insert', ['link', 'picture', 'video']],
-		          ['view', ['fullscreen', 'codeview', 'help']]
-		        ]
-		      });
-		    </script>
-  		</div>
-  		
-  		<div class = "btn-view">
-  			<input type = "submit" value = "작성" id = "writeGo">
-  			<a href = "event">목록</a>
-  			<a onclick="coupon()"> 쿠폰 등록 </a>
-  		</div>
+  		<form action="eventWrite" method="post" enctype="multipart/form-data" onsubmit="return submit()">
+	  		<div class = "detail_view">
+	  			<div class ="view_tit">
+	  				<h3><input type = "text" id="title" placeholder="제목을 입력하시오" name = "event_title" style = "width : 400px"> </h3>
+	  			</div>
+	  			
+	  			<div class = "view_info" align="left">
+					<input type="file" value="파일 추가하기" name="event_image_form" id="fileInput" multiple>
+					선택된 쿠폰 ::
+					<input type="text" id ="couponCode" name="coupon_code" value="" readonly>
+	  			</div>
+	  			
+	<!--   			<div class = "view_cont"> -->
+	<!--   				<p> -->
+	<!--   				<textarea rows="20" cols="150" style = "resize : none" name = "board_content" placeholder="내용을 입력하세요"></textarea> -->
+	<!-- 					</p> -->
+	<!--   			</div> -->
+				
+				<div class ="view_cont"></div>
+					<textarea id="summernote" style = "background-color:white" name = "event_content"></textarea>
+			    <script>
+			    $('#summernote').summernote({
+			        placeholder: '내용을 입력하시오',
+			        tabsize: 2,
+			        height: 400,
+			        toolbar: [
+			          ['style', ['style']],
+			          ['font', ['bold', 'underline', 'clear']],
+			          ['color', ['color']],
+			          ['para', ['ul', 'ol', 'paragraph']],
+			          ['table', ['table']],
+	// 		          ['insert', ['link', 'picture', 'video']],
+			          ['view', ['fullscreen', 'codeview', 'help']]
+			        ]
+			      });
+			    </script>
+	  		</div>
+	  		
+	  		<div class = "btn-view">
+	  			<input type="submit" value="작성" id="writeGo">
+	  			<a href = "event">목록</a>
+	  			<a onclick="coupon()"> 쿠폰 등록 </a>
+	  		</div>
 		</form>
 	</div>
   	

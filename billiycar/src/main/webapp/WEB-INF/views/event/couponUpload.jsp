@@ -10,17 +10,30 @@
 <script>
 	function sumbitCoupon() {
 		let code = $("#coupon option:selected").val();
-		opener.document.getElementById("summernote").value = code;
+		let hasBtn = $("#issueCoupon", parent.opener.document).val();
+		$("#couponCode", parent.opener.document).val(code);
+		
+		if(!hasBtn === undefined) {
+			$(".note-editable", parent.opener.document).append("<input type='button' id='issueCoupon' name='coupon_code' value='쿠폰받기'><p></p>");
+		} else {
+			$("#issueCoupon", parent.opener.document).remove();
+			$(".note-editable", parent.opener.document).append("<input type='button' id='issueCoupon' name='coupon_code' value='쿠폰받기'><p></p>");
+		}
+		
+		window.close();
 	}
 
 </script>
 </head>
 <body>
-	<select id="coupon">
-		<c:forEach var="coupon" items="${couponList}">
-			<option value="${coupon.coupon_code}"> ${coupon.coupon_name} </option>
-		</c:forEach>
-	</select>
-	<input type="button" value="선택하기" onclick="sumbitCoupon()">
+	<div align="center">
+		<select id="coupon">
+			<c:forEach var="coupon" items="${couponList}">d
+				<option value="${coupon.coupon_code}"> ${coupon.coupon_name} </option>
+			</c:forEach>
+		</select>
+		<br>
+		<input type="button" value="선택하기" onclick="sumbitCoupon()">
+	</div>
 </body>
 </html>
