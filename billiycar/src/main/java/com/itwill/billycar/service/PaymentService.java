@@ -50,6 +50,10 @@ public class PaymentService {
 	public List<Map<String, Object>> getReservDetails(int idx) {
 		return mapper.selectPaymentDetail(idx);
 	}
+
+	public int updateCarReserveCount(CarVO car) {
+		return mapper.updateCarCountReserve(car);
+	}
 	
 	
 

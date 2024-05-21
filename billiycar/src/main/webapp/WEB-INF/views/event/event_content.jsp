@@ -27,7 +27,7 @@
 </script>
 <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>유아용 카시트 무료 이벤트</title>
+    <title>${event.event_title}</title>
     <!-- Bootstrap CSS -->
 <!--     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -50,9 +50,9 @@
 		<div class="card">
 			<div class="card-body" style="text-align: center;">
 				<div> ${event.event_content}</div>
-                <a onclick="couponIssue()" class="btn btn-primary">쿠폰 받기</a>
 			</div>
 		</div>
+		<a onclick="couponIssue()" class="btn btn-primary">쿠폰 받기</a>
 		<p class="mt-3">추가 문의사항이 있는 경우 이벤트 문의 메일(itwillbs_3@itwillbs.co.kr)로 연락 주시기 바랍니다.</p>
 	</div>
 

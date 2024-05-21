@@ -33,7 +33,7 @@
 	</select>
 	
 	
-	<select id="selectReservDetail" resultType="com.itwill.billycar.vo.ReservVO">
+<select id="selectReservDetail" resultType="com.itwill.billycar.vo.ReservVO">
 		SELECT * 
 		FROM Reservation 
 		WHERE reserv_idx = #{idx}
@@ -74,6 +74,13 @@
 			 , #{member_id}
 			 , null);
 	</insert>
+	
+	<update id="updateCarCountReserve">
+		UPDATE car
+		SET 
+			car_countReserve = #{car_countReserve}+1
+		WHERE car_number = #{car_number}
+	</update>
 </mapper>
 
 

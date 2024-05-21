@@ -26,6 +26,8 @@ public interface PaymentMapper {
 
 	List<Map<String, Object>> selectPaymentDetail(int idx);
 
+	int updateCarCountReserve(CarVO car);
+
 	
 
 	
