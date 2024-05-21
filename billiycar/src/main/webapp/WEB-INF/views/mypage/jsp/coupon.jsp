@@ -82,6 +82,29 @@
 			</c:forEach>
         </tbody>
     </table>
+    <nav class="pagination-container" aria-label="Page navigation example">
+        <div class="paging">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a id="previousPageLink" class="page-link" href="MyCoupon?pageNum=${pageNum - 1}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+
+                <c:forEach var="i" begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
+                    <li class="page-item">
+                        <a class="page-link pageLink" href="MyCoupon?pageNum=${i}">${i}</a>
+                    </li>
+                </c:forEach>
+
+                <li class="page-item">
+                    <a id="nextPageLink" class="page-link" href="MyCoupon?pageNum=${pageNum + 1}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 </form>
 </body>
 </html>
