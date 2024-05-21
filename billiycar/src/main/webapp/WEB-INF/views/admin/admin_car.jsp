@@ -76,7 +76,7 @@
                             <option value="car_model" <c:if test="${param.searchType eq 'car_model'}">selected</c:if>> 모델</option>
                             <option value="car_number" <c:if test="${param.searchType eq 'car_number'}">selected</c:if>>차량번호</option>
                         </select>
-                        <button type="button" class="btn btn-primary" onclick="searchCars()">검색</button>
+                        <button type="button" class="btn btn-primary" id="btnSearch">검색</button>
                     </form>
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered">
@@ -152,6 +152,12 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script type="text/javascript">
+    	$(document).ready(function(){
+    		$('#btnSearch').on('click', function(){ 
+    			searchCars(); 
+    		});
+    	})
+    
 	    function confirmDelete(carId) {
 	        if (confirm("정말 삭제하시겠습니까?")) {
 	            $.ajax({
@@ -181,19 +187,53 @@
             var searchType = $('#searchType').val(); // 검색 유형 가져오기
             var searchKeyword = $('#searchKeyword').val(); // 검색어 가져오기
 
+            if(searchKeyword.length < 2){
+				alert('2자 이상 입력해주세요');     	
+            }
+            
             $.ajax({
-                type: 'POST',
-                url: 'admin_car', // 서버에서 검색을 처리할 URL
+                type: 'GET',
+                url: 'search_car', // 서버에서 검색을 처리할 URL
                 data: {
                     searchType: searchType,
                     searchKeyword: searchKeyword,
                     pageNum: 1 // 페이지 번호를 1로 설정하여 처음 페이지로 검색
                 },
-                success: function(response) {
-                    $('#carTableBody').html(response); // 서버로부터 받은 응답을 테이블 본문에 업데이트
+                dataType : "json",
+                success: function(carList) {
+                	
+                	$('#carTableBody').empty();
+                	
+                	
+                	$.each(carList, function(index, car) {
+                        $('#carTableBody').append(
+                            '<tr>' 
+                                + '<td style="' + car.color + '">' + car.car_brand + '</td>'
+                                + '<td class="text-center">'
+                                    + '<div class="img_area">'
+                                        + '<img src="' + '<%= request.getContextPath() %>/resources/upload/' + car.car_img + '">'
+                                    + '</div>'
+                                + '</td>'
+                                + '<td>' + car.car_model + '</td>'
+                                + '<td>' + car.car_year + '</td>'
+                                + '<td>' + car.gear_type + '</td>'
+                                + '<td>' + car.car_fuel + '</td>'
+                                + '<td>' + car.car_number + '</td>'
+                                + '<td>' + car.car_dayprice + '</td>'
+                                + '<td>' + car.car_hourprice + '</td>'
+                                + '<td>'
+                                    + '<div class="btn-group" role="group" aria-label="Basic example">'
+                                        + '<button type="button" class="btn btn-sm btn-primary" onclick="modifyCar(\'' + car.car_idx + '\')">수정</button>'
+                                        + '<button type="button" class="btn btn-sm btn-danger" onclick="confirmDelete(\'' + car.car_idx + '\')">삭제</button>'
+                                    + '</div>'
+                                + '</td>'
+                            + '</tr>'
+                        );
+                    });
+//                 	
                 },
                 error: function() {
-                    alert('검색에 실패했습니다.');
+                    alert('데이터가 없습니다.');
                 }
             });
         }

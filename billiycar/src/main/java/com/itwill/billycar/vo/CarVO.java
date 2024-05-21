@@ -15,7 +15,7 @@ public class CarVO {
 	private String car_brand;
 	private String car_fuel;
 	private String car_type;
-	private String gear_type;
+	private String gear_type;    
 	private String car_capacity;
 	private String car_img;
 	private MultipartFile mfc_img;
@@ -23,7 +23,7 @@ public class CarVO {
 	private int car_dayprice;
 	private int car_hourprice;
 	private int car_status;
-	private int car_canReserve;
+	private int car_countreserve;
 	private LocalDateTime car_reg_date;
 	private String color;
 }

@@ -73,13 +73,7 @@ public interface AdminMapper {
 	List<Map<String, Object>> selectReservation(String carNumber);
 
 	// 차량 조회
-	List<CarVO> selectCarList(@Param(value = "startRow") int startRow
-			,@Param(value = "listLimit") int listLimit);
-
-	List<CarVO> selectcarList(@Param(value = "commonKeyword")String commonKeyword
-							, @Param(value = "searchKeyword") String searchKeyword
-							, @Param(value = "startRow")int startRow
-							, @Param(value = "listLimit")int listLimit);
+	List<CarVO> selectCarList(Map<String, Object> param);
 
 	String selectSearchTypeCommon(String searchKeyword);
 	String selectSearchTypeCar(String searchKeyword);
