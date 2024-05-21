@@ -198,7 +198,6 @@
 		</div>
 	</div>
 	
-</div>
 		</main>
 	<!-- 부트 스트랩-->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
