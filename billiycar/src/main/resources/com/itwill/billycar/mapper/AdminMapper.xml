@@ -264,7 +264,6 @@
 <!-- 		INSERT  -->
 <!-- 		  INTO Common -->
 <!-- 		VALUES (#{newCarBrand}, #{newBrand}) -->
-	
 	<insert id="insertNewBrand" parameterType="java.lang.String">
 	    <selectKey resultType="String" keyProperty="newCode" order="BEFORE">
 	        WITH max_code AS (
