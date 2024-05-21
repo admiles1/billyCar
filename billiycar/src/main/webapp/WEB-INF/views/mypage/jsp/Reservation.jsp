@@ -242,17 +242,17 @@ window.onload = function() {
 				            <td>${returnDate}</td>
 				            <td>
 				            	<c:choose>
-				            		<c:when test="${reserv.reserv_status eq 1}">
+				            		<c:when test="${reserv.reserv_status eq 0}">
 				            			예약완료
 				            		</c:when>
-				            		<c:when test="${reserv.reserv_status eq 0}">
-				            			예약취소
+				            		<c:when test="${reserv.reserv_status eq 1}">
+				            			이전예약
 				            		</c:when>
 				            	</c:choose>
 				            </td>
 				             <td>
 				            	<c:choose>
-				            		<c:when test="${reserv.reserv_status eq 1}">
+				            		<c:when test="${reserv.reserv_status eq 0}">
 				            			<a href="paymentDetail?idx=${reserv.reserv_idx}">상세보기</a>
 				            		</c:when>
 				            		<c:otherwise>
