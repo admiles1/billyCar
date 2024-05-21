@@ -56,6 +56,8 @@ public class PaymentController {
 		System.out.println(car.getCar_number());
 		System.out.println(map.get("schedule"));
 //		coupon.getCoupon_id()
+		System.out.println(reserv);
+		System.out.println("00000000000000000000000000000000000000000");
 		
 		String MemberId = (String)session.getAttribute("member_id");
 		model.addAttribute("info", MyPageService.getMemberInfo(MemberId));
@@ -80,6 +82,7 @@ public class PaymentController {
 		String memberId = (String)session.getAttribute("member_id");
 		String carNumber = car.getCar_number();
 		
+		
 		ReservVO reserv = new ReservVO();
 		String pickupdate = map.get("schedule").split(",")[0];
 		String returndate = map.get("schedule").split(",")[1];
@@ -91,12 +94,15 @@ public class PaymentController {
 		reserv.setMember_id(memberId);
 		reserv.setCar_number(carNumber);
 		System.out.println(reserv);
-
+		System.out.println("11111111111111111111111111111111111111");
 		payment.setMember_id(memberId);
 		payment.setCar_number(carNumber);
-		
+		payment.setReserv_idx(reserv.getReserv_idx());
+		System.out.println(payment);
+		System.out.println("22222222222222222222222222222222222222222");
 		int count1 = paymentService.registReserv(reserv);
 		System.out.println("예약테이블에 데이터 들어가씀 ㅇㄱㄹㅇ");
+		
 		int count2 = paymentService.registerPayment(payment);
 		
 		int carReserveCount = paymentService.updateCarReserveCount(car);

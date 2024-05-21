@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 public class PaymentVO {
 	private int payment_idx;
+	private int reserv_idx;
 	private int payment_method;
 	private int payment_status;
 	private LocalDateTime payment_date;

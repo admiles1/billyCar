@@ -427,12 +427,12 @@
 			<div class="row g-3">
 				<div class="col-sm-4">
 	            	<label>쿠폰사용&emsp;
-	            		<select class="form-control" name="searchType">
-				            <option value="all">선택안함</option>
-				            <c:forEach var="" items="" >
-					            <option value="status"></option>
-				            </c:forEach>
-			            </select>
+<!-- 	            		<select class="form-control" name="searchType"> -->
+<!-- 				            <option value="all">선택안함</option> -->
+<%-- 				            <c:forEach var="" items="" > --%>
+<!-- 					            <option value="status"></option> -->
+<%-- 				            </c:forEach> --%>
+<!-- 			            </select> -->
 	            	</label>
 	            </div>
 	            <div class="col-sm-8">
