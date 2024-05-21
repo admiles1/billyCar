@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletResponse;
@@ -17,9 +18,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.itwill.billycar.service.EventService;
+import com.itwill.billycar.vo.CouponVO;
 import com.itwill.billycar.vo.EventVO;
 
 @Controller
@@ -213,6 +216,25 @@ public class EventController {
 		}
 		
 		return "redirect:/event";
+	}
+	
+
+	@GetMapping("CouponUpload")
+	public String CouponUpload(CouponVO coupon, Model model) {
+		
+		List<CouponVO> couponList = service.selectCouponList();
+		
+		model.addAttribute("couponList", couponList);
+		return "event/couponUpload";
+	}
+	
+	@ResponseBody
+	@GetMapping("IssueCoupon")
+	public String IssueCoupon(@RequestParam(defaultValue = "1") String code) {
+		System.out.println(code);
+		//TODO
+		// 쿠폰 어케 발급함?
+		return "true";
 	}
 	
 }

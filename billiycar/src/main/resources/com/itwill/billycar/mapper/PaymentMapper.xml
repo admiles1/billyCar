@@ -34,20 +34,19 @@
 	
 	
 <select id="selectReservDetail" resultType="com.itwill.billycar.vo.ReservVO">
-		SELECT * FROM Reservation WHERE reserv_idx = #{idx}
+		SELECT * 
+		FROM Reservation 
+		WHERE reserv_idx = #{idx}
 	</select>
 	
-	
-	<insert id="insertPayment">
-		INSERT INTO Payment 
-		VALUES (NULL
-		     , 1 
-		     , 1 
-		     , now() 
-		     , #{payment_result_amount}
-		     , #{member_id}
-		     , #{car_number})
-	</insert>
+	<select id="selectPaymentDetail" parameterType="int" resultType="map">
+	    SELECT r.*, c.*, p.*
+	    JOIN car c 
+	    ON r.car_number = c.car_number
+	    JOIN Payment p 
+	    ON r.reserv_idx = p.reserv_idx
+	    WHERE r.reserv_idx = #{idx}
+	</select>
 	
 	<insert id="insertRserv">
 		INSERT INTO Reservation 
@@ -66,10 +65,25 @@
 			 , null);
 	</insert>
 	
+	
+	<insert id="insertPayment">
+		INSERT INTO Payment 
+		VALUES (NULL
+			 , #{reserv_idx}
+		     , 1 
+		     , 1 
+		     , now() 
+		     , #{payment_result_amount}
+		     , #{member_id}
+		     , #{car_number})
+	</insert>
+	
+	
+	
 	<update id="updateCarCountReserve">
 		UPDATE car
 		SET 
-			car_countReserve = #{car_countReserve}+1
+			car_countReserve = car_countReserve + 1
 		WHERE car_number = #{car_number}
 	</update>
 </mapper>

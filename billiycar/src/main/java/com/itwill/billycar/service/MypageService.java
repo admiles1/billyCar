@@ -71,9 +71,9 @@ public class MypageService {
 		return mapper.selectDuplicateLicense(license);
 	}
 
-	public List<Map<String, Object>> getMemberCoupon(String member_id) {
-		return mapper.selcetMemberCoupon(member_id);
-	}
+//	public List<Map<String, Object>> getMemberCoupon(String member_id) {
+//		return mapper.selcetMemberCoupon(member_id);
+//	}
 
 	public int couponUpdate(String member_id, String coupon_code) {
 		return mapper.insertMyCoupon(member_id, coupon_code);
@@ -93,6 +93,14 @@ public class MypageService {
 
 	public int getReservListCount(String client) {
 		return mapper.selectReservListCount(client);
+	}
+
+	public List<Map<String, Object>> getMemberCoupon(int startRow, int listLimit, String member_id) {
+	    return mapper.selectMemberCoupon(member_id, startRow, listLimit);
+	}
+
+	public int getCouponListCount(String memberId) {
+	    return mapper.selectCouponListCount(memberId);
 	}
 
 //	public List<QnaVO> getMemberQna(String memberId, int pageNum) {

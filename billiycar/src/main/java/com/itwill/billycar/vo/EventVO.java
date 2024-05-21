@@ -11,4 +11,5 @@ public class EventVO {
 	private String event_content;
 	private String event_image;
 	private MultipartFile event_image_form;
+	private String coupon_code;
 }

@@ -19,9 +19,26 @@
 <!-- css -->
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/resources/css/notice_write.css">
 
+<style>
+	#couponCode {
+		background-color : rgb(243, 243, 243);
+		display : inline;
+		margin-top : 5px;
+		width : 200px;
+	}
+
+</style>
+
+
 <script>
 	function coupon(){
-		window.open("couponUpload");
+		let divContent = $(".note-editable").html();
+		
+		if (divContent === '<p><br></p>') {
+		    alert('내용을 먼저 입력해주세요');
+		} else {
+			window.open("CouponUpload", "쿠폰 등록", "width=100px, height=30px");
+		}
 	}
 
 </script>
@@ -45,8 +62,10 @@
   				<h3><input type = "text" id="title" placeholder="제목을 입력하시오" name = "event_title" style = "width : 400px" value="${event.event_title}"> </h3>
   			</div>
   			
-  			<div class = "view_info">
+  			<div class = "view_info" align="center"> 
 				<input type="file" value="파일 추가하기" name="event_image_form" multiple>
+				선택된 쿠폰 ::
+				<input type="text" id ="couponCode" name="coupon_code" value="${event.coupon_code}" readonly>
   			</div>
   			
 <!--   			<div class = "view_cont"> -->
@@ -78,7 +97,7 @@
   		<div class = "btn-view">
   			<input type = "submit" value = "수정" id = "writeGo">
   			<a href = "event">목록</a>
-  			<a onclick="coupon()"> 쿠폰 등록 </a>
+  			<a onclick="coupon()"> 쿠폰 변경 </a>
   		</div>
 		</form>
 	</div>

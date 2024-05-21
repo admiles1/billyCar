@@ -107,13 +107,21 @@
 			member_id = #{member_id}
 	</update>
 	
-	<select id="selcetMemberCoupon" resultType="hashmap">
+<!-- 	<select id="selcetMemberCoupon" resultType="hashmap"> -->
 
-		SELECT c.coupon_name , c.coupon_code ,c.coupon_discount_amount, ci.coupon_used_status
-		FROM coupon c JOIN coupon_issue ci
-		ON c.coupon_id  = ci.coupon_id 
-		WHERE ci.member_id = #{member_id};
+<!-- 		SELECT c.coupon_name , c.coupon_code ,c.coupon_discount_amount, ci.coupon_used_status -->
+<!-- 		FROM coupon c JOIN coupon_issue ci -->
+<!-- 		ON c.coupon_id  = ci.coupon_id  -->
+<!-- 		WHERE ci.member_id = #{member_id}; -->
 		
+<!-- 	</select> -->
+	
+	<select id="selectMemberCoupon" resultType="hashmap">
+	    SELECT c.coupon_name, c.coupon_code, c.coupon_discount_amount, ci.coupon_used_status
+	    FROM coupon c 
+	    JOIN coupon_issue ci ON c.coupon_id = ci.coupon_id 
+	    WHERE ci.member_id = #{member_id}
+	    LIMIT #{startRow}, #{listLimit}
 	</select>
 	
 	<select id="selectDuplicateCoupon" resultType="int">
@@ -157,6 +165,13 @@
 		SELECT COUNT(*)
 		FROM Reservation
 		WHERE member_id = #{client}
+	</select>
+	
+<!-- 	쿠폰 내역 조회 수정 -->
+	<select id="selectCouponListCount" resultType="int">
+	    SELECT COUNT(*)
+	    FROM coupon_issue
+	    WHERE member_id = #{memberId}
 	</select>
 	
 </mapper>

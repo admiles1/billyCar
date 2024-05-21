@@ -17,12 +17,30 @@
 	        }
 	    });
 	    
+	    $("#issueCoupon").on("click", function() {
+	    	
+	        $.ajax({
+	        	type : "GET",
+	        	url : "IssueCoupon",
+	        	data : { code : '${event.coupon_code}'},
+	        	dataType : "JSON",
+	        	success : function(response){
+	        		if(response){
+	        			alert('후우');
+	        		}
+	        	}
+	        	
+	        });
+	    });
+	    
 	});
 	
 	function couponIssue(){
 		var member_id = "${sessionScope.member_id}";
     	var coupon_id = 1;
      }
+	
+	
 
 </script>
 <meta charset="UTF-8">
@@ -52,7 +70,6 @@
 				<div> ${event.event_content}</div>
 			</div>
 		</div>
-		<a onclick="couponIssue()" class="btn btn-primary">쿠폰 받기</a>
 		<p class="mt-3">추가 문의사항이 있는 경우 이벤트 문의 메일(itwillbs_3@itwillbs.co.kr)로 연락 주시기 바랍니다.</p>
 	</div>
 

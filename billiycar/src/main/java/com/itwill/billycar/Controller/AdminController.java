@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -149,6 +150,8 @@ public class AdminController {
 		int listLimit = 3;
 		int startRow = (pageNum - 1) * listLimit;
 		
+		
+		
 		List<MemberVO> member = service.adminMemberList(searchType,searchKeyword,startRow,listLimit);
 		
 		int listCount = service.getMemberListCount(searchType,searchKeyword,startRow,listLimit);
@@ -189,14 +192,13 @@ public class AdminController {
 		System.out.println("UpdateSuccess(member_id) : " + UpdateSuccess);
 		
 		if(UpdateSuccess > 0 ) {
-			return "admin/member_status";
+			model.addAttribute("msg", "변경이 완료되었습니다. 닫기 버튼을 눌러주세요");
 		}else {
 			model.addAttribute("msg", "변경되지 않았습니다.");
 			model.addAttribute("targetURL", "admin/admin_member");
 			
-			return "error/fail";
 		}
-		
+		return "err/fail";
 	}
 
 	// 차량 목록 조회
@@ -215,9 +217,15 @@ public class AdminController {
 			endPage = maxPage;
 		}
 		
+		Map<String, Object> param  = new HashMap<String, Object>();
+		param.put("startRow",  startRow);
+		param.put("listLimit",  listLimit);
+		param.put("searchType", "");
+		param.put("searchKeyword", "");
+		
 		model.addAttribute("pageInfo", new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage));
 
-		List<CarVO> carList = service.getCarList(startRow, listLimit);
+		List<CarVO> carList = service.getCarList(param);
 		model.addAttribute("carList", carList);
 		
 		return "admin/admin_car";
@@ -225,7 +233,7 @@ public class AdminController {
 	
 	// 차량 검색
 	@ResponseBody
-	@PostMapping("admin_car")
+	@GetMapping("search_car")
 	public String searchCars(
 			@RequestParam(defaultValue = "") String searchType,
 			@RequestParam(defaultValue = "") String searchKeyword,
@@ -239,21 +247,40 @@ public class AdminController {
 		int listLimit = 10;
 		int startRow = (pageNum - 1) * listLimit;
 		
-		switch (searchType) {
-		case "car_brand"  : searchKeyword = service.getsearchTypeCommon(searchKeyword); break;
-		case "car_model"  : searchKeyword = service.getsearchTypeCommon(searchKeyword); break;
-		case "car_number"  : searchKeyword = service.getsearchTypeCar(searchKeyword); break;
-
+		Map<String, Object> param  = new HashMap<String, Object>();
+		param.put("startRow", startRow);
+		param.put("listLimit", listLimit);
+		param.put("searchType", searchType);
+		param.put("searchKeyword", searchKeyword.trim());
+		
+		List<CarVO> carList = service.getCarList(param);
+		
+		
+		JsonArray list = new JsonArray();
+		for(CarVO vo : carList) {
+			JsonObject json = new JsonObject();
+			json.addProperty("car_number", vo.getCar_number());
+			json.addProperty("car_model", vo.getCar_model());
+			json.addProperty("car_brand", vo.getCar_brand());
+			json.addProperty("car_fuel", vo.getCar_fuel());
+			json.addProperty("gear_type", vo.getGear_type());
+			json.addProperty("car_img", vo.getCar_img());
+			json.addProperty("car_year", vo.getCar_year().toString());
+			json.addProperty("car_dayprice", vo.getCar_dayprice());
+			json.addProperty("car_hourprice", vo.getCar_hourprice());
+			json.addProperty("car_status", vo.getCar_status());
+			json.addProperty("color", vo.getColor());
+			
+			list.add(json);
 		}
 		
-		System.out.println(searchKeyword);
-		
-//		List<CarVO> carList = service.getCarList(searchType, searchKeyword, startRow, listLimit);
-
 		
 		
+//		model.addAttribute("car", list);
+//		System.out.println("ddddddddddddddddddd" + list);
+//		System.out.println("wwwwwwwwwwwwwwwwwww" + list.toString());
 		
-		return "";
+		return list.toString();
 				
 	}
 	

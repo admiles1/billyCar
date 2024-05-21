@@ -29,7 +29,20 @@
 		</if>
 		
 		<if test="searchType.equals('status')">
-			AND member_status LIKE CONCAT('%', #{searchKeyword}, '%')
+			<choose>
+				<when test="searchKeyword.equals('회원')">
+					AND member_status = 1				
+				</when>
+				<when test="searchKeyword.equals('탈퇴')">
+					AND member_status = 2				
+				</when>
+				<when test="searchKeyword.equals('블랙리스트')">
+					AND member_status = 3				
+				</when>
+				<otherwise>
+					and 1=0
+				</otherwise>
+			</choose>
 		</if>
 		
 		LIMIT #{startRow},#{listLimit}
@@ -47,7 +60,20 @@
 		</if>
 		
 		<if test="searchType.equals('status')">
-			AND member_status LIKE CONCAT('%', #{searchKeyword}, '%')
+			<choose>
+				<when test="searchKeyword.equals('회원')">
+					AND member_status = 1				
+				</when>
+				<when test="searchKeyword.equals('탈퇴')">
+					AND member_status = 2				
+				</when>
+				<when test="searchKeyword.equals('블랙리스트')">
+					AND member_status = 3				
+				</when>
+				<otherwise>
+					and 1=0
+				</otherwise>
+			</choose>	
 		</if>
 	</select>
 	
@@ -120,19 +146,23 @@
 		    c.car_reg_date,
 		    CASE WHEN car_status = 1 THEN 'background-color: #ff5f6d'
 							 	     ELSE '' END AS color
+							 	     
 		FROM
 		    car c
 		    LEFT JOIN Common model ON c.car_model = model.code  -- 모델 코드와 매칭
 		    LEFT JOIN Common brand ON c.car_brand = brand.code  -- 브랜드 코드와 매칭
 		    LEFT JOIN Common fuel ON c.car_fuel = fuel.code     -- 연료 코드와 매칭
 		    LEFT JOIN Common type ON c.car_type = type.code    -- 차종 코드와 매칭
-<!-- 		WHERE 1=1 -->
-<!-- 		<if test=""> -->
-<!-- 			AND  car_model = #{commonKeyword}; -->
-<!-- 		</if> -->
-<!-- 		<if test=""> -->
-<!-- 			AND asdasdas =a sdas;d -->
-<!-- 		</if> -->
+		WHERE 1=1
+		<if test="searchType.equals('car_brand')">
+			AND brand.name LIKE CONCAT('%', #{searchKeyword} ,'%')  
+		</if>
+		<if test="searchType.equals('car_model')">
+			AND  model.name LIKE CONCAT('%', #{searchKeyword} ,'%')  
+		</if>
+		<if test="searchType.equals('car_number')">
+			AND c.car_number LIKE CONCAT('%', #{searchKeyword} ,'%')  
+		</if>
 		ORDER BY
 		    brand.name,       -- 브랜드명으로 정렬
 		    model.name       -- 모델명으로 정렬
@@ -142,16 +172,16 @@
 		
 	</select>
 	
-	<select id="selectSearchTypeCommon">
-		SELECT * 
-		FROM Common
-		WHERE name = #{searchKeyword}
-	</select>
-	<select id="selectSearchTypeCar">
-		SELECT * 
-		FROM car
-		WHERE car_number LIKE CONCAT('%', #{searchKeyword} ,'%') 
-	</select>
+<!-- 	<select id="selectSearchTypeCommon"> -->
+<!-- 		SELECT *  -->
+<!-- 		FROM Common -->
+<!-- 		WHERE name LIKE CONCAT('%', #{searchKeyword} ,'%')  -->
+<!-- 	</select> -->
+<!-- 	<select id="selectSearchTypeCar"> -->
+<!-- 		SELECT *  -->
+<!-- 		FROM car -->
+<!-- 		WHERE car_number LIKE CONCAT('%', #{searchKeyword} ,'%')  -->
+<!-- 	</select> -->
 	
 	<select id="selectCarListCount" resultType="int">
 		SELECT COUNT(*)

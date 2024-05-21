@@ -100,7 +100,7 @@
 	            </div>
 	
 	             <div class="col-sm-9">
-                    <input type="text" class="form-control" id="pickupDate" readonly>
+                    <input type="text" class="form-control" id="pickupDate" value="${reservDetails[0].reserv_pickupdate}" readonly>
                 </div>
 	        </div>
 	        
@@ -110,7 +110,7 @@
 	            </div>
 				
 	            <div class="col-sm-9">
-	            	<input type="text" class="form-control" id="locatrionInfo"  value="${reservDetail.reserv_pickuplocation}" readonly>
+	            	<input type="text" class="form-control" id="locatrionInfo"  value="${reservDetails[0].reserv_pickuplocation}" readonly>
 	            </div>
 			</div>
 			
@@ -120,7 +120,7 @@
 	            </div>
 	
 	            <div class="col-sm-9">
-                    <input type="text" class="form-control" id="returnDate" readonly>
+                    <input type="text" class="form-control" id="returnDate" value="${reservDetails[0].reserv_returndate}" readonly>
                 </div>
 				
 			</div>
@@ -131,7 +131,7 @@
 	            </div>
 	
 	            <div class="col-sm-9">
-	            	<input type="text" class="form-control" id="locatrionInfo" value="${reservDetail.reserv_returnlocation}" readonly>
+	            	<input type="text" class="form-control" id="locatrionInfo" value="${reservDetails[0].reserv_returnlocation}" readonly>
 	            </div>
 			</div>
 			<hr>            
@@ -197,7 +197,7 @@
 				        <tr class="insuranceChk" id="insuranceNone">
 				            <td colspan="1" class="c">
 				                <input name="insurance" class="chk insurance_data" id="insuranceCar0" type="radio" value="0"
-				                ${reservDetail.reserv_insurance == 0 ? 'checked="checked"' : ''} disabled>
+				                ${reservDetails[0].reserv_insurance == 0 ? 'checked="checked"' : ''} disabled>
 				                <label>선택안함</label>
 				            </td>
 				            <td colspan="1" class="c">없음</td>
@@ -208,7 +208,7 @@
 				        <tr class="insuranceChk" id="insuranceGeneral">
 				            <td colspan="1" class="c">
 				                <input name="insurance" class="chk insurance_data" id="insuranceCar1" type="radio" value="10000"
-				                ${reservDetail.reserv_insurance == 1 ? 'checked="checked"' : ''} disabled>
+				                ${reservDetails[0].reserv_insurance == 1 ? 'checked="checked"' : ''} disabled>
 				                <label>일반자차</label>
 				            </td>
 				            <td colspan="1" class="c">1만원</td>
@@ -219,7 +219,7 @@
 				        <tr class="insuranceChk" id="insuranceFull">
 				            <td colspan="1" class="c">
 				                <input name="insurance" class="chk insurance_data" id="insuranceCar12" type="radio" value="26000"
-				                ${reservDetail.reserv_insurance == 2 ? 'checked="checked"' : ''} disabled>
+				                ${reservDetails[0].reserv_insurance == 2 ? 'checked="checked"' : ''} disabled>
 				                <label>완전자차</label>
 				            </td>
 				            <td colspan="1" class="c">2만6천원</td>
@@ -283,9 +283,9 @@
 				<p><b>차량 정보</b></p>
 				<div class="row ">
 					<div class="col-3">차량</div>
-					<div class="col-9 car-name" align="right">${car.car_model}</div>
+					<div class="col-9 car-name" align="right">${reservDetails[0].car_model}</div>
  					<div class="col-3">기본정보</div> 
- 					<div class="col-9" align="right">${car.car_capacity}/${car.gear_type}/${car.car_fuel}</div> 
+ 					<div class="col-9" align="right">${reservDetails[0].car_capacity} </div> 
 					<div class="col-3">제한나이</div> 
  					<div class="col-9" align="right">만23세 이상</div> 
  					<div class="col-3">운전경력</div>
@@ -306,7 +306,7 @@
 					<div class="col-9" align="right">할인금액 표시</div>
 					<hr>
 					<div class="col-3">결제 금액(VAT 포함)</div>
-					<div class="col-9"  align="right"><input type="text" id="dateDifferenceInput" value="${paymentDetail.payment_result_amount }" readonly/></div>
+					<div class="col-9"  align="right"><input type="text" id="dateDifferenceInput" value="${reservDetails[0].payment_result_amount }" readonly/></div>
 					<div></div>
 				</div>
 			</div>
@@ -344,7 +344,7 @@
         }
         
         document.addEventListener('DOMContentLoaded', function() {
-            var reservInsurance = ${reservDetail.reserv_insurance};
+            var reservInsurance = ${reservDetails[0].reserv_insurance};
             document.getElementById('insuranceNone').style.display = reservInsurance == 0 ? '' : 'none';
             document.getElementById('insuranceGeneral').style.display = reservInsurance == 1 ? '' : 'none';
             document.getElementById('insuranceFull').style.display = reservInsurance == 2 ? '' : 'none';
@@ -370,34 +370,6 @@
         });
     </script>	
 
-	
-	<script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function() {
-        // 대여날짜를 ISO 8601 형식의 문자열에서 Date 객체로 변환
-        var pickupDate = new Date('${reservDetail.reserv_pickupdate}'.replace('T', ' '));
-        // 반납날짜를 ISO 8601 형식의 문자열에서 Date 객체로 변환
-        var returnDate = new Date('${reservDetail.reserv_returndate}'.replace('T', ' '));
-
-        // 대여날짜를 YYYY-MM-DD HH:MM 형식으로 변환
-        var formattedPickupDate = formatDate(pickupDate);
-        // 반납날짜를 YYYY-MM-DD HH:MM 형식으로 변환
-        var formattedReturnDate = formatDate(returnDate);
-
-        // 변환된 날짜를 해당 입력란에 설정
-        document.getElementById('pickupDate').value = formattedPickupDate;
-        document.getElementById('returnDate').value = formattedReturnDate;
-    });
-
-    function formatDate(date) {
-        var year = date.getFullYear();
-        var month = (date.getMonth() + 1).toString().padStart(2, '0');
-        var day = date.getDate().toString().padStart(2, '0');
-        var hours = date.getHours().toString().padStart(2, '0');
-        var minutes = date.getMinutes().toString().padStart(2, '0');
-
-        return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes;
-    }
-</script>
 	
 	
 		

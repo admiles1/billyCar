@@ -11,6 +11,7 @@
 			, #{event_title}
 			, #{event_content}
 			, #{event_image}
+			, #{coupon_code}
 		)
 	</insert>
 	
@@ -49,5 +50,9 @@
 		FROM event
 		WHERE event_idx = #{event_idx}
 	</select>
-
+	
+	<select id="selectCouponList" resultType="com.itwill.billycar.vo.CouponVO">
+		SELECT *
+		  FROM coupon c ;
+	</select>
 </mapper>

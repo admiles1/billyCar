@@ -46,13 +46,10 @@ public class AdminService {
 		return mapper.updateMember(member);
 	}
 
-	public List<CarVO> getCarList(int startRow, int listLimit) {
-		return mapper.selectCarList(startRow, listLimit);
+	public List<CarVO> getCarList(Map<String, Object> param) {
+		return mapper.selectCarList(param);
 	}
 	
-	public List<CarVO> getCarList(String commonKeyword, String searchKeyword, int startRow, int listLimit) {
-		return mapper.selectcarList(commonKeyword, searchKeyword, startRow, listLimit);
-	}
 	
 	public List<QnaVO> adminAnswerList() {
 		return mapper.selectQnaList();
