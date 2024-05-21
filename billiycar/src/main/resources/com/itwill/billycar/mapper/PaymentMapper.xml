@@ -83,7 +83,7 @@
 	<update id="updateCarCountReserve">
 		UPDATE car
 		SET 
-			car_countReserve = #{car_countReserve}+1
+			car_countReserve = car_countReserve + 1
 		WHERE car_number = #{car_number}
 	</update>
 </mapper>
