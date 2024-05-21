@@ -443,7 +443,6 @@ public class CsController {
 		qna.setQna_writer((String)session.getAttribute("member_id"));
 		qna = service.getQnaDetail(qna);
 		model.addAttribute("qna",qna);
-		System.out.println("qna_a");
 		return "cs/Q&A_A";
 	}
 }

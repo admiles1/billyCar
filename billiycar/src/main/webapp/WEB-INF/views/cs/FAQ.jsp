@@ -103,6 +103,7 @@
         
       </div> <!-- id=accParent -->
 
+		<%--페이징 --%>
 	 	<nav aria-label="Page navigation example">
 		<div class = "paging">
 	  		<ul class="pagination">
@@ -152,8 +153,7 @@
     });
     
 
-	
-	// 지점명 불러오기
+ // 지점명 불러오기
 	/*
 	$(function() {
 		let urlParams = new URL(location.href).searchParams;
@@ -179,6 +179,8 @@
 	});
 	
 */
+    
+	
 
 </script>
 
