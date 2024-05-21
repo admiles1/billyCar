@@ -59,17 +59,6 @@
 		          <h5 class="card-title" style="text-align: center">쿠폰</h5>
 		          
 		          <form action="couponAdd" method="post">
-		          	
-		          	<!-- event_idx -->
-		            <div class="form-group">
-		               <label for="inquiry">이벤트 선택</label>
-		               <select class="form-control" name="event_idx">
-		               	   <c:forEach var="event" items="${eventList}">	
-				               <option value="${event.event_idx }">${event.event_title }</option>
-			               </c:forEach>
-			           </select>
-		            </div>
-		          	
 		            <!-- 쿠폰이름 -->
 		            <div class="form-group">
 		              <label for="inquiry">쿠폰 이름</label><input type="text" class="form-control" placeholder="쿠폰 이름을 입력하세요" required="required" name="coupon_name">
