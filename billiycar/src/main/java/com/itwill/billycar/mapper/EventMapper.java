@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.itwill.billycar.vo.CouponVO;
 import com.itwill.billycar.vo.EventVO;
 
 @Mapper
@@ -20,5 +21,6 @@ public interface EventMapper {
 	int updateEvent(EventVO event);
 
 	String selectEventImage(EventVO event);
-
+	
+	public List<CouponVO> selectCouponList();
 }

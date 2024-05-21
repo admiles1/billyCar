@@ -22,7 +22,7 @@
 
 <script>
 	function coupon(){
-		window.open("couponUpload");
+		window.open("CouponUpload", "쿠폰 등록", "width=400px, height=500px");
 	}
 
 </script>
@@ -81,6 +81,7 @@
   		<div class = "btn-view">
   			<input type = "submit" value = "작성" id = "writeGo">
   			<a href = "event">목록</a>
+  			<a onclick="coupon()"> 쿠폰 등록 </a>
   		</div>
 		</form>
 	</div>

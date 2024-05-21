@@ -218,9 +218,10 @@
 					        var mapContainer = document.getElementById('map');
 							//지도의 초기생성
 					        var mapOption = {
-					            center: new kakao.maps.LatLng(35.17988104101734, 129.07510440921163),
+					            center: new kakao.maps.LatLng(35.1584897298991, 129.06205146230675),
 					            level: 1
 					        };
+	
 							
 							//변수선언(장소 검색, 지오코딩, 인포윈도우)
 					        var map = new kakao.maps.Map(mapContainer, mapOption);

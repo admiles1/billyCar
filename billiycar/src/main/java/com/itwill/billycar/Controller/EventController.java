@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.itwill.billycar.service.EventService;
+import com.itwill.billycar.vo.CouponVO;
 import com.itwill.billycar.vo.EventVO;
 
 @Controller
@@ -213,6 +214,16 @@ public class EventController {
 		}
 		
 		return "redirect:/event";
+	}
+	
+
+	@GetMapping("CouponUpload")
+	public String CouponUpload(CouponVO coupon, Model model) {
+		
+		List<CouponVO> couponList = service.selectCouponList();
+		
+		model.addAttribute("couponList", couponList);
+		return "event/couponUpload";
 	}
 	
 }

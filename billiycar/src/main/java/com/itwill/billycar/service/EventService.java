@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itwill.billycar.mapper.EventMapper;
+import com.itwill.billycar.vo.CouponVO;
 import com.itwill.billycar.vo.EventVO;
 
 @Service
@@ -35,6 +36,11 @@ public class EventService {
 
 	public String selectEventImage(EventVO event) {
 		return mapper.selectEventImage(event);
+	}
+	
+	
+	public List<CouponVO> selectCouponList(){
+		return mapper.selectCouponList();
 	}
 
 }
