@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +33,8 @@
 				<em class="em"><b>작성자</b></em>
 				<em class="em">${notice.board_writer}</em>
 				<em class="em"><b>날짜</b></em>
-				<em class="em"><fmt:formatDate value="${notice.board_date}" pattern = "yy-MM-dd HH시 mm분"/></em>
+				<c:set var="noticeDate" value="${fn:split(fn:split(notice.board_date, 'T')[0], '-')}" />
+				<em class="em">${noticeDate[1]}월 ${noticeDate[2]}일</em>
   			</div>
   			
   			<div class = "view_cont">

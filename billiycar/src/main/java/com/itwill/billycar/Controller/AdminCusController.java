@@ -219,11 +219,7 @@ public class AdminCusController {
 	}
 	
 	@GetMapping("couponAdd")
-	public String couponAdd(Model model) {
-		List<EventVO> eventList = eventService.selectEventList(100);
-		System.out.println(eventList);
-		
-		model.addAttribute("eventList", eventList);
+	public String couponAdd() {
 		return "admin/couponAdd";
 	}
 	
