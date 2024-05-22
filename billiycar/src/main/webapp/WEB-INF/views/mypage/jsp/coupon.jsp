@@ -26,32 +26,42 @@
     }
     
      table {
-     	margin-top: 50px;
-        width: 100%;
+    	width: 100%;
         border-collapse: collapse;
+        margin-top: 45px;
         text-align: center;
+        table-layout: fixed;
+        border-radius: 8px; /* 모서리 둥글게 처리 */
+        overflow: hidden;
     }
 
     th, td {
-        border: 1px solid #ddd;
-        padding: 8px;
+        border: 1px solid #ccc;
+        padding: 15px; /* 셀 간격 늘리기 */
         text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     th {
         background-color: #f2f2f2;
+        font-weight: bold;
     }
 
     tr:nth-child(even) {
-        background-color: #f2f2f2;
+        background-color: #f9f9f9; /* 번갈아가는 행 색상 */
     }
     
-     .pagination-container {
+    tr:hover {
+        background-color: #f5f5f5; /* 호버 효과 */
+    }
+    
+    .pagination-container {
         display: flex;
         justify-content: center;
         margin-top: 20px;
     }
-    
     
     .pagination {
         display: flex;
@@ -83,6 +93,26 @@
         background-color: #fff;
         border-color: #dee2e6;
     }
+    
+    .number {
+    	width: 10%;
+    }
+    
+    .coupon-name {
+    	width: 25%;
+    }
+    
+    .coupon-code {
+    	width: 25%;
+    }
+    
+    .coupon-discount {
+    	width: 20%;
+    }
+    
+    .coupon-status {
+    	width: 20%;
+    }
 </style>
 </head>
 <body>
@@ -95,29 +125,46 @@
         <input type="text" placeholder="쿠폰 코드를 입력하시오" name="coupon_code">
         <input type="submit" value="쿠폰 등록" style="background-color: #00AAFF; color: white">
     </div>
+    <c:set var="pageNum" value="1"/>
+    <c:if test="${not empty param.pageNum}">
+        <c:set var="pageNum" value="${param.pageNum}"/>
+    </c:if>
     <table>
         <thead>
             <tr>
-                <th>쿠폰 이름</th>
-                <th>쿠폰 코드</th>
-                <th>쿠폰 할인율</th>
-                <th>사용 상태</th>
+            	<th class="number"></th>
+                <th class="coupon-name">쿠폰 이름</th>
+                <th class="coupon-code">쿠폰 코드</th>
+                <th class="coupon-discount">쿠폰 할인율</th>
+                <th class="coupon-status">사용 상태</th>
             </tr>
         </thead>
         <tbody>
-           <c:forEach var="coupon" items="${Coupon}">
-                <tr>
-                    <td>${coupon.coupon_name}</td>
-                    <td>${coupon.coupon_code}</td>
-                    <td>${coupon.coupon_discount_amount}%</td>
-                    <td>
-                        <c:choose>
-                            <c:when test="${coupon.coupon_used_status == 1}">사용 가능</c:when>
-                            <c:when test="${coupon.coupon_used_status == 2}">사용 불가</c:when>
-                        </c:choose>
-                    </td>
-                </tr>
-            </c:forEach>
+        	 <c:choose>
+                <%-- 문의 내역이 존재하지 않을 경우 --%>
+                <c:when test="${empty Coupon}">
+                    <tr>
+                        <td colspan="5">쿠폰내역이 존재하지 않습니다</td>
+                    </tr>
+                </c:when>
+              <c:otherwise>  
+         		  <c:forEach var="coupon" items="${Coupon}">
+       		  			<c:set var="i" value="${i+1}"></c:set>
+		                <tr>
+		                	<td>${i}</td>
+		                    <td>${coupon.coupon_name}</td>
+		                    <td>${coupon.coupon_code}</td>
+		                    <td>${coupon.coupon_discount_amount}</td>
+		                    <td>
+		                        <c:choose>
+		                            <c:when test="${coupon.coupon_used_status == 1}">사용 가능</c:when>
+		                            <c:when test="${coupon.coupon_used_status == 2}">사용 불가</c:when>
+		                        </c:choose>
+		                    </td>
+		                </tr>
+            		</c:forEach>
+            	</c:otherwise>
+            </c:choose>
         </tbody>
     </table>
     <nav class="pagination-container" aria-label="Page navigation example">

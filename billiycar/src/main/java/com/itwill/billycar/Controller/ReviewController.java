@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.itwill.billycar.service.ReservService;
 import com.itwill.billycar.service.ReviewService;
 import com.itwill.billycar.vo.HeartVO;
+import com.itwill.billycar.vo.ReservVO;
 import com.itwill.billycar.vo.ReviewVO;
 
 import retrofit2.http.GET;
@@ -107,6 +108,23 @@ public class ReviewController {
 			return false;
 		}
 		return true;
+		
+	}
+	
+	@ResponseBody
+	@GetMapping("reviewCondition")
+	public String reviewCondition(ReservVO reserv) {
+		System.out.println("reserv : "+reserv);
+		
+		//오늘이 반납기간이 보다 큰지 (있으면 reiview작성O, 없으면 review작성 X)
+		ReservVO SuccessReviewCondition = resercService.selectReviewCondition(reserv.getReserv_idx());
+		
+		if(SuccessReviewCondition != null) {
+			return "true";
+		}else {
+			return "false";
+		}
+		
 		
 	}
 }

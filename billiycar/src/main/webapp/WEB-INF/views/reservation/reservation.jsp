@@ -27,6 +27,24 @@
 		display : inline-block;
 		width : 150px;
 	}
+	
+	small {
+		color : black;
+		text-align : left;
+		font-size : 20px;
+	}
+	
+	.canReserv {
+		width : 100px;
+		height : 100px;
+		margin : auto;
+		padding-top : 30px;
+		background-color : orange;
+		border-radius : 50%;
+		color : white;
+		font-size : 18px;
+	}
+	
 </style>
 
 <script>
@@ -72,10 +90,12 @@
 						let dayPrice = car.car_dayprice.toLocaleString();
 						let hourPrice = car.car_hourprice.toLocaleString();
 						let carModel = "\"" + car.car_model + "\"";
+						let carType = "\"" + car.car_type + "\"";
+						let carFuel = "\"" + car.car_fuel + "\"";
 						
 						$("#selectResult > ul").append(
 								"<li class='carList fadeIn row'>"
-								+ "<a class='d-flex' onclick='goDetail(" + carModel + ")'>"
+								+ "<a class='d-flex' onclick='goDetail(" + carModel + "," + carType + "," + carFuel + ")'>"
 								+ "<span class='carImg'><img src='" + car.car_img + "'></span>"
 								+ "<span class='carInfo'>"
 								+ "<span>" + car.car_model + " / " + car.car_capacity + "</span>"
@@ -92,7 +112,6 @@
 				}
 			}) // ajax 끝
 		}); // 더보기 클릭 이벤트
-// 		$("#moreList").css("display" ,"none");
 		$("#searchCar").on("click", function(){
 			if(!check()) {
 				return;
@@ -139,11 +158,22 @@
 	
 	function goDetail(model,type,fuel){
 		let returnLocation = $("#reserv_returnlocation").val();
+		
 		if(returnLocation == "") {
 			alert('반납장소를 선택하여 주십시오');
 			$("#reserv_returnlocation").focus();
 			return false;
 		}
+		
+		let pickupLocation = $("#reserv_pickuplocation").val();
+	    let regex = /^부산/;
+	    
+	    if(!regex.exec(pickupLocation)) {
+	    	alert("부산 지역 내에서 선택하여 주십시오")
+	    	$("#reserv_pickuplocation").focus();
+	    	return false;
+	    }
+		
 		
 		let fuels = [];
 		
@@ -152,14 +182,14 @@
 		
 		let pul = $("#reserv_pickuplocation").val();
 		
-		if(pul == "아이티윌") {
-			pul = "부산광역시 부산진구 동천로 109 삼한골든게이트빌딩 7층";
+		if(pul == "부산 아이티윌") {
+			pul = "부산광역시 부산진구 동천로 109 삼한골든게이트빌딩 7층(부산 아이티윌)";
 		} 
 		
 		let rtl = $("#reserv_returnlocation").val();
 		
 		if(rtl == "branch"){
-			rtl = "부산광역시 부산진구 동천로 109 삼한골든게이트빌딩 7층";
+			rtl = "부산광역시 부산진구 동천로 109 삼한골든게이트빌딩 7층 (부산 아이티윌)";
 		} else if (rtl == "same") {
 			rtl = pul;
 		}
@@ -187,6 +217,7 @@
 			return false;
 		}  
 		
+	    
 		return true;
 	}
 </script>
@@ -349,7 +380,7 @@
 			    	</div>
 			    	<div class="location_area">
 			    		<input type="text" class="selectArea" name="reserv_pickuplocation" 
-			    				value="아이티윌"  id="reserv_pickuplocation"
+			    				value="부산 아이티윌"  id="reserv_pickuplocation"
 			    				style="padding-right: 17px;" placeholder=":: 대여지점 ::" readonly>
 				    	<select  class="selectArea" name="reserv_returnlocation" id="reserv_returnlocation">
 				    		<option selected value=""
@@ -395,9 +426,14 @@
 								<span class='carImg'><img src=""></span>
 								<span class='carInfo'>
 									<span> ${car.car_model} / ${car.car_capacity} </span>
-									<small>종일가 : ${car.car_dayprice} </small><br>
-									<small>시간당 : ${car.car_hourprice} </small><br>
-									<small>예약가능차량 : ${car.canReserv} </small>
+									<c:set var="dayprice" value="${car.car_dayprice}" />
+									<small>종일가 : <fmt:formatNumber value="${dayprice}" type="number" /> </small><br>
+									<c:set var="hourprice" value="${car.car_hourprice}" />
+									<small>시간당 : <fmt:formatNumber value="${hourprice}" type="number" /> </small><br>
+								</span>
+								<span class='canReserv'>
+									${car.canReserv}대<br>
+									<small>이용가능</small>
 								</span>
 							</a>
 						</li>

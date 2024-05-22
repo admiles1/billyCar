@@ -172,12 +172,12 @@ $(function(){
 		 					<option value ="etc"> 기타 </option>
 		 				</select>
 
-						<input type = "text" id="title" placeholder="제목을 입력하시오" name ="faq_subject" style="width :500px;" required="required">
+						<input type = "text" id="title" placeholder="제목을 입력하시오" name ="faq_subject" style="width :500px;" required="required" maxlength="50">
 					</div>
 						<div id="categoryArea" style="margin-left:180px"></div> 
 						
 					<div class ="view_cont" style="margin-top:30px">
-						<textarea id="summernote" style = "background-color:white" name ="faq_content" required="required"></textarea>
+						<textarea id="summernote" style = "background-color:white" name ="faq_content" required="required" maxlength="5000"></textarea>
 					    <script>
 					    $('#summernote').summernote({
 					        placeholder: '내용을 입력하시오',

@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpSession;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.itwill.billycar.service.Memberservice;
 import com.itwill.billycar.service.MypageService;
 import com.itwill.billycar.service.PaymentService;
 import com.itwill.billycar.service.ReservService;
@@ -40,13 +42,18 @@ public class PaymentController {
 	
 	@Autowired
 	private PaymentService paymentService;
+	
+	@Autowired
+	private Memberservice memberservicer;
+	
 	// reservation_detail에서 예약하기 버튼 눌렀을 때 컨트롤러
 	@GetMapping("payment")
 	public String payment(CarVO car 
 						, Model model
 						, HttpSession session
 						, ReservVO reserv
-						, CouponIssueVO coupon
+//						, CouponIssueVO couponIssue
+						, MemberVO member
 						, @RequestParam(defaultValue = "1")int totalAmount
             			, @RequestParam(defaultValue = "") Map<String, String> map) {
 		// 카넘버로 조회하기 컬럼은 car_dayprice, car_hourprice, car_img / * 
@@ -60,8 +67,28 @@ public class PaymentController {
 		System.out.println("00000000000000000000000000000000000000000");
 		
 		String MemberId = (String)session.getAttribute("member_id");
-		model.addAttribute("info", MyPageService.getMemberInfo(MemberId));
+		member.setMember_id(MemberId);
 		
+		if(MemberId == null) {
+			model.addAttribute("msg", "로그인을 진행하여 주세요");
+			model.addAttribute("targetURL", "login");
+			return "err/fail";
+		}
+		
+		member = memberservicer.getMember(member);
+		if(member.getMember_license_checked() != 1) {
+			model.addAttribute("msg", "면허 인증을 진행하여 주십시오");
+			model.addAttribute("targetURL", "license");
+			return "err/fail";
+		}
+		
+//		CouponIssueVO couponIssue = new CouponIssueVO();
+//		List<CouponIssueVO> couponIssue = paymentService.getMemberCoupon(MemberId);
+		List<Map<String, Object>> couponIssue = paymentService.getMemberCoupon(MemberId);
+		model.addAttribute("couponIssue", couponIssue);
+		System.out.println(couponIssue);
+		System.out.println("++++++++++++++++++++++++++++++++++++");
+		model.addAttribute("info", MyPageService.getMemberInfo(MemberId));
 		CarVO dbcar = paymentService.getCarInfo(car);
 		model.addAttribute("car", dbcar);
 		model.addAttribute("totalAmount", totalAmount);
@@ -82,8 +109,15 @@ public class PaymentController {
 		String memberId = (String)session.getAttribute("member_id");
 		String carNumber = car.getCar_number();
 		
+		// 주소값을 강제로 바꿔서 진입하였고 그게 부산이 아닐 시 
+		if(!Pattern.matches("^부산", map.get("schedule").split(",")[2])) {
+			model.addAttribute("msg", "유효한 값이 아닙니다");
+			return "err/fail";
+		}
+
 		
 		ReservVO reserv = new ReservVO();
+		
 		String pickupdate = map.get("schedule").split(",")[0];
 		String returndate = map.get("schedule").split(",")[1];
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH");
@@ -93,29 +127,36 @@ public class PaymentController {
 		reserv.setReserv_returnlocation(map.get("schedule").split(",")[3]);
 		reserv.setMember_id(memberId);
 		reserv.setCar_number(carNumber);
-		System.out.println(reserv);
-		System.out.println("11111111111111111111111111111111111111");
 		payment.setMember_id(memberId);
 		payment.setCar_number(carNumber);
+		
+		// 예약내역 insert후 insert된 차량내역의 idx값 리턴 받아서 payment객체에 세팅
+		paymentService.registReserv(reserv);
+		
 		payment.setReserv_idx(reserv.getReserv_idx());
-		System.out.println(payment);
-		System.out.println("22222222222222222222222222222222222222222");
-		int count1 = paymentService.registReserv(reserv);
-		System.out.println("예약테이블에 데이터 들어가씀 ㅇㄱㄹㅇ");
 		
-		int count2 = paymentService.registerPayment(payment);
+		int count = paymentService.registerPayment(payment);
 		
-		int carReserveCount = paymentService.updateCarReserveCount(car);
-		
-		if(count1 > 0 && count2 > 0) {
-			return "true";
+		if(count > 0) {
+			int carReserveCount = paymentService.updateCarReserveCount(car);
+			
+			if(carReserveCount > 0) {
+				return "true";
+			}
+			
+			return "false";
 		}
+		
+		
 		 
 		return "false";
 	}
 	
 	@GetMapping("paymentDetail")
-	public String paymentDetail(Model model, MemberVO member, @RequestParam("idx") int idx, ReservVO reserv, PaymentVO payment) {
+	public String paymentDetail(Model model, MemberVO member, @RequestParam(defaultValue = "1") int idx, ReservVO reserv, PaymentVO payment) {
+		
+		System.out.println(idx + "!@#!@#!@#!@##!");
+		
 		String memberId = (String)session.getAttribute("member_id");
 		model.addAttribute("info", MyPageService.getMemberInfo(memberId));
 		List<Map<String, Object>> reservDetails = paymentService.getReservDetails(idx);

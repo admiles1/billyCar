@@ -29,6 +29,11 @@
 </style>
 
 <script>
+	
+	$(function(){
+		
+	}); //ready
+
 	function coupon(){
 		let divContent = $(".note-editable").html();
 		
@@ -37,6 +42,21 @@
 		} else {
 			window.open("CouponUpload", "쿠폰 등록", "width=100px, height=30px");
 		}
+	}
+	
+	
+	function submit() {
+		alert('??????');
+		let title = $("#title").val();
+		if(title === null){
+			alert('제목을 입력하세요');
+			$("#title").focus();
+			return false;
+		}
+		
+		
+		
+		return false;
 	}
 
 </script>

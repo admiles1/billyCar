@@ -97,11 +97,11 @@
     }
     
     .reservNum {
-    	width: 10%;
+    	width: 12%;
     }
     
     .reservRegDate {
-    	width: 25%;
+    	width: 23%;
     }
     
     .reservPickupDate {
@@ -148,7 +148,26 @@ document.addEventListener('DOMContentLoaded', function() {
 function showReview(value){
 	console.log(value);
 	let review_id = document.querySelector("#reviewShow" + value);
-	review_id.style.display = 'table-row';
+	let reserv_idx = value;
+	console.log(reserv_idx);
+	
+	$.ajax({
+		type : "GET",
+		url : "reviewCondition",
+		data : {reserv_idx : reserv_idx},
+		dataType : "JSON",
+		success : function(data){
+			console.log(data);
+			let condition = String(data);
+			if(condition == "true"){
+				review_id.style.display = 'table-row';
+			}else if(condition == "false"){
+				alert("리뷰작성 기간이 아닙니다.");
+			}
+		}
+	});
+	
+	
 }
 
 function closeReview(value){
@@ -231,7 +250,7 @@ window.onload = function() {
 			        	<c:set var="i" value="${i+1}"></c:set>
 			        	<tr>
 			        		
-			        		<td>${i} </td>
+			        		<td>${i}</td>
 			        		<c:set var="regDate" value="${fn:split(fn:split(reserv.reserv_reg_date, 'T')[0], '-')}" />
 							<c:set var="regDateTime" value="${fn:split(fn:split(reserv.reserv_reg_date, 'T')[1], ':')}" />
 							<td>${regDate[0]}-${regDate[1]}-${regDate[2]} ${regDateTime[0]}:${regDateTime[1]}</td>
@@ -244,7 +263,7 @@ window.onload = function() {
 				            		<c:when test="${reserv.reserv_status eq 0}">
 				            			예약완료
 				            		</c:when>
-				            		<c:when test="${reserv.reserv_status eq 1}">
+				            		<c:when test="${reserv.reserv_status eq 2}">
 				            			이전예약
 				            		</c:when>
 				            	</c:choose>
@@ -252,6 +271,9 @@ window.onload = function() {
 				             <td>
 				            	<c:choose>
 				            		<c:when test="${reserv.reserv_status eq 0}">
+				            			<a href="paymentDetail?idx=${reserv.reserv_idx}">상세보기</a>
+				            		</c:when>
+				            		<c:when test="${reserv.reserv_status eq 2}">
 				            			<a href="paymentDetail?idx=${reserv.reserv_idx}">상세보기</a>
 				            		</c:when>
 				            		<c:otherwise>

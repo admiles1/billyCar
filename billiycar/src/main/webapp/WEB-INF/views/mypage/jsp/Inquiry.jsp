@@ -184,7 +184,7 @@
                 </li>
 
                 <c:forEach var="i" begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
-                    <li class="page-item">
+                    <li class="page-item ${pageNum == i ? 'active' : ''}">
                         <a class="page-link pageLink" href="MyInquiry?pageNum=${i}">${i}</a>
                     </li>
                 </c:forEach>

@@ -41,14 +41,23 @@
 	
 	<select id="selectPaymentDetail" parameterType="int" resultType="map">
 	    SELECT r.*, c.*, p.*
-	    JOIN car c 
-	    ON r.car_number = c.car_number
-	    JOIN Payment p 
-	    ON r.reserv_idx = p.reserv_idx
-	    WHERE r.reserv_idx = #{idx}
+	      FROM Reservation r 
+	      JOIN car c 
+	        ON r.car_number = c.car_number
+	      JOIN Payment p 
+	        ON r.reserv_idx = p.reserv_idx
+	     WHERE r.reserv_idx = #{idx}
 	</select>
 	
-	<insert id="insertRserv">
+	<select id="selectMemberCoupon" resultType="map">
+		SELECT *
+		FROM coupon_issue ci 
+		JOIN coupon c 
+		ON ci.coupon_id = c.coupon_id 
+		WHERE member_id = #{member_id}
+	</select>
+	
+	<insert id="insertRserv" parameterType="com.itwill.billycar.vo.ReservVO" useGeneratedKeys="true" keyProperty="reserv_idx">
 		INSERT INTO Reservation 
 		VALUES (
 			   NULL
@@ -63,6 +72,11 @@
 			 , now()  
 			 , #{member_id}
 			 , null);
+<!-- 		<selectKey keyProperty="reserv_idx" order="AFTER" resultType="java.lang.integer"> -->
+<!-- 			SELECT reserv_idx -->
+<!-- 			  FROM Reservation -->
+<!-- 			 WHERE member_id = #{member_id} AND reserv_pickupdate = #{reserv_pickupdate} AND reserv_returndate = #{reserv_returndate} -->
+<!-- 		</selectKey> -->
 	</insert>
 	
 	
