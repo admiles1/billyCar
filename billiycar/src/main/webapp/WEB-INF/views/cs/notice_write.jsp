@@ -6,7 +6,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>공지사항 작성</title>
-
  <!-- 부트스트랩 -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
@@ -18,6 +17,20 @@
 
 <!-- css -->
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/resources/css/notice_write.css">
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#summernote").keyup(function(){
+			console.log("안찍히니")
+			var inputLength = $(this).val().length;
+			if (inputLength >= 7000) {
+				alert("더이상 입력할 수 없습니다");
+			} 
+		})
+	})
+
+</script>
+
 </head>
 <body>
 	<header>
@@ -35,13 +48,13 @@
   		<form action="noticeWrite" method= "post">
   		<div class = "detail_view">
   			<div class ="view_tit">
-  				<h3><input type = "text" id="title" placeholder="제목을 입력하시오" name = "board_subject" style = "width : 400px" required="required"> </h3>
+  				<h3><input type = "text" id="title" placeholder="제목을 입력하시오" name = "board_subject" style = "width : 400px" required="required" maxlength="50"> </h3>
   			</div>
   			
   			<div class = "view_info">
 				<em><b>작성자</b></em>
 				<em>${sessionScope.member_id}</em>
-				<input type="checkbox" name="important" value="important" style="margin-left:50px" maxlength="50"> 주요공지 
+				<input type="checkbox" name="important" value="important" style="margin-left:50px" > 주요공지 
   			</div>
   			
 <!--   			<div class = "view_cont"> -->
@@ -54,7 +67,7 @@
 				<textarea id="summernote" style = "background-color:white" name = "board_content" required="required" maxlength="7000"></textarea>
 		    <script>
 		    $('#summernote').summernote({
-		        placeholder: '내용을 입력하시오',
+		        placeholder: '내용을 입력하시오 (글자수 7000자까지 가능합니다)',
 		        tabsize: 2,
 		        height: 400,
 		        toolbar: [
