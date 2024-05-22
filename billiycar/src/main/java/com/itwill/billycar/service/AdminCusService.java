@@ -76,6 +76,11 @@ public class AdminCusService {
 	// ---------------------------------------------------------------------------------------------
 	// ** [쿠폰 등록] **
 	
+	// 중복된 쿠폰 확인
+	public CouponVO selectCouponCode(CouponVO coupon) {
+		return mapper.selectCouponCode(coupon);
+	}
+	
 	// 쿠폰 등록하기
 	public int addCoupon(CouponVO coupon) {
 		return mapper.insertCoupon(coupon);
@@ -87,8 +92,8 @@ public class AdminCusService {
 	}
 
 	// 쿠폰 삭제하기
-	public int removeCoupon(int coupon_id) {
-		return mapper.deleteCoupon(coupon_id);
+	public int removeCoupon(String coupon_code) {
+		return mapper.deleteCoupon(coupon_code);
 	}
 
 	// -----------------------------------------------------------------------------------------
@@ -102,6 +107,8 @@ public class AdminCusService {
 	public List<Map<String, Object>> getLicenseList(int listLimit, int startRow, int license_auth) {
 		return mapper.selectLicense(listLimit, startRow, license_auth);
 	}
+
+	
 
 
 

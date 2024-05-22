@@ -76,6 +76,13 @@
 	</insert>
 	
 	<!-- 쿠폰 -->
+	
+	<select id="selectCouponCode" resultType="com.itwill.billycar.vo.CouponVO">
+		SELECT *
+		FROM coupon
+		WHERE coupon_code = #{coupon_code}
+	</select>
+	
 	<insert id="insertCoupon">
 	-- AdminCusMapper insertCoupon
 		<selectKey keyProperty="coupon_id" resultType="int" order="BEFORE">
@@ -98,7 +105,7 @@
 	
 	<delete id="deleteCoupon">
 		DELETE FROM coupon
-		WHERE coupon_id = #{coupon_id}
+		WHERE coupon_code = #{coupon_code}
 	</delete>
 	
 	

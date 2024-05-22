@@ -25,9 +25,10 @@ public interface AdminCusMapper {
 	int selectQnaListCount(int answer_status); // 문의 내역 개수 가져오기
 	QnaVO selectQna(QnaVO qna); // 문의 내역 답변을 위해 불러오기
 	int updateAnswer(QnaVO qna); // 문의 내역 답변 저장하기
+	CouponVO selectCouponCode(CouponVO coupon); // 중복된 쿠폰 막기
 	int insertCoupon(CouponVO coupon); // 쿠폰 등록하기
 	List<CouponVO> selectCouponList(); // 쿠폰 내역 불러오기
-	int deleteCoupon(int coupon_id); // 쿠폰 삭제하기
+	int deleteCoupon(String coupon_code); // 쿠폰 삭제하기
 	int selectMemberCount(int license_auth); // 회원 수 출력
 	List<Map<String, Object>> selectLicense(@Param(value="startRow") int startRow, @Param(value = "listLimit") int listLimit, @Param(value = "license_auth") int license_auth); // 회원 목록 불러오기
 

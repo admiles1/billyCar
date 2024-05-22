@@ -39,7 +39,7 @@
 
 <script type="text/javascript">
 	$(function(){
-		document.fr.onsubmit = function() {
+		document.fr.addCoupon.onkeyup = function() {
 			let discount = $("#couponDiscount").val();
 			
 			let regex = /^[0-9]*$/
@@ -49,11 +49,19 @@
 				$("#discountDiv").css("color","red");
 				return false;
 			}
+			
 		}
 	})
 
-couponDiscount
+	// 쿠폰 추가 버튼 누르면 창 닫고 부모창 새로고침
+    document.getElementById("addCoupon").onclick = function() {
+        window.close();
+        if (window.opener && !window.opener.closed) {
+            window.opener.location.reload();
+        }
+    }
 </script>
+
 
 </head>
 <body>
@@ -99,9 +107,8 @@ couponDiscount
 		            
 		            <!-- 제출 버튼 -->
 		            <div class="form-group text-center">
-			            <button type="submit" class="btn btn-primary">쿠폰 등록하기</button>
+			            <input type="submit" class="btn btn-primary" id="addCoupon" value="쿠폰 등록하기">
 		            </div>
-		            
 		          </form>
 		        </div>
 		      </div>
