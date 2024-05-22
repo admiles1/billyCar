@@ -158,22 +158,27 @@
     		});
     	})
     
-	    function confirmDelete(carId) {
-	        if (confirm("정말 삭제하시겠습니까?")) {
-	            $.ajax({
-	                type: 'POST',
-	                url: 'deleteCar',
-	                data: { carId: carId },
-	                success: function() {
-                        alert('삭제되었습니다.');
-                        location.reload(); // 페이지를 새로고침하여 목록을 업데이트합니다.
-	                },
-	                error: function() {
-	                    alert('예약차량입니다.');
-	                }
-	            });
-	        }
-	    }
+	   function confirmDelete(carId) {
+		    console.log("Deleting car with ID:", carId); // carId 값을 확인하는 로그 추가
+		    if (confirm("정말 삭제하시겠습니까?")) {
+		        $.ajax({
+		            type: 'POST',
+		            url: 'deleteCar',
+		            data: { carId: carId },
+		            success: function(response) {
+		                if (response === "success") {
+		                    alert('삭제되었습니다.');
+		                    location.reload(); // 페이지를 새로고침하여 목록을 업데이트합니다.
+		                } else {
+		                    alert('삭제에 실패하였습니다.');
+		                }
+		            },
+		            error: function() {
+		                alert('삭제 요청 중 오류가 발생하였습니다.');
+		            }
+		        });
+		    }
+		}
         
         function modifyCar(carId) {
             var carInfo = {

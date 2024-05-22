@@ -30,15 +30,15 @@ button[type="submit"] { width: 100%; }
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">차량 등록</h1>
                 </div>
-                <!-- 폼의 method를 POST로 변경하여 데이터 보안 강화 -->
-                <form action="carUpload" method="post" enctype="multipart/form-data" onsubmit="submitForm()">
+                <form action="carUpload" method="post" enctype="multipart/form-data">
+                    <!-- 기존 폼 요소들 -->
                     <div class="form-group">
                         <label for="manufacturer">제조사</label>
                         <div class="form-group">
                             <select id="manufacturer" name="car_brand" class="form-control" required>
                                 <option value="">제조사를 선택하세요</option>
                                 <c:forEach var="brand" items="${brands}">
-                                    <option value="${brand.code }">${brand.name }</option>
+                                    <option value="${brand.code}">${brand.name}</option>
                                 </c:forEach>
                             </select>
                             <button type="button" class="btn btn-primary ml-1" onclick="openAddBrandWindow()">추가</button>
@@ -50,15 +50,15 @@ button[type="submit"] { width: 100%; }
                         <select id="model" name="car_model" class="form-control" required disabled>
                             <option value="">모델을 선택하세요</option>
                         </select>
-						<button type="button" class="btn btn-primary ml-1" onclick="openAddModelWindow('${brand.name }')">추가</button>
-						<button type="button" class="btn btn-danger ml-1" onclick="deleteNewModel()">삭제</button>
+                        <button type="button" class="btn btn-primary ml-1" onclick="openAddModelWindow('${brand.name}')">추가</button>
+                        <button type="button" class="btn btn-danger ml-1" onclick="deleteNewModel()">삭제</button>
                     </div>
                     <div class="form-group">
                         <label for="carType">차량 종류</label>
                         <select id="carType" name="car_type" class="form-control" required>
                             <option value="">차량 종류를 선택하세요</option>
                             <c:forEach var="type" items="${types}">
-                                <option value="${type.code }">${type.name }</option>
+                                <option value="${type.code}">${type.name}</option>
                             </c:forEach>
                         </select>
                     </div>
@@ -78,7 +78,7 @@ button[type="submit"] { width: 100%; }
                         <select id="fuel" name="car_fuel" class="form-control" required>
                             <option value="">연료를 선택하세요</option>
                             <c:forEach var="fuel" items="${fuels}">
-                                <option value="${fuel.code }">${fuel.name }</option>
+                                <option value="${fuel.code}">${fuel.name}</option>
                             </c:forEach>
                         </select>
                     </div>
@@ -103,9 +103,12 @@ button[type="submit"] { width: 100%; }
                         <input type="text" class="form-control" id="hourlyPrice" name="car_hourprice" placeholder="1시간 가격을 입력하세요" required>
                     </div>
                     <div class="form-group">
-                        <label for="image">차량 이미지</label>
-                        <!-- 여러 이미지를 업로드할 수 있도록 수정 -->
-                        <input type="file" class="form-control" id="image" name="mfc_img" multiple> <!-- multiple 속성 추가 -->
+                        <label for="main_image">메인 사진</label>
+                        <input type="file" class="form-control" id="main_image" name="main_image" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="detail_images">상세 이미지 (최대 5장)</label>
+                        <input type="file" class="form-control" id="detail_images" name="detail_images" multiple="multiple" required>
                     </div>
                     <div class="form-group">
                         <label for="gearType">기어 타입</label>
@@ -117,7 +120,6 @@ button[type="submit"] { width: 100%; }
                     </div>
                     <div class="form-group">
                         <label for="maxPassenger">최대 인원 수</label>
-                        <!-- min과 max를 사용하여 최소값과 최대값을 지정하고, step을 사용하여 값이 얼마나 증가 또는 감소할지를 설정 -->
                         <input type="number" id="maxPassenger" name="car_capacity" class="form-control" min="1" max="20" step="1" placeholder="최대 인원 수를 입력하세요" required>
                     </div>
                     <button type="submit" class="btn btn-primary d-block mx-auto">등록</button>
@@ -129,47 +131,43 @@ button[type="submit"] { width: 100%; }
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
-	$(document).ready(function() {
-	    let models = JSON.parse('${models}');
-	
-	    // 제조사 선택 시 모델 드롭다운 업데이트
-	    $('#manufacturer').change(function() {
-	        var selectedBrand = $(this).val();
-	        var filteredModels = models.filter(function(model) {
-	            return model.code.startsWith(selectedBrand);
-	        });
-	
-	        $('#model').empty().append('<option value="">모델을 선택하세요</option>');
-	        $.each(filteredModels, function(index, model) {
-	            $('#model').append($('<option>').text(model.name).attr('value', model.code));
-	        });
-	        $('#model').prop('disabled', false); // 모델 선택 활성화
-	    });
-	});
-	
-	function openAddBrandWindow() {
-	    window.open('${pageContext.request.contextPath}/addBrand', 'newwindow', 'width=400,height=400');
-	}
-	
-	function openAddModelWindow(brand) {
-		var brandSelect = document.getElementById("manufacturer");
-	    var brandName = brandSelect.options[brandSelect.selectedIndex].text;
-	// 	console.log("현재선택된 제조사 : " + brandName);
-	    window.open('${pageContext.request.contextPath}/addModel?brand='+brandName, 'newwindow', 'width=400,height=400');
-	}
-	
-	function deleteNewCar() {
-		var selectedCar = document.getElementById('manufacturer').value;
-// 		console.log(selectedCar); // code 값 나옴
-		if(selectedCar){ // 값이 있을경우에만
-			console.log(selectedCar); // code 값 나옴
-			$.ajax({
-				type : "POST",
-				url : "deleteNewCar",
-				data : {
-					code : selectedCar
-				},
-				success: function(response) {
+    $(document).ready(function() {
+        let models = JSON.parse('${models}');
+
+        $('#manufacturer').change(function() {
+            var selectedBrand = $(this).val();
+            var filteredModels = models.filter(function(model) {
+                return model.code.startsWith(selectedBrand);
+            });
+
+            $('#model').empty().append('<option value="">모델을 선택하세요</option>');
+            $.each(filteredModels, function(index, model) {
+                $('#model').append($('<option>').text(model.name).attr('value', model.code));
+            });
+            $('#model').prop('disabled', false);
+        });
+    });
+
+    function openAddBrandWindow() {
+        window.open('${pageContext.request.contextPath}/addBrand', 'newwindow', 'width=400,height=400');
+    }
+
+    function openAddModelWindow(brand) {
+        var brandSelect = document.getElementById("manufacturer");
+        var brandName = brandSelect.options[brandSelect.selectedIndex].text;
+        window.open('${pageContext.request.contextPath}/addModel?brand='+brandName, 'newwindow', 'width=400,height=400');
+    }
+
+    function deleteNewCar() {
+        var selectedCar = document.getElementById('manufacturer').value;
+        if(selectedCar){
+            $.ajax({
+                type: "POST",
+                url: "deleteNewCar",
+                data: {
+                    code: selectedCar
+                },
+                success: function(response) {
                     if (response === "models_exist") {
                         alert("모델이 있습니다. 삭제를 원하시면 모델을 먼저 삭제해주시길 바랍니다.");
                     } else if (response === "success") {
@@ -179,38 +177,34 @@ button[type="submit"] { width: 100%; }
                         alert("삭제에 실패했습니다. 다시 시도해주세요.");
                     }
                 }
-			});
-		} else {
-			alert("삭제할 제조사를 선택하세요.");
-		}
+            });
+        } else {
+            alert("삭제할 제조사를 선택하세요.");
+        }
+    }
 
-	}
-	
-	function deleteNewModel() {
-		var selectedCar = document.getElementById('model').value;
-		console.log(selectedCar); // code 값 나옴
-		if(selectedCar){ // 값이 있을경우에만
-			console.log(selectedCar); // code 값 나옴
-			$.ajax({
-				type : "POST",
-				url : "deleteNewModel",
-				data : {
-					code : selectedCar
-				},
-				success: function(response) {
-					if (response === "success") {
+    function deleteNewModel() {
+        var selectedCar = document.getElementById('model').value;
+        if(selectedCar){
+            $.ajax({
+                type: "POST",
+                url: "deleteNewModel",
+                data: {
+                    code: selectedCar
+                },
+                success: function(response) {
+                    if (response === "success") {
                         alert("삭제되었습니다.");
                         location.reload(); 
                     } else {
                         alert("삭제에 실패했습니다. 다시 시도해주세요.");
                     }
                 }
-			});
-		} else {
-			alert("삭제할 모델을 선택하세요.");
-		}
-
-	}
+            });
+        } else {
+            alert("삭제할 모델을 선택하세요.");
+        }
+    }
 </script>
 </body>
 </html>

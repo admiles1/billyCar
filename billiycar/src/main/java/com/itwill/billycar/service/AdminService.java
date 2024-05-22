@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.billycar.mapper.AdminMapper;
 import com.itwill.billycar.vo.AdminVO;
+import com.itwill.billycar.vo.CarImgVO;
 import com.itwill.billycar.vo.CarVO;
 import com.itwill.billycar.vo.CommonVO;
 import com.itwill.billycar.vo.MemberVO;
@@ -40,6 +41,11 @@ public class AdminService {
 	public int carUpload(CarVO car) {
 		
 		return mapper.insertCar(car);
+	}
+	
+	public void  insertCarImg(CarImgVO carImg) {
+		
+		mapper.insertCarImg(carImg);
 	}
 
 	public int MemberStatusModify(MemberVO member) {
@@ -101,7 +107,7 @@ public class AdminService {
 	}
 
 	public int addModel(String brandName, String newModelName) {
-		System.out.println("서비스까지 도착햇어");
+//		System.out.println("서비스까지 도착햇어");
 		
 		return mapper.insertNewModel(brandName,newModelName);
 	}
@@ -152,6 +158,18 @@ public class AdminService {
 		
 		return mapper.selectPastReservation(carNumber);
 	}
+
+	public String getCarBrandName(String carbrand) {
+		
+		return mapper.selectBrandName(carbrand);
+	}
+
+	public String getCarModelName(String carmodel) {
+		// TODO Auto-generated method stub
+		return mapper.selectModelName(carmodel);
+	}
+
+
 
 
 	

@@ -148,6 +148,14 @@
 		    <version>0.2.23</version>
 		</dependency>
 		
+		<!-- https://mvnrepository.com/artifact/org.json/json -->
+		<!-- JSON 객체를 다루는 라이브러리 -->
+		<dependency>
+		    <groupId>org.json</groupId>
+		    <artifactId>json</artifactId>
+		    <version>20240303</version>
+		</dependency>
+		
 		
 		<!-- AspectJ -->
 		<dependency>

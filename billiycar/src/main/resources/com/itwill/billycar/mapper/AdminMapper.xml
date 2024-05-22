@@ -104,6 +104,28 @@
 		)
 	</insert>
 	
+	<insert id="insertCarImg">
+	    INSERT INTO car_images 
+	    (car_images_id, car_images_1, car_images_2, car_images_3, car_images_4, car_images_5)
+	    VALUES 
+	    (#{car_images_id}, #{car_images_1}, #{car_images_2}, #{car_images_3}, #{car_images_4}, #{car_images_5})
+	</insert>
+
+	
+	<!-- 공통코드를 이름으로 변경하기위해 제조사이름가져오기 -->
+	<select id="selectBrandName" resultType="String">
+		SELECT name
+		FROM Common
+		WHERE code = #{carbrand}
+	</select>
+	
+	<!-- 공통코드를 이름으로 변경하기위해 모델이름가져오기 -->
+	<select id="selectModelName" resultType="String">
+		SELECT name
+		FROM Common
+		WHERE code = #{carmodel}
+	</select>
+	
 	<update id="updateMember" parameterType="int">
 		UPDATE member SET member_id = #{member_id}
 		
