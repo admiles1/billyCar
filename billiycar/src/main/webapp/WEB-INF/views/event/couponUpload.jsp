@@ -14,10 +14,10 @@
 		$("#couponCode", parent.opener.document).val(code);
 		
 		if(!hasBtn === undefined) {
-			$(".note-editable", parent.opener.document).append("<input type='button' id='issueCoupon' name='coupon_code' value='쿠폰받기'><p></p>");
+			$(".note-editable", parent.opener.document).append("<input type='button' class='btn btn-primary' id='issueCoupon' name='coupon_code' value='쿠폰받기'>");
 		} else {
 			$("#issueCoupon", parent.opener.document).remove();
-			$(".note-editable", parent.opener.document).append("<input type='button' id='issueCoupon' name='coupon_code' value='쿠폰받기'><p></p>");
+			$(".note-editable", parent.opener.document).append("<input type='button' class='btn btn-primary' id='issueCoupon' name='coupon_code' value='쿠폰받기'>");
 		}
 		
 		window.close();

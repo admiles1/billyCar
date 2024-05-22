@@ -48,7 +48,7 @@
 	    WHERE r.reserv_idx = #{idx}
 	</select>
 	
-	<insert id="insertRserv">
+	<insert id="insertRserv" parameterType="com.itwill.billycar.vo.ReservVO" useGeneratedKeys="true" keyProperty="reserv_idx">
 		INSERT INTO Reservation 
 		VALUES (
 			   NULL
@@ -63,6 +63,11 @@
 			 , now()  
 			 , #{member_id}
 			 , null);
+<!-- 		<selectKey keyProperty="reserv_idx" order="AFTER" resultType="java.lang.integer"> -->
+<!-- 			SELECT reserv_idx -->
+<!-- 			  FROM Reservation -->
+<!-- 			 WHERE member_id = #{member_id} AND reserv_pickupdate = #{reserv_pickupdate} AND reserv_returndate = #{reserv_returndate} -->
+<!-- 		</selectKey> -->
 	</insert>
 	
 	

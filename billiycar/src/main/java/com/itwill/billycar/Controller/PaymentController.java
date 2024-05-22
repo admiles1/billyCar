@@ -105,6 +105,7 @@ public class PaymentController {
 		
 		
 		ReservVO reserv = new ReservVO();
+		
 		String pickupdate = map.get("schedule").split(",")[0];
 		String returndate = map.get("schedule").split(",")[1];
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH");
@@ -114,29 +115,36 @@ public class PaymentController {
 		reserv.setReserv_returnlocation(map.get("schedule").split(",")[3]);
 		reserv.setMember_id(memberId);
 		reserv.setCar_number(carNumber);
-		System.out.println(reserv);
-		System.out.println("11111111111111111111111111111111111111");
 		payment.setMember_id(memberId);
 		payment.setCar_number(carNumber);
+		
+		// 예약내역 insert후 insert된 차량내역의 idx값 리턴 받아서 payment객체에 세팅
+		paymentService.registReserv(reserv);
+		
 		payment.setReserv_idx(reserv.getReserv_idx());
-		System.out.println(payment);
-		System.out.println("22222222222222222222222222222222222222222");
-		int count1 = paymentService.registReserv(reserv);
-		System.out.println("예약테이블에 데이터 들어가씀 ㅇㄱㄹㅇ");
 		
-		int count2 = paymentService.registerPayment(payment);
+		int count = paymentService.registerPayment(payment);
 		
-		int carReserveCount = paymentService.updateCarReserveCount(car);
-		
-		if(count1 > 0 && count2 > 0) {
-			return "true";
+		if(count > 0) {
+			int carReserveCount = paymentService.updateCarReserveCount(car);
+			
+			if(carReserveCount > 0) {
+				return "true";
+			}
+			
+			return "false";
 		}
+		
+		
 		 
 		return "false";
 	}
 	
 	@GetMapping("paymentDetail")
-	public String paymentDetail(Model model, MemberVO member, @RequestParam("idx") int idx, ReservVO reserv, PaymentVO payment) {
+	public String paymentDetail(Model model, MemberVO member, @RequestParam(defaultValue = "1") int idx, ReservVO reserv, PaymentVO payment) {
+		
+		System.out.println(idx + "!@#!@#!@#!@##!");
+		
 		String memberId = (String)session.getAttribute("member_id");
 		model.addAttribute("info", MyPageService.getMemberInfo(memberId));
 		List<Map<String, Object>> reservDetails = paymentService.getReservDetails(idx);

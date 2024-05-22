@@ -72,10 +72,12 @@
 						let dayPrice = car.car_dayprice.toLocaleString();
 						let hourPrice = car.car_hourprice.toLocaleString();
 						let carModel = "\"" + car.car_model + "\"";
+						let carType = "\"" + car.car_type + "\"";
+						let carFuel = "\"" + car.car_fuel + "\"";
 						
 						$("#selectResult > ul").append(
 								"<li class='carList fadeIn row'>"
-								+ "<a class='d-flex' onclick='goDetail(" + carModel + ")'>"
+								+ "<a class='d-flex' onclick='goDetail(" + carModel + "," + carType + "," + carFuel + ")'>"
 								+ "<span class='carImg'><img src='" + car.car_img + "'></span>"
 								+ "<span class='carInfo'>"
 								+ "<span>" + car.car_model + " / " + car.car_capacity + "</span>"
@@ -139,6 +141,10 @@
 	
 	function goDetail(model,type,fuel){
 		let returnLocation = $("#reserv_returnlocation").val();
+		
+		alert(type);
+		alert(fuel);
+		
 		
 		if(returnLocation == "") {
 			alert('반납장소를 선택하여 주십시오');
