@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.itwill.billycar.vo.AdminVO;
+import com.itwill.billycar.vo.CarImgVO;
 import com.itwill.billycar.vo.CarVO;
 import com.itwill.billycar.vo.CommonVO;
 import com.itwill.billycar.vo.MemberVO;
@@ -79,6 +80,12 @@ public interface AdminMapper {
 	String selectSearchTypeCar(String searchKeyword);
 
 	List<Map<String, Object>> selectPastReservation(String carNumber);
+
+	String selectBrandName(String carbrand);
+
+	String selectModelName(String carmodel);
+
+	void insertCarImg(CarImgVO carImg);
 
 	
 	

@@ -29,6 +29,7 @@ import com.itwill.billycar.service.Memberservice;
 import com.itwill.billycar.service.PaymentService;
 import com.itwill.billycar.service.ReviewService;
 import com.itwill.billycar.vo.AdminVO;
+import com.itwill.billycar.vo.CarImgVO;
 import com.itwill.billycar.vo.CarVO;
 import com.itwill.billycar.vo.CommonVO;
 import com.itwill.billycar.vo.MemberVO;
@@ -287,18 +288,17 @@ public class AdminController {
 	// 차량 목록 중 차량 삭제
 	@PostMapping("deleteCar")
 	@ResponseBody
-	public String deleteCar(int carId, Model model) {
-//		System.out.println("차량삭제번호 : " + carId);  // 넘어왔고
+	public String deleteCar(@RequestParam("carId") int carId, Model model) {
+		System.out.println("차량삭제번호 : " + carId);  // 넘어왔고
 		
-		int deleteCount = service.deleteCar(carId);
-		
-		if(deleteCount > 0) { // 성공 시 
-			
-			return "redirect:/admin_car";
-		} else { // 실패 시
-			model.addAttribute("msg", "차량삭제실패!");
-			return "err/fail";
-		}		
+	    int deleteCount = service.deleteCar(carId);
+	    
+	    if (deleteCount > 0) {
+	        return "success";
+	    } else {
+	        return "fail";
+	    }
+	    
 	}
 	
 
@@ -364,82 +364,86 @@ public class AdminController {
 	}
 	
 	
-	// 차량 등록
 	@PostMapping("carUpload")
-	public String carUpload(CarVO car, String car_number1, String car_number2, String car_number3,HttpServletRequest request, Model model) {
-//		System.out.println(car); // 차량정보
-		
-		// 차량 번포판 3개를 하나의 컬럼에 넣기 위해 합치기
-		car.setCar_number(car_number1+car_number2+car_number3);
-		System.out.println(car.getCar_number());
-		
-		// 차량최대인수를 숫자 + "인승" 으로 DB에 넣기위해 사전작업
-		car.setCar_capacity(car.getCar_capacity() + "인승"); 
-		// 1) 경로
-		String uploadDir = "/resources/upload"; // 가상 경로
-		String saveDir = session.getServletContext().getRealPath(uploadDir); // 실제 경로
-		
-	    // 제조사와 모델을 사용한 서브 디렉토리 설정
-	    String carbrand = car.getCar_brand();
-	    String carmodel = car.getCar_model();
-		String subDir = carbrand + File.separator + carmodel;
-		
-		// 4) 기존 업로드 실제 경로에 서브 디렉토리 결합
-		saveDir += File.separator + subDir;
-		
-		// 5) 해당 디렉토리가 실제 경로가 존재하지 않을 경우 자동 생성
-		try {
-			// (1) java.nio.file.Paths의 get() 호출하여 path 객체 리턴
-			Path path = Paths.get(saveDir); 
-			
-			// (2) files 클래스의 createDirectories()로 실제 경로 생성
-			Files.createDirectories(path);
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		// 6) 실제 파일 다루기
-		MultipartFile mfile = car.getMfc_img(); // 여기 폼에 있는 file 이름으로 가져오기
-		System.out.println(mfile.getOriginalFilename());
+    public String carUpload(CarVO car, String car_number1, String car_number2, String car_number3, HttpServletRequest request, Model model) {
+        car.setCar_number(car_number1 + car_number2 + car_number3);
+        car.setCar_capacity(car.getCar_capacity() + "인승");
 
-		// 7) 중복 이름 방지
-		String uuid = UUID.randomUUID().toString();
-		
-		// 7-1) 업로드 안 됐을 시 널스트링
-		car.setCar_img(""); // DB에 있는 file 이름 설정
-		
-		// 7-2) 결합
-		String fileName = uuid.substring(0,8) + "_" + mfile.getOriginalFilename();
-		
-		if(!mfile.getOriginalFilename().equals("")) {
-			car.setCar_img(subDir+ File.separator +fileName);
-		}
-		
-		// DB 작업 ON 
-		int insertCount = service.carUpload(car);
-		
-		try {
-			if(!mfile.getOriginalFilename().equals("")) {
-				mfile.transferTo(new File(saveDir, fileName));
-			}
-				
-			} catch (IllegalStateException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			} // 이것도 밑에 추가
-		
-		
-		if(insertCount > 0) { // 성공 시 
-			
-			return "redirect:/admin_car_registration";
-		} else { // 실패 시
-			model.addAttribute("msg", "차량등록실패!");
-			return "err/fail";
-		}
-		
-	}
+        String uploadDir = "/resources/upload";
+        String saveDir = session.getServletContext().getRealPath(uploadDir);
+
+        String carbrand = car.getCar_brand();
+        String carmodel = car.getCar_model();
+        String brandName = service.getCarBrandName(carbrand);
+        String modelName = service.getCarModelName(carmodel);
+        String subDir = brandName + File.separator + modelName;
+
+        saveDir += File.separator + subDir;
+
+        try {
+            Path path = Paths.get(saveDir);
+            Files.createDirectories(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 메인 이미지 처리
+        MultipartFile mainImage = car.getMain_image();
+        if (!mainImage.isEmpty()) {
+            String uuid = UUID.randomUUID().toString();
+            String fileName = uuid.substring(0, 8) + "_" + mainImage.getOriginalFilename();
+            try {
+                mainImage.transferTo(new File(saveDir, fileName));
+                car.setCar_img(subDir + File.separator + fileName);
+            } catch (IllegalStateException | IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        int insertCount = service.carUpload(car);
+
+        if (insertCount > 0) {
+            // 상세 이미지 처리
+            CarImgVO carImg = new CarImgVO();
+            carImg.setCar_images_id(car.getCar_number()); // car_number로 설정
+            
+            List<MultipartFile> detailImages = car.getDetail_images();
+            for (int i = 0; i < detailImages.size() && i < 5; i++) {
+                MultipartFile detailImage = detailImages.get(i);
+                if (!detailImage.isEmpty()) {
+                    String uuid = UUID.randomUUID().toString();
+                    String fileName = uuid.substring(0, 8) + "_" + detailImage.getOriginalFilename();
+                    try {
+                        detailImage.transferTo(new File(saveDir, fileName));
+                        switch (i) {
+                            case 0:
+                                carImg.setCar_images_1(subDir + File.separator + fileName);
+                                break;
+                            case 1:
+                                carImg.setCar_images_2(subDir + File.separator + fileName);
+                                break;
+                            case 2:
+                                carImg.setCar_images_3(subDir + File.separator + fileName);
+                                break;
+                            case 3:
+                                carImg.setCar_images_4(subDir + File.separator + fileName);
+                                break;
+                            case 4:
+                                carImg.setCar_images_5(subDir + File.separator + fileName);
+                                break;
+                        }
+                    } catch (IllegalStateException | IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            service.insertCarImg(carImg);
+            return "redirect:/admin_car_registration";
+        } else {
+            model.addAttribute("msg", "차량등록실패!");
+            return "err/fail";
+        }
+    }
 	
 	// 제조사 추가 페이지 이동
 	@GetMapping("addBrand")

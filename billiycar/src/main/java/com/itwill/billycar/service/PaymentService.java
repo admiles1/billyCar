@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.itwill.billycar.mapper.PaymentMapper;
 import com.itwill.billycar.vo.CarVO;
+import com.itwill.billycar.vo.CouponIssueVO;
 import com.itwill.billycar.vo.PaymentVO;
 import com.itwill.billycar.vo.ReservVO;
 
@@ -52,6 +53,11 @@ public class PaymentService {
 
 	public int updateCarReserveCount(CarVO car) {
 		return mapper.updateCarCountReserve(car);
+	}
+
+	public List<Map<String, Object>> getMemberCoupon(String memberId) {
+
+		return mapper.selectMemberCoupon(memberId);
 	}
 	
 	

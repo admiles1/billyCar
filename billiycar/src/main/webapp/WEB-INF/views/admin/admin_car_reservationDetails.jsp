@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -60,9 +62,15 @@
                     <c:forEach var="reservation" items="${pastReservList}">
                         <tr>
                             <td>${reservation.member_name}</td>
-                            <td>${reservation.reserv_reg_date}</td>
-                            <td>${reservation.reserv_pickupdate}</td>
-                            <td>${reservation.reserv_returndate}</td>
+							<fmt:parseDate var="regDate" value="${reservation.reserv_reg_date}" pattern="yyyy-MM-dd'T'HH:mm" type="both"/>
+							<fmt:parseDate var="pickupDate" value="${reservation.reserv_pickupdate}" pattern="yyyy-MM-dd'T'HH:mm" type="both"/>
+							<fmt:parseDate var="returnDate" value="${reservation.reserv_returndate}" pattern="yyyy-MM-dd'T'HH:mm" type="both"/>
+							<td><fmt:formatDate value="${regDate}" pattern="MM'월'dd'일' HH:mm"/></td>
+							<td><fmt:formatDate value="${pickupDate}" pattern="MM'월'dd'일' HH:mm"/></td>
+							<td><fmt:formatDate value="${returnDate}" pattern="MM'월'dd'일' HH:mm"/></td>
+<%--                             <td>${reservation.reserv_reg_date}</td> --%>
+<%--                             <td>${reservation.reserv_pickupdate}</td> --%>
+<%--                             <td>${reservation.reserv_returndate}</td> --%>
                         </tr>
                     </c:forEach>
                 </tbody>
@@ -91,9 +99,12 @@
                     <c:forEach var="reservation" items="${reservList}">
                         <tr>
                             <td>${reservation.member_name}</td>
-                            <td>${reservation.reserv_reg_date}</td>
-                            <td>${reservation.reserv_pickupdate}</td>
-                            <td>${reservation.reserv_returndate}</td>
+							<fmt:parseDate var="regDate" value="${reservation.reserv_reg_date}" pattern="yyyy-MM-dd'T'HH:mm" type="both"/>
+							<fmt:parseDate var="pickupDate" value="${reservation.reserv_pickupdate}" pattern="yyyy-MM-dd'T'HH:mm" type="both"/>
+							<fmt:parseDate var="returnDate" value="${reservation.reserv_returndate}" pattern="yyyy-MM-dd'T'HH:mm" type="both"/>
+							<td><fmt:formatDate value="${regDate}" pattern="MM'월'dd'일' HH:mm"/></td>
+							<td><fmt:formatDate value="${pickupDate}" pattern="MM'월'dd'일' HH:mm"/></td>
+							<td><fmt:formatDate value="${returnDate}" pattern="MM'월'dd'일' HH:mm"/></td>
                         </tr>
                     </c:forEach>
                 </tbody>
