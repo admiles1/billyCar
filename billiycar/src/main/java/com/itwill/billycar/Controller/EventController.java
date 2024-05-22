@@ -22,19 +22,24 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.itwill.billycar.service.EventService;
+import com.itwill.billycar.service.MypageService;
 import com.itwill.billycar.vo.CouponVO;
 import com.itwill.billycar.vo.EventVO;
+import com.mysql.cj.protocol.x.SyncFlushDeflaterOutputStream;
 
 @Controller
 public class EventController {
 	
 	@Autowired
-	private EventService service;
+	private EventService eventservice;
+	
+	@Autowired
+	private MypageService mypageService;
 	
 	@GetMapping("event")
 	public String event(Model model) {
 		
-		List<EventVO> eventList =  service.selectEventList(100);
+		List<EventVO> eventList =  eventservice.selectEventList(100);
 //		System.out.println(eventList);
 		model.addAttribute("eventList", eventList);
 		
@@ -44,7 +49,7 @@ public class EventController {
 	@GetMapping("eventContent")
 	public String eventContent(Model model, EventVO event) {
 		System.out.println("event : " + event);
-		event = service.selectEventContent(event.getEvent_idx());
+		event = eventservice.selectEventContent(event.getEvent_idx());
 		System.out.println(event);
 		model.addAttribute("event", event);
 		
@@ -120,7 +125,7 @@ public class EventController {
 		}
 		
 		// 게시물 등록
-		int insertCnt = service.insertEvent(event);
+		int insertCnt = eventservice.insertEvent(event);
 		
 		// 실패시
 		if(insertCnt <= 0) {
@@ -147,13 +152,15 @@ public class EventController {
 	
 	@GetMapping("eventModify")
 	public String eventModify(EventVO event, Model model) {
-		event = service.selectEventContent(event.getEvent_idx());
+		event = eventservice.selectEventContent(event.getEvent_idx());
 		model.addAttribute("event", event);
 		return "event/event_modify";
 	}
 	
 	@PostMapping("eventModify")
 	public String eventModifyPro(EventVO event, Model model, HttpSession session) {
+		
+		System.out.println(event);
 		
 		String uploadDir = "/resources/upload";
 		
@@ -179,12 +186,12 @@ public class EventController {
 		}
 		
 		if(event.getEvent_image().equals("")){
-			String event_image = service.selectEventImage(event);
+			String event_image = eventservice.selectEventImage(event);
 			event.setEvent_image(event_image);
 		}
 		
 		
-		int updateCnt = service.updateEvent(event);
+		int updateCnt = eventservice.updateEvent(event);
 		
 		if(updateCnt <= 0) {
 			model.addAttribute("msg", "이벤트 수정에 실패하였습니다. \\n 다시 시도해 주세요");
@@ -209,7 +216,7 @@ public class EventController {
 	@GetMapping("eventDelete")
 	public String eventDelete(EventVO event, Model model, HttpServletResponse response) {
 		
-		int deleteCnt = service.deleteEvent(event);
+		int deleteCnt = eventservice.deleteEvent(event);
 		
 		if(deleteCnt <= 0) {
 			model.addAttribute("msg", "이벤트 삭제에 실패하였습니다. \\n 다시 시도해 주세요");
@@ -223,7 +230,7 @@ public class EventController {
 	@GetMapping("CouponUpload")
 	public String CouponUpload(CouponVO coupon, Model model) {
 		
-		List<CouponVO> couponList = service.selectCouponList();
+		List<CouponVO> couponList = eventservice.selectCouponList();
 		
 		model.addAttribute("couponList", couponList);
 		return "event/couponUpload";
@@ -231,11 +238,40 @@ public class EventController {
 	
 	@ResponseBody
 	@GetMapping("IssueCoupon")
-	public String IssueCoupon(@RequestParam(defaultValue = "1") String code) {
+	public String IssueCoupon(@RequestParam(defaultValue = "1") String code
+							 , HttpSession session) {
+		
+		// 회원 아이디 가져오기
+		String member_id= (String)session.getAttribute("member_id");
+		
+		System.out.println(member_id);
 		System.out.println(code);
-		//TODO
-		// 쿠폰 어케 발급함?
-		return "true";
+		
+		// 중복된 쿠폰인지 확인
+		int duplicateCoupon = mypageService.couponCheck(member_id, code);
+		
+		if(duplicateCoupon > 0) {
+			System.out.println("중복코드");
+			return "alreadyHasCoupon";
+		}
+		
+		// 존재하는 쿠폰인지 확인
+		int existCoupon = mypageService.couponExist(code);
+		
+		if(existCoupon <= 0) {
+			return "noExistCoupon";
+			
+		} else {
+			// 쿠폰 등록 
+			int insertCnt = mypageService.couponUpdate(member_id, code);
+			
+			if(insertCnt <= 0) {
+				return "fail";
+			} else {
+				return "success";
+			}
+		}
+		
 	}
 	
 }

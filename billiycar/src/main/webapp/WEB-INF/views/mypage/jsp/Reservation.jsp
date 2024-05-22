@@ -148,7 +148,26 @@ document.addEventListener('DOMContentLoaded', function() {
 function showReview(value){
 	console.log(value);
 	let review_id = document.querySelector("#reviewShow" + value);
-	review_id.style.display = 'table-row';
+	let reserv_idx = value;
+	console.log(reserv_idx);
+	
+	$.ajax({
+		type : "GET",
+		url : "reviewCondition",
+		data : {reserv_idx : reserv_idx},
+		dataType : "JSON",
+		success : function(data){
+			console.log(data);
+			let condition = String(data);
+			if(condition == "true"){
+				review_id.style.display = 'table-row';
+			}else if(condition == "false"){
+				alert("리뷰작성 기간이 아닙니다.");
+			}
+		}
+	});
+	
+	
 }
 
 function closeReview(value){

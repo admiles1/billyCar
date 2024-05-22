@@ -282,9 +282,12 @@
 				
 				<p><b>차량 정보</b></p>
 				<div class="row ">
-					<div class="col-3">차량</div>
+					<div class="col-12">${reservDetails[0].car_img}</div>
+					<div class="col-3">차량모델</div>
 					<div class="col-9 car-name" align="right">${reservDetails[0].car_model}</div>
- 					<div class="col-3">기본정보</div> 
+					<div class="col-3">차량번호</div>
+					<div class="col-9 car-name" align="right">${reservDetails[0].car_number}</div>
+ 					<div class="col-3">승차인원</div> 
  					<div class="col-9" align="right">${reservDetails[0].car_capacity} </div> 
 					<div class="col-3">제한나이</div> 
  					<div class="col-9" align="right">만23세 이상</div> 
