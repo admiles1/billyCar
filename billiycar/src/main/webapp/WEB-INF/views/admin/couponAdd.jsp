@@ -61,12 +61,12 @@
 		          <form action="couponAdd" method="post">
 		            <!-- 쿠폰이름 -->
 		            <div class="form-group">
-		              <label for="inquiry">쿠폰 이름</label><input type="text" class="form-control" placeholder="쿠폰 이름을 입력하세요" required="required" name="coupon_name">
+		              <label for="inquiry">쿠폰 이름</label><input type="text" class="form-control" placeholder="쿠폰 이름을 입력하세요" required="required" name="coupon_name" maxlength="30">
 		            </div>
 		            
 		            <!-- 쿠폰 번호 -->
 		            <div class="form-group">
-		              <label for="response">쿠폰 코드</label> <input type="text" class="form-control" placeholder="쿠폰코드를 입력하세요" required="required" name="coupon_code">
+		              <label for="response">쿠폰 코드</label> <input type="text" class="form-control" placeholder="쿠폰코드를 입력하세요" required="required" name="coupon_code" maxlength="20">
 		            </div>
 		            
 		            <!-- 쿠폰 할인율 -->

@@ -69,7 +69,7 @@
 			            <p class="card-text" id="answer">
 			            	<strong>답변</strong>
 			            </p>
-			            <textarea name="admin_content" style="width:900px; height:300px; resize : none; margin-left:30px"></textarea><br>
+			            <textarea name="admin_content" style="width:900px; height:300px; resize : none; margin-left:30px" maxlength="1000"></textarea><br>
 			            
 			            <div class="btn">
 				            <a href="adminAnswerList" class="btn btn-primary"><i class="fas fa-arrow-left"></i> 답변 내역</a>
