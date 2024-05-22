@@ -250,6 +250,7 @@ public class ReservController {
 			}
 		};
 		
+		System.out.println(car);
 		
 		if(carType != null && carFuel == null) { 	// 자동차타입 조건만 존재 할 경우
 			// search메소드로 스트링 포맷 변환 후 초기화
@@ -264,7 +265,9 @@ public class ReservController {
 		// 자동차검색
 		Map<String, String> selectCar = reservService.getCar(car, reserv);
 		System.out.println(selectCar);
+		
 		String carNumber = selectCar.get("car_number");
+		
 		// 리뷰 검색
 		List<ReviewVO> reviewes = reviewService.getReview(carNumber);
 		

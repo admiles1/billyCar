@@ -130,11 +130,11 @@
 		 			</div>
 		 			
 		 			<div class = "title_wr">
-		 				제목 <input type = "text" placeholder="제목을 입력하세요" style = "margin-left : 15px" id="qna_subject" name ="qna_subject">
+		 				제목 <input type = "text" placeholder="제목을 입력하세요" style = "margin-left : 15px" id="qna_subject" name ="qna_subject" maxlength="20">
 		 			</div>
 		 			
 		 			<div class = "content_wr">
-		 				내용 <textarea placeholder="내용을 입력하세요" style = "resize : none" name="qna_content"  id="qna_content"></textarea>
+		 				내용 <textarea placeholder="내용을 입력하세요" style = "resize : none" name="qna_content"  id="qna_content" maxlength="600"></textarea>
 		 				<input type = "file" name="qna_file_form" multiple> 
 		 			</div>
 		 		</div>

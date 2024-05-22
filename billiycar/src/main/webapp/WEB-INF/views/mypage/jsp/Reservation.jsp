@@ -250,7 +250,7 @@ window.onload = function() {
 			        	<c:set var="i" value="${i+1}"></c:set>
 			        	<tr>
 			        		
-			        		<td>${i} </td>
+			        		<td>${i}</td>
 			        		<c:set var="regDate" value="${fn:split(fn:split(reserv.reserv_reg_date, 'T')[0], '-')}" />
 							<c:set var="regDateTime" value="${fn:split(fn:split(reserv.reserv_reg_date, 'T')[1], ':')}" />
 							<td>${regDate[0]}-${regDate[1]}-${regDate[2]} ${regDateTime[0]}:${regDateTime[1]}</td>

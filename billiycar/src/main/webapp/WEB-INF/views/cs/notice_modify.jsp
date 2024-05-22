@@ -41,7 +41,7 @@
   			<input type="hidden" name="pageNum" value="${param.pageNum}">
   			
   			<div class ="view_tit">
-  				<h3> <input type = "text" value="${notice.board_subject}" name ="board_subject" style = "width : 400px"> </h3>
+  				<h3> <input type = "text" value="${notice.board_subject}" name ="board_subject" style = "width : 400px" maxlength="50"> </h3>
   			</div>
   			
   			<div class = "view_info">
@@ -63,7 +63,7 @@
 		    </script>
   			
   			<div class = "view_cont">
-				<textarea rows="20" cols="150" id="summernote" name = "board_content" >${notice.board_content}</textarea>
+				<textarea rows="20" cols="150" id="summernote" name = "board_content" maxlength="7000">${notice.board_content}</textarea>
 			    <script>
 			    $('#summernote').summernote({
 			        placeholder: '내용을 입력하시오',

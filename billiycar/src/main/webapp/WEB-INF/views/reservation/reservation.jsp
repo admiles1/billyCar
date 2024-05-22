@@ -72,10 +72,12 @@
 						let dayPrice = car.car_dayprice.toLocaleString();
 						let hourPrice = car.car_hourprice.toLocaleString();
 						let carModel = "\"" + car.car_model + "\"";
+						let carType = "\"" + car.car_type + "\"";
+						let carFuel = "\"" + car.car_fuel + "\"";
 						
 						$("#selectResult > ul").append(
 								"<li class='carList fadeIn row'>"
-								+ "<a class='d-flex' onclick='goDetail(" + carModel + ")'>"
+								+ "<a class='d-flex' onclick='goDetail(" + carModel + "," + carType + "," + carFuel + ")'>"
 								+ "<span class='carImg'><img src='" + car.car_img + "'></span>"
 								+ "<span class='carInfo'>"
 								+ "<span>" + car.car_model + " / " + car.car_capacity + "</span>"
@@ -139,11 +141,26 @@
 	
 	function goDetail(model,type,fuel){
 		let returnLocation = $("#reserv_returnlocation").val();
+		
+		alert(type);
+		alert(fuel);
+		
+		
 		if(returnLocation == "") {
 			alert('반납장소를 선택하여 주십시오');
 			$("#reserv_returnlocation").focus();
 			return false;
 		}
+		
+		let pickupLocation = $("#reserv_pickuplocation").val();
+	    let regex = /^부산/;
+	    
+	    if(!regex.exec(pickupLocation)) {
+	    	alert("부산 지역 내에서 선택하여 주십시오")
+	    	$("#reserv_pickuplocation").focus();
+	    	return false;
+	    }
+		
 		
 		let fuels = [];
 		
@@ -187,6 +204,7 @@
 			return false;
 		}  
 		
+	    
 		return true;
 	}
 </script>
@@ -349,7 +367,7 @@
 			    	</div>
 			    	<div class="location_area">
 			    		<input type="text" class="selectArea" name="reserv_pickuplocation" 
-			    				value="아이티윌"  id="reserv_pickuplocation"
+			    				value="부산 아이티윌"  id="reserv_pickuplocation"
 			    				style="padding-right: 17px;" placeholder=":: 대여지점 ::" readonly>
 				    	<select  class="selectArea" name="reserv_returnlocation" id="reserv_returnlocation">
 				    		<option selected value=""

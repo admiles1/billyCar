@@ -35,13 +35,13 @@
   		<form action="noticeWrite" method= "post">
   		<div class = "detail_view">
   			<div class ="view_tit">
-  				<h3><input type = "text" id="title" placeholder="제목을 입력하시오" name = "board_subject" style = "width : 400px"> </h3>
+  				<h3><input type = "text" id="title" placeholder="제목을 입력하시오" name = "board_subject" style = "width : 400px" required="required"> </h3>
   			</div>
   			
   			<div class = "view_info">
 				<em><b>작성자</b></em>
 				<em>${sessionScope.member_id}</em>
-				<input type="checkbox" name="important" value="important" style="margin-left:50px"> 주요공지 
+				<input type="checkbox" name="important" value="important" style="margin-left:50px" maxlength="50"> 주요공지 
   			</div>
   			
 <!--   			<div class = "view_cont"> -->
@@ -51,7 +51,7 @@
 <!--   			</div> -->
 			
 			<div class ="view_cont"></div>
-				<textarea id="summernote" style = "background-color:white" name = "board_content"></textarea>
+				<textarea id="summernote" style = "background-color:white" name = "board_content" required="required" maxlength="7000"></textarea>
 		    <script>
 		    $('#summernote').summernote({
 		        placeholder: '내용을 입력하시오',

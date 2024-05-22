@@ -71,6 +71,7 @@ public class EventController {
 	
 	@PostMapping("eventWrite")
 	public String eventWritePro(EventVO event, HttpSession session , Model model) {
+		System.out.println("이벤트 발생안함!!!!!!!!!!!");
 		System.out.println(event);
 		
 		// 가상 경로
