@@ -19,6 +19,7 @@
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
+
 </head>
 <body>
 	<header>
@@ -33,7 +34,7 @@
   			<em class = "notice_d_title">공지사항 수정</em><br>
   		</div>
   		
-  		<form action="noticeModify" method= "post">
+  		<form action="noticeModify" method= "post" name="fr">
   		<div class = "detail_view">
   		
   			<!-- 파라미터 전달 -->
@@ -66,7 +67,7 @@
 				<textarea rows="20" cols="150" id="summernote" name = "board_content" maxlength="7000">${notice.board_content}</textarea>
 			    <script>
 			    $('#summernote').summernote({
-			        placeholder: '내용을 입력하시오',
+			        placeholder: '내용을 입력하시오 (글자수 7000자까지 가능합니다)',
 			        tabsize: 2,
 			        height: 400,
 			        toolbar: [
@@ -80,6 +81,8 @@
 			        ]
 			      });
 		    </script>
+		    
+		
   			</div>
   		</div>
   		

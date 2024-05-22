@@ -154,7 +154,7 @@
 		                	<td>${i}</td>
 		                    <td>${coupon.coupon_name}</td>
 		                    <td>${coupon.coupon_code}</td>
-		                    <td>${coupon.coupon_discount_amount}%</td>
+		                    <td>${coupon.coupon_discount_amount}</td>
 		                    <td>
 		                        <c:choose>
 		                            <c:when test="${coupon.coupon_used_status == 1}">사용 가능</c:when>

@@ -142,10 +142,6 @@
 	function goDetail(model,type,fuel){
 		let returnLocation = $("#reserv_returnlocation").val();
 		
-		alert(type);
-		alert(fuel);
-		
-		
 		if(returnLocation == "") {
 			alert('반납장소를 선택하여 주십시오');
 			$("#reserv_returnlocation").focus();
@@ -169,14 +165,14 @@
 		
 		let pul = $("#reserv_pickuplocation").val();
 		
-		if(pul == "아이티윌") {
-			pul = "부산광역시 부산진구 동천로 109 삼한골든게이트빌딩 7층";
+		if(pul == "부산 아이티윌") {
+			pul = "부산광역시 부산진구 동천로 109 삼한골든게이트빌딩 7층(부산 아이티윌)";
 		} 
 		
 		let rtl = $("#reserv_returnlocation").val();
 		
 		if(rtl == "branch"){
-			rtl = "부산광역시 부산진구 동천로 109 삼한골든게이트빌딩 7층";
+			rtl = "부산광역시 부산진구 동천로 109 삼한골든게이트빌딩 7층 (부산 아이티윌)";
 		} else if (rtl == "same") {
 			rtl = pul;
 		}
