@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.itwill.billycar.service.Memberservice;
 import com.itwill.billycar.service.MypageService;
 import com.itwill.billycar.service.PaymentService;
 import com.itwill.billycar.service.ReservService;
@@ -40,6 +41,10 @@ public class PaymentController {
 	
 	@Autowired
 	private PaymentService paymentService;
+	
+	@Autowired
+	private Memberservice memberservicer;
+	
 	// reservation_detail에서 예약하기 버튼 눌렀을 때 컨트롤러
 	@GetMapping("payment")
 	public String payment(CarVO car 
@@ -47,6 +52,7 @@ public class PaymentController {
 						, HttpSession session
 						, ReservVO reserv
 						, CouponIssueVO coupon
+						, MemberVO member
 						, @RequestParam(defaultValue = "1")int totalAmount
             			, @RequestParam(defaultValue = "") Map<String, String> map) {
 		// 카넘버로 조회하기 컬럼은 car_dayprice, car_hourprice, car_img / * 
@@ -60,6 +66,21 @@ public class PaymentController {
 		System.out.println("00000000000000000000000000000000000000000");
 		
 		String MemberId = (String)session.getAttribute("member_id");
+		member.setMember_id(MemberId);
+		
+		if(MemberId == null) {
+			model.addAttribute("msg", "로그인을 진행하여 주세요");
+			model.addAttribute("targetURL", "login");
+			return "err/fail";
+		}
+		
+		member = memberservicer.getMember(member);
+		if(member.getMember_license_checked() != 1) {
+			model.addAttribute("msg", "면허 인증을 진행하여 주십시오");
+			model.addAttribute("targetURL", "license");
+			return "err/fail";
+		}
+		
 		model.addAttribute("info", MyPageService.getMemberInfo(MemberId));
 		
 		CarVO dbcar = paymentService.getCarInfo(car);
