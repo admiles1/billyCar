@@ -41,4 +41,8 @@ public class ReservService {
 		return mapper.selecReservCount();
 	}
 
+	public ReservVO selectReviewCondition(int reserv_idx) {
+		return mapper.selectReviewCondition(reserv_idx);
+	}
+
 }
