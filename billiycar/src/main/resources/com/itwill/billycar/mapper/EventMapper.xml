@@ -41,6 +41,7 @@
 			event_title = 	#{event_title}
 		  , event_content = #{event_content}
 		  , event_image =	#{event_image}
+		  , coupon_code = #{coupon_code}
 		WHERE
 			event_idx = #{event_idx}
 	</update>
