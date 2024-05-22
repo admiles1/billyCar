@@ -88,8 +88,6 @@
 <body>
 	<header><jsp:include page="../inc/top.jsp"></jsp:include></header>
 	<div class="container">
-	      <!-- row div 다 닫기 -->
-<!-- 		<div class="col-md-7 col-lg-12"> -->
 		<div class="row g-5">
 		<div class="col-md-7 col-lg-8 " id="paymentMain">
 	<!--         <form class="needs-validation" > -->
@@ -229,7 +227,7 @@
 				    </tbody>
 				</table>
 			</div>	
-					
+			</div>		
 			<br>		
 			<div class="row g-3">			
 				<h5>종합보험(기본)</h5>
@@ -273,6 +271,7 @@
 					</tbody>
 				</table>
 			</div>
+			</div>
 			<hr>	
 			<div class="col-md-5 col-lg-4 order-md-last" id="paymentSide">
 			<h4 class="subject2">결제 정보 확인</h4>
@@ -314,7 +313,7 @@
 				</div>
 			</div>
 			</div>
-
+			</div>
     <!-- 아임포트 스크립트 -->
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
     <script>

@@ -97,11 +97,11 @@
     }
     
     .reservNum {
-    	width: 10%;
+    	width: 12%;
     }
     
     .reservRegDate {
-    	width: 25%;
+    	width: 23%;
     }
     
     .reservPickupDate {
@@ -244,7 +244,7 @@ window.onload = function() {
 				            		<c:when test="${reserv.reserv_status eq 0}">
 				            			예약완료
 				            		</c:when>
-				            		<c:when test="${reserv.reserv_status eq 1}">
+				            		<c:when test="${reserv.reserv_status eq 2}">
 				            			이전예약
 				            		</c:when>
 				            	</c:choose>
@@ -252,6 +252,9 @@ window.onload = function() {
 				             <td>
 				            	<c:choose>
 				            		<c:when test="${reserv.reserv_status eq 0}">
+				            			<a href="paymentDetail?idx=${reserv.reserv_idx}">상세보기</a>
+				            		</c:when>
+				            		<c:when test="${reserv.reserv_status eq 2}">
 				            			<a href="paymentDetail?idx=${reserv.reserv_idx}">상세보기</a>
 				            		</c:when>
 				            		<c:otherwise>
