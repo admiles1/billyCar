@@ -894,12 +894,12 @@
 		    differenceString = differenceInDays * ${car.car_dayprice} + ${car.car_dayprice}; 
 	    } else{
 	    	differenceString = differenceInDays * ${car.car_dayprice} + differenceInHours * ${car.car_hourprice};
-	    }
-		$('#memberCoupon').on('change', function() {
-			let sale = $('#memberCoupon').val();
-// 			console.log(sale);
+	    }	
+// 		$('#memberCoupon').on('change', function() {
+// 			let sale = $('#memberCoupon').val();
+// // 			console.log(sale);
 			
-		});
+// 		});
 	    
 	    
 	    // 페이지 로드 후 input 태그에 결과 표시
@@ -907,7 +907,7 @@
 	        document.getElementById('differenceday').value = differenceday.toLocaleString(); 
 	        document.getElementById('firstAmount').value = differenceString.toLocaleString(); 
 	        document.getElementById('dateDifferenceInput').value = differenceString.toLocaleString(); // toLocaleString() 이거 숫자표시 쉼표 넣어줌
-	        document.getElementById('salePrice').value = sale.toLocaleString(); 
+// 	        document.getElementById('salePrice').value = sale.toLocaleString(); 
 	        
 	        
 	    };
