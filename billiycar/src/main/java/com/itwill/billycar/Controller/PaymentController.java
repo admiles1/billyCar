@@ -51,7 +51,7 @@ public class PaymentController {
 						, Model model
 						, HttpSession session
 						, ReservVO reserv
-						, CouponIssueVO coupon
+//						, CouponIssueVO couponIssue
 						, MemberVO member
 						, @RequestParam(defaultValue = "1")int totalAmount
             			, @RequestParam(defaultValue = "") Map<String, String> map) {
@@ -81,8 +81,13 @@ public class PaymentController {
 			return "err/fail";
 		}
 		
+//		CouponIssueVO couponIssue = new CouponIssueVO();
+//		List<CouponIssueVO> couponIssue = paymentService.getMemberCoupon(MemberId);
+		List<Map<String, Object>> couponIssue = paymentService.getMemberCoupon(MemberId);
+		model.addAttribute("couponIssue", couponIssue);
+		System.out.println(couponIssue);
+		System.out.println("++++++++++++++++++++++++++++++++++++");
 		model.addAttribute("info", MyPageService.getMemberInfo(MemberId));
-		
 		CarVO dbcar = paymentService.getCarInfo(car);
 		model.addAttribute("car", dbcar);
 		model.addAttribute("totalAmount", totalAmount);

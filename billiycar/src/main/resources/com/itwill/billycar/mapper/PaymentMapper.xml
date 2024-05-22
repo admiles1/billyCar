@@ -48,6 +48,14 @@
 	    WHERE r.reserv_idx = #{idx}
 	</select>
 	
+	<select id="selectMemberCoupon" resultType="map">
+		SELECT *
+		FROM coupon_issue ci 
+		JOIN coupon c 
+		ON ci.coupon_id = c.coupon_id 
+		WHERE member_id = #{member_id}
+	</select>
+	
 	<insert id="insertRserv" parameterType="com.itwill.billycar.vo.ReservVO" useGeneratedKeys="true" keyProperty="reserv_idx">
 		INSERT INTO Reservation 
 		VALUES (
