@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpSession;
 
@@ -108,6 +109,12 @@ public class PaymentController {
 		String memberId = (String)session.getAttribute("member_id");
 		String carNumber = car.getCar_number();
 		
+		// 주소값을 강제로 바꿔서 진입하였고 그게 부산이 아닐 시 
+		if(!Pattern.matches("^부산", map.get("schedule").split(",")[2])) {
+			model.addAttribute("msg", "유효한 값이 아닙니다");
+			return "err/fail";
+		}
+
 		
 		ReservVO reserv = new ReservVO();
 		

@@ -28,5 +28,7 @@ public interface ReservMapper {
 	
 	int selecReservCount();
 
+	ReservVO selectReviewCondition(int reserv_idx);
+
 	
 }

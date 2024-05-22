@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.billycar.service.AdminCusService;
 import com.itwill.billycar.service.EventService;
+import com.itwill.billycar.vo.AdminVO;
 import com.itwill.billycar.vo.CouponVO;
 import com.itwill.billycar.vo.EventVO;
 import com.itwill.billycar.vo.FaqVO;
@@ -37,7 +38,15 @@ public class AdminCusController {
 	
 	// 자주묻는질문 목록
 	@GetMapping("admin_counsel")
-	public String admin_counsel(FaqVO faq, Model model, @RequestParam(defaultValue ="1") int pageNum) {
+	public String admin_counsel(FaqVO faq, Model model, @RequestParam(defaultValue ="1") int pageNum, AdminVO admin) {
+		
+		// 관리자 아닐 경우 돌려보내기
+		admin.setAdmin_id((String)session.getAttribute("member_id"));
+		
+		if(session.getAttribute("member_id")== null || !session.getAttribute("member_id").equals(admin.getAdmin_id())) {
+			model.addAttribute("msg","접근 권한이 없습니다");
+			return "err/fail";
+		} 
 		
 		// 페이징
 		int listLimit = 10;
@@ -72,7 +81,16 @@ public class AdminCusController {
 	
 	// 자주묻는질문 글쓰기 폼
 	@GetMapping("CounselWrite")
-	public String counselWrite() {
+	public String counselWrite(Model model, AdminVO admin) {
+		
+		// 관리자 아닐 경우 돌려보내기
+		admin.setAdmin_id((String)session.getAttribute("member_id"));
+		
+		if(session.getAttribute("member_id")==null || !session.getAttribute("member_id").equals(admin.getAdmin_id())) {
+			model.addAttribute("msg","접근 권한이 없습니다");
+			return "err/fail";
+		} 
+		
 		return "admin/admin_counsel_write";
 	}
 	
@@ -91,7 +109,15 @@ public class AdminCusController {
 	
 	// 자주묻는질문 자세히 보기
 	@GetMapping("faqDetail")
-	public String faqDetail(int faq_idx, Model model) {
+	public String faqDetail(int faq_idx, Model model, AdminVO admin) {
+		
+		// 관리자 아닐 경우 돌려보내기
+		admin.setAdmin_id((String)session.getAttribute("member_id"));
+		
+		if(session.getAttribute("member_id")==null || !session.getAttribute("member_id").equals(admin.getAdmin_id())) {
+			model.addAttribute("msg","접근 권한이 없습니다");
+			return "err/fail";
+		} 
 		
 		FaqVO faq = service.selectFaqDetail(faq_idx);
 		model.addAttribute("faq", faq);
@@ -101,7 +127,15 @@ public class AdminCusController {
 	
 	// 자주묻는질문 수정 폼
 	@GetMapping("faqModify")
-	public String faqModifyform(FaqVO faq, int faq_idx, Model model) {
+	public String faqModifyform(FaqVO faq, int faq_idx, Model model, AdminVO admin) {
+		
+		// 관리자 아닐 경우 돌려보내기
+		admin.setAdmin_id((String)session.getAttribute("member_id"));
+		
+		if(session.getAttribute("member_id")==null || !session.getAttribute("member_id").equals(admin.getAdmin_id())) {
+			model.addAttribute("msg","접근 권한이 없습니다");
+			return "err/fail";
+		} 
 		
 		faq = service.selectFaqDetail(faq_idx);
 		model.addAttribute("faq", faq);
@@ -126,7 +160,15 @@ public class AdminCusController {
 	
 	// 자주묻는질문 삭제
 	@GetMapping("faqDelete")
-	public String faqDelete(FaqVO faq, int faq_idx, Model model) {
+	public String faqDelete(FaqVO faq, int faq_idx, Model model, AdminVO admin) {
+		
+		// 관리자 아닐 경우 돌려보내기
+		admin.setAdmin_id((String)session.getAttribute("member_id"));
+		
+		if(session.getAttribute("member_id")==null || !session.getAttribute("member_id").equals(admin.getAdmin_id())) {
+			model.addAttribute("msg","접근 권한이 없습니다");
+			return "err/fail";
+		} 
 		
 		int deleteCnt = service.deleteFaq(faq_idx);
 		
@@ -141,7 +183,15 @@ public class AdminCusController {
 	// -------------------------------------------------------------------------------------------------
 	// ** [문의내역] **
 	@GetMapping("adminAnswerList")
-	public String adminAnswerList(Model model, QnaVO qna, @RequestParam(defaultValue ="1") int pageNum, @RequestParam(defaultValue ="") String answer) {
+	public String adminAnswerList(Model model, AdminVO admin, QnaVO qna, @RequestParam(defaultValue ="1") int pageNum, @RequestParam(defaultValue ="") String answer) {
+		
+		// 관리자 아닐 경우 돌려보내기
+		admin.setAdmin_id((String)session.getAttribute("member_id"));
+		
+		if(session.getAttribute("member_id")==null || !session.getAttribute("member_id").equals(admin.getAdmin_id())) {
+			model.addAttribute("msg","접근 권한이 없습니다");
+			return "err/fail";
+		} 
 		
 		// 답변 상태 파라미터 int로 바꿔주기
 		int answer_status = 0;
@@ -181,7 +231,15 @@ public class AdminCusController {
 	
 	// 문의내역 답변폼
 	@GetMapping("adminAnswer")
-	public String adminAnswerForm(QnaVO qna, Model model, int qna_idx) {
+	public String adminAnswerForm(QnaVO qna, Model model, AdminVO admin, int qna_idx) {
+		
+		// 관리자 아닐 경우 돌려보내기
+		admin.setAdmin_id((String)session.getAttribute("member_id"));
+		
+		if(session.getAttribute("member_id")==null || !session.getAttribute("member_id").equals(admin.getAdmin_id())) {
+			model.addAttribute("msg","접근 권한이 없습니다");
+			return "err/fail";
+		} 
 		
 		// 문의내역 불러오기
 		qna.setQna_idx(qna_idx);
@@ -211,7 +269,15 @@ public class AdminCusController {
 	// -------------------------------------------------------------------------------------------------
 	// ** [쿠폰] **
 	@GetMapping("couponList")
-	public String couponList(CouponVO coupon, Model model) {
+	public String couponList(CouponVO coupon, Model model, AdminVO admin) {
+		
+		// 관리자 아닐 경우 돌려보내기
+		admin.setAdmin_id((String)session.getAttribute("member_id"));
+		
+		if(session.getAttribute("member_id")==null || !session.getAttribute("member_id").equals(admin.getAdmin_id())) {
+			model.addAttribute("msg","접근 권한이 없습니다");
+			return "err/fail";
+		} 
 		
 		List<CouponVO> couponList = service.getCouponList();
 		model.addAttribute("couponList", couponList);
@@ -235,7 +301,15 @@ public class AdminCusController {
 	}
 	
 	@GetMapping("couponDelete")
-	public String couponDelete(int coupon_id, Model model) {
+	public String couponDelete(int coupon_id, Model model, AdminVO admin) {
+		
+		// 관리자 아닐 경우 돌려보내기
+		admin.setAdmin_id((String)session.getAttribute("member_id"));
+		
+		if(session.getAttribute("member_id")==null || !session.getAttribute("member_id").equals(admin.getAdmin_id())) {
+			model.addAttribute("msg","접근 권한이 없습니다");
+			return "err/fail";
+		} 
 		
 		int deleteCount = service.removeCoupon(coupon_id);
 		
@@ -252,7 +326,15 @@ public class AdminCusController {
 	// [ 면허인증 관리 ]
 
 	@GetMapping("admin_license")
-	public String admin_blackList(Model model, @RequestParam(defaultValue ="1") int pageNum, String license) {
+	public String admin_blackList(Model model, AdminVO admin, @RequestParam(defaultValue ="1") int pageNum, String license) {
+		
+		// 관리자 아닐 경우 돌려보내기
+		admin.setAdmin_id((String)session.getAttribute("member_id"));
+		
+		if(session.getAttribute("member_id")==null || !session.getAttribute("member_id").equals(admin.getAdmin_id())) {
+			model.addAttribute("msg","접근 권한이 없습니다");
+			return "err/fail";
+		} 
 		
 		// 페이징
 		int listLimit = 10;

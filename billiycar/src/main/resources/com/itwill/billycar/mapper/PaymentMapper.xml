@@ -41,11 +41,12 @@
 	
 	<select id="selectPaymentDetail" parameterType="int" resultType="map">
 	    SELECT r.*, c.*, p.*
-	    JOIN car c 
-	    ON r.car_number = c.car_number
-	    JOIN Payment p 
-	    ON r.reserv_idx = p.reserv_idx
-	    WHERE r.reserv_idx = #{idx}
+	      FROM Reservation r 
+	      JOIN car c 
+	        ON r.car_number = c.car_number
+	      JOIN Payment p 
+	        ON r.reserv_idx = p.reserv_idx
+	     WHERE r.reserv_idx = #{idx}
 	</select>
 	
 	<select id="selectMemberCoupon" resultType="map">
