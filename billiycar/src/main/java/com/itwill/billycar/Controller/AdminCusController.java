@@ -41,7 +41,9 @@ public class AdminCusController {
 	public String admin_counsel(FaqVO faq, Model model, @RequestParam(defaultValue ="1") int pageNum, AdminVO admin) {
 		
 		// 관리자 아닐 경우 돌려보내기
-		if(session.getAttribute("member_id")==null || !session.getAttribute("member_id").equals(admin.getAdmin_id())) {
+		admin.setAdmin_id((String)session.getAttribute("member_id"));
+		
+		if(session.getAttribute("member_id")== null || !session.getAttribute("member_id").equals(admin.getAdmin_id())) {
 			model.addAttribute("msg","접근 권한이 없습니다");
 			return "err/fail";
 		} 
@@ -82,6 +84,8 @@ public class AdminCusController {
 	public String counselWrite(Model model, AdminVO admin) {
 		
 		// 관리자 아닐 경우 돌려보내기
+		admin.setAdmin_id((String)session.getAttribute("member_id"));
+		
 		if(session.getAttribute("member_id")==null || !session.getAttribute("member_id").equals(admin.getAdmin_id())) {
 			model.addAttribute("msg","접근 권한이 없습니다");
 			return "err/fail";
@@ -108,6 +112,8 @@ public class AdminCusController {
 	public String faqDetail(int faq_idx, Model model, AdminVO admin) {
 		
 		// 관리자 아닐 경우 돌려보내기
+		admin.setAdmin_id((String)session.getAttribute("member_id"));
+		
 		if(session.getAttribute("member_id")==null || !session.getAttribute("member_id").equals(admin.getAdmin_id())) {
 			model.addAttribute("msg","접근 권한이 없습니다");
 			return "err/fail";
@@ -124,6 +130,8 @@ public class AdminCusController {
 	public String faqModifyform(FaqVO faq, int faq_idx, Model model, AdminVO admin) {
 		
 		// 관리자 아닐 경우 돌려보내기
+		admin.setAdmin_id((String)session.getAttribute("member_id"));
+		
 		if(session.getAttribute("member_id")==null || !session.getAttribute("member_id").equals(admin.getAdmin_id())) {
 			model.addAttribute("msg","접근 권한이 없습니다");
 			return "err/fail";
@@ -155,6 +163,8 @@ public class AdminCusController {
 	public String faqDelete(FaqVO faq, int faq_idx, Model model, AdminVO admin) {
 		
 		// 관리자 아닐 경우 돌려보내기
+		admin.setAdmin_id((String)session.getAttribute("member_id"));
+		
 		if(session.getAttribute("member_id")==null || !session.getAttribute("member_id").equals(admin.getAdmin_id())) {
 			model.addAttribute("msg","접근 권한이 없습니다");
 			return "err/fail";
@@ -176,6 +186,8 @@ public class AdminCusController {
 	public String adminAnswerList(Model model, AdminVO admin, QnaVO qna, @RequestParam(defaultValue ="1") int pageNum, @RequestParam(defaultValue ="") String answer) {
 		
 		// 관리자 아닐 경우 돌려보내기
+		admin.setAdmin_id((String)session.getAttribute("member_id"));
+		
 		if(session.getAttribute("member_id")==null || !session.getAttribute("member_id").equals(admin.getAdmin_id())) {
 			model.addAttribute("msg","접근 권한이 없습니다");
 			return "err/fail";
@@ -222,6 +234,8 @@ public class AdminCusController {
 	public String adminAnswerForm(QnaVO qna, Model model, AdminVO admin, int qna_idx) {
 		
 		// 관리자 아닐 경우 돌려보내기
+		admin.setAdmin_id((String)session.getAttribute("member_id"));
+		
 		if(session.getAttribute("member_id")==null || !session.getAttribute("member_id").equals(admin.getAdmin_id())) {
 			model.addAttribute("msg","접근 권한이 없습니다");
 			return "err/fail";
@@ -258,6 +272,8 @@ public class AdminCusController {
 	public String couponList(CouponVO coupon, Model model, AdminVO admin) {
 		
 		// 관리자 아닐 경우 돌려보내기
+		admin.setAdmin_id((String)session.getAttribute("member_id"));
+		
 		if(session.getAttribute("member_id")==null || !session.getAttribute("member_id").equals(admin.getAdmin_id())) {
 			model.addAttribute("msg","접근 권한이 없습니다");
 			return "err/fail";
@@ -288,6 +304,8 @@ public class AdminCusController {
 	public String couponDelete(int coupon_id, Model model, AdminVO admin) {
 		
 		// 관리자 아닐 경우 돌려보내기
+		admin.setAdmin_id((String)session.getAttribute("member_id"));
+		
 		if(session.getAttribute("member_id")==null || !session.getAttribute("member_id").equals(admin.getAdmin_id())) {
 			model.addAttribute("msg","접근 권한이 없습니다");
 			return "err/fail";
@@ -311,6 +329,8 @@ public class AdminCusController {
 	public String admin_blackList(Model model, AdminVO admin, @RequestParam(defaultValue ="1") int pageNum, String license) {
 		
 		// 관리자 아닐 경우 돌려보내기
+		admin.setAdmin_id((String)session.getAttribute("member_id"));
+		
 		if(session.getAttribute("member_id")==null || !session.getAttribute("member_id").equals(admin.getAdmin_id())) {
 			model.addAttribute("msg","접근 권한이 없습니다");
 			return "err/fail";
