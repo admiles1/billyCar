@@ -804,7 +804,7 @@
                 buyer_name: "${info.member_name}" // 구매자 이름 가져오기
 //                 buyer_tel: '010-1234-5678', // 구매자 전화번호 필요 하려나
 //                 buyer_addr: '서울특별시 강남구 삼성동', // 구매자 주소 필요 없을듯
-                m_redirect_url: 'http://192.168.3.62:8081/billycar/' // 모바일 결제시 리다이렉션될 URL이건 그냥 메인으로 보내면 될듯 이거안쓰고 보내도 될듯
+                m_redirect_url: 'http://192.168.3.120:8081/billycar/' // 모바일 결제시 리다이렉션될 URL이건 그냥 메인으로 보내면 될듯 이거안쓰고 보내도 될듯
             }, function(rsp) {
                 if (rsp.success) {
                 	
