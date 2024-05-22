@@ -30,6 +30,7 @@ public class PaymentService {
 	}
 	
 	public int registReserv(ReservVO reserv) {
+		System.out.println("예약 서비스까지 옴");
 		return mapper.insertRserv(reserv);
 	}
 

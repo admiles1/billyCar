@@ -426,17 +426,17 @@
 		<h4 class="subject">할인정보(중복할인불가)</h4>
 			<div class="row g-3">
 				<div class="col-sm-2">
-	            	<label> 
-	            		<select class="form-control" id="memberCoupon" name="memberCoupon" style="width: 150px;">
-				            <option value="0">선택안함</option>
-				            <c:forEach var="ci" items="${couponIssue}" >
-					            <option value="${ci.coupon_discount_amount}" id="memberCoupon">${ci.coupon_name}</option>
-				            </c:forEach>
-			            </select>
-	            	</label>
+<!-- 	            	<label>  -->
+<!-- 	            		<select class="form-control" id="memberCoupon" name="memberCoupon" style="width: 150px;"> -->
+<!-- 				            <option value="0">선택안함</option> -->
+<%-- 				            <c:forEach var="ci" items="${couponIssue}" > --%>
+<%-- 					            <option value="${ci.coupon_discount_amount}" id="memberCoupon">${ci.coupon_name}</option> --%>
+<%-- 				            </c:forEach> --%>
+<!-- 			            </select> -->
+<!-- 	            	</label> -->
 	            </div>
 	            <div class="col-sm-10">
-	            	<input type="button" value="적용" style="height: 37px;" name="" >
+	            	<input type="button" value="적용" style="height: 37px;"  >
 	            </div>
 			</div>
 			<hr>
@@ -695,8 +695,8 @@
 			<h4 class="subject2">결제 정보 확인</h4>
 			<div class="container last_check">
 				<div>
- 					<img src="${car.car_img}" width="370" > <!-- 차이미지 받아 오기 --> 
-<!-- 					<img src="resources/event_images/envent_page_event2-1.webp" width="370" align="middle" > -->
+<%--  					<img src="${car.car_img}" width="370" > <!-- 차이미지 받아 오기 -->  --%>
+					<img src="resources/event_images/envent_page_event2-1.webp" width="370" align="middle" >
 				</div>
 <!-- 				<p><b>예약자 정보</b></p> -->
 <!-- 				<div class="row"> -->
@@ -754,9 +754,10 @@
 <!-- 					<div class="col-9 incurance" id="insurance_price" align="right">0</div> -->
 					<div class="col-9 incurance" id="insurance_price" align="right">${empty param.insurance ? '(+)0' : param.insurance}</div>
 					<div class="col-3">할인금액</div>
-					<div class="col-9" align="right" id="salePrice">
-						<input type="text" id="salePrice" readonly/>
-					</div>
+					<div class="col-9"></div>
+<!-- 					<div class="col-9" align="right" id="salePrice"> -->
+<!-- 						<input type="text" id="salePrice" readonly/> -->
+<!-- 					</div> -->
 					<hr>
 					<div class="col-3">결제 금액(VAT 포함)</div>
 					<div class="col-9"  align="right"><input type="text" id="dateDifferenceInput"  readonly/></div>
@@ -804,7 +805,7 @@
                 buyer_name: "${info.member_name}" // 구매자 이름 가져오기
 //                 buyer_tel: '010-1234-5678', // 구매자 전화번호 필요 하려나
 //                 buyer_addr: '서울특별시 강남구 삼성동', // 구매자 주소 필요 없을듯
-                m_redirect_url: 'http://192.168.3.120:8081/billycar/' // 모바일 결제시 리다이렉션될 URL이건 그냥 메인으로 보내면 될듯 이거안쓰고 보내도 될듯
+//                 m_redirect_url: 'http://192.168.3.120:8081/billycar/' // 모바일 결제시 리다이렉션될 URL이건 그냥 메인으로 보내면 될듯 이거안쓰고 보내도 될듯
             }, function(rsp) {
                 if (rsp.success) {
                 	
