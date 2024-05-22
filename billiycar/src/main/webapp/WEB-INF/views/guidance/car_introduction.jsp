@@ -161,7 +161,7 @@
 			            let faqList = response;
 			         //true면 기존 아코디언 비움
 			            if(isEmpty) {
-			            $(".csc_accordion").empty();
+			            $("#listEnd").empty();
 			//             pageNum = 2;
 			            }
 			         
