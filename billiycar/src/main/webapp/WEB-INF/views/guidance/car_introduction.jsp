@@ -10,6 +10,7 @@
     <title>차량 소개 페이지</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <style>
         body {
             font-family: 'Noto Sans KR', sans-serif;
@@ -141,24 +142,29 @@
 
 			let isLoading = false;
 			let isEmpty = false;
-			let faqCategory = '';
+			let searchKeyword = '';
+			let searchType = '';
 			let pageNum = 1;
 			
-			function getScroll(newFaqCategory = "", isEmpty) {
+			function getScroll(newSearchKeyword = "", newSearchType = "", isEmpty) {
+// 			   alert(newSearchKeyword)
+// 			   alert(newSearchType)
+// 			   alert(isEmpty)
 			   
 			   if (isLoading) return; // 이미 데이터를 불러오고 있는 중이라면 중복 요청 방지
 			   isLoading = true; // 데이터 요청 중 플래그 설정
 			   
 			    $.ajax({
 			        type: "GET",
-			        url: "csc_faq.json",
+			        url: "carScroll",
 			        data: {
-			            parsedPageNum: pageNum,
-			            faqCategory: newFaqCategory || faqCategory
+			            pageNum: pageNum,
+			            searchKeyword: newSearchKeyword || searchKeyword,
+			            searchType: newSearchType || searchType
 			        },
 			        dataType: "json",
 			        success: function(response) {
-			            let faqList = response;
+			            let carList = response;
 			         //true면 기존 아코디언 비움
 			            if(isEmpty) {
 			            $("#listEnd").empty();
@@ -166,40 +172,16 @@
 			            }
 			         
 			         //반복문을 통해 ajax를 통해 받아온 값을 아코디언div에 전달
-			         let imgPath = "${pageContext.request.contextPath}/resources/images/cscBulb.png";
-			            $.each(faqList, function(index, faq) {
-			                let accordion = $(".csc_accordion");
-			                let checkbox = $("<input>", {
-			                    type: "checkbox",
-			                    id: "answer" + (index + 1)
-			                });
-			                let label = $("<label>", {
-			                    for: "answer" + (index + 1)
-			                }).append(
-			                    $("<span>", {
-			                        class: "faq_category",
-			                        text: "[" + faq.faq_category + "]"
-			                    }),
-			                    $("<span>", {
-			                        text: faq.faq_subject
-			                    }),
-			                    $("<em>")
-			                );
-			                let answerDiv = $("<div>").append(
-			                    $("<span>").append(
-			                       $("<em>")
-			                    ).text("ANSWER"),
-			                    $("<br>"),
-			                    $("<p>", {
-			                        text: faq.faq_content
-			                    })
-			                );
+// 			         let imgPath = "${pageContext.request.contextPath}/resources/images/cscBulb.png";
+			            $.each(carList, function(index, car) {
+			               let =
 			                accordion.append(checkbox, label, answerDiv);
 			            });
 			         
 			         isLoading = false; // 데이터 요청 완료 후 플래그 해제
 			         pageNum++;
-			        },
+			         
+			        }, // success 처리 끝 
 			        
 			        error: function() {
 			            alert("불러오는데 실패했습니다");
@@ -210,15 +192,30 @@
 			
 			$(function() {
 			   //초기 로딩
-			    getScroll("", false);
+			    getScroll("", "",  false);
 			    
-			    $("#faq_category").change(function() {
-			        let newFaqCategory = $(this).val();
+			   // 검색 버튼 눌렀을 시
+			    document.fr.onsubmit = function() {
+				   
+			        let newSearchType = $("#searchType").val();
+			        let newSearchKeyword = $("#searchKeyword").val();
+// 				   	alert(newSearchType + "dddd" + newSearchKeyword)
+
+			        searchType = newSearchType || ''; // faqCategory 업데이트
+			        searchKeyword = newSearchKeyword || ''; // faqCategory 업데이트
+			        pageNum = 1;
+			        getScroll(newSearchKeyword, newSearchType, true);
+			    }
+			    
+			 /*
+			 	$("#faq_category").change(function() {
+			    	let newFaqCategory = $(this).val();
 			        faqCategory = newFaqCategory || ''; // faqCategory 업데이트
 			        pageNum = 1;
 			        getScroll(newFaqCategory, true);
-			    });
+			    }); 																*/
 			    
+			    // 스크롤 내릴 때
 			    $(document).scroll(function() {
 			        let currentScroll = $(this).scrollTop();
 			        let documentHeight = $(document).height();
@@ -229,7 +226,7 @@
 			        // 화면 하단까지 스크롤되었을 때 추가 데이터 가져오기
 			      if (currentScroll >= documentHeight - windowHeight - bottom) {
 			         console.log("스크롤 이벤트 발생 - pageNum = " + pageNum);
-			         getScroll(faqCategory, false); // 스크롤 이벤트 발생 시 getScroll() 함수 호출
+			         getScroll(newSearchType, newSearchType, false);// 스크롤 이벤트 발생 시 getScroll() 함수 호출
 			        }
 			    });
 			});
@@ -248,13 +245,13 @@
             </div>
         </div>
         <div align="center">	
-       		<form action="guideCar">
-				<select name="searchType">
+       		<form action="javascript:void(0);" name="fr">
+				<select name="searchType" id="searchType">
 					<option value="brand" <c:if test="${param.searchType eq 'brand'}"> selected</c:if>> 제조사</option>
 					<option value="model" <c:if test="${param.searchType eq 'model'}"> selected</c:if>> 모델</option>
 				</select>
-				<input type="text" name="searchKeyword" value="${param.searchKeyword}" placeholder="검색어를 입력하여주세요"> 
-				<input type="button" value="검색" />
+				<input type="text" name="searchKeyword" value="${param.searchKeyword}" placeholder="검색어를 입력하여주세요" id="searchKeyword"> 
+				<input type="submit" value="검색" />
 			</form>
         </div>
         <div class="cont" id="listEnd">

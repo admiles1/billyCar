@@ -110,10 +110,10 @@ public class PaymentController {
 		String carNumber = car.getCar_number();
 		
 		// 주소값을 강제로 바꿔서 진입하였고 그게 부산이 아닐 시 
-		if(!Pattern.matches("^부산", map.get("schedule").split(",")[2])) {
-			model.addAttribute("msg", "유효한 값이 아닙니다");
-			return "err/fail";
-		}
+//		if(!Pattern.matches("^부산", map.get("schedule").split(",")[2])) {
+//			model.addAttribute("msg", "유효한 값이 아닙니다");
+//			return "err/fail";
+//		}
 
 		
 		ReservVO reserv = new ReservVO();
@@ -132,7 +132,7 @@ public class PaymentController {
 		
 		// 예약내역 insert후 insert된 차량내역의 idx값 리턴 받아서 payment객체에 세팅
 		paymentService.registReserv(reserv);
-		
+
 		payment.setReserv_idx(reserv.getReserv_idx());
 		
 		int count = paymentService.registerPayment(payment);

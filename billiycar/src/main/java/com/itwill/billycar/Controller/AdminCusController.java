@@ -291,6 +291,15 @@ public class AdminCusController {
 	
 	@PostMapping("couponAdd")
 	public String couponAddPro(CouponVO coupon, Model model) {
+		
+		// 중복 쿠폰 코드 막기
+		CouponVO dbCoupon = service.selectCouponCode(coupon);
+		
+		if(dbCoupon != null) {
+			model.addAttribute("msg", "중복된 코드입니다. \\n 다른 코드를 입력해 주세요");
+			return "err/fail";
+		}
+		
 		int insertCoupon = service.addCoupon(coupon);
 		
 		if(insertCoupon <= 0) {
@@ -301,7 +310,9 @@ public class AdminCusController {
 	}
 	
 	@GetMapping("couponDelete")
-	public String couponDelete(int coupon_id, Model model, AdminVO admin) {
+	public String couponDelete(String coupon_code, Model model, AdminVO admin) {
+		
+		System.out.println(coupon_code);
 		
 		// 관리자 아닐 경우 돌려보내기
 		admin.setAdmin_id((String)session.getAttribute("member_id"));
@@ -311,7 +322,7 @@ public class AdminCusController {
 			return "err/fail";
 		} 
 		
-		int deleteCount = service.removeCoupon(coupon_id);
+		int deleteCount = service.removeCoupon(coupon_code);
 		
 		if(deleteCount <= 0) {
 			model.addAttribute("msg", "쿠폰 삭제 실패하셨습니다. \\n 다시 시도해 주세요");
