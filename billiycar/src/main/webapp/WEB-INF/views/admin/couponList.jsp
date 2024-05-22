@@ -48,6 +48,13 @@
   }
   
 </style>
+<script type="text/javascript">
+	window.name = 'couponList';
+	
+	function openCouponAdd() {
+		window.open('couponAdd', '쿠폰 추가', 'width=430, height=500, left=750, top=300')
+	}
+</script>
 </head>
 <body>
 <main class="container">
@@ -65,7 +72,7 @@
                 
                 <!-- 쿠폰 등록 -->
                 <div>
-                	<input type="button" value="쿠폰 등록하기" onclick="window.open('couponAdd', '쿠폰 추가', 'width=430, height=500, left=750, top=300')" style="float:right" id="couponButton">
+                	<input type="button" value="쿠폰 등록하기" onclick="openCouponAdd()" style="float:right" id="couponButton">
                 </div>
                 
                 <!-- 쿠폰 내역 -->
@@ -88,17 +95,8 @@
 		                         	<td>${coupon.coupon_name}</td>
 		                         	<td>${coupon.coupon_code}</td>
 		                         	<td>${coupon.coupon_discount_amount}</td>
-		                         	<td><input type="button" id="deleteCoupon" value="삭제" onclick="confirmDelete()"></td>
+		                         	<td><input type="button" id="deleteCoupon" value="삭제" onclick="location.href='couponDelete?coupon_code=${coupon.coupon_code}'"></td>
 		                        </tr>
-		                        
-			                    <script type="text/javascript">
-									function confirmDelete() {
-										if(confirm("쿠폰을 삭제하시겠습니까?")) {
-											location.href = "couponDelete?coupon_id=${coupon.coupon_id}";
-										}
-									}
-								</script>
-								
 	                        </c:forEach>
                         </tbody>
                     </table>

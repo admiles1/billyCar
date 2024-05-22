@@ -8,10 +8,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwill.billycar.service.GuideService;
 import com.itwill.billycar.vo.CarVO;
 import com.itwill.billycar.vo.CouponVO;
+
+import retrofit2.http.GET;
 
 @Controller
 public class GuideController {
@@ -39,15 +42,32 @@ public class GuideController {
 							, @RequestParam(defaultValue = "1") int pageNum
 							, @RequestParam(defaultValue = "") String searchType
 							, @RequestParam(defaultValue = "") String searchKeyword ) {
-	    int listLimit = 4;
+//	    int listLimit = 4;
+//	    int startRow = (pageNum - 1) * listLimit;
+//	    
+//		List<Map<String, Object>> carList = service.carList(startRow,listLimit,searchType,searchKeyword);
+//		
+//		System.out.println(carList);
+//		model.addAttribute("carList", carList);
+		return "guidance/car_introduction";
+	}
+	
+	@ResponseBody
+	@GetMapping("carScroll")
+	public String carScroll(@RequestParam(defaultValue = "1") int pageNum
+							, @RequestParam(defaultValue = "") String searchType
+							, @RequestParam(defaultValue = "") String searchKeyword,
+							Model model) {
+		
+		
+		int listLimit = 4;
 	    int startRow = (pageNum - 1) * listLimit;
 	    
 		List<Map<String, Object>> carList = service.carList(startRow,listLimit,searchType,searchKeyword);
 		
 		System.out.println(carList);
 		model.addAttribute("carList", carList);
-		return "guidance/car_introduction";
+		return "";
 	}
-	
 	
 }

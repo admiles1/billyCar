@@ -90,7 +90,6 @@
 	<div class="container">
 		<div class="row g-5">
 		<div class="col-md-7 col-lg-8 " id="paymentMain">
-	<!--         <form class="needs-validation" > -->
 	    <h4 class="subject">예약정보</h4>
 	    	<div class="row g-3">
 	       		<div class="col-sm-3">
@@ -283,7 +282,7 @@
 				<div class="row ">
 					<div class="col-12">${reservDetails[0].car_img}</div>
 					<div class="col-3">차량모델</div>
-					<div class="col-9 car-name" align="right">${reservDetails[0].car_model}</div>
+					<div class="col-9 car-name" align="right">${reservDetails[0].car_brand} ${reservDetails[0].car_model}</div>
 					<div class="col-3">차량번호</div>
 					<div class="col-9 car-name" align="right">${reservDetails[0].car_number}</div>
  					<div class="col-3">승차인원</div> 
