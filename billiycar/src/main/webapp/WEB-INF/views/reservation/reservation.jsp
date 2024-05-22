@@ -27,6 +27,24 @@
 		display : inline-block;
 		width : 150px;
 	}
+	
+	small {
+		color : black;
+		text-align : left;
+		font-size : 20px;
+	}
+	
+	.canReserv {
+		width : 100px;
+		height : 100px;
+		margin : auto;
+		padding-top : 30px;
+		background-color : orange;
+		border-radius : 50%;
+		color : white;
+		font-size : 18px;
+	}
+	
 </style>
 
 <script>
@@ -94,7 +112,6 @@
 				}
 			}) // ajax 끝
 		}); // 더보기 클릭 이벤트
-// 		$("#moreList").css("display" ,"none");
 		$("#searchCar").on("click", function(){
 			if(!check()) {
 				return;
@@ -409,9 +426,14 @@
 								<span class='carImg'><img src=""></span>
 								<span class='carInfo'>
 									<span> ${car.car_model} / ${car.car_capacity} </span>
-									<small>종일가 : ${car.car_dayprice} </small><br>
-									<small>시간당 : ${car.car_hourprice} </small><br>
-									<small>예약가능차량 : ${car.canReserv} </small>
+									<c:set var="dayprice" value="${car.car_dayprice}" />
+									<small>종일가 : <fmt:formatNumber value="${dayprice}" type="number" /> </small><br>
+									<c:set var="hourprice" value="${car.car_hourprice}" />
+									<small>시간당 : <fmt:formatNumber value="${hourprice}" type="number" /> </small><br>
+								</span>
+								<span class='canReserv'>
+									${car.canReserv}대<br>
+									<small>이용가능</small>
 								</span>
 							</a>
 						</li>
