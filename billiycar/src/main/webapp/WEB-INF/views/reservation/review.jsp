@@ -97,7 +97,11 @@ $(function(){
 							    html += '<i class="fa-regular fa-heart" style="color: gray;"></i>';
 							}
 							html += '</div>' +
-                            '<img src="./resources/main_images/rewiewCar1.png" class="card-img-top" alt="리뷰 이미지 1" width="300" height="300">' +
+							
+							
+		                	
+                            '<img src="request.getContextPath()/resources/upload/' + ${review.car_img } + 'width="306" height="300">' +
+                            '<hr>' +
                             '<div class="card-body">' +
                                 '<h5 class="card-title">';
             for (var i = 0; i < review.review_score; i++) {
@@ -186,7 +190,8 @@ $(function(){
 	        							
 		        						
 	        			</div>
-	                	<img src="./resources/main_images/rewiewCar1.png" class="card-img-top" alt="리뷰 이미지 1" width="300" height="300">
+	                	<img src="<%= request.getContextPath() %>/resources/upload/${review.car_img }" width="306" height="300">
+	                	<hr>
 	                    <div class="card-body">
 	                    	
 	                    	<h5 class="card-title">
@@ -195,7 +200,7 @@ $(function(){
 	                    		</c:forEach>
 	                    	</h5>
 	                    	<h6 class="card-title">${review.car_img }</h6>
-	                    	<p class="card-text">${review.review_content }</p>
+	                    	<div class="card-text" style="height: 100px;">${review.review_content }</div>
 	                    	<div class="card-footer">
 								<small all class="text-body-secondary">${review.review_id } 고객님<i></i></small>
 							</div>
