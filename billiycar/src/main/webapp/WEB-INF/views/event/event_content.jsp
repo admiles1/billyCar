@@ -19,14 +19,31 @@
 	    
 	    $("#issueCoupon").on("click", function() {
 	    	
+	    	if('${sessionScope.member_id}' === '') {
+	    		alert('로그인을 진행하여 주세요')
+	    		location.href="login";
+	    		return;
+	    	}
+	    
+	    	
 	        $.ajax({
 	        	type : "GET",
 	        	url : "IssueCoupon",
 	        	data : { code : '${event.coupon_code}'},
-	        	dataType : "JSON",
+	        	dataType : "text",
 	        	success : function(response){
-	        		if(response){
-	        			alert('후우');
+	        		
+	        		
+	        		if(response === 'alreadyHasCoupon'){ // 중복된 쿠폰일경우
+	        			alert('중복된 쿠폰입니다');
+	        		} else if (response === 'noExistCoupon') { // 존재하지않는 쿠폰일 경우 (이 문장이 실행될 시 이벤트에 등록된 쿠폰이 DB에서 삭제된 경우)
+	        			alert('존재하지 않는 쿠폰입니다');
+	        		} else if (response === 'fail') { // 쿠폰 등록이 실패한 경우
+	        			alert('쿠폰 등록에 실패하셨습니다.');
+	        		} else if (response === 'success') { // 쿠폰 등록 성공
+	        			if(confirm('쿠폰 등록 성공! 마이페이지로 이동하시겠습니까?')) {
+	        				location.href="MyCoupon";
+	        			} 
 	        		}
 	        	}
 	        	
@@ -69,6 +86,9 @@
 			<div class="card-body" style="text-align: center;">
 				<div> ${event.event_content}</div>
 			</div>
+		</div>
+		<div align="center">
+			<input type='button' class='btn btn-primary' id='issueCoupon' name='coupon_code' value='쿠폰받기'>
 		</div>
 		<p class="mt-3">추가 문의사항이 있는 경우 이벤트 문의 메일(itwillbs_3@itwillbs.co.kr)로 연락 주시기 바랍니다.</p>
 	</div>
