@@ -156,21 +156,6 @@ public class PaymentController {
 		model.addAttribute("info", MyPageService.getMemberInfo(memberId));
 		List<Map<String, Object>> reservDetails = paymentService.getReservDetails(idx);
 		
-		 // Date formatting
-	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-	    for (Map<String, Object> reservDetail : reservDetails) {
-	        // Check if the object is instanceof java.util.Date
-	        Object pickupdateObj = reservDetail.get("reserv_pickupdate");
-	        if (pickupdateObj instanceof Date) {
-	            reservDetail.put("reserv_pickupdate", dateFormat.format((Date) pickupdateObj));
-	        }
-
-	        Object returndateObj = reservDetail.get("reserv_returndate");
-	        if (returndateObj instanceof Date) {
-	            reservDetail.put("reserv_returndate", dateFormat.format((Date) returndateObj));
-	        }
-	    }
-		
 		model.addAttribute("reservDetails", reservDetails);
 		
 		//		reserv = paymentService.getReservationByIdx(idx);
