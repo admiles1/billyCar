@@ -97,7 +97,7 @@
 	            </div>
 	
 	             <div class="col-sm-9">
-                    <input type="text" class="form-control" id="pickupDate" value="${reservDetails[0].reserv_pickupdate}" readonly>
+                    <input type="text" class="form-control" id="pickupDate" value="${fn:replace(reservDetails[0].reserv_pickupdate, 'T', ' ')}" readonly>
                 </div>
 	        </div>
 	        
@@ -117,7 +117,7 @@
 	            </div>
 	
 	            <div class="col-sm-9">
-                    <input type="text" class="form-control" id="returnDate" value="${reservDetails[0].reserv_returndate}" readonly>
+                    <input type="text" class="form-control" id="returnDate" value="${fn:replace(reservDetails[0].reserv_returndate, 'T', ' ')}" readonly>
                 </div>
 				
 			</div>
@@ -280,9 +280,8 @@
 				
 				<p><b>차량 정보</b></p>
 				<div class="row ">
-					<div class="col-12">${reservDetails[0].car_img}</div>
 					<div class="col-3">차량모델</div>
-					<div class="col-9 car-name" align="right">${reservDetails[0].car_brand} ${reservDetails[0].car_model}</div>
+					<div class="col-9 car-name" align="right">${reservDetails[0].name} </div>
 					<div class="col-3">차량번호</div>
 					<div class="col-9 car-name" align="right">${reservDetails[0].car_number}</div>
  					<div class="col-3">승차인원</div> 
@@ -295,6 +294,8 @@
 				<br>
 				<h6><b>결제 정보</b></h6>
 				<div class="row">
+					<div class="col-3">결제수단</div>
+					<div class="col-9" align="right">신용카드</div>
 					<div class="col-3">
 						<input type="text" id="differenceday" readonly/>
 					</div>

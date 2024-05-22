@@ -40,12 +40,15 @@
 	</select>
 	
 	<select id="selectPaymentDetail" parameterType="int" resultType="map">
-	    SELECT r.*, c.*, p.*
+	    SELECT *
 	      FROM Reservation r 
 	      JOIN car c 
 	        ON r.car_number = c.car_number
 	      JOIN Payment p 
 	        ON r.reserv_idx = p.reserv_idx
+	     JOIN Common model ON c.car_model = model.code  
+	     JOIN Common fuel ON c.car_fuel = fuel.code     
+	     JOIN Common type ON c.car_type = type.code
 	     WHERE r.reserv_idx = #{idx}
 	</select>
 	

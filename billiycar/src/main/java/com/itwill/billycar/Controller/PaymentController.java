@@ -154,25 +154,11 @@ public class PaymentController {
 	
 	@GetMapping("paymentDetail")
 	public String paymentDetail(Model model, MemberVO member, @RequestParam(defaultValue = "1") int idx, ReservVO reserv, PaymentVO payment) {
-		
-		System.out.println(idx + "!@#!@#!@#!@##!");
-		
 		String memberId = (String)session.getAttribute("member_id");
 		model.addAttribute("info", MyPageService.getMemberInfo(memberId));
 		List<Map<String, Object>> reservDetails = paymentService.getReservDetails(idx);
-		
 		model.addAttribute("reservDetails", reservDetails);
-		
-		//		reserv = paymentService.getReservationByIdx(idx);
-//        if (reserv != null && reserv.getReserv_status() == 0) {
-//            model.addAttribute("reservDetail", reserv);
-//        } 
-//        
-//        payment = paymentService.getPaymentByIdx(idx);
-//        if(payment != null && payment.getPayment_status() == 1) {
-//        	model.addAttribute("paymentDetail", payment);
-//        }
-		
+		System.out.println(reservDetails);
         return "payment/paymentDetail"; 
 		
 	}
