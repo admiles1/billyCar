@@ -14,7 +14,7 @@
 <!-- Font Awesome 아이콘 CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <!-- Chart.js CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js">
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js"> -->
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <!-- 관리자 페이지 스타일 -->
 <style>
@@ -39,10 +39,11 @@
 
 <script type="text/javascript">
 	$(function(){
-		document.fr.addCoupon.onkeyup = function() {
+// 		document.fr.addCouponBtn.onkeyup = function() {
+		document.fr.onsubmit = function() {
 			let discount = $("#couponDiscount").val();
-			
 			let regex = /^[0-9]*$/
+			alert(discount)
 			
 			if(!regex.exec(discount)) {
 				$("#discountDiv").text("숫자만 입력 가능합니다");
@@ -51,15 +52,15 @@
 			}
 			
 		}
+		
+			$("addCouponBtn").onclick(function(){
+				window.opener.location.reload();
+				window.close();
+			});
+
 	})
 
 	// 쿠폰 추가 버튼 누르면 창 닫고 부모창 새로고침
-    document.getElementById("addCoupon").onclick = function() {
-        window.close();
-        if (window.opener && !window.opener.closed) {
-            window.opener.location.reload();
-        }
-    }
 </script>
 
 
@@ -107,7 +108,7 @@
 		            
 		            <!-- 제출 버튼 -->
 		            <div class="form-group text-center">
-			            <input type="submit" class="btn btn-primary" id="addCoupon" value="쿠폰 등록하기">
+			            <input type="submit" class="btn btn-primary" id="addCouponBtn" name="addCouponBtn"value="쿠폰 등록하기">
 		            </div>
 		          </form>
 		        </div>
