@@ -256,7 +256,19 @@
 					<div class="col-3">결제수단</div>
 					<div class="col-9" align="right">신용/체크카드</div>
 					<div class="col-3">보험금액</div>
-					<div class="col-9 incurance" id="insurance_price" align="right">${empty param.insurance ? '(+)0' : param.insurance}</div>
+					<div class="col-9 incurance" id="insurance_price" align="right">
+					    <c:choose>
+                            <c:when test="${reservDetails[0].reserv_insurance == 0}">
+                                (+)0 원
+                            </c:when>
+                            <c:when test="${reservDetails[0].reserv_insurance == 1}">
+                                (+)10,000 원
+                            </c:when>
+                            <c:when test="${reservDetails[0].reserv_insurance == 2}">
+                                (+)26,000 원
+                            </c:when>
+                        </c:choose>
+                    </div>
 					<div class="col-3">할인금액</div>
 					<div class="col-9" align="right">할인금액 표시</div>
 					<hr>
