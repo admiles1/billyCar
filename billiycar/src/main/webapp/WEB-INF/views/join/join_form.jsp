@@ -125,6 +125,7 @@
 		        return false; 
 		    } else if (!checkAuthNumResult) {
 		    	alert("전화번호 인증을 완료해주세요.");
+		        return false; 
 		    }
 		}
 		
