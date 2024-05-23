@@ -64,11 +64,11 @@
 // 			window.close();
 // 		}
 		
-// 		$("#addCouponBtn").click(function() {
-// 			alert("왜 안 떠 - addCouponBtn")
-// 		    window.opener.location.reload(); // 부모 창 새로고침
-//         	 window.close(); // 자식 창 닫기
-// 		}); 
+		$("#addCouponBtn").click(function() {
+			alert("왜 안 떠 - addCouponBtn")
+		    window.opener.location.reload(); // 부모 창 새로고침
+        	 window.close(); // 자식 창 닫기
+		}); 
 
 	})
 	

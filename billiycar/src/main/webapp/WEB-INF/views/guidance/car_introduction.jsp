@@ -171,7 +171,7 @@
 
 			         //true면 기존 아코디언 비움
 			            if(isEmpty) {
-			         	   $("#listEnd").empty();
+			         	   $(".search-car-result-list").empty();
 			//             pageNum = 2;
 			            }
 			         
@@ -196,7 +196,6 @@
 			         // ---------------------------------------------------------------------------------------
 			         
 			            $.each(carList, function(index, car) {
-// 			            for(car of carList) {
 							let original_fileName = null;
 			            	
 							if(car.car_img != null) {
@@ -204,7 +203,6 @@
 			            	}
 							
 			            	let imgPath = "${pageContext.request.contextPath}/resources/upload/" + original_fileName 
-// 							alert(car.model)
 			            	
 			                let carUl = 
 					               ' <li class="panel">'
