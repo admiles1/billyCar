@@ -203,10 +203,11 @@
 			            		original_fileName = car.car_img.substring(car.car_img.indexOf('_') + 1)
 			            	}
 							
+							
 			            	let imgPath = "${pageContext.request.contextPath}/resources/upload/" + original_fileName 
 							alert(car.model)
 			            	
-			               alert(original_fileName)
+			                let carUl = 
 					               ' <li class="panel">'
 					               +' <div class="left">'
 					               +'     <div class="img-wrap-responsive">'
@@ -328,6 +329,7 @@
 			    });
 			}
 			
+			   debugger;
 			$(function() {
 			   //초기 로딩
 			    getScroll("", "",  false);
