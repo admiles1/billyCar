@@ -102,10 +102,10 @@
 
         <!-- 회원 목록 테이블 -->
         <div class="table-responsive">
-          <table class="table table-striped">
+          <table class="table table-striped" style="text-align: center;">
             <thead>
               <tr>
-                <th>순번</th>
+<!--                 <th>순번</th> -->
                 <th>이름</th>
                 <th>아이디</th>
                 <th>이메일</th>
@@ -115,10 +115,10 @@
             </thead>
             <tbody>
             	<c:forEach var="member" items="${memberList}">
-					<c:set var="i" value="${i+1}"></c:set>
+<%-- 					<c:set var="i" value="${i+1}"></c:set> --%>
             	
 		              <tr>
-		                <td>${i}</td>
+<%-- 		                <td>${i}</td> --%>
 		                <td>${member.member_name}</td>
 		                <td>${member.member_id}</td>
 		                <td>${member.member_email}</td>
