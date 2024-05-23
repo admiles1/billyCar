@@ -245,11 +245,20 @@
 			<scope>test</scope>
 		</dependency>      
 		
+		
+		<!-- mysql의 datetime과 자바의 localdatetime 연동 -->
 		<dependency> 
 			<groupId>org.mybatis</groupId> 
 			<artifactId>mybatis-typehandlers-jsr310</artifactId> 
 			<version>1.0.2</version> 
-			</dependency> 
+		</dependency> 
+		
+		<!-- json 객체 리턴 -->
+		<dependency>
+		    <groupId>org.json</groupId>
+		    <artifactId>json</artifactId>
+		    <version>20240303</version>
+		</dependency>
 		
 		  
 	</dependencies>

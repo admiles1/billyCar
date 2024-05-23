@@ -33,14 +33,13 @@
 	        	dataType : "text",
 	        	success : function(response){
 	        		
-	        		
-	        		if(response === 'alreadyHasCoupon'){ // 중복된 쿠폰일경우
+	        		if(response.alreadyHasCoupon){ // 중복된 쿠폰일경우
 	        			alert('중복된 쿠폰입니다');
-	        		} else if (response === 'noExistCoupon') { // 존재하지않는 쿠폰일 경우 (이 문장이 실행될 시 이벤트에 등록된 쿠폰이 DB에서 삭제된 경우)
+	        		} else if (response.noExistCoupon) { // 존재하지않는 쿠폰일 경우 (이 문장이 실행될 시 이벤트에 등록된 쿠폰이 DB에서 삭제된 경우)
 	        			alert('존재하지 않는 쿠폰입니다');
-	        		} else if (response === 'fail') { // 쿠폰 등록이 실패한 경우
+	        		} else if (response.fail) { // 쿠폰 등록이 실패한 경우
 	        			alert('쿠폰 등록에 실패하셨습니다.');
-	        		} else if (response === 'success') { // 쿠폰 등록 성공
+	        		} else if (response.success) { // 쿠폰 등록 성공
 	        			if(confirm('쿠폰 등록 성공! 마이페이지로 이동하시겠습니까?')) {
 	        				location.href="MyCoupon";
 	        			} 

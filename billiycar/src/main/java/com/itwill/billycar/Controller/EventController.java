@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -12,6 +13,7 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +27,6 @@ import com.itwill.billycar.service.EventService;
 import com.itwill.billycar.service.MypageService;
 import com.itwill.billycar.vo.CouponVO;
 import com.itwill.billycar.vo.EventVO;
-import com.mysql.cj.protocol.x.SyncFlushDeflaterOutputStream;
 
 @Controller
 public class EventController {
@@ -70,15 +71,30 @@ public class EventController {
 //	}
 	
 	@GetMapping("eventWrite")
-	public String eventWrite() {
+	public String eventWrite(HttpSession session, Model model) {
+		
+		String id = (String)session.getAttribute("member_id");
+		
+		if(id==null || !id.equals("admin")) {
+			model.addAttribute("msg","잘못된 접근입니다");
+			model.addAttribute("targetURL","notice");
+			return "err/fail";
+		}
+		
 		return "event/event_write";
 	}
 	
 	@PostMapping("eventWrite")
 	public String eventWritePro(EventVO event, HttpSession session , Model model) {
-		System.out.println("이벤트 발생안함!!!!!!!!!!!");
-		System.out.println(event);
 		
+		
+		String id = (String)session.getAttribute("member_id");
+		
+		if(id==null || !id.equals("admin")) {
+			model.addAttribute("msg","잘못된 접근입니다");
+			model.addAttribute("targetURL","notice");
+			return "err/fail";
+		}
 		// 가상 경로
 		String uploadDir = "/resources/upload";
 		
@@ -151,7 +167,16 @@ public class EventController {
 	}
 	
 	@GetMapping("eventModify")
-	public String eventModify(EventVO event, Model model) {
+	public String eventModify(EventVO event, Model model, HttpSession session) {
+		String id = (String)session.getAttribute("member_id");
+		
+		if(id==null || !id.equals("admin")) {
+			model.addAttribute("msg","잘못된 접근입니다");
+			model.addAttribute("targetURL","notice");
+			return "err/fail";
+		}
+		
+		
 		event = eventservice.selectEventContent(event.getEvent_idx());
 		model.addAttribute("event", event);
 		return "event/event_modify";
@@ -214,7 +239,15 @@ public class EventController {
 	}
 	
 	@GetMapping("eventDelete")
-	public String eventDelete(EventVO event, Model model, HttpServletResponse response) {
+	public String eventDelete(EventVO event, Model model, HttpServletResponse response, HttpSession session) {
+		
+		String id = (String)session.getAttribute("member_id");
+		
+		if(id==null || !id.equals("admin")) {
+			model.addAttribute("msg","잘못된 접근입니다");
+			model.addAttribute("targetURL","notice");
+			return "err/fail";
+		}
 		
 		int deleteCnt = eventservice.deleteEvent(event);
 		
@@ -240,38 +273,37 @@ public class EventController {
 	@GetMapping("IssueCoupon")
 	public String IssueCoupon(@RequestParam(defaultValue = "1") String code
 							 , HttpSession session) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
 		
 		// 회원 아이디 가져오기
 		String member_id= (String)session.getAttribute("member_id");
-		
-		System.out.println(member_id);
-		System.out.println(code);
 		
 		// 중복된 쿠폰인지 확인
 		int duplicateCoupon = mypageService.couponCheck(member_id, code);
 		
 		if(duplicateCoupon > 0) {
-			System.out.println("중복코드");
-			return "alreadyHasCoupon";
+			resultMap.put("alreadyHasCoupon", true);
 		}
 		
 		// 존재하는 쿠폰인지 확인
 		int existCoupon = mypageService.couponExist(code);
 		
 		if(existCoupon <= 0) {
-			return "noExistCoupon";
+			resultMap.put("noExistCoupon", true);
 			
 		} else {
 			// 쿠폰 등록 
 			int insertCnt = mypageService.couponUpdate(member_id, code);
 			
 			if(insertCnt <= 0) {
-				return "fail";
+				resultMap.put("fail", true);
 			} else {
-				return "success";
+				resultMap.put("success", true);
 			}
 		}
 		
+		JSONObject jo = new JSONObject(resultMap);
+		return jo.toString();
 	}
 	
 }
