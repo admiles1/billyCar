@@ -29,6 +29,7 @@ $(function(){
 		
 		if(member_id == ""){
 			alert("로그인 후 좋아요 버튼을 눌러주세요!");
+			location.href="login";
 			return;
 		}
 		
@@ -109,8 +110,10 @@ $(function(){
 	                html += '<i class="fa-solid fa-star" style="color: #FFE000;"></i>';
 	            }
 	            html +=         '</h5>' +
-                            '<h6 class="card-title">' + review.car_img + '</h6>' +
-                            '<p class="card-text" style="height: 100px;">' + review.review_content + '</p>' +
+                            '<h5 class="card-title" style="height: 20px; margin-top: 20px;">제목</h5>' + 
+                            '<p>' + review.review_subject + '</p>' + 
+                            '<h5 class="card-text">내용</h5>' + 
+                            '<p style="height: 80px;">' + review.review_content + '</p>' +
                             '<div class="card-footer">' +
                                 '<small class="text-body-secondary">' + review.review_id + ' 고객님</small>' +
                             '</div>' +
@@ -190,16 +193,16 @@ $(function(){
 	        					</c:choose>
 	        			</div>
 	                	<img src="<%= request.getContextPath() %>/resources/upload/${review.car_img }" width="306" height="300">
-	                	<hr>
 	                    <div class="card-body">
-	                    	
 	                    	<h5 class="card-title">
 	                    		<c:forEach begin="1" end="${review.review_score }" varStatus="loop">
 	                    		<i class="fa-solid fa-star" style="color: #FFE000;"></i>
 	                    		</c:forEach>
 	                    	</h5>
-	                    	<h6 class="card-title">${review.car_img }</h6>
-	                    	<div class="card-text" style="height: 100px;">${review.review_content }</div>
+	                    	<h5 class="card-title" style="height: 20px; margin-top: 20px;">제목</h5>
+	                    	<p>${review.review_subject }</p>
+	                    	<h5 class="card-text">내용</h5>
+	                    	<p style="height: 60px;">${review.review_content }</p>
 	                    	<div class="card-footer">
 								<small all class="text-body-secondary">${review.review_id } 고객님<i></i></small>
 							</div>

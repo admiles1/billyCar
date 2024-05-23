@@ -1,26 +1,25 @@
 package com.itwill.billycar.Controller;
 
-import java.net.http.HttpRequest;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.javassist.expr.Instanceof;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwill.billycar.service.AdminCusService;
 import com.itwill.billycar.service.EventService;
 import com.itwill.billycar.vo.AdminVO;
 import com.itwill.billycar.vo.CouponVO;
-import com.itwill.billycar.vo.EventVO;
 import com.itwill.billycar.vo.FaqVO;
-import com.itwill.billycar.vo.MemberVO;
 import com.itwill.billycar.vo.PageInfo;
 import com.itwill.billycar.vo.QnaVO;
 
@@ -289,24 +288,28 @@ public class AdminCusController {
 		return "admin/couponAdd";
 	}
 	
+	@ResponseBody
 	@PostMapping("couponAdd")
 	public String couponAddPro(CouponVO coupon, Model model) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
 		
 		// 중복 쿠폰 코드 막기
 		CouponVO dbCoupon = service.selectCouponCode(coupon);
 		
 		if(dbCoupon != null) {
-			model.addAttribute("msg", "중복된 코드입니다. \\n 다른 코드를 입력해 주세요");
-			return "err/fail";
+			resultMap.put("alreadyHasCoupon", true);
+			return new JSONObject(resultMap).toString();
 		}
 		
 		int insertCoupon = service.addCoupon(coupon);
 		
 		if(insertCoupon <= 0) {
-			model.addAttribute("msg", "쿠폰 등록 실패하셨습니다. \\n 다시 시도해 주세요");
-			return "err/fail";
+			resultMap.put("fail", true);
+			return new JSONObject(resultMap).toString();
 		}
-		return "redirect:/couponAdd";
+		
+		resultMap.put("success", true);
+		return new JSONObject(resultMap).toString();
 	}
 	
 	@GetMapping("couponDelete")
