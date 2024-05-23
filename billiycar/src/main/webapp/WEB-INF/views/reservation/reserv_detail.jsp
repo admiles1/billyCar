@@ -49,7 +49,8 @@
 	   				</div>	
 	   		 	<div class="col-6" id="selectResult" style="">
 	   		 		<h2 class="car-name"> ${car.car_model}
-	   		 			<span class="car-size"> ${car.car_type} </span>
+	   		 			<span class="car-size"> ${car.car_type} </span> 
+	   		 			<span class="car-size"> ${car.car_fuel} </span>
    		 			</h2>
 	   		 		<h2 class="car-price"><fmt:formatNumber value="${car.car_dayprice}" pattern="#,###"/></h2>
 	   		 		<hr>
