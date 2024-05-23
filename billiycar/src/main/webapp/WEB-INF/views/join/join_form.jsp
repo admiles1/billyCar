@@ -307,12 +307,3 @@
 	<footer><jsp:include page="../inc/bottom.jsp"></jsp:include></footer>
 </body>
 </html>
-
-
-
-
-
-
-
-
-

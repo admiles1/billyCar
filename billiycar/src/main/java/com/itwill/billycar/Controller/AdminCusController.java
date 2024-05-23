@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -290,26 +291,29 @@ public class AdminCusController {
 	
 	@ResponseBody
 	@PostMapping("couponAdd")
-	public String couponAddPro(CouponVO coupon, Model model) {
+//	public String couponAddPro(CouponVO coupon, Model model) {
+	public ResponseEntity<Map<String, Object>> couponAddPro(CouponVO coupon, Model model) {
+		
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		
 		// 중복 쿠폰 코드 막기
 		CouponVO dbCoupon = service.selectCouponCode(coupon);
 		
 		if(dbCoupon != null) {
-			resultMap.put("alreadyHasCoupon", true);
-			return new JSONObject(resultMap).toString();
+			resultMap.put("msg", "이미 존재하는 쿠폰입니다");
+			return ResponseEntity.ok(resultMap);
 		}
 		
 		int insertCoupon = service.addCoupon(coupon);
 		
 		if(insertCoupon <= 0) {
-			resultMap.put("fail", true);
-			return new JSONObject(resultMap).toString();
+			resultMap.put("msg", "쿠폰 등록 실패");
+			return ResponseEntity.ok(resultMap);
 		}
 		
 		resultMap.put("success", true);
-		return new JSONObject(resultMap).toString();
+		resultMap.put("msg", "쿠폰 등록 성공");
+		return ResponseEntity.ok(resultMap);
 	}
 	
 	@GetMapping("couponDelete")

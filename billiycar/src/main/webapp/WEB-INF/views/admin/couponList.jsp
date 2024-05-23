@@ -51,6 +51,8 @@
 <script type="text/javascript">
 	window.name = 'couponList';
 	
+	console.log(10);
+	
 	function openCouponAdd() {
 		window.open('couponAdd', '쿠폰 추가', 'width=430, height=500, left=750, top=300')
 	}
