@@ -87,9 +87,9 @@ public class AdminService {
 		return mapper.selectBusinesshours();
 	}
 
-	public CarVO getCarById(int carId) {
+	public CarVO getCarById(String carNumber) {
 		
-		return mapper.selectCarId(carId);
+		return mapper.selectCarId(carNumber);
 	}
 
 	public int updateCar(CarVO car) {
@@ -112,9 +112,9 @@ public class AdminService {
 		return mapper.insertNewModel(brandName,newModelName);
 	}
 
-	public int deleteCar(int carId) {
+	public int deleteCar(String carNumber) {
 		
-		return mapper.deleteCar(carId);
+		return mapper.deleteCar(carNumber);
 	}
 
 	public int deleteCode(String code) {
@@ -167,6 +167,11 @@ public class AdminService {
 	public String getCarModelName(String carmodel) {
 		// TODO Auto-generated method stub
 		return mapper.selectModelName(carmodel);
+	}
+
+	public List<Map<String, Object>> getIngReservation(String carNumber) {
+		
+		return mapper.selectIngReservation(carNumber);
 	}
 
 

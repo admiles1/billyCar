@@ -288,10 +288,10 @@ public class AdminController {
 	// 차량 목록 중 차량 삭제
 	@PostMapping("deleteCar")
 	@ResponseBody
-	public String deleteCar(@RequestParam("carId") int carId, Model model) {
-		System.out.println("차량삭제번호 : " + carId);  // 넘어왔고
+	public String deleteCar(@RequestParam("carNumber") String carNumber, Model model) {
+		System.out.println("차량삭제번호 : " + carNumber);  // 넘어왔고
 		
-	    int deleteCount = service.deleteCar(carId);
+	    int deleteCount = service.deleteCar(carNumber);
 	    
 	    if (deleteCount > 0) {
 	        return "success";
@@ -490,9 +490,9 @@ public class AdminController {
 	
 	// 차량 상태 수정을 위한 조회
 	@GetMapping("carModify")
-	public String carModify(@RequestParam("carId") int carId, Model model) {
+	public String carModify(@RequestParam("carNumber") String carNumber, Model model) {
 	    // 특정 차량의 정보 조회
-	    CarVO car = service.getCarById(carId);
+	    CarVO car = service.getCarById(carNumber);
 	    
 	    // 조회한 차량 정보를 수정 폼 페이지로 전달
 	    model.addAttribute("car", car);
@@ -546,12 +546,14 @@ public class AdminController {
 	public String carReservationDetails(String carNumber,Model model) {
 //		System.out.println("차 번호 왔니? " + carNumber);
 		List<Map<String, Object>> rsList = service.getReservation(carNumber);
+		List<Map<String, Object>> rsingList = service.getIngReservation(carNumber);
 		List<Map<String, Object>> rsPastList = service.getPastReservation(carNumber);
 		
-		System.out.println("rsList @@@" + rsList);
-		System.out.println("rsPastList @@@" + rsPastList);
+//		System.out.println("rsList @@@" + rsList);
+//		System.out.println("rsPastList @@@" + rsPastList);
 		model.addAttribute("reservList", rsList);
 		model.addAttribute("pastReservList", rsPastList);
+		model.addAttribute("ingReservList", rsingList);
 		return "admin/admin_car_reservationDetails";
 	}
 	
