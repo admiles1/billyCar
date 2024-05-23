@@ -45,9 +45,6 @@ public class ReservController {
 								, @RequestParam(defaultValue = "1") int pageNum) {
 		
 		LocalDateTime now = LocalDateTime.now();
-		// 접속한 날짜 기준 다음날 06시 ~ 07시
-		// pickupDate 기준 날 + 1 06시
-		// returnDate 기준날  + 2 07시
 		ReservVO reserv = new ReservVO();
 		LocalDateTime defalutPickup = now.withDayOfMonth(now.getDayOfMonth() +1).withHour(6).withMinute(0).withSecond(0).withNano(0);
 		LocalDateTime defalutReturn = now.withDayOfMonth(now.getDayOfMonth() +2).withHour(7).withMinute(0).withSecond(0).withNano(0);
