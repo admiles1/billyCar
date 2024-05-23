@@ -27,6 +27,7 @@ import com.itwill.billycar.service.EventService;
 import com.itwill.billycar.service.MypageService;
 import com.itwill.billycar.vo.CouponVO;
 import com.itwill.billycar.vo.EventVO;
+import com.mysql.cj.protocol.x.SyncFlushDeflaterOutputStream;
 
 @Controller
 public class EventController {
@@ -272,17 +273,26 @@ public class EventController {
 	@ResponseBody
 	@GetMapping("IssueCoupon")
 	public String IssueCoupon(@RequestParam(defaultValue = "1") String code
-							 , HttpSession session) {
-		Map<String, Object> resultMap = new HashMap<String, Object>();
+							 , HttpSession session
+							 , Model model) {
 		
+		
+		
+		Map<String, Object> resultMap = new HashMap<String, Object>();
 		// 회원 아이디 가져오기
 		String member_id= (String)session.getAttribute("member_id");
+		
+		if(member_id == null || member_id.equals("admin")) {
+			resultMap.put("isAdmin", true);
+			return new JSONObject(resultMap).toString();
+		}
 		
 		// 중복된 쿠폰인지 확인
 		int duplicateCoupon = mypageService.couponCheck(member_id, code);
 		
 		if(duplicateCoupon > 0) {
 			resultMap.put("alreadyHasCoupon", true);
+			return new JSONObject(resultMap).toString();
 		}
 		
 		// 존재하는 쿠폰인지 확인
@@ -290,6 +300,7 @@ public class EventController {
 		
 		if(existCoupon <= 0) {
 			resultMap.put("noExistCoupon", true);
+			return new JSONObject(resultMap).toString();
 			
 		} else {
 			// 쿠폰 등록 
@@ -300,10 +311,9 @@ public class EventController {
 			} else {
 				resultMap.put("success", true);
 			}
+			
+			return new JSONObject(resultMap).toString();
 		}
-		
-		JSONObject jo = new JSONObject(resultMap);
-		return jo.toString();
 	}
 	
 }

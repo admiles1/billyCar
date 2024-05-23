@@ -17,19 +17,7 @@
 
 <!-- css -->
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/resources/css/notice_write.css">
-<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-<script type="text/javascript">
-	$(document).ready(function(){
-		$("#summernote").keyup(function(){
-			console.log("안찍히니")
-			var inputLength = $(this).val().length;
-			if (inputLength >= 7000) {
-				alert("더이상 입력할 수 없습니다");
-			} 
-		})
-	})
-
-</script>
+<!-- <script src="https://code.jquery.com/jquery-3.7.1.js"></script> -->
 
 </head>
 <body>
@@ -67,7 +55,7 @@
 				<textarea id="summernote" style = "background-color:white" name = "board_content" required="required" maxlength="7000"></textarea>
 		    <script>
 		    $('#summernote').summernote({
-		        placeholder: '내용을 입력하시오 (글자수 7000자까지 가능합니다)',
+		        placeholder: '내용을 입력하시오 (글자수 5000자까지 가능합니다)',
 		        tabsize: 2,
 		        height: 400,
 		        toolbar: [
