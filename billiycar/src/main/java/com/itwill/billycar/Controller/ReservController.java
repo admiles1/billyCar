@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.itwill.billycar.service.AdminService;
 import com.itwill.billycar.service.ReservService;
 import com.itwill.billycar.service.ReviewService;
+import com.itwill.billycar.vo.CarImgVO;
 import com.itwill.billycar.vo.CarReviewVO;
 import com.itwill.billycar.vo.CarVO;
 import com.itwill.billycar.vo.MemberVO;
@@ -267,7 +268,11 @@ public class ReservController {
 		System.out.println(selectCar);
 		
 		String carNumber = selectCar.get("car_number");
+		// 상세 이미지 검색
 		
+		Map<String,Object> selectCarDetailImg = reservService.getCarDetailImg(carNumber);
+		
+		System.out.println(selectCarDetailImg);
 		// 리뷰 검색
 		List<ReviewVO> reviewes = reviewService.getReview(carNumber);
 		
@@ -279,6 +284,7 @@ public class ReservController {
 			}
 		}
 		
+		model.addAttribute("selectCarDetailImg", selectCarDetailImg);
 		model.addAttribute("reviewes", reviewes);
 		model.addAttribute("car", selectCar);
 		return "reservation/reserv_detail";
@@ -290,7 +296,7 @@ public class ReservController {
 					@RequestParam(defaultValue = "1") int pageNum
 					) {
 		System.out.println("review");
-		int listLimit = 8;
+		int listLimit = 4;
 		int startRow = (pageNum - 1) * listLimit;
 		
 		if (option == null) {
@@ -304,7 +310,7 @@ public class ReservController {
 		System.out.println("List<CarReviewVO> reviewList : " + reviewList);
 		
 		int reviewListCount = reviewService.selectAllReview();
-		int pageListLimit = 8;
+		int pageListLimit = 4;
 		
 		//----------------------------------------------------------------
 		int maxPage = reviewListCount/listLimit + (reviewListCount%listLimit > 0 ? 1 : 0);
@@ -338,7 +344,7 @@ public class ReservController {
 	        option = "latest"; // 기본값 설정
 	    }
 
-	    int listLimit = 8;
+	    int listLimit = 4;
 	    int startRow = (pageNum - 1) * listLimit;
 
 	    System.out.println("ajax사용했을때 option : " + option);
@@ -347,7 +353,7 @@ public class ReservController {
 	    System.out.println("List<CarReviewVO> reviewList : " + reviewList);
 
 	    int reviewListCount = reviewService.selectAllReview();
-	    int pageListLimit = 8;
+	    int pageListLimit = 4;
 
 	    //----------------------------------------------------------------
 	    int maxPage = reviewListCount / listLimit + (reviewListCount % listLimit > 0 ? 1 : 0);

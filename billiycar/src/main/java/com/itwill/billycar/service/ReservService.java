@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itwill.billycar.mapper.ReservMapper;
+import com.itwill.billycar.vo.CarImgVO;
 import com.itwill.billycar.vo.CarVO;
 import com.itwill.billycar.vo.MemberVO;
 import com.itwill.billycar.vo.ReservVO;
@@ -44,5 +45,12 @@ public class ReservService {
 	public ReservVO selectReviewCondition(int reserv_idx) {
 		return mapper.selectReviewCondition(reserv_idx);
 	}
+	
+	
+	public Map<String,Object> getCarDetailImg(String carNumber) {
+		return mapper.selectCarDetailImg(carNumber);
+	}
+	
+	
 
 }

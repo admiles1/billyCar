@@ -181,7 +181,7 @@
 			            		let original_fileName = substringAfter(car.car_img, '_')
 			            	}
 			            	
-			            	alert(original_fileName)
+			               alert(original_fileName)
 			               let carUl = 
 					               ' <li class="panel">'
 					               +' <div class="left">'
@@ -373,57 +373,62 @@
 				<input type="submit" value="검색" />
 			</form>
         </div>
+        
+        
+        
+        
         <div class="cont" id="listEnd">
         
 <%--         <c:forEach var="car" items="${carList}"> --%>
         
-            <ul class="search-car-result-list">
-<!--                 <li class="panel"> -->
-<!--                     <div class="left"> -->
-<!--                         <div class="img-wrap-responsive"> -->
-<%--                         	<c:if test="${not empty car.car_img}"> --%>
-<%-- 								<c:set var="original_fileName" value="${fn:substringAfter(car.car_img, '_')}"/> --%>
-<%-- 	                            <img src="${pageContext.request.contextPath}/resources/upload/${car.original_fileName}"> --%>
-<%-- 							</c:if> --%>
-<!--                         </div> -->
-<!--                     </div> -->
-<!--                     <div class="right"> -->
-<!--                         <div class="title"> -->
-<%--                             <h3>${car.model}</h3> --%>
-<!--                             <div class="type-list"> -->
-<%--                                 <span>${car.carType}</span> / --%>
-<%--                                 <span>${car.car_capacity}</span> / --%>
-<%--                                 <span>${car.fuel}</span> --%>
-<!--                             </div> -->
-<!--                         </div> -->
-<!--                         <div class="search-car-result-cont"> -->
-<!--                             <div class="search-car-result-cont-left"> -->
-<!--                                 <h5 class="title-01 f14"> 요금정보</h5> -->
-<!--                                 <table class="cont-list-table-v04"> -->
-<%--                                     <colgroup> --%>
-<%--                                         <col width="20%"> --%>
-<%--                                         <col width="40%"> --%>
-<%--                                         <col width="40%"> --%>
-<%--                                     </colgroup> --%>
-<!--                                     <thead> -->
-<!--                                         <tr> -->
-<!--                                             <th class="first">구분</th> -->
-<!--                                             <th>대여료</th> -->
-<!--                                         </tr> -->
-<!--                                     </thead> -->
-<!--                                     <tbody> -->
-<!--                                         <tr> -->
-<!--                                             <td> 종일가 </td> -->
-<!--                                             <td class="b_l1 r"><span style="color:#0b80ff"> -->
-<%--                                             <fmt:formatNumber value="${car.car_dayprice}" type="currency" /></span></td> --%>
-<!--                                         </tr> -->
-<!--                                         <tr> -->
-<!--                                             <td>1시간</td> -->
-<%--                                             <td class="b_l1 r"><fmt:formatNumber value="${car.car_hourprice}" type="currency" /></td>  --%>
-<!--                                         </tr> -->
-<!--                                     </tbody> -->
-<!--                                 </table> -->
-<!--                             </div> -->
+         
+<ul class="search-car-result-list">
+                <li class="panel">
+                    <div class="left">
+                        <div class="img-wrap-responsive">
+                        	<c:if test="${not empty car.car_img}">
+								<c:set var="original_fileName" value="${fn:substringAfter(car.car_img, '_')}"/>
+	                            <img src="${pageContext.request.contextPath}/resources/upload/${car.original_fileName}">
+							</c:if>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="title">
+                            <h3>${car.model}</h3>
+                            <div class="type-list">
+                                <span>${car.carType}</span> /
+                                <span>${car.car_capacity}</span> /
+                                <span>${car.fuel}</span>
+                            </div>
+                        </div>
+                        <div class="search-car-result-cont">
+                            <div class="search-car-result-cont-left">
+                                <h5 class="title-01 f14"> 요금정보</h5>
+                                <table class="cont-list-table-v04">
+                                    <colgroup>
+                                        <col width="20%">
+                                        <col width="40%">
+                                        <col width="40%">
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th class="first">구분</th>
+                                            <th>대여료</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td> 종일가 </td>
+                                            <td class="b_l1 r"><span style="color:#0b80ff">
+                                            <fmt:formatNumber value="${car.car_dayprice}" type="currency" /></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>1시간</td>
+                                            <td class="b_l1 r"><fmt:formatNumber value="${car.car_hourprice}" type="currency" /></td> 
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                             <div class="search-car-result-cont-right">
 	                            <div class="text-box">
                                     <div class="car-option">

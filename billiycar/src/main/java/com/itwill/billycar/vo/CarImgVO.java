@@ -10,5 +10,4 @@ public class CarImgVO {
 	private String car_images_3;
 	private String car_images_4;
 	private String car_images_5;
-	
 }

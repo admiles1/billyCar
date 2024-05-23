@@ -8,6 +8,7 @@
 
 	let checkPasswdResult = false;
 	let checkPasswd2Result = false;
+	let serverAuthNum = ${auth_num};
 	
 	$(function() {
 		
@@ -79,7 +80,6 @@
 		$("#member_passwd2").keyup(checkSamePasswd); // 비밀번호 일치 확인
 		$("#member_passwd").change(checkSamePasswd); // 비밀번호 변경시 일치 확인
 		
-
 		//회원가입 버튼 클릭시 발생하는 이벤트 
 		document.fr.onsubmit = function() {
 			if(document.fr.member_id.value == "") { // 아이디 확인
@@ -112,10 +112,21 @@
 		    	return false;
 		    } else if (!isValidPhoneNumber($("#member_phone").val())) {
 		    	alert("전화번호를 확인해주세요.");
-		    	document.fr.telephone_num.focus();
+		    	document.fr.member_phone.focus();
 		    	return false;
+		    } else if (serverAuthNum == "") { // 인증번호 요청 확인
+		        alert("인증번호 요청을 먼저 해주세요.");
+		        document.fr.member_phone.focus();
+		        return false;
+		    } else if ($("#auth_num").val() == "") {
+		    	alert("인증번호를 입력해주세요");
+		    	document.fr.auth_num.focus();
+		        return false; 
+		    } else if ($("#auth_num").val() != ${auth_num}) {
+		    	alert("인증번호가 일치하지 않습니다.");
+		    	document.fr.auth_num.focus();
+		        return false; 
 		    }
-			
 		}
 		
 	}); // document 객체의 ready 이벤트 끝
@@ -163,7 +174,7 @@
 	        return false;
 	    } 
 		
-		// 아이디가 입력되지 않았을 경우 경고창 출력
+		// 이메일이 입력되지 않았을 경우 경고창 출력
 		if(eMail == "") {
 			alert("이메일을 입력해주세요!");
 			$("#member_email").focus();
@@ -173,8 +184,42 @@
 		// SendAuthMail 서블릿 주소 요청 => 파라미터로 아이디 전달
 		
 		location.href = "SendAuthMail?member_email=" + eMail;
-		
 	}
+	
+	function phoneAuth() {
+		let member_phone = $("#member_phone").val();
+		
+		if (!isValidPhoneNumber(member_phone) || member_phone == "") {
+			alert("전화번호를 확인해주세요.");
+			document.fr.member_phone.focus();
+			return false;
+		}
+		
+		$.ajax({
+			
+			type : "POST",
+			url : "send-one",
+			data : {
+				"member_phone" : member_phone
+			},
+			dataType :"json",
+			success : function(response){
+		        if (response.success) {
+		            serverAuthNum = ${auth_num};  // 서버에서 받은 인증번호를 저장
+		            console.log(${auth_num});
+		            alert("인증번호가 전송되었습니다.");
+		        } else {
+		            alert("인증번호 전송에 실패했습니다.");
+		        }
+				
+			},
+			error : function() {
+				alert("전화번호 인증에 실패했습니다. 다시 시도해주세요.");
+			}
+			
+		});
+	}
+	
 </script>
 <link href="${pageContext.request.contextPath}/resources/css/join_form.css" rel="stylesheet">
 <meta charset="UTF-8">
@@ -227,10 +272,10 @@
 					<option value="LGU+aff">LG U+ 알뜰폰</option>
 				</select>
 				<input type="text" placeholder="전화번호(숫자만입력)" class="telephone_num" name="member_phone" id="member_phone" maxlength="11"/>
-				<input type="button" class="check_tel" value="인증하기"><br>
+				<input type="button" class="check_tel" value="인증하기" onclick="phoneAuth()"><br>
 			</div>
 			<div>
-				<input type="text" placeholder="인증번호"/>
+				<input type="text" placeholder="인증번호" id="auth_num" name="auth_num"/>
 			</div>
 				<div>
 				<input type="text" placeholder="추천인 아이디(선택)" name="inviter" id="member_inviter" maxlength="12"/>

@@ -30,7 +30,7 @@
 	        	type : "GET",
 	        	url : "IssueCoupon",
 	        	data : { code : '${event.coupon_code}'},
-	        	dataType : "text",
+	        	dataType : "JSON",
 	        	success : function(response){
 	        		
 	        		if(response.alreadyHasCoupon){ // 중복된 쿠폰일경우
@@ -39,6 +39,8 @@
 	        			alert('존재하지 않는 쿠폰입니다');
 	        		} else if (response.fail) { // 쿠폰 등록이 실패한 경우
 	        			alert('쿠폰 등록에 실패하셨습니다.');
+	        		} else if (response.isAdmin) { // 쿠폰 등록이 실패한 경우
+	        			alert('당신누구야');
 	        		} else if (response.success) { // 쿠폰 등록 성공
 	        			if(confirm('쿠폰 등록 성공! 마이페이지로 이동하시겠습니까?')) {
 	        				location.href="MyCoupon";

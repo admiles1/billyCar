@@ -84,6 +84,40 @@
     </c:choose>
 
     <c:choose>
+        <c:when test="${not empty ingReservList}">
+            <h2 class="section-header">이용중인 예약 내역</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>예약자</th>
+                        <th>결제 시간</th>
+                        <th>예약 시간</th>
+                        <th>반납 시간</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach var="reservation" items="${ingReservList}">
+                        <tr>
+                            <td>${reservation.member_name}</td>
+							<fmt:parseDate var="regDate" value="${reservation.reserv_reg_date}" pattern="yyyy-MM-dd'T'HH:mm" type="both"/>
+							<fmt:parseDate var="pickupDate" value="${reservation.reserv_pickupdate}" pattern="yyyy-MM-dd'T'HH:mm" type="both"/>
+							<fmt:parseDate var="returnDate" value="${reservation.reserv_returndate}" pattern="yyyy-MM-dd'T'HH:mm" type="both"/>
+							<td><fmt:formatDate value="${regDate}" pattern="MM'월'dd'일' HH:mm"/></td>
+							<td><fmt:formatDate value="${pickupDate}" pattern="MM'월'dd'일' HH:mm"/></td>
+							<td><fmt:formatDate value="${returnDate}" pattern="MM'월'dd'일' HH:mm"/></td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </c:when>
+        <c:otherwise>
+            <div class="alert alert-info">
+                현재 이용 중인 예약 내역이 없습니다.
+            </div>
+        </c:otherwise>
+    </c:choose>
+    
+    <c:choose>
         <c:when test="${not empty reservList}">
             <h2 class="section-header">예정된 예약 내역</h2>
             <table class="table table-striped">
