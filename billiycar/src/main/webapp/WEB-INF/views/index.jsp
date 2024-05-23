@@ -353,12 +353,14 @@ function check() {
     		<c:forEach var="event" items="${eventList}">
 	        	<div class="col-md-4">
 	        		<div class="card">
-	                	<img src="resources/event_images/envent_page_event1-1.webp" class="card-img-top" alt="이벤트 이미지 1" width="300" height="300">
+	        			<img src="<%= request.getContextPath() %>/resources/upload/${event.event_image }" width="406" height="300">
+	        			
 	                    <div class="card-body">
-	                    	<h5 class="card-title">${event.event_title }</h5>
-								<a href="eventContent?event_idx=${event.event_idx}" class="btn btn-primary">쿠폰 받으러 가기</a>
+	                    	<h5 class="fw-light">${event.event_title }</h5>
 						</div>
+						<a href="eventContent?event_idx=${event.event_idx}" class="btn btn-primary">쿠폰받으러가기</a>
 					</div>
+					
 				</div>
 			</c:forEach>
 		</div>

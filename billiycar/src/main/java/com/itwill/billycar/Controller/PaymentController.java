@@ -1,12 +1,9 @@
 package com.itwill.billycar.Controller;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpSession;
 
@@ -23,7 +20,6 @@ import com.itwill.billycar.service.MypageService;
 import com.itwill.billycar.service.PaymentService;
 import com.itwill.billycar.service.ReservService;
 import com.itwill.billycar.vo.CarVO;
-import com.itwill.billycar.vo.CouponIssueVO;
 import com.itwill.billycar.vo.MemberVO;
 import com.itwill.billycar.vo.PaymentVO;
 import com.itwill.billycar.vo.ReservVO;

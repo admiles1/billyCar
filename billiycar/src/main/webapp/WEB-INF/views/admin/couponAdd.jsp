@@ -53,6 +53,7 @@
 			
 		}
 		
+		// 쿠폰 추가 버튼 누르면 창 닫고 부모창 새로고침
 			$("addCouponBtn").onclick(function(){
 				window.opener.location.reload();
 				window.close();
@@ -60,7 +61,6 @@
 
 	})
 
-	// 쿠폰 추가 버튼 누르면 창 닫고 부모창 새로고침
 </script>
 
 

@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.itwill.billycar.vo.CarImgVO;
 import com.itwill.billycar.vo.CarVO;
 import com.itwill.billycar.vo.MemberVO;
 import com.itwill.billycar.vo.ReservVO;
@@ -30,5 +31,5 @@ public interface ReservMapper {
 
 	ReservVO selectReviewCondition(int reserv_idx);
 
-	
+	Map<String,Object> selectCarDetailImg(String carNumber);
 }

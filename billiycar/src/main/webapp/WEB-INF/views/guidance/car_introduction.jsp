@@ -165,6 +165,7 @@
 			        dataType: "json",
 			        success: function(response) {
 			            let carList = response;
+			            console.log(carList);
 			         //true면 기존 아코디언 비움
 			            if(isEmpty) {
 			            $("#listEnd").empty();
@@ -173,11 +174,130 @@
 			         
 			         //반복문을 통해 ajax를 통해 받아온 값을 아코디언div에 전달
 // 			         let imgPath = "${pageContext.request.contextPath}/resources/images/cscBulb.png";
-			            $.each(carList, function(index, car) {
-			               let =
-			                accordion.append(checkbox, label, answerDiv);
-			            });
-			         
+// 			            $.each(carList, function(index, car) {
+			            for(car of carList) {
+							alert(car.car_img)			            	
+			            	if(car.car_img != null) {
+			            		let original_fileName = substringAfter(car.car_img, '_')
+			            	}
+			            	
+			               alert(original_fileName)
+			               let carUl = 
+					               ' <li class="panel">'
+					               +' <div class="left">'
+					               +'     <div class="img-wrap-responsive">'
+					               +'    	<c:if test="${not empty car.car_img}">'
+					               +'			<c:set var="original_fileName" value="${fn:substringAfter(car.car_img, '_')}"/>'
+					               +'            <img src="${pageContext.request.contextPath}/resources/upload/${car.original_fileName}">'
+					               +'		</c:if>'
+					               +'     </div>'
+					               +' </div>'
+					               +' <div class="right">'
+					               +'    <div class="title">'
+					               +'         <h3>${ '+ car.model + '}</h3>'
+					               +'         <div class="type-list">'
+					               +'            <span>${car.carType}</span> /'
+					               +'           <span>${car.car_capacity}</span> /'
+					               +'            <span>${car.fuel}</span>'
+					               +'        </div>'
+					               +'    </div>'
+					               +'    <div class="search-car-result-cont">'
+					               +'         <div class="search-car-result-cont-left">'
+					               +'             <h5 class="title-01 f14"> 요금정보</h5>'
+					               +'            <table class="cont-list-table-v04">'
+					               +'                 <colgroup>'
+					               +'                    <col width="20%">'
+					               +'                    <col width="40%">'
+					               +'                    <col width="40%">'
+					               +'                </colgroup>'
+					               +'                 <thead>'
+					               +'                    <tr>'
+					               +'                         <th class="first">구분</th>'
+					               +'                         <th>대여료</th>'
+					               +'                     </tr>'
+					               +'                 </thead>'
+					               +'                <tbody>'
+					               +'                     <tr>'
+					               +'                         <td> 종일가 </td>'
+					               +'                         <td class="b_l1 r"><span style="color:#0b80ff">'
+					               +'                         <fmt:formatNumber value="${car.car_dayprice}" type="currency" /></span></td>'
+					               +'                    </tr>'
+					               +'                    <tr>'
+					               +'                         <td>1시간</td>'
+					               +'                        <td class="b_l1 r"><fmt:formatNumber value="${car.car_hourprice}" type="currency" /></td>' 
+					               +'                     </tr>'
+					               +'                 </tbody>'
+					               +'            </table>'
+					               +'        </div>'
+					               +'        <div class="search-car-result-cont-right">'
+					               +'            <div class="text-box">'
+					               +'                <div class="car-option">'
+					               +'					<h5 class="div-tap"> 옵션</h5>'
+					               +' 					<ul class="car-option-list">'
+					               +' 						<li>'
+					               +' 							<img src="${pageContext.request.contextPath}/resources/images/option/option_linsece.png" id="optionImg"><p>'
+					               +' 							<small>국제운전면허</small>'
+					               +' 						</li>'
+					               +'						<li>'
+					               +' 							<img src="${pageContext.request.contextPath}/resources/images/option/option_sos.png" id="optionImg"><p>'
+					               +' 							<small> 긴급출동무료</small>'
+					               +' 						</li>'
+					               +' 						<li>'
+					               +' 							<img src="${pageContext.request.contextPath}/resources/images/option/option_charger.png" id="optionImg"><p>'
+					               +' 							<small> 충전기제공 </small>'
+					               +' 						</li>'
+					               +' 						<li>'
+					               +' 							<img src="${pageContext.request.contextPath}/resources/images/option/option_seat.png" id="optionImg"><p>'
+					               +' 							<small> 카시트 무료 </small>'
+					               +' 						</li>'
+					               +' 						<li>'
+					               +' 							<img src="${pageContext.request.contextPath}/resources/images/option/option_nosmoking.png" id="optionImg"><p>'
+					               +' 							<small> 금연 </small>'
+					               +' 						</li>'
+					               +' 						<li>'
+					               +' 							<img src="${pageContext.request.contextPath}/resources/images/option/option_heatseat.png" id="optionImg"><p>'
+					               +' 							<small> 열선시트 </small>'
+					               +' 						</li>'
+					               +' 						<li>'
+					               +' 							<img src="${pageContext.request.contextPath}/resources/images/option/option_smartkey.png" id="optionImg"><p>'
+					               +' 							<small> 스마트키 </small>'
+					               +' 						</li>'
+					               +' 						<li>'
+					               +' 							<img src="${pageContext.request.contextPath}/resources/images/option/option_2ndlinsece.png" id="optionImg"><p>'
+					               +' 							<small> 제2운전자 </small>'
+					               +'  						</li>'
+					               +'  						<li>'
+					               +'							<img src="${pageContext.request.contextPath}/resources/images/option/option_navigation.png" id="optionImg"><p>'
+					               +'							<small> 네비게이션 </small>'
+					               +'						</li>'
+					               +' 						<li>'
+					               +'							<img src="${pageContext.request.contextPath}/resources/images/option/option_backcamera.png" id="optionImg"><p>'
+					               +'							<small> 후방카메라 </small>'
+					               +'						</li>'
+					               +'						<li>'
+					               +'							<img src="${pageContext.request.contextPath}/resources/images/option/option_blackbox.png" id="optionImg"><p>'
+					               +'							<small> 블랙박스 </small>'
+					               +'						</li>'
+					               +'						<li>'
+					               +'							<img src="${pageContext.request.contextPath}/resources/images/option/option_highpass.png" id="optionImg"><p>'
+					               +'							<small> 하이패스 </small>'
+					               +'						</li>'
+					               +'						<li>'
+					               +'							<img src="${pageContext.request.contextPath}/resources/images/option/option_bluetooth.png" id="optionImg"><p>'
+					               +'							<small> 블루투스 </small>'
+					               +'						</li>'
+					               +'					</ul>'
+					               +'				</div>'
+					               +'            </div>'
+					               +'               </div>'
+					               +'    </div>'
+					               +' </div>'
+					               +'   </li>'
+					               
+					               
+		               		$("#search-car-result-list").append(carUl);
+			            };
+			            
 			         isLoading = false; // 데이터 요청 완료 후 플래그 해제
 			         pageNum++;
 			         
@@ -188,7 +308,6 @@
 			        }
 			    });
 			}
-			
 			
 			$(function() {
 			   //초기 로딩
@@ -254,11 +373,16 @@
 				<input type="submit" value="검색" />
 			</form>
         </div>
+        
+        
+        
+        
         <div class="cont" id="listEnd">
         
-        <c:forEach var="car" items="${carList}">
+<%--         <c:forEach var="car" items="${carList}"> --%>
         
-            <ul class="search-car-result-list">
+         
+<ul class="search-car-result-list">
                 <li class="panel">
                     <div class="left">
                         <div class="img-wrap-responsive">
@@ -367,13 +491,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="btn-wrap">
-<!--                             <a class="reservation" href="/?pCode=1541884045&amp;idx=118">실시간 예약</a> -->
-                        </div>
                     </div>
                 </li>
             </ul>
-        </c:forEach>
         
         </div>
     </main>
