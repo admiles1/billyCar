@@ -68,7 +68,8 @@ $(function(){
     $('#options').on('change', function() {
         let pageNum = 1;
         let option = $('#options').val();
-		
+		console.log(option);
+        
         $.ajax({
             type: 'GET',
             url: 'reviewOption',
@@ -91,7 +92,7 @@ $(function(){
 				            '<div class="card" style="position: relative;">' +
 				            '<div style="position: absolute; top: 10px; left: 10px; color: grey;" class="heart">' + 
 				            '<input type="hidden" class="review_idx" value="' + review.review_idx + '">';
-							if (review.member_id && review.member_id === member_id) {
+							if (review.member_id != null && review.member_id === member_id) {
 							    html += '<i class="fa-solid fa-heart" style="color: red;"></i>';
 							} else {
 							    html += '<i class="fa-regular fa-heart" style="color: gray;"></i>';
@@ -100,16 +101,16 @@ $(function(){
 							
 							
 		                	
-                            '<img src="request.getContextPath()/resources/upload/' + ${review.car_img } + 'width="306" height="300">' +
+                            '<img src="request.getContextPath()/resources/upload/' + review.car_img + 'width="306" height="300">' +
                             '<hr>' +
                             '<div class="card-body">' +
                                 '<h5 class="card-title">';
-            for (var i = 0; i < review.review_score; i++) {
-                html += '<i class="fa-solid fa-star" style="color: #FFE000;"></i>';
-            }
-            html +=         '</h5>' +
+	            for (var i = 0; i < review.review_score; i++) {
+	                html += '<i class="fa-solid fa-star" style="color: #FFE000;"></i>';
+	            }
+	            html +=         '</h5>' +
                             '<h6 class="card-title">' + review.car_img + '</h6>' +
-                            '<p class="card-text">' + review.review_content + '</p>' +
+                            '<p class="card-text" style="height: 100px;">' + review.review_content + '</p>' +
                             '<div class="card-footer">' +
                                 '<small class="text-body-secondary">' + review.review_id + ' 고객님</small>' +
                             '</div>' +
@@ -187,8 +188,6 @@ $(function(){
 	        							<i class="fa-regular fa-heart" style="color: gray;"></i>
 	        						</c:otherwise>
 	        					</c:choose>
-	        							
-		        						
 	        			</div>
 	                	<img src="<%= request.getContextPath() %>/resources/upload/${review.car_img }" width="306" height="300">
 	                	<hr>

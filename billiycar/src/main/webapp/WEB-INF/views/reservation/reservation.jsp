@@ -92,11 +92,10 @@
 						let carModel = "\"" + car.car_model + "\"";
 						let carType = "\"" + car.car_type + "\"";
 						let carFuel = "\"" + car.car_fuel + "\"";
-						
 						$("#selectResult > ul").append(
 								"<li class='carList fadeIn row'>"
 								+ "<a class='d-flex' onclick='goDetail(" + carModel + "," + carType + "," + carFuel + ")'>"
-								+ "<span class='carImg'><img src='" + car.car_img + "'></span>"
+								+ "<span class='carImg'><img src='/billycar/resources/upload/" + car.car_img + "'></span>"
 								+ "<span class='carInfo'>"
 								+ "<span>" + car.car_model + " / " + car.car_capacity + "</span>"
 								+ "<small>종일가 "+ dayPrice + "</small><br>"
@@ -136,7 +135,7 @@
 						$("#selectResult > ul").append(
 								"<li class='carList fadeIn row'>"
 								+ "<a class='d-flex' onclick='goDetail(" + carModel + "," + carType + "," + carFuel + ")'>"
-								+ "<span class='carImg'><img src='" + car.car_img + "'></span>"
+								+ "<span class='carImg'><img src='/billycar/resources/upload/" + car.car_img + "'></span>"
 								+ "<span class='carInfo'>"
 								+ "<span>" + car.car_model + " / " + car.car_capacity + "</span>"
 								+ "<small>종일가 "+ dayPrice + "</small><br>"
@@ -423,7 +422,7 @@
 					<c:forEach var="car" items="${cars}">
 						<li class='carList fadeIn row'>
 							<a class='d-flex' onclick='goDetail("${car.car_model}", "${car.car_type}", "${car.car_fuel}")'>
-								<span class='carImg'><img src=""></span>
+								<span class='carImg'><img src="<%= request.getContextPath() %>/resources/upload/${car.car_img}"></span>
 								<span class='carInfo'>
 									<span> ${car.car_model} / ${car.car_capacity} </span>
 									<c:set var="dayprice" value="${car.car_dayprice}" />

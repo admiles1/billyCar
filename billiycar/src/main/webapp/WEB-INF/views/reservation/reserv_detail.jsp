@@ -31,15 +31,11 @@
 	    		<div class="col-6 car-carousel">
 	    			<div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
 	 					<div class="carousel-inner">
-	    					<div class="carousel-item active">
-	      						<img src="" class="d-block w-100" alt="...">
-	   						</div>
-	    					<div class="carousel-item">
-	      						<img src="" class="d-block w-100" alt="...">
-	   						</div>
-	    					<div class="carousel-item">
-	      						<img src="" class="d-block w-100" alt="...">
-	    					</div>
+	 						<c:forEach var="img" items="${selectCarDetailImg}" varStatus="status">
+	 							<div class="carousel-item active">
+	      							<img src="<%= request.getContextPath() %>/resources/upload/${fn:substringAfter(img, '=')}" class="d-block w-100" alt="...">
+	   							</div>
+	 						</c:forEach>
 						</div>
 	  						<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
 	    						<span class="carousel-control-prev-icon" aria-hidden="true"></span>

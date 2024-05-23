@@ -1,5 +1,7 @@
 package com.itwill.billycar.handler;
 
+import java.util.Random;
+
 import org.apache.commons.lang3.RandomStringUtils;
 
 // 특정 길이의 난수 생성에 사용할 클래스 정의
@@ -50,6 +52,11 @@ public class GenerateRandomCode {
 		// => static 메서드 randomXXX() 메서드를 호출하여 난수 생성
 		// => 알파벳, 숫자 조합 난수 생성하기 위해 randomAlphanumeric() 메서드 활용
 		return RandomStringUtils.randomAlphanumeric(length);
+	}
+	
+	public static String getAuthCode() {
+		
+		return RandomStringUtils.randomNumeric(4);
 	}
 }
 

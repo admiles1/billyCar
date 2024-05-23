@@ -69,7 +69,7 @@
 	
 	}
 #paymentSide{  
- 		position:fixed;  
+ 		position:absolute;  
   		left:1190px; top:230px;  
    		width: 410px;  
    		height: 600px;  
@@ -227,51 +227,8 @@
 				</table>
 			</div>	
 			</div>		
-			<br>		
-			<div class="row g-3">			
-				<h5>종합보험(기본)</h5>
-				<table class="list-table-v02" width="100%"  >
-					<colgroup span="1">
-						<col width="40%">
-						<col width="30%">
-						<col width="30%">
-					</colgroup>
-					<thead>
-						<tr>
-							<th>구분</th>
-							<th>보상범위</th>
-							<th class="last=child">고객부담금</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td colspan="1" class="c" >대인 |</td>
-							<td colspan="1" class="c" >없음</td>
-							<td colspan="1" class="c" >없음</td>
-						</tr>
-						
-						<tr>
-							<td colspan="1" class="c" >대인 ||</td>
-							<td colspan="1" class="c">무한</td>
-							<td colspan="1" class="c">50만원</td>
-						</tr>
-						
-						<tr>
-							<td colspan="1" class="c" >대물</td>
-							<td colspan="1" class="c">2000만원</td>
-							<td colspan="1" class="c">30만원</td>
-						</tr>
-						
-						<tr>
-							<td colspan="1" class="c" >자손</td>
-							<td colspan="1" class="c">1500만원</td>
-							<td colspan="1" class="c">30만원</td>
-						</tr>
-					</tbody>
-				</table>
 			</div>
 			</div>
-			<hr>	
 			<div class="col-md-5 col-lg-4 order-md-last" id="paymentSide">
 			<h4 class="subject2">결제 정보 확인</h4>
 			<div class="container last_check">
@@ -281,11 +238,13 @@
 				<p><b>차량 정보</b></p>
 				<div class="row ">
 					<div class="col-3">차량모델</div>
-					<div class="col-9 car-name" align="right">${reservDetails[0].name} </div>
+					<div class="col-9 car-name" align="right">${reservDetails[0].brand_name} ${reservDetails[0].model_name} </div>
 					<div class="col-3">차량번호</div>
 					<div class="col-9 car-name" align="right">${reservDetails[0].car_number}</div>
  					<div class="col-3">승차인원</div> 
  					<div class="col-9" align="right">${reservDetails[0].car_capacity} </div> 
+ 					<div class="col-3">연식</div> 
+ 					<div class="col-9" align="right">${fn:substring(reservDetails[0].car_year, 0, 4)}</div> 
 					<div class="col-3">제한나이</div> 
  					<div class="col-9" align="right">만23세 이상</div> 
  					<div class="col-3">운전경력</div>
@@ -295,67 +254,27 @@
 				<h6><b>결제 정보</b></h6>
 				<div class="row">
 					<div class="col-3">결제수단</div>
-					<div class="col-9" align="right">신용카드</div>
-					<div class="col-3">
-						<input type="text" id="differenceday" readonly/>
-					</div>
-					<div class="col-9" align="right">
-						<input type="text" id="firstAmount" readonly/>
-					</div>
+					<div class="col-9" align="right">신용/체크카드</div>
 					<div class="col-3">보험금액</div>
 					<div class="col-9 incurance" id="insurance_price" align="right">${empty param.insurance ? '(+)0' : param.insurance}</div>
 					<div class="col-3">할인금액</div>
 					<div class="col-9" align="right">할인금액 표시</div>
 					<hr>
-					<div class="col-3">결제 금액(VAT 포함)</div>
-					<div class="col-9"  align="right"><input type="text" id="dateDifferenceInput" value="${reservDetails[0].payment_result_amount }" readonly/></div>
-					<div></div>
+					<div class="col-5">결제금액(VAT 포함)</div>
+					<div class="col-7"  align="right">${reservDetails[0].payment_result_amount} 원</div>
 				</div>
 			</div>
 			</div>
-			</div>
-    <!-- 아임포트 스크립트 -->
-    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
-    <script>
-        const IMP = window.IMP; 
-        IMP.init("imp47235683"); // 내 가맹점 식별 코드
-        
-        function startPayment() {
-            IMP.request_pay({
-                pg: "html5_inicis", // 결제 과정에 사용될 결제사 이니시스
-                pay_method: "card", // 결제 수단
-                merchant_uid: "payDone_" + new Date().getTime(), // 주문번호 어칼지 고민
-                name: "렌트카 예약", // 주문 명 '렌트카 되어있는 곳에 차명 따와야 할듯'
-                amount: 100, // 금액
-                buyer_email: "${info.member_email}", // 구매자 이메일 필요한가 싶네
-//                 buyer_name: '홍길동', // 구매자 이름 가져오기
-                buyer_name: "${info.member_name}" // 구매자 이름 가져오기
-//                 buyer_tel: '010-1234-5678', // 구매자 전화번호 필요 하려나
-//                 buyer_addr: '서울특별시 강남구 삼성동', // 구매자 주소 필요 없을듯
-//                 m_redirect_url: 'http://localhost:8080/billycar/' // 모바일 결제시 리다이렉션될 URL이건 그냥 메인으로 보내면 될듯 이거안쓰고 보내도 될듯
-//                 m_redirect_url: 'http://www.naver.com' // 모바일 결제시 리다이렉션될 URL이건 그냥 메인으로 보내면 될듯 이거안쓰고 보내도 될듯
-            }, function(rsp) {
-                if (rsp.success) {
-                    alert("결제 성공");
-                    location.href ="paymentComplete";
-                } else {
-                    alert("결제 취소");
-                    
-                }
-            });
-        }
-        
-        document.addEventListener('DOMContentLoaded', function() {
-            var reservInsurance = ${reservDetails[0].reserv_insurance};
-            document.getElementById('insuranceNone').style.display = reservInsurance == 0 ? '' : 'none';
-            document.getElementById('insuranceGeneral').style.display = reservInsurance == 1 ? '' : 'none';
-            document.getElementById('insuranceFull').style.display = reservInsurance == 2 ? '' : 'none';
-        });
-        
-        
-    </script>
-	
-	
+			<footer><jsp:include page="../inc/bottom.jsp"></jsp:include></footer>
+	<script type="text/javascript">
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var reservInsurance = ${reservDetails[0].reserv_insurance};
+        document.getElementById('insuranceNone').style.display = reservInsurance == 0 ? '' : 'none';
+        document.getElementById('insuranceGeneral').style.display = reservInsurance == 1 ? '' : 'none';
+        document.getElementById('insuranceFull').style.display = reservInsurance == 2 ? '' : 'none';
+    });
+	</script>
 	<!-- 보험 값 받아오는 스크립트 -->
 	 <script>
         // 문서 로드 시 이벤트 리스너 추가
@@ -372,11 +291,6 @@
         });
     </script>	
 
-	
-	
-		
-				
-  
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <%-- 	<footer><jsp:include page="../inc/bottom.jsp"></jsp:include></footer> --%>
 </body>

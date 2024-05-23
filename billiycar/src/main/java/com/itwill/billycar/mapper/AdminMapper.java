@@ -50,7 +50,7 @@ public interface AdminMapper {
 	// 여기까지
 
 	// 수정할 차량 정보 조회
-	CarVO selectCarId(int carId);
+	CarVO selectCarId(String carNumber);
 
 	int updateCar(CarVO car);
 	
@@ -60,7 +60,7 @@ public interface AdminMapper {
 
 	int insertNewModel(@Param("brandName")String brandName, @Param("newModelName") String newModelName);
 
-	int deleteCar(int carId);
+	int deleteCar(String carNumber);
 
 	int deleteCode(String code);
 
@@ -86,6 +86,8 @@ public interface AdminMapper {
 	String selectModelName(String carmodel);
 
 	void insertCarImg(CarImgVO carImg);
+
+	List<Map<String, Object>> selectIngReservation(String carNumber);
 
 	
 	

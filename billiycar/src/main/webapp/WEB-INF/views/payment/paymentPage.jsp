@@ -426,17 +426,17 @@
 		<h4 class="subject">할인정보(중복할인불가)</h4>
 			<div class="row g-3">
 				<div class="col-sm-2">
-<!-- 	            	<label>  -->
-<!-- 	            		<select class="form-control" id="memberCoupon" name="memberCoupon" style="width: 150px;"> -->
-<!-- 				            <option value="0">선택안함</option> -->
-<%-- 				            <c:forEach var="ci" items="${couponIssue}" > --%>
-<%-- 					            <option value="${ci.coupon_discount_amount}" id="memberCoupon">${ci.coupon_name}</option> --%>
-<%-- 				            </c:forEach> --%>
-<!-- 			            </select> -->
-<!-- 	            	</label> -->
+	            	<label> 
+	            		<select class="form-control" id="memberCoupon" name="memberCoupon" style="width: 150px;">
+				            <option value="0">선택안함</option>
+				            <c:forEach var="ci" items="${couponIssue}" >
+					            <option value="${ci.coupon_discount_amount}" id="memberCoupon">${ci.coupon_name}</option>
+				            </c:forEach>
+			            </select>
+	            	</label>
 	            </div>
 	            <div class="col-sm-10">
-	            	<input type="button" value="적용" style="height: 37px;"  >
+	            	<input type="button" value="적용" style="height: 37px;" id="applyCouponBtn" >
 	            </div>
 			</div>
 			<hr>
@@ -754,20 +754,18 @@
 <!-- 					<div class="col-9 incurance" id="insurance_price" align="right">0</div> -->
 					<div class="col-9 incurance" id="insurance_price" align="right">${empty param.insurance ? '(+)0' : param.insurance}</div>
 					<div class="col-3">할인금액</div>
-					<div class="col-9"></div>
-<!-- 					<div class="col-9" align="right" id="salePrice"> -->
-<!-- 						<input type="text" id="salePrice" readonly/> -->
-<!-- 					</div> -->
+<!-- 					<div class="col-9"></div> -->
+					<div class="col-9" align="right" id="salePrice">0</div>
 					<hr>
 					<div class="col-3">결제 금액(VAT 포함)</div>
 					<div class="col-9"  align="right"><input type="text" id="dateDifferenceInput"  readonly/></div>
-					<div></div>
+				
 <!-- 					<div id="dateDifference"> -->
 <!-- <!-- 						<input type="text" id="dateDifference" value="dateDifference">  -->
 <!-- <!-- 						<input type="text" id="dateDifferenceInput" readonly />  -->
 <!-- 					</div> -->
 				</div>
-				<br><br>
+<!-- 				<br> -->
 				<form action="payment" method="post">
 					<input type="hidden" id="totalAmount" name="totalAmount" value="0">
 <%-- 					<input type="hidden" name="carNumber" value="${car.car_number}"> --%>
@@ -784,12 +782,6 @@
         const IMP = window.IMP; 
         IMP.init("imp47235683"); // 내 가맹점 식별 코드
 
-//         var date = new Date();
-        
-		
-//         merchant_20240514
-//         let a = "mer_" + (new Date().getTime());
-        
         function startPayment() {
         	let totalAmount = document.getElementById('dateDifferenceInput').value.replace(",", "");
         	
@@ -839,33 +831,32 @@
     </script>
 	
 	
-	<!-- 보험 값 받아오는 스크립트 -->
-	 <script>
-        // 문서 로드 시 이벤트 리스너 추가
-        document.addEventListener('DOMContentLoaded', function() {
-            let radios = document.querySelectorAll('.insurance_data'); // 모든 라디오 버튼을 선택
-            let previousInsuranceCost = 0;
+<!-- 	보험 값 받아오는 스크립트  (기존) -->
+ 	 <script> 
+         // 문서 로드 시 이벤트 리스너 추가
+         document.addEventListener('DOMContentLoaded', function() {
+             let radios = document.querySelectorAll('.insurance_data'); // 모든 라디오 버튼을 선택
+             let previousInsuranceCost = 0;
             
-            radios.forEach(function(radio) {
-                radio.addEventListener('change', function() { // 라디오 버튼 변경 이벤트
-                    if (this.checked) { // 라디오 버튼이 선택된 경우
-						let price = parseInt(this.value); // 선택된 라디오 버튼의 값 가져오기
+             radios.forEach(function(radio) {
+                 radio.addEventListener('change', function() { // 라디오 버튼 변경 이벤트
+                     if (this.checked) { // 라디오 버튼이 선택된 경우
+ 						let price = parseInt(this.value); // 선택된 라디오 버튼의 값 가져오기
 		
-		                // P1의 입력 값 업데이트
-		                let inputField = document.getElementById('dateDifferenceInput');
-						let existingTotal = parseInt(inputField.value.replace(/,/g, ''));
-						let newTotal = existingTotal - previousInsuranceCost + price;
+ 		                // P1의 입력 값 업데이트
+ 		                let inputField = document.getElementById('dateDifferenceInput');
+ 						let existingTotal = parseInt(inputField.value.replace(/,/g, ''));
+ 						let newTotal = existingTotal - previousInsuranceCost + price ;
 						
-						inputField.value = newTotal.toLocaleString(); // 총액을 포맷하여 표시
-						document.getElementById('totalAmount').value = newTotal;
+ 						inputField.value = newTotal.toLocaleString(); // 총액을 포맷하여 표시
+ 						document.getElementById('totalAmount').value = newTotal;
 						 
-		                previousInsuranceCost = price;
-						
-                    }
-                });
-            });
+ 		                previousInsuranceCost = price;
+                     }
+                 });
+             });
         });
-    </script>	
+   </script>	 
 
 	<script type="text/javascript">
 	    let startDate1 = "${fn:split(param.schedule, ',')[0]}";
@@ -896,12 +887,7 @@
 	    } else{
 	    	differenceString = differenceInDays * ${car.car_dayprice} + differenceInHours * ${car.car_hourprice};
 	    }	
-// 		$('#memberCoupon').on('change', function() {
-// 			let sale = $('#memberCoupon').val();
-// // 			console.log(sale);
-			
-// 		});
-	    
+		
 	    
 	    // 페이지 로드 후 input 태그에 결과 표시
 	    window.onload = function() {
@@ -909,14 +895,48 @@
 	        document.getElementById('firstAmount').value = differenceString.toLocaleString(); 
 	        document.getElementById('dateDifferenceInput').value = differenceString.toLocaleString(); // toLocaleString() 이거 숫자표시 쉼표 넣어줌
 // 	        document.getElementById('salePrice').value = sale.toLocaleString(); 
-	        
-	        
 	    };
 	    
 	    
 	</script>
 	
+	<script>
+	$('#memberCoupon').on('change', function() {
+		let sale = $('#memberCoupon').val();
+	});
 	
+    $(document).ready(function () {
+        // 적용 버튼 클릭 시
+        $('#applyCouponBtn').click(function () {
+            // 선택한 쿠폰 값을 가져옴
+            let selectedCoupon = $('#memberCoupon').val();
+
+            // 쿠폰 값을 오른쪽에 표시
+            $('#salePrice').text(selectedCoupon);
+        });
+    });
+</script>
+<script type="text/javascript">
+	$(document).ready(function () {
+	    let previousCouponDiscount = 0; // 이전 쿠폰 할인 금액 저장
+	
+	    $('#applyCouponBtn').click(function () {
+	        let selectedCouponDiscount = parseInt($('#memberCoupon').val());
+	        let totalInput = $('#dateDifferenceInput');
+	        let currentTotal = parseInt(totalInput.val().replace(/,/g, ''));
+	
+	        // 쿠폰 할인 금액을 기존 총 금액에서 빼고 새로운 할인 금액을 더합니다.
+	        let newTotal = currentTotal + previousCouponDiscount - selectedCouponDiscount;
+	        totalInput.val(newTotal.toLocaleString()); // 새로운 총 금액 포맷하여 표시
+	
+	        // 할인 금액 표시 업데이트
+	        $('#salePrice').text(selectedCouponDiscount.toLocaleString());
+	
+	        // 새로운 쿠폰 할인 금액 저장
+	        previousCouponDiscount = selectedCouponDiscount;
+	    });
+	});
+</script>	
 	<!-- 추가옵션 스크립트 -->
 <!--  		 <script>
         function updateOptionPrice() {

@@ -45,6 +45,7 @@ button[type="submit"] { width: 100%; }
                         <select id="carStatus" name="car_status" class="form-control" required>
                             <option value="0" >정상</option>
                             <option value="1" >수리중</option>
+                            <option value="2" >차량없음</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary">수정</button>

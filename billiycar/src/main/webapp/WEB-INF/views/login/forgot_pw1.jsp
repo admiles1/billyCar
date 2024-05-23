@@ -15,7 +15,7 @@
 	    <div class="container">
 	        <div class="button">
 	            <a href="forgot_id" class="forgot_id">아이디 찾기</a> |
-	            <a href="forgot_pw" class="forgot_pw">비밀번호 찾기</a>
+	            <a href="forgot_pw_step1" class="forgot_pw">비밀번호 찾기</a>
 	        </div>
 	        <hr>
 	        <div class="insert_id">

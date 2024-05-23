@@ -112,8 +112,8 @@
                                         <td>${car.car_hourprice}</td>
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic example">
-                                                <button type="button" class="btn btn-sm btn-primary" onclick="modifyCar('${car.car_idx}')">수정</button>
-                                                <button type="button" class="btn btn-sm btn-danger" onclick="confirmDelete('${car.car_idx}')">삭제</button>
+                                                <button type="button" class="btn btn-sm btn-primary" onclick="modifyCar('${car.car_number}')">수정</button>
+                                                <button type="button" class="btn btn-sm btn-danger" onclick="confirmDelete('${car.car_number}')">삭제</button>
                                             </div>
                                         </td>
                                     </tr>
@@ -158,13 +158,13 @@
     		});
     	})
     
-	   function confirmDelete(carId) {
-		    console.log("Deleting car with ID:", carId); // carId 값을 확인하는 로그 추가
+	   function confirmDelete(carNumber) {
+		    console.log("Deleting car with ID:", carNumber); // carId 값을 확인하는 로그 추가
 		    if (confirm("정말 삭제하시겠습니까?")) {
 		        $.ajax({
 		            type: 'POST',
 		            url: 'deleteCar',
-		            data: { carId: carId },
+		            data: { carNumber: carNumber },
 		            success: function(response) {
 		                if (response === "success") {
 		                    alert('삭제되었습니다.');
@@ -180,9 +180,9 @@
 		    }
 		}
         
-        function modifyCar(carId) {
+        function modifyCar(carNumber) {
             var carInfo = {
-                carId: carId
+           		carNumber : carNumber
             };
             var queryString = Object.keys(carInfo).map(key => key + '=' + carInfo[key]).join('&');
             window.location.href = 'carModify?' + queryString;
@@ -228,8 +228,8 @@
                                 + '<td>' + car.car_hourprice + '</td>'
                                 + '<td>'
                                     + '<div class="btn-group" role="group" aria-label="Basic example">'
-                                        + '<button type="button" class="btn btn-sm btn-primary" onclick="modifyCar(\'' + car.car_idx + '\')">수정</button>'
-                                        + '<button type="button" class="btn btn-sm btn-danger" onclick="confirmDelete(\'' + car.car_idx + '\')">삭제</button>'
+                                        + '<button type="button" class="btn btn-sm btn-primary" onclick="modifyCar(\'' + car.car_number + '\')">수정</button>'
+                                        + '<button type="button" class="btn btn-sm btn-danger" onclick="confirmDelete(\'' + car.car_number + '\')">삭제</button>'
                                     + '</div>'
                                 + '</td>'
                             + '</tr>'
