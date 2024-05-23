@@ -57,7 +57,6 @@ public class PaymentService {
 	}
 
 	public List<Map<String, Object>> getMemberCoupon(String memberId) {
-
 		return mapper.selectMemberCoupon(memberId);
 	}
 	
