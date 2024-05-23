@@ -215,13 +215,13 @@
 				        
 				        <tr class="insuranceChk" id="insuranceFull">
 				            <td colspan="1" class="c">
-				                <input name="insurance" class="chk insurance_data" id="insuranceCar12" type="radio" value="26000"
+				                <input name="insurance" class="chk insurance_data" id="insuranceCar2" type="radio" value="26000"
 				                ${reservDetails[0].reserv_insurance == 2 ? 'checked="checked"' : ''} disabled>
 				                <label>완전자차</label>
 				            </td>
 				            <td colspan="1" class="c">2만6천원</td>
 				            <td colspan="1" class="c">200만원</td>
-				            <td colspan="1" class="c">0만원</td>
+				            <td colspan="1" class="c">없음</td>
 				        </tr>
 				    </tbody>
 				</table>
@@ -233,6 +233,7 @@
 			<h4 class="subject2">결제 정보 확인</h4>
 			<div class="container last_check">
 				<div>
+					<img src="<%= request.getContextPath() %>/resources/upload/${reservDetails[0].car_img}" width="370" >
 				</div>
 				
 				<p><b>차량 정보</b></p>
@@ -273,7 +274,9 @@
 					<div class="col-9" align="right">할인금액 표시</div>
 					<hr>
 					<div class="col-5">결제금액(VAT 포함)</div>
-					<div class="col-7"  align="right">${reservDetails[0].payment_result_amount} 원</div>
+					<div class="col-7" id="total_payment" align="right">
+					    ${reservDetails[0].payment_result_amount} 원
+					</div>
 				</div>
 			</div>
 			</div>
@@ -282,6 +285,19 @@
 
     document.addEventListener('DOMContentLoaded', function() {
         var reservInsurance = ${reservDetails[0].reserv_insurance};
+        var insurancePrice = 0;
+
+        if (reservInsurance == 1) {
+            insurancePrice = 10000;
+        } else if (reservInsurance == 2) {
+            insurancePrice = 26000;
+        }
+
+        var paymentResultAmount = ${reservDetails[0].payment_result_amount};
+        var totalPaymentAmount = paymentResultAmount + insurancePrice;
+
+        document.getElementById('total_payment').innerText = totalPaymentAmount.toLocaleString() + " 원";
+        
         document.getElementById('insuranceNone').style.display = reservInsurance == 0 ? '' : 'none';
         document.getElementById('insuranceGeneral').style.display = reservInsurance == 1 ? '' : 'none';
         document.getElementById('insuranceFull').style.display = reservInsurance == 2 ? '' : 'none';
@@ -295,8 +311,13 @@
             radios.forEach(function(radio) {
                 radio.addEventListener('change', function() { // 라디오 버튼 변경 이벤트
                     if (this.checked) { // 라디오 버튼이 선택된 경우
-                        let price = this.value; // 선택된 라디오 버튼의 값 가져오기
-                        document.getElementById('insurance_price').innerText = '(+)' + price; // 값을 div에 표시
+                        let price = parseInt(this.value); // 선택된 라디오 버튼의 값 가져오기
+                        document.getElementById('insurance_price').innerText = '(+)' + price.toLocaleString() + " 원"; // 값을 div에 표시
+                        
+                        // 결제 금액 업데이트
+                        let paymentResultAmount = ${reservDetails[0].payment_result_amount};
+                        let totalPaymentAmount = paymentResultAmount + price;
+                        document.getElementById('total_payment').innerText = totalPaymentAmount.toLocaleString() + " 원";
                     }
                 });
             });
