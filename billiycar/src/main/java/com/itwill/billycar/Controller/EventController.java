@@ -100,7 +100,7 @@ public class EventController {
 		
 		// 가상 경로의 실제 경로
 		String saveDir = session.getServletContext().getRealPath(uploadDir);
-		
+		System.out.println("saveDir : " + saveDir);
 //		// 날짜별 하위 디렉토리를 분류
 //		String subDir = "";
 //		LocalDate today = LocalDate.now();
