@@ -110,6 +110,7 @@ $(function(){
 	                html += '<i class="fa-solid fa-star" style="color: #FFE000;"></i>';
 	            }
 	            html +=         '</h5>' +
+	            			'<h4 class="card-title">' + review.car_number + '</h4>' +
                             '<h5 class="card-title" style="height: 20px; margin-top: 20px;">제목</h5>' + 
                             '<p>' + review.review_subject + '</p>' + 
                             '<h5 class="card-text">내용</h5>' + 
@@ -199,6 +200,7 @@ $(function(){
 	                    		<i class="fa-solid fa-star" style="color: #FFE000;"></i>
 	                    		</c:forEach>
 	                    	</h5>
+	                    	<h4 class="card-title">${review.car_number }</h4>
 	                    	<h5 class="card-title" style="height: 20px; margin-top: 20px;">제목</h5>
 	                    	<p>${review.review_subject }</p>
 	                    	<h5 class="card-text">내용</h5>
