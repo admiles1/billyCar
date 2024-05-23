@@ -8,7 +8,8 @@
 
 	let checkPasswdResult = false;
 	let checkPasswd2Result = false;
-	let serverAuthNum = ${auth_num};
+	let checkAuthNumResult = false;
+	let serverAuthNum = "";
 	
 	$(function() {
 		
@@ -122,10 +123,8 @@
 		    	alert("인증번호를 입력해주세요");
 		    	document.fr.auth_num.focus();
 		        return false; 
-		    } else if ($("#auth_num").val() != ${auth_num}) {
-		    	alert("인증번호가 일치하지 않습니다.");
-		    	document.fr.auth_num.focus();
-		        return false; 
+		    } else if (!checkAuthNumResult) {
+		    	alert("전화번호 인증을 완료해주세요.");
 		    }
 		}
 		
@@ -205,9 +204,18 @@
 			dataType :"json",
 			success : function(response){
 		        if (response.success) {
-		            serverAuthNum = ${auth_num};  // 서버에서 받은 인증번호를 저장
-		            console.log(${auth_num});
+		            serverAuthNum = response.auth_num;  // 서버에서 받은 인증번호를 저장
+		            
 		            alert("인증번호가 전송되었습니다.");
+		            
+		            $("#check_tel").remove();
+		            $("#member_phone").css("margin-right", "105px");
+		            $("#auth_num").after(
+		            	'<input type="button" class="check_tel" id="check_tel" value="인증하기" onclick="phoneAuthCheck()">'	
+		            );
+		            $("#authBox").css("margin-left", "100px")
+		            
+		            
 		        } else {
 		            alert("인증번호 전송에 실패했습니다.");
 		        }
@@ -218,6 +226,16 @@
 			}
 			
 		});
+	}
+	
+	function phoneAuthCheck(){
+		alert(serverAuthNum);
+		if($("#auth_num").val() !== serverAuthNum){
+			alert("인증번호를 확인해주세요.");
+			return false;
+		} else {
+			checkAuthNumResult = true;
+		}
 	}
 	
 </script>
@@ -262,20 +280,20 @@
 	<!-- 			<input type="checkbox" value="남자" class="gender man">남자 -->
 	<!-- 		</div> -->
 			<div class="tel">
-				<select class="telecom" id="telecom" name="telecom">
-					<option value="">통신사</option>
-					<option value="SKT">SKT</option>
-					<option value="KT">KT</option>
-					<option value="LGU+">LG U+</option>
-					<option value="SKTaff">SKT 알뜰폰</option>
-					<option value="KTaff">KT 알뜰폰</option>
-					<option value="LGU+aff">LG U+ 알뜰폰</option>
-				</select>
+<!-- 				<select class="telecom" id="telecom" name="telecom"> -->
+<!-- 					<option value="">통신사</option> -->
+<!-- 					<option value="SKT">SKT</option> -->
+<!-- 					<option value="KT">KT</option> -->
+<!-- 					<option value="LGU+">LG U+</option> -->
+<!-- 					<option value="SKTaff">SKT 알뜰폰</option> -->
+<!-- 					<option value="KTaff">KT 알뜰폰</option> -->
+<!-- 					<option value="LGU+aff">LG U+ 알뜰폰</option> -->
+<!-- 				</select> -->
 				<input type="text" placeholder="전화번호(숫자만입력)" class="telephone_num" name="member_phone" id="member_phone" maxlength="11"/>
-				<input type="button" class="check_tel" value="인증하기" onclick="phoneAuth()"><br>
+				<input type="button" class="check_tel" id="check_tel" value="문자전송" onclick="phoneAuth()"><br>
 			</div>
-			<div>
-				<input type="text" placeholder="인증번호" id="auth_num" name="auth_num"/>
+			<div id="authBox">
+				<input type="text" placeholder="인증번호" id="auth_num" name="auth_num" maxlength="4"/>
 			</div>
 				<div>
 				<input type="text" placeholder="추천인 아이디(선택)" name="inviter" id="member_inviter" maxlength="12"/>

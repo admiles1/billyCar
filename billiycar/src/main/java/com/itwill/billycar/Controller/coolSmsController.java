@@ -51,11 +51,12 @@ public class coolSmsController {
 		        message.setText("[BillyCar] 아래의 인증번호를 입력해 주세요. \n인증번호 : ["+ auth_num + "]");
 	
 		        SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
-		        System.out.println(response);
+//		        System.out.println(response);
 		        
 		        session.setAttribute("auth_num", auth_num);
 		        
 		        resultMap.put("success", true);
+		        resultMap.put("auth_num", auth_num);
 		        
 	    	} catch (Exception e) {
 	            e.printStackTrace();
