@@ -59,12 +59,20 @@ public class GuideController {
 							, @RequestParam(defaultValue = "") String searchKeyword,
 							Model model) {
 		
+		System.out.println("pageNum :" + pageNum);
+		System.out.println("searchKeyword :" + searchKeyword);
+		System.out.println("searchType :" + searchType);
+		
 		int listLimit = 4;
 	    int startRow = (pageNum - 1) * listLimit;
 	    
 		List<Map<String, Object>> carList = service.carList(startRow,listLimit,searchType,searchKeyword);
-
+				
+		
+		
+		
 		model.addAttribute("carList", carList);
+		System.out.println(carList);
 		return carList;
 	}
 	

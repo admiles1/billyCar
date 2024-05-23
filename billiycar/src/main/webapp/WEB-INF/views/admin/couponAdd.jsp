@@ -39,11 +39,9 @@
 
 <script type="text/javascript">
 	$(function(){
-// 		document.fr.addCouponBtn.onkeyup = function() {
-		document.fr.onsubmit = function() {
+		document.fr.coupon_discount_amount.onkeyup = function() {
 			let discount = $("#couponDiscount").val();
 			let regex = /^[0-9]*$/
-			alert(discount)
 			
 			if(!regex.exec(discount)) {
 				$("#discountDiv").text("숫자만 입력 가능합니다");
@@ -51,15 +49,36 @@
 				return false;
 			}
 			
+			if(regex.exec(discount)){
+				$("#discountDiv").text("");
+			}
+			
 		}
 		
-		// 쿠폰 추가 버튼 누르면 창 닫고 부모창 새로고침
-			$("addCouponBtn").onclick(function(){
-				window.opener.location.reload();
-				window.close();
-			});
+// 		// 쿠폰 추가 버튼 누르면 창 닫고 부모창 새로고침
+
+// 		document.fr.onsubmit = function() {
+// 			alert("왜 안 떠!")
+//  			window.opener.location.reload();
+// 			opener.document.location.reload(); 
+// 			window.close();
+// 		}
+		
+// 		debugger;
+// 		$("#addCouponBtn").click(function() {
+// 			alert("왜 안 떠 - addCouponBtn")
+// 		    window.opener.location.reload(); // 부모 창 새로고침
+//         	 window.close(); // 자식 창 닫기
+// 		}); 
 
 	})
+	
+// 	function sumbitCoupon() {
+// 		alert("떠라")		
+// 		document.fr.submit();				
+// 		opener.location.reload();
+// 		window.close();
+// 	}
 
 </script>
 
@@ -108,7 +127,7 @@
 		            
 		            <!-- 제출 버튼 -->
 		            <div class="form-group text-center">
-			            <input type="submit" class="btn btn-primary" id="addCouponBtn" name="addCouponBtn"value="쿠폰 등록하기">
+			            <input type="submit" class="btn btn-primary" id="addCouponBtn" value="쿠폰 등록하기">
 		            </div>
 		          </form>
 		        </div>
@@ -126,6 +145,6 @@
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <!-- Chart.js JS -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!--   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
 </body>
 </html>

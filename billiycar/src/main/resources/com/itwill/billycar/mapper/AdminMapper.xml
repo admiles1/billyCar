@@ -175,7 +175,8 @@
 		    LEFT JOIN Common brand ON c.car_brand = brand.code  -- 브랜드 코드와 매칭
 		    LEFT JOIN Common fuel ON c.car_fuel = fuel.code     -- 연료 코드와 매칭
 		    LEFT JOIN Common type ON c.car_type = type.code    -- 차종 코드와 매칭
-		WHERE 1=1
+		WHERE
+		     c.car_status != 2
 		<if test="searchType.equals('car_brand')">
 			AND brand.name LIKE CONCAT('%', #{searchKeyword} ,'%')  
 		</if>
@@ -213,7 +214,7 @@
 	<delete id="deleteCar">
 		DELETE 
 		FROM car 
-		WHERE car_idx = #{carId}
+		WHERE car_number = #{carNumber}
 	</delete>
 	
 	<!-- qnaList -->
@@ -271,9 +272,9 @@
 		    fuel.name AS car_fuel,    -- `Common` 테이블의 `name`을 `car_fuel`로 사용
 		    type.name AS car_type,    -- `Common` 테이블의 `name`을 `car_type`로 사용
 		    CASE c.gear_type
-	        WHEN 0 THEN '자동'
-	        WHEN 1 THEN '수동'
-	   		END AS gear_type, 
+		        WHEN 0 THEN '자동'
+		        WHEN 1 THEN '수동'
+	   			END AS gear_type, 
 		    c.car_capacity,
 		    c.car_img,
 		    c.car_year,
@@ -288,7 +289,7 @@
 		    LEFT JOIN Common brand ON c.car_brand = brand.code  -- 브랜드 코드와 매칭
 		    LEFT JOIN Common fuel ON c.car_fuel = fuel.code     -- 연료 코드와 매칭
 		    LEFT JOIN Common type ON c.car_type = type.code    -- 차종 코드와 매칭
-		WHERE car_idx = #{carId}
+		WHERE car_number = #{carNumber}
 	</select>
 	
 	<update id="updateCar" parameterType="com.itwill.billycar.vo.CarVO">
@@ -333,27 +334,27 @@
 	
 	<insert id="insertNewModel" parameterType="String">
 	
-    <selectKey resultType="String" keyProperty="code" order="BEFORE">
-		SELECT 
-			newCode
-		FROM (
+	    <selectKey resultType="String" keyProperty="code" order="BEFORE">
 			SELECT 
-				c1.code AS brandCode, 
-				CONCAT(c1.code, 'M', COALESCE(MAX(CAST(SUBSTRING(c2.code, LENGTH(c1.code) + 2) AS UNSIGNED)), 0) + 1) AS newCode
-			FROM 
-				Common c1
-			LEFT JOIN 
-				Common c2 ON c2.code LIKE CONCAT(c1.code, 'M%')
-			WHERE 
-				c1.name = #{brandName}
-			GROUP BY 
-				c1.code
-		) AS subquery;
-    </selectKey>
-	
-	    <!-- 새로운 모델을 Common 테이블에 삽입 -->
-	    INSERT INTO Common (code, name)
-	    VALUES (#{code}, #{newModelName})
+				newCode
+			FROM (
+				SELECT 
+					c1.code AS brandCode, 
+					CONCAT(c1.code, 'M', COALESCE(MAX(CAST(SUBSTRING(c2.code, LENGTH(c1.code) + 2) AS UNSIGNED)), 0) + 1) AS newCode
+				FROM 
+					Common c1
+				LEFT JOIN 
+					Common c2 ON c2.code LIKE CONCAT(c1.code, 'M%')
+				WHERE 
+					c1.name = #{brandName}
+				GROUP BY 
+					c1.code
+			) AS subquery;
+	    </selectKey>
+		
+		    <!-- 새로운 모델을 Common 테이블에 삽입 -->
+		    INSERT INTO Common (code, name)
+		    VALUES (#{code}, #{newModelName})
 	</insert>
 	
 	<delete id="deleteCode">
@@ -384,25 +385,28 @@
 	
 	<!-- 차량 번호에 대한 예약 조회 -->
 	<select id="selectReservation" resultType="hashmap">
-		<![CDATA[
 		SELECT *
 		FROM Reservation r
 		JOIN member m ON r.member_id = m.member_id
 		WHERE car_number = #{carNumber}
-		AND reserv_pickupdate >= NOW()
-		]]>
+		AND reserv_status = 0
 	</select>
 	
 	<select id="selectPastReservation" resultType="hashmap">
-		<![CDATA[
 		SELECT *
 		FROM Reservation r
 		JOIN member m ON r.member_id = m.member_id
 		WHERE car_number = #{carNumber}
-		AND reserv_pickupdate < NOW()
-		]]>
+		AND reserv_status = 2
 	</select>
 	
+	<select id="selectIngReservation">
+		SELECT *
+		FROM Reservation r
+		JOIN member m ON r.member_id = m.member_id
+		WHERE car_number = #{carNumber}
+		AND reserv_status = 1
+	</select>
 	
 </mapper>
 

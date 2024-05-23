@@ -146,6 +146,7 @@
 			let searchType = '';
 			let pageNum = 1;
 			
+			
 			function getScroll(newSearchKeyword = "", newSearchType = "", isEmpty) {
 // 			   alert(newSearchKeyword)
 // 			   alert(newSearchType)
@@ -153,6 +154,7 @@
 			   
 			   if (isLoading) return; // 이미 데이터를 불러오고 있는 중이라면 중복 요청 방지
 			   isLoading = true; // 데이터 요청 중 플래그 설정
+			   
 			   
 			    $.ajax({
 			        type: "GET",
@@ -165,40 +167,59 @@
 			        dataType: "json",
 			        success: function(response) {
 			            let carList = response;
-			            console.log(carList);
+// 			            console.log(carList);
+
 			         //true면 기존 아코디언 비움
 			            if(isEmpty) {
-			            $("#listEnd").empty();
+			         	   $("#listEnd").empty();
 			//             pageNum = 2;
 			            }
 			         
 			         //반복문을 통해 ajax를 통해 받아온 값을 아코디언div에 전달
-// 			         let imgPath = "${pageContext.request.contextPath}/resources/images/cscBulb.png";
-// 			            $.each(carList, function(index, car) {
-			            for(car of carList) {
-							alert(car.car_img)			            	
-			            	if(car.car_img != null) {
-			            		let original_fileName = substringAfter(car.car_img, '_')
+			         
+			         // ----------------------------옵션 사진들 변수 저장--------------------------------------
+			         
+						let option_linsece = "${pageContext.request.contextPath}/resources/images/option/option_linsece.png";
+						let option_sos = "${pageContext.request.contextPath}/resources/images/option/option_sos.png";
+						let option_charger = "${pageContext.request.contextPath}/resources/images/option/option_charger.png";
+						let option_seat = "${pageContext.request.contextPath}/resources/images/option/option_seat.png";
+						let option_nosmoking = "${pageContext.request.contextPath}/resources/images/option/option_nosmoking.png";
+						let option_heatseat = "${pageContext.request.contextPath}/resources/images/option/option_heatseat.png";
+						let option_smartkey = "${pageContext.request.contextPath}/resources/images/option/option_smartkey.png";
+						let option_2ndlinsece = "${pageContext.request.contextPath}/resources/images/option/option_2ndlinsece.png";
+						let option_navigation = "${pageContext.request.contextPath}/resources/images/option/option_navigation.png";
+						let option_backcamera = "${pageContext.request.contextPath}/resources/images/option/option_backcamera.png";
+						let option_blackbox = "${pageContext.request.contextPath}/resources/images/option/option_blackbox.png";
+						let option_highpass = "${pageContext.request.contextPath}/resources/images/option/option_highpass.png";
+						let option_bluetooth = "${pageContext.request.contextPath}/resources/images/option/option_bluetooth.png";
+						
+			         // ---------------------------------------------------------------------------------------
+			         
+			            $.each(carList, function(index, car) {
+// 			            for(car of carList) {
+							let original_fileName = null;
+			            	
+							if(car.car_img != null) {
+			            		original_fileName = car.car_img.substring(car.car_img.indexOf('_') + 1)
 			            	}
+							
+			            	let imgPath = "${pageContext.request.contextPath}/resources/upload/" + original_fileName 
+							alert(car.model)
 			            	
 			               alert(original_fileName)
-			               let carUl = 
 					               ' <li class="panel">'
 					               +' <div class="left">'
 					               +'     <div class="img-wrap-responsive">'
-					               +'    	<c:if test="${not empty car.car_img}">'
-					               +'			<c:set var="original_fileName" value="${fn:substringAfter(car.car_img, '_')}"/>'
-					               +'            <img src="${pageContext.request.contextPath}/resources/upload/${car.original_fileName}">'
-					               +'		</c:if>'
+					               +'            <img src="' + imgPath  + '">'
 					               +'     </div>'
 					               +' </div>'
 					               +' <div class="right">'
 					               +'    <div class="title">'
-					               +'         <h3>${ '+ car.model + '}</h3>'
+					               +'         <h3> ' + car.model + '</h3>'
 					               +'         <div class="type-list">'
-					               +'            <span>${car.carType}</span> /'
-					               +'           <span>${car.car_capacity}</span> /'
-					               +'            <span>${car.fuel}</span>'
+					               +'            <span>' + car.carType + '</span> /'
+					               +'           <span>' + car.car_capacity + '</span> /'
+					               +'            <span>' + car.fuel + '</span>'
 					               +'        </div>'
 					               +'    </div>'
 					               +'    <div class="search-car-result-cont">'
@@ -219,12 +240,11 @@
 					               +'                <tbody>'
 					               +'                     <tr>'
 					               +'                         <td> 종일가 </td>'
-					               +'                         <td class="b_l1 r"><span style="color:#0b80ff">'
-					               +'                         <fmt:formatNumber value="${car.car_dayprice}" type="currency" /></span></td>'
+					               +'                         <td class="b_l1 r"><span style="color:#0b80ff">' + car.car_dayprice + '</span></td>'
 					               +'                    </tr>'
 					               +'                    <tr>'
 					               +'                         <td>1시간</td>'
-					               +'                        <td class="b_l1 r"><fmt:formatNumber value="${car.car_hourprice}" type="currency" /></td>' 
+					               +'                        <td class="b_l1 r">' + car.car_hourprice + '</td>' 
 					               +'                     </tr>'
 					               +'                 </tbody>'
 					               +'            </table>'
@@ -235,73 +255,72 @@
 					               +'					<h5 class="div-tap"> 옵션</h5>'
 					               +' 					<ul class="car-option-list">'
 					               +' 						<li>'
-					               +' 							<img src="${pageContext.request.contextPath}/resources/images/option/option_linsece.png" id="optionImg"><p>'
+					               +' 							<img src="' + option_linsece + '" id="optionImg"><p>'
 					               +' 							<small>국제운전면허</small>'
 					               +' 						</li>'
 					               +'						<li>'
-					               +' 							<img src="${pageContext.request.contextPath}/resources/images/option/option_sos.png" id="optionImg"><p>'
+					               +' 							<img src="' + option_sos + '" id="optionImg"><p>'
 					               +' 							<small> 긴급출동무료</small>'
 					               +' 						</li>'
 					               +' 						<li>'
-					               +' 							<img src="${pageContext.request.contextPath}/resources/images/option/option_charger.png" id="optionImg"><p>'
+					               +' 							<img src="' + option_charger + '" id="optionImg"><p>'
 					               +' 							<small> 충전기제공 </small>'
 					               +' 						</li>'
 					               +' 						<li>'
-					               +' 							<img src="${pageContext.request.contextPath}/resources/images/option/option_seat.png" id="optionImg"><p>'
+					               +' 							<img src="' + option_seat + '" id="optionImg"><p>'
 					               +' 							<small> 카시트 무료 </small>'
 					               +' 						</li>'
 					               +' 						<li>'
-					               +' 							<img src="${pageContext.request.contextPath}/resources/images/option/option_nosmoking.png" id="optionImg"><p>'
+					               +' 							<img src="' + option_nosmoking + '" id="optionImg"><p>'
 					               +' 							<small> 금연 </small>'
 					               +' 						</li>'
 					               +' 						<li>'
-					               +' 							<img src="${pageContext.request.contextPath}/resources/images/option/option_heatseat.png" id="optionImg"><p>'
+					               +' 							<img src="' + option_heatseat + '" id="optionImg"><p>'
 					               +' 							<small> 열선시트 </small>'
 					               +' 						</li>'
 					               +' 						<li>'
-					               +' 							<img src="${pageContext.request.contextPath}/resources/images/option/option_smartkey.png" id="optionImg"><p>'
+					               +' 							<img src="' + option_smartkey + '" id="optionImg"><p>'
 					               +' 							<small> 스마트키 </small>'
 					               +' 						</li>'
 					               +' 						<li>'
-					               +' 							<img src="${pageContext.request.contextPath}/resources/images/option/option_2ndlinsece.png" id="optionImg"><p>'
+					               +' 							<img src="' + option_2ndlinsece  + '" id="optionImg"><p>'
 					               +' 							<small> 제2운전자 </small>'
 					               +'  						</li>'
 					               +'  						<li>'
-					               +'							<img src="${pageContext.request.contextPath}/resources/images/option/option_navigation.png" id="optionImg"><p>'
+					               +'							<img src="' + option_navigation + '" id="optionImg"><p>'
 					               +'							<small> 네비게이션 </small>'
 					               +'						</li>'
 					               +' 						<li>'
-					               +'							<img src="${pageContext.request.contextPath}/resources/images/option/option_backcamera.png" id="optionImg"><p>'
+					               +'							<img src="' + option_backcamera + '" id="optionImg"><p>'
 					               +'							<small> 후방카메라 </small>'
 					               +'						</li>'
 					               +'						<li>'
-					               +'							<img src="${pageContext.request.contextPath}/resources/images/option/option_blackbox.png" id="optionImg"><p>'
+					               +'							<img src="' + option_highpass + '" id="optionImg"><p>'
 					               +'							<small> 블랙박스 </small>'
 					               +'						</li>'
 					               +'						<li>'
-					               +'							<img src="${pageContext.request.contextPath}/resources/images/option/option_highpass.png" id="optionImg"><p>'
+					               +'							<img src="' + option_linsece + '" id="optionImg"><p>'
 					               +'							<small> 하이패스 </small>'
 					               +'						</li>'
 					               +'						<li>'
-					               +'							<img src="${pageContext.request.contextPath}/resources/images/option/option_bluetooth.png" id="optionImg"><p>'
+					               +'							<img src="' + option_linsece + '" id="optionImg"><p>'
 					               +'							<small> 블루투스 </small>'
 					               +'						</li>'
 					               +'					</ul>'
 					               +'				</div>'
 					               +'            </div>'
-					               +'               </div>'
-					               +'    </div>'
-					               +' </div>'
-					               +'   </li>'
+					               +'          </div>'
+					               +'      </div>'
+					               +'   </div>'
+					               +'  </li>'
 					               
-					               
-		               		$("#search-car-result-list").append(carUl);
-			            };
+		               		$(".search-car-result-list").append(carUl);
+			                
+				            }); // each
 			            
-			         isLoading = false; // 데이터 요청 완료 후 플래그 해제
-			         pageNum++;
-			         
-			        }, // success 처리 끝 
+				            isLoading = false; // 데이터 요청 완료 후 플래그 해제
+				            pageNum++;
+				           }, // success
 			        
 			        error: function() {
 			            alert("불러오는데 실패했습니다");
@@ -312,27 +331,23 @@
 			$(function() {
 			   //초기 로딩
 			    getScroll("", "",  false);
-			    
+	
 			   // 검색 버튼 눌렀을 시
 			    document.fr.onsubmit = function() {
 				   
 			        let newSearchType = $("#searchType").val();
 			        let newSearchKeyword = $("#searchKeyword").val();
-// 				   	alert(newSearchType + "dddd" + newSearchKeyword)
+				   	alert(newSearchType + "dddd" + newSearchKeyword)
 
 			        searchType = newSearchType || ''; // faqCategory 업데이트
 			        searchKeyword = newSearchKeyword || ''; // faqCategory 업데이트
 			        pageNum = 1;
+			        
+				   	alert("두번째 " + searchType + "-" + searchKeyword)
+			        
 			        getScroll(newSearchKeyword, newSearchType, true);
 			    }
 			    
-			 /*
-			 	$("#faq_category").change(function() {
-			    	let newFaqCategory = $(this).val();
-			        faqCategory = newFaqCategory || ''; // faqCategory 업데이트
-			        pageNum = 1;
-			        getScroll(newFaqCategory, true);
-			    }); 																*/
 			    
 			    // 스크롤 내릴 때
 			    $(document).scroll(function() {
@@ -345,7 +360,7 @@
 			        // 화면 하단까지 스크롤되었을 때 추가 데이터 가져오기
 			      if (currentScroll >= documentHeight - windowHeight - bottom) {
 			         console.log("스크롤 이벤트 발생 - pageNum = " + pageNum);
-			         getScroll(newSearchType, newSearchType, false);// 스크롤 이벤트 발생 시 getScroll() 함수 호출
+			         getScroll(newSearchKeyword, newSearchType, false);// 스크롤 이벤트 발생 시 getScroll() 함수 호출
 			        }
 			    });
 			});
@@ -383,116 +398,116 @@
         
          
 <ul class="search-car-result-list">
-                <li class="panel">
-                    <div class="left">
-                        <div class="img-wrap-responsive">
-                        	<c:if test="${not empty car.car_img}">
-								<c:set var="original_fileName" value="${fn:substringAfter(car.car_img, '_')}"/>
-	                            <img src="${pageContext.request.contextPath}/resources/upload/${car.original_fileName}">
-							</c:if>
-                        </div>
-                    </div>
-                    <div class="right">
-                        <div class="title">
-                            <h3>${car.model}</h3>
-                            <div class="type-list">
-                                <span>${car.carType}</span> /
-                                <span>${car.car_capacity}</span> /
-                                <span>${car.fuel}</span>
-                            </div>
-                        </div>
-                        <div class="search-car-result-cont">
-                            <div class="search-car-result-cont-left">
-                                <h5 class="title-01 f14"> 요금정보</h5>
-                                <table class="cont-list-table-v04">
-                                    <colgroup>
-                                        <col width="20%">
-                                        <col width="40%">
-                                        <col width="40%">
-                                    </colgroup>
-                                    <thead>
-                                        <tr>
-                                            <th class="first">구분</th>
-                                            <th>대여료</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td> 종일가 </td>
-                                            <td class="b_l1 r"><span style="color:#0b80ff">
-                                            <fmt:formatNumber value="${car.car_dayprice}" type="currency" /></span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>1시간</td>
-                                            <td class="b_l1 r"><fmt:formatNumber value="${car.car_hourprice}" type="currency" /></td> 
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="search-car-result-cont-right">
-	                            <div class="text-box">
-                                    <div class="car-option">
-				    					<h5 class="div-tap"> 옵션</h5>
-				    					<ul class="car-option-list">
-				    						<li>
-				    							<img src="${pageContext.request.contextPath}/resources/images/option/option_linsece.png" id="optionImg"><p>
-				    							<small>국제운전면허</small>
-				    						</li>
-				    						<li>
-				    							<img src="${pageContext.request.contextPath}/resources/images/option/option_sos.png" id="optionImg"><p>
-				    							<small> 긴급출동무료</small>
-				    						</li>
-				    						<li>
-				    							<img src="${pageContext.request.contextPath}/resources/images/option/option_charger.png" id="optionImg"><p>
-				    							<small> 충전기제공 </small>
-				    						</li>
-				    						<li>
-				    							<img src="${pageContext.request.contextPath}/resources/images/option/option_seat.png" id="optionImg"><p>
-				    							<small> 카시트 무료 </small>
-				    						</li>
-				    						<li>
-				    							<img src="${pageContext.request.contextPath}/resources/images/option/option_nosmoking.png" id="optionImg"><p>
-				    							<small> 금연 </small>
-				    						</li>
-				    						<li>
-				    							<img src="${pageContext.request.contextPath}/resources/images/option/option_heatseat.png" id="optionImg"><p>
-				    							<small> 열선시트 </small>
-				    						</li>
-				    						<li>
-				    							<img src="${pageContext.request.contextPath}/resources/images/option/option_smartkey.png" id="optionImg"><p>
-				    							<small> 스마트키 </small>
-				    						</li>
-				    						<li>
-				    							<img src="${pageContext.request.contextPath}/resources/images/option/option_2ndlinsece.png" id="optionImg"><p>
-				    							<small> 제2운전자 </small>
-				    						</li>
-				    						<li>
-				    							<img src="${pageContext.request.contextPath}/resources/images/option/option_navigation.png" id="optionImg"><p>
-				    							<small> 네비게이션 </small>
-				    						</li>
-				    						<li>
-				    							<img src="${pageContext.request.contextPath}/resources/images/option/option_backcamera.png" id="optionImg"><p>
-				    							<small> 후방카메라 </small>
-				    						</li>
-				    						<li>
-				    							<img src="${pageContext.request.contextPath}/resources/images/option/option_blackbox.png" id="optionImg"><p>
-				    							<small> 블랙박스 </small>
-				    						</li>
-				    						<li>
-				    							<img src="${pageContext.request.contextPath}/resources/images/option/option_highpass.png" id="optionImg"><p>
-				    							<small> 하이패스 </small>
-				    						</li>
-				    						<li>
-				    							<img src="${pageContext.request.contextPath}/resources/images/option/option_bluetooth.png" id="optionImg"><p>
-				    							<small> 블루투스 </small>
-				    						</li>
-				    					</ul>
-				    				</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
+<!--                 <li class="panel"> -->
+<!--                     <div class="left"> -->
+<!--                         <div class="img-wrap-responsive"> -->
+<%--                         	<c:if test="${not empty car.car_img}"> --%>
+<%-- 								<c:set var="original_fileName" value="${fn:substringAfter(car.car_img, '_')}"/> --%>
+<%-- 	                            <img src="${pageContext.request.contextPath}/resources/upload/${car.original_fileName}"> --%>
+<%-- 							</c:if> --%>
+<!--                         </div> -->
+<!--                     </div> -->
+<!--                     <div class="right"> -->
+<!--                         <div class="title"> -->
+<%--                             <h3>${car.model}</h3> --%>
+<!--                             <div class="type-list"> -->
+<%--                                 <span>${car.carType}</span> / --%>
+<%--                                 <span>${car.car_capacity}</span> / --%>
+<%--                                 <span>${car.fuel}</span> --%>
+<!--                             </div> -->
+<!--                         </div> -->
+<!--                         <div class="search-car-result-cont"> -->
+<!--                             <div class="search-car-result-cont-left"> -->
+<!--                                 <h5 class="title-01 f14"> 요금정보</h5> -->
+<!--                                 <table class="cont-list-table-v04"> -->
+<%--                                     <colgroup> --%>
+<%--                                         <col width="20%"> --%>
+<%--                                         <col width="40%"> --%>
+<%--                                         <col width="40%"> --%>
+<%--                                     </colgroup> --%>
+<!--                                     <thead> -->
+<!--                                         <tr> -->
+<!--                                             <th class="first">구분</th> -->
+<!--                                             <th>대여료</th> -->
+<!--                                         </tr> -->
+<!--                                     </thead> -->
+<!--                                     <tbody> -->
+<!--                                         <tr> -->
+<!--                                             <td> 종일가 </td> -->
+<!--                                             <td class="b_l1 r"><span style="color:#0b80ff"> -->
+<%--                                             <fmt:formatNumber value="${car.car_dayprice}" type="currency" /></span></td> --%>
+<!--                                         </tr> -->
+<!--                                         <tr> -->
+<!--                                             <td>1시간</td> -->
+<%--                                             <td class="b_l1 r"><fmt:formatNumber value="${car.car_hourprice}" type="currency" /></td>  --%>
+<!--                                         </tr> -->
+<!--                                     </tbody> -->
+<!--                                 </table> -->
+<!--                             </div> -->
+<!--                             <div class="search-car-result-cont-right"> -->
+<!-- 	                            <div class="text-box"> -->
+<!--                                     <div class="car-option"> -->
+<!-- 				    					<h5 class="div-tap"> 옵션</h5> -->
+<!-- 				    					<ul class="car-option-list"> -->
+<!-- 				    						<li> -->
+<%-- 				    							<img src="${pageContext.request.contextPath}/resources/images/option/option_linsece.png" id="optionImg"><p> --%>
+<!-- 				    							<small>국제운전면허</small> -->
+<!-- 				    						</li> -->
+<!-- 				    						<li> -->
+<%-- 				    							<img src="${pageContext.request.contextPath}/resources/images/option/option_sos.png" id="optionImg"><p> --%>
+<!-- 				    							<small> 긴급출동무료</small> -->
+<!-- 				    						</li> -->
+<!-- 				    						<li> -->
+<%-- 				    							<img src="${pageContext.request.contextPath}/resources/images/option/option_charger.png" id="optionImg"><p> --%>
+<!-- 				    							<small> 충전기제공 </small> -->
+<!-- 				    						</li> -->
+<!-- 				    						<li> -->
+<%-- 				    							<img src="${pageContext.request.contextPath}/resources/images/option/option_seat.png" id="optionImg"><p> --%>
+<!-- 				    							<small> 카시트 무료 </small> -->
+<!-- 				    						</li> -->
+<!-- 				    						<li> -->
+<%-- 				    							<img src="${pageContext.request.contextPath}/resources/images/option/option_nosmoking.png" id="optionImg"><p> --%>
+<!-- 				    							<small> 금연 </small> -->
+<!-- 				    						</li> -->
+<!-- 				    						<li> -->
+<%-- 				    							<img src="${pageContext.request.contextPath}/resources/images/option/option_heatseat.png" id="optionImg"><p> --%>
+<!-- 				    							<small> 열선시트 </small> -->
+<!-- 				    						</li> -->
+<!-- 				    						<li> -->
+<%-- 				    							<img src="${pageContext.request.contextPath}/resources/images/option/option_smartkey.png" id="optionImg"><p> --%>
+<!-- 				    							<small> 스마트키 </small> -->
+<!-- 				    						</li> -->
+<!-- 				    						<li> -->
+<%-- 				    							<img src="${pageContext.request.contextPath}/resources/images/option/option_2ndlinsece.png" id="optionImg"><p> --%>
+<!-- 				    							<small> 제2운전자 </small> -->
+<!-- 				    						</li> -->
+<!-- 				    						<li> -->
+<%-- 				    							<img src="${pageContext.request.contextPath}/resources/images/option/option_navigation.png" id="optionImg"><p> --%>
+<!-- 				    							<small> 네비게이션 </small> -->
+<!-- 				    						</li> -->
+<!-- 				    						<li> -->
+<%-- 				    							<img src="${pageContext.request.contextPath}/resources/images/option/option_backcamera.png" id="optionImg"><p> --%>
+<!-- 				    							<small> 후방카메라 </small> -->
+<!-- 				    						</li> -->
+<!-- 				    						<li> -->
+<%-- 				    							<img src="${pageContext.request.contextPath}/resources/images/option/option_blackbox.png" id="optionImg"><p> --%>
+<!-- 				    							<small> 블랙박스 </small> -->
+<!-- 				    						</li> -->
+<!-- 				    						<li> -->
+<%-- 				    							<img src="${pageContext.request.contextPath}/resources/images/option/option_highpass.png" id="optionImg"><p> --%>
+<!-- 				    							<small> 하이패스 </small> -->
+<!-- 				    						</li> -->
+<!-- 				    						<li> -->
+<%-- 				    							<img src="${pageContext.request.contextPath}/resources/images/option/option_bluetooth.png" id="optionImg"><p> --%>
+<!-- 				    							<small> 블루투스 </small> -->
+<!-- 				    						</li> -->
+<!-- 				    					</ul> -->
+<!-- 				    				</div> -->
+<!--                                 </div> -->
+<!--                             </div> -->
+<!--                         </div> -->
+<!--                     </div> -->
+<!--                 </li> -->
             </ul>
         
         </div>

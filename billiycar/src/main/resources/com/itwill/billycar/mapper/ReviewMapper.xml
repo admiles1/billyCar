@@ -10,7 +10,7 @@
 	        review_subject,
 	        review_content,
 	        review_score,
-<!-- 	        review_readcount, -->
+	        review_heart,
 	        review_reg_date,
 	        car_number,
 	        review_idx
@@ -19,7 +19,7 @@
 	        #{review_subject},
 	        #{review_content},
 	        #{review_score},
-<!-- 	        0, -->
+	        0,
 	        NOW(),
 	        #{car_number},
 	        #{review_idx}

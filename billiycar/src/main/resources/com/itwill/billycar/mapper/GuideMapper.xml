@@ -28,7 +28,7 @@
 		 </choose>
 		</if>
  		 GROUP BY 
-    		   model.name, carType.name, brand.name , c.car_dayprice, c.car_hourprice, c.car_capacity 
+    		   model.name, carType.name, brand.name , c.car_dayprice, c.car_hourprice, c.car_capacity , c.car_img
  		 ORDER BY model.name
  		 LIMIT #{startRow} , #{listLimit}
 	</select>

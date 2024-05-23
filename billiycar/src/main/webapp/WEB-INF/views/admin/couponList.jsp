@@ -59,6 +59,7 @@
 </head>
 <body>
 <main class="container">
+	<iframe name="couponList" style="display:none;"></iframe>
     <!-- 네비게이션 바 -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">쿠폰 관리</a>
