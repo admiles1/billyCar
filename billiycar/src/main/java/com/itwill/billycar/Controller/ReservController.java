@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.itwill.billycar.service.AdminService;
 import com.itwill.billycar.service.ReservService;
 import com.itwill.billycar.service.ReviewService;
+import com.itwill.billycar.vo.CarImgVO;
 import com.itwill.billycar.vo.CarReviewVO;
 import com.itwill.billycar.vo.CarVO;
 import com.itwill.billycar.vo.MemberVO;
@@ -267,7 +268,11 @@ public class ReservController {
 		System.out.println(selectCar);
 		
 		String carNumber = selectCar.get("car_number");
+		// 상세 이미지 검색
 		
+		Map<String,Object> selectCarDetailImg = reservService.getCarDetailImg(carNumber);
+		
+		System.out.println(selectCarDetailImg);
 		// 리뷰 검색
 		List<ReviewVO> reviewes = reviewService.getReview(carNumber);
 		
@@ -279,6 +284,7 @@ public class ReservController {
 			}
 		}
 		
+		model.addAttribute("selectCarDetailImg", selectCarDetailImg);
 		model.addAttribute("reviewes", reviewes);
 		model.addAttribute("car", selectCar);
 		return "reservation/reserv_detail";

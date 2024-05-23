@@ -78,6 +78,17 @@
 <!-- 		</if> -->
 	</select>
 	
+	
+	<select id="selectCarDetailImg" resultType="map">
+		SELECT 
+			   car_images_1
+			 , car_images_2
+			 , car_images_3
+			 , car_images_4
+			 , car_images_5
+  		  FROM car_images
+         WHERE car_images_id = #{carNumber}
+	</select>
 </mapper>
 
 

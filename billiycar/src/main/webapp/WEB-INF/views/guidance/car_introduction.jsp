@@ -181,7 +181,7 @@
 			            		let original_fileName = substringAfter(car.car_img, '_')
 			            	}
 			            	
-			            	alert(original_fileName)
+			               alert(original_fileName)
 			               let carUl = 
 					               ' <li class="panel">'
 					               +' <div class="left">'
