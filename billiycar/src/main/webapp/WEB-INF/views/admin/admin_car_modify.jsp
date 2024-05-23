@@ -17,6 +17,11 @@ form { max-width: 500px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; 
 label { font-weight: bold; }
 button[type="submit"] { width: 100%; }
 </style>
+<script>
+function confirmSubmit() {
+    return confirm("정말 수정하시겠습니까?");
+}
+</script>
 </head>
 <body>
 <main class="container">
@@ -30,8 +35,8 @@ button[type="submit"] { width: 100%; }
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">차량 수정</h1>
                 </div>
-				<form action="carModifyPro" method="post">
-				<input type="hidden" name="car_idx" value="${car.car_idx}">
+                <form action="carModifyPro" method="post" onsubmit="return confirmSubmit()">
+                    <input type="hidden" name="car_idx" value="${car.car_idx}">
                     <div class="form-group">
                         <label for="pricePerDay">1일 가격</label>
                         <input type="text" class="form-control" id="pricePerDay" name="car_dayprice" value="${car.car_dayprice }" required>
@@ -43,9 +48,9 @@ button[type="submit"] { width: 100%; }
                     <div class="form-group">
                         <label for="carStatus">차량 상태 변경</label>
                         <select id="carStatus" name="car_status" class="form-control" required>
-                            <option value="0" >정상</option>
-                            <option value="1" >수리중</option>
-                            <option value="2" >차량없음</option>
+                            <option value="0">정상</option>
+                            <option value="1">수리중</option>
+                            <option value="2">차량없음</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary">수정</button>

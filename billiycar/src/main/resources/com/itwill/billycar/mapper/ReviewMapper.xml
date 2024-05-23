@@ -91,7 +91,7 @@
 		    car_model,
 		    car_fuel,
 		    car_type,
-		    AVG(review_score) AS review_score, 
+		    ROUND(AVG(review_score),2) AS review_score, 
 		    SUM(review_heart) AS review_heart, 
 		    SUM(car_countReserve) AS car_countReserve
 		FROM (
