@@ -203,9 +203,8 @@
 			            		original_fileName = car.car_img.substring(car.car_img.indexOf('_') + 1)
 			            	}
 							
-							
 			            	let imgPath = "${pageContext.request.contextPath}/resources/upload/" + original_fileName 
-							alert(car.model)
+// 							alert(car.model)
 			            	
 			                let carUl = 
 					               ' <li class="panel">'
@@ -321,6 +320,7 @@
 			            
 				            isLoading = false; // 데이터 요청 완료 후 플래그 해제
 				            pageNum++;
+// 				            alert(pageNum)
 				           }, // success
 			        
 			        error: function() {
@@ -329,7 +329,6 @@
 			    });
 			}
 			
-			   debugger;
 			$(function() {
 			   //초기 로딩
 			    getScroll("", "",  false);
@@ -339,14 +338,11 @@
 				   
 			        let newSearchType = $("#searchType").val();
 			        let newSearchKeyword = $("#searchKeyword").val();
-				   	alert(newSearchType + "dddd" + newSearchKeyword)
 
-			        searchType = newSearchType || ''; // faqCategory 업데이트
-			        searchKeyword = newSearchKeyword || ''; // faqCategory 업데이트
+			        searchType = newSearchType || ''; 
+			        searchKeyword = newSearchKeyword || ''; 
 			        pageNum = 1;
-			        
-				   	alert("두번째 " + searchType + "-" + searchKeyword)
-			        
+
 			        getScroll(newSearchKeyword, newSearchType, true);
 			    }
 			    
@@ -362,7 +358,7 @@
 			        // 화면 하단까지 스크롤되었을 때 추가 데이터 가져오기
 			      if (currentScroll >= documentHeight - windowHeight - bottom) {
 			         console.log("스크롤 이벤트 발생 - pageNum = " + pageNum);
-			         getScroll(newSearchKeyword, newSearchType, false);// 스크롤 이벤트 발생 시 getScroll() 함수 호출
+			         getScroll(searchKeyword, searchType, false);// 스크롤 이벤트 발생 시 getScroll() 함수 호출
 			        }
 			    });
 			});
