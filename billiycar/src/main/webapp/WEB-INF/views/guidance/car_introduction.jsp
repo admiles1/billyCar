@@ -199,20 +199,14 @@
 // 			            for(car of carList) {
 							let original_fileName = null;
 			            	
-<<<<<<< HEAD
 							if(car.car_img != null) {
 			            		original_fileName = car.car_img.substring(car.car_img.indexOf('_') + 1)
 			            	}
 							
-							
 			            	let imgPath = "${pageContext.request.contextPath}/resources/upload/" + original_fileName 
 							alert(car.model)
 			            	
-			                let carUl = 
-=======
 			               alert(original_fileName)
-			               let carUl = 
->>>>>>> branch 'main' of https://github.com/admiles1/billyCar.git
 					               ' <li class="panel">'
 					               +' <div class="left">'
 					               +'     <div class="img-wrap-responsive">'
