@@ -27,9 +27,8 @@
 	</insert>
 	<select id="selectReviewList" resultType="hashmap">
 		SELECT *
-   		FROM car c
-    	JOIN review r ON c.car_number = r.car_number
-    	LEFT JOIN heart h ON r.review_idx = h.review_idx
+		FROM car c
+		JOIN review r ON c.car_number = r.car_number
     	<if test="option.equals('latest')">
     		order by r.review_idx desc
     	</if>

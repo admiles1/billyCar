@@ -22,7 +22,6 @@ public class ReviewService {
 	}
 
 	public List<CarReviewVO> selectReviewList(String option,int startRow,int listLimit) {
-		System.out.println("mapper.selectReviewList(service) : " + mapper.selectReviewList(option,startRow,listLimit));
 		return mapper.selectReviewList(option,startRow,listLimit);
 	}
 	
