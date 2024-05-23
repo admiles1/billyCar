@@ -57,7 +57,7 @@
  					<option value ="function" <c:if test="${qna.qna_category eq 'function'}">selected</c:if>> 부름 </option>
  					<option value ="price" <c:if test="${qna.qna_category eq 'price'}">selected</c:if>> 가격 </option>
  					<option value ="return" <c:if test="${qna.qna_category eq 'return'}">selected</c:if>> 반납 </option>
- 					<option value ="etc"> 기타 </option>
+ 					<option value ="etc" <c:if test="${qna.qna_category eq 'etc'}">selected</c:if>> 기타 </option>
  				</select>
  			</div>
  			

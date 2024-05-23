@@ -67,12 +67,8 @@ public class GuideController {
 	    int startRow = (pageNum - 1) * listLimit;
 	    
 		List<Map<String, Object>> carList = service.carList(startRow,listLimit,searchType,searchKeyword);
-				
-		
-		
-		
 		model.addAttribute("carList", carList);
-		System.out.println(carList);
+//		System.out.println(carList);
 		return carList;
 	}
 	
