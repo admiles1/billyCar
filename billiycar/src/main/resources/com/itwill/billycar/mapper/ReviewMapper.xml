@@ -123,9 +123,9 @@
 		        cm_type.name AS car_type
 		    FROM car c
 		    RIGHT JOIN review r ON c.car_number = r.car_number
-		    LEFT JOIN Common cm_model ON c.car_model = cm_model.code
-		    LEFT JOIN Common cm_fuel ON c.car_fuel = cm_fuel.code
-		    LEFT JOIN Common cm_type ON c.car_type = cm_type.code
+		    RIGHT JOIN Common cm_model ON c.car_model = cm_model.code
+		    RIGHT JOIN Common cm_fuel ON c.car_fuel = cm_fuel.code
+		    RIGHT JOIN Common cm_type ON c.car_type = cm_type.code
 		) AS total
 		GROUP BY car_number, car_model, car_fuel, car_type, car_img
 		ORDER BY 
