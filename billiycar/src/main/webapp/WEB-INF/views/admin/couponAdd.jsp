@@ -64,7 +64,6 @@
 // 			window.close();
 // 		}
 		
-// 		debugger;
 // 		$("#addCouponBtn").click(function() {
 // 			alert("왜 안 떠 - addCouponBtn")
 // 		    window.opener.location.reload(); // 부모 창 새로고침
@@ -79,6 +78,26 @@
 // 		opener.location.reload();
 // 		window.close();
 // 	}
+	
+	function sumbmit(){
+		alert('2222222');
+		
+		$.ajax({
+			type : "POST",
+			url : "couponAdd",
+			data : $("#fr").serialize(),
+			dataType : "JSON",
+			success : function(response){
+				if(response.alreadyHasCoupon) {
+					alert('이미 존재하는 쿠폰입니다');
+				} else if(response.fail) {
+					alert('쿠폰 등록 실패');
+				} else if(response.success){
+					alert('쿠폰 등록 성공');
+				}
+			}
+		});
+	}
 
 </script>
 
@@ -108,7 +127,7 @@
 		        <div class="card-body">
 		          <h5 class="card-title" style="text-align: center">쿠폰</h5>
 		          
-		          <form action="couponAdd" method="post" name="fr">
+		          <form action="couponAdd" method="post" name="fr" onsubmit="return sumbmit()" id="fr">
 		            <!-- 쿠폰이름 -->
 		            <div class="form-group">
 		              <label for="inquiry">쿠폰 이름</label><input type="text" class="form-control" placeholder="쿠폰 이름을 입력하세요" required="required" name="coupon_name" maxlength="30">
@@ -127,7 +146,7 @@
 		            
 		            <!-- 제출 버튼 -->
 		            <div class="form-group text-center">
-			            <input type="submit" class="btn btn-primary" id="addCouponBtn" value="쿠폰 등록하기">
+			            <input type="button" class="btn btn-primary" id="addCouponBtn" value="쿠폰 등록하기" onclick="submit()">
 		            </div>
 		          </form>
 		        </div>
