@@ -85,52 +85,23 @@
 	</select>
 	
 	<select id="selectPopularCar" resultType="hashmap">
-		SELECT 
-		    car_number,
-		    car_img,
-		    car_model,
-		    car_fuel,
-		    car_type,
-		    ROUND(AVG(review_score),2) AS review_score, 
-		    SUM(review_heart) AS review_heart, 
-		    SUM(car_countReserve) AS car_countReserve
-		FROM (
-		    SELECT 
-		        c.car_number,
-		        c.car_img,
-		        r.review_score,
-		        r.review_heart,
-		        c.car_countReserve,
-		        cm_model.name AS car_model,
-		        cm_fuel.name AS car_fuel,
-		        cm_type.name AS car_type
-		    FROM car c
-		    LEFT JOIN review r ON c.car_number = r.car_number
-		    LEFT JOIN Common cm_model ON c.car_model = cm_model.code
-		    LEFT JOIN Common cm_fuel ON c.car_fuel = cm_fuel.code
-		    LEFT JOIN Common cm_type ON c.car_type = cm_type.code
-		
-		    UNION ALL
-		
-		    SELECT 
-		        c.car_number,
-		        c.car_img,
-		        r.review_score,
-		        r.review_heart,
-		        c.car_countReserve,
-		        cm_model.name AS car_model,
-		        cm_fuel.name AS car_fuel,
-		        cm_type.name AS car_type
-		    FROM car c
-		    RIGHT JOIN review r ON c.car_number = r.car_number
-		    RIGHT JOIN Common cm_model ON c.car_model = cm_model.code
-		    RIGHT JOIN Common cm_fuel ON c.car_fuel = cm_fuel.code
-		    RIGHT JOIN Common cm_type ON c.car_type = cm_type.code
-		) AS total
-		GROUP BY car_number, car_model, car_fuel, car_type, car_img
-		ORDER BY 
-		    (AVG(review_score) * 0.5) + (SUM(review_heart) * 0.3) + (SUM(car_countReserve) * 0.2) DESC
-		LIMIT 3;
+		select
+			c.car_number,
+			c.car_img,
+			cm_model.name as car_model,
+			cm_fuel.name as car_fuel,
+			cm_type.name as car_type,
+			ROUND(AVG(r.review_score), 2) AS review_score,
+			COALESCE(SUM(r.review_heart), 0) AS review_heart,
+			c.car_countReserve
+		from car c
+		left join review r on c.car_number = r.car_number
+		left join Common cm_model on c.car_model = cm_model.code
+		left join Common cm_fuel on c.car_fuel = cm_fuel.code
+		left join Common cm_type on c.car_type = cm_type.code
+		group by car_number, c.car_img, cm_model.name, cm_fuel.name, cm_type.name, c.car_countReserve
+		order by (AVG(r.review_score) * 0.5) + (COALESCE(SUM(r.review_heart), 0) * 0.3) + (c.car_countReserve * 0.2) DESC
+		limit 3
 	</select>
 </mapper>
 

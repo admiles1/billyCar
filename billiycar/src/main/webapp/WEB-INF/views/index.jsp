@@ -272,7 +272,7 @@ function check() {
 		</div>
 		
 		<!-- 구분  varstatus 해야라 -->
-		<div class="row row-cols-1 row-cols-md-3 g-4 noto-sans-kr">
+		<div class="row row-cols-1 row-cols-md-3 g-4 noto-sans-kr" style="justify-content: center;">
 		<c:forEach var="popular" items="${popularList}" varStatus="status">
 		<div class="col">
 			<div class="card h-100" style="position: relative;">
