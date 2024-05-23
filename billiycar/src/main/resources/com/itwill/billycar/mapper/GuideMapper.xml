@@ -13,6 +13,7 @@
      		 , c.car_dayprice
      		 , c.car_hourprice
      		 , c.car_capacity 
+     		 , c.car_img
   		  FROM car c 
   		  JOIN Common brand ON brand.code = c.car_brand
   		  JOIN Common model ON model.code = c.car_model

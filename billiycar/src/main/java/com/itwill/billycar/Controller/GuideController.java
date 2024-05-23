@@ -54,20 +54,18 @@ public class GuideController {
 	
 	@ResponseBody
 	@GetMapping("carScroll")
-	public String carScroll(@RequestParam(defaultValue = "1") int pageNum
+	public List<Map<String, Object>> carScroll(@RequestParam(defaultValue = "1") int pageNum
 							, @RequestParam(defaultValue = "") String searchType
 							, @RequestParam(defaultValue = "") String searchKeyword,
 							Model model) {
-		
 		
 		int listLimit = 4;
 	    int startRow = (pageNum - 1) * listLimit;
 	    
 		List<Map<String, Object>> carList = service.carList(startRow,listLimit,searchType,searchKeyword);
-		
-		System.out.println(carList);
+
 		model.addAttribute("carList", carList);
-		return "";
+		return carList;
 	}
 	
 }
