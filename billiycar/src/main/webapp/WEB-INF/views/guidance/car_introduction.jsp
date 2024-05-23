@@ -196,13 +196,8 @@
 			         // ---------------------------------------------------------------------------------------
 			         
 			            $.each(carList, function(index, car) {
-							let original_fileName = null;
-			            	
-							if(car.car_img != null) {
-			            		original_fileName = car.car_img.substring(car.car_img.indexOf('_') + 1)
-			            	}
 							
-			            	let imgPath = "${pageContext.request.contextPath}/resources/upload/" + original_fileName 
+			            	let imgPath = "${pageContext.request.contextPath}/resources/upload/" + car.car_img
 			            	
 			                let carUl = 
 					               ' <li class="panel">'
