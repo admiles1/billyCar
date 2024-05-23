@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <!-- Chart.js CSS -->
 <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js"> -->
-<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="${pageContext.request.contextPath}/resources/util/jquery-3.7.1.js"></script>
 <!-- 관리자 페이지 스타일 -->
 <style>
   /* 추가적인 스타일링 */
@@ -39,6 +39,9 @@
 
 <script type="text/javascript">
 	$(function(){
+		
+		$('#addCouponBtn').on('click', sumbmit); 
+		
 		document.fr.coupon_discount_amount.onkeyup = function() {
 			let discount = $("#couponDiscount").val();
 			let regex = /^[0-9]*$/
@@ -64,11 +67,11 @@
 // 			window.close();
 // 		}
 		
-		$("#addCouponBtn").click(function() {
-			alert("왜 안 떠 - addCouponBtn")
-		    window.opener.location.reload(); // 부모 창 새로고침
-        	 window.close(); // 자식 창 닫기
-		}); 
+// 		$("#addCouponBtn").click(function() {
+// 			alert("왜 안 떠 - addCouponBtn")
+// 		    window.opener.location.reload(); // 부모 창 새로고침
+//         	window.close(); // 자식 창 닫기
+// 		}); 
 
 	})
 	
@@ -80,23 +83,21 @@
 // 	}
 	
 	function sumbmit(){
-		alert('2222222');
-		
 		$.ajax({
 			type : "POST",
 			url : "couponAdd",
 			data : $("#fr").serialize(),
 			dataType : "JSON",
 			success : function(response){
-				if(response.alreadyHasCoupon) {
-					alert('이미 존재하는 쿠폰입니다');
-				} else if(response.fail) {
-					alert('쿠폰 등록 실패');
-				} else if(response.success){
-					alert('쿠폰 등록 성공');
+				alert(response.msg);
+				
+				if(response.success){
+					window.opener.location.reload(); // 부모 창 새로고침
+		        	window.close(); // 자식 창 닫기
 				}
 			}
-		});
+		}); // ajax
+		
 	}
 
 </script>
@@ -127,7 +128,7 @@
 		        <div class="card-body">
 		          <h5 class="card-title" style="text-align: center">쿠폰</h5>
 		          
-		          <form action="couponAdd" method="post" name="fr" onsubmit="return sumbmit()" id="fr">
+		          <form action="couponAdd" method="post" name="fr" id="fr">
 		            <!-- 쿠폰이름 -->
 		            <div class="form-group">
 		              <label for="inquiry">쿠폰 이름</label><input type="text" class="form-control" placeholder="쿠폰 이름을 입력하세요" required="required" name="coupon_name" maxlength="30">
@@ -146,7 +147,7 @@
 		            
 		            <!-- 제출 버튼 -->
 		            <div class="form-group text-center">
-			            <input type="button" class="btn btn-primary" id="addCouponBtn" value="쿠폰 등록하기" onclick="submit()">
+			            <button type="button" class="btn btn-primary"  id="addCouponBtn">쿠폰 등록하기</button>
 		            </div>
 		          </form>
 		        </div>
@@ -160,7 +161,7 @@
       </main>
 </main>
   <!-- jQuery, Popper.js, 부트스트랩 JS -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<!--   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <!-- Chart.js JS -->
