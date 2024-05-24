@@ -20,7 +20,7 @@ public class MailService {
 		// -------------------------------------------------------
 		// 인증메일에 포함할 제목과 본문 생성
 		String subject = "[빌리카] 가입 인증 메일입니다.";
-		String content = "<a href='http://localhost:8081/billycar/MemberEmailAuth?member_email=" + member.getMember_email() + "&auth_code=" + auth_code + "'>빌리카 이메일 인증을 위해 링크를 클릭해 주세요.</a>";
+		String content = "<a href='http://c3d2401t1.itwillbs.com/MemberEmailAuth?member_email=" + member.getMember_email() + "&auth_code=" + auth_code + "'>빌리카 이메일 인증을 위해 링크를 클릭해 주세요.</a>";
 		// -------------------------------------------------------
 		// SendMailClient - sendMail() 메서드 호출하여 메일 발송 요청
 		// => 파라미터 : 이메일주소, 제목, 본문
