@@ -88,23 +88,25 @@
 	</select>
 	
 	<select id="selectPopularCar" resultType="hashmap">
-		select
-			c.car_number,
-			c.car_img,
-			cm_model.name as car_model,
-			cm_fuel.name as car_fuel,
-			cm_type.name as car_type,
-			ROUND(AVG(r.review_score), 2) AS review_score,
-			COALESCE(SUM(r.review_heart), 0) AS review_heart,
-			c.car_countReserve
-		from car c
-		left join review r on c.car_number = r.car_number
-		left join Common cm_model on c.car_model = cm_model.code
-		left join Common cm_fuel on c.car_fuel = cm_fuel.code
-		left join Common cm_type on c.car_type = cm_type.code
-		group by car_number, c.car_img, cm_model.name, cm_fuel.name, cm_type.name, c.car_countReserve
-		order by (AVG(r.review_score) * 0.5) + (COALESCE(SUM(r.review_heart), 0) * 0.3) + (c.car_countReserve * 0.2) DESC
-		limit 3
+		  SELECT *
+		  FROM (select
+					c.car_number,
+					c.car_img,	
+					ROUND(AVG(r.review_score), 2) AS review_score,
+					COALESCE(SUM(r.review_heart), 0) AS review_heart,
+					c.car_countReserve,
+		            c.car_model,
+		            c.car_fuel,
+		            c.car_type
+				from car c
+				left join review r 
+				  on c.car_number = r.car_number
+				group by car_number, c.car_img, c.car_countReserve
+				order by (AVG(r.review_score) * 0.5) + (COALESCE(SUM(r.review_heart), 0) * 0.3) + (c.car_countReserve * 0.2) DESC) A
+		  left join Common cm_model on A.car_model = cm_model.code
+		  left join Common cm_fuel on A.car_fuel = cm_fuel.code
+		  left join Common cm_type on A.car_type = cm_type.code
+		  limit 3;
 	</select>
 </mapper>
 
