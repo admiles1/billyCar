@@ -59,7 +59,7 @@
 		  LEFT JOIN Common model ON c.car_model = model.code  
 		  LEFT JOIN Common brand ON c.car_brand = brand.code  
 		  LEFT JOIN Common fuel ON c.car_fuel = fuel.code     
-		  LEFT JOIN Common type ON c.car_type = type.code   	
+		  LEFT JOIN Common type ON c.car_type = type.code   
 		 WHERE car_number NOT IN (SELECT car_number
 									FROM Reservation
 								   WHERE NOT (
