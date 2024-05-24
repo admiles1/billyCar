@@ -85,6 +85,7 @@ public class AdminController {
 		// 관리자 아닐 경우 돌려보내기
 		if(session.getAttribute("member_id")==null || !session.getAttribute("member_id").equals(admin.getAdmin_id())) {
 			model.addAttribute("msg","접근 권한이 없습니다");
+			model.addAttribute("targetURL","/billycar");
 			return "err/fail";
 		} 
 		
@@ -134,19 +135,27 @@ public class AdminController {
 		// 관리자 아닐 경우 돌려보내기
 		if(session.getAttribute("member_id")==null || !session.getAttribute("member_id").equals(admin.getAdmin_id())) {
 			model.addAttribute("msg","접근 권한이 없습니다");
+			model.addAttribute("targetURL","/billycar");
 			return "err/fail";
-		} 
+		}  
 		
 		return "admin/admin_member";
 	}
 	
 	//회원 검색
 	@GetMapping("adminMemberSearch")
-	public String adminMemberSearch(@RequestParam(defaultValue = "") String searchType,
+	public String adminMemberSearch(AdminVO admin,@RequestParam(defaultValue = "") String searchType,
 									@RequestParam(defaultValue = "") String searchKeyword,
 									@RequestParam(defaultValue = "1") int pageNum,
 									Model model) {
-		
+		admin.setAdmin_id((String)session.getAttribute("member_id"));
+
+		// 관리자 아닐 경우 돌려보내기
+		if(session.getAttribute("member_id")==null || !session.getAttribute("member_id").equals(admin.getAdmin_id())) {
+			model.addAttribute("msg","접근 권한이 없습니다");
+			model.addAttribute("targetURL","/billycar");
+			return "err/fail";
+		} 
 		
 		int listLimit = 3;
 		int startRow = (pageNum - 1) * listLimit;
@@ -181,7 +190,17 @@ public class AdminController {
 	
 	//회원 상태 수정 폼 
 	@GetMapping("memberStatus")
-	public String memberStatus(MemberVO member) {
+	public String memberStatus(MemberVO member, AdminVO admin, Model model) {
+		
+		admin.setAdmin_id((String)session.getAttribute("member_id"));
+		
+		// 관리자 아닐 경우 돌려보내기
+		if(session.getAttribute("member_id")==null || !session.getAttribute("member_id").equals(admin.getAdmin_id())) {
+			model.addAttribute("msg","접근 권한이 없습니다");
+			model.addAttribute("targetURL","/billycar");
+			return "err/fail";
+		}		
+		
 		return "admin/member_status";
 	}
 	
@@ -204,7 +223,16 @@ public class AdminController {
 
 	// 차량 목록 조회
 	@GetMapping("admin_car")
-	public String admin_car(CarVO car, Model model, @RequestParam(defaultValue = "1") int pageNum) {
+	public String admin_car(CarVO car, AdminVO admin,Model model, @RequestParam(defaultValue = "1") int pageNum) {
+		
+		admin.setAdmin_id((String)session.getAttribute("member_id"));
+
+		// 관리자 아닐 경우 돌려보내기
+		if(session.getAttribute("member_id")==null || !session.getAttribute("member_id").equals(admin.getAdmin_id())) {
+			model.addAttribute("msg","접근 권한이 없습니다");
+			model.addAttribute("targetURL","/billycar");
+			return "err/fail";
+		}
 		
 		int listLimit = 10;
 		int startRow = (pageNum - 1) * listLimit;
@@ -239,11 +267,20 @@ public class AdminController {
 			@RequestParam(defaultValue = "") String searchType,
 			@RequestParam(defaultValue = "") String searchKeyword,
 			@RequestParam(defaultValue = "1") int pageNum,
-			Model model) {
+			Model model, AdminVO admin) {
 		
-		System.out.println("검색타입 : " + searchType);
-		System.out.println("검색어 : " + searchKeyword);
-		System.out.println("페이지번호 : " + pageNum);
+		admin.setAdmin_id((String)session.getAttribute("member_id"));
+
+		// 관리자 아닐 경우 돌려보내기
+		if(session.getAttribute("member_id")==null || !session.getAttribute("member_id").equals(admin.getAdmin_id())) {
+			model.addAttribute("msg","접근 권한이 없습니다");
+			model.addAttribute("targetURL","/billycar");
+			return "err/fail";
+		}
+		
+//		System.out.println("검색타입 : " + searchType);
+//		System.out.println("검색어 : " + searchKeyword);
+//		System.out.println("페이지번호 : " + pageNum);
 		
 		int listLimit = 10;
 		int startRow = (pageNum - 1) * listLimit;
@@ -289,7 +326,7 @@ public class AdminController {
 	@PostMapping("deleteCar")
 	@ResponseBody
 	public String deleteCar(@RequestParam("carNumber") String carNumber, Model model) {
-		System.out.println("차량삭제번호 : " + carNumber);  // 넘어왔고
+//		System.out.println("차량삭제번호 : " + carNumber);  // 넘어왔고
 		
 	    int deleteCount = service.deleteCar(carNumber);
 	    
@@ -328,8 +365,17 @@ public class AdminController {
 	
 	// 차량 등록 페이지에 공통코드 가져가기
 	@GetMapping("admin_car_registration")
-	public String admin_car_registration(CommonVO common, Model model) {
+	public String admin_car_registration(CommonVO common, Model model, AdminVO admin) {
 //		System.out.println(common);
+		
+		admin.setAdmin_id((String)session.getAttribute("member_id"));
+
+		// 관리자 아닐 경우 돌려보내기
+		if(session.getAttribute("member_id")==null || !session.getAttribute("member_id").equals(admin.getAdmin_id())) {
+			model.addAttribute("msg","접근 권한이 없습니다");
+			model.addAttribute("targetURL","/billycar");
+			return "err/fail";
+		}
 		
 //		List<CommonVO> dbCommon = service.getCommon(common);
 //		System.out.println(dbCommon);
@@ -366,7 +412,8 @@ public class AdminController {
 	
 	@PostMapping("carUpload")
     public String carUpload(CarVO car, String car_number1, String car_number2, String car_number3, HttpServletRequest request, Model model) {
-        car.setCar_number(car_number1 + car_number2 + car_number3);
+      
+		car.setCar_number(car_number1 + car_number2 + car_number3);
         car.setCar_capacity(car.getCar_capacity() + "인승");
 
         String uploadDir = "/resources/upload";
