@@ -44,11 +44,17 @@ public class MypageController {
 		String MemberId = (String)session.getAttribute("member_id");
 		System.out.println(MemberId + " 1231231");
 		if(MemberId == null) {
-			System.out.println("asdasd");
 			model.addAttribute("msg", "로그인이 필요합니다.");
 			model.addAttribute("targetURL", "login");
 			return "err/fail";
 		}
+		
+		Object memberInfo = service.getMemberInfo(MemberId);
+	    if (memberInfo == null) {
+	        model.addAttribute("msg", "유효하지 않은 회원 정보입니다.");
+	        return "err/fail";
+	    }
+		
 		model.addAttribute("info", service.getMemberInfo(MemberId));
 		return "mypage/page/Mypage_Member_Info";
 	}
@@ -95,7 +101,6 @@ public class MypageController {
 			model.addAttribute("targetURL", "mypage");
 			return "success/success";
 		}
-//		return "redirect:/mypage";
 	}
 	
 	@GetMapping("modifyPasswd")
