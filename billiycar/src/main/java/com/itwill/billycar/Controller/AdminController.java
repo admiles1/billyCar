@@ -242,9 +242,7 @@ public class AdminController {
 			@RequestParam(defaultValue = "1") int pageNum) {
 		
 		
-		System.out.println(pageNum);
 		JsonObject responseJson = new JsonObject();
-		
 		
 		int listLimit = 2;
 		int startRow = (pageNum - 1) * listLimit;
@@ -252,24 +250,21 @@ public class AdminController {
 		int listCount = service.getCarListCount();
 		int pageListLimit = 3; // 페이지 번호 갯수를 3개로 지정(1 2 3 or 4 5 6 등...)
 		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0);
-		
-		System.out.println("이자민바보");
-		
 		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
 		int endPage = startPage + pageListLimit - 1;
 		if(endPage > maxPage) {
 			endPage = maxPage;
 		}
 		
-		PageInfo pageInfo = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
+//		PageInfo pageInfo = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
 		
 		JsonObject pageInfoJson = new JsonObject();
-		pageInfoJson.addProperty("listCount", pageInfo.getListCount());
-	    pageInfoJson.addProperty("listLimit", pageInfo.getPageListLimit());
-	    pageInfoJson.addProperty("maxPage", pageInfo.getMaxPage());
-	    pageInfoJson.addProperty("startPage", pageInfo.getStartPage());
-	    pageInfoJson.addProperty("endPage", pageInfo.getEndPage());
-//	    pageInfoJson.addProperty("pageNum", pageNum);
+		pageInfoJson.addProperty("listCount", listCount);
+	    pageInfoJson.addProperty("listLimit", pageListLimit);
+	    pageInfoJson.addProperty("maxPage", maxPage);
+	    pageInfoJson.addProperty("startPage", startPage);
+	    pageInfoJson.addProperty("endPage", endPage);
+	    pageInfoJson.addProperty("pageNum", pageNum);
 	    
 	    responseJson.add("pageInfo", pageInfoJson);
 		
@@ -282,23 +277,9 @@ public class AdminController {
 		
 		List<CarVO> carList = service.getCarList(param);
 		
-//		JsonArray list = new JsonArray();
-//		JsonObject json = new JsonObject();
 		JsonArray carsJson = new JsonArray();
-//		for(CarVO vo : carList) { // 차 정보 저장
 		for (CarVO car : carList) {
 			JsonObject carJson = new JsonObject();
-//			json.addProperty("car_number", vo.getCar_number());
-//			json.addProperty("car_model", vo.getCar_model());
-//			json.addProperty("car_brand", vo.getCar_brand());
-//			json.addProperty("car_fuel", vo.getCar_fuel());
-//			json.addProperty("gear_type", vo.getGear_type());
-//			json.addProperty("car_img", vo.getCar_img());
-//			json.addProperty("car_year", vo.getCar_year().toString());
-//			json.addProperty("car_dayprice", vo.getCar_dayprice());
-//			json.addProperty("car_hourprice", vo.getCar_hourprice());
-//			json.addProperty("car_status", vo.getCar_status());
-//			json.addProperty("color", vo.getColor());
 			
 			carJson.addProperty("car_number", car.getCar_number());
 			carJson.addProperty("car_model", car.getCar_model());
@@ -313,6 +294,24 @@ public class AdminController {
 	        carJson.addProperty("color", car.getColor());
 	        carsJson.add(carJson);
 		}
+
+		responseJson.add("cars", carsJson);
+		
+//		JsonArray list = new JsonArray();
+//		JsonObject json = new JsonObject();
+//		for(CarVO vo : carList) { // 차 정보 저장
+//			json.addProperty("car_number", vo.getCar_number());
+//			json.addProperty("car_model", vo.getCar_model());
+//			json.addProperty("car_brand", vo.getCar_brand());
+//			json.addProperty("car_fuel", vo.getCar_fuel());
+//			json.addProperty("gear_type", vo.getGear_type());
+//			json.addProperty("car_img", vo.getCar_img());
+//			json.addProperty("car_year", vo.getCar_year().toString());
+//			json.addProperty("car_dayprice", vo.getCar_dayprice());
+//			json.addProperty("car_hourprice", vo.getCar_hourprice());
+//			json.addProperty("car_status", vo.getCar_status());
+//			json.addProperty("color", vo.getColor());
+//		}
 		
 		//페이징 정보 저장
 //		json.addProperty("pageInfo_listCount", pageInfo.getListCount());
@@ -322,11 +321,10 @@ public class AdminController {
 //		json.addProperty("pageInfo_endPage", pageInfo.getEndPage());
 //		list.add(json);
 		
-	    responseJson.add("cars", carsJson);
-
 //		System.out.println("ddddddddddddddddddd" + list);
 		
 //		return list.toString();
+
 	    return responseJson;
 
 	}
