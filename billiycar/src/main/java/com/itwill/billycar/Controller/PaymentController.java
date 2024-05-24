@@ -157,7 +157,7 @@ public class PaymentController {
 			// 1차 시도
             int couponId = Integer.parseInt(map.get("coupon_id"));
             System.out.println("dddddd앙아아ㄴ" + map.get("coupon_id"));
-            paymentService.updateCouponStatus(couponId); // 쿠폰 상태를 2로 변경
+            paymentService.updateCouponStatus(couponId,memberId); // 쿠폰 상태를 2로 변경
 
             //
 //			int couponCount = paymentService.updateCouponStatus(payment);

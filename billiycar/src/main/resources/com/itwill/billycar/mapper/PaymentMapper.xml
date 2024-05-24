@@ -110,7 +110,7 @@
 		UPDATE coupon_issue
 		SET
 			coupon_used_status = 2
-		WHERE coupon_id = #{coupon_id} 
+		WHERE coupon_id = #{coupon_id} and member_id = #{memberId}
 	</update>
 	
 </mapper>
