@@ -15,6 +15,9 @@
 			alert('로그인을 진행하여 주십시오');
 			location.href="login";
 			return;
+		} else if (${sessionScope.member_id == 'admin'}) {
+			alert('관리자는 좀 ㅋ ');
+			return;
 		}
 		
 		location.href="payment?car_number=${car.car_number}&schedule=${param.schedule}";
