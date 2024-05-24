@@ -38,11 +38,13 @@ public class MypageController {
 	@Autowired
 	private ReservService reservService;
 	
-	
+//	TODO
 	@GetMapping("mypage")
 	public String memberInfo(Model model) {
 		String MemberId = (String)session.getAttribute("member_id");
+		System.out.println(MemberId + " 1231231");
 		if(MemberId == null) {
+			System.out.println("asdasd");
 			model.addAttribute("msg", "로그인이 필요합니다.");
 			model.addAttribute("targetURL", "login");
 			return "err/fail";
@@ -54,6 +56,10 @@ public class MypageController {
 	@GetMapping("modifyInfo") //회원정보수정 클릭시
 	public String modifyInfo(Model model) {
 		String MemberId = (String)session.getAttribute("member_id");
+		if(MemberId == null) {
+			model.addAttribute("msg", "허용되지 않은 접근입니다!");
+			return "err/fail";
+		}
 		model.addAttribute("info", service.getMemberInfo(MemberId));
 		return "mypage/page/Mypage_Insert_Password";
 	}
@@ -93,8 +99,13 @@ public class MypageController {
 	}
 	
 	@GetMapping("modifyPasswd")
-    public String modifyPasswd() {
+    public String modifyPasswd(Model model) {
         System.out.println("비밀번호 변경");
+        String MemberId = (String)session.getAttribute("member_id");
+		if(MemberId == null) {
+			model.addAttribute("msg", "허용되지 않은 접근입니다!");
+			return "err/fail";
+		}
         return "mypage/page/Mypage_Modify_Password";
     }
 	
@@ -128,8 +139,13 @@ public class MypageController {
 	}
 	
 	@GetMapping("license")
-    public String license() {
+    public String license(Model model) {
         System.out.println("면허등록 및 갱신");
+        String MemberId = (String)session.getAttribute("member_id");
+		if(MemberId == null) {
+			model.addAttribute("msg", "허용되지 않은 접근입니다!");
+			return "err/fail";
+		}
         return "mypage/page/Mypage_License_register";
     }
 	
@@ -172,6 +188,10 @@ public class MypageController {
 	@GetMapping("licenseInfo")
 	public String licenseInfo(Model model, LicenseVO license) {
 		String memberId = (String)session.getAttribute("member_id");
+		if(memberId == null) {
+			model.addAttribute("msg", "허용되지 않은 접근입니다!");
+			return "err/fail";
+		}
 		model.addAttribute("licenseInfo", service.getLicenseInfo(memberId));
 		return "mypage/page/Mypage_License_Info";
 	}
@@ -181,6 +201,11 @@ public class MypageController {
 	@GetMapping("resvConfirm")
     public String resvConfirm(@RequestParam(defaultValue = "1") int pageNum, 
     						  MemberVO member, Model model, ReservVO reserv) {
+		String memberId = (String)session.getAttribute("member_id");
+		if(memberId == null) {
+			model.addAttribute("msg", "허용되지 않은 접근입니다!");
+			return "err/fail";
+		}
         // 페이징 
  		int listLimit = 10;
  		int startRow = (pageNum-1)*listLimit;
@@ -202,7 +227,6 @@ public class MypageController {
 		}
 		model.addAttribute("pageInfo", new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage));
 		model.addAttribute("pageNum", pageNum);
-		String memberId = (String)session.getAttribute("member_id");
         List<ReservVO> reservList = reservService.selectReservList(startRow, listLimit, memberId);
         System.out.println("회원의 예약 리스트 보이기 : " + reservList);
         model.addAttribute("reservList", reservList);
@@ -213,6 +237,11 @@ public class MypageController {
 	@GetMapping("MyInquiry")
     public String MyInquiry(@RequestParam(defaultValue = "1") int pageNum, 
     						Model model, QnaVO qna) {
+		String MemberId = (String)session.getAttribute("member_id");
+		if(MemberId == null) {
+			model.addAttribute("msg", "허용되지 않은 접근입니다!");
+			return "err/fail";
+		}
 		// 페이징 
 		int listLimit = 10;
 		int startRow = (pageNum-1)*listLimit;
@@ -237,7 +266,6 @@ public class MypageController {
 		}
 		
 		model.addAttribute("pageInfo", new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage));
-		String MemberId = (String)session.getAttribute("member_id");
 		List<QnaVO> qnaList = service.getMemberQna(startRow, listLimit, MemberId);
 		model.addAttribute("qna", qnaList);
         return "mypage/page/Mypage_Inquiry";
@@ -258,10 +286,14 @@ public class MypageController {
 	                       HttpSession session,
 	                       Model model) {
 	    System.out.println("나의 쿠폰함");
+	    String memberId = (String) session.getAttribute("member_id");
+	    if(memberId == null) {
+	    	model.addAttribute("msg", "허용되지 않은 접근입니다!");
+	    	return "err/fail";
+	    }
 
 	    int listLimit = 10; // 한 페이지당 표시할 목록 개수
 	    int startRow = (pageNum - 1) * listLimit; // 시작 행 번호
-	    String memberId = (String) session.getAttribute("member_id");
 	    int listCount = service.getCouponListCount(memberId); // 총 목록 개수
 
 	    int pageListLimit = 3; // 한 번에 표시할 페이지 목록 개수
@@ -334,7 +366,6 @@ public class MypageController {
 		
 		if(memberId == null) {
 			model.addAttribute("msg", "잘못된 접근입니다!");
-			model.addAttribute("targetURL", "./");
 			return "err/fail";
 		}
 		
@@ -345,11 +376,6 @@ public class MypageController {
 	public String withdrawPro(MemberVO member, BCryptPasswordEncoder passwordEncoder, Model model) {
 		String memberId = (String)session.getAttribute("member_id");
 		
-		if(memberId == null) {
-			model.addAttribute("msg", "잘못된 접근입니다!");
-			model.addAttribute("targetURL", "./");
-			return "err/fail";
-		}
 		
 		member.setMember_id(memberId);
 		MemberVO dbMember = service.getMemberInfo(memberId);

@@ -61,6 +61,7 @@
 		height: 80px;
 		 
 	}
+	
 	#paymentMain{
 	border: 1px solid lightgray;
 	border-radius: 10px;
@@ -95,7 +96,6 @@
 	       		<div class="col-sm-3">
 	            	<label>대여날짜</label>
 	            </div>
-	
 	             <div class="col-sm-9">
                     <input type="text" class="form-control" id="pickupDate" value="${fn:replace(reservDetails[0].reserv_pickupdate, 'T', ' ')}" readonly>
                 </div>
@@ -105,7 +105,6 @@
 	        	<div class="col-sm-3">
 	       	    	<label>대여지역</label>
 	            </div>
-				
 	            <div class="col-sm-9">
 	            	<input type="text" class="form-control" id="locatrionInfo"  value="${reservDetails[0].reserv_pickuplocation}" readonly>
 	            </div>
@@ -115,18 +114,15 @@
 				<div class="col-sm-3">
 	            	<label>반납날짜</label>
 	            </div>
-	
 	            <div class="col-sm-9">
                     <input type="text" class="form-control" id="returnDate" value="${fn:replace(reservDetails[0].reserv_returndate, 'T', ' ')}" readonly>
                 </div>
-				
 			</div>
 			
 			<div class="row g-3">
 				<div class="col-sm-3">
 	            	<label>반납지역</label>
 	            </div>
-	
 	            <div class="col-sm-9">
 	            	<input type="text" class="form-control" id="locatrionInfo" value="${reservDetails[0].reserv_returnlocation}" readonly>
 	            </div>
@@ -304,6 +300,5 @@
 	</script>
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<%-- 	<footer><jsp:include page="../inc/bottom.jsp"></jsp:include></footer> --%>
 </body>
 </html>
