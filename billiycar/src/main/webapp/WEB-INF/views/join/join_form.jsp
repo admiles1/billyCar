@@ -230,7 +230,6 @@
 	}
 	
 	function phoneAuthCheck(){
-		alert(serverAuthNum);
 		if($("#auth_num").val() !== serverAuthNum){
 			alert("인증번호를 확인해주세요.");
 			return false;
