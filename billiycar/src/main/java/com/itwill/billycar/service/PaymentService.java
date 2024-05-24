@@ -59,6 +59,10 @@ public class PaymentService {
 	public List<Map<String, Object>> getMemberCoupon(String memberId) {
 		return mapper.selectMemberCoupon(memberId);
 	}
+
+//	public int updateCouponStatus(CouponIssueVO couponIssue) {
+//		return mapper.updateCouponStatus(couponIssue);
+//	}
 	
 	
 

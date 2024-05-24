@@ -20,6 +20,7 @@ import com.itwill.billycar.service.MypageService;
 import com.itwill.billycar.service.PaymentService;
 import com.itwill.billycar.service.ReservService;
 import com.itwill.billycar.vo.CarVO;
+import com.itwill.billycar.vo.CouponIssueVO;
 import com.itwill.billycar.vo.MemberVO;
 import com.itwill.billycar.vo.PaymentVO;
 import com.itwill.billycar.vo.ReservVO;
@@ -88,6 +89,7 @@ public class PaymentController {
 		CarVO dbcar = paymentService.getCarInfo(car);
 		model.addAttribute("car", dbcar);
 		model.addAttribute("totalAmount", totalAmount);
+//		model.addAttribute("salePrice", salePrice);
 		
 		return "payment/paymentPage";
 	}
@@ -95,23 +97,21 @@ public class PaymentController {
 	@ResponseBody
 	@PostMapping("payment")
 	public String paymentPro(CarVO car 
-							, PaymentVO payment
+							, PaymentVO payment 
+							, @RequestParam(defaultValue = "") String memberCoupon 
 							, @RequestParam(defaultValue = "") Map<String, String> map
 							, Model model) {
 		System.out.println("====================================");
 		System.out.println(car);
 		System.out.println(payment);
 		System.out.println(map);
+//		System.out.println(couponIssue);
 		String memberId = (String)session.getAttribute("member_id");
 		String carNumber = car.getCar_number();
-		
-		// 주소값을 강제로 바꿔서 진입하였고 그게 부산이 아닐 시 
-//		if(!Pattern.matches("^부산", map.get("schedule").split(",")[2])) {
-//			model.addAttribute("msg", "유효한 값이 아닙니다");
-//			return "err/fail";
-//		}
-
-		
+		List<Map<String, Object>> couponIssue = paymentService.getMemberCoupon(memberId);
+		System.out.println(memberCoupon);
+		System.out.println("99999999999999999999999999999999999");
+		System.out.println(couponIssue);
 		ReservVO reserv = new ReservVO();
 		
 		String pickupdate = map.get("schedule").split(",")[0];
@@ -126,6 +126,8 @@ public class PaymentController {
 		payment.setMember_id(memberId);
 		payment.setCar_number(carNumber);
 		
+		CouponIssueVO coupon = new CouponIssueVO();
+		coupon.setMember_id(memberId);
 		// 예약내역 insert후 insert된 차량내역의 idx값 리턴 받아서 payment객체에 세팅
 		paymentService.registReserv(reserv);
 
@@ -136,7 +138,10 @@ public class PaymentController {
 		if(count > 0) {
 			int carReserveCount = paymentService.updateCarReserveCount(car);
 			
-			if(carReserveCount > 0) {
+//			int couponSatusCount = paymentService.updateCouponStatus(couponIssue);
+			
+			
+			if(carReserveCount >  0) {
 				return "true";
 			}
 			

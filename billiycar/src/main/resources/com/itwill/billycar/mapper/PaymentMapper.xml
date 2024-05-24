@@ -104,6 +104,14 @@
 			car_countReserve = car_countReserve + 1
 		WHERE car_number = #{car_number}
 	</update>
+	
+<!-- 	<update id="updateCouponStatus"> -->
+<!-- 		UPDATE coupon_issue -->
+<!-- 		SET -->
+<!-- 			coupon_used_status = 2 -->
+<!-- 		WHERE member_id = #{member_id} AND coupon_id = #{coupon_id}  -->
+<!-- 	</update> -->
+	
 </mapper>
 
 

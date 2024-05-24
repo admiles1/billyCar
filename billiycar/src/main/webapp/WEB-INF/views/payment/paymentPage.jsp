@@ -569,6 +569,7 @@
                 		data : {
                 			schedule : '${param.schedule}',
                 			car_number : '${param.car_number}',
+//                 			salePrice : salePrice,
                 			payment_result_amount : totalAmount
                 		},
                 		dataType : "JSON",
@@ -638,8 +639,6 @@
 	    // 밀리초를 일, 시간, 분, 초 단위로 변환
 	    let differenceInDays = Math.floor(differenceInMilliseconds / (1000 * 60 * 60 * 24));
 	    let differenceInHours = Math.floor((differenceInMilliseconds % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-	//     let differenceInMinutes = Math.floor((differenceInMilliseconds % (1000 * 60 * 60)) / (1000 * 60));
-	//     let differenceInSeconds = Math.floor((differenceInMilliseconds % (1000 * 60)) / 1000);
 	
 	    // 결과 문자열 생성
 	    let differenceday = "대여금액(" + differenceInDays + "일 " + differenceInHours+  "시간)" ;
@@ -656,7 +655,6 @@
 	        document.getElementById('differenceday').value = differenceday.toLocaleString(); 
 	        document.getElementById('firstAmount').value = differenceString.toLocaleString(); 
 	        document.getElementById('dateDifferenceInput').value = differenceString.toLocaleString(); // toLocaleString() 이거 숫자표시 쉼표 넣어줌
-// 	        document.getElementById('salePrice').value = sale.toLocaleString(); 
 	    };
 	    
 	    
@@ -722,6 +720,7 @@
 	function submitPaymentForm() {
 	    // 필요한 데이터 설정
 	    let totalAmount = document.getElementById('totalAmount').value;
+	    let salePrice = document.getElementById('salePrice').value;
 	    let form = document.getElementById('paymentForm');
 	    form.totalAmount.value = totalAmount;
 
