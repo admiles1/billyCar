@@ -151,8 +151,6 @@
 	}
 	
 	function moreList(){
-		alert(car_fuel)
-		alert(car_type)
 		
 		$.ajax({
 			type : "POST" ,

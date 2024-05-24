@@ -275,6 +275,10 @@ public class AdminController {
 		param.put("searchKeyword", searchKeyword.trim());
 		
 		List<CarVO> carList = service.getCarList(param);
+		if(carList == null || carList.get(0) == null ) {
+			System.out.println("????????????????????????");
+			return responseJson;
+		}
 		
 		int listCount = carList.get(0).getList_count();
 		int pageListLimit = 3; // 페이지 번호 갯수를 3개로 지정(1 2 3 or 4 5 6 등...)
