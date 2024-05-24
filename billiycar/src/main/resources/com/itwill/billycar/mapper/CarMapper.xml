@@ -28,8 +28,11 @@
 		  LEFT JOIN Common type ON c.car_type = type.code   	
 		 WHERE car_number NOT IN (SELECT car_number
 									FROM Reservation
-								   WHERE reserv_pickupdate between #{reserv.reserv_pickupdate} AND #{reserv.reserv_returndate}
-									  OR reserv_returndate between #{reserv.reserv_pickupdate} AND #{reserv.reserv_returndate})	]]> 
+								   WHERE NOT (
+								   		(#{reserv.reserv_pickupdate} >= reserv_returndate) OR
+                						(#{reserv.reserv_returndate} <= reserv_pickupdate)
+								   		) 
+								   )	]]> 
 		   AND car_status = 0
 		 <if test="car.car_fuel != null"> 
 		   AND fuel.name IN (${car.car_fuel})</if>

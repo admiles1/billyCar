@@ -42,6 +42,11 @@ public class MypageController {
 	@GetMapping("mypage")
 	public String memberInfo(Model model) {
 		String MemberId = (String)session.getAttribute("member_id");
+		if(MemberId == null) {
+			model.addAttribute("msg", "로그인이 필요합니다.");
+			model.addAttribute("targetURL", "login");
+			return "err/fail";
+		}
 		model.addAttribute("info", service.getMemberInfo(MemberId));
 		return "mypage/page/Mypage_Member_Info";
 	}
