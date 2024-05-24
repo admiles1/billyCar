@@ -122,25 +122,25 @@
                         </table>
                        	<nav aria-label="Page navigation example">
 							<div class = "paging" id="paging">
-						  		<ul class="pagination">
-						    		<li class="page-item">
-								    <a id="previousPageLink" class="page-link" href="admin_car?pageNum=${pageNum - 1}" aria-label="Previous">
-								        <span aria-hidden="true">&laquo;</span>
-								    </a>
-									</li>
+<!-- 						  		<ul class="pagination"> -->
+<!-- 						    		<li class="page-item"> -->
+<%-- 								    <a id="previousPageLink" class="page-link" href="admin_car?pageNum=${pageNum - 1}" aria-label="Previous"> --%>
+<!-- 								        <span aria-hidden="true">&laquo;</span> -->
+<!-- 								    </a> -->
+<!-- 									</li> -->
 								
-									<c:forEach var="i" begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
-									    <li class="page-item">
-									        <a class="page-link pageLink" href="admin_car?pageNum=${i}">${i}</a>
-									    </li>
-									</c:forEach>
+<%-- 									<c:forEach var="i" begin="${pageInfo.startPage}" end="${pageInfo.endPage}"> --%>
+<!-- 									    <li class="page-item"> -->
+<%-- 									        <a class="page-link pageLink" href="admin_car?pageNum=${i}">${i}</a> --%>
+<!-- 									    </li> -->
+<%-- 									</c:forEach> --%>
 									
-									<li class="page-item">
-									    <a id="nextPageLink" class="page-link" href="admin_car?pageNum=${pageNum + 1}" aria-label="Next">
-									        <span aria-hidden="true">&raquo;</span>
-									    </a>
-									</li>
-						  		</ul>
+<!-- 									<li class="page-item"> -->
+<%-- 									    <a id="nextPageLink" class="page-link" href="admin_car?pageNum=${pageNum + 1}" aria-label="Next"> --%>
+<!-- 									        <span aria-hidden="true">&raquo;</span> -->
+<!-- 									    </a> -->
+<!-- 									</li> -->
+<!-- 						  		</ul> -->
 					  		</div>
 						</nav>
                     </div>
@@ -154,7 +154,7 @@
     <script type="text/javascript">
     
    		let pageNum = 1;
-   		
+   		let isLoading = false;
    		
     	$(document).ready(function(){
     		//변수
@@ -189,10 +189,14 @@
     	}
     	
 		function searchCars(pageNum) { // 차량검색
+			
+			if(isLoading){
+				return;
+			}
+			isLoading = true;
         	
             var searchType = $('#searchType').val(); // 검색 유형 가져오기
             var searchKeyword = $('#searchKeyword').val(); // 검색어 가져오기
-
             
             $.ajax({	
                 type: 'GET',
@@ -204,6 +208,8 @@
                 },
                 dataType : "json",
                 success: function(response) {
+                	
+                	debugger;
                 	
                 	$('#carTableBody').empty();
                 	$("#paging").empty();
@@ -237,10 +243,11 @@
                 	
                 	let startPage = response.pageInfo.startPage;
                 	let endPage = response.pageInfo.endPage;
+                	let maxPage = response.pageInfo.maxPage;
                 	
                     $("#paging").append(
                             '<ul class="pagination">'
-                            + '<li class="page-item">'
+                            + '<li class="page-item ' + (pageNum == 1 ? 'disabled' : '') + '">'
                             + '<a id="previousPageLink" class="page-link" href="#" data-pagenum="' + (pageNum - 1) + '" aria-label="Previous">'
                             + '<span aria-hidden="true">&laquo;</span>'
                             + '</a>'
@@ -256,13 +263,14 @@
                         }
 
                         $("#paging ul").append(
-                            '<li class="page-item">'
+                        	'<li class="page-item ' + (pageNum == maxPage ? 'disabled' : '') + '">'
                             + '<a id="nextPageLink" class="page-link" href="#" data-pagenum="' + (pageNum + 1) + '" aria-label="Next">'
                             + '<span aria-hidden="true">&raquo;</span>'
                             + '</a>'
                             + '</li>'
                             + '</ul>'
                         );
+                        isLoading = false;
                     },
                 error: function() {
                     alert('데이터가 없습니다.');

@@ -147,6 +147,22 @@
 	
 	<!-- 자동차 조회 -->
 	<select id="selectCarList" resultType="com.itwill.billycar.vo.CarVO">
+		WITH TMP AS (
+			SELECT COUNT(*) AS list_count
+	          FROM car c
+	          LEFT JOIN Common brand 
+	            ON c.car_brand = brand.code
+	         WHERE 1=1
+	        <if test="searchType.equals('car_brand')">
+			   AND brand.name LIKE CONCAT('%', #{searchKeyword} ,'%')  
+			</if>
+			<if test="searchType.equals('car_model')">
+			   AND  model.name LIKE CONCAT('%', #{searchKeyword} ,'%')  
+			</if>
+			<if test="searchType.equals('car_number')">
+			   AND c.car_number LIKE CONCAT('%', #{searchKeyword} ,'%')  
+			</if>
+		)
 		SELECT
 		    c.car_idx,
 		    c.car_number,
@@ -167,10 +183,11 @@
 		    c.car_countReserve,
 		    c.car_reg_date,
 		    CASE WHEN car_status = 1 THEN 'background-color: #ff5f6d'
-							 	     ELSE '' END AS color
-							 	     
+							 	     ELSE '' END AS color,
+			t.list_count
 		FROM
 		    car c
+		    LEFT JOIN TMP t ON 1=1
 		    LEFT JOIN Common model ON c.car_model = model.code  -- 모델 코드와 매칭
 		    LEFT JOIN Common brand ON c.car_brand = brand.code  -- 브랜드 코드와 매칭
 		    LEFT JOIN Common fuel ON c.car_fuel = fuel.code     -- 연료 코드와 매칭
