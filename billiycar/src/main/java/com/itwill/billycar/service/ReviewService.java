@@ -21,8 +21,8 @@ public class ReviewService {
 		return mapper.insertReview(review);
 	}
 
-	public List<CarReviewVO> selectReviewList(String option,int startRow,int listLimit) {
-		return mapper.selectReviewList(option,startRow,listLimit);
+	public List<CarReviewVO> selectReviewList(String option,int startRow,int listLimit,String member_id) {
+		return mapper.selectReviewList(option,startRow,listLimit,member_id);
 	}
 	
 	public List<ReviewVO> getReview(String carNumber){
