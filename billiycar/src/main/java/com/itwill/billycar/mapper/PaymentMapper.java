@@ -32,6 +32,8 @@ public interface PaymentMapper {
 
 	List<Map<String, Object>> selectMemberCoupon(String memberId);
 
+//	int updateCouponStatus(CouponIssueVO couponIssue);
+
 	
 
 	

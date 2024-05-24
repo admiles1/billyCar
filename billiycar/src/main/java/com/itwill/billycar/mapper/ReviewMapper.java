@@ -17,7 +17,8 @@ public interface ReviewMapper {
 
 	List<CarReviewVO> selectReviewList(@Param("option") String option
 										,@Param("startRow") int startRow
-										,@Param("listLimit") int listLimit);
+										,@Param("listLimit") int listLimit
+										,@Param("member_id") String member_id);
 								
 	List<ReviewVO> selectReview(String carNumber);
 	

@@ -102,6 +102,7 @@ public class PaymentController {
 		System.out.println(car);
 		System.out.println(payment);
 		System.out.println(map);
+		
 		String memberId = (String)session.getAttribute("member_id");
 		String carNumber = car.getCar_number();
 		
@@ -111,8 +112,19 @@ public class PaymentController {
 //			return "err/fail";
 //		}
 
+		System.out.println(map.get("insurance"));
 		
 		ReservVO reserv = new ReservVO();
+		
+		int insurance = 0;
+		if(map.get("insurance").equals("일반자차")) {
+			insurance = 1;
+		} else if(map.get("insurance").equals("완전자차")) {
+			insurance = 2;
+		}
+		
+		reserv.setReserv_insurance(insurance);
+		
 		
 		String pickupdate = map.get("schedule").split(",")[0];
 		String returndate = map.get("schedule").split(",")[1];
@@ -125,6 +137,10 @@ public class PaymentController {
 		reserv.setCar_number(carNumber);
 		payment.setMember_id(memberId);
 		payment.setCar_number(carNumber);
+		
+		System.out.println("----------------------------");
+		System.out.println(reserv);
+		
 		
 		// 예약내역 insert후 insert된 차량내역의 idx값 리턴 받아서 payment객체에 세팅
 		paymentService.registReserv(reserv);

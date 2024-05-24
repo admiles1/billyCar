@@ -167,14 +167,22 @@
 			        dataType: "json",
 			        success: function(response) {
 			            let carList = response;
-// 			            console.log(carList);
-
-			         //true면 기존 아코디언 비움
+						
+							
+			        	//true면 기존 아코디언 비움
 			            if(isEmpty) {
 			         	   $(".search-car-result-list").empty();
-			//             pageNum = 2;
+							// pageNum = 2;
 			            }
 			         
+			            // 검색했을 때 없는 차량일 경우
+						if(carList == '' && pageNum == 1) {
+							alert("검색하신 차량이 없습니다");
+							
+							let div = '<li class="panel"><div style="margin:0 auto; text-align:center; color:#00aaff; margin-top:20px"><b> 검색하신 차량이 없습니다. <br> 다시 검색해 주세요 </b></div></li>';
+							$(".search-car-result-list").append(div);
+						}
+			            
 			         //반복문을 통해 ajax를 통해 받아온 값을 아코디언div에 전달
 			         
 			         // ----------------------------옵션 사진들 변수 저장--------------------------------------

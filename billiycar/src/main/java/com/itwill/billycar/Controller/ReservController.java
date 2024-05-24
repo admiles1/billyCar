@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringJoiner;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -290,9 +292,14 @@ public class ReservController {
 	@GetMapping("review")
 	public String review(Model model,
 					@RequestParam(defaultValue = "latest") String option,
-					@RequestParam(defaultValue = "1") int pageNum
+					@RequestParam(defaultValue = "1") int pageNum,
+					HttpSession session
 					) {
 		System.out.println("review");
+		
+		String member_id = (String)session.getAttribute("member_id");
+		System.out.println("member_id" + member_id);
+		
 		int listLimit = 4;
 		int startRow = (pageNum - 1) * listLimit;
 		
@@ -303,7 +310,7 @@ public class ReservController {
 		System.out.println(listLimit);
 		System.out.println(startRow);
 		System.out.println(option);
-		List<CarReviewVO> reviewList = reviewService.selectReviewList(option,startRow,listLimit);
+		List<CarReviewVO> reviewList = reviewService.selectReviewList(option,startRow,listLimit,member_id);
 		System.out.println("List<CarReviewVO> reviewList : " + reviewList);
 		
 		int reviewListCount = reviewService.selectAllReview();
@@ -335,7 +342,11 @@ public class ReservController {
 	@ResponseBody
 	@GetMapping("reviewOption")
 	public Map<String, Object> reviewOption(@RequestParam(defaultValue = "latest") String option,
-	                                        @RequestParam(defaultValue = "1") int pageNum) {
+	                                        @RequestParam(defaultValue = "1") int pageNum,
+	                                        HttpSession session) {
+		
+		String member_id = (String)session.getAttribute("member_id");
+		System.out.println("member_id" + member_id);
 	    System.out.println("option 값 : " + option);
 	    if (option == null) {
 	        option = "latest"; // 기본값 설정
@@ -346,7 +357,7 @@ public class ReservController {
 
 	    System.out.println("ajax사용했을때 option : " + option);
 
-	    List<CarReviewVO> reviewList = reviewService.selectReviewList(option, startRow, listLimit);
+	    List<CarReviewVO> reviewList = reviewService.selectReviewList(option, startRow, listLimit,member_id);
 	    System.out.println("List<CarReviewVO> reviewList : " + reviewList);
 
 	    int reviewListCount = reviewService.selectAllReview();

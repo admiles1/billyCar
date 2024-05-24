@@ -301,7 +301,7 @@
 						<tr class="insuranceChk" >
 							<td colspan="1" class="c" >
 								<input name="insurance" class="chk insurance_data" id="insuranceCar0" type="radio" value="0" checked="checked"> 
-								<label>선택안함</label>
+								<label  for="insuranceCar0">선택안함</label>
 							</td>
 							<td colspan="1" class="c" >없음</td>
 							<td colspan="1" class="c" >없음</td>
@@ -311,7 +311,7 @@
 						<tr class="insuranceChk" >
 							<td colspan="1" class="c" >
 								<input name="insurance" class="chk insurance_data" id="insuranceCar1" type="radio" value="15" > 
-								<label>일반자차</label>
+								<label  for="insuranceCar1">일반자차</label>
 							</td>
 							<td colspan="1" class="c">1만원</td>
 							<td colspan="1" class="c">200만원</td>
@@ -320,8 +320,8 @@
 						
 						<tr class="insuranceChk" >
 							<td colspan="1" class="c" >
-								<input name="insurance" class="chk insurance_data" id="insuranceCar12" type="radio" value="25" > 
-								<label>완전자차</label>
+								<input name="insurance" class="chk insurance_data" id="insuranceCar2" type="radio" value="25" >
+								<label  for="insuranceCar2"> 완전자차 </label>
 							</td>
 							<td colspan="1" class="c">2만6천원</td>
 							<td colspan="1" class="c">200만원</td>
@@ -415,8 +415,8 @@
 	            	<label> 
 	            		<select class="form-control" id="memberCoupon" name="memberCoupon" style="width: 150px;">
 				            <option value="0">선택안함</option>
-				            <c:forEach var="ci" items="${couponIssue}" >
-					            <option value="${ci.coupon_discount_amount}" id="memberCoupon">${ci.coupon_name}</option>
+				            <c:forEach var="ci" items="${couponIssue}">
+					            <option value="${ci.coupon_discount_amount}" id="memberCoupon">${ci.coupon_name} // ${ci.coupon_id}</option>
 				            </c:forEach>
 			            </select>
 	            	</label>
@@ -546,7 +546,15 @@
 
         function startPayment() {
         	let totalAmount = document.getElementById('dateDifferenceInput').value.replace(",", "");
-        	
+        	 // 선택된 보험 항목의 id를 가져옴
+            let selectedInsuranceId = document.querySelector('input[name="insurance"]:checked').id;
+            
+            // 해당 id와 일치하는 label 태그를 선택
+            let selectedLabel = document.querySelector('label[for="' + selectedInsuranceId + '"]');
+            
+            // 선택된 label의 텍스트를 가져옴
+            let selectedInsuranceText = selectedLabel ? selectedLabel.textContent.trim() : '';
+            
             IMP.request_pay({
                 pg: "html5_inicis", // 결제 과정에 사용될 결제사 이니시스
                 pay_method: "card", // 결제 수단
@@ -569,7 +577,8 @@
                 		data : {
                 			schedule : '${param.schedule}',
                 			car_number : '${param.car_number}',
-                			payment_result_amount : totalAmount
+                			payment_result_amount : totalAmount,
+                			insurance: selectedInsuranceText
                 		},
                 		dataType : "JSON",
                 		success : function(response) {
@@ -638,8 +647,6 @@
 	    // 밀리초를 일, 시간, 분, 초 단위로 변환
 	    let differenceInDays = Math.floor(differenceInMilliseconds / (1000 * 60 * 60 * 24));
 	    let differenceInHours = Math.floor((differenceInMilliseconds % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-	//     let differenceInMinutes = Math.floor((differenceInMilliseconds % (1000 * 60 * 60)) / (1000 * 60));
-	//     let differenceInSeconds = Math.floor((differenceInMilliseconds % (1000 * 60)) / 1000);
 	
 	    // 결과 문자열 생성
 	    let differenceday = "대여금액(" + differenceInDays + "일 " + differenceInHours+  "시간)" ;
@@ -656,7 +663,6 @@
 	        document.getElementById('differenceday').value = differenceday.toLocaleString(); 
 	        document.getElementById('firstAmount').value = differenceString.toLocaleString(); 
 	        document.getElementById('dateDifferenceInput').value = differenceString.toLocaleString(); // toLocaleString() 이거 숫자표시 쉼표 넣어줌
-// 	        document.getElementById('salePrice').value = sale.toLocaleString(); 
 	    };
 	    
 	    
@@ -668,11 +674,12 @@
 	});
 	
     $(document).ready(function () {
+    	
+    	
         // 적용 버튼 클릭 시
         $('#applyCouponBtn').click(function () {
             // 선택한 쿠폰 값을 가져옴
             let selectedCoupon = $('#memberCoupon').val();
-
             // 쿠폰 값을 오른쪽에 표시
             $('#salePrice').text(selectedCoupon);
         });
