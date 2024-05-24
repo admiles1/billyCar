@@ -6,19 +6,20 @@
 <mapper namespace="com.itwill.billycar.mapper.GuideMapper">
 
 	<select id="selectCarList" resultType="HashMap">
-		SELECT DISTINCT model.name AS model
-     		 , carType.name AS carType
-   		 	 , brand.name AS car_brand
-     		 , GROUP_CONCAT(DISTINCT fuel.name SEPARATOR ', ') AS fuel
-     		 , c.car_dayprice
-     		 , c.car_hourprice
-     		 , c.car_capacity 
-     		 , c.car_img
-  		  FROM car c 
-  		  JOIN Common brand ON brand.code = c.car_brand
-  		  JOIN Common model ON model.code = c.car_model
-  		  JOIN Common carType ON carType.code = c.car_type
-  		  JOIN Common fuel ON fuel.code = c.car_fuel
+		SELECT DISTINCT model.name AS model 
+    		 , carType.name AS carType 
+    		 , brand.name AS car_brand 
+    		 , GROUP_CONCAT(DISTINCT fuel.name SEPARATOR ', ') AS fuel 
+    		 , MIN(c.car_dayprice)  AS car_dayprice
+    		 , MIN(c.car_hourprice) AS car_hourprice
+    		 , MAX(c.car_capacity) AS car_capacity
+    		 , MAX(c.car_img) AS car_img
+		  FROM car c 
+		  JOIN Common brand ON brand.code = c.car_brand 
+		  JOIN Common model ON model.code = c.car_model 
+		  JOIN Common carType ON carType.code = c.car_type 
+		  JOIN Common fuel ON fuel.code 
+= c.car_fuel 
   		<if test="!searchKeyword.equals('')">
 		 WHERE 
 		 <choose>
@@ -28,7 +29,7 @@
 		 </choose>
 		</if>
  		 GROUP BY 
-    		   model.name, carType.name, brand.name , c.car_dayprice, c.car_hourprice, c.car_capacity , c.car_img
+    		   model.name, carType.name, brand.name
  		 ORDER BY model.name
  		 LIMIT #{startRow} , #{listLimit}
 	</select>

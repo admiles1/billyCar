@@ -46,6 +46,7 @@ public class ReservController {
 								, Model model
 								, @RequestParam(defaultValue = "1") int pageNum) {
 		
+		// 디폴트 날짜검색 조건 만들기
 		LocalDateTime now = LocalDateTime.now();
 		ReservVO reserv = new ReservVO();
 		LocalDateTime defalutPickup = now.withDayOfMonth(now.getDayOfMonth() +1).withHour(6).withMinute(0).withSecond(0).withNano(0);
@@ -57,22 +58,12 @@ public class ReservController {
 		map.put("reserv_returndate", defalutReturn.toString().split("T")[0]);
 		map.put("returnTime", defalutReturn.toString().split("T")[1].substring(0, 2));
 
-		reserv.setReserv_pickupdate(defalutPickup);
-		reserv.setReserv_returndate(defalutReturn);
 		
-		 // 한 번 검색당 4개씩 보여주기
-	    int listLimit = 4;
-	    int startRow = (pageNum - 1) * listLimit;
-		
-		// 자동차검색
-		List<Map<String, String>> cars = reservService.getCarList(car, reserv, startRow , listLimit);
-		System.out.println(cars);
-		// 공통 코드에서 type, fule 조회해서 가져오기 TODO = 줄일것
+		// 공통코드 및 디폴트 스케쥴
 		model.addAttribute("schedule", map);
 		model.addAttribute("types", adminService.getTypes());
 		model.addAttribute("fuels", adminService.getFuels());
 		model.addAttribute("BusinessHours", adminService.getBusinesshours());
-		model.addAttribute("cars", cars);
 		
 		return "reservation/reservation";
 	}
@@ -91,44 +82,13 @@ public class ReservController {
 		reserv.setReserv_pickupdate(LocalDateTime.parse(pickupdate, formatter));
 		reserv.setReserv_returndate(LocalDateTime.parse(returndate, formatter));
 		
-		String carType = car.getCar_type();
-		String carFuel = car.getCar_fuel();
+		model.addAttribute("selType", car.getCar_type());
+		model.addAttribute("selFuel", car.getCar_fuel());
 		
-		model.addAttribute("selType", carType);
-		model.addAttribute("selFuel", carFuel);
-		
-		if(carType.equals("")) {
-			car.setCar_type(null);
-			carType = null;
-		}
-		
-		if(carFuel.equals("")) {
-			car.setCar_fuel(null);
-			carFuel = null;
-		}
-		
-		if(carType != null && carFuel == null) { 	// 자동차타입 조건만 존재 할 경우
-			// search메소드로 스트링 포맷 변환 후 초기화
-			car.setCar_type(searchMethod(carType));
-		} else if (carType == null && carFuel != null) { // 자동차연료 조건만 존재 할 경우
-			car.setCar_fuel(searchMethod(carFuel));
-		} else if (carType != null && carFuel != null) { // 두 가지 모두 검색 할 경우
-			car.setCar_fuel(searchMethod(carFuel));
-			car.setCar_type(searchMethod(carType));
-		} 
-		
-		 // 한 번 검색당 4개씩 보여주기
-	    int listLimit = 4;
-	    int startRow = (pageNum - 1) * listLimit;
-		
-		// 자동차검색
-		List<Map<String, String>> cars = reservService.getCarList(car, reserv, startRow , listLimit);
-		// 공통 코드에서 type, fule 조회해서 가져오기 TODO = 줄일것
 		model.addAttribute("schedule", map);
 		model.addAttribute("types", adminService.getTypes());
 		model.addAttribute("fuels", adminService.getFuels());
 		model.addAttribute("BusinessHours", adminService.getBusinesshours());
-		model.addAttribute("cars", cars);
 		
 		return "reservation/reservation";
 	}
@@ -138,10 +98,8 @@ public class ReservController {
 	@PostMapping("SelectCarList")
 	public List<Map<String, String>> SelectCarList(CarVO car
 							, @RequestParam(defaultValue = "") Map<String, String> map 
-				            , Model model
-				            , @RequestParam(defaultValue = "1")int pageNum) {
-		System.out.println(map);
-		pageNum = 1;
+				            , Model model) {
+		
 		ReservVO reserv = new ReservVO();
 		String pickupdate = map.get("reserv_pickupdate") + " " + map.get("pickupTime");
 		String returndate = map.get("reserv_returndate") + " " + map.get("returnTime");
@@ -151,6 +109,17 @@ public class ReservController {
 		
 		String carType = car.getCar_type();
 		String carFuel = car.getCar_fuel();
+		
+		if(carType.equals("")) {
+			car.setCar_type(null);
+			carType = null;
+		}
+		
+		if(carFuel.equals("")) {
+			car.setCar_fuel(null);
+			carFuel = null;
+		}
+		
 		
 		if(carType != null && carFuel == null) { 	// 자동차타입 조건만 존재 할 경우
 			// search메소드로 스트링 포맷 변환 후 초기화
@@ -163,9 +132,8 @@ public class ReservController {
 		} 
 		
 		int listLimit = 4;
-	    int startRow = (pageNum - 1) * listLimit;
+		int startRow = (Integer.parseInt(map.get("pageNum")) - 1) * listLimit;
 		List<Map<String, String>> cars = reservService.getCarList(car, reserv, startRow, listLimit);
-		System.out.println(cars);
 		return cars;
 	}
 	
@@ -175,9 +143,7 @@ public class ReservController {
 	@PostMapping("MoreList")
 	public List<Map<String, String>> moreList(CarVO car
 											, @RequestParam(defaultValue = "") Map<String, String> map 
-											, Model model
-											, @RequestParam(defaultValue = "1")int pageNum) {
-		System.out.println("========================================================");
+											, Model model) {
 		ReservVO reserv = new ReservVO();
 		String pickupdate = map.get("reserv_pickupdate") + " " + map.get("pickupTime");
 		String returndate = map.get("reserv_returndate") + " " + map.get("returnTime");
@@ -209,7 +175,7 @@ public class ReservController {
 		} 
 		
 		int listLimit = 4;
-		int startRow = (pageNum - 1) * listLimit;
+		int startRow = (Integer.parseInt(map.get("pageNum")) - 1) * listLimit;
 		List<Map<String, String>> cars = reservService.getCarList(car, reserv, startRow, listLimit);
 
 		return cars;

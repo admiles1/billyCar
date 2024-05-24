@@ -21,6 +21,12 @@
 	}
 
 </script>
+<style>
+	#carouselExampleAutoplaying{
+		margin-top : 100px;
+	}
+
+</style>
 <title>:: 상세 예약페이지 ::</title>
 </head>
 <body>

@@ -100,7 +100,6 @@
 	    </div>
 	</div>
 
-        
       </div> <!-- id=accParent -->
 
 		<%--페이징 --%>
@@ -108,19 +107,19 @@
 		<div class = "paging">
 	  		<ul class="pagination">
 	    		<li class="page-item">
-			    <a id="previousPageLink" class="page-link" href="faq?pageNum=${pageNum - 1}" aria-label="Previous">
+			    <a id="previousPageLink" class="page-link" href="faq?pageNum=${pageNum - 1}<c:if test="${not empty param.category}">&category=${param.category}</c:if>" aria-label="Previous">
 			        <span aria-hidden="true">&laquo;</span>
 			    </a>
 			</li>
 			
 			<c:forEach var="i" begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
 			    <li class="page-item">
-			        <a class="page-link pageLink" href="faq?pageNum=${i}">${i}</a>
+			        <a class="page-link pageLink" href="faq?pageNum=${i}<c:if test="${not empty param.category}">&category=${param.category}</c:if>">${i}</a>
 			    </li>
 			</c:forEach>
 			
 			<li class="page-item">
-			    <a id="nextPageLink" class="page-link" href="faq?pageNum=${pageNum + 1}" aria-label="Next">
+			    <a id="nextPageLink" class="page-link" href="faq?pageNum=${pageNum + 1}<c:if test="${not empty param.category}">&category=${param.category}</c:if>" aria-label="Next">
 			        <span aria-hidden="true">&raquo;</span>
 			    </a>
 			</li>
@@ -179,8 +178,6 @@
 	});
 	
 */
-    
-	
 
 </script>
 
@@ -196,7 +193,7 @@
 			<input type = "button" class = "cs_btn" value = "1:1 상담 신청 바로가기" onclick = "location.href = 'qna_q'">
 		</div>
 		<hr class="hr-2">
-		<em class = "faq_tell"> 전화상담 : 1577-7777</em>
+		<em class = "faq_tell"> 전화상담 : 3333-3333</em>
 		</div>
 	</div>
 	

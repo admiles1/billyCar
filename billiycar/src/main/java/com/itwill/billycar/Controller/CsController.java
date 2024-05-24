@@ -262,7 +262,7 @@ public class CsController {
 //		System.out.println("카테고리" + category);
 		
 		int listCount = 0;
-		
+
 		if(category != null) { 
 			listCount = service.getCategoryListCount(category);
 		} else { 
@@ -332,7 +332,7 @@ public class CsController {
 		
 		String id = (String)session.getAttribute("member_id");
 		
-		List<QnaVO> qnaList = service.getQnaList(startRow, listLimit, id);
+		List<Map<String, Object>> qnaList = service.getQnaList(startRow, listLimit, id);
 		model.addAttribute("qnaList", qnaList);
 		return "cs/Q&A_list";
 	}

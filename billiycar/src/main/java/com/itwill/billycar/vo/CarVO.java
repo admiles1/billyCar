@@ -28,5 +28,6 @@ public class CarVO {
     private LocalDateTime car_reg_date;
     private String color;
     private List<MultipartFile> detail_images;
+    private int list_count;
     
 }

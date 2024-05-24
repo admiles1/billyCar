@@ -76,6 +76,7 @@
 		
 		.car-option-list li {width : 20%;}
 		
+		
    /* 	========================================= */
    
    /* div 인라인 */
@@ -133,6 +134,31 @@
 		margin-left: -20px;
 		padding : 5px;
 	}
+	
+	
+	/*submit 버튼*/
+	#submitBtn {
+		margin-left : 10px;
+		background-color : #00aaff;
+		color : white;
+		font-size : 17px;
+		border : none;
+		border-radius: 5px;
+		padding : 5px;
+	}
+	
+	#searchKeyword {
+		border : 1px solid gray;
+		border-radius: 5px;
+		padding : 5px;
+	}
+	
+	#searchType {
+		border : 1px solid gray;
+		border-radius: 5px;
+		padding : 4px;
+	}
+	
 	
     </style>
     
@@ -205,13 +231,13 @@
 			         
 			            $.each(carList, function(index, car) {
 							
-			            	let imgPath = "${pageContext.request.contextPath}/resources/upload/" + car.car_img
-			            	
+// 			            	let imgPath = "${pageContext.request.contextPath}/resources/upload/" + car.car_img
+							
 			                let carUl = 
 					               ' <li class="panel">'
 					               +' <div class="left">'
 					               +'     <div class="img-wrap-responsive">'
-					               +'            <img src="' + imgPath  + '">'
+					               + '<img src="' + '<%= request.getContextPath() %>/resources/upload/' + car.car_img + '">'
 					               +'     </div>'
 					               +' </div>'
 					               +' <div class="right">'
@@ -225,7 +251,7 @@
 					               +'    </div>'
 					               +'    <div class="search-car-result-cont">'
 					               +'         <div class="search-car-result-cont-left">'
-					               +'             <h5 class="title-01 f14"> 요금정보</h5>'
+					               +'             <h5 class="title-01 f14"> 최저가 요금정보</h5>'
 					               +'            <table class="cont-list-table-v04">'
 					               +'                 <colgroup>'
 					               +'                    <col width="20%">'
@@ -300,11 +326,11 @@
 					               +'							<small> 블랙박스 </small>'
 					               +'						</li>'
 					               +'						<li>'
-					               +'							<img src="' + option_linsece + '" id="optionImg"><p>'
+					               +'							<img src="' + option_highpass + '" id="optionImg"><p>'
 					               +'							<small> 하이패스 </small>'
 					               +'						</li>'
 					               +'						<li>'
-					               +'							<img src="' + option_linsece + '" id="optionImg"><p>'
+					               +'							<img src="' + option_bluetooth + '" id="optionImg"><p>'
 					               +'							<small> 블루투스 </small>'
 					               +'						</li>'
 					               +'					</ul>'
@@ -377,14 +403,14 @@
                 <h2 style="text-align: center">차량소개</h2>
             </div>
         </div>
-        <div align="center">	
+        <div align="center" style="margin-top:40px; margin-bottom:30px;">	
        		<form action="javascript:void(0);" name="fr">
 				<select name="searchType" id="searchType">
 					<option value="brand" <c:if test="${param.searchType eq 'brand'}"> selected</c:if>> 제조사</option>
 					<option value="model" <c:if test="${param.searchType eq 'model'}"> selected</c:if>> 모델</option>
 				</select>
 				<input type="text" name="searchKeyword" value="${param.searchKeyword}" placeholder="검색어를 입력하여주세요" id="searchKeyword"> 
-				<input type="submit" value="검색" />
+				<input type="submit" value="검색" id="submitBtn"/>
 			</form>
         </div>
         

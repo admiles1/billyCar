@@ -12,8 +12,8 @@
 		SELECT MAX(model.name) AS car_model
 		     , MAX(c.car_number) AS car_number
 			 , MAX(brand.name) AS car_brand
-			 , MAX(fuel.name) AS car_fuel
 			 , MAX(type.name) AS car_type
+ 			 , GROUP_CONCAT(DISTINCT fuel.name SEPARATOR ', ') AS car_fuel
 			 , MAX(gear_type) AS gear_type
 			 , MAX(car_capacity) AS car_capacity
 			 , MAX(car_img) AS car_img
@@ -62,8 +62,11 @@
 		  LEFT JOIN Common type ON c.car_type = type.code   	
 		 WHERE car_number NOT IN (SELECT car_number
 									FROM Reservation
-								   WHERE reserv_pickupdate between #{reserv.reserv_pickupdate} AND #{reserv.reserv_returndate}
-									  OR reserv_returndate between #{reserv.reserv_pickupdate} AND #{reserv.reserv_returndate})	]]> 
+								   WHERE NOT (
+								   		(#{reserv.reserv_pickupdate} >= reserv_returndate) OR
+                						(#{reserv.reserv_returndate} <= reserv_pickupdate)
+								  		) 
+								   )	]]> 
 		   AND car_status = 0
 		   AND model.name = #{car.car_model}
 		 <if test="car.car_fuel != null"> 

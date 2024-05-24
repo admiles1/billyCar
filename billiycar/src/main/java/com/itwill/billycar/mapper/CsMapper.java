@@ -1,6 +1,7 @@
 package com.itwill.billycar.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -30,7 +31,7 @@ public interface CsMapper {
 	
 	// ---------------------------------------------------------
 	// **  [QnA] **
-	List<QnaVO> selectQnaList(@Param(value = "startRow")int startRow, @Param(value = "listLimit") int listLimit, @Param(value = "id") String id); // 문의 내역 가져오기
+	List<Map<String, Object>> selectQnaList(@Param(value = "startRow")int startRow, @Param(value = "listLimit") int listLimit, @Param(value = "id") String id); // 문의 내역 가져오기
 	int selectQnaListCount(String writer); // 큐엔에이 목록 수
 	int insertQna(QnaVO qna); // 큐엔에이 작성하기
 	QnaVO selectQnaDetail(QnaVO qna); // 작성한 큐엔에이 가져오기

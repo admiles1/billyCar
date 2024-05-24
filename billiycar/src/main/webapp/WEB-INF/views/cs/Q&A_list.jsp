@@ -60,7 +60,7 @@
 			</tr>
 		</thead>
 		<tbody class="table-hover">
-		
+
 		<c:choose>
 			<%-- 문의 내역이 존재하지 않을 경우 --%>
 			<c:when test="${empty qnaList}">
@@ -72,10 +72,11 @@
 			<%-- 문의 내역이 존재할 경우 --%>
 			<c:otherwise>
 				<c:forEach var="qna" items="${qnaList}">
-					<c:set var="i" value="${i+1}"></c:set>
+<%-- 					<c:set var="i" value="${i+1}"></c:set> --%>
+					
 					<tr>
 						<%-- 답변 번호 --%>
-						<td class="text-left">${i}</td>
+						<td class="text-left"> ${qna.r}</td>
 
 						<%-- 제목 --%>
 						<td class="text-left"><a href = "qnaAnswerDetail?qna_idx=${qna.qna_idx}&pageNum=${pageNum}">${qna.qna_subject}</a></td>
