@@ -267,28 +267,19 @@ public class AdminController {
 	public JsonObject  searchCars(
 			@RequestParam(defaultValue = "") String searchType,
 			@RequestParam(defaultValue = "") String searchKeyword,
-<<<<<<< HEAD
 			@RequestParam(defaultValue = "1") int pageNum,
 			Model model, AdminVO admin) {
-=======
-			@RequestParam(defaultValue = "1") int pageNum) {
->>>>>>> branch 'main' of https://github.com/admiles1/billyCar.git
-		
-<<<<<<< HEAD
 		admin.setAdmin_id((String)session.getAttribute("member_id"));
 
 		// 관리자 아닐 경우 돌려보내기
 		if(session.getAttribute("member_id")==null || !session.getAttribute("member_id").equals(admin.getAdmin_id())) {
 			model.addAttribute("msg","접근 권한이 없습니다");
 			model.addAttribute("targetURL","/billycar");
-			return "err/fail";
 		}
 		
 //		System.out.println("검색타입 : " + searchType);
 //		System.out.println("검색어 : " + searchKeyword);
 //		System.out.println("페이지번호 : " + pageNum);
-=======
->>>>>>> branch 'main' of https://github.com/admiles1/billyCar.git
 		
 		System.out.println(pageNum);
 		JsonObject responseJson = new JsonObject();
