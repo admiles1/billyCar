@@ -119,6 +119,226 @@
 /* 	width: 30px; */
 	}
  </style>
+ 
+ <script>
+    	
+        const IMP = window.IMP; 
+        IMP.init("imp47235683"); // 내 가맹점 식별 코드
+
+        function startPayment() {
+        	let totalAmount = document.getElementById('dateDifferenceInput').value.replace(",", "");
+        	 // 선택된 보험 항목의 id를 가져옴
+            let selectedInsuranceId = document.querySelector('input[name="insurance"]:checked').id;
+            
+            // 해당 id와 일치하는 label 태그를 선택
+            let selectedLabel = document.querySelector('label[for="' + selectedInsuranceId + '"]');
+            
+            // 선택된 label의 텍스트를 가져옴
+            let selectedInsuranceText = selectedLabel ? selectedLabel.textContent.trim() : '';
+            
+            // 선택된 쿠폰의 값 (coupon_id,coupon_discount_amount)
+            let couponValue = $('#memberCoupon').val();
+            let couponParts = couponValue.split(','); // coupon_id와 coupon_discount_amount 분리
+            let couponId = couponParts[1];
+            let couponDiscountAmount = couponParts[0];
+            console.log("선택된 쿠폰 ID: " + couponId); // 쿠폰 ID 확인
+            console.log("선택된 쿠폰 할인 금액: " + couponDiscountAmount); // 쿠폰 할인 금액 확인
+            
+            IMP.request_pay({
+                pg: "html5_inicis", // 결제 과정에 사용될 결제사 이니시스
+                pay_method: "card", // 결제 수단
+//                 merchant_uid: "payDone_" + new Date().getTime(), // 주문번호 어칼지 고민
+                name: "렌트카 예약", // 주문 명 '렌트카 되어있는 곳에 차명 따와야 할듯'
+//                 amount: 100, // 금액
+                amount: totalAmount, // 찐 금액 이걸로하면 ㄹㅇ 차금액 나옴!
+                buyer_email: "${info.member_email}", // 구매자 이메일 필요한가 싶네
+//                 buyer_name: '홍길동', // 구매자 이름 가져오기
+                buyer_name: "${info.member_name}" // 구매자 이름 가져오기
+//                 buyer_tel: '010-1234-5678', // 구매자 전화번호 필요 하려나
+//                 buyer_addr: '서울특별시 강남구 삼성동', // 구매자 주소 필요 없을듯
+//                 m_redirect_url: 'http://192.168.3.120:8081/billycar/' // 모바일 결제시 리다이렉션될 URL이건 그냥 메인으로 보내면 될듯 이거안쓰고 보내도 될듯
+            }, function(rsp) {
+                if (rsp.success) {
+                	
+                	$.ajax({
+                		type : "POST",
+                		url : "payment",
+                		data : {
+                			schedule : '${param.schedule}',
+                			car_number : '${param.car_number}',
+                			payment_result_amount : totalAmount,
+                			insurance: selectedInsuranceText,
+                			coupon_id : couponId
+                		},
+                		dataType : "JSON",
+                		success : function(response) {
+                			if(response) {
+        	        			 alert("결제 성공");
+        	        			 location.href="./";
+                			} else {
+                				 alert("헐 실패;");
+                			}
+                		}
+                	
+                	})
+                	
+                } else {
+                    alert("결제 취소");
+                    
+                }
+            });
+        }
+        	
+    </script>
+	
+	
+<!-- 	보험 값 받아오는 스크립트  (기존) -->
+ 	 <script> 
+         // 문서 로드 시 이벤트 리스너 추가
+         document.addEventListener('DOMContentLoaded', function() {
+             let radios = document.querySelectorAll('.insurance_data'); // 모든 라디오 버튼을 선택
+             let previousInsuranceCost = 0;
+            
+             radios.forEach(function(radio) {
+                 radio.addEventListener('change', function() { // 라디오 버튼 변경 이벤트
+                     if (this.checked) { // 라디오 버튼이 선택된 경우
+ 						let price = parseInt(this.value); // 선택된 라디오 버튼의 값 가져오기
+		
+ 		                // P1의 입력 값 업데이트
+ 		                let inputField = document.getElementById('dateDifferenceInput');
+ 						let existingTotal = parseInt(inputField.value.replace(/,/g, ''));
+ 						let newTotal = existingTotal - previousInsuranceCost + price ;
+						
+ 						inputField.value = newTotal.toLocaleString(); // 총액을 포맷하여 표시
+ 						document.getElementById('totalAmount').value = newTotal;
+						 
+ 		                previousInsuranceCost = price;
+                     }
+                 });
+             });
+        });
+   </script>	 
+
+	<script type="text/javascript">
+	    let startDate1 = "${fn:split(param.schedule, ',')[0]}";
+	    let endDate1 = "${fn:split(param.schedule, ',')[1]}";
+		
+	    // 문자열 형식 변경
+	    let startDate2 = startDate1.replace(" ", "T") + ":00:00";
+	    let endDate2 = endDate1.replace(" ", "T") + ":00:00";
+	
+	    // Date 객체로 변환
+	    let startDateObject = new Date(startDate2);
+	    let endDateObject = new Date(endDate2);
+	
+	    // 두 날짜 간의 차이를 밀리초 단위로 계산
+	    let differenceInMilliseconds = endDateObject - startDateObject;
+	
+	    // 밀리초를 일, 시간, 분, 초 단위로 변환
+	    let differenceInDays = Math.floor(differenceInMilliseconds / (1000 * 60 * 60 * 24));
+	    let differenceInHours = Math.floor((differenceInMilliseconds % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+	
+	    // 결과 문자열 생성
+	    let differenceday = "대여금액(" + differenceInDays + "일 " + differenceInHours+  "시간)" ;
+	    let differenceString = 0;
+	    if(differenceInHours/4 > 1){
+		    differenceString = differenceInDays * ${car.car_dayprice} + ${car.car_dayprice}; 
+	    } else{
+	    	differenceString = differenceInDays * ${car.car_dayprice} + differenceInHours * ${car.car_hourprice};
+	    }	
+		
+	    
+	    // 페이지 로드 후 input 태그에 결과 표시
+	    window.onload = function() {
+	        document.getElementById('differenceday').value = differenceday.toLocaleString(); 
+	        document.getElementById('firstAmount').value = differenceString.toLocaleString(); 
+	        document.getElementById('dateDifferenceInput').value = differenceString.toLocaleString(); // toLocaleString() 이거 숫자표시 쉼표 넣어줌
+	    };
+	    
+	    
+	</script>
+	
+	<script>
+	$('#memberCoupon').on('change', function() {
+		let sale = $('#memberCoupon').val();
+	});
+	
+    $(document).ready(function () {
+    	
+        // 적용 버튼 클릭 시
+        $('#applyCouponBtn').click(function () {
+            // 선택한 쿠폰 값을 가져옴
+            let selectedCoupon = $('#memberCoupon').val();
+            // 쿠폰 값을 오른쪽에 표시
+            $('#salePrice').text(selectedCoupon);
+        });
+    });
+    
+    
+   $('#insurance_price').on('change', function() {
+		let insurance_price = $('#insurance_price').val();
+	});
+   $(document).ready(function () {
+	   $('#insurance_price').click(function () {
+           // 선택한 쿠폰 값을 가져옴
+           let selectedInsurance = $('#insurance_price').val();
+           // 쿠폰 값을 오른쪽에 표시
+           $('#insurance_price').text(selectedInsurance);
+       });
+   };
+</script>
+<script type="text/javascript">
+	$(document).ready(function () {
+	    let previousCouponDiscount = 0; // 이전 쿠폰 할인 금액 저장
+	
+	    $('#applyCouponBtn').click(function () {
+	        let selectedCouponDiscount = parseInt($('#memberCoupon').val());
+	        let totalInput = $('#dateDifferenceInput');
+	        let currentTotal = parseInt(totalInput.val().replace(/,/g, ''));
+	
+	        // 쿠폰 할인 금액을 기존 총 금액에서 빼고 새로운 할인 금액을 더합니다.
+	        let newTotal = currentTotal + previousCouponDiscount - selectedCouponDiscount;
+	        totalInput.val(newTotal.toLocaleString()); // 새로운 총 금액 포맷하여 표시
+	
+	        // 할인 금액 표시 업데이트
+	        $('#salePrice').text(selectedCouponDiscount.toLocaleString());
+	
+	        // 새로운 쿠폰 할인 금액 저장
+	        previousCouponDiscount = selectedCouponDiscount;
+	    });
+	});
+</script>	
+	<!-- 추가옵션 스크립트 -->
+<!--  		 <script>
+        function updateOptionPrice() {
+            let checkboxes = document.querySelectorAll('input[name="opt_chk"]:checked'); // 체크된 모든 체크박스 선택
+            let total = 0;
+            checkboxes.forEach(function(checkbox) {
+                total += parseInt(checkbox.value, 10); // 체크박스의 값(가격)을 합산
+            });
+            document.getElementById('optionPrice').innerText = '(+)' + total; // 결과를 div에 표시
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            let checkboxes = document.querySelectorAll('input[name="opt_chk"]');
+            checkboxes.forEach(function(checkbox) {
+                checkbox.addEventListener('change', updateOptionPrice); // 각 체크박스에 이벤트 리스너 추가
+            });
+            updateOptionPrice(); // 페이지 로드 시 초기값 업데이트
+        });
+    </script>
+-->
+	<script type="text/javascript">
+	function submitPaymentForm() {
+	    // 필요한 데이터 설정
+	    let totalAmount = document.getElementById('totalAmount').value;
+	    let form = document.getElementById('paymentForm');
+	    form.totalAmount.value = totalAmount;
+
+	    // 폼 제출
+	    form.submit();
+	}
+	</script>
+ 
 </head>
 <body class="mine">
 	<header><jsp:include page="../inc/top.jsp"></jsp:include></header>
@@ -542,206 +762,6 @@
     <!-- 아임포트 스크립트 -->
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
     
-    <script>
-        const IMP = window.IMP; 
-        IMP.init("imp47235683"); // 내 가맹점 식별 코드
-
-        function startPayment() {
-        	let totalAmount = document.getElementById('dateDifferenceInput').value.replace(",", "");
-        	 // 선택된 보험 항목의 id를 가져옴
-            let selectedInsuranceId = document.querySelector('input[name="insurance"]:checked').id;
-            
-            // 해당 id와 일치하는 label 태그를 선택
-            let selectedLabel = document.querySelector('label[for="' + selectedInsuranceId + '"]');
-            
-            // 선택된 label의 텍스트를 가져옴
-            let selectedInsuranceText = selectedLabel ? selectedLabel.textContent.trim() : '';
-            
-            IMP.request_pay({
-                pg: "html5_inicis", // 결제 과정에 사용될 결제사 이니시스
-                pay_method: "card", // 결제 수단
-//                 merchant_uid: "payDone_" + new Date().getTime(), // 주문번호 어칼지 고민
-                name: "렌트카 예약", // 주문 명 '렌트카 되어있는 곳에 차명 따와야 할듯'
-//                 amount: 100, // 금액
-                amount: totalAmount, // 찐 금액 이걸로하면 ㄹㅇ 차금액 나옴!
-                buyer_email: "${info.member_email}", // 구매자 이메일 필요한가 싶네
-//                 buyer_name: '홍길동', // 구매자 이름 가져오기
-                buyer_name: "${info.member_name}" // 구매자 이름 가져오기
-//                 buyer_tel: '010-1234-5678', // 구매자 전화번호 필요 하려나
-//                 buyer_addr: '서울특별시 강남구 삼성동', // 구매자 주소 필요 없을듯
-//                 m_redirect_url: 'http://192.168.3.120:8081/billycar/' // 모바일 결제시 리다이렉션될 URL이건 그냥 메인으로 보내면 될듯 이거안쓰고 보내도 될듯
-            }, function(rsp) {
-                if (rsp.success) {
-                	
-                	$.ajax({
-                		type : "POST",
-                		url : "payment",
-                		data : {
-                			schedule : '${param.schedule}',
-                			car_number : '${param.car_number}',
-                			payment_result_amount : totalAmount,
-                			insurance : selectedInsuranceText
-                		},
-                		dataType : "JSON",
-                		success : function(response) {
-                			if(response) {
-        	        			 alert("결제 성공");
-        	        			 location.href="./";
-                			} else {
-                				 alert("헐 실패;");
-                			}
-                		}
-                	
-                	})
-                	
-                } else {
-                    alert("결제 취소");
-                    
-                }
-            });
-        }
-        	
-    </script>
-	
-	
-<!-- 	보험 값 받아오는 스크립트  (기존) -->
- 	 <script> 
-         // 문서 로드 시 이벤트 리스너 추가
-         document.addEventListener('DOMContentLoaded', function() {
-             let radios = document.querySelectorAll('.insurance_data'); // 모든 라디오 버튼을 선택
-             let previousInsuranceCost = 0;
-            
-             radios.forEach(function(radio) {
-                 radio.addEventListener('change', function() { // 라디오 버튼 변경 이벤트
-                     if (this.checked) { // 라디오 버튼이 선택된 경우
- 						let price = parseInt(this.value); // 선택된 라디오 버튼의 값 가져오기
-		
- 		                // P1의 입력 값 업데이트
- 		                let inputField = document.getElementById('dateDifferenceInput');
- 						let existingTotal = parseInt(inputField.value.replace(/,/g, ''));
- 						let newTotal = existingTotal - previousInsuranceCost + price ;
-						
- 						inputField.value = newTotal.toLocaleString(); // 총액을 포맷하여 표시
- 						document.getElementById('totalAmount').value = newTotal;
-						 
- 		                previousInsuranceCost = price;
-                     }
-                 });
-             });
-        });
-   </script>	 
-
-	<script type="text/javascript">
-	    let startDate1 = "${fn:split(param.schedule, ',')[0]}";
-	    let endDate1 = "${fn:split(param.schedule, ',')[1]}";
-		
-	    // 문자열 형식 변경
-	    let startDate2 = startDate1.replace(" ", "T") + ":00:00";
-	    let endDate2 = endDate1.replace(" ", "T") + ":00:00";
-	
-	    // Date 객체로 변환
-	    let startDateObject = new Date(startDate2);
-	    let endDateObject = new Date(endDate2);
-	
-	    // 두 날짜 간의 차이를 밀리초 단위로 계산
-	    let differenceInMilliseconds = endDateObject - startDateObject;
-	
-	    // 밀리초를 일, 시간, 분, 초 단위로 변환
-	    let differenceInDays = Math.floor(differenceInMilliseconds / (1000 * 60 * 60 * 24));
-	    let differenceInHours = Math.floor((differenceInMilliseconds % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-	//     let differenceInMinutes = Math.floor((differenceInMilliseconds % (1000 * 60 * 60)) / (1000 * 60));
-	//     let differenceInSeconds = Math.floor((differenceInMilliseconds % (1000 * 60)) / 1000);
-	
-	    // 결과 문자열 생성
-	    let differenceday = "대여금액(" + differenceInDays + "일 " + differenceInHours+  "시간)" ;
-	    let differenceString = 0;
-	    if(differenceInHours/4 > 1){
-		    differenceString = differenceInDays * ${car.car_dayprice} + ${car.car_dayprice}; 
-	    } else{
-	    	differenceString = differenceInDays * ${car.car_dayprice} + differenceInHours * ${car.car_hourprice};
-	    }	
-		
-	    
-	    // 페이지 로드 후 input 태그에 결과 표시
-	    window.onload = function() {
-	        document.getElementById('differenceday').value = differenceday.toLocaleString(); 
-	        document.getElementById('firstAmount').value = differenceString.toLocaleString(); 
-	        document.getElementById('dateDifferenceInput').value = differenceString.toLocaleString(); // toLocaleString() 이거 숫자표시 쉼표 넣어줌
-// 	        document.getElementById('salePrice').value = sale.toLocaleString(); 
-	    };
-	    
-	    
-	</script>
-	
-	<script>
-	$('#memberCoupon').on('change', function() {
-		let sale = $('#memberCoupon').val();
-	});
-	
-    $(document).ready(function () {
-    	
-    	
-        // 적용 버튼 클릭 시
-        $('#applyCouponBtn').click(function () {
-            // 선택한 쿠폰 값을 가져옴
-            let selectedCoupon = $('#memberCoupon').val();
-
-            // 쿠폰 값을 오른쪽에 표시
-            $('#salePrice').text(selectedCoupon);
-        });
-    });
-</script>
-<script type="text/javascript">
-	$(document).ready(function () {
-	    let previousCouponDiscount = 0; // 이전 쿠폰 할인 금액 저장
-	
-	    $('#applyCouponBtn').click(function () {
-	        let selectedCouponDiscount = parseInt($('#memberCoupon').val());
-	        let totalInput = $('#dateDifferenceInput');
-	        let currentTotal = parseInt(totalInput.val().replace(/,/g, ''));
-	
-	        // 쿠폰 할인 금액을 기존 총 금액에서 빼고 새로운 할인 금액을 더합니다.
-	        let newTotal = currentTotal + previousCouponDiscount - selectedCouponDiscount;
-	        totalInput.val(newTotal.toLocaleString()); // 새로운 총 금액 포맷하여 표시
-	
-	        // 할인 금액 표시 업데이트
-	        $('#salePrice').text(selectedCouponDiscount.toLocaleString());
-	
-	        // 새로운 쿠폰 할인 금액 저장
-	        previousCouponDiscount = selectedCouponDiscount;
-	    });
-	});
-</script>	
-	<!-- 추가옵션 스크립트 -->
-<!--  		 <script>
-        function updateOptionPrice() {
-            let checkboxes = document.querySelectorAll('input[name="opt_chk"]:checked'); // 체크된 모든 체크박스 선택
-            let total = 0;
-            checkboxes.forEach(function(checkbox) {
-                total += parseInt(checkbox.value, 10); // 체크박스의 값(가격)을 합산
-            });
-            document.getElementById('optionPrice').innerText = '(+)' + total; // 결과를 div에 표시
-        }
-        document.addEventListener('DOMContentLoaded', function() {
-            let checkboxes = document.querySelectorAll('input[name="opt_chk"]');
-            checkboxes.forEach(function(checkbox) {
-                checkbox.addEventListener('change', updateOptionPrice); // 각 체크박스에 이벤트 리스너 추가
-            });
-            updateOptionPrice(); // 페이지 로드 시 초기값 업데이트
-        });
-    </script>
--->
-	<script type="text/javascript">
-	function submitPaymentForm() {
-	    // 필요한 데이터 설정
-	    let totalAmount = document.getElementById('totalAmount').value;
-	    let form = document.getElementById('paymentForm');
-	    form.totalAmount.value = totalAmount;
-
-	    // 폼 제출
-	    form.submit();
-	}
-	</script>
 	
 	<!-- 부트스트랩 -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
