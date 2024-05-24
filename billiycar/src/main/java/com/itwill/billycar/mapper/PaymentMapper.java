@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.itwill.billycar.vo.CarVO;
 import com.itwill.billycar.vo.CouponIssueVO;
@@ -31,6 +32,8 @@ public interface PaymentMapper {
 	int updateCarCountReserve(CarVO car);
 
 	List<Map<String, Object>> selectMemberCoupon(String memberId);
+
+	void updateCouponStatus(@Param("couponId")int couponId);
 
 //	int updateCouponStatus(CouponIssueVO couponIssue);
 

@@ -16,29 +16,42 @@
  <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
  <script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
  <style type="text/css">
- 	.subject{
-	font: bold;
-	margin-bottom : 15px;
- 	padding: 5px; 
-	text-align : left;
-	background-color : lightgray;
-	border-radius : 10px;
-	height: 45px;
+/*  	.subject{ */
+/* 	font: bold; */
+/* 	margin-bottom : 15px; */
+/*  	padding: 5px;  */
+/* 	text-align : left; */
+/* 	background-color : lightgray; */
+/* 	border-radius : 10px; */
+/* 	height: 45px; */
+/* 	} */
+
+	#reservInfo {
+		margin-top: 30px;
+		background:#fff;
+		border:1px solid #ccc;
+		border-radius: 8px;
+	    padding: 30px;
+		width: 100%;	
+		height: 100%;
+	    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	    align-items: center;
 	}
-	.subject2{
-	font: bold;
-	margin-bottom : 15px;
- 	padding: 5px; 
-	text-align : left;
-	background-color : lightgray;
-	border-radius : 10px;
-	height: 45px;
-	}
+
+/* 	.subject2{ */
+/* 	font: bold; */
+/* 	margin-bottom : 15px; */
+/*  	padding: 5px;  */
+/* 	text-align : left; */
+/* 	background-color : lightgray; */
+/* 	border-radius : 10px; */
+/* 	height: 45px; */
+/* 	} */
 		
-	.accordion-body {
-            max-height: 200px; /* 최대 높이 설정 */
-            overflow-y: auto; /* 내용이 넘치는 경우 스크롤 표시 */
-    }
+/* 	.accordion-body { */
+/*             max-height: 200px; /* 최대 높이 설정 */ */
+/*             overflow-y: auto; /* 내용이 넘치는 경우 스크롤 표시 */ */
+/*     } */
     .list-table-v02{
 		border-top: 2px solid black;
  		width: 870px; 
@@ -56,21 +69,22 @@
 		border-right: 0;	
 	}
 	
-	.testBtn {
-		width: 150px;
-		height: 80px;
+/* 	.testBtn { */
+/* 		width: 150px; */
+/* 		height: 80px; */
 		 
-	}
+/* 	} */
 	
-	#paymentMain{
-	border: 1px solid lightgray;
-	border-radius: 10px;
-	padding-left: 0px;
-	padding-right: 0px;
+/* 	#paymentMain{ */
+/* 	border: 1px solid lightgray; */
+/* 	border-radius: 10px; */
+/* 	padding-left: 0px; */
+/* 	padding-right: 0px; */
 	
-	}
+/* 	} */
 #paymentSide{  
- 		position:absolute;  
+		margin-top: 30px;
+ 		position:fixed;  
   		left:1190px; top:230px;  
    		width: 410px;  
    		height: 600px;  
@@ -91,45 +105,48 @@
 	<div class="container">
 		<div class="row g-5">
 		<div class="col-md-7 col-lg-8 " id="paymentMain">
-	    <h4 class="subject">예약정보</h4>
-	    	<div class="row g-3">
-	       		<div class="col-sm-3">
-	            	<label>대여날짜</label>
-	            </div>
-	             <div class="col-sm-9">
-                    <input type="text" class="form-control" id="pickupDate" value="${fn:replace(reservDetails[0].reserv_pickupdate, 'T', ' ')}" readonly>
-                </div>
-	        </div>
-	        
-	        <div class="row g-3">
-	        	<div class="col-sm-3">
-	       	    	<label>대여지역</label>
-	            </div>
-	            <div class="col-sm-9">
-	            	<input type="text" class="form-control" id="locatrionInfo"  value="${reservDetails[0].reserv_pickuplocation}" readonly>
-	            </div>
-			</div>
-			
-			<div class="row g-3">
-				<div class="col-sm-3">
-	            	<label>반납날짜</label>
-	            </div>
-	            <div class="col-sm-9">
-                    <input type="text" class="form-control" id="returnDate" value="${fn:replace(reservDetails[0].reserv_returndate, 'T', ' ')}" readonly>
-                </div>
-			</div>
-			
-			<div class="row g-3">
-				<div class="col-sm-3">
-	            	<label>반납지역</label>
-	            </div>
-	            <div class="col-sm-9">
-	            	<input type="text" class="form-control" id="locatrionInfo" value="${reservDetails[0].reserv_returnlocation}" readonly>
-	            </div>
-			</div>
-			<hr>            
-	        
+		<form id="reservInfo">
+		    <h4 class="subject">예약정보</h4>
+		    <hr>
+		    	<div class="row g-3">
+		       		<div class="col-sm-3">
+		            	<label>대여날짜</label>
+		            </div>
+		             <div class="col-sm-9">
+	                    <input type="text" class="form-control" id="pickupDate" value="${fn:replace(reservDetails[0].reserv_pickupdate, 'T', ' ')}" readonly>
+	                </div>
+		        </div>
+		        
+		        <div class="row g-3">
+		        	<div class="col-sm-3">
+		       	    	<label>대여지역</label>
+		            </div>
+		            <div class="col-sm-9">
+		            	<input type="text" class="form-control" id="locatrionInfo"  value="${reservDetails[0].reserv_pickuplocation}" readonly>
+		            </div>
+				</div>
+				
+				<div class="row g-3">
+					<div class="col-sm-3">
+		            	<label>반납날짜</label>
+		            </div>
+		            <div class="col-sm-9">
+	                    <input type="text" class="form-control" id="returnDate" value="${fn:replace(reservDetails[0].reserv_returndate, 'T', ' ')}" readonly>
+	                </div>
+				</div>
+				
+				<div class="row g-3">
+					<div class="col-sm-3">
+		            	<label>반납지역</label>
+		            </div>
+		            <div class="col-sm-9">
+		            	<input type="text" class="form-control" id="locatrionInfo" value="${reservDetails[0].reserv_returnlocation}" readonly>
+		            </div>
+				</div>
+				<hr>            
+	       
 		<h4 class="subject">운전자정보(필수입력)</h4>
+		<hr>
 	        <div class="row gy-3">
 	            <div class="col-sm-2">
 	              		<label>운전자명</label>
@@ -169,6 +186,7 @@
 			
 		<hr>
 		<h4 class="subject">보험정보</h4>
+		<hr>
 			<div class="row g-3">
 				<h5>자차보험(선택사항, 24시간기준)</h5>
 				<table class="list-table-v02" width="100%">
@@ -222,6 +240,7 @@
 				    </tbody>
 				</table>
 			</div>	
+		 </form>
 			</div>		
 			</div>
 			</div>

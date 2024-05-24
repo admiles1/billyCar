@@ -54,11 +54,12 @@
 	</select>
 	
 	<select id="selectMemberCoupon" resultType="map">
-		SELECT *
-		FROM coupon_issue ci 
-		JOIN coupon c 
-		ON ci.coupon_id = c.coupon_id 
-		WHERE member_id = #{member_id}
+		SELECT ci.issue_id, ci.coupon_id, ci.member_id, ci.coupon_used_status,
+       		   c.coupon_code, c.coupon_name, c.coupon_discount_amount
+		  FROM coupon_issue ci 
+		  JOIN coupon c 
+		    ON ci.coupon_id = c.coupon_id 
+		 WHERE member_id = #{member_id}
 	</select>
 	
 	<insert id="insertRserv" parameterType="com.itwill.billycar.vo.ReservVO" useGeneratedKeys="true" keyProperty="reserv_idx">
@@ -105,12 +106,12 @@
 		WHERE car_number = #{car_number}
 	</update>
 	
-<!-- 	<update id="updateCouponStatus"> -->
-<!-- 		UPDATE coupon_issue -->
-<!-- 		SET -->
-<!-- 			coupon_used_status = 2 -->
-<!-- 		WHERE member_id = #{member_id} AND coupon_id = #{coupon_id}  -->
-<!-- 	</update> -->
+	<update id="updateCouponStatus">
+		UPDATE coupon_issue
+		SET
+			coupon_used_status = 2
+		WHERE coupon_id = #{coupon_id} 
+	</update>
 	
 </mapper>
 
