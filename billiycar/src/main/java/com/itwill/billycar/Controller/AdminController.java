@@ -13,7 +13,6 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.javassist.expr.Instanceof;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -264,13 +263,20 @@ public class AdminController {
 			@RequestParam(defaultValue = "") String searchKeyword,
 			@RequestParam(defaultValue = "1") int pageNum) {
 		
-		
 		JsonObject responseJson = new JsonObject();
 		
 		int listLimit = 2;
 		int startRow = (pageNum - 1) * listLimit;
 		
-		int listCount = service.getCarListCount();
+		Map<String, Object> param  = new HashMap<String, Object>();
+		param.put("startRow", startRow);
+		param.put("listLimit", listLimit);
+		param.put("searchType", searchType);
+		param.put("searchKeyword", searchKeyword.trim());
+		
+		List<CarVO> carList = service.getCarList(param);
+		
+		int listCount = carList.get(0).getList_count();
 		int pageListLimit = 3; // 페이지 번호 갯수를 3개로 지정(1 2 3 or 4 5 6 등...)
 		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0);
 		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
@@ -291,14 +297,7 @@ public class AdminController {
 	    
 	    responseJson.add("pageInfo", pageInfoJson);
 		
-		Map<String, Object> param  = new HashMap<String, Object>();
-		param.put("startRow", startRow);
-		param.put("listLimit", listLimit);
-		param.put("searchType", searchType);
-		param.put("searchKeyword", searchKeyword.trim());
 		
-		
-		List<CarVO> carList = service.getCarList(param);
 		
 		JsonArray carsJson = new JsonArray();
 		for (CarVO car : carList) {
