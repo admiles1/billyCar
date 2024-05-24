@@ -415,8 +415,8 @@
 	            	<label> 
 	            		<select class="form-control" id="memberCoupon" name="memberCoupon" style="width: 150px;">
 				            <option value="0">선택안함</option>
-				            <c:forEach var="ci" items="${couponIssue}" >
-					            <option value="${ci.coupon_discount_amount}" id="memberCoupon">${ci.coupon_name}</option>
+				            <c:forEach var="ci" items="${couponIssue}">
+					            <option value="${ci.coupon_discount_amount}" id="memberCoupon">${ci.coupon_name} // ${ci.coupon_id}</option>
 				            </c:forEach>
 			            </select>
 	            	</label>
@@ -684,7 +684,6 @@
         $('#applyCouponBtn').click(function () {
             // 선택한 쿠폰 값을 가져옴
             let selectedCoupon = $('#memberCoupon').val();
-
             // 쿠폰 값을 오른쪽에 표시
             $('#salePrice').text(selectedCoupon);
         });

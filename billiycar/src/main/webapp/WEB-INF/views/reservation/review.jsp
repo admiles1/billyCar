@@ -21,49 +21,46 @@
 $(function(){
 	var member_id = "${sessionScope.member_id}";
 	
-	$('.heart').on('click',function(){
-		var heart = $(this).find('i');
-		var review_idx = $(this).find('.review_idx').val();
-		console.log(member_id);
-		console.log(review_idx);
-		
-		if(member_id == ""){
-			alert("로그인 후 좋아요 버튼을 눌러주세요!");
-			location.href="login";
-			return;
-		}
-		
-		
-		var isHeart = heart.hasClass('fa-regular');
-//         if (heart.hasClass('fa-regular')) {
-//         	heart.removeClass('fa-regular').addClass('fa-solid').css('color', 'red');
-//         	count ++;
-//         } else if(heart.hasClass('fa-solid')){
-//         	heart.removeClass('fa-solid').addClass('fa-regular').css('color', 'grey');
-//         	count --;
-//         }
-        
-        $.ajax({
-        	type : "GET",
-        	url : "reviewHeart",
-        	data : {
-        		member_id : member_id,
-        		isHeart : isHeart,
-        		review_idx : review_idx
-        	},
-        	dataType : "JSON",
-        	success : function(data){
-        		console.log(data);
-        		 if (isHeart) {
-                     heart.removeClass('fa-regular').addClass('fa-solid').css('color', 'red');
-                 } else {
-                     heart.removeClass('fa-solid').addClass('fa-regular').css('color', 'grey');
-                 }
-        		
-        	}
-        });
-        
-    });
+	function heartclick(){
+		$('.heart').on('click',function(){
+			var heart = $(this).find('i');
+			var review_idx = $(this).find('.review_idx').val();
+			console.log(member_id);
+			console.log(review_idx);
+			
+			if(member_id == ""){
+				alert("로그인 후 좋아요 버튼을 눌러주세요!");
+				location.href="login";
+				return;
+			}
+			
+			
+			var isHeart = heart.hasClass('fa-regular');
+	        
+	        $.ajax({
+	        	type : "GET",
+	        	url : "reviewHeart",
+	        	data : {
+	        		member_id : member_id,
+	        		isHeart : isHeart,
+	        		review_idx : review_idx
+	        	},
+	        	dataType : "JSON",
+	        	success : function(data){
+	        		console.log(data);
+	        		 if (isHeart) {
+	                     heart.removeClass('fa-regular').addClass('fa-solid').css('color', 'red');
+	                 } else {
+	                     heart.removeClass('fa-solid').addClass('fa-regular').css('color', 'grey');
+	                 }
+	        		
+	        	}
+	        });
+	        
+	    });
+	}
+	
+	heartclick();
 	
 	
     $('#options').on('change', function() {
@@ -122,7 +119,8 @@ $(function(){
                     '</div>' +
                 '</div>';
         });
-        $('.row').html(html);  
+        $('.row').html(html);
+        heartclick();
     }
 
     function updatePageInfo(pageInfo, pageNum, option) {
