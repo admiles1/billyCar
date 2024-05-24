@@ -278,7 +278,7 @@ function check() {
 			<div class="card h-100" style="position: relative;">
 <!-- 				<div style="position: absolute; left: -50px; top: -50px;"><img width="100" height="100" src="https://img.icons8.com/carbon-copy/100/1-circle.png" alt="1-circle"/></div> -->
 				<div style="position: absolute; left: -50px; top: -50px;"><img width="100" height="100" src="https://img.icons8.com/carbon-copy/100/${status.count}-circle.png" alt="${status.count}-circle"/></div>
-				<img src="resources/main_images/rewiewCar1.png" class="card-img-top" alt="...">
+				<img src="<%= request.getContextPath() %>/resources/upload/${popular.car_img }" class="card-img-top">
 				<div class="card-body">
 				    <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
 				        <h5 style="width: 100px; text-align: right; margin-right: 10px;">모델명</h5>
