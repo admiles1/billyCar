@@ -60,6 +60,10 @@ public class PaymentService {
 		return mapper.selectMemberCoupon(memberId);
 	}
 
+	public void updateCouponStatus(int couponId) {
+		mapper.updateCouponStatus(couponId);
+	}
+
 //	public int updateCouponStatus(CouponIssueVO couponIssue) {
 //		return mapper.updateCouponStatus(couponIssue);
 //	}
