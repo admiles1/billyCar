@@ -13,7 +13,6 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.javassist.expr.Instanceof;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -235,28 +234,28 @@ public class AdminController {
 			return "err/fail";
 		}
 		
-//		int listLimit = 5;
-//		int startRow = (pageNum - 1) * listLimit;
-//		
-//		int listCount = service.getCarListCount();
-//		int pageListLimit = 3; // 페이지 번호 갯수를 3개로 지정(1 2 3 or 4 5 6 등...)
-//		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0);
-//		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
-//		int endPage = startPage + pageListLimit - 1;
-//		if(endPage > maxPage) {
-//			endPage = maxPage;
-//		}
-//		
-//		Map<String, Object> param  = new HashMap<String, Object>();
-//		param.put("startRow",  startRow);
-//		param.put("listLimit",  listLimit);
-//		param.put("searchType", "");
-//		param.put("searchKeyword", "");
-//		
-//		model.addAttribute("pageInfo", new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage));
-//
-//		List<CarVO> carList = service.getCarList(param);
-//		model.addAttribute("carList", carList);
+		int listLimit = 10;
+		int startRow = (pageNum - 1) * listLimit;
+		
+		int listCount = service.getCarListCount();
+		int pageListLimit = 3; // 페이지 번호 갯수를 3개로 지정(1 2 3 or 4 5 6 등...)
+		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0);
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		int endPage = startPage + pageListLimit - 1;
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		Map<String, Object> param  = new HashMap<String, Object>();
+		param.put("startRow",  startRow);
+		param.put("listLimit",  listLimit);
+		param.put("searchType", "");
+		param.put("searchKeyword", "");
+		
+		model.addAttribute("pageInfo", new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage));
+
+		List<CarVO> carList = service.getCarList(param);
+		model.addAttribute("carList", carList);
 		
 		return "admin/admin_car";
 	}
@@ -264,17 +263,12 @@ public class AdminController {
 	// 차량 검색
 	@ResponseBody
 	@GetMapping("search_car")
-	public JsonObject  searchCars(
+	public String searchCars(
 			@RequestParam(defaultValue = "") String searchType,
 			@RequestParam(defaultValue = "") String searchKeyword,
-<<<<<<< HEAD
 			@RequestParam(defaultValue = "1") int pageNum,
 			Model model, AdminVO admin) {
-=======
-			@RequestParam(defaultValue = "1") int pageNum) {
->>>>>>> branch 'main' of https://github.com/admiles1/billyCar.git
 		
-<<<<<<< HEAD
 		admin.setAdmin_id((String)session.getAttribute("member_id"));
 
 		// 관리자 아닐 경우 돌려보내기
@@ -287,39 +281,9 @@ public class AdminController {
 //		System.out.println("검색타입 : " + searchType);
 //		System.out.println("검색어 : " + searchKeyword);
 //		System.out.println("페이지번호 : " + pageNum);
-=======
->>>>>>> branch 'main' of https://github.com/admiles1/billyCar.git
 		
-		System.out.println(pageNum);
-		JsonObject responseJson = new JsonObject();
-		
-		
-		int listLimit = 2;
+		int listLimit = 10;
 		int startRow = (pageNum - 1) * listLimit;
-		
-		int listCount = service.getCarListCount();
-		int pageListLimit = 3; // 페이지 번호 갯수를 3개로 지정(1 2 3 or 4 5 6 등...)
-		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0);
-		
-		System.out.println("이자민바보");
-		
-		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
-		int endPage = startPage + pageListLimit - 1;
-		if(endPage > maxPage) {
-			endPage = maxPage;
-		}
-		
-		PageInfo pageInfo = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
-		
-		JsonObject pageInfoJson = new JsonObject();
-		pageInfoJson.addProperty("listCount", pageInfo.getListCount());
-	    pageInfoJson.addProperty("listLimit", pageInfo.getPageListLimit());
-	    pageInfoJson.addProperty("maxPage", pageInfo.getMaxPage());
-	    pageInfoJson.addProperty("startPage", pageInfo.getStartPage());
-	    pageInfoJson.addProperty("endPage", pageInfo.getEndPage());
-//	    pageInfoJson.addProperty("pageNum", pageNum);
-	    
-	    responseJson.add("pageInfo", pageInfoJson);
 		
 		Map<String, Object> param  = new HashMap<String, Object>();
 		param.put("startRow", startRow);
@@ -327,56 +291,35 @@ public class AdminController {
 		param.put("searchType", searchType);
 		param.put("searchKeyword", searchKeyword.trim());
 		
-		
 		List<CarVO> carList = service.getCarList(param);
 		
-//		JsonArray list = new JsonArray();
-//		JsonObject json = new JsonObject();
-		JsonArray carsJson = new JsonArray();
-//		for(CarVO vo : carList) { // 차 정보 저장
-		for (CarVO car : carList) {
-			JsonObject carJson = new JsonObject();
-//			json.addProperty("car_number", vo.getCar_number());
-//			json.addProperty("car_model", vo.getCar_model());
-//			json.addProperty("car_brand", vo.getCar_brand());
-//			json.addProperty("car_fuel", vo.getCar_fuel());
-//			json.addProperty("gear_type", vo.getGear_type());
-//			json.addProperty("car_img", vo.getCar_img());
-//			json.addProperty("car_year", vo.getCar_year().toString());
-//			json.addProperty("car_dayprice", vo.getCar_dayprice());
-//			json.addProperty("car_hourprice", vo.getCar_hourprice());
-//			json.addProperty("car_status", vo.getCar_status());
-//			json.addProperty("color", vo.getColor());
+		
+		JsonArray list = new JsonArray();
+		for(CarVO vo : carList) {
+			JsonObject json = new JsonObject();
+			json.addProperty("car_number", vo.getCar_number());
+			json.addProperty("car_model", vo.getCar_model());
+			json.addProperty("car_brand", vo.getCar_brand());
+			json.addProperty("car_fuel", vo.getCar_fuel());
+			json.addProperty("gear_type", vo.getGear_type());
+			json.addProperty("car_img", vo.getCar_img());
+			json.addProperty("car_year", vo.getCar_year().toString());
+			json.addProperty("car_dayprice", vo.getCar_dayprice());
+			json.addProperty("car_hourprice", vo.getCar_hourprice());
+			json.addProperty("car_status", vo.getCar_status());
+			json.addProperty("color", vo.getColor());
 			
-			carJson.addProperty("car_number", car.getCar_number());
-			carJson.addProperty("car_model", car.getCar_model());
-			carJson.addProperty("car_brand", car.getCar_brand());
-			carJson.addProperty("car_fuel", car.getCar_fuel());
-			carJson.addProperty("gear_type", car.getGear_type());
-	        carJson.addProperty("car_img", car.getCar_img());
-	        carJson.addProperty("car_year", car.getCar_year().toString());
-	        carJson.addProperty("car_dayprice", car.getCar_dayprice());
-	        carJson.addProperty("car_hourprice", car.getCar_hourprice());
-	        carJson.addProperty("car_status", car.getCar_status());
-	        carJson.addProperty("color", car.getColor());
-	        carsJson.add(carJson);
+			list.add(json);
 		}
 		
-		//페이징 정보 저장
-//		json.addProperty("pageInfo_listCount", pageInfo.getListCount());
-//		json.addProperty("pageInfo_listLimit", pageInfo.getPageListLimit());
-//		json.addProperty("pageInfo_maxPage", pageInfo.getMaxPage());
-//		json.addProperty("pageInfo_startPage", pageInfo.getStartPage());
-//		json.addProperty("pageInfo_endPage", pageInfo.getEndPage());
-//		list.add(json);
 		
-	    responseJson.add("cars", carsJson);
-
+		
+//		model.addAttribute("car", list);
 //		System.out.println("ddddddddddddddddddd" + list);
+//		System.out.println("wwwwwwwwwwwwwwwwwww" + list.toString());
 		
-//		return list.toString();
-	    return responseJson;
-
+		return list.toString();
+				
 	}
 	
 	// 차량 목록 중 차량 삭제
