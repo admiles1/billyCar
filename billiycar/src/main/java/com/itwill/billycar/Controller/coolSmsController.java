@@ -29,7 +29,7 @@ public class coolSmsController {
 
 	    public coolSmsController() {
 	        // 반드시 계정 내 등록된 유효한 API 키, API Secret Key를 입력해주셔야 합니다!
-	        this.messageService = NurigoApp.INSTANCE.initialize("NCSLACN1QKPRG3LD", "PEJILNK2JBLN5CGMF3UQDB7A6N8SXZW8", "https://api.coolsms.co.kr");
+	        this.messageService = NurigoApp.INSTANCE.initialize("NCSKB693UUE2UC7D", "IBHPCKUB3AT5KINEU0K9VVPQ4YGIGS0D", "https://api.coolsms.co.kr");
 
 	    }
 	    
