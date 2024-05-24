@@ -546,7 +546,15 @@
 
         function startPayment() {
         	let totalAmount = document.getElementById('dateDifferenceInput').value.replace(",", "");
-        	
+        	 // 선택된 보험 항목의 id를 가져옴
+            let selectedInsuranceId = document.querySelector('input[name="insurance"]:checked').id;
+            
+            // 해당 id와 일치하는 label 태그를 선택
+            let selectedLabel = document.querySelector('label[for="' + selectedInsuranceId + '"]');
+            
+            // 선택된 label의 텍스트를 가져옴
+            let selectedInsuranceText = selectedLabel ? selectedLabel.textContent.trim() : '';
+            
             IMP.request_pay({
                 pg: "html5_inicis", // 결제 과정에 사용될 결제사 이니시스
                 pay_method: "card", // 결제 수단
@@ -563,15 +571,6 @@
             }, function(rsp) {
                 if (rsp.success) {
                 	
-//                 	var selectedId = $(this).attr('id');
-                    
-//                     // 해당 id와 일치하는 label 태그를 선택
-//                     var selectedLabel = $('label[for="' + selectedId + '"]');
-                    
-//                     let i = selectedLabel.text();
-                    // 선택된 레이블 태그의 텍스트를 콘솔에 출력
-                	
-                	
                 	$.ajax({
                 		type : "POST",
                 		url : "payment",
@@ -579,7 +578,7 @@
                 			schedule : '${param.schedule}',
                 			car_number : '${param.car_number}',
                 			payment_result_amount : totalAmount,
-                			insurance : i
+                			insurance: selectedInsuranceText
                 		},
                 		dataType : "JSON",
                 		success : function(response) {
