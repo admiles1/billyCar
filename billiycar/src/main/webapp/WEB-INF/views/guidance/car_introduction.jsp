@@ -76,6 +76,7 @@
 		
 		.car-option-list li {width : 20%;}
 		
+		
    /* 	========================================= */
    
    /* div 인라인 */
@@ -133,6 +134,31 @@
 		margin-left: -20px;
 		padding : 5px;
 	}
+	
+	
+	/*submit 버튼*/
+	#submitBtn {
+		margin-left : 10px;
+		background-color : #00aaff;
+		color : white;
+		font-size : 17px;
+		border : none;
+		border-radius: 5px;
+		padding : 5px;
+	}
+	
+	#searchKeyword {
+		border : 1px solid gray;
+		border-radius: 5px;
+		padding : 5px;
+	}
+	
+	#searchType {
+		border : 1px solid gray;
+		border-radius: 5px;
+		padding : 4px;
+	}
+	
 	
     </style>
     
@@ -377,14 +403,14 @@
                 <h2 style="text-align: center">차량소개</h2>
             </div>
         </div>
-        <div align="center">	
+        <div align="center" style="margin-top:40px; margin-bottom:30px;">	
        		<form action="javascript:void(0);" name="fr">
 				<select name="searchType" id="searchType">
 					<option value="brand" <c:if test="${param.searchType eq 'brand'}"> selected</c:if>> 제조사</option>
 					<option value="model" <c:if test="${param.searchType eq 'model'}"> selected</c:if>> 모델</option>
 				</select>
 				<input type="text" name="searchKeyword" value="${param.searchKeyword}" placeholder="검색어를 입력하여주세요" id="searchKeyword"> 
-				<input type="submit" value="검색" />
+				<input type="submit" value="검색" id="submitBtn"/>
 			</form>
         </div>
         
