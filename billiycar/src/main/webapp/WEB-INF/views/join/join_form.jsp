@@ -234,6 +234,7 @@
 			alert("인증번호를 확인해주세요.");
 			return false;
 		} else {
+			alert("인증되었습니다.");
 			checkAuthNumResult = true;
 		}
 	}
