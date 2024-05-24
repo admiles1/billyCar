@@ -29,6 +29,7 @@
 		SELECT *
 		FROM car c
 		JOIN review r ON c.car_number = r.car_number
+		JOIN heart h ON h.review_idx = r.review_idx
     	<if test="option.equals('latest')">
     		order by r.review_idx desc
     	</if>

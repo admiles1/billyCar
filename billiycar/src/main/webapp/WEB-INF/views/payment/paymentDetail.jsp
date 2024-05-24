@@ -208,7 +208,7 @@
 				                ${reservDetails[0].reserv_insurance == 1 ? 'checked="checked"' : ''} disabled>
 				                <label>일반자차</label>
 				            </td>
-				            <td colspan="1" class="c">1만원</td>
+				            <td colspan="1" class="c">10원</td>
 				            <td colspan="1" class="c">200만원</td>
 				            <td colspan="1" class="c">50만원</td>
 				        </tr>
@@ -219,7 +219,7 @@
 				                ${reservDetails[0].reserv_insurance == 2 ? 'checked="checked"' : ''} disabled>
 				                <label>완전자차</label>
 				            </td>
-				            <td colspan="1" class="c">2만6천원</td>
+				            <td colspan="1" class="c">25원</td>
 				            <td colspan="1" class="c">200만원</td>
 				            <td colspan="1" class="c">없음</td>
 				        </tr>
@@ -263,15 +263,15 @@
                                 (+)0 원
                             </c:when>
                             <c:when test="${reservDetails[0].reserv_insurance == 1}">
-                                (+)10,000 원
+                                (+)15 원
                             </c:when>
                             <c:when test="${reservDetails[0].reserv_insurance == 2}">
-                                (+)26,000 원
+                                (+)25 원
                             </c:when>
                         </c:choose>
                     </div>
-					<div class="col-3">할인금액</div>
-					<div class="col-9" align="right">할인금액 표시</div>
+<!-- 					<div class="col-3">할인금액</div> -->
+<!-- 					<div class="col-9" align="right">할인금액 표시</div> -->
 					<hr>
 					<div class="col-5">결제금액(VAT 포함)</div>
 					<div class="col-7" id="total_payment" align="right">
@@ -294,35 +294,14 @@
         }
 
         var paymentResultAmount = ${reservDetails[0].payment_result_amount};
-        var totalPaymentAmount = paymentResultAmount + insurancePrice;
+        var totalPaymentAmount = paymentResultAmount;
 
         document.getElementById('total_payment').innerText = totalPaymentAmount.toLocaleString() + " 원";
-        
         document.getElementById('insuranceNone').style.display = reservInsurance == 0 ? '' : 'none';
         document.getElementById('insuranceGeneral').style.display = reservInsurance == 1 ? '' : 'none';
         document.getElementById('insuranceFull').style.display = reservInsurance == 2 ? '' : 'none';
     });
 	</script>
-	<!-- 보험 값 받아오는 스크립트 -->
-	 <script>
-        // 문서 로드 시 이벤트 리스너 추가
-        document.addEventListener('DOMContentLoaded', function() {
-            let radios = document.querySelectorAll('.insurance_data'); // 모든 라디오 버튼을 선택
-            radios.forEach(function(radio) {
-                radio.addEventListener('change', function() { // 라디오 버튼 변경 이벤트
-                    if (this.checked) { // 라디오 버튼이 선택된 경우
-                        let price = parseInt(this.value); // 선택된 라디오 버튼의 값 가져오기
-                        document.getElementById('insurance_price').innerText = '(+)' + price.toLocaleString() + " 원"; // 값을 div에 표시
-                        
-                        // 결제 금액 업데이트
-                        let paymentResultAmount = ${reservDetails[0].payment_result_amount};
-                        let totalPaymentAmount = paymentResultAmount + price;
-                        document.getElementById('total_payment').innerText = totalPaymentAmount.toLocaleString() + " 원";
-                    }
-                });
-            });
-        });
-    </script>	
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <%-- 	<footer><jsp:include page="../inc/bottom.jsp"></jsp:include></footer> --%>

@@ -70,7 +70,7 @@
 			 , #{reserv_returndate}
 			 , #{reserv_pickuplocation}
 			 , #{reserv_returnlocation}
-			 , 0    -- car_in
+			 , #{reserv_insurance}    -- car_in
 			 , 0    -- car_status
 			 , 0    -- car_option
 			 , now()  

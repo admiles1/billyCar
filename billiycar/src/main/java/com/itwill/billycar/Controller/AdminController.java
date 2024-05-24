@@ -13,6 +13,7 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.javassist.expr.Instanceof;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -80,13 +81,13 @@ public class AdminController {
 	public String admin(Model model, AdminVO admin) {
 		
 		admin.setAdmin_id((String)session.getAttribute("member_id"));
-		
-		
+
 		// 관리자 아닐 경우 돌려보내기
 		if(session.getAttribute("member_id")==null || !session.getAttribute("member_id").equals(admin.getAdmin_id())) {
 			model.addAttribute("msg","접근 권한이 없습니다");
+			model.addAttribute("targetURL","/billycar");
 			return "err/fail";
-		} 
+		}  
 		
 		//총 회원 수
 		int totalMember = memberService.selectMemberCount();
@@ -145,8 +146,15 @@ public class AdminController {
 	public String adminMemberSearch(@RequestParam(defaultValue = "") String searchType,
 									@RequestParam(defaultValue = "") String searchKeyword,
 									@RequestParam(defaultValue = "1") int pageNum,
-									Model model) {
-		
+									Model model, AdminVO admin) {
+		admin.setAdmin_id((String)session.getAttribute("member_id"));
+
+		// 관리자 아닐 경우 돌려보내기
+		if(session.getAttribute("member_id")==null || !session.getAttribute("member_id").equals(admin.getAdmin_id())) {
+			model.addAttribute("msg","접근 권한이 없습니다");
+			model.addAttribute("targetURL","/billycar");
+			return "err/fail";
+		} 
 		
 		int listLimit = 3;
 		int startRow = (pageNum - 1) * listLimit;
@@ -181,7 +189,16 @@ public class AdminController {
 	
 	//회원 상태 수정 폼 
 	@GetMapping("memberStatus")
-	public String memberStatus(MemberVO member) {
+	public String memberStatus(MemberVO member,AdminVO admin, Model model) {
+		admin.setAdmin_id((String)session.getAttribute("member_id"));
+
+		// 관리자 아닐 경우 돌려보내기
+		if(session.getAttribute("member_id")==null || !session.getAttribute("member_id").equals(admin.getAdmin_id())) {
+			model.addAttribute("msg","접근 권한이 없습니다");
+			model.addAttribute("targetURL","/billycar");
+			return "err/fail";
+		} 
+		
 		return "admin/member_status";
 	}
 	
@@ -204,30 +221,37 @@ public class AdminController {
 
 	// 차량 목록 조회
 	@GetMapping("admin_car")
-	public String admin_car(CarVO car, Model model, @RequestParam(defaultValue = "1") int pageNum) {
-		
-		int listLimit = 10;
-		int startRow = (pageNum - 1) * listLimit;
-		
-		int listCount = service.getCarListCount();
-		int pageListLimit = 3; // 페이지 번호 갯수를 3개로 지정(1 2 3 or 4 5 6 등...)
-		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0);
-		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
-		int endPage = startPage + pageListLimit - 1;
-		if(endPage > maxPage) {
-			endPage = maxPage;
-		}
-		
-		Map<String, Object> param  = new HashMap<String, Object>();
-		param.put("startRow",  startRow);
-		param.put("listLimit",  listLimit);
-		param.put("searchType", "");
-		param.put("searchKeyword", "");
-		
-		model.addAttribute("pageInfo", new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage));
+	public String admin_car(CarVO car, Model model, @RequestParam(defaultValue = "1") int pageNum, AdminVO admin) {
+		admin.setAdmin_id((String)session.getAttribute("member_id"));
 
-		List<CarVO> carList = service.getCarList(param);
-		model.addAttribute("carList", carList);
+		// 관리자 아닐 경우 돌려보내기
+		if(session.getAttribute("member_id")==null || !session.getAttribute("member_id").equals(admin.getAdmin_id())) {
+			model.addAttribute("msg","접근 권한이 없습니다");
+			model.addAttribute("targetURL","/billycar");
+			return "err/fail";
+		} 
+//		int listLimit = 5;
+//		int startRow = (pageNum - 1) * listLimit;
+//		
+//		int listCount = service.getCarListCount();
+//		int pageListLimit = 3; // 페이지 번호 갯수를 3개로 지정(1 2 3 or 4 5 6 등...)
+//		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0);
+//		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+//		int endPage = startPage + pageListLimit - 1;
+//		if(endPage > maxPage) {
+//			endPage = maxPage;
+//		}
+//		
+//		Map<String, Object> param  = new HashMap<String, Object>();
+//		param.put("startRow",  startRow);
+//		param.put("listLimit",  listLimit);
+//		param.put("searchType", "");
+//		param.put("searchKeyword", "");
+//		
+//		model.addAttribute("pageInfo", new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage));
+//
+//		List<CarVO> carList = service.getCarList(param);
+//		model.addAttribute("carList", carList);
 		
 		return "admin/admin_car";
 	}
@@ -235,18 +259,42 @@ public class AdminController {
 	// 차량 검색
 	@ResponseBody
 	@GetMapping("search_car")
-	public String searchCars(
+	public JsonObject  searchCars(
 			@RequestParam(defaultValue = "") String searchType,
 			@RequestParam(defaultValue = "") String searchKeyword,
-			@RequestParam(defaultValue = "1") int pageNum,
-			Model model) {
+			@RequestParam(defaultValue = "1") int pageNum) {
 		
-		System.out.println("검색타입 : " + searchType);
-		System.out.println("검색어 : " + searchKeyword);
-		System.out.println("페이지번호 : " + pageNum);
 		
-		int listLimit = 10;
+		System.out.println(pageNum);
+		JsonObject responseJson = new JsonObject();
+		
+		
+		int listLimit = 2;
 		int startRow = (pageNum - 1) * listLimit;
+		
+		int listCount = service.getCarListCount();
+		int pageListLimit = 3; // 페이지 번호 갯수를 3개로 지정(1 2 3 or 4 5 6 등...)
+		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0);
+		
+		System.out.println("이자민바보");
+		
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		int endPage = startPage + pageListLimit - 1;
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		PageInfo pageInfo = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
+		
+		JsonObject pageInfoJson = new JsonObject();
+		pageInfoJson.addProperty("listCount", pageInfo.getListCount());
+	    pageInfoJson.addProperty("listLimit", pageInfo.getPageListLimit());
+	    pageInfoJson.addProperty("maxPage", pageInfo.getMaxPage());
+	    pageInfoJson.addProperty("startPage", pageInfo.getStartPage());
+	    pageInfoJson.addProperty("endPage", pageInfo.getEndPage());
+//	    pageInfoJson.addProperty("pageNum", pageNum);
+	    
+	    responseJson.add("pageInfo", pageInfoJson);
 		
 		Map<String, Object> param  = new HashMap<String, Object>();
 		param.put("startRow", startRow);
@@ -254,35 +302,56 @@ public class AdminController {
 		param.put("searchType", searchType);
 		param.put("searchKeyword", searchKeyword.trim());
 		
+		
 		List<CarVO> carList = service.getCarList(param);
 		
-		
-		JsonArray list = new JsonArray();
-		for(CarVO vo : carList) {
-			JsonObject json = new JsonObject();
-			json.addProperty("car_number", vo.getCar_number());
-			json.addProperty("car_model", vo.getCar_model());
-			json.addProperty("car_brand", vo.getCar_brand());
-			json.addProperty("car_fuel", vo.getCar_fuel());
-			json.addProperty("gear_type", vo.getGear_type());
-			json.addProperty("car_img", vo.getCar_img());
-			json.addProperty("car_year", vo.getCar_year().toString());
-			json.addProperty("car_dayprice", vo.getCar_dayprice());
-			json.addProperty("car_hourprice", vo.getCar_hourprice());
-			json.addProperty("car_status", vo.getCar_status());
-			json.addProperty("color", vo.getColor());
+//		JsonArray list = new JsonArray();
+//		JsonObject json = new JsonObject();
+		JsonArray carsJson = new JsonArray();
+//		for(CarVO vo : carList) { // 차 정보 저장
+		for (CarVO car : carList) {
+			JsonObject carJson = new JsonObject();
+//			json.addProperty("car_number", vo.getCar_number());
+//			json.addProperty("car_model", vo.getCar_model());
+//			json.addProperty("car_brand", vo.getCar_brand());
+//			json.addProperty("car_fuel", vo.getCar_fuel());
+//			json.addProperty("gear_type", vo.getGear_type());
+//			json.addProperty("car_img", vo.getCar_img());
+//			json.addProperty("car_year", vo.getCar_year().toString());
+//			json.addProperty("car_dayprice", vo.getCar_dayprice());
+//			json.addProperty("car_hourprice", vo.getCar_hourprice());
+//			json.addProperty("car_status", vo.getCar_status());
+//			json.addProperty("color", vo.getColor());
 			
-			list.add(json);
+			carJson.addProperty("car_number", car.getCar_number());
+			carJson.addProperty("car_model", car.getCar_model());
+			carJson.addProperty("car_brand", car.getCar_brand());
+			carJson.addProperty("car_fuel", car.getCar_fuel());
+			carJson.addProperty("gear_type", car.getGear_type());
+	        carJson.addProperty("car_img", car.getCar_img());
+	        carJson.addProperty("car_year", car.getCar_year().toString());
+	        carJson.addProperty("car_dayprice", car.getCar_dayprice());
+	        carJson.addProperty("car_hourprice", car.getCar_hourprice());
+	        carJson.addProperty("car_status", car.getCar_status());
+	        carJson.addProperty("color", car.getColor());
+	        carsJson.add(carJson);
 		}
 		
+		//페이징 정보 저장
+//		json.addProperty("pageInfo_listCount", pageInfo.getListCount());
+//		json.addProperty("pageInfo_listLimit", pageInfo.getPageListLimit());
+//		json.addProperty("pageInfo_maxPage", pageInfo.getMaxPage());
+//		json.addProperty("pageInfo_startPage", pageInfo.getStartPage());
+//		json.addProperty("pageInfo_endPage", pageInfo.getEndPage());
+//		list.add(json);
 		
-		
-//		model.addAttribute("car", list);
+	    responseJson.add("cars", carsJson);
+
 //		System.out.println("ddddddddddddddddddd" + list);
-//		System.out.println("wwwwwwwwwwwwwwwwwww" + list.toString());
 		
-		return list.toString();
-				
+//		return list.toString();
+	    return responseJson;
+
 	}
 	
 	// 차량 목록 중 차량 삭제
@@ -328,7 +397,15 @@ public class AdminController {
 	
 	// 차량 등록 페이지에 공통코드 가져가기
 	@GetMapping("admin_car_registration")
-	public String admin_car_registration(CommonVO common, Model model) {
+	public String admin_car_registration(CommonVO common, Model model, AdminVO admin) {
+		admin.setAdmin_id((String)session.getAttribute("member_id"));
+
+		// 관리자 아닐 경우 돌려보내기
+		if(session.getAttribute("member_id")==null || !session.getAttribute("member_id").equals(admin.getAdmin_id())) {
+			model.addAttribute("msg","접근 권한이 없습니다");
+			model.addAttribute("targetURL","/billycar");
+			return "err/fail";
+		} 
 //		System.out.println(common);
 		
 //		List<CommonVO> dbCommon = service.getCommon(common);
@@ -365,8 +442,18 @@ public class AdminController {
 	
 	
 	@PostMapping("carUpload")
-    public String carUpload(CarVO car, String car_number1, String car_number2, String car_number3, HttpServletRequest request, Model model) {
-        car.setCar_number(car_number1 + car_number2 + car_number3);
+    public String carUpload(AdminVO admin,CarVO car, String car_number1, String car_number2, String car_number3, HttpServletRequest request, Model model) {
+        
+		admin.setAdmin_id((String)session.getAttribute("member_id"));
+
+		// 관리자 아닐 경우 돌려보내기
+		if(session.getAttribute("member_id")==null || !session.getAttribute("member_id").equals(admin.getAdmin_id())) {
+			model.addAttribute("msg","접근 권한이 없습니다");
+			model.addAttribute("targetURL","/billycar");
+			return "err/fail";
+		} 
+		
+		car.setCar_number(car_number1 + car_number2 + car_number3);
         car.setCar_capacity(car.getCar_capacity() + "인승");
 
         String uploadDir = "/resources/upload";
@@ -490,7 +577,16 @@ public class AdminController {
 	
 	// 차량 상태 수정을 위한 조회
 	@GetMapping("carModify")
-	public String carModify(@RequestParam("carNumber") String carNumber, Model model) {
+	public String carModify(@RequestParam("carNumber") String carNumber, Model model, AdminVO admin) {
+		admin.setAdmin_id((String)session.getAttribute("member_id"));
+
+		// 관리자 아닐 경우 돌려보내기
+		if(session.getAttribute("member_id")==null || !session.getAttribute("member_id").equals(admin.getAdmin_id())) {
+			model.addAttribute("msg","접근 권한이 없습니다");
+			model.addAttribute("targetURL","/billycar");
+			return "err/fail";
+		} 
+		
 	    // 특정 차량의 정보 조회
 	    CarVO car = service.getCarById(carNumber);
 	    
@@ -521,7 +617,15 @@ public class AdminController {
 	
 	// 예약 차량 조회
 	@GetMapping("admin_car_reservation")
-	public String admin_car_reservation(CommonVO common, Model model) {
+	public String admin_car_reservation(CommonVO common, Model model, AdminVO admin) {
+		admin.setAdmin_id((String)session.getAttribute("member_id"));
+
+		// 관리자 아닐 경우 돌려보내기
+		if(session.getAttribute("member_id")==null || !session.getAttribute("member_id").equals(admin.getAdmin_id())) {
+			model.addAttribute("msg","접근 권한이 없습니다");
+			model.addAttribute("targetURL","/billycar");
+			return "err/fail";
+		} 
 		
 		// 제조사 정보 가져오기
 	    List<CommonVO> brands = service.getBrands();
