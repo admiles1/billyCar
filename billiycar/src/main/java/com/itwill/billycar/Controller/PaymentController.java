@@ -20,6 +20,7 @@ import com.itwill.billycar.service.MypageService;
 import com.itwill.billycar.service.PaymentService;
 import com.itwill.billycar.service.ReservService;
 import com.itwill.billycar.vo.CarVO;
+import com.itwill.billycar.vo.CouponIssueVO;
 import com.itwill.billycar.vo.MemberVO;
 import com.itwill.billycar.vo.PaymentVO;
 import com.itwill.billycar.vo.ReservVO;
@@ -152,6 +153,14 @@ public class PaymentController {
 		if(count > 0) {
 			int carReserveCount = paymentService.updateCarReserveCount(car);
 			
+			
+			// 1차 시도
+            int couponId = Integer.parseInt(map.get("coupon_id"));
+            System.out.println("dddddd앙아아ㄴ" + map.get("coupon_id"));
+            paymentService.updateCouponStatus(couponId); // 쿠폰 상태를 2로 변경
+
+            //
+//			int couponCount = paymentService.updateCouponStatus(payment);
 			if(carReserveCount > 0) {
 				return "true";
 			}
