@@ -1,6 +1,7 @@
 package com.itwill.billycar.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -76,7 +77,7 @@ public class CsService {
 	// ------------------------------------------------------------------------------------------------
 	// ** [QnA] **
 	// 큐엔에이 목록 불러오기
-	public List<QnaVO> getQnaList(int startRow, int listLimit, String id) {
+	public List<Map<String, Object>> getQnaList(int startRow, int listLimit, String id) {
 		return mapper.selectQnaList(startRow, listLimit, id);
 	}
 

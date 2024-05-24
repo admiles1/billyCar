@@ -89,16 +89,21 @@
 	
 	<!-- ==================================================================  -->
 	<!-- ** [큐엔에이] ** -->
-	<select id="selectQnaList" resultType="com.itwill.billycar.vo.QnaVO">
-		SELECT *
+	<select id="selectQnaList" resultType="hashmap">
+		SELECT qna_idx
+			 , qna_writer
+			 , qna_subject
+			 , qna_date
+			 , qna_status
+			 , qna_category
+			 , ROW_NUMBER() OVER(ORDER BY qna_idx DESC) AS r
 		FROM qna
 		WHERE qna_writer = #{id}
-		ORDER BY qna_idx DESC
 		LIMIT #{startRow}, #{listLimit}
 	</select>
 	
 	<select id="selectQnaListCount" resultType="int">
-		SELECT COUNT(*)
+		SELECT Count(*)
 		FROM qna
 		WHERE qna_writer =#{writer}
 	</select>

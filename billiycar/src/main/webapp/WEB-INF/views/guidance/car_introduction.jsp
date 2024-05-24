@@ -205,13 +205,13 @@
 			         
 			            $.each(carList, function(index, car) {
 							
-			            	let imgPath = "${pageContext.request.contextPath}/resources/upload/" + car.car_img
-			            	
+// 			            	let imgPath = "${pageContext.request.contextPath}/resources/upload/" + car.car_img
+							
 			                let carUl = 
 					               ' <li class="panel">'
 					               +' <div class="left">'
 					               +'     <div class="img-wrap-responsive">'
-					               +'            <img src="' + imgPath  + '">'
+					               + '<img src="' + '<%= request.getContextPath() %>/resources/upload/' + car.car_img + '">'
 					               +'     </div>'
 					               +' </div>'
 					               +' <div class="right">'
