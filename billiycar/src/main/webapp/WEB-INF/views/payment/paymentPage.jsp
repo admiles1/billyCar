@@ -301,7 +301,7 @@
 						<tr class="insuranceChk" >
 							<td colspan="1" class="c" >
 								<input name="insurance" class="chk insurance_data" id="insuranceCar0" type="radio" value="0" checked="checked"> 
-								<label>선택안함</label>
+								<label  for="insuranceCar0">선택안함</label>
 							</td>
 							<td colspan="1" class="c" >없음</td>
 							<td colspan="1" class="c" >없음</td>
@@ -311,7 +311,7 @@
 						<tr class="insuranceChk" >
 							<td colspan="1" class="c" >
 								<input name="insurance" class="chk insurance_data" id="insuranceCar1" type="radio" value="15" > 
-								<label>일반자차</label>
+								<label  for="insuranceCar1">일반자차</label>
 							</td>
 							<td colspan="1" class="c">1만원</td>
 							<td colspan="1" class="c">200만원</td>
@@ -320,8 +320,8 @@
 						
 						<tr class="insuranceChk" >
 							<td colspan="1" class="c" >
-								<input name="insurance" class="chk insurance_data" id="insuranceCar12" type="radio" value="25" > 
-								<label>완전자차</label>
+								<input name="insurance" class="chk insurance_data" id="insuranceCar2" type="radio" value="25" >
+								<label  for="insuranceCar2"> 완전자차 </label>
 							</td>
 							<td colspan="1" class="c">2만6천원</td>
 							<td colspan="1" class="c">200만원</td>
@@ -563,13 +563,23 @@
             }, function(rsp) {
                 if (rsp.success) {
                 	
+//                 	var selectedId = $(this).attr('id');
+                    
+//                     // 해당 id와 일치하는 label 태그를 선택
+//                     var selectedLabel = $('label[for="' + selectedId + '"]');
+                    
+//                     let i = selectedLabel.text();
+                    // 선택된 레이블 태그의 텍스트를 콘솔에 출력
+                	
+                	
                 	$.ajax({
                 		type : "POST",
                 		url : "payment",
                 		data : {
                 			schedule : '${param.schedule}',
                 			car_number : '${param.car_number}',
-                			payment_result_amount : totalAmount
+                			payment_result_amount : totalAmount,
+                			insurance : i
                 		},
                 		dataType : "JSON",
                 		success : function(response) {
@@ -668,6 +678,8 @@
 	});
 	
     $(document).ready(function () {
+    	
+    	
         // 적용 버튼 클릭 시
         $('#applyCouponBtn').click(function () {
             // 선택한 쿠폰 값을 가져옴
