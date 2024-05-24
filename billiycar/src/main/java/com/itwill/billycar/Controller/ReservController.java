@@ -82,44 +82,13 @@ public class ReservController {
 		reserv.setReserv_pickupdate(LocalDateTime.parse(pickupdate, formatter));
 		reserv.setReserv_returndate(LocalDateTime.parse(returndate, formatter));
 		
-		String carType = car.getCar_type();
-		String carFuel = car.getCar_fuel();
+		model.addAttribute("selType", car.getCar_type());
+		model.addAttribute("selFuel", car.getCar_fuel());
 		
-		model.addAttribute("selType", carType);
-		model.addAttribute("selFuel", carFuel);
-		
-		if(carType.equals("")) {
-			car.setCar_type(null);
-			carType = null;
-		}
-		
-		if(carFuel.equals("")) {
-			car.setCar_fuel(null);
-			carFuel = null;
-		}
-		
-		if(carType != null && carFuel == null) { 	// 자동차타입 조건만 존재 할 경우
-			// search메소드로 스트링 포맷 변환 후 초기화
-			car.setCar_type(searchMethod(carType));
-		} else if (carType == null && carFuel != null) { // 자동차연료 조건만 존재 할 경우
-			car.setCar_fuel(searchMethod(carFuel));
-		} else if (carType != null && carFuel != null) { // 두 가지 모두 검색 할 경우
-			car.setCar_fuel(searchMethod(carFuel));
-			car.setCar_type(searchMethod(carType));
-		} 
-		
-		 // 한 번 검색당 4개씩 보여주기
-	    int listLimit = 4;
-	    int startRow = (pageNum - 1) * listLimit;
-		
-		// 자동차검색
-		List<Map<String, String>> cars = reservService.getCarList(car, reserv, startRow , listLimit);
-		// 공통 코드에서 type, fule 조회해서 가져오기 TODO = 줄일것
 		model.addAttribute("schedule", map);
 		model.addAttribute("types", adminService.getTypes());
 		model.addAttribute("fuels", adminService.getFuels());
 		model.addAttribute("BusinessHours", adminService.getBusinesshours());
-		model.addAttribute("cars", cars);
 		
 		return "reservation/reservation";
 	}

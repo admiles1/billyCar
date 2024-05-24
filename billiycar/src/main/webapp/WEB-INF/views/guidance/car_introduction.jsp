@@ -225,7 +225,7 @@
 					               +'    </div>'
 					               +'    <div class="search-car-result-cont">'
 					               +'         <div class="search-car-result-cont-left">'
-					               +'             <h5 class="title-01 f14"> 요금정보</h5>'
+					               +'             <h5 class="title-01 f14"> 최저가 요금정보</h5>'
 					               +'            <table class="cont-list-table-v04">'
 					               +'                 <colgroup>'
 					               +'                    <col width="20%">'
