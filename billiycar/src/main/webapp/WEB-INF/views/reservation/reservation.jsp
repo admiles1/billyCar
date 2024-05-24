@@ -48,113 +48,159 @@
 </style>
 
 <script>
-	
-	$(function(){	
-		
-		let pageNum = 2;
-		
-		$("#moreList").on("click", function(){
-			let selectedFuel = ''; // 선택된 연료를 저장할 문자열 변수
-		    $('input[name="car_fuel"]:checked').each(function() {
-		    	selectedFuel += $(this).val() + ',';
-		    });
-		    selectedFuel = selectedFuel.slice(0, -1);
-		    
-			let selectedType = ''; // 선택된 연료를 저장할 문자열 변수
-		    $('input[name="car_type"]:checked').each(function() {
-		    	selectedType += $(this).val() + ',';
-		    });
-		    selectedType = selectedType.slice(0, -1);
-		    
-		   
-			$.ajax({
-				type : "POST" ,
-				url : "MoreList",
-				data : {
-					reserv_pickupdate : $("#reserv_pickupdate").val(),
-					reserv_returndate : $("#reserv_returndate").val(),
-					pickupTime : $("#reserv_pickuptime").val(),
-					returnTime : $("#reserv_returntime").val(),
-					car_fuel : selectedFuel,
-					car_type : selectedType,
-					pageNum : pageNum
-				},
-				dataType : "json",
-				success : function(response) {
-					if (response.length === 0) {
-						alert('마지막 항목입니다!');
-// 						$("#moreList").css("display", "none");
-					}
-					
-					for(let car of response) {
-						let dayPrice = car.car_dayprice.toLocaleString();
-						let hourPrice = car.car_hourprice.toLocaleString();
-						let carModel = "\"" + car.car_model + "\"";
-						let carType = "\"" + car.car_type + "\"";
-						let carFuel = "\"" + car.car_fuel + "\"";
-						$("#selectResult > ul").append(
-								"<li class='carList fadeIn row'>"
-								+ "<a class='d-flex' onclick='goDetail(" + carModel + "," + carType + "," + carFuel + ")'>"
-								+ "<span class='carImg'><img src='/billycar/resources/upload/" + car.car_img + "'></span>"
-								+ "<span class='carInfo'>"
-								+ "<span>" + car.car_model + " / " + car.car_capacity + "</span>"
-								+ "<small>종일가 "+ dayPrice + "</small><br>"
-								+ "<small>시간당 "+ hourPrice + "</small><br>"
-								+ "<small>예약가능차량" + car.canReserv + "</small>"
-								+ "</span>"
-								+ "</a>"
-								+ "</li>"
-						);
-						
-					}
-					pageNum++;
-				}
-			}) // ajax 끝
-		}); // 더보기 클릭 이벤트
-		$("#searchCar").on("click", function(){
-			if(!check()) {
-				return;
-			}
-			
-			let formData = $("#searchForm").serialize();
-			
-			$.ajax({
-				type : "POST" ,
-				url : "SelectCarList",
-				data : formData,
-				dataType : "json",
-				success : function(response) {
-					$("#selectResult > ul").empty();
-					for(let car of response) {
-						let dayPrice = car.car_dayprice.toLocaleString();
-						let hourPrice = car.car_hourprice.toLocaleString();
-						let carModel = "\"" + car.car_model + "\"";
-						let carType = "\"" + car.car_type + "\"";
-						let carFuel = "\"" + car.car_fuel + "\"";
-						
-						$("#selectResult > ul").append(
-								"<li class='carList fadeIn row'>"
-								+ "<a class='d-flex' onclick='goDetail(" + carModel + "," + carType + "," + carFuel + ")'>"
-								+ "<span class='carImg'><img src='/billycar/resources/upload/" + car.car_img + "'></span>"
-								+ "<span class='carInfo'>"
-								+ "<span>" + car.car_model + " / " + car.car_capacity + "</span>"
-								+ "<small>종일가 "+ dayPrice + "</small><br>"
-								+ "<small>시간당 "+ hourPrice + "</small><br>"
-								+ "<small>예약가능차량" + car.canReserv + "</small>"
-								+ "</span>"
-								+ "</a>"
-								+ "</li>"
-						);
-					}
-					pageNum = 2;
-					$("#moreList").css("display" ,"inline");
-				}
-			}) // ajax 끝
-		}); // 차량검색 클릭 이벤트
-	}); //ready 끝
+	// 전역변수
+	let pageNum = 1;
+	let reserv_pickupdate = "";
+	let reserv_returndate = "";
+	let pickupTime = "";
+	let returnTime = "";
+	let car_fuel = "";
+	let car_type = "";
 
 	
+	// ready
+	$(function(){	
+		
+		search(); // 페이지 로딩 시 디폴트값 차량 검색
+		
+		// evnet
+		$("#searchCar").on("click", search); // 차량 검색
+		$("#moreList").on("click", moreList); // 검색되어 페이징 처리된 차량 목록 더보기
+		
+		
+		
+		// 함수
+		
+		<% // 데이트피커 스크립트 %>
+		$('.input-daterange').datepicker({
+		    format: 'yyyy-mm-dd',
+		    todayHighlight: true,
+		    startDate: '0d',
+		    orientation: "bottom"
+		});		
+		
+	}); //ready 끝
 	
+
+	
+	// 차량 검색 함수
+	function search(){
+		
+		pageNum = 1;
+		
+		reserv_pickupdate = $("#reserv_pickupdate").val();
+		reserv_returndate = $("#reserv_returndate").val();
+		pickupTime = $("#reserv_pickuptime").val()
+		returnTime = $("#reserv_returntime").val();
+		car_fuel = "";
+	    car_type = "";
+	    
+		// 체크된 옵션들을 체크
+	    $('input[name="car_fuel"]:checked').each(function() {
+	    	car_fuel += $(this).val() + ',';
+	    });
+		
+	    $('input[name="car_type"]:checked').each(function() {
+	    	car_type += $(this).val() + ',';
+	    });
+		
+	    // 데이터 가공
+	    car_fuel = car_fuel.slice(0, -1);
+	    car_type = car_type.slice(0, -1);
+		
+		$.ajax({
+			type : "POST" ,
+			url : "SelectCarList",
+			data : {
+				reserv_pickupdate : reserv_pickupdate,
+				reserv_returndate : reserv_returndate,
+				pickupTime : pickupTime,
+				returnTime : returnTime,
+				car_fuel : car_fuel,
+				car_type : car_type,
+				pageNum : pageNum
+			},
+			dataType : "json",
+			success : function(response) {
+				$("#selectResult > ul").empty();
+				
+				for(let car of response) {
+					let dayPrice = car.car_dayprice.toLocaleString();
+					let hourPrice = car.car_hourprice.toLocaleString();
+					let carModel = "\"" + car.car_model + "\"";
+					let carType = "\"" + car.car_type + "\"";
+					let carFuel = "\"" + car.car_fuel + "\"";
+					
+					$("#selectResult > ul").append(
+							"<li class='carList fadeIn row'>"
+							+ "<a class='d-flex' onclick='goDetail(" + carModel + "," + carType + "," + carFuel + ")'>"
+							+ "<span class='carImg'><img src='/billycar/resources/upload/" + car.car_img + "'></span>"
+							+ "<span class='carInfo'>"
+							+ "<span>" + car.car_model + " / " + car.car_capacity + "</span>"
+							+ "<small>종일가 "+ dayPrice + "</small><br>"
+							+ "<small>시간당 "+ hourPrice + "</small></span>"
+							+ "<span class='canReserv'>" + car.canReserv + "대 차량 <br><small>이용가능</small></span>" 
+							+ "</span>"
+							+ "</a>"
+							+ "</li>"
+					);
+				}
+				pageNum++;
+			}
+		}) // ajax 끝
+	}
+	
+	function moreList(){
+		alert(car_fuel)
+		alert(car_type)
+		
+		$.ajax({
+			type : "POST" ,
+			url : "MoreList",
+			data : {
+				reserv_pickupdate : reserv_pickupdate,
+				reserv_returndate : reserv_returndate,
+				pickupTime : pickupTime,
+				returnTime : returnTime,
+				car_fuel : car_fuel,
+				car_type : car_type,
+				pageNum : pageNum
+			},
+			dataType : "JSON",
+			success : function(response) {
+				
+				if (response.length === 0) {
+					alert('마지막 항목입니다!');
+				}
+				
+				for(let car of response) {
+					let dayPrice = car.car_dayprice.toLocaleString();
+					let hourPrice = car.car_hourprice.toLocaleString();
+					let carModel = "\"" + car.car_model + "\"";
+					let carType = "\"" + car.car_type + "\"";
+					let carFuel = "\"" + car.car_fuel + "\"";
+					$("#selectResult > ul").append(
+							"<li class='carList fadeIn row'>"
+							+ "<a class='d-flex' onclick='goDetail(" + carModel + "," + carType + "," + carFuel + ")'>"
+							+ "<span class='carImg'><img src='/billycar/resources/upload/" + car.car_img + "'></span>"
+							+ "<span class='carInfo'>"
+							+ "<span>" + car.car_model + " / " + car.car_capacity + "</span>"
+							+ "<small>종일가 "+ dayPrice + "</small><br>"
+							+ "<small>시간당 "+ hourPrice + "</small></span>"
+							+ "<span class='canReserv'>" + car.canReserv + "대 차량 <br><small>이용가능</small></span>" 
+							+ "</span>"
+							+ "</a>"
+							+ "</li>"
+					);
+					
+				}
+				pageNum++;
+			}
+		}) // ajax 끝
+	}
+	
+	
+	// 상세 페이지로 이동
 	function goDetail(model,type,fuel){
 		let returnLocation = $("#reserv_returnlocation").val();
 		
@@ -206,19 +252,6 @@
 				 + "&car_fuel=" + fuel
 				 + "&schedule=" + schedule;
 	}
-	
-	function check() {
-		let pickupDate = $("#reserv_pickupdate").val();
-		
-		if(pickupDate == "") {
-			alert('대여날짜를 선택하여 주십시오');
-			$("#reserv_pickupdate").focus();
-			return false;
-		}  
-		
-	    
-		return true;
-	}
 </script>
 </head>
 <body>	
@@ -229,7 +262,7 @@
 	<main class="container text-center">
  		<div class="row">	
     		<div class="col-4">
-			    <form action="reservation" id="searchForm" method="post" onsubmit="return check()">
+			    <form id="searchForm" method="post">
 			    	<div class="car_option_sel"> <h3> 예약 일정 </h3></div>
 			    	<div>
 						<div>
@@ -419,44 +452,11 @@
     		</div>
 	   		<div class="col-8" id="selectResult">
 				<ul>
-					<c:forEach var="car" items="${cars}">
-						<li class='carList fadeIn row'>
-							<a class='d-flex' onclick='goDetail("${car.car_model}", "${car.car_type}", "${car.car_fuel}")'>
-								<span class='carImg'><img src="<%= request.getContextPath() %>/resources/upload/${car.car_img}"></span>
-								<span class='carInfo'>
-									<span> ${car.car_model} / ${car.car_capacity} </span>
-									<c:set var="dayprice" value="${car.car_dayprice}" />
-									<small>종일가 : <fmt:formatNumber value="${dayprice}" type="number" /> </small><br>
-									<c:set var="hourprice" value="${car.car_hourprice}" />
-									<small>시간당 : <fmt:formatNumber value="${hourprice}" type="number" /> </small><br>
-								</span>
-								<span class='canReserv'>
-									${car.canReserv}대<br>
-									<small>이용가능</small>
-								</span>
-							</a>
-						</li>
-					</c:forEach>
 				</ul>
 	   			<input type="button" value="차량 더보기" id="moreList">
 			</div>
 		</div>
 	</main>
 	<footer><jsp:include page="../inc/bottom.jsp"></jsp:include></footer>
-
-<% // 데이트피커 스크립트 %>
-<script>
-	$(document).ready(function(){
-		$('.input-daterange').datepicker({
-		    format: 'yyyy-mm-dd',
-		    todayHighlight: true,
-		    startDate: '0d',
-		    orientation: "bottom"
-		});
-		
-	});
-	
-	
-</script>
 </body>
 </html>
