@@ -273,7 +273,8 @@
                         isLoading = false;
                     },
                 error: function() {
-                    alert('데이터가 없습니다.');
+                    alert('차량 목록이 없습니다.');
+                    location.reload();
                 }
             });
         }
