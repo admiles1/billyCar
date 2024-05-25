@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.itwill.billycar.service.Memberservice;
 import com.itwill.billycar.service.MypageService;
 import com.itwill.billycar.service.ReservService;
 import com.itwill.billycar.vo.CouponIssueVO;
@@ -37,6 +38,9 @@ public class MypageController {
 	
 	@Autowired
 	private ReservService reservService;
+	
+	@Autowired
+	private Memberservice memberService;
 	
 //	TODO
 	@GetMapping("mypage")
@@ -90,6 +94,18 @@ public class MypageController {
 	@PostMapping("mypage")
 	public String modifyMemberInfoPro(Model model, MemberVO member) {
 		member.setMember_id((String)session.getAttribute("member_id"));
+		boolean isEmptyEmail = memberService.isEmptyEmail(member.getMember_email());
+		boolean isEmptyPhoneNum = memberService.isEmptyPhoneNum(member.getMember_phone());
+		
+		if(!isEmptyEmail) {
+			model.addAttribute("msg", "이미 가입된 이메일 입니다.");
+			return "err/fail";
+		}
+		
+		if(!isEmptyPhoneNum) {
+			model.addAttribute("msg", "이미 가입된 전화번호입니다.");
+			return "err/fail";
+		}
 		
 		int updateCount = service.modifyInfo(member);
 		
