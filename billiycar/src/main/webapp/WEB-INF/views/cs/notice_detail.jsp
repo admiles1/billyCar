@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항 detail</title>
+<title>공지사항 자세히 보기</title>
 
 <!-- css -->
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/resources/css/notice_detail.css">

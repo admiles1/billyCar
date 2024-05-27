@@ -18,13 +18,12 @@
 		  JOIN Common brand ON brand.code = c.car_brand 
 		  JOIN Common model ON model.code = c.car_model 
 		  JOIN Common carType ON carType.code = c.car_type 
-		  JOIN Common fuel ON fuel.code 
-= c.car_fuel 
+		  JOIN Common fuel ON fuel.code = c.car_fuel 
+		  WHERE c.car_status != 2
   		<if test="!searchKeyword.equals('')">
-		 WHERE 
 		 <choose>
-		 	<when test="searchType.equals('brand')"> brand.name LIKE concat('%', #{searchKeyword} , '%') </when>
-		 	<when test="searchType.equals('model')"> model.name LIKE concat('%', #{searchKeyword} , '%') </when>
+		 	<when test="searchType.equals('brand')"> AND brand.name LIKE concat('%', #{searchKeyword} , '%') </when>
+		 	<when test="searchType.equals('model')"> AND model.name LIKE concat('%', #{searchKeyword} , '%') </when>
 		 	<otherwise> 1 = 1 </otherwise>
 		 </choose>
 		</if>

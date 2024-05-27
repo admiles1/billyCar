@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>차량 소개 페이지</title>
+    <title>차량 안내</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
@@ -237,7 +237,7 @@
 					               ' <li class="panel">'
 					               +' <div class="left">'
 					               +'     <div class="img-wrap-responsive">'
-					               + '<img src="' + '<%= request.getContextPath() %>/resources/upload/' + car.car_img + '">'
+					               + '<img src="' + '<%= request.getContextPath() %>/resources/upload/' + car.car_img + '" style="margin-top:60px">'
 					               +'     </div>'
 					               +' </div>'
 					               +' <div class="right">'
