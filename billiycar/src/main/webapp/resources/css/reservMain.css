@@ -19,9 +19,29 @@ li a {
 	text-decoration : none;
 }
 
+select {
+	width : 150px;
+	text-align-last: center;
+	text-align: center;
+	border-top : none;
+	border-color : rgb(222, 226, 230);
+	border-bottom-left-radius : 6px !important;
+	border-bottom-right-radius : 6px !important;
+}
+
+.datetext {
+	border-bottom : 0px !important;
+	border-top-left-radius : 6px !important;
+	border-top-right-radius : 6px !important;
+	border-bottom-left-radius : 0px !important;
+	border-bottom-right-radius : 0px !important;
+}
+
 /* 검색 옵션 선택*/
 
-
+#reserv_returnlocation {
+	border-radius : 10px !important;
+}
 
 .option_title {
 	position : absolute;

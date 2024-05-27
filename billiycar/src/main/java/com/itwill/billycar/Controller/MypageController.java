@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.itwill.billycar.service.Memberservice;
 import com.itwill.billycar.service.MypageService;
 import com.itwill.billycar.service.ReservService;
 import com.itwill.billycar.vo.CouponIssueVO;
@@ -38,17 +39,26 @@ public class MypageController {
 	@Autowired
 	private ReservService reservService;
 	
+	@Autowired
+	private Memberservice memberService;
+	
 //	TODO
 	@GetMapping("mypage")
 	public String memberInfo(Model model) {
 		String MemberId = (String)session.getAttribute("member_id");
 		System.out.println(MemberId + " 1231231");
 		if(MemberId == null) {
-			System.out.println("asdasd");
 			model.addAttribute("msg", "로그인이 필요합니다.");
 			model.addAttribute("targetURL", "login");
 			return "err/fail";
 		}
+		
+		Object memberInfo = service.getMemberInfo(MemberId);
+	    if (memberInfo == null) {
+	        model.addAttribute("msg", "유효하지 않은 회원 정보입니다.");
+	        return "err/fail";
+	    }
+		
 		model.addAttribute("info", service.getMemberInfo(MemberId));
 		return "mypage/page/Mypage_Member_Info";
 	}
@@ -84,6 +94,18 @@ public class MypageController {
 	@PostMapping("mypage")
 	public String modifyMemberInfoPro(Model model, MemberVO member) {
 		member.setMember_id((String)session.getAttribute("member_id"));
+		boolean isEmptyEmail = memberService.isEmptyEmail(member.getMember_email());
+		boolean isEmptyPhoneNum = memberService.isEmptyPhoneNum(member.getMember_phone());
+		
+		if(!isEmptyEmail) {
+			model.addAttribute("msg", "이미 가입된 이메일 입니다.");
+			return "err/fail";
+		}
+		
+		if(!isEmptyPhoneNum) {
+			model.addAttribute("msg", "이미 가입된 전화번호입니다.");
+			return "err/fail";
+		}
 		
 		int updateCount = service.modifyInfo(member);
 		
@@ -95,7 +117,6 @@ public class MypageController {
 			model.addAttribute("targetURL", "mypage");
 			return "success/success";
 		}
-//		return "redirect:/mypage";
 	}
 	
 	@GetMapping("modifyPasswd")

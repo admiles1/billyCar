@@ -28,6 +28,17 @@
 	#carouselExampleAutoplaying{
 		margin-top : 100px;
 	}
+	.schedules-title {
+		font-size : 25px;
+		font-weight: 700;
+		color : #00AAFF;
+	}
+	
+	.schedules-content {
+		font-weight: 500;
+		font-size : 18px;
+	}
+	
 
 </style>
 <title>:: 상세 예약페이지 ::</title>
@@ -64,11 +75,16 @@
 	   		 		<h2 class="car-price"><fmt:formatNumber value="${car.car_dayprice}" pattern="#,###"/></h2>
 	   		 		<hr>
 	   		 		<div>
-	   		 			<c:set var="schedules" value="${fn:split(param.schedule, ',')}" />
-	   		 			<p> 대여 날짜 : ${schedules[0]}
-	   		 			<p> 반납 날짜 : ${schedules[1]}
-	   		 			<p> 대여 장소 : ${schedules[2]}
-	   		 			<p> 반납 장소 : ${schedules[3]}
+	   		 			<ul class="rental-criteria-list">
+		   		 			<c:set var="schedules" value="${fn:split(param.schedule, ',')}" />
+			    			<li><img src="${pageContext.request.contextPath}/resources/images/check-img.png" class="check-img"><span class="qua">대여시간이 5시간 이상일 경우 종일가로 계산됩니다!</span></li>
+		    				<li class="schedules-title"> 예약 일정 </li>
+		    				<li class="schedules-content"> ${schedules[0]}시 ~ ${schedules[1]}시 </li>
+		    				<li class="schedules-title">대여 장소</li>
+		    				<li class="schedules-content">${schedules[2]}</li>
+		    				<li class="schedules-title">반납 장소</li>
+		    				<li class="schedules-content">${schedules[3]}</li>
+		    			</ul>
 	   		 		</div>
 	   		 		<hr>
 		    		<br>

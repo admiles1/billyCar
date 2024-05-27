@@ -86,6 +86,9 @@ h2 {
 	letter-spacing: -1px;
 }   
 
+#email, #tel {
+    border: 1px solid orange;
+}
 
 </style>
 <body>

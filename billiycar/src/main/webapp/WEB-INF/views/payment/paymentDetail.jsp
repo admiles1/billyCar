@@ -26,7 +26,7 @@
 /* 	height: 45px; */
 /* 	} */
 
-	#reservInfo {
+	#reservDetailInfo {
 		margin-top: 30px;
 		background:#fff;
 		border:1px solid #ccc;
@@ -104,8 +104,9 @@
 	<header><jsp:include page="../inc/top.jsp"></jsp:include></header>
 	<div class="container">
 		<div class="row g-5">
-		<div class="col-md-7 col-lg-8 " id="paymentMain">
-		<form id="reservInfo">
+		<div class="col-md-7 col-lg-8">
+		<form id="reservDetailInfo">
+			<fieldset>예약상세 정보
 		    <h4 class="subject">예약정보</h4>
 		    <hr>
 		    	<div class="row g-3">
@@ -119,7 +120,7 @@
 		        
 		        <div class="row g-3">
 		        	<div class="col-sm-3">
-		       	    	<label>대여지역</label>
+		       	    	<label><i class="fa-solid fa-location-dot"></i>대여지역</label>
 		            </div>
 		            <div class="col-sm-9">
 		            	<input type="text" class="form-control" id="locatrionInfo"  value="${reservDetails[0].reserv_pickuplocation}" readonly>
@@ -240,8 +241,9 @@
 				    </tbody>
 				</table>
 			</div>	
+			</fieldset>
 		 </form>
-			</div>		
+	</div>		
 			</div>
 			</div>
 			<div class="col-md-5 col-lg-4 order-md-last" id="paymentSide">
@@ -295,7 +297,7 @@
 				</div>
 			</div>
 			</div>
-			<footer><jsp:include page="../inc/bottom.jsp"></jsp:include></footer>
+<%-- 			<footer><jsp:include page="../inc/bottom.jsp"></jsp:include></footer> --%>
 	<script type="text/javascript">
 
     document.addEventListener('DOMContentLoaded', function() {
