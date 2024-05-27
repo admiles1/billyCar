@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>마이페이지</title>
+<title>1:1 문의내역</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://kit.fontawesome.com/ef42a902c7.js" crossorigin="anonymous"></script>
 </head>
