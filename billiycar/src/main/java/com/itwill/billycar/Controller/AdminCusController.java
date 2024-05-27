@@ -329,12 +329,9 @@ public class AdminCusController {
 			model.addAttribute("msg","접근 권한이 없습니다");
 			return "err/fail";
 		} 
+		
 		//쿠폰 테이블에서 쿠폰삭제하기
 		int deleteCount = service.removeCoupon(coupon_code);
-		
-		//쿠폰이슈에서 쿠폰 삭제하기
-		int deleteCouponIssueCount = service.removeCouponIssue(coupon_id);
-		
 		
 		if(deleteCount <= 0) {
 			

@@ -165,6 +165,9 @@
                                     <c:when test="${coupon.coupon_used_status == 2}">
                                     	<span style="color:red">사용 완료</span>
                                    	</c:when>
+                                   	<c:otherwise>
+                                   		<span style="color:red">없음</span>
+                                   	</c:otherwise>
                                 </c:choose>
                             </td>
                         </tr>
