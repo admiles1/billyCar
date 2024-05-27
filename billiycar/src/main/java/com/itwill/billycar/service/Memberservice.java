@@ -134,6 +134,13 @@ public class Memberservice {
 	}
 
 
+	public String forgotIdPhone(Map<String, String> map) {
+		return mapper.selectForgotIdPhone(map);
+	}
+
+
+
+
 	
 	
 }

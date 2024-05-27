@@ -62,6 +62,14 @@
 		 AND   member_email = #{member_email}
 	</select>
 	
+	<select id="selectForgotIdPhone" resultType="string">
+		SELECT member_id
+		  FROM member 
+		 WHERE
+			   member_name =  #{phone_member_name}  
+		 AND   member_phone = #{member_phone}
+	</select>
+	
 	<select id="selectForgotPw" resultType="com.itwill.billycar.vo.MemberVO">
 		SELECT *
 		  FROM member 

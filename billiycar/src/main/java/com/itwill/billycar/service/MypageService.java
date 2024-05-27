@@ -55,11 +55,7 @@ public class MypageService {
 		return mapper.updatePasswd(member);
 	}
 	public int modifyPasswd2(MemberVO member) {
-		System.out.println("2222222222222222222"); //까지 나옴
-		System.out.println("222222222222222222의" + member);
-//		System.out.println(mapper.updatePasswd(member));
 		mapper.updatePasswd(member);
-		System.out.println("333333333333333333333333333나와라");
 		return mapper.updatePasswd(member);
 	}
 
@@ -70,10 +66,6 @@ public class MypageService {
 	public boolean isLicenseDuplicate(LicenseVO license) {
 		return mapper.selectDuplicateLicense(license);
 	}
-
-//	public List<Map<String, Object>> getMemberCoupon(String member_id) {
-//		return mapper.selcetMemberCoupon(member_id);
-//	}
 
 	public int couponUpdate(String member_id, String coupon_code) {
 		return mapper.insertMyCoupon(member_id, coupon_code);
@@ -102,18 +94,5 @@ public class MypageService {
 	public int getCouponListCount(String memberId) {
 	    return mapper.selectCouponListCount(memberId);
 	}
-
-//	public List<QnaVO> getMemberQna(String memberId, int pageNum) {
-//		return mapper.selcetMemberQna(memberId, pageNum);
-//	}
-
-//	public PageInfo getPageInfo(String memberId, int pageNum) {
-//		return null;
-//	}
-
-	
-
-
-
 
 }

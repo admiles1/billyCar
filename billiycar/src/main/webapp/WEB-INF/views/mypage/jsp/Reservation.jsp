@@ -11,118 +11,118 @@
 <title>현재 예약 내역</title>
 </head>
 <style>
-   #resv-confirm {
-   		margin-top: 30px;
-   	 	background:#fff;
-   	 	margin-right:30px;
-		border:1px solid #ccc;
-		border-radius: 8px;
-	    padding: 30px;
-		width: 100%;	
-		height: 100%;
-	    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-   }
+#resv-confirm {
+    margin-top: 30px;
+    background: #fff;
+    margin-right: 30px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 30px;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
    
-    h2 {
-        font-size: 32px;
-        margin-bottom: 20px;
-    }
-    
-     table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 45px;
-        text-align: center;
-        table-layout: fixed;
-        border-radius: 8px; /* 모서리 둥글게 처리 */
-        overflow: hidden;
-    }
-    
-    th, td {
-        border: 1px solid #ccc;
-        padding: 15px; /* 셀 간격 늘리기 */
-        text-align: center;
-        white-space: nowrap;
-        overflow: hidden;
-    }
-    
-    th {
-        background-color: #f2f2f2;
-        font-weight: bold;
-    }
-    
-     tr:nth-child(even) {
-        background-color: #f9f9f9; /* 번갈아가는 행 색상 */
-    }
+h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
 
-    tr:hover {
-        background-color: #f5f5f5; /* 호버 효과 */
-    }
-    
-     .pagination-container {
-        display: flex;
-        justify-content: center;
-        margin-top: 20px;
-    }
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 45px;
+    text-align: center;
+    table-layout: fixed;
+    border-radius: 8px; /* 모서리 둥글게 처리 */
+    overflow: hidden;
+}
+   
+th, td {
+    border: 1px solid #ccc;
+    padding: 15px; /* 셀 간격 늘리기 */
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+}
 
-    .pagination {
-        display: flex;
-        list-style: none;
-        padding: 0;
-    }
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
 
-    .pagination .page-item {
-        margin: 0 5px;
-    }
+tr:nth-child(even) {
+    background-color: #f9f9f9; /* 번갈아가는 행 색상 */
+}
 
-    .pagination .page-link {
-        display: block;
-        padding: 10px 15px;
-        color: #007bff;
-        text-decoration: none;
-        background-color: #fff;
-        border: 1px solid #dee2e6;
-        border-radius: 5px;
-    }
+tr:hover {
+    background-color: #f5f5f5; /* 호버 효과 */
+}
 
-    .pagination .page-link:hover {
-        background-color: #e9ecef;
-    }
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
 
-    .pagination .page-item.disabled .page-link {
-        pointer-events: none;
-        color: #6c757d;
-        background-color: #fff;
-        border-color: #dee2e6;
-    }
-    
-    .reservNum {
-    	width: 12%;
-    }
-    
-    .reservRegDate {
-    	width: 23%;
-    }
-    
-    .reservPickupDate {
-    	width: 15%
-    }
-    
-    .reservReturnDate {
-    	width: 15%;
-    }
-    
-    .reservStatus {
-    	width: 15%;
-    }
-    
-    .reservDetail {
-    	width: 15%;
-    }
-    
-    .review {
-    	width: 15%;
-    }
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+}
+
+.pagination .page-item {
+    margin: 0 5px;
+}
+
+.pagination .page-link {
+    display: block;
+    padding: 10px 15px;
+    color: #007bff;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+}
+
+.pagination .page-link:hover {
+    background-color: #e9ecef;
+}
+
+.pagination .page-item.disabled .page-link {
+    pointer-events: none;
+    color: #6c757d;
+    background-color: #fff;
+    border-color: #dee2e6;
+}
+
+.reservNum {
+    width: 12%;
+}
+
+.reservRegDate {
+    width: 23%;
+}
+
+.reservPickupDate {
+    width: 15%
+}
+
+.reservReturnDate {
+    width: 15%;
+}
+
+.reservStatus {
+    width: 15%;
+}
+
+.reservDetail {
+    width: 15%;
+}
+   
+.review {
+    width: 15%;
+}
 </style>
 <script type="text/javascript">
 document.addEventListener('DOMContentLoaded', function() {

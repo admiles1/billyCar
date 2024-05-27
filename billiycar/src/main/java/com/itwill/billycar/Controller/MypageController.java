@@ -154,7 +154,6 @@ public class MypageController {
 				model.addAttribute("targetURL", "mypage");
 				return "success/success";
 			}
-//			return "redirect:/mypage";
 		}
 		
 	}
@@ -203,7 +202,6 @@ public class MypageController {
 			model.addAttribute("targetURL", "licenseInfo");
 			return "success/success";
 		}
-//		return "redirect:/licenseInfo";
 	}
 	
 	@GetMapping("licenseInfo")
@@ -292,16 +290,6 @@ public class MypageController {
         return "mypage/page/Mypage_Inquiry";
     }
 	
-//	@GetMapping("MyCoupon")
-//    public String MyCoupon(Model model) {
-//        System.out.println("나의 쿠폰함");
-//        String member_id = (String)session.getAttribute("member_id");
-//        List<Map<String, Object>> couponList = service.getMemberCoupon(member_id);
-//        System.out.println(couponList);
-//        model.addAttribute("Coupon", couponList);
-//        return "mypage/page/Mypage_Coupon";
-//    }
-	
 	@GetMapping("MyCoupon")
 	public String MyCoupon(@RequestParam(defaultValue = "1") int pageNum, 
 	                       HttpSession session,
@@ -337,7 +325,6 @@ public class MypageController {
 	@PostMapping("couponUpdate")
 	public String MyCouponUpdate(Model model, String coupon_code) {
 		String member_id= (String)session.getAttribute("member_id");
-//		System.out.println(couponIssue);
 		
 		// 중복된 쿠폰인지 확인
 		int duplicateCoupon = service.couponCheck(member_id, coupon_code);
@@ -367,17 +354,7 @@ public class MypageController {
 			}
 		}
 		
-		
-			
-		
 	}
-	
-	
-//	@GetMapping("resignReason")
-//    public String resignReason() {
-//        System.out.println("회원탈퇴 사유 등록");
-//        return "mypage/page/Mypage_Delete_Account_Reason";
-//    }
 	
 	@GetMapping("MemberWithdraw")
 	public String withdrawForm(Model model) {

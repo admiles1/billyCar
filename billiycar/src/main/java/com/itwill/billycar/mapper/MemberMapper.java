@@ -38,5 +38,7 @@ public interface MemberMapper {
 
 	int updatePasswd(MemberVO member);
 
+	String selectForgotIdPhone(Map<String, String> map);
+
 
 }
