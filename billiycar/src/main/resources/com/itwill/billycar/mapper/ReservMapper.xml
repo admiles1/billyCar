@@ -24,8 +24,8 @@
 	<select id="selectReviewCondition" resultType="com.itwill.billycar.vo.ReservVO">
 		select *
 		from Reservation
-		where reserv_idx = #{reserv_idx} AND now() > reserv_returndate;
-<!-- 		where reserv_idx = #{reserv_idx} AND reserv_status = 2; -->
+<!-- 		where reserv_idx = #{reserv_idx} AND now() > reserv_returndate; -->
+		where reserv_idx = #{reserv_idx} AND reserv_status = 2;
 	</select>
 </mapper>
 
