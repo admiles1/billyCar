@@ -67,7 +67,8 @@ public class MypageController {
 	public String modifyInfo(Model model) {
 		String MemberId = (String)session.getAttribute("member_id");
 		if(MemberId == null) {
-			model.addAttribute("msg", "허용되지 않은 접근입니다!");
+			model.addAttribute("msg", "로그인이 필요합니다.");
+			model.addAttribute("targetURL", "login");
 			return "err/fail";
 		}
 		model.addAttribute("info", service.getMemberInfo(MemberId));
@@ -124,7 +125,8 @@ public class MypageController {
         System.out.println("비밀번호 변경");
         String MemberId = (String)session.getAttribute("member_id");
 		if(MemberId == null) {
-			model.addAttribute("msg", "허용되지 않은 접근입니다!");
+			model.addAttribute("msg", "로그인이 필요합니다.");
+			model.addAttribute("targetURL", "login");
 			return "err/fail";
 		}
         return "mypage/page/Mypage_Modify_Password";
@@ -163,7 +165,8 @@ public class MypageController {
         System.out.println("면허등록 및 갱신");
         String MemberId = (String)session.getAttribute("member_id");
 		if(MemberId == null) {
-			model.addAttribute("msg", "허용되지 않은 접근입니다!");
+			model.addAttribute("msg", "로그인이 필요합니다.");
+			model.addAttribute("targetURL", "login");
 			return "err/fail";
 		}
         return "mypage/page/Mypage_License_register";
@@ -208,7 +211,8 @@ public class MypageController {
 	public String licenseInfo(Model model, LicenseVO license) {
 		String memberId = (String)session.getAttribute("member_id");
 		if(memberId == null) {
-			model.addAttribute("msg", "허용되지 않은 접근입니다!");
+			model.addAttribute("msg", "로그인이 필요합니다.");
+			model.addAttribute("targetURL", "login");
 			return "err/fail";
 		}
 		model.addAttribute("licenseInfo", service.getLicenseInfo(memberId));
@@ -222,7 +226,8 @@ public class MypageController {
     						  MemberVO member, Model model, ReservVO reserv) {
 		String memberId = (String)session.getAttribute("member_id");
 		if(memberId == null) {
-			model.addAttribute("msg", "허용되지 않은 접근입니다!");
+			model.addAttribute("msg", "로그인이 필요합니다.");
+			model.addAttribute("targetURL", "login");
 			return "err/fail";
 		}
         // 페이징 
@@ -258,7 +263,8 @@ public class MypageController {
     						Model model, QnaVO qna) {
 		String MemberId = (String)session.getAttribute("member_id");
 		if(MemberId == null) {
-			model.addAttribute("msg", "허용되지 않은 접근입니다!");
+			model.addAttribute("msg", "로그인이 필요합니다.");
+			model.addAttribute("targetURL", "login");
 			return "err/fail";
 		}
 		// 페이징 
@@ -297,7 +303,8 @@ public class MypageController {
 	    System.out.println("나의 쿠폰함");
 	    String memberId = (String) session.getAttribute("member_id");
 	    if(memberId == null) {
-	    	model.addAttribute("msg", "허용되지 않은 접근입니다!");
+	    	model.addAttribute("msg", "로그인이 필요합니다.");
+	    	model.addAttribute("targetURL", "login");
 	    	return "err/fail";
 	    }
 
@@ -363,7 +370,8 @@ public class MypageController {
 		String memberId = (String)session.getAttribute("member_id");
 		
 		if(memberId == null) {
-			model.addAttribute("msg", "잘못된 접근입니다!");
+			model.addAttribute("msg", "로그인이 필요합니다.");
+			model.addAttribute("targetURL", "login");
 			return "err/fail";
 		}
 		
