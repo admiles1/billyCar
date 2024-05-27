@@ -203,7 +203,7 @@
 			         
 			            // 검색했을 때 없는 차량일 경우
 						if(carList == '' && pageNum == 1) {
-							alert("검색하신 차량이 없습니다");
+// 							alert("검색하신 차량이 없습니다");
 							
 							let div = '<li class="panel"><div style="margin:0 auto; text-align:center; color:#00aaff; margin-top:20px"><b> 검색하신 차량이 없습니다. <br> 다시 검색해 주세요 </b></div></li>';
 							$(".search-car-result-list").append(div);
