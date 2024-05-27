@@ -158,7 +158,7 @@
 		                    <td>
 		                        <c:choose>
 		                            <c:when test="${coupon.coupon_used_status == 1}">사용 가능</c:when>
-		                            <c:when test="${coupon.coupon_used_status == 2}">사용 불가</c:when>
+		                            <c:when test="${coupon.coupon_used_status == 2}">사용 완료</c:when>
 		                        </c:choose>
 		                    </td>
 		                </tr>
