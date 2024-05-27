@@ -50,15 +50,14 @@
 	                 
 	                 <form action="adminAnswer?qna_idx=${qna.qna_idx}&pageNum=${param.pageNum}" method="post">
 			            <%-- Assume that data is fetched from the server based on the qid parameter --%>
-			            <h5 class="card-title">질문 ID: ${qna.qna_writer}</h5>
+			            <h5 class="card-title">질문자 ID: ${qna.qna_writer}</h5>
 			            <p class="card-text" id="question">
 			            	<strong>제목:</strong> ${qna.qna_subject} <br> 
-			            	<strong>내용:</strong> ${qna.qna_content} <br>
-			            	
+			            	<strong>내용</strong> <div style="width:950px;" > &emsp; ${qna.qna_content}</div> <br>
 			            		<%-- 파일 처리 --%>
 			            		<c:if test="${not empty qna.qna_file}">
 									<c:set var="original_fileName" value="${fn:substringAfter(qna.qna_file, '_')}"/>
-										 파일 : ${original_fileName}
+										 <span style="color:#007bff;"><b>파일 </b></span> ${original_fileName}
 										<%-- 다운로드 --%>
 										<%-- 다운로드 속성값에 파일명 지정 시 그 이름으로 다운됨 --%>
 										<a href="${pageContext.request.contextPath}/resources/upload/${qna.qna_file}" download="${original_fileName}">

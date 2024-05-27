@@ -76,18 +76,24 @@
 			          <div class="row">
 			            <div class="col-md-12">
 			              <div class="card">
-			                 <div class="card-body">
+			                 <div class="card-body" <c:if test="${qna.qna_status eq 0}"> style="border:1px solid;border-color:red;border-radius:3px"</c:if>>
 					            <%-- Assume that data is fetched from the server based on the qid parameter --%>
-					            <h5 class="card-title">질문 ID: ${qna.qna_writer}</h5>
-					            <p class="card-text" id="question"><strong>제목:</strong> ${qna.qna_subject}</p>
-					            <p class="card-text" id="question"><strong>내용:</strong> ${qna.qna_content}</p>
-					            <p class="card-text" id="answer"><strong>답변 내용:</strong>
+					            <h5 class="card-title">질문자 ID: ${qna.qna_writer}</h5>
+					            <p class="card-text" id="question"><strong>제목 </strong> ${qna.qna_subject}</p>
+					            <p class="card-text" id="question"><strong> Q. </strong>
+					            	<div style="width:950px">
+						            	&emsp; ${qna.qna_content} 
+					            	 </div> 
+					            </p>
+					            <p class="card-text" id="answer"><strong> A. </strong>
 									<c:choose>
 										<c:when test="${qna.qna_status eq 0}">
-											<span style="color:red;background-color:#FFFFD2; font-size: bold;">아직 답변하지 않으셨습니다.</span> 
+											<span style="color:red;background-color:#FFFFD2; font-size: bold;"> 아직 답변하지 않으셨습니다.</span> 
 										</c:when>
 										<c:otherwise>
-								             ${qna.admin_content}
+											<div style="width:1000px">
+									            &emsp; ${qna.admin_content}
+											</div>
 										</c:otherwise>
 									</c:choose>
 								</p>
