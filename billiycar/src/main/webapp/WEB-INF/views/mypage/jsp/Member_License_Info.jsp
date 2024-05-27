@@ -99,44 +99,44 @@ h2 {
 </style>
 </head>
 <body>
-	<form id="memberInfo">
-		<fieldset>
-			<h2>면허 정보</h2>
-			<hr>
-			<div class="LicenseInfo_notice">
+<form id="memberInfo">
+	<fieldset>
+		<h2>면허 정보</h2>
+		<hr>
+		<div class="LicenseInfo_notice">
 			<p><em>${sessionScope.member_id}</em> 님의 면허 정보입니다.</p>
 			<p class="contxt-info">
 				회원님의 등록된 면허 정보는 아래와 같습니다.<br>
 				새롭게 면허 등록 또는 갱신을 원하시면 좌측 사이드바의
 				<em>면허 등록 및 갱신</em> 메뉴를 이용해주세요.
 			</p>
-			</div>
-		      <ul>
-		      	<li>
-		          <label for="licenseNumber">면허 번호</label>
-		          <input id="licenseNumber" name="name" type="text" value="${licenseInfo.license_user_id}" readonly>
-		        </li>
-		      	<li>
-		          <label for="licenseType">면허 종류</label>
-		          <input id="licenseType" name="type" type="text" value="${licenseInfo.license_name}" readonly>
-		        </li>
-		        <li>
-		          <label for="licenseIssue">발급일</label>
-		          <input id="licenseIssue" name="issue" type="text" value="${licenseInfo.license_issue_date}"  readonly>
-		        </li>
-		         <li>
-		          <label for="licenseExpiration">만료일</label>
-		          <input id="licenseExpiration" name="Expiration" type="text" value="${licenseInfo.license_expiration_date}" readonly>
-		        </li>
-		      </ul>
-		</fieldset>
-	</form>
+		</div>
+		<ul>
+			<li>
+				<label for="licenseNumber">면허 번호</label>
+				<input id="licenseNumber" name="name" type="text" value="${licenseInfo.license_user_id}" readonly>
+			</li>
+			<li>
+				<label for="licenseType">면허 종류</label>
+				<input id="licenseType" name="type" type="text" value="${licenseInfo.license_name}" readonly>
+			</li>
+			<li>
+				<label for="licenseIssue">발급일</label>
+				<input id="licenseIssue" name="issue" type="text" value="${licenseInfo.license_issue_date}" readonly>
+			</li>
+			<li>
+				<label for="licenseExpiration">만료일</label>
+				<input id="licenseExpiration" name="Expiration" type="text" value="${licenseInfo.license_expiration_date}" readonly>
+			</li>
+		</ul>
+	</fieldset>
+</form>
 <script type="text/javascript">
 	//면허 번호를 하이픈 구분된 형식으로 변환하는 함수
 	function formatLicenseNumber(licenseNumber) {
 	    // 숫자를 하이픈으로 구분하여 반환
 	    return licenseNumber.slice(0, 2) + '-' + licenseNumber.slice(2, 4) + '-' + licenseNumber.slice(4, 9) + '-' + licenseNumber.slice(9);
-	};
+	}
 	
 	function formatLicenseIssueDate(licenseIssue) {
         return licenseIssue.slice(0, 4) + '-' + licenseIssue.slice(4, 6) + '-' + licenseIssue.slice(6, 8);

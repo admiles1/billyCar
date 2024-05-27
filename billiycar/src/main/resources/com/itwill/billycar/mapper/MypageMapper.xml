@@ -12,10 +12,6 @@
     </select>
     
     <select id="selcetMemberQna" resultType="com.itwill.billycar.vo.QnaVO">
-<!-- 		SELECT *,  -->
-<!-- 			 ROW_NUMBER() OVER (ORDER BY qna_date DESC) AS new_qna_idx -->
-<!-- 		FROM qna -->
-<!-- 		WHERE qna_writer = #{memberId} -->
 		SELECT *
 		FROM qna
 		WHERE qna_writer = #{memberId}
@@ -23,11 +19,6 @@
 		LIMIT #{startRow}, #{listLimit}
 	</select>
     
-
-<!-- <select id="selectQnaCount" resultType="int" parameterType="String"> -->
-<!--     SELECT COUNT(*) FROM qna WHERE qna_writer = #{memberId} -->
-<!-- </select>	 -->
-    	
     <insert id="insertLicense">
     	INSERT INTO license
     	VALUES (
@@ -106,15 +97,6 @@
 		WHERE
 			member_id = #{member_id}
 	</update>
-	
-<!-- 	<select id="selcetMemberCoupon" resultType="hashmap"> -->
-
-<!-- 		SELECT c.coupon_name , c.coupon_code ,c.coupon_discount_amount, ci.coupon_used_status -->
-<!-- 		FROM coupon c JOIN coupon_issue ci -->
-<!-- 		ON c.coupon_id  = ci.coupon_id  -->
-<!-- 		WHERE ci.member_id = #{member_id}; -->
-		
-<!-- 	</select> -->
 	
 	<select id="selectMemberCoupon" resultType="hashmap">
 	    SELECT c.coupon_name, c.coupon_code, c.coupon_discount_amount, ci.coupon_used_status
