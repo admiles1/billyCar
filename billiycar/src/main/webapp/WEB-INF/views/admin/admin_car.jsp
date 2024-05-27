@@ -20,19 +20,18 @@
         }
         .img_area {
             width: 200px;
-            height: 150px;  /* 높이 조정 */
+            height: 150px;
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding-left: 10px;  /* 왼쪽 패딩 추가 */
+            padding: 0;
         }
         .img_area img {
             width: 100%;
-            height: 100%;  /* 높이를 100%로 설정하여 컨테이너에 맞춤 */
-            object-fit: cover;  /* object-fit 속성 추가로 이미지가 컨테이너에 꽉 차도록 함 */
+            height: auto;
+            object-fit: contain;
             display: block;
-            margin: 0;  /* 마진 제거 */
         }
         .table th, .table td {
             text-align: center;
@@ -57,7 +56,6 @@
             justify-content: center;
             margin-top: 20px;
         }
-        
     </style>
 </head>
 <body>
@@ -73,7 +71,7 @@
                         <h1 class="h2">차량 목록 조회</h1>
                     </div>
                     <form class="search-container" id="searchForm">
-                   		<c:set var="pageNum" value="${empty param.pageNum ? 1 : param.pageNum}" />
+                        <c:set var="pageNum" value="${empty param.pageNum ? 1 : param.pageNum}" />
                         <input type="text" id="searchKeyword" class="form-control" placeholder="검색어 입력" value="${param.searchKeyword}">
                         <select id="searchType" class="form-control">
                             <option value="">전체</option>
@@ -88,7 +86,7 @@
                             <thead>
                                 <tr>
                                     <th>제조사</th>
-                                    <th>사진</th>
+                                    <th style="width: 200px;">사진</th>
                                     <th>모델</th>
                                     <th>연식</th>
                                     <th>기어</th>
@@ -105,7 +103,7 @@
                                 <!-- <td style="${car.color}">${car.car_brand}</td> -->
                                 <!-- <td class="text-center"> -->
                                 <!-- <div class="img_area"> -->
-                                <!-- <img src="<%= request.getContextPath() %>/resources/upload/${car.car_img}"> -->
+                                <!-- <img src="<%= request.getContextPath() %>/resources/upload/${car.car_img}" alt="차량 이미지"> -->
                                 <!-- </div> -->
                                 <!-- </td> -->
                                 <!-- <td>${car.car_model}</td> -->
@@ -125,29 +123,29 @@
                                 <!-- </c:forEach> -->
                             </tbody>
                         </table>
-                       	<nav aria-label="Page navigation example">
-							<div class = "paging" id="paging">
-<!-- 						  		<ul class="pagination"> -->
-<!-- 						    		<li class="page-item"> -->
-<!-- 								    <a id="previousPageLink" class="page-link" href="admin_car?pageNum=${pageNum - 1}" aria-label="Previous"> -->
-<!-- 								        <span aria-hidden="true">&laquo;</span> -->
-<!-- 								    </a> -->
-<!-- 									</li> -->
-								
-<!-- 									<c:forEach var="i" begin="${pageInfo.startPage}" end="${pageInfo.endPage}"> -->
-<!-- 									    <li class="page-item"> -->
-<!-- 									        <a class="page-link pageLink" href="admin_car?pageNum=${i}">${i}</a> -->
-<!-- 									    </li> -->
-<!-- 									</c:forEach> -->
-									
-<!-- 									<li class="page-item"> -->
-<!-- 									    <a id="nextPageLink" class="page-link" href="admin_car?pageNum=${pageNum + 1}" aria-label="Next"> -->
-<!-- 									        <span aria-hidden="true">&raquo;</span> -->
-<!-- 									</a> -->
-<!-- 									</li> -->
-<!-- 						  		</ul> -->
-					  		</div>
-						</nav>
+                        <nav aria-label="Page navigation example">
+                            <div class="paging" id="paging">
+                                <!-- <ul class="pagination"> -->
+                                <!-- <li class="page-item"> -->
+                                <!-- <a id="previousPageLink" class="page-link" href="admin_car?pageNum=${pageNum - 1}" aria-label="Previous"> -->
+                                <!-- <span aria-hidden="true">&laquo;</span> -->
+                                <!-- </a> -->
+                                <!-- </li> -->
+
+                                <!-- <c:forEach var="i" begin="${pageInfo.startPage}" end="${pageInfo.endPage}"> -->
+                                <!-- <li class="page-item"> -->
+                                <!-- <a class="page-link pageLink" href="admin_car?pageNum=${i}">${i}</a> -->
+                                <!-- </li> -->
+                                <!-- </c:forEach> -->
+
+                                <!-- <li class="page-item"> -->
+                                <!-- <a id="nextPageLink" class="page-link" href="admin_car?pageNum=${pageNum + 1}" aria-label="Next"> -->
+                                <!-- <span aria-hidden="true">&raquo;</span> -->
+                                <!-- </a> -->
+                                <!-- </li> -->
+                                <!-- </ul> -->
+                            </div>
+                        </nav>
                     </div>
                 </main>
             </div>
@@ -157,166 +155,150 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script type="text/javascript">
-    
-   		let pageNum = 1;
-   		let isLoading = false;
-   		
-    	$(document).ready(function(){
-    		//변수
-    		// 이벤트
-// 			$('#btnSearch').on('click', check);
-// 			$('#pageLink').on('click', searchCars);
-			$('#btnSearch').on('click', function() {
-				check();
+        let pageNum = 1;
+        let isLoading = false;
+
+        $(document).ready(function() {
+            $('#btnSearch').on('click', function() {
+                check();
                 pageNum = 1;
                 searchCars(pageNum);
             });
-			
+
             $(document).on('click', '.page-link', function(e) {
                 e.preventDefault();
                 pageNum = $(this).data('pagenum');
                 searchCars(pageNum);
             });
-			
-    		
-			searchCars(pageNum);
-		})
-		
-		
-		
-		function check(){
-    		if(searchKeyword.length < 2){
-				alert('2자 이상 입력해주세요');
-				return
+
+            searchCars(pageNum);
+        });
+
+        function check() {
+            if (searchKeyword.length < 2) {
+                alert('2자 이상 입력해주세요');
+                return;
             }
-    		
-    		searchCars(pageNum);
-    	}
-    	
-		function searchCars(pageNum) { // 차량검색
-			
-			if(isLoading){
-				return;
-			}
-			isLoading = true;
-        	
-            var searchType = $('#searchType').val(); // 검색 유형 가져오기
-            var searchKeyword = $('#searchKeyword').val(); // 검색어 가져오기
-            
-            $.ajax({	
+
+            searchCars(pageNum);
+        }
+
+        function searchCars(pageNum) {
+            if (isLoading) {
+                return;
+            }
+            isLoading = true;
+
+            var searchType = $('#searchType').val();
+            var searchKeyword = $('#searchKeyword').val();
+
+            $.ajax({
                 type: 'GET',
-                url: 'search_car', // 서버에서 검색을 처리할 URL
+                url: 'search_car',
                 data: {
                     searchType: searchType,
                     searchKeyword: searchKeyword,
-                    pageNum: pageNum // 페이지 번호를 1로 설정하여 처음 페이지로 검색
+                    pageNum: pageNum
                 },
-                dataType : "json",
+                dataType: "json",
                 success: function(response) {
-                	
-                	debugger;
-                	
-                	$('#carTableBody').empty();
-                	$("#paging").empty();
-                	
-                	let cars = response.cars;
-                	$.each(cars, function(index, car) {
+                    $('#carTableBody').empty();
+                    $("#paging").empty();
+
+                    let cars = response.cars;
+                    $.each(cars, function(index, car) {
                         $('#carTableBody').append(
-                            '<tr>' 
-                                + '<td style="' + car.color + '">' + car.car_brand + '</td>'
-                                + '<td class="text-center">'
-                                    + '<div class="img_area">'
-                                        + '<img src="' + '<%= request.getContextPath() %>/resources/upload/' + car.car_img + '">'
-                                    + '</div>'
-                                + '</td>'
-                                + '<td>' + car.car_model + '</td>'
-                                + '<td>' + car.car_year + '</td>'
-                                + '<td>' + car.gear_type + '</td>'
-                                + '<td>' + car.car_fuel + '</td>'
-                                + '<td>' + car.car_number + '</td>'
-                                + '<td>' + car.car_dayprice + '</td>'
-                                + '<td>' + car.car_hourprice + '</td>'
-                                + '<td>'
-                                    + '<div class="btn-group" role="group" aria-label="Basic example">'
-                                        + '<button type="button" class="btn btn-sm btn-primary" onclick="modifyCar(\'' + car.car_number + '\')">수정</button>'
-                                        + '<button type="button" class="btn btn-sm btn-danger" onclick="confirmDelete(\'' + car.car_number + '\')">삭제</button>'
-                                    + '</div>'
-                                + '</td>'
-                            + '</tr>'
+                            '<tr>' +
+                                '<td style="' + car.color + '">' + car.car_brand + '</td>' +
+                                '<td class="text-center">' +
+                                    '<div class="img_area">' +
+                                        '<img src="' + '<%= request.getContextPath() %>/resources/upload/' + car.car_img + '" alt="차량 이미지">' +
+                                    '</div>' +
+                                '</td>' +
+                                '<td>' + car.car_model + '</td>' +
+                                '<td>' + car.car_year + '</td>' +
+                                '<td>' + car.gear_type + '</td>' +
+                                '<td>' + car.car_fuel + '</td>' +
+                                '<td>' + car.car_number + '</td>' +
+                                '<td>' + car.car_dayprice + '</td>' +
+                                '<td>' + car.car_hourprice + '</td>' +
+                                '<td>' +
+                                    '<div class="btn-group" role="group" aria-label="Basic example">' +
+                                        '<button type="button" class="btn btn-sm btn-primary" onclick="modifyCar(\'' + car.car_number + '\')">수정</button>' +
+                                        '<button type="button" class="btn btn-sm btn-danger" onclick="confirmDelete(\'' + car.car_number + '\')">삭제</button>' +
+                                    '</div>' +
+                                '</td>' +
+                            '</tr>'
                         );
                     });
-                	
-                	let startPage = response.pageInfo.startPage;
-                	let endPage = response.pageInfo.endPage;
-                	let maxPage = response.pageInfo.maxPage;
-                	
+
+                    let startPage = response.pageInfo.startPage;
+                    let endPage = response.pageInfo.endPage;
+                    let maxPage = response.pageInfo.maxPage;
+
                     $("#paging").append(
-                            '<ul class="pagination">'
-                            + '<li class="page-item ' + (pageNum == 1 ? 'disabled' : '') + '">'
-                            + '<a id="previousPageLink" class="page-link" href="#" data-pagenum="' + (pageNum - 1) + '" aria-label="Previous">'
-                            + '<span aria-hidden="true">&laquo;</span>'
-                            + '</a>'
-                            + '</li>'
-                        );
+                        '<ul class="pagination">' +
+                            '<li class="page-item ' + (pageNum == 1 ? 'disabled' : '') + '">' +
+                                '<a id="previousPageLink" class="page-link" href="#" data-pagenum="' + (pageNum - 1) + '" aria-label="Previous">' +
+                                    '<span aria-hidden="true">&laquo;</span>' +
+                                '</a>' +
+                            '</li>'
+                    );
 
-                        for (let i = startPage; i <= endPage; i++) {
-                            $("#paging ul").append(
-                                '<li class="page-item">'
-                                + '<a class="page-link pageLink" href="#" data-pagenum="' + i + '">' + i + '</a>'
-                                + '</li>'
-                            );
-                        }
-
+                    for (let i = startPage; i <= endPage; i++) {
                         $("#paging ul").append(
-                        	'<li class="page-item ' + (pageNum == maxPage ? 'disabled' : '') + '">'
-                            + '<a id="nextPageLink" class="page-link" href="#" data-pagenum="' + (pageNum + 1) + '" aria-label="Next">'
-                            + '<span aria-hidden="true">&raquo;</span>'
-                            + '</a>'
-                            + '</li>'
-                            + '</ul>'
+                            '<li class="page-item">' +
+                                '<a class="page-link pageLink" href="#" data-pagenum="' + i + '">' + i + '</a>' +
+                            '</li>'
                         );
-                        isLoading = false;
-                    },
+                    }
+
+                    $("#paging ul").append(
+                        '<li class="page-item ' + (pageNum == maxPage ? 'disabled' : '') + '">' +
+                            '<a id="nextPageLink" class="page-link" href="#" data-pagenum="' + (pageNum + 1) + '" aria-label="Next">' +
+                                '<span aria-hidden="true">&raquo;</span>' +
+                            '</a>' +
+                        '</li>' +
+                        '</ul>'
+                    );
+                    isLoading = false;
+                },
                 error: function() {
                     alert('차량 목록이 없습니다.');
                     location.reload();
                 }
             });
         }
-    	
-    	
-		
-	    function confirmDelete(carNumber) {
-		    console.log("Deleting car with ID:", carNumber); // carId 값을 확인하는 로그 추가
-		    if (confirm("정말 삭제하시겠습니까?")) {
-		        $.ajax({
-		            type: 'POST',
-		            url: 'deleteCar',
-		            data: { carNumber: carNumber },
-		            success: function(response) {
-		                if (response === "success") {
-		                    alert('삭제되었습니다.');
-		                    location.reload(); // 페이지를 새로고침하여 목록을 업데이트합니다.
-		                } else {
-		                    alert('삭제에 실패하였습니다.');
-		                }
-		            },
-		            error: function() {
-		                alert('예약된 차량은 삭제 불가능합니다.');
-		            }
-		        });
-		    }
-		}
-        
+
+        function confirmDelete(carNumber) {
+            console.log("Deleting car with ID:", carNumber);
+            if (confirm("정말 삭제하시겠습니까?")) {
+                $.ajax({
+                    type: 'POST',
+                    url: 'deleteCar',
+                    data: { carNumber: carNumber },
+                    success: function(response) {
+                        if (response === "success") {
+                            alert('삭제되었습니다.');
+                            location.reload();
+                        } else {
+                            alert('삭제에 실패하였습니다.');
+                        }
+                    },
+                    error: function() {
+                        alert('예약된 차량은 삭제 불가능합니다.');
+                    }
+                });
+            }
+        }
+
         function modifyCar(carNumber) {
             var carInfo = {
-           		carNumber : carNumber
+                carNumber: carNumber
             };
             var queryString = Object.keys(carInfo).map(key => key + '=' + carInfo[key]).join('&');
             window.location.href = 'carModify?' + queryString;
         }
-        
-
     </script>
 </body>
 </html>
