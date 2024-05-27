@@ -23,8 +23,8 @@
       		 </div>
 			 <input type="submit" class="btn btn-4" value ="로그인">
       		 <div class="social-container">
-	      		 <a href="https://www.kakaocorp.com/page/"><img src="${pageContext.request.contextPath}/resources/images/kakao.png"></a> 
-	      		 <a href="https://www.google.com"><img src="${pageContext.request.contextPath}/resources/images/google.png"></a> 
+	      		 <a href="#"><img src="${pageContext.request.contextPath}/resources/images/kakao.png" onclick="showAlert()"></a> 
+	      		 <a href="#"><img src="${pageContext.request.contextPath}/resources/images/google.png" onclick="showAlert()"></a> 
 	      		 <a id="naverIdLogin_loginButton" href="javascript:void(0)">
         			  <img src="${pageContext.request.contextPath}/resources/images/naver.png">
     			 </a>
@@ -86,12 +86,13 @@
  		setTimeout(function() {
  			closePopUp();
  			}, 1000);
- 		
- 		
  	}
+ 	
+ 	function showAlert() {
+		alert("서비스 준비중 입니다.");
+	}
  	</script>
  	 
  	 
 </body>
 </html>
-
