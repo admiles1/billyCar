@@ -107,11 +107,7 @@ public class PaymentController {
 		String memberId = (String)session.getAttribute("member_id");
 		String carNumber = car.getCar_number();
 		
-		// 주소값을 강제로 바꿔서 진입하였고 그게 부산이 아닐 시 
-//		if(!Pattern.matches("^부산", map.get("schedule").split(",")[2])) {
-//			model.addAttribute("msg", "유효한 값이 아닙니다");
-//			return "err/fail";
-//		}
+	
 
 		System.out.println(map.get("insurance"));
 		
@@ -155,14 +151,19 @@ public class PaymentController {
 			
 			
 			// 1차 시도
-            int coupon_id = Integer.parseInt(map.get("coupon_id"));
-            System.out.println("dddddd앙아아ㄴ" + map.get("coupon_id"));
-            paymentService.updateCouponStatus(coupon_id,memberId); // 쿠폰 상태를 2로 변경
+			if(map.get("coupon_id") != null){
+				int coupon_id = Integer.parseInt(map.get("coupon_id"));
+				System.out.println("dddddd앙아아ㄴ" + map.get("coupon_id"));
+            	paymentService.updateCouponStatus(coupon_id,memberId);
+			}
+            
+            
 
             //
 //			int couponCount = paymentService.updateCouponStatus(payment);
 			if(carReserveCount > 0) {
-				return "true";
+				
+	            	return "true";
 			}
 			
 			return "false";
