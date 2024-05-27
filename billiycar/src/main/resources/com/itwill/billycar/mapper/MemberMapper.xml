@@ -79,6 +79,15 @@
 		 AND   member_id = 	  #{member_id}
 	</select>
 	
+	<select id="selectForgotPwPhone">
+		SELECT *
+		  FROM member 
+		 WHERE
+			   member_name =  #{phone_member_name}  
+		 AND   member_phone = #{member_phone}
+		 AND   member_id = 	  #{member_id}
+	</select>
+	
 	
 	<select id="selectMemberCount">
 		SELECT count(member_idx)

@@ -40,5 +40,7 @@ public interface MemberMapper {
 
 	String selectForgotIdPhone(Map<String, String> map);
 
+	MemberVO selectForgotPwPhone(Map<String, String> map);
+
 
 }

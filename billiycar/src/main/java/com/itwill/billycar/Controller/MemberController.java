@@ -259,7 +259,6 @@ public class MemberController {
 	@PostMapping("forgot_pw_step1")
 	public String forgot_pwPro(MemberVO member, Model model, HttpSession session) {
 		
-		System.out.println(member);
 		
 		MemberVO dbMember = service.getMember(member);
 		
@@ -267,7 +266,7 @@ public class MemberController {
 			model.addAttribute("member_id", dbMember.getMember_id());
 			return "redirect:/forgot_pw_step2";
 		} else {
-			model.addAttribute("msg", "존재하지 않는 회원입니다.");
+			model.addAttribute("msg", "아이디를 확인해 주세요.");
 			return "err/fail";
 		}
 	}
@@ -294,11 +293,28 @@ public class MemberController {
 		}
 	}
 	
+	@PostMapping("forgot_pw_step2_phone")
+	public String forgot_pw2phonePro(MemberVO member,@RequestParam Map<String, String> map, Model model) {
+		
+		member = service.forgotPwPhone(map);
+		
+		if(member != null) {
+			model.addAttribute("member_id", member.getMember_id());
+			return "redirect:/forgot_pw_step3";
+		} else {
+			model.addAttribute("msg", "이름 또는 전화번호를 잘못 입력했습니다.");
+			return "err/fail";
+		}
+		
+		
+	}
 	@GetMapping("forgot_pw_step3")
 	public String forgot_pw3(MemberVO member, Model model) {
 		model.addAttribute("member_id", member.getMember_id());
 		return "login/forgot_pw3";
 	}
+	
+	
 	
 	@PostMapping("forgot_pw_step3")
 	public String forgot_pw3Pro(MemberVO member
@@ -307,12 +323,10 @@ public class MemberController {
 					            , String member_passwd) {
 //		MypageService mypageService = new MypageService();
 		
-		System.out.println("sadflhawrilfhqeiorashgiuewqkarshdgilqwrheasdfilqwrehfd" + member);
 		
 		String securePasswd = passwordEncoder.encode(member.getMember_passwd());
 		member.setMember_passwd(securePasswd);
 		
-		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + member);
 		int updateCnt = service.modifyPasswd(member);
 		
 		if(updateCnt <= 0) {
@@ -322,6 +336,7 @@ public class MemberController {
 		
 		return "redirect:/login";
 	}
+	
 	
 	@PostMapping ("passwdChange")
 	public String passwdChange() {
