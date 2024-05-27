@@ -20,14 +20,19 @@
         }
         .img_area {
             width: 200px;
-            height: 150px;
+            height: 150px;  /* 높이 조정 */
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;  /* 패딩 제거 */
         }
         .img_area img {
             width: 100%;
-            height: auto;
+            height: 100%;  /* 높이를 100%로 설정하여 컨테이너에 맞춤 */
+            object-fit: cover;  /* object-fit 속성 추가로 이미지가 컨테이너에 꽉 차도록 함 */
             display: block;
-            margin: 0 auto;
+            margin: 0;  /* 마진 제거 */
         }
         .table th, .table td {
             text-align: center;
@@ -48,10 +53,10 @@
             flex: 1;
         }
         .paging {
-        display: flex;
-        justify-content: center;
-        margin-top: 20px;
-    }
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
         
     </style>
 </head>
@@ -95,50 +100,50 @@
                                 </tr>
                             </thead>
                             <tbody id="carTableBody">
-<%--                                 <c:forEach var="car" items="${carList}"> --%>
-<!--                                     <tr>  -->
-<%--                                         <td style="${car.color}">${car.car_brand}</td> --%>
-<!--                                         <td class="text-center"> -->
-<!--                                             <div class="img_area"> -->
-<%--                                                 <img src="<%= request.getContextPath() %>/resources/upload/${car.car_img}"> --%>
-<!--                                             </div> -->
-<!--                                         </td> -->
-<%--                                         <td>${car.car_model}</td> --%>
-<%--                                         <td>${car.car_year}</td> --%>
-<%--                                         <td>${car.gear_type}</td> --%>
-<%--                                         <td>${car.car_fuel}</td> --%>
-<%--                                         <td>${car.car_number}</td> --%>
-<%--                                         <td>${car.car_dayprice}</td> --%>
-<%--                                         <td>${car.car_hourprice}</td> --%>
-<!--                                         <td> -->
-<!--                                             <div class="btn-group" role="group" aria-label="Basic example"> -->
-<%--                                                 <button type="button" class="btn btn-sm btn-primary" onclick="modifyCar('${car.car_number}')">수정</button> --%>
-<%--                                                 <button type="button" class="btn btn-sm btn-danger" onclick="confirmDelete('${car.car_number}')">삭제</button> --%>
-<!--                                             </div> -->
-<!--                                         </td> -->
-<!--                                     </tr> -->
-<%--                                 </c:forEach> --%>
+                                <!-- <c:forEach var="car" items="${carList}"> -->
+                                <!-- <tr> -->
+                                <!-- <td style="${car.color}">${car.car_brand}</td> -->
+                                <!-- <td class="text-center"> -->
+                                <!-- <div class="img_area"> -->
+                                <!-- <img src="<%= request.getContextPath() %>/resources/upload/${car.car_img}"> -->
+                                <!-- </div> -->
+                                <!-- </td> -->
+                                <!-- <td>${car.car_model}</td> -->
+                                <!-- <td>${car.car_year}</td> -->
+                                <!-- <td>${car.gear_type}</td> -->
+                                <!-- <td>${car.car_fuel}</td> -->
+                                <!-- <td>${car.car_number}</td> -->
+                                <!-- <td>${car.car_dayprice}</td> -->
+                                <!-- <td>${car.car_hourprice}</td> -->
+                                <!-- <td> -->
+                                <!-- <div class="btn-group" role="group" aria-label="Basic example"> -->
+                                <!-- <button type="button" class="btn btn-sm btn-primary" onclick="modifyCar('${car.car_number}')">수정</button> -->
+                                <!-- <button type="button" class="btn btn-sm btn-danger" onclick="confirmDelete('${car.car_number}')">삭제</button> -->
+                                <!-- </div> -->
+                                <!-- </td> -->
+                                <!-- </tr> -->
+                                <!-- </c:forEach> -->
                             </tbody>
                         </table>
                        	<nav aria-label="Page navigation example">
 							<div class = "paging" id="paging">
 <!-- 						  		<ul class="pagination"> -->
 <!-- 						    		<li class="page-item"> -->
-<%-- 								    <a id="previousPageLink" class="page-link" href="admin_car?pageNum=${pageNum - 1}" aria-label="Previous"> --%>
+<!-- 								    <a id="previousPageLink" class="page-link" href="admin_car?pageNum=${pageNum - 1}" aria-label="Previous"> -->
 <!-- 								        <span aria-hidden="true">&laquo;</span> -->
 <!-- 								    </a> -->
 <!-- 									</li> -->
 								
-<%-- 									<c:forEach var="i" begin="${pageInfo.startPage}" end="${pageInfo.endPage}"> --%>
+<!-- 									<c:forEach var="i" begin="${pageInfo.startPage}" end="${pageInfo.endPage}"> -->
 <!-- 									    <li class="page-item"> -->
-<%-- 									        <a class="page-link pageLink" href="admin_car?pageNum=${i}">${i}</a> --%>
+<!-- 									        <a class="page-link pageLink" href="admin_car?pageNum=${i}">${i}</a> -->
 <!-- 									    </li> -->
-<%-- 									</c:forEach> --%>
+<!-- 									</c:forEach> -->
 									
 <!-- 									<li class="page-item"> -->
-<%-- 									    <a id="nextPageLink" class="page-link" href="admin_car?pageNum=${pageNum + 1}" aria-label="Next"> --%>
+<!-- 									    <a id="nextPageLink" class="page-link" href="admin_car?pageNum=${pageNum + 1}" aria-label="Next"> -->
 <!-- 									        <span aria-hidden="true">&raquo;</span> -->
-<!-- 									    </a> -->
+<!-- 									</a> -->
 <!-- 									</li> -->
 <!-- 						  		</ul> -->
 					  		</div>
