@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title> :: 빌리카-예약페이지 :: </title>
+<title>예약페이지</title>
 <script src="${pageContext.request.contextPath}/resources/util/jquery-3.7.1.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reservMain.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">

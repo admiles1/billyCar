@@ -41,7 +41,7 @@
 	
 
 </style>
-<title>:: 상세 예약페이지 ::</title>
+<title>상세 예약페이지</title>
 </head>
 <body>
 <header><jsp:include page="../inc/top.jsp"></jsp:include></header>

@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Billycar</title>
+<title>메인 페이지</title>
 <script src="https://code.jquery.com/jquery-3.6.2.min.js" integrity="sha256-2krYZKh//PcchRtd+H+VyyQoZ/e3EcrkxhM8ycwASPA=" crossorigin="anonymous"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
@@ -282,7 +282,7 @@ function check() {
 				<div class="card-body">
 				    <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
 				        <h5 style="width: 100px; text-align: right; margin-right: 10px;">모델명</h5>
-				        <p class="lead text-body-secondary" style="margin: 0; width: 200px;">${popular.car_model}</p>
+				        <p class="lead text-body-secondary" style="margin: 0; width: 200px;">${popular.name}</p>
 				    </div>
 				    <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
 				        <h5 style="width: 100px; text-align: right; margin-right: 10px;">차번호</h5>
