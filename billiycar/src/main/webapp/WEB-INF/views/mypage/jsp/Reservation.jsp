@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>현재 예약 내역</title>
+<title>예약 내역 확인</title>
 </head>
 <style>
 #resv-confirm {

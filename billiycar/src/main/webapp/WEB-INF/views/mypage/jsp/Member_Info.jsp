@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<title>Main Area</title>
+<title>기본회원정보</title>
 <style>
 #memberInfo form {
     text-align: center; /* 폼 안의 요소들을 가운데 정렬 */
