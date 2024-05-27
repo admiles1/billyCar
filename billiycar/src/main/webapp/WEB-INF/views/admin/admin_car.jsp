@@ -25,7 +25,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 0;  /* 패딩 제거 */
+            padding-left: 10px;  /* 왼쪽 패딩 추가 */
         }
         .img_area img {
             width: 100%;
