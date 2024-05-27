@@ -108,6 +108,10 @@ public class AdminCusService {
 		return mapper.selectLicense(listLimit, startRow, license_auth);
 	}
 
+	public int removeCouponIssue(String coupon_id) {
+		return mapper.deleteCouponIssue(coupon_id);
+	}
+
 	
 
 

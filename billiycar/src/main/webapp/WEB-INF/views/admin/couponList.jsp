@@ -99,7 +99,7 @@
 		                         	<td>${coupon.coupon_name}</td>
 		                         	<td>${coupon.coupon_code}</td>
 		                         	<td>${coupon.coupon_discount_amount}</td>
-		                         	<td><input type="button" id="deleteCoupon" value="삭제" onclick="location.href='couponDelete?coupon_code=${coupon.coupon_code}'"></td>
+		                         	<td><input type="button" id="deleteCoupon" value="삭제" onclick="location.href='couponDelete?coupon_code=${coupon.coupon_code}&coupon_id=${coupon.coupon_id}'"></td>
 		                        </tr>
 	                        </c:forEach>
                         </tbody>

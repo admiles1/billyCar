@@ -31,5 +31,6 @@ public interface AdminCusMapper {
 	int deleteCoupon(String coupon_code); // 쿠폰 삭제하기
 	int selectMemberCount(int license_auth); // 회원 수 출력
 	List<Map<String, Object>> selectLicense(@Param(value="startRow") int startRow, @Param(value = "listLimit") int listLimit, @Param(value = "license_auth") int license_auth); // 회원 목록 불러오기
+	int deleteCouponIssue(String coupon_id); //쿠폰이슈데이터삭제
 
 }

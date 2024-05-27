@@ -136,4 +136,8 @@
 		WHERE qna_writer = #{qna_writer} AND qna_idx=#{qna_idx}
 	</select>
 	
+	<delete id="deleteCouponIssue">
+		delete from coupon_issue where coupon_id = #{coupon_id}
+	</delete>
+	
 </mapper>
