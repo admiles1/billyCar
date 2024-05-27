@@ -1,5 +1,7 @@
 package com.itwill.billycar.Controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -235,8 +237,18 @@ public class MemberController {
 	}
 	
 	@GetMapping("show_id")
-	public String show_id() {
-		return "login/show_id";
+	public String show_id(MemberVO member , Model model ,@RequestParam Map<String, String> map) {
+		System.out.println(map.get("phone_member_name"));
+		System.out.println(map.get("auth_num"));
+		String member_id = service.forgotIdPhone(map);
+		if(member_id != null) {
+			model.addAttribute("member_id",  member_id);
+			return "login/show_id";
+		} else {
+			model.addAttribute("msg", "이름 또는 전화번호를 잘못 입력하셨습니다.");
+			return "err/fail";
+		}
+		
 	}
 	
 	@GetMapping("forgot_pw_step1")

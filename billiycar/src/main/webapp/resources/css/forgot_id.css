@@ -71,7 +71,7 @@ label {
 	font-size: 15px;
      }
 
-.name, .email_ad,.cernum, .telephone_num{
+.name, .email_ad,.cernum, .telephone_num , .phone_member_name{
 	width:300px;
     padding: 10px;
     margin: 8px 0;
