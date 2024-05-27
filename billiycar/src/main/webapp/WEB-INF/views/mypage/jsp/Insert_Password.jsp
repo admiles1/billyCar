@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>비밀번호입력</title>
+<title>회원정보수정</title>
 </head>
 <style>
 	#passwd-insert {
