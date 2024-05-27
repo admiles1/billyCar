@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>쿠폰 발급페이지</title>
 <script src="${pageContext.request.contextPath}/resources/util/jquery-3.7.1.js"></script>
 <script>
 	function sumbitCoupon() {
