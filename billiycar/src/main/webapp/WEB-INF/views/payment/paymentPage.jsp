@@ -438,7 +438,7 @@
 								<input name="insurance" class="chk insurance_data" id="insuranceCar1" type="radio" value="15" > 
 								<label  for="insuranceCar1">일반자차</label>
 							</td>
-							<td colspan="1" class="c">1만원</td>
+							<td colspan="1" class="c">15원</td>
 							<td colspan="1" class="c">200만원</td>
 							<td colspan="1" class="c">50만원</td>
 						</tr>
@@ -448,7 +448,7 @@
 								<input name="insurance" class="chk insurance_data" id="insuranceCar2" type="radio" value="25" >
 								<label  for="insuranceCar2"> 완전자차 </label>
 							</td>
-							<td colspan="1" class="c">2만6천원</td>
+							<td colspan="1" class="c">25원</td>
 							<td colspan="1" class="c">200만원</td>
 							<td colspan="1" class="c">0만원</td>
 						</tr>
