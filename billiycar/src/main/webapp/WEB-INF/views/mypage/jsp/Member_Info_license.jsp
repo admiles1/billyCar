@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>면허 등록</title>
+<title>면허 등록 및 갱신</title>
 <script src="https://kit.fontawesome.com/ef42a902c7.js" crossorigin="anonymous"></script>
 </head>
 <style>
