@@ -237,7 +237,7 @@
 					               ' <li class="panel">'
 					               +' <div class="left">'
 					               +'     <div class="img-wrap-responsive">'
-					               + '<img src="' + '<%= request.getContextPath() %>/resources/upload/' + car.car_img + '">'
+					               + '<img src="' + '<%= request.getContextPath() %>/resources/upload/' + car.car_img + '" style="margin-top:60px">'
 					               +'     </div>'
 					               +' </div>'
 					               +' <div class="right">'
