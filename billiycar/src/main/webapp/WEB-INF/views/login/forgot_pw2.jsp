@@ -69,7 +69,7 @@
 		        if (response.success) {
 		            serverAuthNum = response.auth_num;  // 서버에서 받은 인증번호를 저장
 		            
-		            alert("인증번호가 전송되었습니다." +serverAuthNum );
+		            alert("인증번호가 전송되었습니다.");
 		            
 		            
 		        } else {
