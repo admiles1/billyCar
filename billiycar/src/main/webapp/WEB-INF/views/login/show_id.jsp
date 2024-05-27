@@ -23,7 +23,7 @@
     	</fieldset>
         <div class="next">
         <input type="button" value="로그인하기" onclick="location.href='login'">
-        <input type="button" value="비밀번호찾기" onclick="location.href='forgot_pw'">
+        <input type="button" value="비밀번호찾기" onclick="location.href='forgot_pw_step1'">
         </div>
     </div>
     <footer><jsp:include page="../inc/bottom.jsp"></jsp:include></footer>

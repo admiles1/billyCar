@@ -17,7 +17,6 @@
 			if (!isValidName($("#phone_member_name").val())) { // 이름 확인
 		    	alert("이름을 확인해주세요.");
 		        document.fr.phone_member_name.focus();
-		        debugger;
 		        return false;
 		    } else if (!isValidPhoneNumber($("#member_phone").val())) {
 		    	alert("전화번호를 확인해주세요.");
