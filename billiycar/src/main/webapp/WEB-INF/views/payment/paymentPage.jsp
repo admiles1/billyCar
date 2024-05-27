@@ -516,9 +516,9 @@
 			<hr>
 		<h4 class="subject">할인정보(중복할인불가)</h4>
 			<div class="row g-3">
-				<div class="col-sm-2">
+				<div class="col-sm-3">
 	            	<label> 
-	            		<select class="form-control" id="memberCoupon" name="memberCoupon" style="width: 150px;">
+	            		<select class="form-control" id="memberCoupon" name="memberCoupon" style="width: 210px;">
 				            <option value="0">선택안함</option>
 				            <c:forEach var="ci" items="${couponIssue}">
 					            <option value="${ci.coupon_discount_amount},${ci.coupon_id}" id="memberCoupon">${ci.coupon_name}</option>
@@ -527,7 +527,7 @@
 			            </select>
 	            	</label>
 	            </div>
-	            <div class="col-sm-10">
+	            <div class="col-sm-9">
 	            	<input type="button" value="적용" style="height: 37px;" id="applyCouponBtn" >
 	            </div>
 			</div>
