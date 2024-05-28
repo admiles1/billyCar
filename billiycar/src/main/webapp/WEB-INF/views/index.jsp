@@ -240,7 +240,7 @@ function check() {
 	                <div class="about-reason text-center">
 	                    <img src="resources/main_images/icon2.png" width="53" height="53" alt="예약가능차량">
 	                    <div class="mt-2">
-	                        <div class="font-weight-bold">예약 가능 차량</div>
+	                        <div class="font-weight-bold">현재 보유 차량</div>
 	                        <div id="ableRsv" class="text-primary">${carCount }</div>
 	                    </div>
 	                </div>
