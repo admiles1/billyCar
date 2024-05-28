@@ -263,7 +263,7 @@ function check() {
 	<section class="py-5 text-center container noto-sans-kr" style="margin-top: 30px;">
 		<div class="row py-lg-5">
 			<div class="col-lg-6 col-md-8 mx-auto">
-				<h1 class="fw-light">맞춤 추천 차량</h1>
+				<h1 class="fw-light">인기 차량 추천</h1>
 				<p class="lead text-body-secondary">빌리카에게 가장 많은 인기 많은 차량입니다.</p>
 <!-- 				<p> -->
 <!-- 					<a href="review" class="btn btn-primary my-2">리뷰 더보기</a> -->
