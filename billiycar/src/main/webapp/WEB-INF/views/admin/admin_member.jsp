@@ -53,7 +53,7 @@
         </div>
 
         <!-- 회원 목록 검색 기능 -->
-        <form action="adminMemberSearch" method="get">
+        <form action="adminMember" method="get">
         <div class="row">
           <div class="col-md-4" style="text-align: center;">
             <input type="text" name="searchKeyword" class="form-control" placeholder="검색어 입력">
@@ -131,7 +131,7 @@
         <!-- 목록 테이블 끝 -->
         <section id = "pageList" style="text-align: center;">
 			
-			<input type="button" value="이전" onclick="location.href='adminMemberSearch?pageNum=${pageNum -1}&searchType=${searchType }&searchKeyword=${searchKeyword }'" 
+			<input type="button" value="이전" onclick="location.href='adminMember?pageNum=${pageNum -1}&searchType=${searchType }&searchKeyword=${searchKeyword }'" 
 				<c:if test="${pageNum eq 1 }">disabled</c:if>
 			>
 			
@@ -141,11 +141,11 @@
 						${i}
 					</c:when>
 					<c:otherwise>
-						<a href="adminMemberSearch?pageNum=${i}&searchType=${searchType }&searchKeyword=${searchKeyword }">${i}</a>
+						<a href="adminMember?pageNum=${i}&searchType=${searchType }&searchKeyword=${searchKeyword }">${i}</a>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>		
-		<input type="button" value="다음" onclick="location.href='adminMemberSearch?pageNum=${pageNum +1}&searchType=${searchType }&searchKeyword=${searchKeyword }'"
+		<input type="button" value="다음" onclick="location.href='adminMember?pageNum=${pageNum +1}&searchType=${searchType }&searchKeyword=${searchKeyword }'"
 			<c:if test="${pageNum eq pageInfo.maxPage }">disabled</c:if>
 		>
 		</section>

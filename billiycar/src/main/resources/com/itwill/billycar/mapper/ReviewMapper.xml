@@ -34,10 +34,10 @@
 		JOIN review r ON c.car_number = r.car_number
 		LEFT JOIN heart h ON r.review_idx = h.review_idx AND h.member_id = #{member_id}
     	<if test="option.equals('latest')">
-    		order by r.review_idx desc
+    		order by r.review_reg_date desc
     	</if>
     	<if test="option.equals('old')">
-    		order by r.review_idx asc
+    		order by r.review_reg_date asc
     	</if>
     	<if test="option.equals('rating')">
     		order by r.review_score desc
