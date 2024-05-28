@@ -10,7 +10,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>예약 내역 확인</title>
 <style>
-<style>
 #resv-confirm {
     margin-top: 30px;
     background: #fff;
@@ -123,7 +122,6 @@ tr:hover {
 .review {
     width: 15%;
 }
-</style>
 </style>
 <script type="text/javascript">
 document.addEventListener('DOMContentLoaded', function() {
