@@ -569,7 +569,18 @@
 					<div class="col-3">차량</div>
 					<div class="col-9 car-name" align="right">${car.car_model}</div>
  					<div class="col-3">기본정보</div> 
- 					<div class="col-9" align="right">${car.car_capacity}/${car.gear_type}/${car.car_fuel}</div> 
+ 					<div class="col-9" align="right">
+ 					${car.car_capacity}/
+ 					<c:choose>
+ 						<c:when test="${car.gear_type == 0}">
+							자동 						
+ 						</c:when>
+ 						<c:when test="${car.gear_type == 1}">
+							수동 						
+ 						</c:when>
+ 					</c:choose> 
+ 					/${car.car_fuel}
+ 					</div> 
 					<div class="col-3">제한나이</div> 
  					<div class="col-9" align="right">만23세 이상</div> 
  					<div class="col-3">운전경력</div>

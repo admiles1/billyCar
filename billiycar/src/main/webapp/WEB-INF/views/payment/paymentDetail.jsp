@@ -247,7 +247,7 @@
 				                ${reservDetails[0].reserv_insurance == 1 ? 'checked="checked"' : ''} disabled>
 				                <label>일반자차</label>
 				            </td>
-				            <td colspan="1" class="c">10원</td>
+				            <td colspan="1" class="c">15원</td>
 				            <td colspan="1" class="c">200만원</td>
 				            <td colspan="1" class="c">50만원</td>
 				        </tr>
@@ -297,6 +297,8 @@
                     <div class="row">
                         <div class="col-3">결제수단</div>
                         <div class="col-9" align="right">신용/체크카드</div>
+                        <div class="col-7">총 대여시간</div>
+                        <div class="col-5" id="total_rental_time" align="right"></div>
                         <div class="col-3">보험금액</div>
                         <div class="col-9 incurance" id="insurance_price" align="right">
                             <c:choose>
@@ -333,14 +335,56 @@
             insurancePrice = 26000;
         }
 
-        var paymentResultAmount = ${reservDetails[0].payment_result_amount};
-        var totalPaymentAmount = paymentResultAmount;
+        let paymentResultAmount = ${reservDetails[0].payment_result_amount};
+        let totalPaymentAmount = paymentResultAmount;
 
         document.getElementById('total_payment').innerText = totalPaymentAmount.toLocaleString() + " 원";
         document.getElementById('insuranceNone').style.display = reservInsurance == 0 ? '' : 'none';
         document.getElementById('insuranceGeneral').style.display = reservInsurance == 1 ? '' : 'none';
         document.getElementById('insuranceFull').style.display = reservInsurance == 2 ? '' : 'none';
+        
+        let pickupDateStr = "${reservDetails[0].reserv_pickupdate}";
+        let returnDateStr = "${reservDetails[0].reserv_returndate}";
+
+        // Date 객체로 변환합니다.
+        let pickupDate = new Date(pickupDateStr);
+        let returnDate = new Date(returnDateStr);
+
+        // 대여시간과 반납시간의 차이
+        let timeDiff = returnDate - pickupDate;
+
+        // 밀리초에서 시간으로 변환
+        let totalHours = Math.floor(timeDiff / (1000 * 60 * 60));
+        
+        let totalRentalTimeStr = "";
+        if (totalHours < 24) {
+            totalRentalTimeStr = totalHours + "시간";
+        } else {
+            let days = Math.floor(totalHours / 24);
+            let remainingHours = totalHours % 24;
+            totalRentalTimeStr = days + "일";
+            if (remainingHours > 0) {
+                totalRentalTimeStr += " " + remainingHours + "시간";
+            }
+        }
+
+        // 총 대여시간 표시
+        document.getElementById('total_rental_time').innerText = totalRentalTimeStr;
+	    
+// 	    let rentalFirstPrice = 0; 
+	    
+// 	    if(Interger.parseInt(totalRentalTimeStr)/4 > 1){
+// 	    	Interger.parseInt(days) = totalRentalTimeStr
+// 	    	'${reservDetails[0].car_dayprice}' * 	
+// 	    } else{
+// 	    	totalRentalTimeStr
+// 	    }
+        
     });
+    
+   
+    
+    
 	</script>
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

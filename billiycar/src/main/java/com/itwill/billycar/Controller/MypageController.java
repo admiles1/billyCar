@@ -231,7 +231,7 @@ public class MypageController {
 			return "err/fail";
 		}
         // 페이징 
- 		int listLimit = 10;
+ 		int listLimit = 2;
  		int startRow = (pageNum-1)*listLimit;
  		// 1) 전체 예약 목록 갯수 조회
 		String client = (String)session.getAttribute("member_id");
@@ -268,7 +268,7 @@ public class MypageController {
 			return "err/fail";
 		}
 		// 페이징 
-		int listLimit = 10;
+		int listLimit = 1;
 		int startRow = (pageNum-1)*listLimit;
 		// 1) 전체 게시물 수 조회
 		String writer = (String)session.getAttribute("member_id");
@@ -308,7 +308,7 @@ public class MypageController {
 	    	return "err/fail";
 	    }
 
-	    int listLimit = 10; // 한 페이지당 표시할 목록 개수
+	    int listLimit = 1; // 한 페이지당 표시할 목록 개수
 	    int startRow = (pageNum - 1) * listLimit; // 시작 행 번호
 	    int listCount = service.getCouponListCount(memberId); // 총 목록 개수
 
