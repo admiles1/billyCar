@@ -282,7 +282,7 @@ function check() {
 				<div class="card-body">
 				    <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
 				        <h5 style="width: 100px; text-align: right; margin-right: 10px;">모델명</h5>
-				        <p class="lead text-body-secondary" style="margin: 0; width: 200px;">${popular.name}</p>
+				        <p class="lead text-body-secondary" style="margin: 0; width: 200px;">${popular.car_model_name}</p>
 				    </div>
 				    <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
 				        <h5 style="width: 100px; text-align: right; margin-right: 10px;">차번호</h5>
@@ -290,11 +290,11 @@ function check() {
 				    </div>
 				    <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
 				        <h5 style="width: 100px; text-align: right; margin-right: 10px;">연료</h5>
-				        <p class="lead text-body-secondary" style="margin: 0; width: 200px;">${popular.car_fuel}</p>
+				        <p class="lead text-body-secondary" style="margin: 0; width: 200px;">${popular.car_fuel_name}</p>
 				    </div>
 				    <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
 				        <h5 style="width: 100px; text-align: right; margin-right: 10px;">차종류</h5>
-				        <p class="lead text-body-secondary" style="margin: 0; width: 200px;">${popular.car_type}</p>
+				        <p class="lead text-body-secondary" style="margin: 0; width: 200px;">${popular.car_type_name}</p>
 				    </div>
 				</div>
 				<div class="card-footer">
