@@ -31,7 +31,7 @@
   			
   			<div class = "view_info">
 				<em class="em"><b>작성자</b></em>
-				<em class="em">${notice.board_writer}</em>
+				<em class="em"><c:if test="${notice.board_writer eq 'admin'}"> 관리자 </c:if> </em>
 				<em class="em"><b>날짜</b></em>
 				<c:set var="noticeDate" value="${fn:split(fn:split(notice.board_date, 'T')[0], '-')}" />
 				<em class="em">${noticeDate[1]}월 ${noticeDate[2]}일</em>
