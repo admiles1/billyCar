@@ -14,12 +14,15 @@
 -->      
 <mapper namespace="com.itwill.billycar.mapper.AdminMapper">
 	<select id="selectMember" resultType="com.itwill.billycar.vo.AdminVO">
-		select * from admin where admin_id = #{admin_id} AND admin_passwd = #{admin_passwd};
+		select *
+		from admin 
+		where admin_id = #{admin_id} AND admin_passwd = #{admin_passwd};
 	</select>
 	
 	<select id="adminMemberList" resultType="com.itwill.billycar.vo.MemberVO">
-		select * from member where 1=1
-		
+		select *
+		from member
+		where 1=1
 		<if test="searchType.equals('name')">
 			AND member_name LIKE CONCAT('%', #{searchKeyword}, '%')
 		</if>

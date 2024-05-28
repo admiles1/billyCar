@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page import="java.time.LocalDateTime" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>
 <!DOCTYPE html>
@@ -95,19 +96,8 @@
 		                <td>${member.member_id }</td>
 		                <td>${member.member_name }</td>
 		                <td>${member.member_email }</td>
-		                
-		                <%
-						  // LocalDateTime 객체 생성
-						  LocalDateTime regDate = LocalDateTime.now();
-						
-						  // DateTimeFormatter를 사용하여 원하는 형식으로 변환
-						  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY년 MM월 dd일");
-						  String formattedDate = regDate.format(formatter);
-						%>
-		                
-		                
-		                <td><%= formattedDate %></td>
-		               
+		                <c:set var="reg_date" value="${fn:split(member.member_reg_date, 'T')}" />
+		                <td>${reg_date[0]}</td>
 		                <c:choose>
 		                	<c:when test="${member.member_status eq 1}">
 		                		<td>회원</td>

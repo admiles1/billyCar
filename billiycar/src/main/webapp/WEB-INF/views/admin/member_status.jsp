@@ -16,6 +16,12 @@
 <body>
 <script type="text/javascript">
 
+function closeWindow() {
+    if (window.opener && !window.opener.closed) {
+        window.opener.location.reload();
+    }
+    window.close();
+}
 </script>
 	<form action="memberStatus"  name="fr" method="post">
 		<div class="form-group mr-2" style="text-align: center;">
@@ -27,7 +33,7 @@
             
             <input type="hidden" name="member_id" value="${param.member_id }">
             <input type="submit" class="btn btn-primary" style="width: 100px;" id="updateButton" value="변경">
-            <input type="button" class="btn btn-primary" style="width: 100px;" onclick="window.close()" value="닫기">
+            <input type="button" class="btn btn-primary" style="width: 100px;" onclick="closeWindow()" value="닫기">
           </div>
 	</form>
 	
