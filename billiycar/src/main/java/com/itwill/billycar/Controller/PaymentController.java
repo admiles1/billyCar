@@ -1,7 +1,9 @@
 package com.itwill.billycar.Controller;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Map;
 
@@ -66,18 +68,33 @@ public class PaymentController {
 		String MemberId = (String)session.getAttribute("member_id");
 		member.setMember_id(MemberId);
 		
+		// 로그인 여부 쳌 
 		if(MemberId == null) {
 			model.addAttribute("msg", "로그인을 진행하여 주세요");
 			model.addAttribute("targetURL", "login");
 			return "err/fail";
 		}
 		
+		// 면허인증 여부 쳌
 		member = memberservicer.getMember(member);
 		if(member.getMember_license_checked() != 1) {
 			model.addAttribute("msg", "면허 인증을 진행하여 주십시오");
 			model.addAttribute("targetURL", "license");
 			return "err/fail";
 		}
+		
+		// 생년월일 여부 쳌
+		String memberBirthStr = member.getMember_birth();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+        LocalDate birthDate = LocalDate.parse(memberBirthStr, formatter);
+        LocalDate now = LocalDate.now();
+        long age = ChronoUnit.YEARS.between(birthDate, now);
+
+        if(age <= 23) {
+            model.addAttribute("msg", "만 23세 이하는 접근할 수 없습니다.");
+            model.addAttribute("targetURL", "./");
+            return "err/fail";
+        }
 		
 //		CouponIssueVO couponIssue = new CouponIssueVO();
 //		List<CouponIssueVO> couponIssue = paymentService.getMemberCoupon(MemberId);
