@@ -46,7 +46,7 @@
 	</select>
 	
 	<select id="selectReviewAvg">
-		SELECT IFNULL(AVG(review_score), 0) AS avg_score FROM review;
+		SELECT IFNULL(ROUND(AVG(review_score),2), 0) AS avg_score FROM review;
 	</select>
 	
 	<select id="selectAllReview">
