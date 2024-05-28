@@ -350,6 +350,11 @@ public class CsController {
 			return "err/fail";
 		}
 		
+		if(id.equals("admin")) {
+			model.addAttribute("msg","관리자는 문의하기 지원이 안 됩니다");
+			return "err/fail";
+		}
+		
 		qna.setQna_writer(id);
 		model.addAttribute("qna", qna);
 		return "cs/Q&A_Q";
