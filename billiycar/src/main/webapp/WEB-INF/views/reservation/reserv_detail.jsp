@@ -61,7 +61,7 @@
 	   		 			<span class="car-size"> ${car.car_type} </span> 
 	   		 			<span class="car-size"> ${car.car_fuel} </span>
    		 			</h2>
-	   		 		<h2 class="car-price"><fmt:formatNumber value="${car.car_dayprice}" pattern="#,###"/></h2>
+	   		 		<h2 class="car-price"><fmt:formatNumber value="${car.car_dayprice}" pattern="#,###"/>원</h2>
 	   		 		<hr>
 	   		 		<div>
 	   		 			<c:set var="schedules" value="${fn:split(param.schedule, ',')}" />
