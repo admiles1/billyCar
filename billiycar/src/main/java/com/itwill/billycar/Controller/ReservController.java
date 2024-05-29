@@ -49,14 +49,16 @@ public class ReservController {
 		// 디폴트 날짜검색 조건 만들기
 		LocalDateTime now = LocalDateTime.now();
 		ReservVO reserv = new ReservVO();
-		LocalDateTime defalutPickup = now.withDayOfMonth(now.getDayOfMonth() +1).withHour(6).withMinute(0).withSecond(0).withNano(0);
-		LocalDateTime defalutReturn = now.withDayOfMonth(now.getDayOfMonth() +2).withHour(7).withMinute(0).withSecond(0).withNano(0);
-		// Ex) 2024-05-20일 접속 기준 defalutPickup = 2024-05-21T06:00 // defalutReturn = 2024-05-22T07:00
+		LocalDateTime defalutPickup = now.withDayOfMonth(now.getDayOfMonth()).withHour(6).withMinute(0).withSecond(0).withNano(0);
+		LocalDateTime defalutReturn = now.withDayOfMonth(now.getDayOfMonth()).withHour(7).withMinute(0).withSecond(0).withNano(0);
+		// Ex) 2024-05-20일 접속 기준 defalutPickup = 2024-05-20T06:00 // defalutReturn = 2024-05-20T07:00
 		// T기준 스플릿 [0] 날짜 [1] 시간  XXX[1].substring(0, 2) 시간단위만 분리
 		map.put("reserv_pickupdate", defalutPickup.toString().split("T")[0]);
 		map.put("pickupTime", defalutPickup.toString().split("T")[1].substring(0, 2));
 		map.put("reserv_returndate", defalutReturn.toString().split("T")[0]);
 		map.put("returnTime", defalutReturn.toString().split("T")[1].substring(0, 2));
+		
+
 
 		
 		// 공통코드 및 디폴트 스케쥴
