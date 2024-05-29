@@ -40,7 +40,7 @@
 		if (divContent === '<p><br></p>') {
 		    alert('내용을 먼저 입력해주세요');
 		} else {
-			window.open("CouponUpload", "쿠폰 등록", "width=100px, height=30px");
+			window.open("CouponUpload", "쿠폰 등록", "width=100, height=30, left=850, top=300");
 		}
 	}
 	

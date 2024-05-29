@@ -80,20 +80,6 @@
    		border-radius: 10px; 
    		overflow-y: auto; 
    	}  
-   	/*놑북용 사이드 */
-   	
-	/*
-	#paymentSide{  
- 		position:fixed;  
-  		left:1000px; top:140px;  
-   		width: 410px;   
-   		height: 600px;   
-		margin: 0px;
-		padding: 0px;
-  		border: 1px solid lightgray;
-  		border-radius: 10px;
-   		overflows-y: auto; 
-  	} */
  
   	label {
   		margin-left: 10px;
@@ -116,10 +102,15 @@
 	#differenceday{
 	text-align: left;
 	border: none;
-/* 	width: 30px; */
 	}
  </style>
  
+ <!-- 부트스트랩 -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+ 
+ <!-- 아임포트 스크립트 -->
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
+	
  <script>
     	
         const IMP = window.IMP; 
@@ -203,7 +194,9 @@
                  radio.addEventListener('change', function() { // 라디오 버튼 변경 이벤트
                      if (this.checked) { // 라디오 버튼이 선택된 경우
  						let price = parseInt(this.value); // 선택된 라디오 버튼의 값 가져오기
-		
+						
+ 						document.getElementById('insurance_price').textContent = price.toLocaleString();
+ 						
  		                // P1의 입력 값 업데이트
  		                let inputField = document.getElementById('dateDifferenceInput');
  						let existingTotal = parseInt(inputField.value.replace(/,/g, ''));
@@ -308,26 +301,8 @@
 	    });
 	});
 </script>	
-	<!-- 추가옵션 스크립트 -->
-<!--  		 <script>
-        function updateOptionPrice() {
-            let checkboxes = document.querySelectorAll('input[name="opt_chk"]:checked'); // 체크된 모든 체크박스 선택
-            let total = 0;
-            checkboxes.forEach(function(checkbox) {
-                total += parseInt(checkbox.value, 10); // 체크박스의 값(가격)을 합산
-            });
-            document.getElementById('optionPrice').innerText = '(+)' + total; // 결과를 div에 표시
-        }
-        document.addEventListener('DOMContentLoaded', function() {
-            let checkboxes = document.querySelectorAll('input[name="opt_chk"]');
-            checkboxes.forEach(function(checkbox) {
-                checkbox.addEventListener('change', updateOptionPrice); // 각 체크박스에 이벤트 리스너 추가
-            });
-            updateOptionPrice(); // 페이지 로드 시 초기값 업데이트
-        });
-    </script>
--->
-	<script type="text/javascript">
+	<!-- 필요데이터  변수 초기화  스크립트--> 
+<script type="text/javascript">
 	function submitPaymentForm() {
 	    // 필요한 데이터 설정
 	    let totalAmount = document.getElementById('totalAmount').value;
@@ -343,11 +318,8 @@
 <body class="mine">
 	<header><jsp:include page="../inc/top.jsp"></jsp:include></header>
 	<div class="container">
-	      <!-- row div 다 닫기 -->
-<!-- 		<div class="col-md-7 col-lg-12"> -->
 		<div class="row g-5">
 		<div class="col-md-7 col-lg-8 " id="paymentMain">
-	<!--         <form class="needs-validation" > -->
 	    <h4 class="subject">예약정보</h4>
 	    	<div class="row g-3">
 	       		<div class="col-sm-3">
@@ -387,24 +359,9 @@
 	
 	            <div class="col-sm-9">
 	            	<input type="text" class="form-control" id="locatrionInfo" value="${fn:split(param.schedule, ',')[3]}" readonly>
-<!-- 	            	<select class="form-select" aria-label="Default select example"> -->
-<!-- 						<option selected>반납지역</option> -->
-<!-- 						<option value="1">반납지역1</option> -->
-<!-- 						<option value="2">반납지역2</option> -->
-<!-- 						<option value="3">반납지역3</option> -->
-<!-- 					</select> -->
 	            </div>
 			</div>
 			
-<!-- 			<div class="row g-3">  --> <!--  필요 없을듯 --> 
-<!-- 				<div class="col-sm-3"> -->
-<!-- 	            	<label>총 대여시간</label> -->
-<!-- 	        	</div> -->
-	
-<!-- 	            <div class="col-sm-9"> -->
-<!-- 	            	<input type="text" class="form-control" id="dateInfo" placeholder="" value="총 대여시간 받아올꺼" required> -->
-<!-- 	            </div> -->
-<!-- 	        </div> -->
 			<hr>            
 	        
 		<h4 class="subject">예약자정보</h4>
@@ -447,58 +404,6 @@
 			
 		<hr>
 				
-<!-- 		<h4 class="subject">이벤트정보</h4> -->
-			
-<!-- 			<div class="row g-3" id="tables"> -->
-<!-- 				<table class="list-table-v02"   > -->
-<%-- 					<colgroup span="1"> --%>
-<%-- 						<col width="45%"> --%>
-<%-- 						<col width="25%"> --%>
-<%-- 						<col width="30%"> --%>
-<%-- 					</colgroup> --%>
-<!-- 					<thead> -->
-<!-- 						<tr> -->
-<!-- 							<th>이벤트명</th> -->
-<!-- 							<th>혜택</th> -->
-<!-- 							<th class="last-child">기간</th> -->
-<!-- 						</tr> -->
-<!-- 					</thead> -->
-<!-- 					<tbody> -->
-<!-- 						<tr class="eventChk" bordercolor="black"> -->
-<!-- 							<td colspan="1" class="c" bordercolor="black"> -->
-<!-- 								<input name="event" class="chk event_data" id="event0" type="radio" checked="checked">  -->
-<!-- 								<label for="event0" >선택안함</label> -->
-<!-- 							</td> -->
-<!-- 							<td colspan="1" class="c">없음</td> -->
-<!-- 							<td colspan="1" class="c">없음</td> -->
-<!-- 						</tr> -->
-<!-- 						<tr class="eventChk" bordercolor="black"> -->
-<!-- 							<td colspan="1" class="c" bordercolor="black"> -->
-<!-- 								<input name="event" class="chk event_data" id="event1" type="radio">  -->
-<!-- 								<label for="event1" >유아용 카시트 무료 이벤트</label> -->
-<!-- 							</td> -->
-<!-- 							<td colspan="1" class="c">카시트 무료 제공</td> -->
-<!-- 							<td colspan="1" class="c">무제한</td>							 -->
-<!-- 						</tr> -->
-<!-- 						<tr class="eventChk" bordercolor="black"> -->
-<!-- 							<td colspan="1" class="c" bordercolor="black"> -->
-<!-- 								<input name="event" class="chk event_data" id="event2" type="radio">  -->
-<!-- 								<label for="event1" >현대차 렌트 할인 이벤트</label> -->
-<!-- 							</td> -->
-<!-- 							<td colspan="1" class="c">5000원 쿠폰 제공</td> -->
-<!-- 							<td colspan="1" class="c">100명 소진 시 종료</td>							 -->
-<!-- 						</tr> -->
-<!-- 						<tr class="eventChk" bordercolor="black"> -->
-<!-- 							<td colspan="1" class="c" bordercolor="black"> -->
-<!-- 								<input name="event" class="chk event_data" id="event3" type="radio" value="0|선택안함" >  -->
-<!-- 								<label for="event1" >첫 고객 할인 이벤트</label> -->
-<!-- 							</td> -->
-<!-- 							<td colspan="1" class="c">5000원 쿠폰 제공</td> -->
-<!-- 							<td colspan="1" class="c">제한 없음</td>							 -->
-<!-- 						</tr> -->
-<!-- 				</table> -->
-<!-- 			</div> -->
-<!-- 			<hr>	 -->
 		<h4 class="subject">보험정보</h4>
 			<div class="row g-3">
 				<h5>자차보험(선택사항, 24시간기준)</h5>
@@ -533,7 +438,7 @@
 								<input name="insurance" class="chk insurance_data" id="insuranceCar1" type="radio" value="15" > 
 								<label  for="insuranceCar1">일반자차</label>
 							</td>
-							<td colspan="1" class="c">1만원</td>
+							<td colspan="1" class="c">15원</td>
 							<td colspan="1" class="c">200만원</td>
 							<td colspan="1" class="c">50만원</td>
 						</tr>
@@ -543,7 +448,7 @@
 								<input name="insurance" class="chk insurance_data" id="insuranceCar2" type="radio" value="25" >
 								<label  for="insuranceCar2"> 완전자차 </label>
 							</td>
-							<td colspan="1" class="c">2만6천원</td>
+							<td colspan="1" class="c">25원</td>
 							<td colspan="1" class="c">200만원</td>
 							<td colspan="1" class="c">0만원</td>
 						</tr>
@@ -594,26 +499,6 @@
 					</tbody>
 				</table>
 			</div>
-<!-- 			<hr>	 -->
-<!-- 		<h4 class="subject">추가옵션</h4> -->
-<!-- 			<div class="row row-cols-2"> -->
-<!-- 				<div class="opt_chk"> -->
-<!-- 					&nbsp;<input type="checkbox" name="opt_chk" id="opt_chk1" value="5000">&emsp;카시트(영유아용)1개 &emsp;5000원 -->
-					
-<!-- 				</div> -->
-<!-- 				<div class="opt_chk"> -->
-<!-- 					<input type="checkbox" name="opt_chk" id="opt_chk2" value="5000">&emsp;카시트(주니어)1개 &emsp;5000원 -->
-					
-<!-- 				</div> -->
-<!-- 				<div class="opt_chk"> -->
-<!-- 					&nbsp;<input type="checkbox" name="opt_chk" id="opt_chk8" value="8|0">&emsp;카시트(영유아용)2개 -->
-<!-- 					<br>&nbsp;5000원 -->
-<!-- 				</div> -->
-<!-- 				<div class="opt_chk"> -->
-<!-- 					<input type="checkbox" name="opt_chk" id="opt_chk8" value="8|0">&emsp;카시트(주니어)2개 -->
-<!-- 					<br>5000원 -->
-<!-- 				</div> -->
-<!-- 			</div> -->
 			
 			<hr>
 		<h4 class="subject">결제수단 선택</h4>
@@ -631,9 +516,9 @@
 			<hr>
 		<h4 class="subject">할인정보(중복할인불가)</h4>
 			<div class="row g-3">
-				<div class="col-sm-2">
+				<div class="col-sm-3">
 	            	<label> 
-	            		<select class="form-control" id="memberCoupon" name="memberCoupon" style="width: 150px;">
+	            		<select class="form-control" id="memberCoupon" name="memberCoupon" style="width: 210px;">
 				            <option value="0">선택안함</option>
 				            <c:forEach var="ci" items="${couponIssue}">
 					            <option value="${ci.coupon_discount_amount},${ci.coupon_id}" id="memberCoupon">${ci.coupon_name}</option>
@@ -642,7 +527,7 @@
 			            </select>
 	            	</label>
 	            </div>
-	            <div class="col-sm-10">
+	            <div class="col-sm-9">
 	            	<input type="button" value="적용" style="height: 37px;" id="applyCouponBtn" >
 	            </div>
 			</div>
@@ -672,56 +557,36 @@
 		        </div>
 		    </div>
 		</div>
-<!-- 		<div class="col-lg-4"> -->
-<!-- 		<div class="col-md-7 col-lg-4"> -->
 		<div class="col-md-5 col-lg-4 order-md-last" id="paymentSide">
 			<h4 class="subject2">결제 정보 확인</h4>
 			<div class="container last_check">
 				<div>
  					<img src="<%= request.getContextPath() %>/resources/upload/${car.car_img}" width="370" > <!-- 차이미지 받아 오기 --> 
-<!-- 					<img src="resources/event_images/envent_page_event2-1.webp" width="370" align="middle" > -->
 				</div>
-<!-- 				<p><b>예약자 정보</b></p> -->
-<!-- 				<div class="row"> -->
-<!-- 					<div class="col-3">예약자 이름</div> -->
-<!-- 					<div class="col-9" id="displayInfoName"></div> -->
-<!-- 					<div class="col-3">생년월일</div> -->
-<!-- 					<div class="col-9" id="displayInfoBirth"></div> -->
-<!-- 					<div class="col-3">전화번호</div> -->
-<!-- 					<div class="col-9" id="displayInfoTell"></div> -->
-<!-- 					<div class="col-3">이메일</div> -->
-<!-- 					<div class="col-9" id="displayInfoEmail"></div> -->
-<!-- 				</div> -->
 				
 				<p><b>차량 정보</b></p>
 				<div class="row ">
 					<div class="col-3">차량</div>
 					<div class="col-9 car-name" align="right">${car.car_model}</div>
  					<div class="col-3">기본정보</div> 
- 					<div class="col-9" align="right">${car.car_capacity}/${car.gear_type}/${car.car_fuel}</div> 
-<!--  					<div class="col-3">세부정보</div>  -->
-<!--  					<div class="col-9">차 옵션 표시</div> -->
-<!-- 					<div class="col-3">이용일</div> -->
-<!-- 					<div class="col-9">빌린 날짜 표기(대여일 및 시간 ~ 반납일 및 시간)</div> -->
-<!-- 					<div class="col-3">대여지역</div> -->
-<!-- 					<div class="col-9">대여지역 표시</div> -->
-<!-- 					<div class="col-3">반납지역</div> -->
-<!-- 					<div class="col-9">반납지역 표시</div> -->
+ 					<div class="col-9" align="right">
+ 					${car.car_capacity}/
+ 					<c:choose>
+ 						<c:when test="${car.gear_type == 0}">
+							자동 						
+ 						</c:when>
+ 						<c:when test="${car.gear_type == 1}">
+							수동 						
+ 						</c:when>
+ 					</c:choose> 
+ 					/${car.car_fuel}
+ 					</div> 
 					<div class="col-3">제한나이</div> 
  					<div class="col-9" align="right">만23세 이상</div> 
  					<div class="col-3">운전경력</div>
  					<div class="col-9" align="right">면허취득 1년이상</div> 
-<!--  					<div class="col-3">면허종류</div> -->
-<!--  					<div class="col-9">면허종류 표시</div>  -->
 				</div>
 				
-<!-- 				<p><b>추가 옵션</b></p> -->
-<!-- 				<h6><b>추가 옵션</b></h6> -->
-<!-- 				<div class="row"> -->
-<!-- 					<div class="col-3">추가 옵션</div> -->
-<!-- 					<div class="col-9" id="optionPrice" align="right">0</div> -->
-<!-- 				</div> -->
-			 	
 				
 				<br>
 				<h6><b>결제 정보</b></h6>
@@ -734,21 +599,14 @@
 						<input type="text" id="firstAmount" readonly/>
 					</div>
 					<div class="col-3">보험금액</div>
-<!-- 					<div class="col-9 incurance" id="insurance_price" align="right">0</div> -->
-					<div class="col-9 incurance" id="insurance_price" align="right">${empty param.insurance ? '(+)0' : param.insurance}</div>
+					<div class="col-9 incurance" id="insurance_price" align="right">0</div>
 					<div class="col-3">할인금액</div>
-<!-- 					<div class="col-9"></div> -->
 					<div class="col-9" align="right" id="salePrice">0</div>
 					<hr>
 					<div class="col-3">결제 금액(VAT 포함)</div>
 					<div class="col-9"  align="right"><input type="text" id="dateDifferenceInput"  readonly/></div>
 				
-<!-- 					<div id="dateDifference"> -->
-<!-- <!-- 						<input type="text" id="dateDifference" value="dateDifference">  -->
-<!-- <!-- 						<input type="text" id="dateDifferenceInput" readonly />  -->
-<!-- 					</div> -->
 				</div>
-<!-- 				<br> -->
 				<form action="payment" method="post">
 					<input type="hidden" id="totalAmount" name="totalAmount" value="0">
 <%-- 					<input type="hidden" name="carNumber" value="${car.car_number}"> --%>
@@ -759,12 +617,7 @@
 		</div>
 	</div>
 
-    <!-- 아임포트 스크립트 -->
-    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
     
-	
-	<!-- 부트스트랩 -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <%-- 	<footer><jsp:include page="../inc/bottom.jsp"></jsp:include></footer> --%>
 </body>
 </html>

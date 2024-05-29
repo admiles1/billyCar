@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>리뷰</title>
+<title>리뷰 리스트</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -84,9 +84,10 @@ $(function(){
     });
 
     function updateReviewList(reviews) {
+    	var contextPath = "<%= request.getContextPath() %>";
         var html = '';
         reviews.forEach(function(review) {
-        	html += '<div class="col-md-3" style="margin-top: 20px;">' +
+        	html += '<div class="col-md-4" style="margin-top: 20px;">' +
 				            '<div class="card" style="position: relative;">' +
 				            '<div style="position: absolute; top: 10px; left: 10px; color: grey;" class="heart">' + 
 				            '<input type="hidden" class="review_idx" value="' + review.review_idx + '">';
@@ -99,15 +100,15 @@ $(function(){
 							
 							
 		                	
-                            '<img src="request.getContextPath()/resources/upload/' + review.car_img + 'width="306" height="300">' +
-                            '<hr>' +
+							'<img src="' + contextPath + '/resources/upload/' + review.car_img + '" style="margin-top: 10px;">' +
                             '<div class="card-body">' +
+                            '<h4 class="card-title"><a style="color: #00498c;">' + review.car_number + '</a> 차량</h4>' +
                                 '<h5 class="card-title">';
 	            for (var i = 0; i < review.review_score; i++) {
 	                html += '<i class="fa-solid fa-star" style="color: #FFE000;"></i>';
 	            }
 	            html +=         '</h5>' +
-	            			'<h4 class="card-title">' + review.car_number + '</h4>' +
+	            			'<hr>' +
                             '<h5 class="card-title" style="height: 20px; margin-top: 20px;">제목</h5>' + 
                             '<p>' + review.review_subject + '</p>' + 
                             '<h5 class="card-text">내용</h5>' + 
@@ -178,7 +179,7 @@ $(function(){
         </div>
     	<div class="row">
     		<c:forEach var="review" items="${reviewList }">
-	        	<div class="col-md-3" style="margin-top: 20px;">
+	        	<div class="col-md-4" style="margin-top: 20px;">
 	        		<div class="card" style="position: relative;">
 	        			<div style="position: absolute; top: 10px; left: 10px; color: grey;" class="heart">
 	        				<input type="hidden" class="review_idx" value="${review.review_idx }">
@@ -191,14 +192,17 @@ $(function(){
 	        						</c:otherwise>
 	        					</c:choose>
 	        			</div>
-	                	<img src="<%= request.getContextPath() %>/resources/upload/${review.car_img }" width="306" height="300">
+	                	<img src="<%= request.getContextPath() %>/resources/upload/${review.car_img }" style="margin-top: 10px;">
+	                	
 	                    <div class="card-body">
+	                    	<h4 class="card-title"><a style="color: #00498c;">${review.car_number }</a> 차량</h4>
 	                    	<h5 class="card-title">
 	                    		<c:forEach begin="1" end="${review.review_score }" varStatus="loop">
 	                    		<i class="fa-solid fa-star" style="color: #FFE000;"></i>
 	                    		</c:forEach>
 	                    	</h5>
-	                    	<h4 class="card-title">${review.car_number }</h4>
+	                    	
+	                    	<hr>
 	                    	<h5 class="card-title" style="height: 20px; margin-top: 20px;">제목</h5>
 	                    	<p>${review.review_subject }</p>
 	                    	<h5 class="card-text">내용</h5>

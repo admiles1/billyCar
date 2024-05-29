@@ -134,6 +134,18 @@ public class Memberservice {
 	}
 
 
+	public String forgotIdPhone(Map<String, String> map) {
+		return mapper.selectForgotIdPhone(map);
+	}
+
+
+	public MemberVO forgotPwPhone(Map<String, String> map) {
+		return mapper.selectForgotPwPhone(map);
+	}
+
+
+
+
 	
 	
 }

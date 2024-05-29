@@ -1,5 +1,7 @@
 package com.itwill.billycar.Controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -169,11 +171,13 @@ public class MemberController {
 		MemberVO dbMember = service.getMember(member);
 		
 		
-		if(dbMember == null || !passwordEncoder.matches(member.getMember_passwd(), dbMember.getMember_passwd())
-							|| dbMember.getMember_status() == 2) { // 로그인 실패
+		if(dbMember == null || !passwordEncoder.matches(member.getMember_passwd(), dbMember.getMember_passwd())){ // 로그인 실패
 			model.addAttribute("msg", "아이디 또는 비밀번호를 잘못 입력했습니다.\\n입력하신 내용을 다시 확인해주세요.");
 			return "err/fail";
-		}  else { // 로그인 성공
+		} else if (dbMember.getMember_status() == 2) {
+			model.addAttribute("msg", "이미 탈퇴한 회원입니다.");
+			return "err/fail";
+		}else { // 로그인 성공
 			// 세션 객체에 로그인 성공한 아이디를 "sId" 속성값으로 추가
 			session.setAttribute("member_id", member.getMember_id());
 			
@@ -235,8 +239,18 @@ public class MemberController {
 	}
 	
 	@GetMapping("show_id")
-	public String show_id() {
-		return "login/show_id";
+	public String show_id(MemberVO member , Model model ,@RequestParam Map<String, String> map) {
+		System.out.println(map.get("phone_member_name"));
+		System.out.println(map.get("auth_num"));
+		String member_id = service.forgotIdPhone(map);
+		if(member_id != null) {
+			model.addAttribute("member_id",  member_id);
+			return "login/show_id";
+		} else {
+			model.addAttribute("msg", "이름 또는 전화번호를 잘못 입력하셨습니다.");
+			return "err/fail";
+		}
+		
 	}
 	
 	@GetMapping("forgot_pw_step1")
@@ -247,7 +261,6 @@ public class MemberController {
 	@PostMapping("forgot_pw_step1")
 	public String forgot_pwPro(MemberVO member, Model model, HttpSession session) {
 		
-		System.out.println(member);
 		
 		MemberVO dbMember = service.getMember(member);
 		
@@ -255,7 +268,7 @@ public class MemberController {
 			model.addAttribute("member_id", dbMember.getMember_id());
 			return "redirect:/forgot_pw_step2";
 		} else {
-			model.addAttribute("msg", "존재하지 않는 회원입니다.");
+			model.addAttribute("msg", "아이디를 확인해 주세요.");
 			return "err/fail";
 		}
 	}
@@ -282,11 +295,28 @@ public class MemberController {
 		}
 	}
 	
+	@PostMapping("forgot_pw_step2_phone")
+	public String forgot_pw2phonePro(MemberVO member,@RequestParam Map<String, String> map, Model model) {
+		
+		member = service.forgotPwPhone(map);
+		
+		if(member != null) {
+			model.addAttribute("member_id", member.getMember_id());
+			return "redirect:/forgot_pw_step3";
+		} else {
+			model.addAttribute("msg", "이름 또는 전화번호를 잘못 입력했습니다.");
+			return "err/fail";
+		}
+		
+		
+	}
 	@GetMapping("forgot_pw_step3")
 	public String forgot_pw3(MemberVO member, Model model) {
 		model.addAttribute("member_id", member.getMember_id());
 		return "login/forgot_pw3";
 	}
+	
+	
 	
 	@PostMapping("forgot_pw_step3")
 	public String forgot_pw3Pro(MemberVO member
@@ -295,12 +325,10 @@ public class MemberController {
 					            , String member_passwd) {
 //		MypageService mypageService = new MypageService();
 		
-		System.out.println("sadflhawrilfhqeiorashgiuewqkarshdgilqwrheasdfilqwrehfd" + member);
 		
 		String securePasswd = passwordEncoder.encode(member.getMember_passwd());
 		member.setMember_passwd(securePasswd);
 		
-		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + member);
 		int updateCnt = service.modifyPasswd(member);
 		
 		if(updateCnt <= 0) {
@@ -310,6 +338,7 @@ public class MemberController {
 		
 		return "redirect:/login";
 	}
+	
 	
 	@PostMapping ("passwdChange")
 	public String passwdChange() {

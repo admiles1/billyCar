@@ -78,7 +78,6 @@ public class EventController {
 		
 		if(id==null || !id.equals("admin")) {
 			model.addAttribute("msg","잘못된 접근입니다");
-			model.addAttribute("targetURL","notice");
 			return "err/fail";
 		}
 		
@@ -93,7 +92,6 @@ public class EventController {
 		
 		if(id==null || !id.equals("admin")) {
 			model.addAttribute("msg","잘못된 접근입니다");
-			model.addAttribute("targetURL","notice");
 			return "err/fail";
 		}
 		// 가상 경로
@@ -173,7 +171,6 @@ public class EventController {
 		
 		if(id==null || !id.equals("admin")) {
 			model.addAttribute("msg","잘못된 접근입니다");
-			model.addAttribute("targetURL","notice");
 			return "err/fail";
 		}
 		
@@ -246,7 +243,6 @@ public class EventController {
 		
 		if(id==null || !id.equals("admin")) {
 			model.addAttribute("msg","잘못된 접근입니다");
-			model.addAttribute("targetURL","notice");
 			return "err/fail";
 		}
 		

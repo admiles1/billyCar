@@ -33,7 +33,7 @@ public interface PaymentMapper {
 
 	List<Map<String, Object>> selectMemberCoupon(String memberId);
 
-	void updateCouponStatus(@Param("couponId")int couponId);
+	void updateCouponStatus(@Param("coupon_id")int coupon_id,@Param("memberId")String memberId);
 
 //	int updateCouponStatus(CouponIssueVO couponIssue);
 

@@ -317,9 +317,10 @@ public class AdminCusController {
 	}
 	
 	@GetMapping("couponDelete")
-	public String couponDelete(String coupon_code, Model model, AdminVO admin) {
+	public String couponDelete(String coupon_code, String coupon_id, Model model, AdminVO admin) {
 		
 		System.out.println(coupon_code);
+		System.out.println(coupon_id);
 		
 		// 관리자 아닐 경우 돌려보내기
 		admin.setAdmin_id((String)session.getAttribute("member_id"));
@@ -329,15 +330,20 @@ public class AdminCusController {
 			return "err/fail";
 		} 
 		
+		//쿠폰 테이블에서 쿠폰삭제하기
 		int deleteCount = service.removeCoupon(coupon_code);
 		
 		if(deleteCount <= 0) {
+			
 			model.addAttribute("msg", "쿠폰 삭제 실패하셨습니다. \\n 다시 시도해 주세요");
+			return "err/fail";
+		}else {
+			model.addAttribute("msg", "쿠폰이 정상적으로 삭제되었습니다.");
+			model.addAttribute("targetURL", "couponList");
+			
 			return "err/fail";
 		}
 		
-		
-		return "redirect:/couponList";
 	}
 	
 	// ----------------------------------------------------------------------------------------------

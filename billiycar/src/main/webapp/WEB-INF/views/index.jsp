@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Billycar</title>
+<title>메인 페이지</title>
 <script src="https://code.jquery.com/jquery-3.6.2.min.js" integrity="sha256-2krYZKh//PcchRtd+H+VyyQoZ/e3EcrkxhM8ycwASPA=" crossorigin="anonymous"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
@@ -240,7 +240,7 @@ function check() {
 	                <div class="about-reason text-center">
 	                    <img src="resources/main_images/icon2.png" width="53" height="53" alt="예약가능차량">
 	                    <div class="mt-2">
-	                        <div class="font-weight-bold">예약 가능 차량</div>
+	                        <div class="font-weight-bold">현재 보유 차량</div>
 	                        <div id="ableRsv" class="text-primary">${carCount }</div>
 	                    </div>
 	                </div>
@@ -263,7 +263,7 @@ function check() {
 	<section class="py-5 text-center container noto-sans-kr" style="margin-top: 30px;">
 		<div class="row py-lg-5">
 			<div class="col-lg-6 col-md-8 mx-auto">
-				<h1 class="fw-light">맞춤 추천 차량</h1>
+				<h1 class="fw-light">인기 차량 추천</h1>
 				<p class="lead text-body-secondary">빌리카에게 가장 많은 인기 많은 차량입니다.</p>
 <!-- 				<p> -->
 <!-- 					<a href="review" class="btn btn-primary my-2">리뷰 더보기</a> -->
@@ -282,7 +282,7 @@ function check() {
 				<div class="card-body">
 				    <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
 				        <h5 style="width: 100px; text-align: right; margin-right: 10px;">모델명</h5>
-				        <p class="lead text-body-secondary" style="margin: 0; width: 200px;">${popular.car_model}</p>
+				        <p class="lead text-body-secondary" style="margin: 0; width: 200px;">${popular.car_model_name}</p>
 				    </div>
 				    <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
 				        <h5 style="width: 100px; text-align: right; margin-right: 10px;">차번호</h5>
@@ -290,11 +290,11 @@ function check() {
 				    </div>
 				    <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
 				        <h5 style="width: 100px; text-align: right; margin-right: 10px;">연료</h5>
-				        <p class="lead text-body-secondary" style="margin: 0; width: 200px;">${popular.car_fuel}</p>
+				        <p class="lead text-body-secondary" style="margin: 0; width: 200px;">${popular.car_fuel_name}</p>
 				    </div>
 				    <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
 				        <h5 style="width: 100px; text-align: right; margin-right: 10px;">차종류</h5>
-				        <p class="lead text-body-secondary" style="margin: 0; width: 200px;">${popular.car_type}</p>
+				        <p class="lead text-body-secondary" style="margin: 0; width: 200px;">${popular.car_type_name}</p>
 				    </div>
 				</div>
 				<div class="card-footer">

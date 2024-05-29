@@ -126,22 +126,22 @@ public class AdminController {
 	}
 	
 	
-	@GetMapping("adminMember")
-	public String adminMember(AdminVO admin,Model model) {
-		admin.setAdmin_id((String)session.getAttribute("member_id"));
-		
-		
-		// 관리자 아닐 경우 돌려보내기
-		if(session.getAttribute("member_id")==null || !session.getAttribute("member_id").equals(admin.getAdmin_id())) {
-			model.addAttribute("msg","접근 권한이 없습니다");
-			return "err/fail";
-		} 
-		
-		return "admin/admin_member";
-	}
+//	@GetMapping("adminMember")
+//	public String adminMember(AdminVO admin,Model model) {
+//		admin.setAdmin_id((String)session.getAttribute("member_id"));
+//		
+//		
+//		// 관리자 아닐 경우 돌려보내기
+//		if(session.getAttribute("member_id")==null || !session.getAttribute("member_id").equals(admin.getAdmin_id())) {
+//			model.addAttribute("msg","접근 권한이 없습니다");
+//			return "err/fail";
+//		} 
+//		
+//		return "admin/admin_member";
+//	}
 	
 	//회원 검색
-	@GetMapping("adminMemberSearch")
+	@GetMapping("adminMember")
 	public String adminMemberSearch(@RequestParam(defaultValue = "") String searchType,
 									@RequestParam(defaultValue = "") String searchKeyword,
 									@RequestParam(defaultValue = "1") int pageNum,
@@ -275,6 +275,10 @@ public class AdminController {
 		param.put("searchKeyword", searchKeyword.trim());
 		
 		List<CarVO> carList = service.getCarList(param);
+		if(carList == null || carList.get(0) == null ) {
+			System.out.println("????????????????????????");
+			return responseJson;
+		}
 		
 		int listCount = carList.get(0).getList_count();
 		int pageListLimit = 3; // 페이지 번호 갯수를 3개로 지정(1 2 3 or 4 5 6 등...)

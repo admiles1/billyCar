@@ -266,7 +266,7 @@ public class ReservController {
 		String member_id = (String)session.getAttribute("member_id");
 		System.out.println("member_id" + member_id);
 		
-		int listLimit = 4;
+		int listLimit = 6;
 		int startRow = (pageNum - 1) * listLimit;
 		
 		if (option == null) {
@@ -280,7 +280,7 @@ public class ReservController {
 		System.out.println("List<CarReviewVO> reviewList : " + reviewList);
 		
 		int reviewListCount = reviewService.selectAllReview();
-		int pageListLimit = 4;
+		int pageListLimit = 6;
 		
 		//----------------------------------------------------------------
 		int maxPage = reviewListCount/listLimit + (reviewListCount%listLimit > 0 ? 1 : 0);
@@ -318,7 +318,7 @@ public class ReservController {
 	        option = "latest"; // 기본값 설정
 	    }
 
-	    int listLimit = 4;
+	    int listLimit = 6;
 	    int startRow = (pageNum - 1) * listLimit;
 
 	    System.out.println("ajax사용했을때 option : " + option);
@@ -327,7 +327,7 @@ public class ReservController {
 	    System.out.println("List<CarReviewVO> reviewList : " + reviewList);
 
 	    int reviewListCount = reviewService.selectAllReview();
-	    int pageListLimit = 4;
+	    int pageListLimit = 6;
 
 	    //----------------------------------------------------------------
 	    int maxPage = reviewListCount / listLimit + (reviewListCount % listLimit > 0 ? 1 : 0);

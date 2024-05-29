@@ -19,9 +19,29 @@ li a {
 	text-decoration : none;
 }
 
+select {
+	width : 150px;
+	text-align-last: center;
+	text-align: center;
+	border-top : none;
+	border-color : rgb(222, 226, 230);
+	border-bottom-left-radius : 6px !important;
+	border-bottom-right-radius : 6px !important;
+}
+
+.datetext {
+	border-bottom : 0px !important;
+	border-top-left-radius : 6px !important;
+	border-top-right-radius : 6px !important;
+	border-bottom-left-radius : 0px !important;
+	border-bottom-right-radius : 0px !important;
+}
+
 /* 검색 옵션 선택*/
 
-
+#reserv_returnlocation {
+	border-radius : 10px !important;
+}
 
 .option_title {
 	position : absolute;
@@ -122,10 +142,10 @@ label {
 .carImg {
 	display : block;
 	position : relative;
-	width : 40%;
-	height: 200px;
-	left : 30px;
+ 	width : 60%; 
+ 	height: 200px; 
 }
+
 .carInfo {
 	display : block;
 	position : relative;
@@ -133,12 +153,12 @@ label {
 	height: 200px;
 }
 	
-.carImg img {
-	display : inline-block;
-	position : relative;
-	width : 100%;
-	height: 100%;
-}
+ .carImg img { 
+  	display : inline-block;  
+  	position : relative;  
+  	width : 100%; 
+  	height: 100%; 
+ } 
 .carInfo span {
 	display : block;
 }
@@ -146,7 +166,7 @@ label {
 	height: 50%;
 	text-align : left;
 	font-size : 30px;
-	padding: 30px 0px 0px 100px;
+	padding: 30px 0px 0px 50px;
 	color : black;
 }
 
@@ -157,6 +177,7 @@ label {
 	padding-left : 30px;
 	color : black;
 }
+
 .carInfo span:nth-child(3) {
 	height: 25%;
 	text-align : left;

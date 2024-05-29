@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<title>Main Area</title>
+<title>기본회원정보</title>
 <style>
 #memberInfo form {
     text-align: center; /* 폼 안의 요소들을 가운데 정렬 */
@@ -138,25 +138,25 @@ h2 {
 	function formatTel(tel) {
 		return tel.slice(0, 3) + '-' + tel.slice(3, 7) + '-' + tel.slice(7, 11);
 	}
-  window.onload = function() {
-        // 회원 가입일 가져와서 자르기
-        let memberRegDate = "${info.member_reg_date}";
-        let slicedDate = memberRegDate.slice(0, 10); // 10글자까지 자름
-        
-        // 자른 날짜 설정
-        document.getElementById("memberRegDate").value = slicedDate;
-        
-        let memberBirthInput = document.getElementById("memberBirth");
-        if (memberBirthInput) {
-        	memberBirthInput.value = formatBirth(memberBirthInput.value);
-        }
-      
-        let telInput = document.getElementById("tel");
-        if (telInput) {
-        	telInput.value = formatTel(telInput.value);
-        }
-        
-    }
+	
+	window.onload = function() {
+	// 회원 가입일 가져와서 자르기
+	let memberRegDate = "${info.member_reg_date}";
+	let slicedDate = memberRegDate.slice(0, 10); // 10글자까지 자름
+	      
+	// 자른 날짜 설정
+	document.getElementById("memberRegDate").value = slicedDate;
+	      
+	let memberBirthInput = document.getElementById("memberBirth");
+	if (memberBirthInput) {
+		memberBirthInput.value = formatBirth(memberBirthInput.value);
+	}
+		
+	let telInput = document.getElementById("tel");
+	if (telInput) {
+		telInput.value = formatTel(telInput.value);
+	}
+  }
 
   </script>
 </body>

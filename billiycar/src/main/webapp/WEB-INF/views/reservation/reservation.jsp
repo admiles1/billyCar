@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title> :: 빌리카-예약페이지 :: </title>
+<title>예약페이지</title>
 <script src="${pageContext.request.contextPath}/resources/util/jquery-3.7.1.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reservMain.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -137,8 +137,8 @@
 							+ "<span class='carImg'><img src='/billycar/resources/upload/" + car.car_img + "'></span>"
 							+ "<span class='carInfo'>"
 							+ "<span>" + car.car_model + " / " + car.car_capacity + "</span>"
-							+ "<small>종일가 "+ dayPrice + "</small><br>"
-							+ "<small>시간당 "+ hourPrice + "</small></span>"
+							+ "<small>종일가 "+ dayPrice + "원</small><br>"
+							+ "<small>시간당 "+ hourPrice + "원</small></span>"
 							+ "<span class='canReserv'>" + car.canReserv + "대 차량 <br><small>이용가능</small></span>" 
 							+ "</span>"
 							+ "</a>"
@@ -232,7 +232,7 @@
 		let rtl = $("#reserv_returnlocation").val();
 		
 		if(rtl == "branch"){
-			rtl = "부산광역시 부산진구 동천로 109 삼한골든게이트빌딩 7층 (부산 아이티윌)";
+			rtl = "부산광역시 부산진구 동천로 109 삼한골든게이트빌딩 7층(부산 아이티윌)";
 		} else if (rtl == "same") {
 			rtl = pul;
 		}

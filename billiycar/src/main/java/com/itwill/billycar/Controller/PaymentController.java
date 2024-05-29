@@ -1,7 +1,9 @@
 package com.itwill.billycar.Controller;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Map;
 
@@ -66,18 +68,33 @@ public class PaymentController {
 		String MemberId = (String)session.getAttribute("member_id");
 		member.setMember_id(MemberId);
 		
+		// 로그인 여부 쳌 
 		if(MemberId == null) {
 			model.addAttribute("msg", "로그인을 진행하여 주세요");
 			model.addAttribute("targetURL", "login");
 			return "err/fail";
 		}
 		
+		// 면허인증 여부 쳌
 		member = memberservicer.getMember(member);
 		if(member.getMember_license_checked() != 1) {
 			model.addAttribute("msg", "면허 인증을 진행하여 주십시오");
 			model.addAttribute("targetURL", "license");
 			return "err/fail";
 		}
+		
+		// 생년월일 여부 쳌
+		String memberBirthStr = member.getMember_birth();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+        LocalDate birthDate = LocalDate.parse(memberBirthStr, formatter);
+        LocalDate now = LocalDate.now();
+        long age = ChronoUnit.YEARS.between(birthDate, now);
+
+        if(age <= 23) {
+            model.addAttribute("msg", "만 23세 이하는 접근할 수 없습니다.");
+            model.addAttribute("targetURL", "./");
+            return "err/fail";
+        }
 		
 //		CouponIssueVO couponIssue = new CouponIssueVO();
 //		List<CouponIssueVO> couponIssue = paymentService.getMemberCoupon(MemberId);
@@ -107,11 +124,7 @@ public class PaymentController {
 		String memberId = (String)session.getAttribute("member_id");
 		String carNumber = car.getCar_number();
 		
-		// 주소값을 강제로 바꿔서 진입하였고 그게 부산이 아닐 시 
-//		if(!Pattern.matches("^부산", map.get("schedule").split(",")[2])) {
-//			model.addAttribute("msg", "유효한 값이 아닙니다");
-//			return "err/fail";
-//		}
+	
 
 		System.out.println(map.get("insurance"));
 		
@@ -155,14 +168,19 @@ public class PaymentController {
 			
 			
 			// 1차 시도
-            int couponId = Integer.parseInt(map.get("coupon_id"));
-            System.out.println("dddddd앙아아ㄴ" + map.get("coupon_id"));
-            paymentService.updateCouponStatus(couponId); // 쿠폰 상태를 2로 변경
+			if(map.get("coupon_id") != null){
+				int coupon_id = Integer.parseInt(map.get("coupon_id"));
+				System.out.println("dddddd앙아아ㄴ" + map.get("coupon_id"));
+            	paymentService.updateCouponStatus(coupon_id,memberId);
+			}
+            
+            
 
             //
 //			int couponCount = paymentService.updateCouponStatus(payment);
 			if(carReserveCount > 0) {
-				return "true";
+				
+	            	return "true";
 			}
 			
 			return "false";

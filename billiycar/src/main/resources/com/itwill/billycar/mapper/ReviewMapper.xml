@@ -34,10 +34,10 @@
 		JOIN review r ON c.car_number = r.car_number
 		LEFT JOIN heart h ON r.review_idx = h.review_idx AND h.member_id = #{member_id}
     	<if test="option.equals('latest')">
-    		order by r.review_idx desc
+    		order by r.review_reg_date desc
     	</if>
     	<if test="option.equals('old')">
-    		order by r.review_idx asc
+    		order by r.review_reg_date asc
     	</if>
     	<if test="option.equals('rating')">
     		order by r.review_score desc
@@ -46,7 +46,7 @@
 	</select>
 	
 	<select id="selectReviewAvg">
-		SELECT IFNULL(AVG(review_score), 0) AS avg_score FROM review;
+		SELECT IFNULL(ROUND(AVG(review_score),2), 0) AS avg_score FROM review;
 	</select>
 	
 	<select id="selectAllReview">
@@ -88,25 +88,44 @@
 	</select>
 	
 	<select id="selectPopularCar" resultType="hashmap">
-		  SELECT *
-		  FROM (select
-					c.car_number,
-					c.car_img,	
-					ROUND(AVG(r.review_score), 2) AS review_score,
-					COALESCE(SUM(r.review_heart), 0) AS review_heart,
-					c.car_countReserve,
-		            c.car_model,
-		            c.car_fuel,
-		            c.car_type
-				from car c
-				left join review r 
-				  on c.car_number = r.car_number
-				group by car_number, c.car_img, c.car_countReserve
-				order by (AVG(r.review_score) * 0.5) + (COALESCE(SUM(r.review_heart), 0) * 0.3) + (c.car_countReserve * 0.2) DESC) A
-		  left join Common cm_model on A.car_model = cm_model.code
-		  left join Common cm_fuel on A.car_fuel = cm_fuel.code
-		  left join Common cm_type on A.car_type = cm_type.code
-		  limit 3;
+		SELECT 
+		    A.car_number,
+		    A.car_img,
+		    A.review_score,
+		    A.review_heart,
+		    A.car_countReserve,
+		    cm_model.name as car_model_name,
+		    cm_fuel.name as car_fuel_name,
+		    cm_type.name as car_type_name
+		FROM (
+		    SELECT
+		        c.car_number,
+		        c.car_img,    
+		        ROUND(AVG(r.review_score), 2) AS review_score,
+		        COALESCE(SUM(r.review_heart), 0) AS review_heart,
+		        c.car_countReserve,
+		        c.car_model,
+		        c.car_fuel,
+		        c.car_type
+		    FROM car c
+		    LEFT JOIN review r 
+		        ON c.car_number = r.car_number
+		    GROUP BY 
+		        c.car_number, 
+		        c.car_img, 
+		        c.car_countReserve
+		    ORDER BY 
+		        (AVG(r.review_score) * 0.5) + 
+		        (COALESCE(SUM(r.review_heart), 0) * 0.3) + 
+		        (c.car_countReserve * 0.2) DESC
+		) A
+		LEFT JOIN Common cm_model 
+		    ON A.car_model = cm_model.code
+		LEFT JOIN Common cm_fuel 
+		    ON A.car_fuel = cm_fuel.code
+		LEFT JOIN Common cm_type 
+		    ON A.car_type = cm_type.code
+		LIMIT 3;
 	</select>
 </mapper>
 

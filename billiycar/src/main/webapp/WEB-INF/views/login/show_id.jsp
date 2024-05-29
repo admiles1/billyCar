@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>아이디 찾음</title>
+<title>아이디 찾기</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/show_id.css">
 </head>
 <header><jsp:include page="../inc/top.jsp"></jsp:include></header>
@@ -23,7 +23,7 @@
     	</fieldset>
         <div class="next">
         <input type="button" value="로그인하기" onclick="location.href='login'">
-        <input type="button" value="비밀번호찾기" onclick="location.href='forgot_pw'">
+        <input type="button" value="비밀번호찾기" onclick="location.href='forgot_pw_step1'">
         </div>
     </div>
     <footer><jsp:include page="../inc/bottom.jsp"></jsp:include></footer>
